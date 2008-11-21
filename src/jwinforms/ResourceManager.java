@@ -1,9 +1,5 @@
 package jwinforms;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
 
@@ -17,14 +13,11 @@ public class ResourceManager
 	{
 		try
 		{
-			properties.load(new FileInputStream(new File(resource.toURI())));
+			properties.load(resource.openStream());
 			this.path = path;
-		} catch (IOException e)
+		} catch (Exception e)
 		{
-			throw new Error(e);
-		} catch (URISyntaxException e)
-		{
-			throw new Error(e);
+			throw new Error(e.getMessage()+ ": trying to load url \"" + resource+"\"", e);
 		}
 	}
 
@@ -72,7 +65,7 @@ public class ResourceManager
 
 	Object getImage(String imageName)
 	{
-		return new Bitmap(classLoader.getResource(imageName));
+		return new Bitmap(classLoader.getResource(imageName.trim()));
 	}
 
 	public String GetString(String key)
