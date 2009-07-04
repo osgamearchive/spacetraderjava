@@ -2,14 +2,10 @@ package jwinforms;
 
 import java.awt.Component;
 import java.awt.Graphics;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.swing.JPanel;
 import javax.swing.SortingFocusTraversalPolicy;
-
 
 public class WinformJPanel extends JPanel
 {
@@ -36,13 +32,14 @@ public class WinformJPanel extends JPanel
 			}
 		});
 	}
-	
+
 	Image BackgroundImage = null;
+
 	@Override
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		if (BackgroundImage!=null)
+		if (BackgroundImage != null)
 		{
 			g.drawImage(BackgroundImage.asSwingImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 		}
@@ -88,7 +85,7 @@ public class WinformJPanel extends JPanel
 				@Override
 				public void instanceHandle(Object sender, EventArgs e)
 				{
-					form.setResult( button.DialogResult);
+					form.setResult(button.DialogResult);
 					form.dispose();
 				}
 			});

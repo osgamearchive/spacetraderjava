@@ -71,10 +71,6 @@ public class WinformForm extends WinformControl implements WinformPane
 		jdialog.setVisible(false);
 	}
 
-	@Override
-	public void ResumeLayout(boolean foo)
-	{}
-
 	public void PerformLayout()
 	{}
 

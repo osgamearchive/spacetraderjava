@@ -5,7 +5,7 @@ import javax.swing.border.TitledBorder;
 
 public class GroupBox extends WinformControl
 {
-	private TitledBorder border;
+	private final TitledBorder border;
 
 	public GroupBox()
 	{
@@ -18,12 +18,13 @@ public class GroupBox extends WinformControl
 	public final WinformJPanel Controls;
 	public AnchorStyles Anchor;
 
+	@Override
 	public void SuspendLayout()
 	{
 	// TODO Auto-generated method stub
 
 	}
-	
+
 	public void setText(String text)
 	{
 		border.setTitle(text);

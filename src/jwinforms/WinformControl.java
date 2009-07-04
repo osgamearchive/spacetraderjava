@@ -61,15 +61,16 @@ public class WinformControl implements ISupportInitialize
 	 * @deprecated not really, just doesn't work.
 	 * @param backColor
 	 */
+	@Deprecated
 	public void setBackColor(Color backColor)
 	{
 		BackColor = backColor;
 	}
-	
+
 	public jwinforms.Font getFont()
 	{
 		Font font = swingVersion.getFont();
-		return font==null ? null : new jwinforms.Font(font);
+		return font == null ? null : new jwinforms.Font(font);
 	}
 
 	public Color getForeColor()
@@ -107,22 +108,14 @@ public class WinformControl implements ISupportInitialize
 		return getSize().width;
 	}
 
-	public void ResumeLayout(boolean b)
-	{
-	// TODO Auto-generated method stub
-
-	}
-
 	public void setAutoSize(boolean autoSize)
 	{
 	// /TODO impl.
 	}
 
-
 	@Deprecated
 	public void setBorderStyle(BorderStyle borderStyle)
-	{
-	}
+	{}
 
 	public void setClick(EventHandler<Object, EventArgs> click)
 	{
@@ -174,7 +167,7 @@ public class WinformControl implements ISupportInitialize
 
 	/**
 	 * I think this is nothing.
-	 * 
+	 *
 	 * @param name
 	 */
 	public void setName(String name)

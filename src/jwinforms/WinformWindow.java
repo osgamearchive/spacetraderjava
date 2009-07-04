@@ -57,11 +57,6 @@ public class WinformWindow extends WinformControl implements WinformPane
 		// TODO am I sure I want this?
 		System.exit(0);
 	}
-
-	@Override
-	public void ResumeLayout(boolean foo)
-	{}
-
 	// Must encapsulate most of these.
 	private Size AutoScaleBaseSize;
 	private FormBorderStyle FormBorderStyle;
