@@ -470,7 +470,6 @@ public class FormOptions extends WinformForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Options");
 		((ISupportInitialize) (this.numEmpty)).EndInit();
-		this.ResumeLayout(false);
 
 	}
 

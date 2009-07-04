@@ -33,7 +33,6 @@ import java.io.IOException;
 import java.util.Random;
 
 import jwinforms.*;
-
 import spacetrader.enums.AlertType;
 import spacetrader.enums.Difficulty;
 import spacetrader.gui.FormAlert;

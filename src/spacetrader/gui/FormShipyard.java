@@ -1050,10 +1050,6 @@ public class FormShipyard extends WinformForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Ship Design at XXXX Shipyards");
-		boxWelcome.ResumeLayout(false);
-		boxInfo.ResumeLayout(false);
-		boxCosts.ResumeLayout(false);
-		boxAllocation.ResumeLayout(false);
 		((ISupportInitialize)(numHullStrength)).EndInit();
 		((ISupportInitialize)(numCargoBays)).EndInit();
 		((ISupportInitialize)(numCrewQuarters)).EndInit();
@@ -1061,8 +1057,6 @@ public class FormShipyard extends WinformForm
 		((ISupportInitialize)(numShieldSlots)).EndInit();
 		((ISupportInitialize)(numGadgetSlots)).EndInit();
 		((ISupportInitialize)(numWeaponSlots)).EndInit();
-		this.ResumeLayout(false);
-
 	}
 
 	//#endregion

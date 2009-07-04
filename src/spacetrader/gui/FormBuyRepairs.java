@@ -148,7 +148,6 @@ public class FormBuyRepairs extends jwinforms.WinformForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Hull Repair");
 		((ISupportInitialize)(this.numAmount)).EndInit();
-		this.ResumeLayout(false);
 	}
 
 	// #endregion

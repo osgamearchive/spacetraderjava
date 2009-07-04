@@ -312,7 +312,6 @@ btnPayBack_Click(sender, e);}});
 			this.setShowInTaskbar(false);
 			this.setStartPosition(FormStartPosition.CenterParent);
 			this.setText("Bank");
-			this.ResumeLayout(false);
 		}
 		//#endregion
 

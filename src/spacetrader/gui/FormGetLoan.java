@@ -153,7 +153,6 @@ public class FormGetLoan extends WinformForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Get Loan");
 		((ISupportInitialize)(this.numAmount)).EndInit();
-		this.ResumeLayout(false);
 	}
 
 	// #endregion

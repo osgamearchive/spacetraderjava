@@ -252,7 +252,6 @@ import spacetrader.*;
 			this.setShowInTaskbar(false);
 			this.setStartPosition(FormStartPosition.CenterParent);
 			this.setText("High Scores");
-			this.ResumeLayout(false);
 		}
 		//#endregion
 

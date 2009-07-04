@@ -1327,7 +1327,6 @@ public class FormEncounter extends WinformForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Encounter");
-		this.ResumeLayout(false);
 
 	}
 

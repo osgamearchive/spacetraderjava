@@ -226,7 +226,6 @@ public class FormCosts extends WinformForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Cost Specification");
-		this.ResumeLayout(false);
 	}
 	// #endregion
 

@@ -259,9 +259,6 @@ btnTestSpecialEvent_Click(sender, e);}});
 			this.setShowInTaskbar(false);
 			this.setStartPosition(FormStartPosition.CenterParent);
 			this.setText("Test");
-			this.boxAlert.ResumeLayout(false);
-			this.groupBox1.ResumeLayout(false);
-			this.ResumeLayout(false);
 		}
 		//#endregion
 

@@ -169,9 +169,6 @@ public class FormViewShip extends WinformForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Current Ship");
-		this.boxSpecialCargo.ResumeLayout(false);
-		this.ResumeLayout(false);
-
 	}
 
 	//#endregion

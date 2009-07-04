@@ -465,10 +465,6 @@ public class FormViewCommander extends WinformForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Commander Status");
-		this.boxSkills.ResumeLayout(false);
-		this.boxFinances.ResumeLayout(false);
-		this.boxNotoriety.ResumeLayout(false);
-		this.ResumeLayout(false);
 	}
 
 	// #endregion

@@ -623,7 +623,6 @@ btnJettison_Click(sender, e);}});
 			this.setShowInTaskbar(false);
 			this.setStartPosition(FormStartPosition.CenterParent);
 			this.setText("Plunder Cargo");
-			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}

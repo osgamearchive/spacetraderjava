@@ -119,7 +119,6 @@ public class FormAbout extends jwinforms.WinformForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("About Space Trader");
 		((ISupportInitialize) (this.picLogo)).EndInit();
-		this.ResumeLayout(false);
 		this.PerformLayout();
 
 	}

@@ -373,7 +373,6 @@ public class FormNewCommander extends WinformForm
 		((ISupportInitialize)(this.numFighter)).EndInit();
 		((ISupportInitialize)(this.numTrader)).EndInit();
 		((ISupportInitialize)(this.numEngineer)).EndInit();
-		this.ResumeLayout(false);
 
 	}
 

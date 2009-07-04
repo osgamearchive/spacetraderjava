@@ -219,7 +219,6 @@ public class FormAlert extends WinformForm
 				FormAlert_Click(sender, e);
 			}
 		});
-		this.ResumeLayout(false);
 
 	}
 

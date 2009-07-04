@@ -226,7 +226,6 @@ public class FormCargoSell extends WinformForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Sell Xxxxxxxxxx");
 		((ISupportInitialize) (this.numAmount)).EndInit();
-		this.ResumeLayout(false);
 
 	}
 

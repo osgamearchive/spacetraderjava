@@ -621,11 +621,6 @@ public class FormMonster extends WinformForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Monster.com Job Listing");
-		this.pnlMercs.ResumeLayout(false);
-		this.pnlQuests.ResumeLayout(false);
-		this.pnlShipyards.ResumeLayout(false);
-		this.ResumeLayout(false);
-
 	}
 
 	// #endregion

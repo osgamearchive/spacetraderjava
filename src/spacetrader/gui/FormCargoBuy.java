@@ -233,7 +233,6 @@ public class FormCargoBuy extends WinformForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Buy Xxxxxxxxxx");
 		((ISupportInitialize)(this.numAmount)).EndInit();
-		this.ResumeLayout(false);
 
 	}
 

@@ -160,7 +160,6 @@ public class FormPayBackLoan extends WinformForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Pay Back Loan");
 		((ISupportInitialize)(this.numAmount)).EndInit();
-		this.ResumeLayout(false);
 	}
 
 	// #endregion

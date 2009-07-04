@@ -151,7 +151,6 @@ public class FormBuyFuel extends WinformForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Buy Fuel");
 		((ISupportInitialize)(this.numAmount)).EndInit();
-		this.ResumeLayout(false);
 	}
 
 	// #endregion

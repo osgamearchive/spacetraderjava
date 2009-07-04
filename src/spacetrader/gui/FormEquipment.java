@@ -645,10 +645,9 @@ public class FormEquipment extends WinformForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Buy/Sell Equipment");
-		this.boxSell.ResumeLayout(false);
-		this.boxBuy.ResumeLayout(false);
-		this.boxShipInfo.ResumeLayout(false);
-		this.ResumeLayout(false);
+		GroupBox r = this.boxSell;
+		GroupBox r1 = this.boxBuy;
+		GroupBox r2 = this.boxShipInfo;
 
 	}
 

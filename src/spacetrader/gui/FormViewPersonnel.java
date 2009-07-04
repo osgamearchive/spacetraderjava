@@ -328,11 +328,6 @@ public class FormViewPersonnel extends WinformForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Personnel");
-		this.boxCurrentCrew.ResumeLayout(false);
-		this.boxForHire.ResumeLayout(false);
-		this.boxInfo.ResumeLayout(false);
-		this.ResumeLayout(false);
-
 	}
 
 	//#endregion

@@ -138,7 +138,6 @@ public class FormFind extends WinformForm
 				FormFind_Closed(sender, e);
 			}
 		};
-		this.ResumeLayout(false);
 	}
 
 	// #endregion

@@ -956,9 +956,6 @@ btnBuyInfo_Click(sender, e);}});
 			this.setShowInTaskbar(false);
 			this.setStartPosition(FormStartPosition.CenterParent);
 			this.setText("Ship List");
-			this.boxShipInfo.ResumeLayout(false);
-			this.ResumeLayout(false);
-
 		}
 		//#endregion
 

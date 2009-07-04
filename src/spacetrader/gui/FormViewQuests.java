@@ -134,7 +134,6 @@ public class FormViewQuests extends WinformForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Quests");
-		this.ResumeLayout(false);
 	}
 
 	// #endregion

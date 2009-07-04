@@ -610,7 +610,6 @@ btnJettison_Click(sender, e);}});
 			this.setShowInTaskbar(false);
 			this.setStartPosition(FormStartPosition.CenterParent);
 			this.setText("Jettison Cargo");
-			this.ResumeLayout(false);
 		}
 		//#endregion
 
