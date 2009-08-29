@@ -46,7 +46,7 @@ public class Button extends WinformControl
 		DialogResult = dialogResult;
 	}
 
-	@SuppressWarnings("serial")
+//	@SuppressWarnings("serial")
 	@Override
 	public void setClick(final EventHandler<Object, EventArgs> click)
 	{
@@ -63,7 +63,7 @@ public class Button extends WinformControl
 		super.setClick(click);
 	}
 
-	public void setFlatStyle(FlatStyle flatStyle)
+		public void setFlatStyle(FlatStyle flatStyle)
 	{
 		switch (flatStyle)
 		{
@@ -76,7 +76,5 @@ public class Button extends WinformControl
 		}
 		// I think this is default.
 		//asJButtton().setBorder(BorderFactory.createRaisedBevelBorder());
-
 	}
-
 }

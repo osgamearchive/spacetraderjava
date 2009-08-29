@@ -23,7 +23,7 @@ public class Label extends WinformControl
 		if (text.length() > 15)
 		{
 			convertedToHtml = true;
-			text = START + text.replaceAll(NEWLINE_LITERAL+"\\s*", NEWLINE) + END;
+			text = START + text.replaceAll(NEWLINE_LITERAL + "\\s*", NEWLINE) + END;
 		} else
 			convertedToHtml = false;
 		((JLabel)swingVersion).setText(text);

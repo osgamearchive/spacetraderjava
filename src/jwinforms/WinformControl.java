@@ -65,6 +65,7 @@ public class WinformControl implements ISupportInitialize
 	public void setBackColor(Color backColor)
 	{
 		BackColor = backColor;
+		asSwingObject().setBackground(backColor);
 	}
 
 	public jwinforms.Font getFont()

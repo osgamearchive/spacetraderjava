@@ -21,6 +21,7 @@ public class NumericUpDown extends WinformControl
 		/// this bunch of code selects all text when entering the spinner.
 		((JSpinner.DefaultEditor)spinner.getEditor()).getTextField().addFocusListener(new FocusAdapter()
 		{
+			@Override
 			public void focusGained(FocusEvent e)
 			{
 				if (e.getSource() instanceof JTextComponent)
@@ -95,7 +96,7 @@ public class NumericUpDown extends WinformControl
 	/**
 	 * In .NET, this means that the field can be manipulated by the buttons/arrows,
 	 * just not by directly inputing text into it.
-	 * TODO: implement this. Possibly by installing filter on key-presses. 
+	 * TODO: implement this. Possibly by installing filter on key-presses.
 	 */
 	public void setReadOnly(boolean readOnly)
 	{
@@ -109,7 +110,7 @@ public class NumericUpDown extends WinformControl
 	{
 		return (Integer)asJSpinner().getValue();
 	}
-	
+
 	@Override
 	public void setEnabled(boolean enabled)
 	{
@@ -120,5 +121,4 @@ public class NumericUpDown extends WinformControl
 	{
 		model.setStepSize(increment);
 	}
-
 }
