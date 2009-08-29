@@ -10,10 +10,12 @@ import spacetrader.enums.AlertType;
 public class SystemBox extends jwinforms.GroupBox
 {
 	private Game game = null;
+	private GameController controller = null;
 
-	void setGame(Game game)
+	void setGame(Game game, GameController controller)
 	{
 		this.game = game;
+		this.controller = controller;
 	}
 
 	private final SpaceTrader mainWindow;
@@ -386,7 +388,7 @@ public class SystemBox extends jwinforms.GroupBox
 					game.HandleSpecialEvent();
 				} catch (GameEndException ex)
 				{
-					mainWindow.GameEnd();
+					controller.GameEnd();
 				}
 			}
 		}

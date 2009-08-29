@@ -15,10 +15,12 @@ import spacetrader.util.Util;
 public class GalacticChart extends jwinforms.GroupBox
 {
 	private Game game = null;
+	private GameController controller = null;
 
-	void setGame(Game game)
+	void setGame(Game game, GameController controller)
 	{
 		this.game = game;
+		this.controller = controller;
 	}
 
 	private final SpaceTrader mainWindow;
@@ -245,15 +247,15 @@ public class GalacticChart extends jwinforms.GroupBox
 			try
 			{
 				if (game.getAutoSave())
-					mainWindow.SaveGame(SpaceTrader.SAVE_DEPARTURE, false);
+					controller.SaveGame(SpaceTrader.SAVE_DEPARTURE, false);
 
 				game.Warp(true);
 
 				if (game.getAutoSave())
-					mainWindow.SaveGame(SpaceTrader.SAVE_ARRIVAL, false);
+					controller.SaveGame(SpaceTrader.SAVE_ARRIVAL, false);
 			} catch (GameEndException ex)
 			{
-				mainWindow.GameEnd();
+				controller.GameEnd();
 			}
 			// todo inline when done
 			mainWindow.UpdateAll();
@@ -318,12 +320,12 @@ public class GalacticChart extends jwinforms.GroupBox
 					if (game.SelectedSystem().Name().toLowerCase() == second.toLowerCase())
 					{
 						if (game.getAutoSave())
-							mainWindow.SaveGame(SpaceTrader.SAVE_DEPARTURE, false);
+							controller.SaveGame(SpaceTrader.SAVE_DEPARTURE, false);
 
 						game.WarpDirect();
 
 						if (game.getAutoSave())
-							mainWindow.SaveGame(SpaceTrader.SAVE_ARRIVAL, false);
+							controller.SaveGame(SpaceTrader.SAVE_ARRIVAL, false);
 					}
 					break;
 				case Ice:

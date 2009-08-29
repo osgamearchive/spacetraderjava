@@ -7,19 +7,17 @@ import jwinforms.EventHandler;
 import jwinforms.Font;
 import jwinforms.FontStyle;
 import jwinforms.GraphicsUnit;
-import spacetrader.Functions;
-import spacetrader.Game;
-import spacetrader.GameEndException;
-import spacetrader.StarSystem;
-import spacetrader.Strings;
+import spacetrader.*;
 
 public class TargetSystemBox extends jwinforms.GroupBox
 {
 	private Game game = null;
+	private GameController controller = null;
 
-	void setGame(Game game)
+	void setGame(Game game, GameController controller)
 	{
 		this.game = game;
+		this.controller = controller;
 	}
 
 	private final SpaceTrader mainWindow;
@@ -352,15 +350,15 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		try
 		{
 			if (game.getAutoSave())
-				mainWindow.SaveGame(SpaceTrader.SAVE_DEPARTURE, false);
+				controller.SaveGame( SpaceTrader.SAVE_DEPARTURE, false);
 
 			game.Warp(false);
 
 			if (game.getAutoSave())
-				mainWindow.SaveGame(SpaceTrader.SAVE_ARRIVAL, false);
+				controller.SaveGame( SpaceTrader.SAVE_ARRIVAL, false);
 		} catch (GameEndException ex)
 		{
-			mainWindow.GameEnd();
+			controller.GameEnd();
 		}
 		UpdateAll();
 	}

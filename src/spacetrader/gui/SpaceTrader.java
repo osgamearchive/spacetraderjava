@@ -22,33 +22,32 @@ package spacetrader.gui;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.util.Arrays;
 
 import javax.swing.UIManager;
 
 import jwinforms.*;
-import spacetrader.*;
+import spacetrader.Consts;
+import spacetrader.Functions;
+import spacetrader.Game;
+import spacetrader.GameController;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.GameEndType;
 import spacetrader.enums.ShipType;
 import spacetrader.stub.Directory;
 import spacetrader.stub.RegistryKey;
-import spacetrader.util.Hashtable;
-import spacetrader.util.Util;
-
 
 public class SpaceTrader extends jwinforms.WinformWindow
 {
-	private static final Font BOLD_FONT = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
 	// #region Control Declarations
 
-	DockBox dockBox;
-	CargoBox cargoBox;
-	TargetSystemBox 	targetSystemBox;
-	GalacticChart galacticChart;
-	ShortRangeChart shortRangeChart;
-	SystemBox system;
-	ShipyardBox shipyard;
+	private DockBox dockBox;
+	private CargoBox cargoBox;
+	private TargetSystemBox targetSystemBox;
+	private GalacticChart galacticChart;
+	private ShortRangeChart shortRangeChart;
+	private SystemBox system;
+	private ShipyardBox shipyard;
+	private SpaceTraderStatusBar statusBar;
 
 	private jwinforms.ImageList ilChartImages;
 	private jwinforms.ImageList ilDirectionImages;
@@ -79,11 +78,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private jwinforms.OpenFileDialog dlgOpen;
 	private jwinforms.PictureBox picLine;
 	private jwinforms.SaveFileDialog dlgSave;
-	private jwinforms.StatusBar statusBar;
-	private jwinforms.StatusBarPanel statusBarPanelBays;
-	private jwinforms.StatusBarPanel statusBarPanelCash;
-	private jwinforms.StatusBarPanel statusBarPanelCosts;
-	private jwinforms.StatusBarPanel statusBarPanelExtra;
 
 	private jwinforms.IContainer components;
 
@@ -95,9 +89,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	static final String SAVE_DEPARTURE = "autosave_departure.sav";
 
 	private Game game;
-
-	private String SaveGameFile = null;
-	private int SaveGameDays = -1;
+	private GameController controller;
 
 	// #endregion
 
@@ -110,15 +102,21 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		InitFileStructure();
 
 		if (loadFileName != null)
-			LoadGame(loadFileName);
+			controller.LoadGame(loadFileName);
 
 		UpdateAll();
 	}
 
 	public static void main(String[] args) throws Exception
 	{
-		UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		UIManager.put("swing.boldMetal", Boolean.FALSE);
+		try
+		{
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			UIManager.put("swing.boldMetal", Boolean.FALSE);
+		} catch (Exception e)
+		{
+			// TODO: We get here if there's no windows UI; I think no special treatment is needed.
+		}
 		SpaceTrader spaceTrader = new SpaceTrader(args.length > 0 ? args[0] : null);
 		spaceTrader.ShowWindow();
 	}
@@ -154,11 +152,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		mnuOptions = new jwinforms.MenuItem();
 		mnuHelp = new jwinforms.SubMenu();
 		mnuHelpAbout = new jwinforms.MenuItem();
-		statusBar = new jwinforms.StatusBar();
-		statusBarPanelCash = new jwinforms.StatusBarPanel();
-		statusBarPanelBays = new jwinforms.StatusBarPanel();
-		statusBarPanelCosts = new jwinforms.StatusBarPanel();
-		statusBarPanelExtra = new jwinforms.StatusBarPanel(jwinforms.StatusBarPanelAutoSize.Spring);
+		statusBar = new SpaceTraderStatusBar(this);
 		cargoBox = new CargoBox(this);
 		system = new SystemBox(this);
 		shipyard = new ShipyardBox(this);
@@ -170,13 +164,10 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		ilShipImages = new jwinforms.ImageList(components);
 		ilDirectionImages = new jwinforms.ImageList(components);
 		ilEquipmentImages = new jwinforms.ImageList(components);
-		((jwinforms.ISupportInitialize)(statusBarPanelCash)).BeginInit();
-		((jwinforms.ISupportInitialize)(statusBarPanelBays)).BeginInit();
-		((jwinforms.ISupportInitialize)(statusBarPanelCosts)).BeginInit();
-		((jwinforms.ISupportInitialize)(statusBarPanelExtra)).BeginInit();
+		statusBar.BeginInit();
 		shortRangeChart = new ShortRangeChart(this, ilChartImages);
-		galacticChart=new GalacticChart(this,ilChartImages);
-		targetSystemBox=new TargetSystemBox(this);
+		galacticChart = new GalacticChart(this, ilChartImages);
+		targetSystemBox = new TargetSystemBox(this);
 
 		shortRangeChart.SuspendLayout();
 		galacticChart.SuspendLayout();
@@ -437,46 +428,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		// statusBar
 		//
 		statusBar.setLocation(new Point(0, 481));
-		statusBar.setName("statusBar");
-		statusBar.Panels.addAll(Arrays.asList(new jwinforms.StatusBarPanel[] { statusBarPanelCash, statusBarPanelBays,
-				statusBarPanelCosts, statusBarPanelExtra }));
-		statusBar.ShowPanels = true;
-		statusBar.setSize(new jwinforms.Size(768, 24));
-		statusBar.SizingGrip = false;
-		statusBar.setTabIndex(2);
-		statusBar.PanelClick = new jwinforms.EventHandler<Object, StatusBarPanelClickEventArgs>()
-		{
-			@Override
-			public void handle(Object sender, StatusBarPanelClickEventArgs e)
-			{
-				statusBar_PanelClick(sender, e);
-			}
-		};
-		//
-		// statusBarPanelCash
-		//
-		statusBarPanelCash.setMinWidth(112);
-		statusBarPanelCash.setText(" Cash: 88,888,888 cr.");
-		statusBarPanelCash.setWidth(112);
-		//
-		// statusBarPanelBays
-		//
-		statusBarPanelBays.setMinWidth(80);
-		statusBarPanelBays.setText(" Bays: 88/88");
-		statusBarPanelBays.setWidth(80);
-		//
-		// statusBarPanelCosts
-		//
-		statusBarPanelCosts.setMinWidth(120);
-		statusBarPanelCosts.setText(" Current Costs: 888 cr.");
-		statusBarPanelCosts.setWidth(120);
-		//
-		// statusBarPanelExtra
-		//
-		// this.statusBarPanelExtra.AutoSize =
-		// spacetrader.winforms.StatusBarPanelAutoSize.Spring;
-		// this.statusBarPanelExtra.setMinWidth(120);
-		// this.statusBarPanelExtra.setWidth();
+		statusBar.InitializeComponent();
 
 		//
 		// boxShortRangeChart
@@ -590,84 +542,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				SpaceTrader_Load(sender, e);
 			}
 		});
-		statusBarPanelCash.EndInit();
-		statusBarPanelBays.EndInit();
-		statusBarPanelCosts.EndInit();
-		statusBarPanelExtra.EndInit();
 	}
 
 	// #endregion
-
-	private void AddHighScore(HighScoreRecord highScore)
-	{
-		HighScoreRecord[] highScores = Functions.GetHighScores(this);
-		highScores[0] = highScore;
-		Util.sort(highScores);
-
-		Functions.SaveFile(Consts.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores), this);
-	}
-
-	private void CargoBuy(int tradeItem, boolean max)
-	{
-		game.CargoBuySystem(tradeItem, max, this);
-		UpdateAll();
-	}
-
-	private void CargoSell(int tradeItem, boolean all)
-	{
-		if (game.PriceCargoSell()[tradeItem] > 0)
-			game.CargoSellSystem(tradeItem, all, this);
-		else
-			game.CargoDump(tradeItem, this);
-		UpdateAll();
-	}
-
-	private void ClearHighScores()
-	{
-		HighScoreRecord[] highScores = new HighScoreRecord[3];
-		Functions.SaveFile(Consts.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores), this);
-	}
-
-	 void GameEnd()
-	{
-		SetInGameControlsEnabled(false);
-
-		AlertType alertType = AlertType.Alert;
-		switch (game.getEndStatus())
-		{
-		case Killed:
-			alertType = AlertType.GameEndKilled;
-			break;
-		case Retired:
-			alertType = AlertType.GameEndRetired;
-			break;
-		case BoughtMoon:
-			alertType = AlertType.GameEndBoughtMoon;
-			break;
-		}
-
-		FormAlert.Alert(alertType, this);
-
-		FormAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions
-				.FormatNumber(game.Score() % 10));
-
-		HighScoreRecord candidate = new HighScoreRecord(game.Commander().Name(), game.Score(), game.getEndStatus(),
-				game.Commander().getDays(), game.Commander().Worth(), game.Difficulty());
-		if (candidate.CompareTo(Functions.GetHighScores(this)[0]) > 0)
-		{
-			if (game.getCheatEnabled())
-				FormAlert.Alert(AlertType.GameEndHighScoreCheat, this);
-			else
-			{
-				AddHighScore(candidate);
-				FormAlert.Alert(AlertType.GameEndHighScoreAchieved, this);
-			}
-		} else
-			FormAlert.Alert(AlertType.GameEndHighScoreMissed, this);
-
-		Game.CurrentGame(null);
-		setGame(null);
-	}
 
 	private String GetRegistrySetting(String settingName, String defaultValue)
 	{
@@ -704,35 +581,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		dlgSave.setInitialDirectory(Consts.SaveDirectory);
 	}
 
-	private void LoadGame(String fileName)
-	{
-		try
-		{
-			Object obj = Functions.LoadFile(fileName, false, this);
-			if (obj != null)
-			{
-				setGame(new Game((Hashtable)obj, this));
-				SaveGameFile = fileName;
-				SaveGameDays = game.Commander().getDays();
-
-				SetInGameControlsEnabled(true);
-				UpdateAll();
-			}
-		} catch (FutureVersionException ex)
-		{
-			FormAlert.Alert(AlertType.FileErrorOpen, this, fileName, Strings.FileFutureVersion);
-		}
-	}
-
-	void SaveGame(String fileName, boolean saveFileName)
-	{
-		if (Functions.SaveFile(fileName, game.Serialize(), this) && saveFileName)
-			SaveGameFile = fileName;
-
-		SaveGameDays = game.Commander().getDays();
-	}
-
-	private void SetInGameControlsEnabled(boolean enabled)
+	public void SetInGameControlsEnabled(boolean enabled)
 	{
 		mnuGameSave.setEnabled(enabled);
 		mnuGameSaveAs.setEnabled(enabled);
@@ -762,39 +611,16 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		dockBox.Update();
 		cargoBox.Update();
 		shipyard.Update();
-		UpdateStatusBar();
+		statusBar.Update();
 		system.Update();
 		targetSystemBox.Update();
-		UpdateCharts();
-	}
-
-	private void UpdateCharts()
-	{
 		galacticChart.Refresh();
 		shortRangeChart.Refresh();
 	}
 
-	public void UpdateStatusBar()
-	{
-		if (game == null)
-		{
-			statusBarPanelCash.setText("");
-			statusBarPanelBays.setText("");
-			statusBarPanelCosts.setText("");
-			statusBarPanelExtra.setText("No Game Loaded.");
-		} else
-		{
-			statusBarPanelCash.setText("Cash: " + Functions.FormatMoney(game.Commander().getCash()));
-			statusBarPanelBays.setText("Bays: " + game.Commander().getShip().FilledCargoBays() + "/"
-					+ game.Commander().getShip().CargoBays());
-			statusBarPanelCosts.setText("Current Costs: " + Functions.FormatMoney(game.CurrentCosts()));
-			statusBarPanelExtra.setText("");
-		}
-	}
-
 	private void SpaceTrader_Closing(Object sender, jwinforms.CancelEventArgs e)
 	{
-		if (game == null || game.Commander().getDays() == SaveGameDays
+		if (game == null || game.Commander().getDays() == controller.SaveGameDays
 				|| FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
 		{
 			if (WindowState == FormWindowState.Normal)
@@ -814,18 +640,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		FormAlert.Alert(AlertType.AppStart, this);
 	}
 
-	private void btnBuySell_Click(Object sender, jwinforms.EventArgs e)
-	{
-		String name = ((Button)sender).getName();
-		boolean all = name.indexOf("Qty") < 0;
-		int index = Integer.parseInt(name.substring(name.length() - 1));
-
-		if (name.indexOf("Buy") < 0)
-			CargoSell(index, all);
-		else
-			CargoBuy(index, all);
-	}
-
 	private void mnuGameExit_Click(Object sender, jwinforms.EventArgs e)
 	{
 		Close();
@@ -834,14 +648,14 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private void mnuGameNew_Click(Object sender, jwinforms.EventArgs e)
 	{
 		FormNewCommander form = new FormNewCommander();
-		if ((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(
+		if ((game == null || game.Commander().getDays() == controller.SaveGameDays || FormAlert.Alert(
 				AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
 				&& form.ShowDialog(this) == DialogResult.OK)
 		{
 			setGame(new Game(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form.Trader(), form
 					.Engineer(), this));
-			SaveGameFile = null;
-			SaveGameDays = 0;
+			controller.SaveGameFile = null;
+			controller.SaveGameDays = 0;
 
 			SetInGameControlsEnabled(true);
 			UpdateAll();
@@ -853,18 +667,18 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private void mnuGameLoad_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if ((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(
+		if ((game == null || game.Commander().getDays() == controller.SaveGameDays || FormAlert.Alert(
 				AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
 				&& dlgOpen.ShowDialog(this) == DialogResult.OK)
-			LoadGame(dlgOpen.getFileName());
+			controller.LoadGame(dlgOpen.getFileName());
 	}
 
 	private void mnuGameSave_Click(Object sender, jwinforms.EventArgs e)
 	{
 		if (Game.CurrentGame() != null)
 		{
-			if (SaveGameFile != null)
-				SaveGame(SaveGameFile, false);
+			if (controller.SaveGameFile != null)
+				controller.SaveGame(controller.SaveGameFile, false);
 			else
 				mnuGameSaveAs_Click(sender, e);
 		}
@@ -873,7 +687,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private void mnuGameSaveAs_Click(Object sender, jwinforms.EventArgs e)
 	{
 		if (Game.CurrentGame() != null && dlgSave.ShowDialog(this) == DialogResult.OK)
-			SaveGame(dlgSave.getFileName(), true);
+			controller.SaveGame(dlgSave.getFileName(), true);
 	}
 
 	private void mnuHelpAbout_Click(Object sender, jwinforms.EventArgs e)
@@ -901,12 +715,17 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		if (FormAlert.Alert(AlertType.GameRetire, this) == DialogResult.Yes)
 		{
 			game.setEndStatus(GameEndType.Retired);
-			GameEnd();
+			controller.GameEnd();
 			UpdateAll();
 		}
 	}
 
 	private void mnuViewBank_Click(Object sender, jwinforms.EventArgs e)
+	{
+		ShowBank();
+	}
+
+	public void ShowBank()
 	{
 		(new FormViewBank()).ShowDialog(this);
 	}
@@ -929,17 +748,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private void mnuViewShip_Click(Object sender, jwinforms.EventArgs e)
 	{
 		(new FormViewShip()).ShowDialog(this);
-	}
-
-	private void statusBar_PanelClick(Object sender, jwinforms.StatusBarPanelClickEventArgs e)
-	{
-		if (game != null)
-		{
-			if (e.StatusBarPanel == statusBarPanelCash)
-				mnuViewBank_Click(sender, e);
-			else if (e.StatusBarPanel == statusBarPanelCosts)
-				(new FormCosts()).ShowDialog(this);
-		}
 	}
 
 	// #endregion
@@ -996,17 +804,28 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		for (int index = 0; index < Consts.ImagesPerShip; index++)
 			ilShipImages.getImages()[baseIndex + index] = images[index];
 	}
+
 	// #endregion
 
-	private void setGame(Game game)
+	public void setGame(Game game)
 	{
 		this.game = game;
+		controller = new GameController(game, this);
 		dockBox.setGame(game);
 		cargoBox.setGame(game);
-		targetSystemBox.setGame(game);
-		galacticChart.setGame(game);
+		targetSystemBox.setGame(game, controller);
+		galacticChart.setGame(game, controller);
 		shortRangeChart.setGame(game);
-		system.setGame(game);
+		system.setGame(game, controller);
 		shipyard.setGame(game);
+		statusBar.setGame(game);
+	}
+
+	/**
+	 * TODO remove?
+	 */
+	public void UpdateStatusBar()
+	{
+		statusBar.Update();
 	}
 }
