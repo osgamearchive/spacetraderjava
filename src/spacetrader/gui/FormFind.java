@@ -29,12 +29,10 @@
 //using System.Windows.Forms;
 package spacetrader.gui;
 import jwinforms.DialogResult;
-import jwinforms.EventArgs;
-import jwinforms.EventHandler;
 import jwinforms.FormStartPosition;
 import jwinforms.WinformForm;
 
-public class FormFind extends WinformForm
+public class FormFind extends SpaceTraderForm
 {
 	// #region Control Declarations
 
@@ -43,8 +41,6 @@ public class FormFind extends WinformForm
 	private jwinforms.Button btnCancel;
 	private jwinforms.TextBox txtSystem;
 	private jwinforms.CheckBox chkTrack;
-	private static String text = "";
-	private static boolean boxChecked = false;
 
 	// #endregion
 
@@ -54,8 +50,8 @@ public class FormFind extends WinformForm
 	{
 		InitializeComponent();
 
-		txtSystem.setText(text);
-		chkTrack.setChecked(boxChecked);
+		txtSystem.setText("");
+		chkTrack.setChecked(false);
 	}
 
 	// #region Windows Form Designer generated code
@@ -65,96 +61,74 @@ public class FormFind extends WinformForm
 	// / </summary>
 	private void InitializeComponent()
 	{
-		this.lblText = new jwinforms.Label();
-		this.btnOk = new jwinforms.Button();
-		this.btnCancel = new jwinforms.Button();
-		this.txtSystem = new jwinforms.TextBox();
-		this.chkTrack = new jwinforms.CheckBox();
+		lblText = new jwinforms.Label();
+		btnOk = new jwinforms.Button();
+		btnCancel = new jwinforms.Button();
+		txtSystem = new jwinforms.TextBox();
+		chkTrack = new jwinforms.CheckBox();
 		this.SuspendLayout();
 		//
 		// lblText
 		//
-		this.lblText.setAutoSize(true);
-		this.lblText.setLocation(new java.awt.Point(8, 8));
-		this.lblText.setName("lblText");
-		this.lblText.setSize(new jwinforms.Size(177, 13));
-		this.lblText.setTabIndex(3);
-		this.lblText.setText("Which system are you looking for?");
+		lblText.setAutoSize(true);
+		lblText.setLocation(new java.awt.Point(8, 8));
+		lblText.setName("lblText");
+		lblText.setSize(new jwinforms.Size(177, 13));
+		lblText.setTabIndex(3);
+		lblText.setText("Which system are you looking for?");
 		//
 		// btnOk
 		//
-		this.btnOk.setDialogResult(DialogResult.OK);
-		this.btnOk.setFlatStyle(jwinforms.FlatStyle.Flat);
-		this.btnOk.setLocation(new java.awt.Point(43, 68));
-		this.btnOk.setName("btnOk");
-		this.btnOk.setSize(new jwinforms.Size(40, 22));
-		this.btnOk.setTabIndex(3);
-		this.btnOk.setText("Ok");
+		btnOk.setDialogResult(DialogResult.OK);
+		btnOk.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnOk.setLocation(new java.awt.Point(43, 68));
+		btnOk.setName("btnOk");
+		btnOk.setSize(new jwinforms.Size(40, 22));
+		btnOk.setTabIndex(3);
+		btnOk.setText("Ok");
 		//
 		// btnCancel
 		//
-		this.btnCancel.setDialogResult(DialogResult.Cancel);
-		this.btnCancel.setFlatStyle(jwinforms.FlatStyle.Flat);
-		this.btnCancel.setLocation(new java.awt.Point(91, 68));
-		this.btnCancel.setName("btnCancel");
-		this.btnCancel.setSize(new jwinforms.Size(50, 22));
-		this.btnCancel.setTabIndex(4);
-		this.btnCancel.setText("Cancel");
+		btnCancel.setDialogResult(DialogResult.Cancel);
+		btnCancel.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnCancel.setLocation(new java.awt.Point(91, 68));
+		btnCancel.setName("btnCancel");
+		btnCancel.setSize(new jwinforms.Size(50, 22));
+		btnCancel.setTabIndex(4);
+		btnCancel.setText("Cancel");
 		//
 		// txtSystem
 		//
-		this.txtSystem.setLocation(new java.awt.Point(8, 24));
-		this.txtSystem.setName("txtSystem");
-		this.txtSystem.setSize(new jwinforms.Size(168, 20));
-		this.txtSystem.setTabIndex(1);
-		this.txtSystem.setText("");
+		txtSystem.setLocation(new java.awt.Point(8, 24));
+		txtSystem.setName("txtSystem");
+		txtSystem.setSize(new jwinforms.Size(168, 20));
+		txtSystem.setTabIndex(1);
+		txtSystem.setText("");
 		//
 		// chkTrack
 		//
-		this.chkTrack.setLocation(new java.awt.Point(8, 48));
-		this.chkTrack.setName("chkTrack");
-		this.chkTrack.setSize(new jwinforms.Size(112, 16));
-		this.chkTrack.setTabIndex(2);
-		this.chkTrack.setText("Track this system");
+		chkTrack.setLocation(new java.awt.Point(8, 48));
+		chkTrack.setName("chkTrack");
+		chkTrack.setSize(new jwinforms.Size(112, 16));
+		chkTrack.setTabIndex(2);
+		chkTrack.setText("Track this system");
 		//
 		// FormFind
 		//
-		this.setAcceptButton(this.btnOk);
+		this.setAcceptButton(btnOk);
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
-		this.setCancelButton(this.btnCancel);
+		this.setCancelButton(btnCancel);
 		this.setClientSize(new jwinforms.Size(184, 97));
 		this.setControlBox(false);
-		this.Controls.addAll(this.chkTrack, this.txtSystem,
-				this.btnCancel, this.btnOk, this.lblText);
+		Controls.addAll(chkTrack, txtSystem,
+				btnCancel, btnOk, lblText);
 		this.setFormBorderStyle(jwinforms.FormBorderStyle.FixedDialog);
 		this.setName("FormFind");
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Find System");
-		this.Closed = new EventHandler<Object, EventArgs>()
-		{
-			public void handle(Object sender, jwinforms.EventArgs e)
-			{
-				FormFind_Closed(sender, e);
-			}
-		};
 	}
 
-	// #endregion
-
-	// #endregion
-
-	// #region Event Handlers
-
-	private void FormFind_Closed(Object sender, EventArgs e)
-	{
-		text = txtSystem.getText();
-		boxChecked = chkTrack.isChecked();
-	}
-
-	// #endregion
-
-	// #region Properties
 	public String SystemName()
 	{
 		return txtSystem.getText();

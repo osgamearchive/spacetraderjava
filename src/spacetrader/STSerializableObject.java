@@ -19,6 +19,8 @@
  ******************************************************************************/
 package spacetrader;
 
+import java.util.List;
+
 import spacetrader.enums.SpaceTraderEnum;
 import spacetrader.stub.ArrayList;
 import spacetrader.util.DWIM;
@@ -29,7 +31,7 @@ public abstract class STSerializableObject
 	public STSerializableObject()
 	{}
 
-	public STSerializableObject(Hashtable hash)
+	protected STSerializableObject(Hashtable hash)
 	{}
 
 	/**
@@ -46,9 +48,9 @@ public abstract class STSerializableObject
 	 * If an array of a type not listed is converted using {@link #ArrayToArrayList(STSerializableObject[]) ArrayToArrayList}, the
 	 * type needs to be added here.
 	 */
-	public static STSerializableObject[] ArrayListToArray(ArrayList<Hashtable> list, String typeName)
+	public static STSerializableObject[] ArrayListToArray(List<Hashtable> list, String typeName)
 	{
-		STSerializableObject[] array = null;
+		STSerializableObject[] array;
 
 		SupportedTypesOfSomethingST type = SupportedTypesOfSomethingST.valueOf(typeName);
 

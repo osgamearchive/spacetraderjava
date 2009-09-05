@@ -2,25 +2,35 @@ package spacetrader.gui;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.util.Iterator;
 
 import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.AlertType;
-import spacetrader.enums.CrewMemberId;
 import spacetrader.enums.StarSystemId;
-import spacetrader.enums.VeryRareEncounter;
 import spacetrader.util.Util;
 
+/*
+ * Aviv, aug 09:
+ *
+ * - fixed tracking to work (was string==, changed with .equals)
+ *
+ * - extracted cheats to class
+ *
+ * - replaced Game with SystemTracker where possible.
+ */
 public class GalacticChart extends jwinforms.GroupBox
 {
-	private Game game = null;
+	private SystemTracker game = null;
 	private GameController controller = null;
+	private Commander commander;
+	private GameCheats cheats;
 
-	void setGame(Game game, GameController controller)
+	void setGame(Game game, GameController controller, Commander commander)
 	{
 		this.game = game;
 		this.controller = controller;
+		this.commander = commander;
+		cheats = game == null ? null : game.Cheats();
 	}
 
 	private final SpaceTrader mainWindow;
@@ -93,7 +103,6 @@ public class GalacticChart extends jwinforms.GroupBox
 		Controls.add(btnJump);
 		Controls.add(btnFind);
 		Controls.add(picGalacticChart);
-		setLocation(new Point(180, 306));
 		setName("boxGalacticChart");
 		setSize(new jwinforms.Size(176, 168));
 		setTabIndex(5);
@@ -146,7 +155,7 @@ public class GalacticChart extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnFind_Click(sender, e);
+				btnFind_Click();
 			}
 		});
 
@@ -154,38 +163,38 @@ public class GalacticChart extends jwinforms.GroupBox
 
 	private void picGalacticChart_MouseDown(Object sender, jwinforms.MouseEventArgs e)
 	{
-		if (e.Button == MouseButtons.Left && game != null)
+		if (e.Button != MouseButtons.Left || game == null)
+			return;
+
+		StarSystem[] universe = game.Universe();
+
+		boolean clickedSystem = false;
+
+		for (int i = 0; i < universe.length && !clickedSystem; i++)
 		{
-			StarSystem[] universe = game.Universe();
+			int x = universe[i].X() + OFF_X;
+			int y = universe[i].Y() + OFF_Y;
 
-			boolean clickedSystem = false;
-
-			for (int i = 0; i < universe.length && !clickedSystem; i++)
+			if (e.X >= x - 2 && e.X <= x + 2 && e.Y >= y - 2 && e.Y <= y + 2)
 			{
-				int x = universe[i].X() + OFF_X;
-				int y = universe[i].Y() + OFF_Y;
+				clickedSystem = true;
+				game.SelectedSystemId(StarSystemId.FromInt(i));
+			} else if (Functions.WormholeExists(i, -1))
+			{
+				int xW = x + OFF_X_WORM;
 
-				if (e.X >= x - 2 && e.X <= x + 2 && e.Y >= y - 2 && e.Y <= y + 2)
+				if (e.X >= xW - 2 && e.X <= xW + 2 && e.Y >= y - 2 && e.Y <= y + 2)
 				{
 					clickedSystem = true;
 					game.SelectedSystemId(StarSystemId.FromInt(i));
-				} else if (Functions.WormholeExists(i, -1))
-				{
-					int xW = x + OFF_X_WORM;
-
-					if (e.X >= xW - 2 && e.X <= xW + 2 && e.Y >= y - 2 && e.Y <= y + 2)
-					{
-						clickedSystem = true;
-						game.SelectedSystemId(StarSystemId.FromInt(i));
-						game.TargetWormhole(true);
-					}
+					game.TargetWormhole(true);
 				}
 			}
-
-			if (clickedSystem)
-				// todo inline when done
-				mainWindow.UpdateAll();
 		}
+
+		if (clickedSystem)
+			// todo inline when done
+			mainWindow.UpdateAll();
 	}
 
 	private void picGalacticChart_Paint(Object sender, jwinforms.PaintEventArgs e)
@@ -195,8 +204,8 @@ public class GalacticChart extends jwinforms.GroupBox
 			StarSystem[] universe = game.Universe();
 			int[] wormholes = game.Wormholes();
 			StarSystem targetSys = game.SelectedSystem();
-			StarSystem curSys = game.Commander().CurrentSystem();
-			int fuel = game.Commander().getShip().getFuel();
+			StarSystem curSys = commander.CurrentSystem();
+			int fuel = commander.getShip().getFuel();
 
 			if (fuel > 0)
 				e.Graphics.DrawEllipse(DEFAULT_PEN, curSys.X() + OFF_X - fuel, curSys.Y() + OFF_Y - fuel, fuel * 2,
@@ -238,21 +247,19 @@ public class GalacticChart extends jwinforms.GroupBox
 	private void btnJump_Click(Object sender, jwinforms.EventArgs e)
 	{
 		if (game.WarpSystem() == null)
-			FormAlert.Alert(AlertType.ChartJumpNoSystemSelected, mainWindow);
-		else if (game.WarpSystem() == game.Commander().CurrentSystem())
-			FormAlert.Alert(AlertType.ChartJumpCurrent, mainWindow);
-		else if (FormAlert.Alert(AlertType.ChartJump, mainWindow, game.WarpSystem().Name()) == DialogResult.Yes)
+			FormAlert.Alert(AlertType.ChartJumpNoSystemSelected);
+		else if (game.WarpSystem() == commander.CurrentSystem())
+			FormAlert.Alert(AlertType.ChartJumpCurrent);
+		else if (FormAlert.Alert(AlertType.ChartJump, game.WarpSystem().Name()) == DialogResult.Yes)
 		{
 			game.setCanSuperWarp(false);
 			try
 			{
-				if (game.getAutoSave())
-					controller.SaveGame(SpaceTrader.SAVE_DEPARTURE, false);
+				controller.autoSave_depart();
 
 				game.Warp(true);
 
-				if (game.getAutoSave())
-					controller.SaveGame(SpaceTrader.SAVE_ARRIVAL, false);
+				controller.autoSave_arive();
 			} catch (GameEndException ex)
 			{
 				controller.GameEnd();
@@ -262,248 +269,20 @@ public class GalacticChart extends jwinforms.GroupBox
 		}
 	}
 
-	private void btnFind_Click(Object sender, jwinforms.EventArgs e)
+	private void btnFind_Click()
 	{
 		FormFind form = new FormFind();
 		if (form.ShowDialog(mainWindow) == DialogResult.OK)
 		{
-			Ship ship = game.Commander().getShip();
-
 			String[] words = form.SystemName().split(" ");
 
-			String first = words.length > 0 ? words[0] : "";
-			String second = words.length > 1 ? words[1] : "";
-			String third = words.length > 2 ? words[2] : "";
-			int num1 = Functions.IsInt(second) ? Integer.parseInt(second) : 0;
-			int num2 = Functions.IsInt(third) ? Integer.parseInt(third) : 0;
+			boolean tryToFind = cheats.ConsiderCheat(words, controller);
 
-			boolean find = false;
-
-			if (game.getCheatEnabled())
-			{
-				switch (SomeStringsForSwitch.find(first))
-				{
-				case Bazaar:
-					game.setChanceOfTradeInOrbit(Math.max(0, Math.min(1000, num1)));
-					break;
-				case Cover:
-					if (num1 >= 0 && num1 < ship.Shields().length && num2 >= 0 && num2 < Consts.Shields.length)
-						ship.Shields()[num1] = (Shield)Consts.Shields[num2].Clone();
-					break;
-				case DeLorean:
-					game.Commander().setDays(Math.max(0, num1));
-					break;
-				case Diamond:
-					ship.setHullUpgraded(!ship.getHullUpgraded());
-					break;
-				case Energize:
-					game.setCanSuperWarp(!game.getCanSuperWarp());
-					break;
-				case Events:
-					if (second == "Reset")
-						game.ResetVeryRareEncounters();
-					else
-					{
-						String text = "";
-						for (Iterator<VeryRareEncounter> list = game.VeryRareEncounters().iterator(); list.hasNext();)
-							text += Strings.VeryRareEncounters[list.next().CastToInt()] + Strings.newline;
-						text = text.trim();
-
-						FormAlert.Alert(AlertType.Alert, mainWindow, "Remaining Very Rare Encounters", text);
-					}
-					break;
-				case Fame:
-					game.Commander().setReputationScore(Math.max(0, num1));
-					break;
-				case Go:
-					game.setSelectedSystemByName(second);
-					if (game.SelectedSystem().Name().toLowerCase() == second.toLowerCase())
-					{
-						if (game.getAutoSave())
-							controller.SaveGame(SpaceTrader.SAVE_DEPARTURE, false);
-
-						game.WarpDirect();
-
-						if (game.getAutoSave())
-							controller.SaveGame(SpaceTrader.SAVE_ARRIVAL, false);
-					}
-					break;
-				case Ice:
-				{
-					switch (SomeStringsForSwitch.find(second))
-					{
-					case Pirate:
-						game.Commander().setKillsPirate(Math.max(0, num2));
-						break;
-					case Police:
-						game.Commander().setKillsPolice(Math.max(0, num2));
-						break;
-					case Trader:
-						game.Commander().setKillsTrader(Math.max(0, num2));
-						break;
-					}
-				}
-					break;
-				case Indemnity:
-					game.Commander().NoClaim(Math.max(0, num1));
-					break;
-				case IOU:
-					game.Commander().setDebt(Math.max(0, num1));
-					break;
-				case Iron:
-					if (num1 >= 0 && num1 < ship.Weapons().length && num2 >= 0 && num2 < Consts.Weapons.length)
-						ship.Weapons()[num1] = (Weapon)Consts.Weapons[num2].Clone();
-					break;
-				case Juice:
-					ship.setFuel(Math.max(0, Math.min(ship.FuelTanks(), num1)));
-					break;
-				case Knack:
-					if (num1 >= 0 && num1 < game.Mercenaries().length)
-					{
-						String[] skills = third.split(",");
-						for (int i = 0; i < game.Mercenaries()[num1].Skills().length && i < skills.length; i++)
-						{
-							if (Functions.IsInt(skills[i]))
-								game.Mercenaries()[num1].Skills()[i] = Math.max(1, Math.min(Consts.MaxSkill, Integer
-										.parseInt(skills[i])));
-						}
-					}
-					break;
-				case L_Engle:
-					game.setFabricRipProbability(Math.max(0, Math.min(Consts.FabricRipInitialProbability, num1)));
-					break;
-				case LifeBoat:
-					ship.setEscapePod(!ship.getEscapePod());
-					break;
-				case MonsterCom:
-					(new FormMonster()).ShowDialog(mainWindow);
-					break;
-				case PlanB:
-					game.setAutoSave(true);
-					break;
-				case Posse:
-					if (num1 > 0 && num1 < ship.Crew().length && num2 > 0 && num2 < game.Mercenaries().length
-							&& !Util.ArrayContains(Consts.SpecialCrewMemberIds, (CrewMemberId.FromInt(num2))))
-					{
-						int skill = ship.Trader();
-						ship.Crew()[num1] = game.Mercenaries()[num2];
-						if (ship.Trader() != skill)
-							game.RecalculateBuyPrices(game.Commander().CurrentSystem());
-					}
-					break;
-				case RapSheet:
-					game.Commander().setPoliceRecordScore(num1);
-					break;
-				case Rarity:
-					game.setChanceOfVeryRareEncounter(Math.max(0, Math.min(1000, num1)));
-					break;
-				case Scratch:
-					game.Commander().setCash(Math.max(0, num1));
-					break;
-				case Skin:
-					ship.setHull(Math.max(0, Math.min(ship.HullStrength(), num1)));
-					break;
-				case Status:
-				{
-					switch (SomeStringsForSwitch.find(second))
-					{
-					case Artifact:
-						game.setQuestStatusArtifact(Math.max(0, num2));
-						break;
-					case Dragonfly:
-						game.setQuestStatusDragonfly(Math.max(0, num2));
-						break;
-					case Experiment:
-						game.setQuestStatusExperiment(Math.max(0, num2));
-						break;
-					case Gemulon:
-						game.setQuestStatusGemulon(Math.max(0, num2));
-						break;
-					case Japori:
-						game.setQuestStatusJapori(Math.max(0, num2));
-						break;
-					case Jarek:
-						game.setQuestStatusJarek(Math.max(0, num2));
-						break;
-					case Moon:
-						game.setQuestStatusMoon(Math.max(0, num2));
-						break;
-					case Reactor:
-						game.setQuestStatusReactor(Math.max(0, num2));
-						break;
-					case Princess:
-						game.setQuestStatusPrincess(Math.max(0, num2));
-						break;
-					case Scarab:
-						game.setQuestStatusScarab(Math.max(0, num2));
-						break;
-					case Sculpture:
-						game.setQuestStatusSculpture(Math.max(0, num2));
-						break;
-					case SpaceMonster:
-						game.setQuestStatusSpaceMonster(Math.max(0, num2));
-						break;
-					case Wild:
-						game.setQuestStatusWild(Math.max(0, num2));
-						break;
-					default:
-						String text = "Artifact: " + game.getQuestStatusArtifact() + Strings.newline + "Dragonfly: "
-								+ game.getQuestStatusDragonfly() + Strings.newline + "Experiment: "
-								+ game.getQuestStatusExperiment() + Strings.newline + "Gemulon: "
-								+ game.getQuestStatusGemulon() + Strings.newline + "Japori: "
-								+ game.getQuestStatusJapori() + Strings.newline + "Jarek: "
-								+ game.getQuestStatusJarek() + Strings.newline + "Moon: " + game.getQuestStatusMoon()
-								+ Strings.newline + "Princess: " + game.getQuestStatusPrincess() + Strings.newline
-								+ "Reactor: " + game.getQuestStatusReactor() + Strings.newline + "Scarab: "
-								+ game.getQuestStatusScarab() + Strings.newline + "Sculpture: "
-								+ game.getQuestStatusSculpture() + Strings.newline + "SpaceMonster: "
-								+ game.getQuestStatusSpaceMonster() + Strings.newline + "Wild: "
-								+ game.getQuestStatusWild();
-
-						FormAlert.Alert(AlertType.Alert, mainWindow, "Status of Quests", text);
-						break;
-					}
-				}
-					break;
-				case Swag:
-					if (num1 >= 0 && num1 < ship.Cargo().length)
-						ship.Cargo()[num1] = Math.max(0, Math.min(ship.FreeCargoBays() + ship.Cargo()[num1], num2));
-					break;
-				case Test:
-					(new FormTest()).ShowDialog(mainWindow);
-					break;
-				case Tool:
-					if (num1 >= 0 && num1 < ship.Gadgets().length && num2 >= 0 && num2 < Consts.Gadgets.length)
-						ship.Gadgets()[num1] = (Gadget)Consts.Gadgets[num2].Clone();
-					break;
-				case Varmints:
-					ship.setTribbles(Math.max(0, num1));
-					break;
-				case Yellow:
-					game.setEasyEncounters(true);
-					break;
-				default:
-					find = true;
-					break;
-				}
-			} else
-			{
-				switch (SomeStringsForSwitch.find(first))
-				{
-				case Cheetah:
-					FormAlert.Alert(AlertType.Cheater, mainWindow);
-					game.setCheatEnabled(true);
-					break;
-				default:
-					find = true;
-					break;
-				}
-			}
-
-			if (find)
+			if (tryToFind)
 			{
 				game.setSelectedSystemByName(form.SystemName());
-				if (form.TrackSystem() && game.SelectedSystem().Name().toLowerCase() == form.SystemName().toLowerCase())
+				if (form.TrackSystem()
+						&& game.SelectedSystem().Name().toLowerCase().equals(form.SystemName().toLowerCase()))
 					game.setTrackedSystemId(game.SelectedSystemId());
 			}
 

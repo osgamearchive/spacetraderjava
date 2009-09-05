@@ -34,7 +34,7 @@ import spacetrader.enums.*;
 
 
 @SuppressWarnings("unchecked")
-public class FormViewShip extends WinformForm
+public class FormViewShip extends SpaceTraderForm
 {
 	//#region Control Declarations
 

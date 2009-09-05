@@ -34,7 +34,7 @@ import java.util.*;
 import jwinforms.*;
 import spacetrader.enums.*;
 
-public class FormNewCommander extends WinformForm
+public class FormNewCommander extends SpaceTraderForm
 {
 	// #region Control Declarations
 

@@ -9,13 +9,15 @@ import spacetrader.enums.AlertType;
 
 public class SystemBox extends jwinforms.GroupBox
 {
-	private Game game = null;
+	private CurrentSystemMgr game = null;
 	private GameController controller = null;
+	private Commander commander;
 
-	void setGame(Game game, GameController controller)
+	void setGame(CurrentSystemMgr game, GameController controller, Commander commander)
 	{
 		this.game = game;
 		this.controller = controller;
+		this.commander = commander;
 	}
 
 	private final SpaceTrader mainWindow;
@@ -66,7 +68,6 @@ public class SystemBox extends jwinforms.GroupBox
 		Controls.add(lblSystemSizeLabel);
 		Controls.add(lblSystemName);
 		Controls.add(lblSystemNameLabel);
-		setLocation(new Point(4, 2));
 		setName("boxSystem");
 		setSize(new jwinforms.Size(240, 206));
 		setTabIndex(1);
@@ -282,7 +283,7 @@ public class SystemBox extends jwinforms.GroupBox
 
 	public void Update()
 	{
-		if (game == null || game.Commander().CurrentSystem() == null)
+		if (game == null || commander.CurrentSystem() == null)
 		{
 			lblSystemName.setText("");
 			lblSystemSize.setText("");
@@ -298,7 +299,7 @@ public class SystemBox extends jwinforms.GroupBox
 			btnSpecial.setVisible(false);
 		} else
 		{
-			StarSystem system = game.Commander().CurrentSystem();
+			StarSystem system = commander.CurrentSystem();
 			CrewMember[] mercs = system.MercenariesForHire();
 
 			lblSystemName.setText(system.Name());
@@ -358,7 +359,7 @@ public class SystemBox extends jwinforms.GroupBox
 
 	private void btnSpecial_Click(Object sender, jwinforms.EventArgs e)
 	{
-		SpecialEvent specEvent = game.Commander().CurrentSystem().SpecialEvent();
+		SpecialEvent specEvent = commander.CurrentSystem().SpecialEvent();
 		String btn1, btn2;
 		DialogResult res1, res2;
 
@@ -379,8 +380,8 @@ public class SystemBox extends jwinforms.GroupBox
 		FormAlert alert = new FormAlert(specEvent.Title(), specEvent.String(), btn1, res1, btn2, res2, null);
 		if (alert.ShowDialog() != DialogResult.No)
 		{
-			if (game.Commander().CashToSpend() < specEvent.Price())
-				FormAlert.Alert(AlertType.SpecialIF, mainWindow);
+			if (commander.CashToSpend() < specEvent.Price())
+				FormAlert.Alert(AlertType.SpecialIF);
 			else
 			{
 				try

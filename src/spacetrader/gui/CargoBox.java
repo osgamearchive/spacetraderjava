@@ -26,21 +26,15 @@ import java.awt.Point;
 import jwinforms.*;
 import spacetrader.*;
 
-
 public class CargoBox extends jwinforms.GroupBox
 {
-	private Game game = null;
+	private SpaceTraderGame game = null;
+	private GameController controller = null;
 
-	void setGame(Game game)
+	void setGame(SpaceTraderGame game, GameController controller)
 	{
 		this.game = game;
-	}
-
-	private final SpaceTrader mainWindow;
-
-	public CargoBox(SpaceTrader mainWindow)
-	{
-		this.mainWindow = mainWindow;
+		this.controller = controller;
 	}
 
 	private static final Font BOLD_FONT = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -441,7 +435,6 @@ public class CargoBox extends jwinforms.GroupBox
 		Controls.add(lblTradeCmdty4);
 		Controls.add(lblTradeCmdty3);
 		Controls.add(lblTradeCmdty7);
-		setLocation(new Point(252, 2));
 		setName("boxCargo");
 		setSize(new jwinforms.Size(512, 300));
 		setTabIndex(8);
@@ -524,7 +517,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 
@@ -542,7 +535,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -568,7 +561,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -585,7 +578,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -638,7 +631,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -655,7 +648,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -681,7 +674,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -698,7 +691,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -753,7 +746,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -770,7 +763,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -796,7 +789,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -813,7 +806,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -866,7 +859,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -883,7 +876,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -909,7 +902,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -926,7 +919,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -979,7 +972,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -996,7 +989,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1022,7 +1015,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1039,7 +1032,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1092,7 +1085,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1109,7 +1102,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1135,7 +1128,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1152,7 +1145,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1205,7 +1198,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1222,7 +1215,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1248,7 +1241,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1265,7 +1258,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1318,7 +1311,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1335,7 +1328,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1361,7 +1354,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1378,7 +1371,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1431,7 +1424,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1448,7 +1441,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1528,7 +1521,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1545,7 +1538,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1571,7 +1564,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1588,7 +1581,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1614,7 +1607,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1631,7 +1624,7 @@ public class CargoBox extends jwinforms.GroupBox
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuySell_Click(sender, e);
+				btnBuySell_Click(((Button)sender).getName());
 			}
 		});
 		//
@@ -1791,23 +1784,6 @@ public class CargoBox extends jwinforms.GroupBox
 		FinishInit();
 	}
 
-	private void CargoBuy(int tradeItem, boolean max)
-	{
-		game.CargoBuySystem(tradeItem, max, mainWindow);
-		// todo inline when done
-		mainWindow.UpdateAll();
-	}
-
-	private void CargoSell(int tradeItem, boolean all)
-	{
-		if (game.PriceCargoSell()[tradeItem] > 0)
-			game.CargoSellSystem(tradeItem, all, mainWindow);
-		else
-			game.CargoDump(tradeItem, mainWindow);
-		// todo inline when done
-		mainWindow.UpdateAll();
-	}
-
 	void Update()
 	{
 		int i;
@@ -1826,66 +1802,65 @@ public class CargoBox extends jwinforms.GroupBox
 				btnBuyQty[i].setVisible(false);
 				btnBuyMax[i].setVisible(false);
 			}
-		} else
+			return;
+		}
+		int[] buy = game.PriceCargoBuy();
+		int[] sell = game.PriceCargoSell();
+		Commander cmdr = game.Commander();
+		StarSystem warpSys = game.WarpSystem();
+
+		for (i = 0; i < lblSellPrice.length; i++)
 		{
-			int[] buy = game.PriceCargoBuy();
-			int[] sell = game.PriceCargoSell();
-			Commander cmdr = game.Commander();
-			StarSystem warpSys = game.WarpSystem();
+			int price = warpSys == null ? 0 : Consts.TradeItems[i].StandardPrice(warpSys);
 
-			for (i = 0; i < lblSellPrice.length; i++)
+			lblSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : Strings.CargoSellNA);
+			btnSellQty[i].setText("" + cmdr.getShip().Cargo()[i]);
+			btnSellQty[i].setVisible(true);
+			btnSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
+			btnSellAll[i].setVisible(true);
+			lblBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : Strings.CargoBuyNA);
+			btnBuyQty[i].setText("" + cmdr.CurrentSystem().TradeItems()[i]);
+			btnBuyQty[i].setVisible(buy[i] > 0);
+			btnBuyMax[i].setVisible(buy[i] > 0);
+
+			if (sell[i] * cmdr.getShip().Cargo()[i] > cmdr.PriceCargo()[i])
+				lblSellPrice[i].setFont(BOLD_FONT);
+			else
+				lblSellPrice[i].setFont(lblSell.getFont());
+
+			if (warpSys != null && warpSys.DestOk() && price > 0)
+				lblTargetPrice[i].setText(Functions.FormatMoney(price));
+			else
+				lblTargetPrice[i].setText("-----------");
+
+			if (warpSys != null && warpSys.DestOk() && price > 0 && buy[i] > 0)
 			{
-				int price = warpSys == null ? 0 : Consts.TradeItems[i].StandardPrice(warpSys);
-
-				lblSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : Strings.CargoSellNA);
-				btnSellQty[i].setText("" + cmdr.getShip().Cargo()[i]);
-				btnSellQty[i].setVisible(true);
-				btnSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
-				btnSellAll[i].setVisible(true);
-				lblBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : Strings.CargoBuyNA);
-				btnBuyQty[i].setText("" + cmdr.CurrentSystem().TradeItems()[i]);
-				btnBuyQty[i].setVisible(buy[i] > 0);
-				btnBuyMax[i].setVisible(buy[i] > 0);
-
-				if (sell[i] * cmdr.getShip().Cargo()[i] > cmdr.PriceCargo()[i])
-					lblSellPrice[i].setFont(BOLD_FONT);
-				else
-					lblSellPrice[i].setFont(lblSell.getFont());
-
-				if (warpSys != null && warpSys.DestOk() && price > 0)
-					lblTargetPrice[i].setText(Functions.FormatMoney(price));
-				else
-					lblTargetPrice[i].setText("-----------");
-
-				if (warpSys != null && warpSys.DestOk() && price > 0 && buy[i] > 0)
-				{
-					int diff = price - buy[i];
-					lblTargetDiff[i].setText((diff > 0 ? "+" : "") + Functions.FormatMoney(diff));
-					lblTargetPct[i].setText((diff > 0 ? "+" : "") + Functions.FormatNumber(100 * diff / buy[i]) + "%");
-					lblBuyPrice[i].setFont((diff > 0 && cmdr.CurrentSystem().TradeItems()[i] > 0) ? BOLD_FONT : lblBuy.getFont());
-				} else
-				{
-					lblTargetDiff[i].setText("------------");
-					lblTargetPct[i].setText("--------");
-					lblBuyPrice[i].setFont(lblBuy.getFont());
-				}
-
-				lblTargetPrice[i].setFont(lblBuyPrice[i].getFont());
-				lblTargetDiff[i].setFont(lblBuyPrice[i].getFont());
-				lblTargetPct[i].setFont(lblBuyPrice[i].getFont());
+				int diff = price - buy[i];
+				lblTargetDiff[i].setText((diff > 0 ? "+" : "") + Functions.FormatMoney(diff));
+				lblTargetPct[i].setText((diff > 0 ? "+" : "") + Functions.FormatNumber(100 * diff / buy[i]) + "%");
+				lblBuyPrice[i].setFont((diff > 0 && cmdr.CurrentSystem().TradeItems()[i] > 0) ? BOLD_FONT : lblBuy
+						.getFont());
+			} else
+			{
+				lblTargetDiff[i].setText("------------");
+				lblTargetPct[i].setText("--------");
+				lblBuyPrice[i].setFont(lblBuy.getFont());
 			}
+
+			lblTargetPrice[i].setFont(lblBuyPrice[i].getFont());
+			lblTargetDiff[i].setFont(lblBuyPrice[i].getFont());
+			lblTargetPct[i].setFont(lblBuyPrice[i].getFont());
 		}
 	}
 
-	private void btnBuySell_Click(Object sender, jwinforms.EventArgs e)
+	private void btnBuySell_Click(String buttonName)
 	{
-		String name = ((Button)sender).getName();
-		boolean all = name.indexOf("Qty") < 0;
-		int index = Integer.parseInt(name.substring(name.length() - 1));
+		boolean all = buttonName.indexOf("Qty") < 0;
+		int index = Integer.parseInt(buttonName.substring(buttonName.length() - 1));
 
-		if (name.indexOf("Buy") < 0)
-			CargoSell(index, all);
+		if (buttonName.indexOf("Buy") < 0)
+			controller.CargoSell(index, all);
 		else
-			CargoBuy(index, all);
+			controller.CargoBuy(index, all);
 	}
 }

@@ -4,20 +4,18 @@ import java.awt.Color;
 import java.awt.Point;
 
 import jwinforms.*;
-import spacetrader.Consts;
-import spacetrader.Functions;
-import spacetrader.Game;
-import spacetrader.StarSystem;
-import spacetrader.Strings;
+import spacetrader.*;
 import spacetrader.enums.StarSystemId;
 
 public class ShortRangeChart extends jwinforms.GroupBox
 {
-	private Game game = null;
+	private SystemTracker game = null;
+	private Commander commander;
 
-	void setGame(Game game)
+	void setGame(SystemTracker game, Commander commander)
 	{
 		this.game = game;
+		this.commander = commander;
 	}
 
 	private final SpaceTrader mainWindow;
@@ -64,13 +62,11 @@ public class ShortRangeChart extends jwinforms.GroupBox
 
 		Anchor = (((jwinforms.AnchorStyles.Top_Right)));
 		Controls.add(picShortRangeChart);
-		setLocation(new Point(364, 306));
 		setName("boxShortRangeChart");
 		setSize(new jwinforms.Size(176, 168));
 		setTabIndex(6);
 		setTabStop(false);
 		setText("Short-Range Chart");
-
 	}
 
 	private final int OFF_X = ChartsGraphicsConsts.OFF_X;
@@ -86,7 +82,7 @@ public class ShortRangeChart extends jwinforms.GroupBox
 		if (e.Button == MouseButtons.Left && game != null)
 		{
 			StarSystem[] universe = game.Universe();
-			StarSystem curSys = game.Commander().CurrentSystem();
+			StarSystem curSys = commander.CurrentSystem();
 
 			boolean clickedSystem = false;
 			int centerX = picShortRangeChart.getWidth() / 2;
@@ -138,8 +134,8 @@ public class ShortRangeChart extends jwinforms.GroupBox
 			StarSystem[] universe = game.Universe();
 			int[] wormholes = game.Wormholes();
 			StarSystem trackSys = game.TrackedSystem();
-			StarSystem curSys = game.Commander().CurrentSystem();
-			int fuel = game.Commander().getShip().getFuel();
+			StarSystem curSys = commander.CurrentSystem();
+			int fuel = commander.getShip().getFuel();
 
 			int centerX = picShortRangeChart.getWidth() / 2;
 			int centerY = picShortRangeChart.getHeight() / 2;
@@ -167,7 +163,7 @@ public class ShortRangeChart extends jwinforms.GroupBox
 							new Point(centerX + dX2, centerY + dY2) });
 				}
 
-				if (game.Options().getShowTrackedRange())
+				if (game.isShowTrackedRange())
 					e.Graphics.DrawString(Functions.StringVars(Strings.ChartDistance, Functions.Multiples(dist,
 							Strings.DistanceUnit), trackSys.Name()), getFont(), new SolidBrush(Color.black), 0,
 							picShortRangeChart.getHeight() - 13);

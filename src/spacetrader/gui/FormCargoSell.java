@@ -31,7 +31,7 @@ package spacetrader.gui;import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.*;
 
-public class FormCargoSell extends WinformForm
+public class FormCargoSell extends SpaceTraderForm
 {
 	// #region Control Declarations
 

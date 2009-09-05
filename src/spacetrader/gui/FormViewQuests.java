@@ -44,7 +44,7 @@ import spacetrader.stub.*;
 import spacetrader.util.Util;
 
 @SuppressWarnings("unchecked")
-public class FormViewQuests extends WinformForm
+public class FormViewQuests extends SpaceTraderForm
 {
 	// #region Control Declarations
 

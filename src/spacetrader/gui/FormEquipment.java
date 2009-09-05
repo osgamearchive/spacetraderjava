@@ -35,7 +35,7 @@ import spacetrader.enums.AlertType;
 import spacetrader.enums.EquipmentType;
 import spacetrader.enums.GadgetType;
 
-public class FormEquipment extends WinformForm
+public class FormEquipment extends SpaceTraderForm
 {
 	// #region Control Declarations
 	public static void main(String[] args) throws Exception
@@ -662,17 +662,17 @@ public class FormEquipment extends WinformForm
 
 			if (baseType == EquipmentType.Gadget && cmdr.getShip().HasGadget(((Gadget) selectedEquipment).Type())
 					&& ((Gadget) selectedEquipment).Type() != GadgetType.ExtraCargoBays)
-				FormAlert.Alert(AlertType.EquipmentAlreadyOwn, this);
+				FormAlert.Alert(AlertType.EquipmentAlreadyOwn);
 			else if (cmdr.getDebt() > 0)
-				FormAlert.Alert(AlertType.DebtNoBuy, this);
+				FormAlert.Alert(AlertType.DebtNoBuy);
 			else if (selectedEquipment.Price() > cmdr.CashToSpend())
-				FormAlert.Alert(AlertType.EquipmentIF, this);
+				FormAlert.Alert(AlertType.EquipmentIF);
 			else if ((baseType == EquipmentType.Weapon && cmdr.getShip().FreeSlotsWeapon() == 0)
 					|| (baseType == EquipmentType.Shield && cmdr.getShip().FreeSlotsShield() == 0)
 					|| (baseType == EquipmentType.Gadget && cmdr.getShip().FreeSlotsGadget() == 0))
-				FormAlert.Alert(AlertType.EquipmentNotEnoughSlots, this);
-			else if (FormAlert.Alert(AlertType.EquipmentBuy, this, selectedEquipment.Name(), Functions
-					.FormatNumber(selectedEquipment.Price())) == DialogResult.Yes)
+				FormAlert.Alert(AlertType.EquipmentNotEnoughSlots);
+			else if (FormAlert.Alert(AlertType.EquipmentBuy, selectedEquipment.Name(), Functions
+			.FormatNumber(selectedEquipment.Price())) == DialogResult.Yes)
 			{
 				cmdr.getShip().AddEquipment(selectedEquipment);
 				cmdr.setCash(cmdr.getCash() - selectedEquipment.Price());
@@ -698,7 +698,7 @@ public class FormEquipment extends WinformForm
 	{
 		if (selectedEquipment != null && sellSideSelected)
 		{
-			if (FormAlert.Alert(AlertType.EquipmentSell, this) == DialogResult.Yes)
+			if (FormAlert.Alert(AlertType.EquipmentSell) == DialogResult.Yes)
 			{
 				// The slot is the selected index. Two of the three list boxes
 				// will have selected indices of -1, so adding
@@ -710,7 +710,7 @@ public class FormEquipment extends WinformForm
 						&& (((Gadget) selectedEquipment).Type() == GadgetType.ExtraCargoBays || ((Gadget) selectedEquipment)
 								.Type() == GadgetType.HiddenCargoBays) && cmdr.getShip().FreeCargoBays() < 5)
 				{
-					FormAlert.Alert(AlertType.EquipmentExtraBaysInUse, this);
+					FormAlert.Alert(AlertType.EquipmentExtraBaysInUse);
 				} else
 				{
 					cmdr.setCash(cmdr.getCash() + selectedEquipment.SellPrice());

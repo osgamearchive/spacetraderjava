@@ -32,7 +32,7 @@ package spacetrader.gui;import java.util.*;
 
 import jwinforms.*;
 import spacetrader.*;import spacetrader.enums.*;
-	public class FormViewBank extends WinformForm
+	public class FormViewBank extends SpaceTraderForm
 	{
 		//#region Control Declarations
 
@@ -339,7 +339,7 @@ btnPayBack_Click(sender, e);}});
 		private void btnGetLoan_Click(Object sender, EventArgs e)
 		{
 			if (cmdr.getDebt() >= MaxLoan)
-				FormAlert.Alert(AlertType.DebtTooLargeLoan, this);
+				FormAlert.Alert(AlertType.DebtTooLargeLoan);
 			else
 			{
 				FormGetLoan	form	= new FormGetLoan(MaxLoan - cmdr.getDebt());
@@ -357,7 +357,7 @@ btnPayBack_Click(sender, e);}});
 		private void btnPayBack_Click(Object sender, EventArgs e)
 		{
 			if (cmdr.getDebt() == 0)
-				FormAlert.Alert(AlertType.DebtNone, this);
+				FormAlert.Alert(AlertType.DebtNone);
 			else
 			{
 				FormPayBackLoan	form	= new FormPayBackLoan();
@@ -376,14 +376,14 @@ btnPayBack_Click(sender, e);}});
 		{
 			if (cmdr.getInsurance())
 			{
-				if (FormAlert.Alert(AlertType.InsuranceStop, this) == DialogResult.Yes)
+				if (FormAlert.Alert(AlertType.InsuranceStop) == DialogResult.Yes)
 				{
 					cmdr.setInsurance(false);
 					cmdr.NoClaim(0);
 				}
 			}
 			else if (!cmdr.getShip().getEscapePod())
-				FormAlert.Alert(AlertType.InsuranceNoEscapePod, this);
+				FormAlert.Alert(AlertType.InsuranceNoEscapePod);
 			else
 			{
 				cmdr.setInsurance(true);

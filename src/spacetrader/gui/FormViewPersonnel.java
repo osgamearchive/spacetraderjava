@@ -28,7 +28,7 @@ import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.*;
 
-public class FormViewPersonnel extends WinformForm
+public class FormViewPersonnel extends SpaceTraderForm
 {
 	//#region Control Declarations
 
@@ -440,7 +440,7 @@ public class FormViewPersonnel extends WinformForm
 		{
 			if (game.Commander().getShip().HasCrew(selectedCrewMember.Id()))
 			{
-				if (FormAlert.Alert(AlertType.CrewFireMercenary, this, selectedCrewMember.Name()) == DialogResult.Yes)
+				if (FormAlert.Alert(AlertType.CrewFireMercenary, selectedCrewMember.Name()) == DialogResult.Yes)
 				{
 					game.Commander().getShip().Fire(selectedCrewMember.Id());
 
@@ -450,7 +450,7 @@ public class FormViewPersonnel extends WinformForm
 			} else
 			{
 				if (game.Commander().getShip().FreeCrewQuarters() == 0)
-					FormAlert.Alert(AlertType.CrewNoQuarters, this, selectedCrewMember.Name());
+					FormAlert.Alert(AlertType.CrewNoQuarters, selectedCrewMember.Name());
 				else
 				{
 					game.Commander().getShip().Hire(selectedCrewMember);

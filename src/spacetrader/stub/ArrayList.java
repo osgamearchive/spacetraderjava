@@ -29,11 +29,6 @@ public class ArrayList<T> extends java.util.ArrayList<T>
 		Collections.sort((java.util.List<Comparable>)ob);
 	}
 
-	public <U> U[] ToArray(U[] a)
-	{
-		return this.toArray(a);
-	}
-
 	public void Reverse()
 	{
 		Collections.reverse(this);

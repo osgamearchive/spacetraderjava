@@ -32,7 +32,7 @@ import spacetrader.stub.ArrayList;
 import spacetrader.util.Util;
 
 @SuppressWarnings({"unchecked","synthetic-access"})
-public class FormMonster extends WinformForm
+public class FormMonster extends SpaceTraderForm
 {
 	// #region Constants
 

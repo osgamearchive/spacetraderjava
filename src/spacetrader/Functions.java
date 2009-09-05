@@ -30,13 +30,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
-import jwinforms.*;
+import jwinforms.Bitmap;
+import jwinforms.Graphics;
+import jwinforms.GraphicsUnit;
+import jwinforms.Image;
+import jwinforms.Rectangle;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.Difficulty;
 import spacetrader.gui.FormAlert;
-import spacetrader.stub.ArrayList;
 import spacetrader.stub.BinaryFormatter;
 import spacetrader.stub.RegistryKey;
 import spacetrader.stub.SerializationException;
@@ -69,7 +73,7 @@ public class Functions
 		return skill;
 	}
 
-	public static String[] ArrayListtoStringArray(spacetrader.stub.ArrayList<?> list)
+	public static String[] ArrayListtoStringArray(List<?> list)
 	{
 		String[] items = new String[list.size()];
 
@@ -136,15 +140,13 @@ public class Functions
 		return -1;
 	}
 
-	public static HighScoreRecord[] GetHighScores(WinformPane owner)
+	public static HighScoreRecord[] GetHighScores()
 	{
-		HighScoreRecord[] highScores = new HighScoreRecord[3];
+		Object obj = LoadFile(Consts.HighScoreFile, true);
+		if (obj == null)
+			return new HighScoreRecord[3];
 
-		Object obj = LoadFile(Consts.HighScoreFile, true, owner);
-		if (obj != null)
-			highScores = (HighScoreRecord[])STSerializableObject.ArrayListToArray((ArrayList<Hashtable>)obj, "HighScoreRecord");
-
-		return highScores;
+		return (HighScoreRecord[])STSerializableObject.ArrayListToArray((List<Hashtable>)obj, "HighScoreRecord");
 	}
 
 	public static int GetRandom(int max)
@@ -178,38 +180,34 @@ public class Functions
 
 	public static boolean IsInt(String toParse)
 	{
-		boolean isInt = true;
-
 		try
 		{
 			Integer.parseInt(toParse);
+			return true;
 		} catch (Exception e)
 		{
 			return false;
 		}
-
-		return isInt;
 	}
 
-	public static Object LoadFile(String fileName, boolean ignoreMissingFile, WinformPane owner)
+	public static Object LoadFile(String fileName, boolean ignoreMissingFile)
 	{
-		Object obj = null;
 		FileInputStream inStream = null;
 
 		try
 		{
 			inStream = new FileInputStream(fileName/* , FileMode.Open */);
-			obj = (new BinaryFormatter()).Deserialize(inStream);
+			return (new BinaryFormatter()).Deserialize(inStream);
 		} catch (FileNotFoundException e)
 		{
 			if (!ignoreMissingFile)
-				FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, e.getMessage());
+				FormAlert.Alert(AlertType.FileErrorOpen, fileName, e.getMessage());
 		} catch (IOException ex)
 		{
-			FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, ex.getMessage());
+			FormAlert.Alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
 		} catch (SerializationException ex)
 		{
-			FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, Strings.FileFormatBad);
+			FormAlert.Alert(AlertType.FileErrorOpen, fileName, Strings.FileFormatBad);
 		} finally
 		{
 			if (inStream != null)
@@ -222,7 +220,7 @@ public class Functions
 				}
 		}
 
-		return obj;
+		return null;
 	}
 
 	public static String Multiples(int num, String unit)
@@ -285,7 +283,7 @@ public class Functions
 			SeedY = DEFSEEDY;
 	}
 
-	public static boolean SaveFile(String fileName, Object toSerialize, WinformPane owner)
+	public static boolean SaveFile(String fileName, Object toSerialize)
 	{
 		System.out.println(fileName);
 		FileOutputStream outStream = null;
@@ -301,7 +299,7 @@ public class Functions
 		} catch (IOException ex)
 		{
 			ex.printStackTrace();
-			FormAlert.Alert(AlertType.FileErrorSave, owner, fileName, ex.getMessage());
+			FormAlert.Alert(AlertType.FileErrorSave, fileName, ex.getMessage());
 		} finally
 		{
 			if (outStream != null)

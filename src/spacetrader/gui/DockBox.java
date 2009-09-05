@@ -5,18 +5,18 @@ import java.awt.Point;
 import jwinforms.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
+import spacetrader.Commander;
 import spacetrader.Functions;
-import spacetrader.Game;
 import spacetrader.Ship;
 import spacetrader.Strings;
 
 public class DockBox extends jwinforms.GroupBox
 {
-	private Game game = null;
+	private Commander commander;
 
-	void setGame(Game game)
+	void setGame(Commander commander)
 	{
-		this.game = game;
+		this.commander = commander;
 	}
 
 	private final SpaceTrader mainWindow;
@@ -48,7 +48,6 @@ public class DockBox extends jwinforms.GroupBox
 		Controls.add(lblFuelCost);
 		Controls.add(lblHullStatus);
 		Controls.add(lblRepairCost);
-		setLocation(new Point(4, 212));
 		setName("boxDock");
 		setSize(new jwinforms.Size(240, 90));
 		setTabIndex(2);
@@ -128,9 +127,9 @@ public class DockBox extends jwinforms.GroupBox
 		FormBuyFuel form = new FormBuyFuel();
 		if (form.ShowDialog(mainWindow) == DialogResult.OK)
 		{
-			int toAdd = form.Amount() / game.Commander().getShip().getFuelCost();
-			game.Commander().getShip().setFuel(game.Commander().getShip().getFuel() + toAdd);
-			game.Commander().setCash(game.Commander().getCash() - (toAdd * game.Commander().getShip().getFuelCost()));
+			int toAdd = form.Amount() / commander.getShip().getFuelCost();
+			commander.getShip().setFuel(commander.getShip().getFuel() + toAdd);
+			commander.setCash(commander.getCash() - (toAdd * commander.getShip().getFuelCost()));
 			// todo inline when done
 			mainWindow.UpdateAll();
 		}
@@ -141,9 +140,9 @@ public class DockBox extends jwinforms.GroupBox
 		FormBuyRepairs form = new FormBuyRepairs();
 		if (form.ShowDialog(mainWindow) == DialogResult.OK)
 		{
-			int toAdd = form.Amount() / game.Commander().getShip().getRepairCost();
-			game.Commander().getShip().setHull(game.Commander().getShip().getHull() + toAdd);
-			game.Commander().setCash(game.Commander().getCash() - (toAdd * game.Commander().getShip().getRepairCost()));
+			int toAdd = form.Amount() / commander.getShip().getRepairCost();
+			commander.getShip().setHull(commander.getShip().getHull() + toAdd);
+			commander.setCash(commander.getCash() - (toAdd * commander.getShip().getRepairCost()));
 			// todo inline when done
 			mainWindow.UpdateAll();
 		}
@@ -151,7 +150,7 @@ public class DockBox extends jwinforms.GroupBox
 
 	void Update()
 	{
-		if (game == null)
+		if (commander == null)
 		{
 			lblFuelStatus.setText("");
 			lblFuelCost.setText("");
@@ -161,7 +160,7 @@ public class DockBox extends jwinforms.GroupBox
 			btnRepair.setVisible(false);
 		} else
 		{
-			Ship ship = game.Commander().getShip();
+			Ship ship = commander.getShip();
 
 			lblFuelStatus.setText(Functions.StringVars(Strings.DockFuelStatus, Functions.Multiples(ship.getFuel(),
 					"parsec")));
@@ -177,6 +176,5 @@ public class DockBox extends jwinforms.GroupBox
 					.FormatMoney(hullLoss * ship.getRepairCost())) : Strings.DockHullFull);
 			btnRepair.setVisible(hullLoss > 0);
 		}
-
 	}
 }

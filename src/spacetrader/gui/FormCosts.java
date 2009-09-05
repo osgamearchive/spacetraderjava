@@ -31,7 +31,7 @@ package spacetrader.gui;import jwinforms.*;
 import spacetrader.Functions;
 import spacetrader.Game;
 
-public class FormCosts extends WinformForm
+public class FormCosts extends SpaceTraderForm
 {
 	// #region Control Declarations
 

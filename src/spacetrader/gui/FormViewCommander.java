@@ -35,7 +35,7 @@ import jwinforms.*;
 
 import spacetrader.*;
 
-public class FormViewCommander extends WinformForm
+public class FormViewCommander extends SpaceTraderForm
 {
 	public static void main(String[] args) throws Exception
 	{

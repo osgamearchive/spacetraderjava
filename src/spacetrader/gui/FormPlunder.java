@@ -29,8 +29,9 @@
 //using System.Windows.Forms;
 
 package spacetrader.gui;import jwinforms.*;
-import spacetrader.*;
-	public class FormPlunder extends WinformForm
+import spacetrader.Game;
+import spacetrader.Ship;
+	public class FormPlunder extends SpaceTraderForm
 	{
 		//#region Control Declarations
 
@@ -68,16 +69,16 @@ import spacetrader.*;
 		private jwinforms.Label lblBays;
 		private jwinforms.Button btnDone;
 		private jwinforms.Button btnJettison;
-		private Container components = null;
+		private final Container components = null;
 
-		private Button[]	btnPlunderQty;
-		private Button[]	btnPlunderAll;
+		private final Button[]	btnPlunderQty;
+		private final Button[]	btnPlunderAll;
 
 		//#endregion
 
 		//#region Member Declarations
 
-		private Game			game	= Game.CurrentGame();
+		private final Game			game	= Game.CurrentGame();
 
 		//#endregion
 
@@ -120,7 +121,7 @@ import spacetrader.*;
 			UpdateAll();
 		}
 
-		
+
 
 		//#region Windows Form Designer generated code
 		/// <summary>
@@ -129,493 +130,514 @@ import spacetrader.*;
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.btnPlunderAll9 = new jwinforms.Button();
-			this.btnPlunderQty9 = new jwinforms.Button();
-			this.btnPlunderAll8 = new jwinforms.Button();
-			this.btnPlunderQty8 = new jwinforms.Button();
-			this.btnPlunderAll7 = new jwinforms.Button();
-			this.btnPlunderQty7 = new jwinforms.Button();
-			this.btnPlunderAll6 = new jwinforms.Button();
-			this.btnPlunderQty6 = new jwinforms.Button();
-			this.btnPlunderAll5 = new jwinforms.Button();
-			this.btnPlunderQty5 = new jwinforms.Button();
-			this.btnPlunderAll4 = new jwinforms.Button();
-			this.btnPlunderQty4 = new jwinforms.Button();
-			this.btnPlunderAll3 = new jwinforms.Button();
-			this.btnPlunderQty3 = new jwinforms.Button();
-			this.btnPlunderAll2 = new jwinforms.Button();
-			this.btnPlunderQty2 = new jwinforms.Button();
-			this.btnPlunderAll1 = new jwinforms.Button();
-			this.btnPlunderQty1 = new jwinforms.Button();
-			this.btnPlunderAll0 = new jwinforms.Button();
-			this.btnPlunderQty0 = new jwinforms.Button();
-			this.lblTradeCmdty9 = new jwinforms.Label();
-			this.lblTradeCmdty8 = new jwinforms.Label();
-			this.lblTradeCmdty2 = new jwinforms.Label();
-			this.lblTradeCmdty0 = new jwinforms.Label();
-			this.lblTradeCmdty1 = new jwinforms.Label();
-			this.lblTradeCmdty6 = new jwinforms.Label();
-			this.lblTradeCmdty5 = new jwinforms.Label();
-			this.lblTradeCmdty4 = new jwinforms.Label();
-			this.lblTradeCmdty3 = new jwinforms.Label();
-			this.lblTradeCmdty7 = new jwinforms.Label();
-			this.lblBaysLabel = new jwinforms.Label();
-			this.lblBays = new jwinforms.Label();
-			this.btnDone = new jwinforms.Button();
-			this.btnJettison = new jwinforms.Button();
+			btnPlunderAll9 = new jwinforms.Button();
+			btnPlunderQty9 = new jwinforms.Button();
+			btnPlunderAll8 = new jwinforms.Button();
+			btnPlunderQty8 = new jwinforms.Button();
+			btnPlunderAll7 = new jwinforms.Button();
+			btnPlunderQty7 = new jwinforms.Button();
+			btnPlunderAll6 = new jwinforms.Button();
+			btnPlunderQty6 = new jwinforms.Button();
+			btnPlunderAll5 = new jwinforms.Button();
+			btnPlunderQty5 = new jwinforms.Button();
+			btnPlunderAll4 = new jwinforms.Button();
+			btnPlunderQty4 = new jwinforms.Button();
+			btnPlunderAll3 = new jwinforms.Button();
+			btnPlunderQty3 = new jwinforms.Button();
+			btnPlunderAll2 = new jwinforms.Button();
+			btnPlunderQty2 = new jwinforms.Button();
+			btnPlunderAll1 = new jwinforms.Button();
+			btnPlunderQty1 = new jwinforms.Button();
+			btnPlunderAll0 = new jwinforms.Button();
+			btnPlunderQty0 = new jwinforms.Button();
+			lblTradeCmdty9 = new jwinforms.Label();
+			lblTradeCmdty8 = new jwinforms.Label();
+			lblTradeCmdty2 = new jwinforms.Label();
+			lblTradeCmdty0 = new jwinforms.Label();
+			lblTradeCmdty1 = new jwinforms.Label();
+			lblTradeCmdty6 = new jwinforms.Label();
+			lblTradeCmdty5 = new jwinforms.Label();
+			lblTradeCmdty4 = new jwinforms.Label();
+			lblTradeCmdty3 = new jwinforms.Label();
+			lblTradeCmdty7 = new jwinforms.Label();
+			lblBaysLabel = new jwinforms.Label();
+			lblBays = new jwinforms.Label();
+			btnDone = new jwinforms.Button();
+			btnJettison = new jwinforms.Button();
 			this.SuspendLayout();
-			// 
+			//
 			// btnPlunderAll9
-			// 
-			this.btnPlunderAll9.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll9.setLocation(new java.awt.Point(100, 220));
-			this.btnPlunderAll9.setName("btnPlunderAll9");
-			this.btnPlunderAll9.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll9.setTabIndex(141);
-			this.btnPlunderAll9.setText("All");
-			this.btnPlunderAll9.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll9.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll9.setLocation(new java.awt.Point(100, 220));
+			btnPlunderAll9.setName("btnPlunderAll9");
+			btnPlunderAll9.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll9.setTabIndex(141);
+			btnPlunderAll9.setText("All");
+			btnPlunderAll9.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty9
-			// 
-			this.btnPlunderQty9.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty9.setLocation(new java.awt.Point(68, 220));
-			this.btnPlunderQty9.setName("btnPlunderQty9");
-			this.btnPlunderQty9.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty9.setTabIndex(140);
-			this.btnPlunderQty9.setText("88");
-			this.btnPlunderQty9.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty9.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty9.setLocation(new java.awt.Point(68, 220));
+			btnPlunderQty9.setName("btnPlunderQty9");
+			btnPlunderQty9.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty9.setTabIndex(140);
+			btnPlunderQty9.setText("88");
+			btnPlunderQty9.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderAll8
-			// 
-			this.btnPlunderAll8.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll8.setLocation(new java.awt.Point(100, 196));
-			this.btnPlunderAll8.setName("btnPlunderAll8");
-			this.btnPlunderAll8.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll8.setTabIndex(139);
-			this.btnPlunderAll8.setText("All");
-			this.btnPlunderAll8.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll8.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll8.setLocation(new java.awt.Point(100, 196));
+			btnPlunderAll8.setName("btnPlunderAll8");
+			btnPlunderAll8.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll8.setTabIndex(139);
+			btnPlunderAll8.setText("All");
+			btnPlunderAll8.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty8
-			// 
-			this.btnPlunderQty8.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty8.setLocation(new java.awt.Point(68, 196));
-			this.btnPlunderQty8.setName("btnPlunderQty8");
-			this.btnPlunderQty8.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty8.setTabIndex(138);
-			this.btnPlunderQty8.setText("88");
-			this.btnPlunderQty8.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty8.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty8.setLocation(new java.awt.Point(68, 196));
+			btnPlunderQty8.setName("btnPlunderQty8");
+			btnPlunderQty8.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty8.setTabIndex(138);
+			btnPlunderQty8.setText("88");
+			btnPlunderQty8.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderAll7
-			// 
-			this.btnPlunderAll7.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll7.setLocation(new java.awt.Point(100, 172));
-			this.btnPlunderAll7.setName("btnPlunderAll7");
-			this.btnPlunderAll7.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll7.setTabIndex(137);
-			this.btnPlunderAll7.setText("All");
-			this.btnPlunderAll7.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll7.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll7.setLocation(new java.awt.Point(100, 172));
+			btnPlunderAll7.setName("btnPlunderAll7");
+			btnPlunderAll7.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll7.setTabIndex(137);
+			btnPlunderAll7.setText("All");
+			btnPlunderAll7.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty7
-			// 
-			this.btnPlunderQty7.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty7.setLocation(new java.awt.Point(68, 172));
-			this.btnPlunderQty7.setName("btnPlunderQty7");
-			this.btnPlunderQty7.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty7.setTabIndex(136);
-			this.btnPlunderQty7.setText("88");
-			this.btnPlunderQty7.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty7.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty7.setLocation(new java.awt.Point(68, 172));
+			btnPlunderQty7.setName("btnPlunderQty7");
+			btnPlunderQty7.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty7.setTabIndex(136);
+			btnPlunderQty7.setText("88");
+			btnPlunderQty7.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderAll6
-			// 
-			this.btnPlunderAll6.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll6.setLocation(new java.awt.Point(100, 148));
-			this.btnPlunderAll6.setName("btnPlunderAll6");
-			this.btnPlunderAll6.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll6.setTabIndex(135);
-			this.btnPlunderAll6.setText("All");
-			this.btnPlunderAll6.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll6.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll6.setLocation(new java.awt.Point(100, 148));
+			btnPlunderAll6.setName("btnPlunderAll6");
+			btnPlunderAll6.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll6.setTabIndex(135);
+			btnPlunderAll6.setText("All");
+			btnPlunderAll6.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty6
-			// 
-			this.btnPlunderQty6.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty6.setLocation(new java.awt.Point(68, 148));
-			this.btnPlunderQty6.setName("btnPlunderQty6");
-			this.btnPlunderQty6.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty6.setTabIndex(134);
-			this.btnPlunderQty6.setText("88");
-			this.btnPlunderQty6.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty6.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty6.setLocation(new java.awt.Point(68, 148));
+			btnPlunderQty6.setName("btnPlunderQty6");
+			btnPlunderQty6.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty6.setTabIndex(134);
+			btnPlunderQty6.setText("88");
+			btnPlunderQty6.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderAll5
-			// 
-			this.btnPlunderAll5.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll5.setLocation(new java.awt.Point(100, 124));
-			this.btnPlunderAll5.setName("btnPlunderAll5");
-			this.btnPlunderAll5.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll5.setTabIndex(133);
-			this.btnPlunderAll5.setText("All");
-			this.btnPlunderAll5.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll5.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll5.setLocation(new java.awt.Point(100, 124));
+			btnPlunderAll5.setName("btnPlunderAll5");
+			btnPlunderAll5.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll5.setTabIndex(133);
+			btnPlunderAll5.setText("All");
+			btnPlunderAll5.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty5
-			// 
-			this.btnPlunderQty5.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty5.setLocation(new java.awt.Point(68, 124));
-			this.btnPlunderQty5.setName("btnPlunderQty5");
-			this.btnPlunderQty5.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty5.setTabIndex(132);
-			this.btnPlunderQty5.setText("88");
-			this.btnPlunderQty5.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty5.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty5.setLocation(new java.awt.Point(68, 124));
+			btnPlunderQty5.setName("btnPlunderQty5");
+			btnPlunderQty5.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty5.setTabIndex(132);
+			btnPlunderQty5.setText("88");
+			btnPlunderQty5.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderAll4
-			// 
-			this.btnPlunderAll4.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll4.setLocation(new java.awt.Point(100, 100));
-			this.btnPlunderAll4.setName("btnPlunderAll4");
-			this.btnPlunderAll4.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll4.setTabIndex(131);
-			this.btnPlunderAll4.setText("All");
-			this.btnPlunderAll4.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll4.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll4.setLocation(new java.awt.Point(100, 100));
+			btnPlunderAll4.setName("btnPlunderAll4");
+			btnPlunderAll4.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll4.setTabIndex(131);
+			btnPlunderAll4.setText("All");
+			btnPlunderAll4.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty4
-			// 
-			this.btnPlunderQty4.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty4.setLocation(new java.awt.Point(68, 100));
-			this.btnPlunderQty4.setName("btnPlunderQty4");
-			this.btnPlunderQty4.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty4.setTabIndex(130);
-			this.btnPlunderQty4.setText("88");
-			this.btnPlunderQty4.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty4.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty4.setLocation(new java.awt.Point(68, 100));
+			btnPlunderQty4.setName("btnPlunderQty4");
+			btnPlunderQty4.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty4.setTabIndex(130);
+			btnPlunderQty4.setText("88");
+			btnPlunderQty4.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderAll3
-			// 
-			this.btnPlunderAll3.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll3.setLocation(new java.awt.Point(100, 76));
-			this.btnPlunderAll3.setName("btnPlunderAll3");
-			this.btnPlunderAll3.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll3.setTabIndex(129);
-			this.btnPlunderAll3.setText("All");
-			this.btnPlunderAll3.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll3.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll3.setLocation(new java.awt.Point(100, 76));
+			btnPlunderAll3.setName("btnPlunderAll3");
+			btnPlunderAll3.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll3.setTabIndex(129);
+			btnPlunderAll3.setText("All");
+			btnPlunderAll3.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty3
-			// 
-			this.btnPlunderQty3.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty3.setLocation(new java.awt.Point(68, 76));
-			this.btnPlunderQty3.setName("btnPlunderQty3");
-			this.btnPlunderQty3.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty3.setTabIndex(128);
-			this.btnPlunderQty3.setText("88");
-			this.btnPlunderQty3.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty3.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty3.setLocation(new java.awt.Point(68, 76));
+			btnPlunderQty3.setName("btnPlunderQty3");
+			btnPlunderQty3.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty3.setTabIndex(128);
+			btnPlunderQty3.setText("88");
+			btnPlunderQty3.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderAll2
-			// 
-			this.btnPlunderAll2.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll2.setLocation(new java.awt.Point(100, 52));
-			this.btnPlunderAll2.setName("btnPlunderAll2");
-			this.btnPlunderAll2.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll2.setTabIndex(127);
-			this.btnPlunderAll2.setText("All");
-			this.btnPlunderAll2.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll2.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll2.setLocation(new java.awt.Point(100, 52));
+			btnPlunderAll2.setName("btnPlunderAll2");
+			btnPlunderAll2.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll2.setTabIndex(127);
+			btnPlunderAll2.setText("All");
+			btnPlunderAll2.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty2
-			// 
-			this.btnPlunderQty2.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty2.setLocation(new java.awt.Point(68, 52));
-			this.btnPlunderQty2.setName("btnPlunderQty2");
-			this.btnPlunderQty2.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty2.setTabIndex(126);
-			this.btnPlunderQty2.setText("88");
-			this.btnPlunderQty2.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty2.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty2.setLocation(new java.awt.Point(68, 52));
+			btnPlunderQty2.setName("btnPlunderQty2");
+			btnPlunderQty2.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty2.setTabIndex(126);
+			btnPlunderQty2.setText("88");
+			btnPlunderQty2.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderAll1
-			// 
-			this.btnPlunderAll1.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll1.setLocation(new java.awt.Point(100, 28));
-			this.btnPlunderAll1.setName("btnPlunderAll1");
-			this.btnPlunderAll1.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll1.setTabIndex(125);
-			this.btnPlunderAll1.setText("All");
-			this.btnPlunderAll1.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll1.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll1.setLocation(new java.awt.Point(100, 28));
+			btnPlunderAll1.setName("btnPlunderAll1");
+			btnPlunderAll1.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll1.setTabIndex(125);
+			btnPlunderAll1.setText("All");
+			btnPlunderAll1.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty1
-			// 
-			this.btnPlunderQty1.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty1.setLocation(new java.awt.Point(68, 28));
-			this.btnPlunderQty1.setName("btnPlunderQty1");
-			this.btnPlunderQty1.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty1.setTabIndex(124);
-			this.btnPlunderQty1.setText("88");
-			this.btnPlunderQty1.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty1.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty1.setLocation(new java.awt.Point(68, 28));
+			btnPlunderQty1.setName("btnPlunderQty1");
+			btnPlunderQty1.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty1.setTabIndex(124);
+			btnPlunderQty1.setText("88");
+			btnPlunderQty1.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderAll0
-			// 
-			this.btnPlunderAll0.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderAll0.setLocation(new java.awt.Point(100, 4));
-			this.btnPlunderAll0.setName("btnPlunderAll0");
-			this.btnPlunderAll0.setSize(new jwinforms.Size(32, 22));
-			this.btnPlunderAll0.setTabIndex(123);
-			this.btnPlunderAll0.setText("All");
-			this.btnPlunderAll0.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderAll0.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderAll0.setLocation(new java.awt.Point(100, 4));
+			btnPlunderAll0.setName("btnPlunderAll0");
+			btnPlunderAll0.setSize(new jwinforms.Size(32, 22));
+			btnPlunderAll0.setTabIndex(123);
+			btnPlunderAll0.setText("All");
+			btnPlunderAll0.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// btnPlunderQty0
-			// 
-			this.btnPlunderQty0.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPlunderQty0.setLocation(new java.awt.Point(68, 4));
-			this.btnPlunderQty0.setName("btnPlunderQty0");
-			this.btnPlunderQty0.setSize(new jwinforms.Size(28, 22));
-			this.btnPlunderQty0.setTabIndex(122);
-			this.btnPlunderQty0.setText("88");
-			this.btnPlunderQty0.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnPlunderQty0.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPlunderQty0.setLocation(new java.awt.Point(68, 4));
+			btnPlunderQty0.setName("btnPlunderQty0");
+			btnPlunderQty0.setSize(new jwinforms.Size(28, 22));
+			btnPlunderQty0.setTabIndex(122);
+			btnPlunderQty0.setText("88");
+			btnPlunderQty0.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPlunder_Click(sender, e);}});
-			// 
+			//
 			// lblTradeCmdty9
-			// 
-			this.lblTradeCmdty9.setAutoSize(true);
-			this.lblTradeCmdty9.setLocation(new java.awt.Point(8, 224));
-			this.lblTradeCmdty9.setName("lblTradeCmdty9");
-			this.lblTradeCmdty9.setSize(new jwinforms.Size(41, 13));
-			this.lblTradeCmdty9.setTabIndex(151);
-			this.lblTradeCmdty9.setText("Robots");
-			// 
+			//
+			lblTradeCmdty9.setAutoSize(true);
+			lblTradeCmdty9.setLocation(new java.awt.Point(8, 224));
+			lblTradeCmdty9.setName("lblTradeCmdty9");
+			lblTradeCmdty9.setSize(new jwinforms.Size(41, 13));
+			lblTradeCmdty9.setTabIndex(151);
+			lblTradeCmdty9.setText("Robots");
+			//
 			// lblTradeCmdty8
-			// 
-			this.lblTradeCmdty8.setAutoSize(true);
-			this.lblTradeCmdty8.setLocation(new java.awt.Point(8, 200));
-			this.lblTradeCmdty8.setName("lblTradeCmdty8");
-			this.lblTradeCmdty8.setSize(new jwinforms.Size(52, 13));
-			this.lblTradeCmdty8.setTabIndex(150);
-			this.lblTradeCmdty8.setText("Narcotics");
-			// 
+			//
+			lblTradeCmdty8.setAutoSize(true);
+			lblTradeCmdty8.setLocation(new java.awt.Point(8, 200));
+			lblTradeCmdty8.setName("lblTradeCmdty8");
+			lblTradeCmdty8.setSize(new jwinforms.Size(52, 13));
+			lblTradeCmdty8.setTabIndex(150);
+			lblTradeCmdty8.setText("Narcotics");
+			//
 			// lblTradeCmdty2
-			// 
-			this.lblTradeCmdty2.setAutoSize(true);
-			this.lblTradeCmdty2.setLocation(new java.awt.Point(8, 56));
-			this.lblTradeCmdty2.setName("lblTradeCmdty2");
-			this.lblTradeCmdty2.setSize(new jwinforms.Size(31, 13));
-			this.lblTradeCmdty2.setTabIndex(149);
-			this.lblTradeCmdty2.setText("Food");
-			// 
+			//
+			lblTradeCmdty2.setAutoSize(true);
+			lblTradeCmdty2.setLocation(new java.awt.Point(8, 56));
+			lblTradeCmdty2.setName("lblTradeCmdty2");
+			lblTradeCmdty2.setSize(new jwinforms.Size(31, 13));
+			lblTradeCmdty2.setTabIndex(149);
+			lblTradeCmdty2.setText("Food");
+			//
 			// lblTradeCmdty0
-			// 
-			this.lblTradeCmdty0.setAutoSize(true);
-			this.lblTradeCmdty0.setLocation(new java.awt.Point(8, 8));
-			this.lblTradeCmdty0.setName("lblTradeCmdty0");
-			this.lblTradeCmdty0.setSize(new jwinforms.Size(36, 13));
-			this.lblTradeCmdty0.setTabIndex(148);
-			this.lblTradeCmdty0.setText("Water");
-			// 
+			//
+			lblTradeCmdty0.setAutoSize(true);
+			lblTradeCmdty0.setLocation(new java.awt.Point(8, 8));
+			lblTradeCmdty0.setName("lblTradeCmdty0");
+			lblTradeCmdty0.setSize(new jwinforms.Size(36, 13));
+			lblTradeCmdty0.setTabIndex(148);
+			lblTradeCmdty0.setText("Water");
+			//
 			// lblTradeCmdty1
-			// 
-			this.lblTradeCmdty1.setAutoSize(true);
-			this.lblTradeCmdty1.setLocation(new java.awt.Point(8, 32));
-			this.lblTradeCmdty1.setName("lblTradeCmdty1");
-			this.lblTradeCmdty1.setSize(new jwinforms.Size(27, 13));
-			this.lblTradeCmdty1.setTabIndex(147);
-			this.lblTradeCmdty1.setText("Furs");
-			// 
+			//
+			lblTradeCmdty1.setAutoSize(true);
+			lblTradeCmdty1.setLocation(new java.awt.Point(8, 32));
+			lblTradeCmdty1.setName("lblTradeCmdty1");
+			lblTradeCmdty1.setSize(new jwinforms.Size(27, 13));
+			lblTradeCmdty1.setTabIndex(147);
+			lblTradeCmdty1.setText("Furs");
+			//
 			// lblTradeCmdty6
-			// 
-			this.lblTradeCmdty6.setAutoSize(true);
-			this.lblTradeCmdty6.setLocation(new java.awt.Point(8, 152));
-			this.lblTradeCmdty6.setName("lblTradeCmdty6");
-			this.lblTradeCmdty6.setSize(new jwinforms.Size(50, 13));
-			this.lblTradeCmdty6.setTabIndex(146);
-			this.lblTradeCmdty6.setText("Medicine");
-			// 
+			//
+			lblTradeCmdty6.setAutoSize(true);
+			lblTradeCmdty6.setLocation(new java.awt.Point(8, 152));
+			lblTradeCmdty6.setName("lblTradeCmdty6");
+			lblTradeCmdty6.setSize(new jwinforms.Size(50, 13));
+			lblTradeCmdty6.setTabIndex(146);
+			lblTradeCmdty6.setText("Medicine");
+			//
 			// lblTradeCmdty5
-			// 
-			this.lblTradeCmdty5.setAutoSize(true);
-			this.lblTradeCmdty5.setLocation(new java.awt.Point(8, 128));
-			this.lblTradeCmdty5.setName("lblTradeCmdty5");
-			this.lblTradeCmdty5.setSize(new jwinforms.Size(46, 13));
-			this.lblTradeCmdty5.setTabIndex(145);
-			this.lblTradeCmdty5.setText("Firearms");
-			// 
+			//
+			lblTradeCmdty5.setAutoSize(true);
+			lblTradeCmdty5.setLocation(new java.awt.Point(8, 128));
+			lblTradeCmdty5.setName("lblTradeCmdty5");
+			lblTradeCmdty5.setSize(new jwinforms.Size(46, 13));
+			lblTradeCmdty5.setTabIndex(145);
+			lblTradeCmdty5.setText("Firearms");
+			//
 			// lblTradeCmdty4
-			// 
-			this.lblTradeCmdty4.setAutoSize(true);
-			this.lblTradeCmdty4.setLocation(new java.awt.Point(8, 104));
-			this.lblTradeCmdty4.setName("lblTradeCmdty4");
-			this.lblTradeCmdty4.setSize(new jwinforms.Size(40, 13));
-			this.lblTradeCmdty4.setTabIndex(144);
-			this.lblTradeCmdty4.setText("Games");
-			// 
+			//
+			lblTradeCmdty4.setAutoSize(true);
+			lblTradeCmdty4.setLocation(new java.awt.Point(8, 104));
+			lblTradeCmdty4.setName("lblTradeCmdty4");
+			lblTradeCmdty4.setSize(new jwinforms.Size(40, 13));
+			lblTradeCmdty4.setTabIndex(144);
+			lblTradeCmdty4.setText("Games");
+			//
 			// lblTradeCmdty3
-			// 
-			this.lblTradeCmdty3.setAutoSize(true);
-			this.lblTradeCmdty3.setLocation(new java.awt.Point(8, 80));
-			this.lblTradeCmdty3.setName("lblTradeCmdty3");
-			this.lblTradeCmdty3.setSize(new jwinforms.Size(24, 13));
-			this.lblTradeCmdty3.setTabIndex(143);
-			this.lblTradeCmdty3.setText("Ore");
-			// 
+			//
+			lblTradeCmdty3.setAutoSize(true);
+			lblTradeCmdty3.setLocation(new java.awt.Point(8, 80));
+			lblTradeCmdty3.setName("lblTradeCmdty3");
+			lblTradeCmdty3.setSize(new jwinforms.Size(24, 13));
+			lblTradeCmdty3.setTabIndex(143);
+			lblTradeCmdty3.setText("Ore");
+			//
 			// lblTradeCmdty7
-			// 
-			this.lblTradeCmdty7.setAutoSize(true);
-			this.lblTradeCmdty7.setLocation(new java.awt.Point(8, 176));
-			this.lblTradeCmdty7.setName("lblTradeCmdty7");
-			this.lblTradeCmdty7.setSize(new jwinforms.Size(53, 13));
-			this.lblTradeCmdty7.setTabIndex(142);
-			this.lblTradeCmdty7.setText("Machines");
-			// 
+			//
+			lblTradeCmdty7.setAutoSize(true);
+			lblTradeCmdty7.setLocation(new java.awt.Point(8, 176));
+			lblTradeCmdty7.setName("lblTradeCmdty7");
+			lblTradeCmdty7.setSize(new jwinforms.Size(53, 13));
+			lblTradeCmdty7.setTabIndex(142);
+			lblTradeCmdty7.setText("Machines");
+			//
 			// lblBaysLabel
-			// 
-			this.lblBaysLabel.setAutoSize(true);
-			this.lblBaysLabel.setLocation(new java.awt.Point(144, 8));
-			this.lblBaysLabel.setName("lblBaysLabel");
-			this.lblBaysLabel.setSize(new jwinforms.Size(33, 13));
-			this.lblBaysLabel.setTabIndex(152);
-			this.lblBaysLabel.setText("Bays:");
-			// 
+			//
+			lblBaysLabel.setAutoSize(true);
+			lblBaysLabel.setLocation(new java.awt.Point(144, 8));
+			lblBaysLabel.setName("lblBaysLabel");
+			lblBaysLabel.setSize(new jwinforms.Size(33, 13));
+			lblBaysLabel.setTabIndex(152);
+			lblBaysLabel.setText("Bays:");
+			//
 			// lblBays
-			// 
-			this.lblBays.setLocation(new java.awt.Point(176, 8));
-			this.lblBays.setName("lblBays");
-			this.lblBays.setSize(new jwinforms.Size(48, 13));
-			this.lblBays.setTabIndex(153);
-			this.lblBays.setText("888/888");
-			// 
+			//
+			lblBays.setLocation(new java.awt.Point(176, 8));
+			lblBays.setName("lblBays");
+			lblBays.setSize(new jwinforms.Size(48, 13));
+			lblBays.setTabIndex(153);
+			lblBays.setText("888/888");
+			//
 			// btnDone
-			// 
-			this.btnDone.setDialogResult(DialogResult.Cancel);
-			this.btnDone.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnDone.setLocation(new java.awt.Point(87, 252));
-			this.btnDone.setName("btnDone");
-			this.btnDone.setSize(new jwinforms.Size(44, 22));
-			this.btnDone.setTabIndex(154);
-			this.btnDone.setText("Done");
-			// 
+			//
+			btnDone.setDialogResult(DialogResult.Cancel);
+			btnDone.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnDone.setLocation(new java.awt.Point(87, 252));
+			btnDone.setName("btnDone");
+			btnDone.setSize(new jwinforms.Size(44, 22));
+			btnDone.setTabIndex(154);
+			btnDone.setText("Done");
+			//
 			// btnJettison
-			// 
-			this.btnJettison.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnJettison.setLocation(new java.awt.Point(150, 24));
-			this.btnJettison.setName("btnJettison");
-			this.btnJettison.setSize(new jwinforms.Size(53, 22));
-			this.btnJettison.setTabIndex(155);
-			this.btnJettison.setText("Jettison");
-			this.btnJettison.setClick(new EventHandler<Object, EventArgs>()
+			//
+			btnJettison.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnJettison.setLocation(new java.awt.Point(150, 24));
+			btnJettison.setName("btnJettison");
+			btnJettison.setSize(new jwinforms.Size(53, 22));
+			btnJettison.setTabIndex(155);
+			btnJettison.setText("Jettison");
+			btnJettison.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnJettison_Click(sender, e);}});
-			// 
+			//
 			// FormPlunder
-			// 
-			this.setAcceptButton(this.btnDone);
+			//
+			this.setAcceptButton(btnDone);
 			this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
-			this.setCancelButton(this.btnDone);
+			this.setCancelButton(btnDone);
 			this.setClientSize(new jwinforms.Size(230, 283));
-			this.Controls.add(this.btnJettison);
-			this.Controls.add(this.btnDone);
-			this.Controls.add(this.lblBays);
-			this.Controls.add(this.lblBaysLabel);
-			this.Controls.add(this.lblTradeCmdty9);
-			this.Controls.add(this.lblTradeCmdty8);
-			this.Controls.add(this.lblTradeCmdty2);
-			this.Controls.add(this.lblTradeCmdty0);
-			this.Controls.add(this.lblTradeCmdty1);
-			this.Controls.add(this.lblTradeCmdty6);
-			this.Controls.add(this.lblTradeCmdty5);
-			this.Controls.add(this.lblTradeCmdty4);
-			this.Controls.add(this.lblTradeCmdty3);
-			this.Controls.add(this.lblTradeCmdty7);
-			this.Controls.add(this.btnPlunderAll9);
-			this.Controls.add(this.btnPlunderQty9);
-			this.Controls.add(this.btnPlunderAll8);
-			this.Controls.add(this.btnPlunderQty8);
-			this.Controls.add(this.btnPlunderAll7);
-			this.Controls.add(this.btnPlunderQty7);
-			this.Controls.add(this.btnPlunderAll6);
-			this.Controls.add(this.btnPlunderQty6);
-			this.Controls.add(this.btnPlunderAll5);
-			this.Controls.add(this.btnPlunderQty5);
-			this.Controls.add(this.btnPlunderAll4);
-			this.Controls.add(this.btnPlunderQty4);
-			this.Controls.add(this.btnPlunderAll3);
-			this.Controls.add(this.btnPlunderQty3);
-			this.Controls.add(this.btnPlunderAll2);
-			this.Controls.add(this.btnPlunderQty2);
-			this.Controls.add(this.btnPlunderAll1);
-			this.Controls.add(this.btnPlunderQty1);
-			this.Controls.add(this.btnPlunderAll0);
-			this.Controls.add(this.btnPlunderQty0);
+			Controls.add(btnJettison);
+			Controls.add(btnDone);
+			Controls.add(lblBays);
+			Controls.add(lblBaysLabel);
+			Controls.add(lblTradeCmdty9);
+			Controls.add(lblTradeCmdty8);
+			Controls.add(lblTradeCmdty2);
+			Controls.add(lblTradeCmdty0);
+			Controls.add(lblTradeCmdty1);
+			Controls.add(lblTradeCmdty6);
+			Controls.add(lblTradeCmdty5);
+			Controls.add(lblTradeCmdty4);
+			Controls.add(lblTradeCmdty3);
+			Controls.add(lblTradeCmdty7);
+			Controls.add(btnPlunderAll9);
+			Controls.add(btnPlunderQty9);
+			Controls.add(btnPlunderAll8);
+			Controls.add(btnPlunderQty8);
+			Controls.add(btnPlunderAll7);
+			Controls.add(btnPlunderQty7);
+			Controls.add(btnPlunderAll6);
+			Controls.add(btnPlunderQty6);
+			Controls.add(btnPlunderAll5);
+			Controls.add(btnPlunderQty5);
+			Controls.add(btnPlunderAll4);
+			Controls.add(btnPlunderQty4);
+			Controls.add(btnPlunderAll3);
+			Controls.add(btnPlunderQty3);
+			Controls.add(btnPlunderAll2);
+			Controls.add(btnPlunderQty2);
+			Controls.add(btnPlunderAll1);
+			Controls.add(btnPlunderQty1);
+			Controls.add(btnPlunderAll0);
+			Controls.add(btnPlunderQty0);
 			this.setFormBorderStyle(FormBorderStyle.FixedDialog);
 			this.setMaximizeBox(false);
 			this.setMinimizeBox(false);
@@ -630,7 +652,7 @@ btnJettison_Click(sender, e);}});
 
 		private void Plunder(int tradeItem, boolean all)
 		{
-			game.CargoPlunder(tradeItem, all, this);
+			game.CargoPlunder(tradeItem, all);
 
 			UpdateAll();
 		}

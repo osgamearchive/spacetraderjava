@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import jwinforms.StatusBar;
 import jwinforms.StatusBarPanelClickEventArgs;
+import spacetrader.Commander;
 import spacetrader.Functions;
-import spacetrader.Game;
 
 class SpaceTraderStatusBar extends StatusBar
 {
@@ -14,11 +14,11 @@ class SpaceTraderStatusBar extends StatusBar
 	private jwinforms.StatusBarPanel statusBarPanelCosts;
 	private jwinforms.StatusBarPanel statusBarPanelExtra;
 
-	private Game game;
+	private Commander commander;
 
-	public void setGame(Game game)
+	void setGame(Commander commander)
 	{
-		this.game = game;
+		this.commander = commander;
 	}
 
 	private final SpaceTrader mainWindow;
@@ -93,7 +93,7 @@ class SpaceTraderStatusBar extends StatusBar
 
 	public void Update()
 	{
-		if (game == null)
+		if (commander == null)
 		{
 			statusBarPanelCash.setText("");
 			statusBarPanelBays.setText("");
@@ -101,17 +101,17 @@ class SpaceTraderStatusBar extends StatusBar
 			statusBarPanelExtra.setText("No Game Loaded.");
 		} else
 		{
-			statusBarPanelCash.setText("Cash: " + Functions.FormatMoney(game.Commander().getCash()));
-			statusBarPanelBays.setText("Bays: " + game.Commander().getShip().FilledCargoBays() + "/"
-					+ game.Commander().getShip().CargoBays());
-			statusBarPanelCosts.setText("Current Costs: " + Functions.FormatMoney(game.CurrentCosts()));
+			statusBarPanelCash.setText("Cash: " + Functions.FormatMoney(commander.getCash()));
+			statusBarPanelBays.setText("Bays: " + commander.getShip().FilledCargoBays() + "/"
+					+ commander.getShip().CargoBays());
+			statusBarPanelCosts.setText("Current Costs: " + Functions.FormatMoney(commander.CurrentCosts()));
 			statusBarPanelExtra.setText("");
 		}
 	}
 
 	private void statusBar_PanelClick(Object sender, jwinforms.StatusBarPanelClickEventArgs e)
 	{
-		if (game != null)
+		if (commander != null)
 		{
 			if (e.StatusBarPanel == statusBarPanelCash)
 				mainWindow.ShowBank();

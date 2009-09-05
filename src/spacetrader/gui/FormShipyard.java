@@ -23,7 +23,6 @@ import java.awt.Color;
 import java.util.Arrays;
 
 import jwinforms.*;
-
 import spacetrader.*;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.ShipType;
@@ -34,7 +33,7 @@ import spacetrader.util.Hashtable;
 import util.Path;
 
 @SuppressWarnings({"synthetic-access","unchecked"})
-public class FormShipyard extends WinformForm
+public class FormShipyard extends SpaceTraderForm
 {
 	//#region Control Declarations
 
@@ -1075,7 +1074,7 @@ public class FormShipyard extends WinformForm
 			image = new Bitmap(fileName);
 		} catch (Exception ex)
 		{
-			FormAlert.Alert(AlertType.FileErrorOpen, this, fileName, ex.getMessage());
+			FormAlert.Alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
 		}
 
 		return image;
@@ -1166,7 +1165,7 @@ public class FormShipyard extends WinformForm
 		ArrayList userTemplates = new ArrayList();
 		for (String fileName : Directory.GetFiles(Consts.CustomTemplatesDirectory, "*.sst"))
 		{
-			ShipTemplate template = new ShipTemplate((Hashtable)Functions.LoadFile(fileName, true, this));
+			ShipTemplate template = new ShipTemplate((Hashtable)Functions.LoadFile(fileName, true));
 			if (sizes.contains(template.Size()))
 				userTemplates.add(template);
 		}
@@ -1286,7 +1285,7 @@ public class FormShipyard extends WinformForm
 	{
 		if (ConstructButtonEnabled())
 		{
-			if (game.Commander().TradeShip(shipyard.ShipSpec(), shipyard.TotalCost(), txtName.getText(), this))
+			if (game.Commander().TradeShip(shipyard.ShipSpec(), shipyard.TotalCost(), txtName.getText()))
 			{
 				Strings.ShipNames[ShipType.Custom.CastToInt()] = txtName.getText();
 
@@ -1301,7 +1300,7 @@ public class FormShipyard extends WinformForm
 					game.Commander().getShip().UpdateCustomImageOffsetConstants();
 				}
 
-				FormAlert.Alert(AlertType.ShipDesignThanks, this, shipyard.Name());
+				FormAlert.Alert(AlertType.ShipDesignThanks, shipyard.Name());
 				Close();
 			}
 		}
@@ -1353,7 +1352,7 @@ public class FormShipyard extends WinformForm
 				} else
 					template.ImageIndex(imgIndex);
 
-				Functions.SaveFile(dlgSave.getFileName(), template.Serialize(), this);
+				Functions.SaveFile(dlgSave.getFileName(), template.Serialize());
 
 				LoadTemplateList();
 			}

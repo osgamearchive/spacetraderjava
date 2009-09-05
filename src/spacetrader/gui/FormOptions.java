@@ -35,7 +35,7 @@ import spacetrader.Game;
 import spacetrader.GameOptions;
 import spacetrader.enums.AlertType;
 
-public class FormOptions extends WinformForm
+public class FormOptions extends SpaceTraderForm
 {
 	// #region Control Declarations
 
@@ -83,9 +83,9 @@ public class FormOptions extends WinformForm
 			Options().CopyValues(game.Options());
 		else
 		{
-			Options().LoadFromDefaults(false, this);
+			Options().LoadFromDefaults(false);
 			btnOk.setEnabled(false);
-			FormAlert.Alert(AlertType.OptionsNoGame, this);
+			FormAlert.Alert(AlertType.OptionsNoGame);
 		}
 
 		UpdateAll();
@@ -533,13 +533,13 @@ public class FormOptions extends WinformForm
 
 	private void btnLoad_Click(Object sender, EventArgs e)
 	{
-		Options().LoadFromDefaults(true, this);
+		Options().LoadFromDefaults(true);
 		UpdateAll();
 	}
 
 	private void btnSave_Click(Object sender, EventArgs e)
 	{
-		Options().SaveAsDefaults(this);
+		Options().SaveAsDefaults();
 	}
 
 	private void controlChanged(Object sender, EventArgs e)

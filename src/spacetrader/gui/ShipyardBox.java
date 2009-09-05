@@ -5,20 +5,21 @@ import java.awt.Point;
 import jwinforms.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
+import spacetrader.Commander;
 import spacetrader.Consts;
-import spacetrader.Game;
 import spacetrader.Strings;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.ShipType;
 
 public class ShipyardBox extends jwinforms.GroupBox
 {
-	private Game game = null;
+	private Commander commander;
 
-	void setGame(Game game)
+	void setGame(Commander commander)
 	{
-		this.game = game;
+		this.commander = commander;
 	}
+
 	private final SpaceTrader mainWindow;
 
 	public ShipyardBox(SpaceTrader mainWindow)
@@ -54,7 +55,6 @@ public class ShipyardBox extends jwinforms.GroupBox
 		Controls.add(btnBuyShip);
 		Controls.add(lblEquipForSale);
 		Controls.add(lblShipsForSale);
-		setLocation(new Point(4, 306));
 		setName("boxShipYard");
 		setSize(new jwinforms.Size(168, 168));
 		setTabIndex(4);
@@ -156,7 +156,7 @@ public class ShipyardBox extends jwinforms.GroupBox
 
 	public void Update()
 	{
-		if (game == null)
+		if (commander == null)
 		{
 			lblShipsForSale.setText("");
 			lblEquipForSale.setText("");
@@ -167,22 +167,22 @@ public class ShipyardBox extends jwinforms.GroupBox
 			btnEquip.setVisible(false);
 		} else
 		{
-			boolean noTech = (game.Commander().CurrentSystem().TechLevel().CastToInt() < Consts.ShipSpecs[ShipType.Flea
+			boolean noTech = (commander.CurrentSystem().TechLevel().CastToInt() < Consts.ShipSpecs[ShipType.Flea
 					.CastToInt()].MinimumTechLevel().CastToInt());
 
 			lblShipsForSale.setText(noTech ? Strings.ShipyardShipNoSale : Strings.ShipyardShipForSale);
 			btnBuyShip.setVisible(true);
-			btnDesign.setVisible((Game.CurrentGame().Commander().CurrentSystem().Shipyard() != null));
+			btnDesign.setVisible(commander.CurrentSystem().Shipyard() != null);
 
 			lblEquipForSale.setText(noTech ? Strings.ShipyardEquipNoSale : Strings.ShipyardEquipForSale);
 			btnEquip.setVisible(true);
 
 			btnPod.setVisible(false);
-			if (game.Commander().getShip().getEscapePod())
+			if (commander.getShip().getEscapePod())
 				lblEscapePod.setText(Strings.ShipyardPodInstalled);
 			else if (noTech)
 				lblEscapePod.setText(Strings.ShipyardPodNoSale);
-			else if (game.Commander().getCash() < 2000)
+			else if (commander.getCash() < 2000)
 				lblEscapePod.setText(Strings.ShipyardPodIF);
 			else
 			{
@@ -212,10 +212,10 @@ public class ShipyardBox extends jwinforms.GroupBox
 
 	private void btnPod_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if (FormAlert.Alert(AlertType.EquipmentEscapePod, mainWindow) == DialogResult.Yes)
+		if (FormAlert.Alert(AlertType.EquipmentEscapePod) == DialogResult.Yes)
 		{
-			game.Commander().setCash(game.Commander().getCash() - 2000);
-			game.Commander().getShip().setEscapePod(true);
+			commander.setCash(commander.getCash() - 2000);
+			commander.getShip().setEscapePod(true);
 			mainWindow.UpdateAll();
 		}
 	}

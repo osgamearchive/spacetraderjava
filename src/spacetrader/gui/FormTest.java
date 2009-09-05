@@ -32,7 +32,7 @@ package spacetrader.gui;import java.util.*;
 
 import jwinforms.*;
 import spacetrader.*;import spacetrader.enums.*;
-	public class FormTest extends WinformForm
+	public class FormTest extends SpaceTraderForm
 	{
 		//#region Control Declarations
 
@@ -268,9 +268,8 @@ btnTestSpecialEvent_Click(sender, e);}});
 
 		private void btnTestAlert_Click(Object sender, EventArgs e)
 		{
-			FormAlert.Alert(AlertType.Alert, this, "Result", "The result was " +
-				FormAlert.Alert((AlertType)selAlertType.getSelectedItem(),
-				this, txtValue1.getText(), txtValue2.getText(), txtValue3.getText()).toString());
+			FormAlert.Alert(AlertType.Alert, "Result", ("The result was " +
+			FormAlert.Alert(((AlertType)selAlertType.getSelectedItem()), txtValue1.getText(), txtValue2.getText(), txtValue3.getText()).toString()));
 		}
 
 		private void btnTestSpecialEvent_Click(Object sender, EventArgs e)

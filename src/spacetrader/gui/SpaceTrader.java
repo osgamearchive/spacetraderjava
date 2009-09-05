@@ -26,6 +26,7 @@ import java.awt.Point;
 import javax.swing.UIManager;
 
 import jwinforms.*;
+import spacetrader.Commander;
 import spacetrader.Consts;
 import spacetrader.Functions;
 import spacetrader.Game;
@@ -81,19 +82,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private jwinforms.IContainer components;
 
-	// #endregion
-
-	// #region Member Declarations
-
-	static final String SAVE_ARRIVAL = "autosave_arrival.sav";
-	static final String SAVE_DEPARTURE = "autosave_departure.sav";
-
 	private Game game;
 	private GameController controller;
-
-	// #endregion
-
-	// #region Methods
+	private Commander commander;
 
 	public SpaceTrader(String loadFileName)
 	{
@@ -153,7 +144,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		mnuHelp = new jwinforms.SubMenu();
 		mnuHelpAbout = new jwinforms.MenuItem();
 		statusBar = new SpaceTraderStatusBar(this);
-		cargoBox = new CargoBox(this);
+		cargoBox = new CargoBox();
 		system = new SystemBox(this);
 		shipyard = new ShipyardBox(this);
 		dockBox = new DockBox(this);
@@ -423,6 +414,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		// picGalacticChart
 		//
 		galacticChart.InitializeComponent();
+		galacticChart.setLocation(new Point(180, 306));
 
 		//
 		// statusBar
@@ -434,30 +426,37 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		// boxShortRangeChart
 		//
 		shortRangeChart.InitializeComponent();
+		shortRangeChart.setLocation(new Point(364, 306));
+
 		//
 		// boxTargetSystem
 		//
 		targetSystemBox.InitializeComponent();
+		targetSystemBox.setLocation(new Point(548, 306));
 
 		//
 		// boxCargo
 		//
 		cargoBox.InitializeComponent();
+		cargoBox.setLocation(new Point(252, 2));
 
 		//
 		// boxSystem
 		//
 		system.InitializeComponent();
+		system.setLocation(new Point(4, 2));
 
 		//
 		// boxShipYard
 		//
 		shipyard.InitializeComponent();
+		shipyard.setLocation(new Point(4, 306));
 
 		//
 		// boxDock
 		//
 		dockBox.InitializeComponent();
+		dockBox.setLocation(new Point(4, 212));
 
 		//
 		// picLine
@@ -559,7 +558,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			key.Close();
 		} catch (NullPointerException ex)
 		{
-			FormAlert.Alert(AlertType.RegistryError, this, ex.getMessage());
+			FormAlert.Alert(AlertType.RegistryError, ex.getMessage());
 		}
 
 		return settingValue;
@@ -602,7 +601,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			key.Close();
 		} catch (NullPointerException ex)
 		{
-			FormAlert.Alert(AlertType.RegistryError, this, ex.getMessage());
+			FormAlert.Alert(AlertType.RegistryError, ex.getMessage());
 		}
 	}
 
@@ -620,14 +619,15 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private void SpaceTrader_Closing(Object sender, jwinforms.CancelEventArgs e)
 	{
-		if (game == null || game.Commander().getDays() == controller.SaveGameDays
-				|| FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
+		if (game == null || commander.getDays() == controller.SaveGameDays
+				|| FormAlert.Alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
 		{
 			if (WindowState == FormWindowState.Normal)
 			{
 				SetRegistrySetting("X", Left.toString());
 				SetRegistrySetting("Y", Top.toString());
 			}
+			FormsOwnerTree.pop(this);
 		} else
 			e.Cancel = true;
 	}
@@ -637,7 +637,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		Left = Integer.parseInt(GetRegistrySetting("X", "0"));
 		Top = Integer.parseInt(GetRegistrySetting("Y", "0"));
 
-		FormAlert.Alert(AlertType.AppStart, this);
+		FormsOwnerTree.add(this);
+
+		FormAlert.Alert(AlertType.AppStart);
 	}
 
 	private void mnuGameExit_Click(Object sender, jwinforms.EventArgs e)
@@ -648,8 +650,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private void mnuGameNew_Click(Object sender, jwinforms.EventArgs e)
 	{
 		FormNewCommander form = new FormNewCommander();
-		if ((game == null || game.Commander().getDays() == controller.SaveGameDays || FormAlert.Alert(
-				AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
+		if ((game == null || commander.getDays() == controller.SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
 				&& form.ShowDialog(this) == DialogResult.OK)
 		{
 			setGame(new Game(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form.Trader(), form
@@ -667,8 +668,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private void mnuGameLoad_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if ((game == null || game.Commander().getDays() == controller.SaveGameDays || FormAlert.Alert(
-				AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
+		if ((game == null || commander.getDays() == controller.SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
 				&& dlgOpen.ShowDialog(this) == DialogResult.OK)
 			controller.LoadGame(dlgOpen.getFileName());
 	}
@@ -712,7 +712,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private void mnuRetire_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if (FormAlert.Alert(AlertType.GameRetire, this) == DialogResult.Yes)
+		if (FormAlert.Alert(AlertType.GameRetire) == DialogResult.Yes)
 		{
 			game.setEndStatus(GameEndType.Retired);
 			controller.GameEnd();
@@ -811,14 +811,16 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	{
 		this.game = game;
 		controller = new GameController(game, this);
-		dockBox.setGame(game);
-		cargoBox.setGame(game);
-		targetSystemBox.setGame(game, controller);
-		galacticChart.setGame(game, controller);
-		shortRangeChart.setGame(game);
-		system.setGame(game, controller);
-		shipyard.setGame(game);
-		statusBar.setGame(game);
+		commander = game == null ? null : game.Commander();
+
+		dockBox.setGame(commander);
+		cargoBox.setGame(game, controller);
+		targetSystemBox.setGame(game, controller, commander);
+		galacticChart.setGame(game, controller, commander);
+		shortRangeChart.setGame(game, commander);
+		system.setGame(game, controller, commander);
+		shipyard.setGame(commander);
+		statusBar.setGame(commander);
 	}
 
 	/**

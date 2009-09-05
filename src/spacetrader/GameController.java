@@ -33,32 +33,32 @@ public class GameController
 
 	public void CargoBuy(int tradeItem, boolean max)
 	{
-		game.CargoBuySystem(tradeItem, max, mainWindow);
+		game.CargoBuySystem(tradeItem, max);
 		mainWindow.UpdateAll();
 	}
 
 	public void CargoSell(int tradeItem, boolean all)
 	{
 		if (game.PriceCargoSell()[tradeItem] > 0)
-			game.CargoSellSystem(tradeItem, all, mainWindow);
+			game.CargoSellSystem(tradeItem, all);
 		else
-			game.CargoDump(tradeItem, mainWindow);
+			game.CargoDump(tradeItem);
 		mainWindow.UpdateAll();
 	}
 
 	public void ClearHighScores()
 	{
 		HighScoreRecord[] highScores = new HighScoreRecord[3];
-		Functions.SaveFile(Consts.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores), mainWindow);
+		Functions.SaveFile(Consts.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores));
 	}
 
 	public void AddHighScore(HighScoreRecord highScore)
 	{
-		HighScoreRecord[] highScores = Functions.GetHighScores(mainWindow);
+		HighScoreRecord[] highScores = Functions.GetHighScores();
 		highScores[0] = highScore;
 		Util.sort(highScores);
 
-		Functions.SaveFile(Consts.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores), mainWindow);
+		Functions.SaveFile(Consts.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores));
 	}
 
 	public void GameEnd()
@@ -79,24 +79,24 @@ public class GameController
 			break;
 		}
 
-		FormAlert.Alert(alertType, mainWindow);
+		FormAlert.Alert(alertType);
 
-		FormAlert.Alert(AlertType.GameEndScore, mainWindow, Functions.FormatNumber(game.Score() / 10), Functions
-				.FormatNumber(game.Score() % 10));
+		FormAlert.Alert(AlertType.GameEndScore, Functions.FormatNumber(game.Score() / 10), Functions
+		.FormatNumber(game.Score() % 10));
 
 		HighScoreRecord candidate = new HighScoreRecord(game.Commander().Name(), game.Score(), game.getEndStatus(),
 				game.Commander().getDays(), game.Commander().Worth(), game.Difficulty());
-		if (candidate.CompareTo(Functions.GetHighScores(mainWindow)[0]) > 0)
+		if (candidate.CompareTo(Functions.GetHighScores()[0]) > 0)
 		{
-			if (game.getCheatEnabled())
-				FormAlert.Alert(AlertType.GameEndHighScoreCheat, mainWindow);
+			if (game.Cheats().cheatMode)
+				FormAlert.Alert(AlertType.GameEndHighScoreCheat);
 			else
 			{
 				AddHighScore(candidate);
-				FormAlert.Alert(AlertType.GameEndHighScoreAchieved, mainWindow);
+				FormAlert.Alert(AlertType.GameEndHighScoreAchieved);
 			}
 		} else
-			FormAlert.Alert(AlertType.GameEndHighScoreMissed, mainWindow);
+			FormAlert.Alert(AlertType.GameEndHighScoreMissed);
 
 		Game.CurrentGame(null);
 		mainWindow.setGame(null);
@@ -106,7 +106,7 @@ public class GameController
 	{
 		try
 		{
-			Object obj = Functions.LoadFile(fileName, false, mainWindow);
+			Object obj = Functions.LoadFile(fileName, false);
 			if (obj != null)
 			{
 				mainWindow.setGame(new Game((Hashtable)obj, mainWindow));
@@ -118,16 +118,30 @@ public class GameController
 			}
 		} catch (FutureVersionException ex)
 		{
-			FormAlert.Alert(AlertType.FileErrorOpen, mainWindow, fileName, Strings.FileFutureVersion);
+			FormAlert.Alert(AlertType.FileErrorOpen, fileName, Strings.FileFutureVersion);
 		}
 	}
 
 	public void SaveGame(String fileName, boolean saveFileName)
 	{
-		if (Functions.SaveFile(fileName, game.Serialize(), mainWindow) && saveFileName)
+		if (Functions.SaveFile(fileName, game.Serialize()) && saveFileName)
 			SaveGameFile = fileName;
 
 		SaveGameDays = game.Commander().getDays();
 	}
 
+	static final String SAVE_ARRIVAL = "autosave_arrival.sav";
+	static final String SAVE_DEPARTURE = "autosave_departure.sav";
+
+	public void autoSave_arive()
+	{
+		if (game.getAutoSave())
+			SaveGame(SAVE_ARRIVAL, false);
+	}
+
+	public void autoSave_depart()
+	{
+		if (game.getAutoSave())
+			SaveGame(SAVE_DEPARTURE, false);
+	}
 }

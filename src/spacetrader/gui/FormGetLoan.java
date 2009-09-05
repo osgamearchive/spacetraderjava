@@ -36,7 +36,7 @@ import jwinforms.*;
 import spacetrader.Functions;
 import spacetrader.Strings;
 
-public class FormGetLoan extends WinformForm
+public class FormGetLoan extends SpaceTraderForm
 {
 	// #region Control Declarations
 

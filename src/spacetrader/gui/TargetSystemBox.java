@@ -11,13 +11,15 @@ import spacetrader.*;
 
 public class TargetSystemBox extends jwinforms.GroupBox
 {
-	private Game game = null;
+	private SystemTracker game = null;
 	private GameController controller = null;
+	private Commander commander;
 
-	void setGame(Game game, GameController controller)
+	void setGame(SystemTracker game, GameController controller, Commander commander)
 	{
 		this.game = game;
 		this.controller = controller;
+		this.commander = commander;
 	}
 
 	private final SpaceTrader mainWindow;
@@ -101,7 +103,6 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		Controls.add(lblTargetSizeLabel);
 		Controls.add(lblTargetName);
 		Controls.add(lblTargetNameLabel);
-		setLocation(new Point(548, 306));
 		setName("boxTargetSystem");
 		setSize(new jwinforms.Size(216, 168));
 		setTabIndex(7);
@@ -349,13 +350,11 @@ public class TargetSystemBox extends jwinforms.GroupBox
 	{
 		try
 		{
-			if (game.getAutoSave())
-				controller.SaveGame( SpaceTrader.SAVE_DEPARTURE, false);
+			controller.autoSave_depart();
 
 			game.Warp(false);
 
-			if (game.getAutoSave())
-				controller.SaveGame( SpaceTrader.SAVE_ARRIVAL, false);
+			controller.autoSave_arive();
 		} catch (GameEndException ex)
 		{
 			controller.GameEnd();
@@ -384,7 +383,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		} else
 		{
 			StarSystem system = game.WarpSystem();
-			int distance = Functions.Distance(game.Commander().CurrentSystem(), system);
+			int distance = Functions.Distance(commander.CurrentSystem(), system);
 
 			lblTargetName.setText(system.Name());
 			lblTargetSize.setText(Strings.Sizes[system.Size().CastToInt()]);
@@ -395,7 +394,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 			lblTargetPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
 			lblTargetPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
 			lblTargetDistance.setText("" + distance);
-			lblTargetOutOfRange.setVisible(!system.DestOk() && system != game.Commander().CurrentSystem());
+			lblTargetOutOfRange.setVisible(!system.DestOk() && system != commander.CurrentSystem());
 			btnWarp.setVisible(system.DestOk());
 			btnTrack.setVisible(lblTargetOutOfRange.getVisible() && system != game.TrackedSystem());
 		}

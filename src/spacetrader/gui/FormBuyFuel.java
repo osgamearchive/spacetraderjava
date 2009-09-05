@@ -36,7 +36,7 @@ import jwinforms.*;
 import spacetrader.Commander;
 import spacetrader.Game;
 
-public class FormBuyFuel extends WinformForm
+public class FormBuyFuel extends SpaceTraderForm
 {
 	// #region Control Declarations
 
