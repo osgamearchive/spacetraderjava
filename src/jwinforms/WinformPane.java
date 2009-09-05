@@ -1,12 +1,40 @@
 package jwinforms;
 
-import java.awt.Component;
+import java.awt.Window;
 
-public interface WinformPane
+/**
+ * base class for windows / forms.
+ *
+ * @author Aviv
+ */
+public abstract class WinformPane extends WinformControl
 {
-	void setResult(DialogResult dialogResult);
+	protected WinformPane(Window swingVersion)
+	{
+		super(swingVersion);
+	}
 
-	void dispose();
+	protected void show()
+	{
+		EventHandler<Object, EventArgs> loadHandler = Load;
+		raise(loadHandler, this, null);
+		swingVersion.setVisible(true);
+	}
 
-	Component asSwingObject();
+	protected <O, E> void raise(EventHandler<O, E> handler, O sender, E args)
+	{
+		if (handler != null)
+			handler.handle(sender, args);
+	}
+
+	private EventHandler<Object, EventArgs> Load;
+
+	public void setLoad(EventHandler<Object, EventArgs> load)
+	{
+		Load = load;
+	}
+
+	public abstract void setResult(DialogResult dialogResult);
+
+	public abstract void dispose();
 }

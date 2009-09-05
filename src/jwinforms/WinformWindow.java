@@ -2,10 +2,14 @@ package jwinforms;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
-public class WinformWindow extends WinformControl implements WinformPane
+public class WinformWindow extends WinformPane
 {
 	private final JFrame frame;
 	private final WinformJPanel panel;
@@ -15,33 +19,47 @@ public class WinformWindow extends WinformControl implements WinformPane
 
 	public WinformWindow()
 	{
-		// super(new WinformJPanel());
 		super(new JFrame());
 		frame = (JFrame)swingVersion;
-		// panel = (WinformJPanel)swingVersion;
+		frame.addWindowListener(new WindowListener());
+
 		panel = new WinformJPanel(this);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		Controls = panel;
 		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+	}
+
+	private EventHandler<Object, CancelEventArgs> onClosing;
+
+	public void setClosing(EventHandler<Object, CancelEventArgs> closing)
+	{
+		onClosing = closing;
+	}
+
+	private class WindowListener extends WindowAdapter
+	{
+		@Override
+		public void windowClosing(WindowEvent e)
+		{
+			CancelEventArgs args = new CancelEventArgs();
+			if (onClosing != null)
+				onClosing.handle(WinformWindow.this, args);
+			if (!args.Cancel)
+				frame.dispose();
+		}
 	}
 
 	// ///////////// implementation ends here.
 	protected enum FormWindowState
 	{
 		Normal
-
 	}
 
 	public void ShowWindow()
 	{
-		EventHandler<Object, EventArgs> loadHandler = onLoad;
-		if (loadHandler != null)
-			loadHandler.handle(this, null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fixLocation();
-
-		frame.setVisible(true);
+		show();
 	}
 
 	private void fixLocation()
@@ -54,19 +72,17 @@ public class WinformWindow extends WinformControl implements WinformPane
 
 	public void Close()
 	{
-		// TODO am I sure I want this?
-		System.exit(0);
+		WindowEvent wev = new WindowEvent((Window)swingVersion, WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
 	}
+
 	// Must encapsulate most of these.
 	private Size AutoScaleBaseSize;
 	private FormBorderStyle FormBorderStyle;
-	private Icon Icon;
 	private boolean ControlBox;
 	private boolean MinimizeBox;
 	private boolean MaximizeBox;
-	private EventHandler<Object, CancelEventArgs> Closing;
 	private String Title;
-	private EventHandler<Object, EventArgs> onLoad;
 
 	public void setAutoScaleBaseSize(Size autoScaleBaseSize)
 	{
@@ -86,21 +102,6 @@ public class WinformWindow extends WinformControl implements WinformPane
 	public String getTitle()
 	{
 		return Title;
-	}
-
-	public void setLoad(EventHandler<Object, EventArgs> load)
-	{
-		onLoad = load;
-	}
-
-	public void setClosing(EventHandler<Object, CancelEventArgs> closing)
-	{
-		Closing = closing;
-	}
-
-	public EventHandler<Object, CancelEventArgs> getClosing()
-	{
-		return Closing;
 	}
 
 	public void setStartPosition(FormStartPosition startPosition)
@@ -145,8 +146,6 @@ public class WinformWindow extends WinformControl implements WinformPane
 
 	public void setIcon(Icon icon)
 	{
-		Icon = icon;
-//		Image icon = Toolkit.getDefaultToolkit().getImage("icon.gif");
 		frame.setIconImage(icon.asSwingImage());
 	}
 

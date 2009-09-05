@@ -5,7 +5,8 @@ import java.awt.Dialog.ModalityType;
 
 import javax.swing.JDialog;
 
-public class WinformForm extends WinformControl implements WinformPane
+// TODO make Closing etc work.
+public class WinformForm extends WinformPane
 {
 	private final JDialog jdialog;
 	private final WinformJPanel panel;
@@ -41,11 +42,11 @@ public class WinformForm extends WinformControl implements WinformPane
 	{
 		parent = owner;
 
-		fixLocation();
 		panel.addMouseListener(getMouseListener());
 		jdialog.setModalityType(ModalityType.APPLICATION_MODAL);
 
-		jdialog.setVisible(true);
+		fixLocation();
+		show();
 
 		return result;
 	}
@@ -69,6 +70,7 @@ public class WinformForm extends WinformControl implements WinformPane
 	public void Close()
 	{
 		jdialog.setVisible(false);
+		jdialog.dispose();
 	}
 
 	public void PerformLayout()
@@ -80,11 +82,8 @@ public class WinformForm extends WinformControl implements WinformPane
 	private boolean MinimizeBox;
 	private boolean MaximizeBox;
 	private FormStartPosition StartPosition;
-	private EventHandler<Object, CancelEventArgs> Closing;
-	private EventHandler<Object, EventArgs> Load;
 	private Button AcceptButton;
 	private Button CancelButton;
-	protected EventHandler<Object, EventArgs> Closed;
 	private String Title;
 	private WinformPane parent;
 
@@ -127,26 +126,6 @@ public class WinformForm extends WinformControl implements WinformPane
 	public Button getCancelButton()
 	{
 		return CancelButton;
-	}
-
-	public void setLoad(EventHandler<Object, EventArgs> load)
-	{
-		Load = load;
-	}
-
-	public EventHandler<Object, EventArgs> getLoad()
-	{
-		return Load;
-	}
-
-	public void setClosing(EventHandler<Object, CancelEventArgs> closing)
-	{
-		Closing = closing;
-	}
-
-	public EventHandler<Object, CancelEventArgs> getClosing()
-	{
-		return Closing;
 	}
 
 	public void setStartPosition(FormStartPosition startPosition)
