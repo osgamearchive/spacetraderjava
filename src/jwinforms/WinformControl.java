@@ -42,8 +42,8 @@ public class WinformControl implements ISupportInitialize
 
 	public WinformControl(Component swingVersion)
 	{
-		super();
 		this.swingVersion = swingVersion;
+		swingVersion.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 11));
 	}
 
 	public Component asSwingObject()

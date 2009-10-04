@@ -17,7 +17,7 @@ public class ImageList
 
 	public void Draw(jwinforms.Graphics graphics, int x, int y, int imageIndex)
 	{
-		graphics.DrawImage(images[imageIndex], x, y, new Rectangle(0, 0, size.width, size.height), 0);
+		graphics.DrawImage(images[imageIndex], x, y, new Rectangle(0, 0, size.width, size.height), GraphicsUnit.Pixel);
 	}
 
 	public Image[] getImages()

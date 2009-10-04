@@ -4,17 +4,17 @@ public class Font extends java.awt.Font
 {
 	public Font(String name, float size)
 	{
-		this(name, FontStyle.Regular, size);
+		this(name, FontStyle.Regular, size, GraphicsUnit.Point);
 	}
 
-	public Font(String name, float size, FontStyle style, int point, int b)
+	public Font(String name, float size, FontStyle style, GraphicsUnit unit, int b)
 	{
-		this(name, style, (int)size);
+		this(name, style, size, unit);
 	}
 
-	private Font(String name, FontStyle style, float size)
+	private Font(String name, FontStyle style, float size, GraphicsUnit unit)
 	{
-		super(name, style.awtFontstyle, (int)(size * 1.3));
+		super(name, style.awtFontstyle, (int)unit.toPixels(size));
 		Name = getName();
 		FontFamily = getFamily();
 	}
