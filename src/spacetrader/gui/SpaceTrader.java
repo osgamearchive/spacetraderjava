@@ -102,7 +102,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	{
 		try
 		{
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			UIManager.put("swing.boldMetal", Boolean.FALSE);
 		} catch (Exception e)
 		{
