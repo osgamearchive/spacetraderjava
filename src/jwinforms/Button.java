@@ -52,7 +52,6 @@ public class Button extends WinformControl
 	{
 		userAction = new AbstractAction()
 		{
-			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				click.handle(Button.this, null);

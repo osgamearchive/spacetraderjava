@@ -36,7 +36,6 @@ public class MenuItem
 	{
 		asJMenuItem().addActionListener(new ActionListener()
 		{
-			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				eventHandler.handle(this, null);

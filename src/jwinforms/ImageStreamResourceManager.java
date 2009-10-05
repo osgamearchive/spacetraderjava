@@ -1,10 +1,11 @@
 package jwinforms;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map.Entry;
 
-//import spacetrader.util.List;
 import util.Convertor;
 import util.Lisp;
 
@@ -20,7 +21,6 @@ public class ImageStreamResourceManager extends ResourceManager
 		java.util.List<Entry<Object, Object>> ents = new ArrayList<Entry<Object, Object>>(properties.entrySet());
 		Collections.sort(ents, new Comparator<Entry<Object, Object>>()
 		{
-			@Override
 			public int compare(Entry<Object, Object> arg0, Entry<Object, Object> arg1)
 			{
 				String left = (String)arg0.getKey();
@@ -31,7 +31,6 @@ public class ImageStreamResourceManager extends ResourceManager
 		
 		Iterable<Image> images = Lisp.map(ents, new Convertor<Image, Entry<Object, Object>>()
 		{
-			@Override
 			public Image convert(Entry<Object, Object> entry)
 			{
 //				System.out.println("Converting image: "+ entry.getValue());
@@ -41,5 +40,4 @@ public class ImageStreamResourceManager extends ResourceManager
 
 		return new ImageListStreamer(images);
 	}
-
 }

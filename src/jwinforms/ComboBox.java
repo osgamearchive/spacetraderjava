@@ -32,7 +32,6 @@ public class ComboBox extends WinformControl
 	{
 		asJComboBox().addActionListener(new ActionListener()
 		{
-			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				handler.handle(ComboBox.this, null);

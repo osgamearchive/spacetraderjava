@@ -53,7 +53,6 @@ public class NumericUpDown extends WinformControl
 	{
 		asJSpinner().addChangeListener(new ChangeListener()
 		{
-			@Override
 			public void stateChanged(ChangeEvent e)
 			{
 				valueChanged.handle(NumericUpDown.this, null);

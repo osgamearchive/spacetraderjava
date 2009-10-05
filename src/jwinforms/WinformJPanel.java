@@ -2,7 +2,10 @@ package jwinforms;
 
 import java.awt.Component;
 import java.awt.Graphics;
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.SortingFocusTraversalPolicy;
@@ -18,7 +21,6 @@ public class WinformJPanel extends JPanel
 
 		setFocusTraversalPolicy(new SortingFocusTraversalPolicy(new Comparator<Component>()
 		{
-			@Override
 			public int compare(Component o1, Component o2)
 			{
 				return tabOrderMap.get(o1).compareTo(tabOrderMap.get(o2));

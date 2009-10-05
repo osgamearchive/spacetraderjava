@@ -1,8 +1,9 @@
 package jwinforms;
 
-import java.awt.*;
+import java.awt.Color;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -10,6 +11,7 @@ public class ListBox extends WinformControl
 {
 	public final MyListModel Items = new MyListModel();
 
+	@Override
 	public void setBorderStyle(BorderStyle borderStyle)
 	{
 		if (borderStyle != BorderStyle.FixedSingle)
@@ -38,7 +40,6 @@ public class ListBox extends WinformControl
 	{
 		asJList().addListSelectionListener(new ListSelectionListener()
 		{
-			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
 				handler.handle(ListBox.this, null);

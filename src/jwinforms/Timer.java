@@ -7,7 +7,6 @@ public class Timer
 {
 	private final javax.swing.Timer timer = new javax.swing.Timer(0, new ActionListener()
 	{
-		@Override
 		public void actionPerformed(ActionEvent arg0)
 		{
 			Tick.handle(Timer.this, null);
