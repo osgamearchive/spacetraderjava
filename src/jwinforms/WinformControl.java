@@ -9,6 +9,8 @@ import java.awt.event.MouseListener;
 
 public class WinformControl implements ISupportInitialize
 {
+	private static final Font DEFAULT_FONT = new Font(jwinforms.Font.WINDOWS_DEFAULT_FONT_FAMILY, Font.PLAIN, 11);
+
 	protected final Component swingVersion;
 
 	private String Name;
@@ -43,7 +45,7 @@ public class WinformControl implements ISupportInitialize
 	public WinformControl(Component swingVersion)
 	{
 		this.swingVersion = swingVersion;
-		swingVersion.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 11));
+		swingVersion.setFont(DEFAULT_FONT);
 	}
 
 	public Component asSwingObject()
@@ -131,7 +133,7 @@ public class WinformControl implements ISupportInitialize
 	public void setEnter(EventHandler<Object, EventArgs> enter)
 	{}
 
-	public void setFont(Font font)
+	public void setFont(jwinforms.Font font)
 	{
 		swingVersion.setFont(font);
 	}
