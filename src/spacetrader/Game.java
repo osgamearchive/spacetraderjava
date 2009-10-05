@@ -4413,7 +4413,6 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return _wormholes;
 	}
 
-	@Override
 	public boolean isShowTrackedRange()
 	{
 		return Options().getShowTrackedRange();
