@@ -67,6 +67,8 @@ public class ShortRangeChart extends jwinforms.GroupBox
 		setTabIndex(6);
 		setTabStop(false);
 		setText("Short-Range Chart");
+
+		fixFonts(super.getFont());
 	}
 
 	private final int OFF_X = ChartsGraphicsConsts.OFF_X;
@@ -120,7 +122,6 @@ public class ShortRangeChart extends jwinforms.GroupBox
 		}
 	}
 
-
 	private void UpdateAll()
 	{
 		// todo inline when done
@@ -165,7 +166,7 @@ public class ShortRangeChart extends jwinforms.GroupBox
 
 				if (game.isShowTrackedRange())
 					e.Graphics.DrawString(Functions.StringVars(Strings.ChartDistance, Functions.Multiples(dist,
-							Strings.DistanceUnit), trackSys.Name()), getFont(), new SolidBrush(Color.black), 0,
+							Strings.DistanceUnit), trackSys.Name()), font, new SolidBrush(Color.black), 0,
 							picShortRangeChart.getHeight() - 13);
 			}
 
@@ -213,10 +214,9 @@ public class ShortRangeChart extends jwinforms.GroupBox
 							}
 						} else
 						{
-							Font font = new Font(getFont().FontFamily, 7);
 							SizeF size = e.Graphics.MeasureString(universe[i].Name(), getFont());
-							e.Graphics.DrawString(universe[i].Name(), font, new SolidBrush(Color.black), x - size.width
-									/ 2 + OFF_X, y /*- size.Height*/- 5);
+							e.Graphics.DrawString(universe[i].Name(), smallFont, new SolidBrush(Color.black), x
+									- size.width / 2 + OFF_X, y /*- size.Height*/- 5);
 							// implementations differ as to which point we start the string at. --aviv
 						}
 					}
@@ -230,5 +230,21 @@ public class ShortRangeChart extends jwinforms.GroupBox
 	public void Refresh()
 	{
 		picShortRangeChart.Refresh();
+	}
+
+	private Font font;
+	private Font smallFont;
+
+	@Override
+	public void setFont(Font font)
+	{
+		fixFonts(font);
+		super.setFont(font);
+	}
+
+	private void fixFonts(Font base)
+	{
+		font = base;
+		smallFont = base == null ? null : new Font(base.FontFamily, 7);
 	}
 }

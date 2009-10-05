@@ -90,8 +90,7 @@ public class FormViewShip extends SpaceTraderForm
 		// lblTypeLabel
 		// 
 		this.lblTypeLabel.setAutoSize(true);
-		this.lblTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblTypeLabel.setFont(FontCollection.bold825);
 		this.lblTypeLabel.setLocation(new java.awt.Point(8, 8));
 		this.lblTypeLabel.setName("lblTypeLabel");
 		this.lblTypeLabel.setSize(new jwinforms.Size(34, 13));
@@ -118,8 +117,7 @@ public class FormViewShip extends SpaceTraderForm
 		// 
 		// lblEquipLabel
 		// 
-		this.lblEquipLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblEquipLabel.setFont(FontCollection.bold825);
 		this.lblEquipLabel.setLocation(new java.awt.Point(8, 34));
 		this.lblEquipLabel.setName("lblEquipLabel");
 		this.lblEquipLabel.setSize(new jwinforms.Size(64, 176));

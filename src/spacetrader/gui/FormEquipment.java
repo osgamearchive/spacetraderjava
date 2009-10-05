@@ -484,8 +484,7 @@ public class FormEquipment extends SpaceTraderForm
 		// lblChargeLabel
 		// 
 		this.lblChargeLabel.setAutoSize(true);
-		this.lblChargeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblChargeLabel.setFont(FontCollection.bold825);
 		this.lblChargeLabel.setLocation(new java.awt.Point(8, 164));
 		this.lblChargeLabel.setName("lblChargeLabel");
 		this.lblChargeLabel.setSize(new jwinforms.Size(46, 16));
@@ -495,8 +494,7 @@ public class FormEquipment extends SpaceTraderForm
 		// lblPowerLabel
 		// 
 		this.lblPowerLabel.setAutoSize(true);
-		this.lblPowerLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblPowerLabel.setFont(FontCollection.bold825);
 		this.lblPowerLabel.setLocation(new java.awt.Point(8, 148));
 		this.lblPowerLabel.setName("lblPowerLabel");
 		this.lblPowerLabel.setSize(new jwinforms.Size(41, 16));
@@ -514,8 +512,7 @@ public class FormEquipment extends SpaceTraderForm
 		// lblTypeLabel
 		// 
 		this.lblTypeLabel.setAutoSize(true);
-		this.lblTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblTypeLabel.setFont(FontCollection.bold825);
 		this.lblTypeLabel.setLocation(new java.awt.Point(8, 100));
 		this.lblTypeLabel.setName("lblTypeLabel");
 		this.lblTypeLabel.setSize(new jwinforms.Size(34, 16));
@@ -525,8 +522,7 @@ public class FormEquipment extends SpaceTraderForm
 		// lblNameLabel
 		// 
 		this.lblNameLabel.setAutoSize(true);
-		this.lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblNameLabel.setFont(FontCollection.bold825);
 		this.lblNameLabel.setLocation(new java.awt.Point(8, 84));
 		this.lblNameLabel.setName("lblNameLabel");
 		this.lblNameLabel.setSize(new jwinforms.Size(39, 16));
@@ -568,8 +564,7 @@ public class FormEquipment extends SpaceTraderForm
 		// lblBuyPriceLabel
 		// 
 		this.lblBuyPriceLabel.setAutoSize(true);
-		this.lblBuyPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblBuyPriceLabel.setFont(FontCollection.bold825);
 		this.lblBuyPriceLabel.setLocation(new java.awt.Point(8, 116));
 		this.lblBuyPriceLabel.setName("lblBuyPriceLabel");
 		this.lblBuyPriceLabel.setSize(new jwinforms.Size(58, 16));
@@ -587,8 +582,7 @@ public class FormEquipment extends SpaceTraderForm
 		// lblSellPriceLabel
 		// 
 		this.lblSellPriceLabel.setAutoSize(true);
-		this.lblSellPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblSellPriceLabel.setFont(FontCollection.bold825);
 		this.lblSellPriceLabel.setLocation(new java.awt.Point(8, 132));
 		this.lblSellPriceLabel.setName("lblSellPriceLabel");
 		this.lblSellPriceLabel.setSize(new jwinforms.Size(58, 16));

@@ -176,8 +176,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblQuestsLabel
 		// 
 		this.lblQuestsLabel.setAutoSize(true);
-		this.lblQuestsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblQuestsLabel.setFont(FontCollection.bold10);
 		this.lblQuestsLabel.setLocation(new java.awt.Point(88, 4));
 		this.lblQuestsLabel.setName("lblQuestsLabel");
 		this.lblQuestsLabel.setSize(new jwinforms.Size(50, 19));
@@ -187,8 +186,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblMercLabel
 		// 
 		this.lblMercLabel.setAutoSize(true);
-		this.lblMercLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblMercLabel.setFont(FontCollection.bold10);
 		this.lblMercLabel.setLocation(new java.awt.Point(348, 4));
 		this.lblMercLabel.setName("lblMercLabel");
 		this.lblMercLabel.setSize(new jwinforms.Size(84, 19));
@@ -198,8 +196,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblMercSkillLabelPilot
 		// 
 		this.lblMercSkillLabelPilot.setAutoSize(true);
-		this.lblMercSkillLabelPilot.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblMercSkillLabelPilot.setFont(FontCollection.bold825);
 		this.lblMercSkillLabelPilot.setLocation(new java.awt.Point(341, 24));
 		this.lblMercSkillLabelPilot.setName("lblMercSkillLabelPilot");
 		this.lblMercSkillLabelPilot.setSize(new jwinforms.Size(12, 16));
@@ -218,8 +215,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblMercSkillLabelFighter
 		// 
 		this.lblMercSkillLabelFighter.setAutoSize(true);
-		this.lblMercSkillLabelFighter.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold,
-				GraphicsUnit.Point, ((byte) (0))));
+		this.lblMercSkillLabelFighter.setFont(FontCollection.bold825);
 		this.lblMercSkillLabelFighter.setLocation(new java.awt.Point(362, 24));
 		this.lblMercSkillLabelFighter.setName("lblMercSkillLabelFighter");
 		this.lblMercSkillLabelFighter.setSize(new jwinforms.Size(11, 16));
@@ -238,8 +234,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblMercSkillLabelTrader
 		// 
 		this.lblMercSkillLabelTrader.setAutoSize(true);
-		this.lblMercSkillLabelTrader.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold,
-				GraphicsUnit.Point, ((byte) (0))));
+		this.lblMercSkillLabelTrader.setFont(FontCollection.bold825);
 		this.lblMercSkillLabelTrader.setLocation(new java.awt.Point(382, 24));
 		this.lblMercSkillLabelTrader.setName("lblMercSkillLabelTrader");
 		this.lblMercSkillLabelTrader.setSize(new jwinforms.Size(11, 16));
@@ -258,8 +253,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblMercSkillLabelEngineer
 		// 
 		this.lblMercSkillLabelEngineer.setAutoSize(true);
-		this.lblMercSkillLabelEngineer.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold,
-				GraphicsUnit.Point, ((byte) (0))));
+		this.lblMercSkillLabelEngineer.setFont(FontCollection.bold825);
 		this.lblMercSkillLabelEngineer.setLocation(new java.awt.Point(401, 24));
 		this.lblMercSkillLabelEngineer.setName("lblMercSkillLabelEngineer");
 		this.lblMercSkillLabelEngineer.setSize(new jwinforms.Size(12, 16));
@@ -278,8 +272,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblMercSystemLabel
 		// 
 		this.lblMercSystemLabel.setAutoSize(true);
-		this.lblMercSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblMercSystemLabel.setFont(FontCollection.bold825);
 		this.lblMercSystemLabel.setLocation(new java.awt.Point(425, 24));
 		this.lblMercSystemLabel.setName("lblMercSystemLabel");
 		this.lblMercSystemLabel.setSize(new jwinforms.Size(43, 16));
@@ -297,8 +290,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblQuestSystemLabel
 		// 
 		this.lblQuestSystemLabel.setAutoSize(true);
-		this.lblQuestSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblQuestSystemLabel.setFont(FontCollection.bold825);
 		this.lblQuestSystemLabel.setLocation(new java.awt.Point(13, 24));
 		this.lblQuestSystemLabel.setName("lblQuestSystemLabel");
 		this.lblQuestSystemLabel.setSize(new jwinforms.Size(43, 16));
@@ -316,8 +308,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblQuestDescLabel
 		// 
 		this.lblQuestDescLabel.setAutoSize(true);
-		this.lblQuestDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblQuestDescLabel.setFont(FontCollection.bold825);
 		this.lblQuestDescLabel.setLocation(new java.awt.Point(85, 24));
 		this.lblQuestDescLabel.setName("lblQuestDescLabel");
 		this.lblQuestDescLabel.setSize(new jwinforms.Size(63, 16));
@@ -335,8 +326,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblMercIDLabel
 		// 
 		this.lblMercIDLabel.setAutoSize(true);
-		this.lblMercIDLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblMercIDLabel.setFont(FontCollection.bold825);
 		this.lblMercIDLabel.setLocation(new java.awt.Point(247, 24));
 		this.lblMercIDLabel.setName("lblMercIDLabel");
 		this.lblMercIDLabel.setSize(new jwinforms.Size(16, 16));
@@ -355,8 +345,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblMercNameLabel
 		// 
 		this.lblMercNameLabel.setAutoSize(true);
-		this.lblMercNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblMercNameLabel.setFont(FontCollection.bold825);
 		this.lblMercNameLabel.setLocation(new java.awt.Point(268, 24));
 		this.lblMercNameLabel.setName("lblMercNameLabel");
 		this.lblMercNameLabel.setSize(new jwinforms.Size(35, 16));
@@ -374,8 +363,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblShipyardsDescLabel
 		// 
 		this.lblShipyardsDescLabel.setAutoSize(true);
-		this.lblShipyardsDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblShipyardsDescLabel.setFont(FontCollection.bold825);
 		this.lblShipyardsDescLabel.setLocation(new java.awt.Point(85, 258));
 		this.lblShipyardsDescLabel.setName("lblShipyardsDescLabel");
 		this.lblShipyardsDescLabel.setSize(new jwinforms.Size(63, 16));
@@ -393,8 +381,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblShipyardsSystemLabel
 		// 
 		this.lblShipyardsSystemLabel.setAutoSize(true);
-		this.lblShipyardsSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold,
-				GraphicsUnit.Point, ((byte) (0))));
+		this.lblShipyardsSystemLabel.setFont(FontCollection.bold825);
 		this.lblShipyardsSystemLabel.setLocation(new java.awt.Point(13, 258));
 		this.lblShipyardsSystemLabel.setName("lblShipyardsSystemLabel");
 		this.lblShipyardsSystemLabel.setSize(new jwinforms.Size(43, 16));
@@ -412,8 +399,7 @@ public class FormMonster extends SpaceTraderForm
 		// lblShipyardsLabel
 		// 
 		this.lblShipyardsLabel.setAutoSize(true);
-		this.lblShipyardsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte) (0))));
+		this.lblShipyardsLabel.setFont(FontCollection.bold10);
 		this.lblShipyardsLabel.setLocation(new java.awt.Point(79, 238));
 		this.lblShipyardsLabel.setName("lblShipyardsLabel");
 		this.lblShipyardsLabel.setSize(new jwinforms.Size(68, 19));

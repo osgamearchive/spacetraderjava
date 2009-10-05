@@ -266,8 +266,7 @@ public class FormShipyard extends SpaceTraderForm
 		// lblSkillLabel
 		//
 		lblSkillLabel.setAutoSize(true);
-		lblSkillLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSkillLabel.setFont(FontCollection.bold825);
 		lblSkillLabel.setLocation(new java.awt.Point(92, 79));
 		lblSkillLabel.setName("lblSkillLabel");
 		lblSkillLabel.setSize(new jwinforms.Size(72, 13));
@@ -277,8 +276,7 @@ public class FormShipyard extends SpaceTraderForm
 		// lblSizeSpecialtyLabel
 		//
 		lblSizeSpecialtyLabel.setAutoSize(true);
-		lblSizeSpecialtyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSizeSpecialtyLabel.setFont(FontCollection.bold825);
 		lblSizeSpecialtyLabel.setLocation(new java.awt.Point(92, 65));
 		lblSizeSpecialtyLabel.setName("lblSizeSpecialtyLabel");
 		lblSizeSpecialtyLabel.setSize(new jwinforms.Size(82, 13));
@@ -721,7 +719,7 @@ public class FormShipyard extends SpaceTraderForm
 		//
 		// lblPct
 		//
-		lblPct.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+		lblPct.setFont(FontCollection.bold825);
 		lblPct.setForeColor(java.awt.Color.red);
 		lblPct.setLocation(new java.awt.Point(110, 204));
 		lblPct.setName("lblPct");

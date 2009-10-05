@@ -28,10 +28,15 @@
 //using System.ComponentModel;
 //using System.Windows.Forms;
 
-package spacetrader.gui;import java.util.*;
+package spacetrader.gui;import java.util.Arrays;
 
 import jwinforms.*;
-import spacetrader.*;import spacetrader.enums.*;
+import spacetrader.Commander;
+import spacetrader.Consts;
+import spacetrader.Functions;
+import spacetrader.Game;
+import spacetrader.Strings;
+import spacetrader.enums.AlertType;
 	public class FormViewBank extends SpaceTraderForm
 	{
 		//#region Control Declarations
@@ -53,15 +58,15 @@ import spacetrader.*;import spacetrader.enums.*;
 		private jwinforms.Button btnPayBack;
 		private jwinforms.Button btnClose;
 		private jwinforms.Label lblMaxNoClaim;
-		private Container components = null;
+		private final Container components = null;
 
 		//#endregion
 
 		//#region Member Declarations
 
-		private Game			game		= Game.CurrentGame();
-		private Commander	cmdr		= Game.CurrentGame().Commander();
-		private int				MaxLoan	= Game.CurrentGame().Commander().getPoliceRecordScore() >=
+		private final Game			game		= Game.CurrentGame();
+		private final Commander	cmdr		= Game.CurrentGame().Commander();
+		private final int				MaxLoan	= Game.CurrentGame().Commander().getPoliceRecordScore() >=
 																Consts.PoliceRecordScoreClean ?
 																Math.min(25000, Math.max(1000, Game.CurrentGame().Commander().Worth() / 5000 * 500)) :
 																500;
@@ -77,7 +82,7 @@ import spacetrader.*;import spacetrader.enums.*;
 			UpdateAll();
 		}
 
-		
+
 
 		//#region Windows Form Designer generated code
 		/// <summary>
@@ -86,225 +91,228 @@ import spacetrader.*;import spacetrader.enums.*;
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.lblLoan = new jwinforms.Label();
-			this.lblCurrentDebtLabel = new jwinforms.Label();
-			this.lblMaxLoanLabel = new jwinforms.Label();
-			this.lblCurrentDebt = new jwinforms.Label();
-			this.lblMaxLoan = new jwinforms.Label();
-			this.btnGetLoan = new jwinforms.Button();
-			this.btnBuyInsurance = new jwinforms.Button();
-			this.lblNoClaim = new jwinforms.Label();
-			this.lblShipValue = new jwinforms.Label();
-			this.lblNoClaimLabel = new jwinforms.Label();
-			this.lblShipValueLabel = new jwinforms.Label();
-			this.lblInsurance = new jwinforms.Label();
-			this.lblInsAmt = new jwinforms.Label();
-			this.lblInsAmtLabel = new jwinforms.Label();
-			this.btnPayBack = new jwinforms.Button();
-			this.btnClose = new jwinforms.Button();
-			this.lblMaxNoClaim = new jwinforms.Label();
+			lblLoan = new jwinforms.Label();
+			lblCurrentDebtLabel = new jwinforms.Label();
+			lblMaxLoanLabel = new jwinforms.Label();
+			lblCurrentDebt = new jwinforms.Label();
+			lblMaxLoan = new jwinforms.Label();
+			btnGetLoan = new jwinforms.Button();
+			btnBuyInsurance = new jwinforms.Button();
+			lblNoClaim = new jwinforms.Label();
+			lblShipValue = new jwinforms.Label();
+			lblNoClaimLabel = new jwinforms.Label();
+			lblShipValueLabel = new jwinforms.Label();
+			lblInsurance = new jwinforms.Label();
+			lblInsAmt = new jwinforms.Label();
+			lblInsAmtLabel = new jwinforms.Label();
+			btnPayBack = new jwinforms.Button();
+			btnClose = new jwinforms.Button();
+			lblMaxNoClaim = new jwinforms.Label();
 			this.SuspendLayout();
 			//
 			// lblLoan
 			//
-			this.lblLoan.setAutoSize(true);
-			this.lblLoan.setFont(new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-			this.lblLoan.setLocation(new java.awt.Point(8, 8));
-			this.lblLoan.setName("lblLoan");
-			this.lblLoan.setSize(new jwinforms.Size(44, 19));
-			this.lblLoan.setTabIndex(1);
-			this.lblLoan.setText("Loan");
+			lblLoan.setAutoSize(true);
+			lblLoan.setFont(FontCollection.bold12);
+			lblLoan.setLocation(new java.awt.Point(8, 8));
+			lblLoan.setName("lblLoan");
+			lblLoan.setSize(new jwinforms.Size(44, 19));
+			lblLoan.setTabIndex(1);
+			lblLoan.setText("Loan");
 			//
 			// lblCurrentDebtLabel
 			//
-			this.lblCurrentDebtLabel.setAutoSize(true);
-			this.lblCurrentDebtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-			this.lblCurrentDebtLabel.setLocation(new java.awt.Point(16, 32));
-			this.lblCurrentDebtLabel.setName("lblCurrentDebtLabel");
-			this.lblCurrentDebtLabel.setSize(new jwinforms.Size(75, 13));
-			this.lblCurrentDebtLabel.setTabIndex(2);
-			this.lblCurrentDebtLabel.setText("Current Debt:");
+			lblCurrentDebtLabel.setAutoSize(true);
+			lblCurrentDebtLabel.setFont(FontCollection.bold825);
+			lblCurrentDebtLabel.setLocation(new java.awt.Point(16, 32));
+			lblCurrentDebtLabel.setName("lblCurrentDebtLabel");
+			lblCurrentDebtLabel.setSize(new jwinforms.Size(75, 13));
+			lblCurrentDebtLabel.setTabIndex(2);
+			lblCurrentDebtLabel.setText("Current Debt:");
 			//
 			// lblMaxLoanLabel
 			//
-			this.lblMaxLoanLabel.setAutoSize(true);
-			this.lblMaxLoanLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-			this.lblMaxLoanLabel.setLocation(new java.awt.Point(16, 52));
-			this.lblMaxLoanLabel.setName("lblMaxLoanLabel");
-			this.lblMaxLoanLabel.setSize(new jwinforms.Size(88, 13));
-			this.lblMaxLoanLabel.setTabIndex(3);
-			this.lblMaxLoanLabel.setText("Maximum Loan:");
+			lblMaxLoanLabel.setAutoSize(true);
+			lblMaxLoanLabel.setFont(FontCollection.bold825);
+			lblMaxLoanLabel.setLocation(new java.awt.Point(16, 52));
+			lblMaxLoanLabel.setName("lblMaxLoanLabel");
+			lblMaxLoanLabel.setSize(new jwinforms.Size(88, 13));
+			lblMaxLoanLabel.setTabIndex(3);
+			lblMaxLoanLabel.setText("Maximum Loan:");
 			//
 			// lblCurrentDebt
 			//
-			this.lblCurrentDebt.setLocation(new java.awt.Point(136, 32));
-			this.lblCurrentDebt.setName("lblCurrentDebt");
-			this.lblCurrentDebt.setSize(new jwinforms.Size(56, 13));
-			this.lblCurrentDebt.setTabIndex(4);
-			this.lblCurrentDebt.setText("88,888 cr.");
-			this.lblCurrentDebt.TextAlign = ContentAlignment.TopRight;
+			lblCurrentDebt.setLocation(new java.awt.Point(136, 32));
+			lblCurrentDebt.setName("lblCurrentDebt");
+			lblCurrentDebt.setSize(new jwinforms.Size(56, 13));
+			lblCurrentDebt.setTabIndex(4);
+			lblCurrentDebt.setText("88,888 cr.");
+			lblCurrentDebt.TextAlign = ContentAlignment.TopRight;
 			//
 			// lblMaxLoan
 			//
-			this.lblMaxLoan.setLocation(new java.awt.Point(136, 52));
-			this.lblMaxLoan.setName("lblMaxLoan");
-			this.lblMaxLoan.setSize(new jwinforms.Size(56, 13));
-			this.lblMaxLoan.setTabIndex(5);
-			this.lblMaxLoan.setText("88,888 cr.");
-			this.lblMaxLoan.TextAlign = ContentAlignment.TopRight;
+			lblMaxLoan.setLocation(new java.awt.Point(136, 52));
+			lblMaxLoan.setName("lblMaxLoan");
+			lblMaxLoan.setSize(new jwinforms.Size(56, 13));
+			lblMaxLoan.setTabIndex(5);
+			lblMaxLoan.setText("88,888 cr.");
+			lblMaxLoan.TextAlign = ContentAlignment.TopRight;
 			//
 			// btnGetLoan
 			//
-			this.btnGetLoan.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnGetLoan.setLocation(new java.awt.Point(16, 72));
-			this.btnGetLoan.setName("btnGetLoan");
-			this.btnGetLoan.setSize(new jwinforms.Size(61, 22));
-			this.btnGetLoan.setTabIndex(1);
-			this.btnGetLoan.setText("Get Loan");
-			this.btnGetLoan.setClick(new EventHandler<Object, EventArgs>()
+			btnGetLoan.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnGetLoan.setLocation(new java.awt.Point(16, 72));
+			btnGetLoan.setName("btnGetLoan");
+			btnGetLoan.setSize(new jwinforms.Size(61, 22));
+			btnGetLoan.setTabIndex(1);
+			btnGetLoan.setText("Get Loan");
+			btnGetLoan.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnGetLoan_Click(sender, e);}});
 			//
 			// btnBuyInsurance
 			//
-			this.btnBuyInsurance.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnBuyInsurance.setLocation(new java.awt.Point(16, 196));
-			this.btnBuyInsurance.setName("btnBuyInsurance");
-			this.btnBuyInsurance.setSize(new jwinforms.Size(90, 22));
-			this.btnBuyInsurance.setTabIndex(3);
-			this.btnBuyInsurance.setText("Stop Insurance");
-			this.btnBuyInsurance.setClick(new EventHandler<Object, EventArgs>()
+			btnBuyInsurance.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnBuyInsurance.setLocation(new java.awt.Point(16, 196));
+			btnBuyInsurance.setName("btnBuyInsurance");
+			btnBuyInsurance.setSize(new jwinforms.Size(90, 22));
+			btnBuyInsurance.setTabIndex(3);
+			btnBuyInsurance.setText("Stop Insurance");
+			btnBuyInsurance.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnBuyInsurance_Click(sender, e);}});
 			//
 			// lblNoClaim
 			//
-			this.lblNoClaim.setLocation(new java.awt.Point(154, 156));
-			this.lblNoClaim.setName("lblNoClaim");
-			this.lblNoClaim.setSize(new jwinforms.Size(32, 13));
-			this.lblNoClaim.setTabIndex(27);
-			this.lblNoClaim.setText("88%");
-			this.lblNoClaim.TextAlign = ContentAlignment.TopRight;
+			lblNoClaim.setLocation(new java.awt.Point(154, 156));
+			lblNoClaim.setName("lblNoClaim");
+			lblNoClaim.setSize(new jwinforms.Size(32, 13));
+			lblNoClaim.setTabIndex(27);
+			lblNoClaim.setText("88%");
+			lblNoClaim.TextAlign = ContentAlignment.TopRight;
 			//
 			// lblShipValue
 			//
-			this.lblShipValue.setLocation(new java.awt.Point(136, 136));
-			this.lblShipValue.setName("lblShipValue");
-			this.lblShipValue.setSize(new jwinforms.Size(56, 13));
-			this.lblShipValue.setTabIndex(26);
-			this.lblShipValue.setText("88,888 cr.");
-			this.lblShipValue.TextAlign = ContentAlignment.TopRight;
+			lblShipValue.setLocation(new java.awt.Point(136, 136));
+			lblShipValue.setName("lblShipValue");
+			lblShipValue.setSize(new jwinforms.Size(56, 13));
+			lblShipValue.setTabIndex(26);
+			lblShipValue.setText("88,888 cr.");
+			lblShipValue.TextAlign = ContentAlignment.TopRight;
 			//
 			// lblNoClaimLabel
 			//
-			this.lblNoClaimLabel.setAutoSize(true);
-			this.lblNoClaimLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-			this.lblNoClaimLabel.setLocation(new java.awt.Point(16, 156));
-			this.lblNoClaimLabel.setName("lblNoClaimLabel");
-			this.lblNoClaimLabel.setSize(new jwinforms.Size(106, 13));
-			this.lblNoClaimLabel.setTabIndex(25);
-			this.lblNoClaimLabel.setText("No-Claim Discount:");
+			lblNoClaimLabel.setAutoSize(true);
+			lblNoClaimLabel.setFont(FontCollection.bold825);
+			lblNoClaimLabel.setLocation(new java.awt.Point(16, 156));
+			lblNoClaimLabel.setName("lblNoClaimLabel");
+			lblNoClaimLabel.setSize(new jwinforms.Size(106, 13));
+			lblNoClaimLabel.setTabIndex(25);
+			lblNoClaimLabel.setText("No-Claim Discount:");
 			//
 			// lblShipValueLabel
 			//
-			this.lblShipValueLabel.setAutoSize(true);
-			this.lblShipValueLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-			this.lblShipValueLabel.setLocation(new java.awt.Point(16, 136));
-			this.lblShipValueLabel.setName("lblShipValueLabel");
-			this.lblShipValueLabel.setSize(new jwinforms.Size(65, 13));
-			this.lblShipValueLabel.setTabIndex(24);
-			this.lblShipValueLabel.setText("Ship Value:");
+			lblShipValueLabel.setAutoSize(true);
+			lblShipValueLabel.setFont(FontCollection.bold825);
+			lblShipValueLabel.setLocation(new java.awt.Point(16, 136));
+			lblShipValueLabel.setName("lblShipValueLabel");
+			lblShipValueLabel.setSize(new jwinforms.Size(65, 13));
+			lblShipValueLabel.setTabIndex(24);
+			lblShipValueLabel.setText("Ship Value:");
 			//
 			// lblInsurance
 			//
-			this.lblInsurance.setAutoSize(true);
-			this.lblInsurance.setFont(new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-			this.lblInsurance.setLocation(new java.awt.Point(8, 112));
-			this.lblInsurance.setName("lblInsurance");
-			this.lblInsurance.setSize(new jwinforms.Size(81, 19));
-			this.lblInsurance.setTabIndex(23);
-			this.lblInsurance.setText("Insurance");
+			lblInsurance.setAutoSize(true);
+			lblInsurance.setFont(FontCollection.bold12);
+			lblInsurance.setLocation(new java.awt.Point(8, 112));
+			lblInsurance.setName("lblInsurance");
+			lblInsurance.setSize(new jwinforms.Size(81, 19));
+			lblInsurance.setTabIndex(23);
+			lblInsurance.setText("Insurance");
 			//
 			// lblInsAmt
 			//
-			this.lblInsAmt.setLocation(new java.awt.Point(136, 176));
-			this.lblInsAmt.setName("lblInsAmt");
-			this.lblInsAmt.setSize(new jwinforms.Size(82, 13));
-			this.lblInsAmt.setTabIndex(30);
-			this.lblInsAmt.setText("8,888 cr. daily");
-			this.lblInsAmt.TextAlign = ContentAlignment.TopRight;
+			lblInsAmt.setLocation(new java.awt.Point(136, 176));
+			lblInsAmt.setName("lblInsAmt");
+			lblInsAmt.setSize(new jwinforms.Size(82, 13));
+			lblInsAmt.setTabIndex(30);
+			lblInsAmt.setText("8,888 cr. daily");
+			lblInsAmt.TextAlign = ContentAlignment.TopRight;
 			//
 			// lblInsAmtLabel
 			//
-			this.lblInsAmtLabel.setAutoSize(true);
-			this.lblInsAmtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-			this.lblInsAmtLabel.setLocation(new java.awt.Point(16, 176));
-			this.lblInsAmtLabel.setName("lblInsAmtLabel");
-			this.lblInsAmtLabel.setSize(new jwinforms.Size(38, 13));
-			this.lblInsAmtLabel.setTabIndex(29);
-			this.lblInsAmtLabel.setText("Costs:");
+			lblInsAmtLabel.setAutoSize(true);
+			lblInsAmtLabel.setFont(FontCollection.bold825);
+			lblInsAmtLabel.setLocation(new java.awt.Point(16, 176));
+			lblInsAmtLabel.setName("lblInsAmtLabel");
+			lblInsAmtLabel.setSize(new jwinforms.Size(38, 13));
+			lblInsAmtLabel.setTabIndex(29);
+			lblInsAmtLabel.setText("Costs:");
 			//
 			// btnPayBack
 			//
-			this.btnPayBack.setFlatStyle(jwinforms.FlatStyle.Flat);
-			this.btnPayBack.setLocation(new java.awt.Point(88, 72));
-			this.btnPayBack.setName("btnPayBack");
-			this.btnPayBack.setSize(new jwinforms.Size(90, 22));
-			this.btnPayBack.setTabIndex(2);
-			this.btnPayBack.setText("Pay Back Loan");
-			this.btnPayBack.setClick(new EventHandler<Object, EventArgs>()
+			btnPayBack.setFlatStyle(jwinforms.FlatStyle.Flat);
+			btnPayBack.setLocation(new java.awt.Point(88, 72));
+			btnPayBack.setName("btnPayBack");
+			btnPayBack.setSize(new jwinforms.Size(90, 22));
+			btnPayBack.setTabIndex(2);
+			btnPayBack.setText("Pay Back Loan");
+			btnPayBack.setClick(new EventHandler<Object, EventArgs>()
 {
+@Override
 public void handle(Object sender, jwinforms.EventArgs e)
 	{
 btnPayBack_Click(sender, e);}});
 			//
 			// btnClose
 			//
-			this.btnClose.setDialogResult(DialogResult.Cancel);
-			this.btnClose.setLocation(new java.awt.Point(-32, -32));
-			this.btnClose.setName("btnClose");
-			this.btnClose.setSize(new jwinforms.Size(26, 27));
-			this.btnClose.setTabIndex(32);
-			this.btnClose.setTabStop(false);
-			this.btnClose.setText("X");
+			btnClose.setDialogResult(DialogResult.Cancel);
+			btnClose.setLocation(new java.awt.Point(-32, -32));
+			btnClose.setName("btnClose");
+			btnClose.setSize(new jwinforms.Size(26, 27));
+			btnClose.setTabIndex(32);
+			btnClose.setTabStop(false);
+			btnClose.setText("X");
 			//
 			// lblMaxNoClaim
 			//
-			this.lblMaxNoClaim.setAutoSize(true);
-			this.lblMaxNoClaim.setLocation(new java.awt.Point(182, 156));
-			this.lblMaxNoClaim.setName("lblMaxNoClaim");
-			this.lblMaxNoClaim.setSize(new jwinforms.Size(33, 13));
-			this.lblMaxNoClaim.setTabIndex(33);
-			this.lblMaxNoClaim.setText("(max)");
-			this.lblMaxNoClaim.setVisible(false);
+			lblMaxNoClaim.setAutoSize(true);
+			lblMaxNoClaim.setLocation(new java.awt.Point(182, 156));
+			lblMaxNoClaim.setName("lblMaxNoClaim");
+			lblMaxNoClaim.setSize(new jwinforms.Size(33, 13));
+			lblMaxNoClaim.setTabIndex(33);
+			lblMaxNoClaim.setText("(max)");
+			lblMaxNoClaim.setVisible(false);
 			//
 			// FormViewBank
 			//
 			this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
-			this.setCancelButton(this.btnClose);
+			this.setCancelButton(btnClose);
 			this.setClientSize(new jwinforms.Size(226, 231));
-			this.Controls.addAll(Arrays.asList(
-																																	this.lblMaxNoClaim,
-																																	this.btnClose,
-																																	this.btnPayBack,
-																																	this.lblInsAmt,
-																																	this.lblInsAmtLabel,
-																																	this.lblNoClaimLabel,
-																																	this.lblShipValueLabel,
-																																	this.lblInsurance,
-																																	this.lblMaxLoanLabel,
-																																	this.lblCurrentDebtLabel,
-																																	this.lblLoan,
-																																	this.btnBuyInsurance,
-																																	this.lblNoClaim,
-																																	this.lblShipValue,
-																																	this.btnGetLoan,
-																																	this.lblMaxLoan,
-																																	this.lblCurrentDebt));
+			Controls.addAll(Arrays.asList(
+																																	lblMaxNoClaim,
+																																	btnClose,
+																																	btnPayBack,
+																																	lblInsAmt,
+																																	lblInsAmtLabel,
+																																	lblNoClaimLabel,
+																																	lblShipValueLabel,
+																																	lblInsurance,
+																																	lblMaxLoanLabel,
+																																	lblCurrentDebtLabel,
+																																	lblLoan,
+																																	btnBuyInsurance,
+																																	lblNoClaim,
+																																	lblShipValue,
+																																	btnGetLoan,
+																																	lblMaxLoan,
+																																	lblCurrentDebt));
 			this.setFormBorderStyle(FormBorderStyle.FixedDialog);
 			this.setMaximizeBox(false);
 			this.setMinimizeBox(false);

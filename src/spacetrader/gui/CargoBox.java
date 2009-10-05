@@ -37,7 +37,7 @@ public class CargoBox extends jwinforms.GroupBox
 		this.controller = controller;
 	}
 
-	private static final Font BOLD_FONT = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+	private static final Font BOLD_FONT = FontCollection.bold825;
 
 	private jwinforms.Button btnBuyMax0;
 	private jwinforms.Button btnBuyQty0;
@@ -715,8 +715,7 @@ public class CargoBox extends jwinforms.GroupBox
 		//
 		// lblTargetDiff7
 		//
-		lblTargetDiff7.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetDiff7.setFont(FontCollection.regular825);
 		lblTargetDiff7.setLocation(new Point(410, 228));
 		lblTargetDiff7.setName("lblTargetDiff7");
 		lblTargetDiff7.setSize(new jwinforms.Size(52, 13));
@@ -1658,7 +1657,7 @@ public class CargoBox extends jwinforms.GroupBox
 		// lblSell
 		//
 		lblSell.setAutoSize(true);
-		lblSell.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
+		lblSell.setFont(FontCollection.regular825);
 		lblSell.setLocation(new Point(132, 34));
 		lblSell.setName("lblSell");
 		lblSell.setSize(new jwinforms.Size(23, 16));

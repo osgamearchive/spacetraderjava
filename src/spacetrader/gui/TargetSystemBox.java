@@ -245,8 +245,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		// lblTargetDistanceLabel
 		//
 		lblTargetDistanceLabel.setAutoSize(true);
-		lblTargetDistanceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetDistanceLabel.setFont(FontCollection.bold825);
 		lblTargetDistanceLabel.setLocation(new Point(8, 128));
 		lblTargetDistanceLabel.setName("lblTargetDistanceLabel");
 		lblTargetDistanceLabel.setSize(new jwinforms.Size(53, 16));
@@ -256,8 +255,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		// lblTargetPiratesLabel
 		//
 		lblTargetPiratesLabel.setAutoSize(true);
-		lblTargetPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetPiratesLabel.setFont(FontCollection.bold825);
 		lblTargetPiratesLabel.setLocation(new Point(8, 112));
 		lblTargetPiratesLabel.setName("lblTargetPiratesLabel");
 		lblTargetPiratesLabel.setSize(new jwinforms.Size(44, 16));
@@ -267,8 +265,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		// lblTargetPoliceLabel
 		//
 		lblTargetPoliceLabel.setAutoSize(true);
-		lblTargetPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetPoliceLabel.setFont(FontCollection.bold825);
 		lblTargetPoliceLabel.setLocation(new Point(8, 96));
 		lblTargetPoliceLabel.setName("lblTargetPoliceLabel");
 		lblTargetPoliceLabel.setSize(new jwinforms.Size(40, 16));
@@ -278,8 +275,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		// lblTargetResourceLabel
 		//
 		lblTargetResourceLabel.setAutoSize(true);
-		lblTargetResourceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetResourceLabel.setFont(FontCollection.bold825);
 		lblTargetResourceLabel.setLocation(new Point(8, 80));
 		lblTargetResourceLabel.setName("lblTargetResourceLabel");
 		lblTargetResourceLabel.setSize(new jwinforms.Size(58, 16));
@@ -289,8 +285,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		// lblTargetGovtLabel
 		//
 		lblTargetGovtLabel.setAutoSize(true);
-		lblTargetGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetGovtLabel.setFont(FontCollection.bold825);
 		lblTargetGovtLabel.setLocation(new Point(8, 64));
 		lblTargetGovtLabel.setName("lblTargetGovtLabel");
 		lblTargetGovtLabel.setSize(new jwinforms.Size(72, 16));
@@ -300,8 +295,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		// lblTargetTechLabel
 		//
 		lblTargetTechLabel.setAutoSize(true);
-		lblTargetTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetTechLabel.setFont(FontCollection.bold825);
 		lblTargetTechLabel.setLocation(new Point(8, 48));
 		lblTargetTechLabel.setName("lblTargetTechLabel");
 		lblTargetTechLabel.setSize(new jwinforms.Size(65, 16));
@@ -311,8 +305,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		// lblTargetSizeLabel
 		//
 		lblTargetSizeLabel.setAutoSize(true);
-		lblTargetSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetSizeLabel.setFont(FontCollection.bold825);
 		lblTargetSizeLabel.setLocation(new Point(8, 32));
 		lblTargetSizeLabel.setName("lblTargetSizeLabel");
 		lblTargetSizeLabel.setSize(new jwinforms.Size(31, 16));
@@ -330,8 +323,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		// lblTargetNameLabel
 		//
 		lblTargetNameLabel.setAutoSize(true);
-		lblTargetNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetNameLabel.setFont(FontCollection.bold825);
 		lblTargetNameLabel.setLocation(new Point(8, 16));
 		lblTargetNameLabel.setName("lblTargetNameLabel");
 		lblTargetNameLabel.setSize(new jwinforms.Size(39, 16));

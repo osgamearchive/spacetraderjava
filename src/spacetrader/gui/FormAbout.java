@@ -78,7 +78,7 @@ public class FormAbout extends jwinforms.WinformForm
 		// lblTitle
 		// 
 		this.lblTitle.setAutoSize(true);
-		this.lblTitle.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+		this.lblTitle.setFont(FontCollection.bold825);
 		this.lblTitle.setLocation(new Point(172, 8));
 		this.lblTitle.setName("lblTitle");
 		this.lblTitle.setSize(new Size(187, 13));

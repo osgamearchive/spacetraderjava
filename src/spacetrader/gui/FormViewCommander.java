@@ -139,8 +139,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblNameLabel
 		//
 		this.lblNameLabel.setAutoSize(true);
-		this.lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblNameLabel.setFont(FontCollection.bold825);
 		this.lblNameLabel.setLocation(new java.awt.Point(8, 8));
 		this.lblNameLabel.setName("lblNameLabel");
 		this.lblNameLabel.setSize(new jwinforms.Size(39, 16));
@@ -176,8 +175,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblTimeLabel
 		//
 		this.lblTimeLabel.setAutoSize(true);
-		this.lblTimeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblTimeLabel.setFont(FontCollection.bold825);
 		this.lblTimeLabel.setLocation(new java.awt.Point(8, 40));
 		this.lblTimeLabel.setName("lblTimeLabel");
 		this.lblTimeLabel.setSize(new jwinforms.Size(34, 16));
@@ -187,8 +185,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblCashLabel
 		//
 		this.lblCashLabel.setAutoSize(true);
-		this.lblCashLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblCashLabel.setFont(FontCollection.bold825);
 		this.lblCashLabel.setLocation(new java.awt.Point(8, 16));
 		this.lblCashLabel.setName("lblCashLabel");
 		this.lblCashLabel.setSize(new jwinforms.Size(35, 16));
@@ -198,8 +195,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblDebtLabel
 		//
 		this.lblDebtLabel.setAutoSize(true);
-		this.lblDebtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblDebtLabel.setFont(FontCollection.bold825);
 		this.lblDebtLabel.setLocation(new java.awt.Point(8, 32));
 		this.lblDebtLabel.setName("lblDebtLabel");
 		this.lblDebtLabel.setSize(new jwinforms.Size(32, 16));
@@ -209,8 +205,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblNetWorthLabel
 		//
 		this.lblNetWorthLabel.setAutoSize(true);
-		this.lblNetWorthLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblNetWorthLabel.setFont(FontCollection.bold825);
 		this.lblNetWorthLabel.setLocation(new java.awt.Point(8, 48));
 		this.lblNetWorthLabel.setName("lblNetWorthLabel");
 		this.lblNetWorthLabel.setSize(new jwinforms.Size(60, 16));
@@ -220,8 +215,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblDifficultyLabel
 		//
 		this.lblDifficultyLabel.setAutoSize(true);
-		this.lblDifficultyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblDifficultyLabel.setFont(FontCollection.bold825);
 		this.lblDifficultyLabel.setLocation(new java.awt.Point(8, 24));
 		this.lblDifficultyLabel.setName("lblDifficultyLabel");
 		this.lblDifficultyLabel.setSize(new jwinforms.Size(53, 16));
@@ -282,8 +276,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblEngineerLabel
 		//
 		this.lblEngineerLabel.setAutoSize(true);
-		this.lblEngineerLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblEngineerLabel.setFont(FontCollection.bold825);
 		this.lblEngineerLabel.setLocation(new java.awt.Point(104, 32));
 		this.lblEngineerLabel.setName("lblEngineerLabel");
 		this.lblEngineerLabel.setSize(new jwinforms.Size(55, 16));
@@ -293,8 +286,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblTraderLabel
 		//
 		this.lblTraderLabel.setAutoSize(true);
-		this.lblTraderLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblTraderLabel.setFont(FontCollection.bold825);
 		this.lblTraderLabel.setLocation(new java.awt.Point(8, 32));
 		this.lblTraderLabel.setName("lblTraderLabel");
 		this.lblTraderLabel.setSize(new jwinforms.Size(42, 16));
@@ -304,8 +296,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblFighterLabel
 		//
 		this.lblFighterLabel.setAutoSize(true);
-		this.lblFighterLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblFighterLabel.setFont(FontCollection.bold825);
 		this.lblFighterLabel.setLocation(new java.awt.Point(104, 16));
 		this.lblFighterLabel.setName("lblFighterLabel");
 		this.lblFighterLabel.setSize(new jwinforms.Size(44, 16));
@@ -315,8 +306,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblPilotLabel
 		//
 		this.lblPilotLabel.setAutoSize(true);
-		this.lblPilotLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblPilotLabel.setFont(FontCollection.bold825);
 		this.lblPilotLabel.setLocation(new java.awt.Point(8, 16));
 		this.lblPilotLabel.setName("lblPilotLabel");
 		this.lblPilotLabel.setSize(new jwinforms.Size(31, 16));
@@ -376,8 +366,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblPoliceLabel
 		//
 		this.lblPoliceLabel.setAutoSize(true);
-		this.lblPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblPoliceLabel.setFont(FontCollection.bold825);
 		this.lblPoliceLabel.setLocation(new java.awt.Point(8, 48));
 		this.lblPoliceLabel.setName("lblPoliceLabel");
 		this.lblPoliceLabel.setSize(new jwinforms.Size(81, 16));
@@ -387,8 +376,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblReputationLabel
 		//
 		this.lblReputationLabel.setAutoSize(true);
-		this.lblReputationLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblReputationLabel.setFont(FontCollection.bold825);
 		this.lblReputationLabel.setLocation(new java.awt.Point(8, 32));
 		this.lblReputationLabel.setName("lblReputationLabel");
 		this.lblReputationLabel.setSize(new jwinforms.Size(65, 16));
@@ -398,8 +386,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblKillsLabel
 		//
 		this.lblKillsLabel.setAutoSize(true);
-		this.lblKillsLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblKillsLabel.setFont(FontCollection.bold825);
 		this.lblKillsLabel.setLocation(new java.awt.Point(8, 16));
 		this.lblKillsLabel.setName("lblKillsLabel");
 		this.lblKillsLabel.setSize(new jwinforms.Size(30, 16));
@@ -433,8 +420,7 @@ public class FormViewCommander extends SpaceTraderForm
 		// lblBountyLabel
 		//
 		this.lblBountyLabel.setAutoSize(true);
-		this.lblBountyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		this.lblBountyLabel.setFont(FontCollection.bold825);
 		this.lblBountyLabel.setLocation(new java.awt.Point(8, 64));
 		this.lblBountyLabel.setName("lblBountyLabel");
 		this.lblBountyLabel.setSize(new jwinforms.Size(84, 16));

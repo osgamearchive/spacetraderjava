@@ -195,8 +195,7 @@ public class SystemBox extends jwinforms.GroupBox
 		// lblSystemPiratesLabel
 		//
 		lblSystemPiratesLabel.setAutoSize(true);
-		lblSystemPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemPiratesLabel.setFont(FontCollection.bold825);
 		lblSystemPiratesLabel.setLocation(new Point(8, 112));
 		lblSystemPiratesLabel.setName("lblSystemPiratesLabel");
 		lblSystemPiratesLabel.setSize(new jwinforms.Size(44, 16));
@@ -206,8 +205,7 @@ public class SystemBox extends jwinforms.GroupBox
 		// lblSystemPoliceLabel
 		//
 		lblSystemPoliceLabel.setAutoSize(true);
-		lblSystemPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemPoliceLabel.setFont(FontCollection.bold825);
 		lblSystemPoliceLabel.setLocation(new Point(8, 96));
 		lblSystemPoliceLabel.setName("lblSystemPoliceLabel");
 		lblSystemPoliceLabel.setSize(new jwinforms.Size(40, 16));
@@ -217,8 +215,7 @@ public class SystemBox extends jwinforms.GroupBox
 		// lblSystemResourseLabel
 		//
 		lblSystemResourseLabel.setAutoSize(true);
-		lblSystemResourseLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemResourseLabel.setFont(FontCollection.bold825);
 		lblSystemResourseLabel.setLocation(new Point(8, 80));
 		lblSystemResourseLabel.setName("lblSystemResourseLabel");
 		lblSystemResourseLabel.setSize(new jwinforms.Size(58, 16));
@@ -228,8 +225,7 @@ public class SystemBox extends jwinforms.GroupBox
 		// lblSystemGovtLabel
 		//
 		lblSystemGovtLabel.setAutoSize(true);
-		lblSystemGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemGovtLabel.setFont(FontCollection.bold825);
 		lblSystemGovtLabel.setLocation(new Point(8, 64));
 		lblSystemGovtLabel.setName("lblSystemGovtLabel");
 		lblSystemGovtLabel.setSize(new jwinforms.Size(72, 16));
@@ -239,8 +235,7 @@ public class SystemBox extends jwinforms.GroupBox
 		// lblSystemTechLabel
 		//
 		lblSystemTechLabel.setAutoSize(true);
-		lblSystemTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemTechLabel.setFont(FontCollection.bold825);
 		lblSystemTechLabel.setLocation(new Point(8, 48));
 		lblSystemTechLabel.setName("lblSystemTechLabel");
 		lblSystemTechLabel.setSize(new jwinforms.Size(65, 16));
@@ -250,8 +245,7 @@ public class SystemBox extends jwinforms.GroupBox
 		// lblSystemSizeLabel
 		//
 		lblSystemSizeLabel.setAutoSize(true);
-		lblSystemSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemSizeLabel.setFont(FontCollection.bold825);
 		lblSystemSizeLabel.setLocation(new Point(8, 32));
 		lblSystemSizeLabel.setName("lblSystemSizeLabel");
 		lblSystemSizeLabel.setSize(new jwinforms.Size(31, 16));
@@ -269,8 +263,7 @@ public class SystemBox extends jwinforms.GroupBox
 		// lblSystemNameLabel
 		//
 		lblSystemNameLabel.setAutoSize(true);
-		lblSystemNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemNameLabel.setFont(FontCollection.bold825);
 		lblSystemNameLabel.setLocation(new Point(8, 16));
 		lblSystemNameLabel.setName("lblSystemNameLabel");
 		lblSystemNameLabel.setSize(new jwinforms.Size(39, 16));

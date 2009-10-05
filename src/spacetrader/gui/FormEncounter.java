@@ -304,8 +304,7 @@ public class FormEncounter extends SpaceTraderForm
 		// lblOpponentLabel
 		//
 		lblOpponentLabel.setAutoSize(true);
-		lblOpponentLabel.setFont(new Font("Microsoft Sans Serif", 8.25F,
-				FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+		lblOpponentLabel.setFont(FontCollection.bold825);
 		lblOpponentLabel.setLocation(new java.awt.Point(141, 8));
 		lblOpponentLabel.setName("lblOpponentLabel");
 		lblOpponentLabel.setSize(new jwinforms.Size(59, 16));
@@ -315,8 +314,7 @@ public class FormEncounter extends SpaceTraderForm
 		// lblYouLabel
 		//
 		lblYouLabel.setAutoSize(true);
-		lblYouLabel.setFont(new Font("Microsoft Sans Serif", 8.25F,
-				FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+		lblYouLabel.setFont(FontCollection.bold825);
 		lblYouLabel.setLocation(new java.awt.Point(45, 8));
 		lblYouLabel.setName("lblYouLabel");
 		lblYouLabel.setSize(new jwinforms.Size(28, 16));

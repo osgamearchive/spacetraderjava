@@ -149,8 +149,7 @@ public class FormCosts extends SpaceTraderForm
 		// lblTotalLabel
 		//
 		this.lblTotalLabel.setAutoSize(true);
-		this.lblTotalLabel.setFont(new Font("Microsoft Sans Serif", 8.25F,
-				FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+		this.lblTotalLabel.setFont(FontCollection.bold825);
 		this.lblTotalLabel.setLocation(new java.awt.Point(8, 79));
 		this.lblTotalLabel.setName("lblTotalLabel");
 		this.lblTotalLabel.setSize(new jwinforms.Size(34, 13));
@@ -160,8 +159,7 @@ public class FormCosts extends SpaceTraderForm
 		// lblTaxLabel
 		//
 		this.lblTaxLabel.setAutoSize(true);
-		this.lblTaxLabel.setFont(new Font("Microsoft Sans Serif", 8.25F,
-				FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+		this.lblTaxLabel.setFont(FontCollection.bold825);
 		this.lblTaxLabel.setLocation(new java.awt.Point(8, 56));
 		this.lblTaxLabel.setName("lblTaxLabel");
 		this.lblTaxLabel.setSize(new jwinforms.Size(84, 13));
@@ -171,8 +169,7 @@ public class FormCosts extends SpaceTraderForm
 		// lblIntLabel
 		//
 		this.lblIntLabel.setAutoSize(true);
-		this.lblIntLabel.setFont(new Font("Microsoft Sans Serif", 8.25F,
-				FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+		this.lblIntLabel.setFont(FontCollection.bold825);
 		this.lblIntLabel.setLocation(new java.awt.Point(8, 40));
 		this.lblIntLabel.setName("lblIntLabel");
 		this.lblIntLabel.setSize(new jwinforms.Size(47, 13));
@@ -182,8 +179,7 @@ public class FormCosts extends SpaceTraderForm
 		// lblMercLabel
 		//
 		this.lblMercLabel.setAutoSize(true);
-		this.lblMercLabel.setFont(new Font("Microsoft Sans Serif", 8.25F,
-				FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+		this.lblMercLabel.setFont(FontCollection.bold825);
 		this.lblMercLabel.setLocation(new java.awt.Point(8, 8));
 		this.lblMercLabel.setName("lblMercLabel");
 		this.lblMercLabel.setSize(new jwinforms.Size(72, 13));
@@ -193,8 +189,7 @@ public class FormCosts extends SpaceTraderForm
 		// lblInsLabel
 		//
 		this.lblInsLabel.setAutoSize(true);
-		this.lblInsLabel.setFont(new Font("Microsoft Sans Serif", 8.25F,
-				FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
+		this.lblInsLabel.setFont(FontCollection.bold825);
 		this.lblInsLabel.setLocation(new java.awt.Point(8, 24));
 		this.lblInsLabel.setName("lblInsLabel");
 		this.lblInsLabel.setSize(new jwinforms.Size(59, 13));

@@ -835,7 +835,7 @@ btnBuyInfo_Click(sender, e);}});
 			// lblGadgetLabel
 			//
 			lblGadgetLabel.setAutoSize(true);
-			lblGadgetLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+			lblGadgetLabel.setFont(FontCollection.bold825);
 			lblGadgetLabel.setLocation(new java.awt.Point(8, 208));
 			lblGadgetLabel.setName("lblGadgetLabel");
 			lblGadgetLabel.setSize(new jwinforms.Size(76, 13));
@@ -845,7 +845,7 @@ btnBuyInfo_Click(sender, e);}});
 			// lblCrewLabel
 			//
 			lblCrewLabel.setAutoSize(true);
-			lblCrewLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+			lblCrewLabel.setFont(FontCollection.bold825);
 			lblCrewLabel.setLocation(new java.awt.Point(8, 224));
 			lblCrewLabel.setName("lblCrewLabel");
 			lblCrewLabel.setSize(new jwinforms.Size(84, 13));
@@ -855,7 +855,7 @@ btnBuyInfo_Click(sender, e);}});
 			// lblShieldLabel
 			//
 			lblShieldLabel.setAutoSize(true);
-			lblShieldLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+			lblShieldLabel.setFont(FontCollection.bold825);
 			lblShieldLabel.setLocation(new java.awt.Point(8, 192));
 			lblShieldLabel.setName("lblShieldLabel");
 			lblShieldLabel.setSize(new jwinforms.Size(70, 13));
@@ -865,7 +865,7 @@ btnBuyInfo_Click(sender, e);}});
 			// lblWeaponLabel
 			//
 			lblWeaponLabel.setAutoSize(true);
-			lblWeaponLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+			lblWeaponLabel.setFont(FontCollection.bold825);
 			lblWeaponLabel.setLocation(new java.awt.Point(8, 176));
 			lblWeaponLabel.setName("lblWeaponLabel");
 			lblWeaponLabel.setSize(new jwinforms.Size(81, 13));
@@ -875,7 +875,7 @@ btnBuyInfo_Click(sender, e);}});
 			// lblHullLabel
 			//
 			lblHullLabel.setAutoSize(true);
-			lblHullLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+			lblHullLabel.setFont(FontCollection.bold825);
 			lblHullLabel.setLocation(new java.awt.Point(8, 160));
 			lblHullLabel.setName("lblHullLabel");
 			lblHullLabel.setSize(new jwinforms.Size(73, 13));
@@ -885,7 +885,7 @@ btnBuyInfo_Click(sender, e);}});
 			// lblRangeLabel
 			//
 			lblRangeLabel.setAutoSize(true);
-			lblRangeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+			lblRangeLabel.setFont(FontCollection.bold825);
 			lblRangeLabel.setLocation(new java.awt.Point(8, 144));
 			lblRangeLabel.setName("lblRangeLabel");
 			lblRangeLabel.setSize(new jwinforms.Size(42, 13));
@@ -895,7 +895,7 @@ btnBuyInfo_Click(sender, e);}});
 			// lblBaysLabel
 			//
 			lblBaysLabel.setAutoSize(true);
-			lblBaysLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+			lblBaysLabel.setFont(FontCollection.bold825);
 			lblBaysLabel.setLocation(new java.awt.Point(8, 128));
 			lblBaysLabel.setName("lblBaysLabel");
 			lblBaysLabel.setSize(new jwinforms.Size(69, 13));
@@ -905,7 +905,7 @@ btnBuyInfo_Click(sender, e);}});
 			// lblNameLabel
 			//
 			lblNameLabel.setAutoSize(true);
-			lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+			lblNameLabel.setFont(FontCollection.bold825);
 			lblNameLabel.setLocation(new java.awt.Point(8, 96));
 			lblNameLabel.setName("lblNameLabel");
 			lblNameLabel.setSize(new jwinforms.Size(39, 13));
@@ -915,7 +915,7 @@ btnBuyInfo_Click(sender, e);}});
 			// lblSizeLabel
 			//
 			lblSizeLabel.setAutoSize(true);
-			lblSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+			lblSizeLabel.setFont(FontCollection.bold825);
 			lblSizeLabel.setLocation(new java.awt.Point(8, 112));
 			lblSizeLabel.setName("lblSizeLabel");
 			lblSizeLabel.setSize(new jwinforms.Size(31, 13));

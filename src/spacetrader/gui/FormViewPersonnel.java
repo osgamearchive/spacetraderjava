@@ -219,7 +219,7 @@ public class FormViewPersonnel extends SpaceTraderForm
 		// 
 		// lblName
 		// 
-		this.lblName.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+		this.lblName.setFont(FontCollection.bold825);
 		this.lblName.setLocation(new java.awt.Point(12, 18));
 		this.lblName.setName("lblName");
 		this.lblName.setSize(new jwinforms.Size(72, 13));
