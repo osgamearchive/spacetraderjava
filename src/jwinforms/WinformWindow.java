@@ -31,10 +31,16 @@ public class WinformWindow extends WinformPane
 	}
 
 	private EventHandler<Object, CancelEventArgs> onClosing;
+	private EventHandler<Object, EventArgs> onClosed;
 
 	public void setClosing(EventHandler<Object, CancelEventArgs> closing)
 	{
 		onClosing = closing;
+	}
+
+	public void setClosed(EventHandler<Object, EventArgs> closed)
+	{
+		onClosed = closed;
 	}
 
 	private class WindowListener extends WindowAdapter
@@ -47,6 +53,14 @@ public class WinformWindow extends WinformPane
 				onClosing.handle(WinformWindow.this, args);
 			if (!args.Cancel)
 				frame.dispose();
+		}
+
+		@Override
+		public void windowClosed(WindowEvent e)
+		{
+			if (onClosed != null)
+				onClosed.handle(WinformWindow.this, new EventArgs());
+			super.windowClosed(e);
 		}
 	}
 
@@ -106,7 +120,7 @@ public class WinformWindow extends WinformPane
 
 	public void setStartPosition(FormStartPosition startPosition)
 	{
-		//TODO implmnt method.
+	//TODO implmnt method.
 	}
 
 	public void setMenu(MainMenu menu)
