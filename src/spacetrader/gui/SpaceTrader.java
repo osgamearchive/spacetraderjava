@@ -532,6 +532,14 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				SpaceTrader_Closing(sender, e);
 			}
 		});
+		this.setClosed(new jwinforms.EventHandler<Object, EventArgs>()
+		{
+			@Override
+			public void handle(Object sender, EventArgs e)
+			{
+				SpaceTrader_Closed(sender, e);
+			}
+		});
 
 		this.setLoad(new EventHandler<Object, EventArgs>()
 		{
@@ -627,9 +635,13 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				SetRegistrySetting("X", Left.toString());
 				SetRegistrySetting("Y", Top.toString());
 			}
-			FormsOwnerTree.pop(this);
 		} else
 			e.Cancel = true;
+	}
+
+	private void SpaceTrader_Closed(Object sender, jwinforms.EventArgs e)
+	{
+		FormsOwnerTree.pop(this);
 	}
 
 	private void SpaceTrader_Load(Object sender, jwinforms.EventArgs e)

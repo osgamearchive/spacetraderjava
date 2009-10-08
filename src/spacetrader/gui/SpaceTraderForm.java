@@ -49,7 +49,7 @@ abstract class FormsOwnerTree
 		stack.push(e);
 	}
 
-	public static WinformPane top()
+	static WinformPane top()
 	{
 		return stack.empty() ? null : stack.peek();
 	}
