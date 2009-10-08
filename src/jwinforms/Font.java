@@ -1,8 +1,10 @@
 package jwinforms;
 
+import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
-import java.util.Set;
 
 public class Font extends java.awt.Font
 {
@@ -34,27 +36,44 @@ public class Font extends java.awt.Font
 	public final String Name;
 
 	public static final String WINDOWS_DEFAULT_FONT_FAMILY;
+	public static final String WINDOWS_DEFAULT_FONT_FAMILY_BOLD;
 
 	static
 	{
-		String[] preferedFonts = new String[] { "Microsoft Sans Serif", // What Windows says.
-				"Tahoma", // Basically the same. Mostly on Windows
-				"Geneva", // Very similar font, can be found on the Macintosh
-				"Kalimati" // Similar, should be present in common Linuxes.
-		};
+		String preferedFonts = "Microsoft Sans Serif";
 
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		HashSet<String> names = new HashSet<String>();
 		for (String family : ge.getAvailableFontFamilyNames())
 			names.add(family);
-		WINDOWS_DEFAULT_FONT_FAMILY = findInSet(names, preferedFonts);
+
+		if (names.contains(preferedFonts))
+		{
+			WINDOWS_DEFAULT_FONT_FAMILY = preferedFonts;
+			WINDOWS_DEFAULT_FONT_FAMILY_BOLD = preferedFonts;
+		} else
+		{
+			try
+			{
+				java.awt.Font def = makeAndRegisterFont("jwinforms/tahoma.ttf");
+				WINDOWS_DEFAULT_FONT_FAMILY = def.getFamily();
+				java.awt.Font bold = makeAndRegisterFont("jwinforms/tahomabd.ttf");
+				WINDOWS_DEFAULT_FONT_FAMILY_BOLD = bold.getFamily();
+			} catch (Exception e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
 	}
 
-	private static String findInSet(Set<String> set, String[] targets)
+	private static java.awt.Font makeAndRegisterFont(String name) throws FontFormatException, IOException
 	{
-		for (String string : targets)
-			if (set.contains(string))
-				return string;
-		return null;
+		InputStream stream = Font.class.getClassLoader().getResourceAsStream(name);
+		if (stream == null)
+			throw new IOException("Resource not found: " + name);
+
+		java.awt.Font font = java.awt.Font.createFont(Font.TRUETYPE_FONT, stream);
+		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
+		return font;
 	}
 }

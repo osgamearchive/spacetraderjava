@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 
 public class WinformControl implements ISupportInitialize
 {
-	private static final Font DEFAULT_FONT = new Font(jwinforms.Font.WINDOWS_DEFAULT_FONT_FAMILY, Font.PLAIN, 11);
+	public static final Font DEFAULT_FONT = new Font(jwinforms.Font.WINDOWS_DEFAULT_FONT_FAMILY, Font.PLAIN, 11);
 
 	protected final Component swingVersion;
 

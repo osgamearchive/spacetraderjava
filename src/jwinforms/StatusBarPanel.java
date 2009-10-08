@@ -17,6 +17,7 @@ public class StatusBarPanel implements ISupportInitialize
 	public StatusBarPanel(StatusBarPanelAutoSize autoSize)
 	{
 		AutoSize = autoSize;
+		jpanel.setFont(WinformControl.DEFAULT_FONT);
 	}
 
 	public void setText(String text)
