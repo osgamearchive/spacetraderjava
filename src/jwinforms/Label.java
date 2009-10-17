@@ -1,5 +1,7 @@
 package jwinforms;
 
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -40,6 +42,13 @@ public class Label extends WinformControl
 		}
 
 		return text;
+	}
+
+	@Override
+	public void setBackColor(Color backColor)
+	{
+		((JLabel)swingVersion).setOpaque(backColor != null);
+		super.setBackColor(backColor);
 	}
 
 	public void setImage(Image image)

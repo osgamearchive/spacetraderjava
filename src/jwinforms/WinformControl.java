@@ -5,7 +5,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.JComponent;
 
 public class WinformControl implements ISupportInitialize
 {
@@ -52,6 +56,7 @@ public class WinformControl implements ISupportInitialize
 	{
 		return swingVersion;
 	}
+
 	private Color BackColor;
 
 	public Color getBackColor()
@@ -59,11 +64,6 @@ public class WinformControl implements ISupportInitialize
 		return BackColor;
 	}
 
-	/**
-	 * @deprecated not really, just doesn't work.
-	 * @param backColor
-	 */
-	@Deprecated
 	public void setBackColor(Color backColor)
 	{
 		BackColor = backColor;
@@ -116,9 +116,14 @@ public class WinformControl implements ISupportInitialize
 	// /TODO impl.
 	}
 
-	@Deprecated
 	public void setBorderStyle(BorderStyle borderStyle)
-	{}
+	{
+		if (!(swingVersion instanceof JComponent))
+			throw new UnsupportedOperationException("Can't set border for this control: I don't know how. Control is "
+					+ getClass());
+
+		((JComponent)swingVersion).setBorder(borderStyle.getBorder());
+	}
 
 	public void setClick(EventHandler<Object, EventArgs> click)
 	{
@@ -130,8 +135,13 @@ public class WinformControl implements ISupportInitialize
 		swingVersion.setEnabled(enabled);
 	}
 
+	/**
+	 * Occurs when the control is entered (According to MSDN).
+	 */
 	public void setEnter(EventHandler<Object, EventArgs> enter)
-	{}
+	{
+	// TODO implement: control.setEnter()
+	}
 
 	public void setFont(jwinforms.Font font)
 	{
@@ -140,7 +150,9 @@ public class WinformControl implements ISupportInitialize
 
 	public void setForeColor(Color foreColor)
 	{
+		// todo  Under winforms, this also appears to change the border color.
 		ForeColor = foreColor;
+		swingVersion.setForeground(foreColor);
 	}
 
 	public void setHeight(int height)
@@ -162,11 +174,42 @@ public class WinformControl implements ISupportInitialize
 		swingVersion.setLocation(location);
 	}
 
+	private EventHandler<Object, EventArgs> mouseEnter, mouseLeave;
+
 	public void setMouseEnter(EventHandler<Object, EventArgs> mouseEnter)
-	{}
+	{
+		this.mouseEnter = mouseEnter;
+		CreateMouseListener();
+	}
 
 	public void setMouseLeave(EventHandler<Object, EventArgs> mouseLeave)
-	{}
+	{
+		this.mouseLeave = mouseLeave;
+		CreateMouseListener();
+	}
+
+	private MouseListener mouseListener;
+
+	private void CreateMouseListener()
+	{
+		if (mouseListener != null)
+			return;
+		mouseListener = new MouseAdapter()
+		{
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+				mouseEnter.handle(WinformControl.this, new EventArgs());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+				mouseLeave.handle(WinformControl.this, new EventArgs());
+			}
+		};
+		this.asSwingObject().addMouseListener(mouseListener);
+	}
 
 	/**
 	 * I think this is nothing.
