@@ -84,7 +84,7 @@ public class ShortRangeChart extends jwinforms.GroupBox
 		if (e.Button == MouseButtons.Left && game != null)
 		{
 			StarSystem[] universe = game.Universe();
-			StarSystem curSys = commander.CurrentSystem();
+			StarSystem curSys = commander.getCurrentSystem();
 
 			boolean clickedSystem = false;
 			int centerX = picShortRangeChart.getWidth() / 2;
@@ -135,7 +135,7 @@ public class ShortRangeChart extends jwinforms.GroupBox
 			StarSystem[] universe = game.Universe();
 			int[] wormholes = game.Wormholes();
 			StarSystem trackSys = game.TrackedSystem();
-			StarSystem curSys = commander.CurrentSystem();
+			StarSystem curSys = commander.getCurrentSystem();
 			int fuel = commander.getShip().getFuel();
 
 			int centerX = picShortRangeChart.getWidth() / 2;

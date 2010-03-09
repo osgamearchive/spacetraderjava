@@ -374,7 +374,7 @@ public class FormViewPersonnel extends SpaceTraderForm
 
 	private void UpdateForHire()
 	{
-		CrewMember[] mercs = game.Commander().CurrentSystem().MercenariesForHire();
+		CrewMember[] mercs = game.Commander().getCurrentSystem().MercenariesForHire();
 
 		lstForHire.Items.clear();
 		for (int i = 0; i < mercs.length; i++)

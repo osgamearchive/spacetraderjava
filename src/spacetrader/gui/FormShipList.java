@@ -1016,7 +1016,7 @@ btnBuyInfo_Click(sender, e);}});
 			{
 				btnBuy[i].setVisible(false);
 
-				if (Consts.ShipSpecs[i].MinimumTechLevel().CastToInt() > game.Commander().CurrentSystem().TechLevel().CastToInt())
+				if (Consts.ShipSpecs[i].MinimumTechLevel().CastToInt() > game.Commander().getCurrentSystem().TechLevel().CastToInt())
 					lblPrice[i].setText(Strings.CargoBuyNA);
 				else if (Consts.ShipSpecs[i].Type() == game.Commander().getShip().Type())
 					lblPrice[i].setText(Strings.ShipBuyGotOne);

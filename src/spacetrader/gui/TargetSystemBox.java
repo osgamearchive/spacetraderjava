@@ -375,7 +375,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 		} else
 		{
 			StarSystem system = game.WarpSystem();
-			int distance = Functions.Distance(commander.CurrentSystem(), system);
+			int distance = Functions.Distance(commander.getCurrentSystem(), system);
 
 			lblTargetName.setText(system.Name());
 			lblTargetSize.setText(Strings.Sizes[system.Size().CastToInt()]);
@@ -386,7 +386,7 @@ public class TargetSystemBox extends jwinforms.GroupBox
 			lblTargetPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
 			lblTargetPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
 			lblTargetDistance.setText("" + distance);
-			lblTargetOutOfRange.setVisible(!system.DestOk() && system != commander.CurrentSystem());
+			lblTargetOutOfRange.setVisible(!system.DestOk() && system != commander.getCurrentSystem());
 			btnWarp.setVisible(system.DestOk());
 			btnTrack.setVisible(lblTargetOutOfRange.getVisible() && system != game.TrackedSystem());
 		}

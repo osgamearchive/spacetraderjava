@@ -702,9 +702,9 @@ public class FormMonster extends SpaceTraderForm
 
 	private String CurrentSystemDisplay(CrewMember merc)
 	{
-		return (merc.CurrentSystem() == null ? Strings.Unknown
+		return (merc.getCurrentSystem() == null ? Strings.Unknown
 				: (game.Commander().getShip().HasCrew(merc.Id()) ? Functions.StringVars(Strings.MercOnBoard, merc
-						.CurrentSystem().Name()) : merc.CurrentSystem().Name()));
+						.getCurrentSystem().Name()) : merc.getCurrentSystem().Name()));
 	}
 
 	private void PopulateIdArrays()
@@ -824,7 +824,7 @@ public class FormMonster extends SpaceTraderForm
 		for (int i = 0; i < mercIds.length; i++)
 		{
 			CrewMember merc = game.Mercenaries()[mercIds[i]];
-			boolean link = merc.CurrentSystem() != null && !game.Commander().getShip().HasCrew(merc.Id());
+			boolean link = merc.getCurrentSystem() != null && !game.Commander().getShip().HasCrew(merc.Id());
 
 			lblMercIds.setText(lblMercIds.getText() + ((merc.Id().CastToInt()) + Strings.newline));
 			lblMercNames.setText(lblMercNames.getText() + (merc.Name() + Strings.newline));
@@ -838,13 +838,13 @@ public class FormMonster extends SpaceTraderForm
 				int start = lblMercSystems.getText().length();
 				lblMercSystems.setText(lblMercSystems.getText() + (CurrentSystemDisplay(merc) + Strings.newline));
 				if (link)
-					lblMercSystems.Links.add(start, merc.CurrentSystem().Name().length(), merc.CurrentSystem().Name());
+					lblMercSystems.Links.add(start, merc.getCurrentSystem().Name().length(), merc.getCurrentSystem().Name());
 			} else
 			{
 				int start = lblMercSystems2.getText().length();
 				lblMercSystems2.setText(lblMercSystems2.getText() + (CurrentSystemDisplay(merc) + Strings.newline));
 				if (link)
-					lblMercSystems2.Links.add(start, merc.CurrentSystem().Name().length(), merc.CurrentSystem().Name());
+					lblMercSystems2.Links.add(start, merc.getCurrentSystem().Name().length(), merc.getCurrentSystem().Name());
 			}
 		}
 

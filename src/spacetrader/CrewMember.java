@@ -81,7 +81,7 @@ public class CrewMember extends STSerializableObject
 			int curTrader = Game.CurrentGame().Commander().getShip().Trader();
 			Skills()[skill] += amount;
 			if (Game.CurrentGame().Commander().getShip().Trader() != curTrader)
-				Game.CurrentGame().RecalculateBuyPrices(Game.CurrentGame().Commander().CurrentSystem());
+				Game.CurrentGame().RecalculateBuyPrices(Game.CurrentGame().Commander().getCurrentSystem());
 		}
 	}
 
@@ -167,12 +167,12 @@ public class CrewMember extends STSerializableObject
 
 	// #region Properties
 
-	public StarSystem CurrentSystem()
+	public StarSystem getCurrentSystem()
 	{
 		return _curSystemId == StarSystemId.NA ? null : Game.CurrentGame().Universe()[_curSystemId.CastToInt()];
 	}
 
-	public void CurrentSystem(StarSystem value)
+	public void setCurrentSystem(StarSystem value)
 	{
 		_curSystemId = value.Id();
 	}

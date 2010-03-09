@@ -167,12 +167,12 @@ public class ShipyardBox extends jwinforms.GroupBox
 			btnEquip.setVisible(false);
 		} else
 		{
-			boolean noTech = (commander.CurrentSystem().TechLevel().CastToInt() < Consts.ShipSpecs[ShipType.Flea
+			boolean noTech = (commander.getCurrentSystem().TechLevel().CastToInt() < Consts.ShipSpecs[ShipType.Flea
 					.CastToInt()].MinimumTechLevel().CastToInt());
 
 			lblShipsForSale.setText(noTech ? Strings.ShipyardShipNoSale : Strings.ShipyardShipForSale);
 			btnBuyShip.setVisible(true);
-			btnDesign.setVisible(commander.CurrentSystem().Shipyard() != null);
+			btnDesign.setVisible(commander.getCurrentSystem().Shipyard() != null);
 
 			lblEquipForSale.setText(noTech ? Strings.ShipyardEquipNoSale : Strings.ShipyardEquipForSale);
 			btnEquip.setVisible(true);

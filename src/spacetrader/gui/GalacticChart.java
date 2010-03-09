@@ -204,7 +204,7 @@ public class GalacticChart extends jwinforms.GroupBox
 			StarSystem[] universe = game.Universe();
 			int[] wormholes = game.Wormholes();
 			StarSystem targetSys = game.SelectedSystem();
-			StarSystem curSys = commander.CurrentSystem();
+			StarSystem curSys = commander.getCurrentSystem();
 			int fuel = commander.getShip().getFuel();
 
 			if (fuel > 0)
@@ -248,7 +248,7 @@ public class GalacticChart extends jwinforms.GroupBox
 	{
 		if (game.WarpSystem() == null)
 			FormAlert.Alert(AlertType.ChartJumpNoSystemSelected);
-		else if (game.WarpSystem() == commander.CurrentSystem())
+		else if (game.WarpSystem() == commander.getCurrentSystem())
 			FormAlert.Alert(AlertType.ChartJumpCurrent);
 		else if (FormAlert.Alert(AlertType.ChartJump, game.WarpSystem().Name()) == DialogResult.Yes)
 		{

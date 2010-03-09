@@ -9,9 +9,11 @@ import spacetrader.gui.FormAlert;
 import spacetrader.gui.FormMonster;
 import spacetrader.gui.FormTest;
 import spacetrader.gui.SomeStringsForSwitch;
+import spacetrader.util.CheatCode;
 import spacetrader.util.Util;
 
 // TODO removes refs to gui...
+@CheatCode
 public class GameCheats
 {
 	private final Game game;
@@ -143,7 +145,7 @@ public class GameCheats
 					int skill = ship.Trader();
 					ship.Crew()[num1] = game.Mercenaries()[num2];
 					if (ship.Trader() != skill)
-						game.RecalculateBuyPrices(game.Commander().CurrentSystem());
+						game.RecalculateBuyPrices(game.Commander().getCurrentSystem());
 				}
 				break;
 			case RapSheet:

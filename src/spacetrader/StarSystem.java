@@ -315,13 +315,13 @@ public class StarSystem extends STSerializableObject
 	public boolean DestOk()
 	{
 		Commander comm = Game.CurrentGame().Commander();
-		return this != comm.CurrentSystem()
-				&& (Distance() <= comm.getShip().getFuel() || Functions.WormholeExists(comm.CurrentSystem(), this));
+		return this != comm.getCurrentSystem()
+				&& (Distance() <= comm.getShip().getFuel() || Functions.WormholeExists(comm.getCurrentSystem(), this));
 	}
 
 	public int Distance()
 	{
-		return Functions.Distance(this, Game.CurrentGame().Commander().CurrentSystem());
+		return Functions.Distance(this, Game.CurrentGame().Commander().getCurrentSystem());
 	}
 
 	public StarSystemId Id()
@@ -337,7 +337,7 @@ public class StarSystem extends STSerializableObject
 
 		for (int i = 1; i < mercs.length; i++)
 		{
-			if (mercs[i].CurrentSystem() == cmdr.CurrentSystem() && !cmdr.getShip().HasCrew(mercs[i].Id()))
+			if (mercs[i].getCurrentSystem() == cmdr.getCurrentSystem() && !cmdr.getShip().HasCrew(mercs[i].Id()))
 				forHire.add(mercs[i]);
 		}
 

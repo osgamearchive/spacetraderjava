@@ -1787,7 +1787,7 @@ public class CargoBox extends jwinforms.GroupBox
 	{
 		int i;
 
-		if (game == null || game.Commander().CurrentSystem() == null)
+		if (game == null || game.Commander().getCurrentSystem() == null)
 		{
 			for (i = 0; i < lblSellPrice.length; i++)
 			{
@@ -1818,7 +1818,7 @@ public class CargoBox extends jwinforms.GroupBox
 			btnSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
 			btnSellAll[i].setVisible(true);
 			lblBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : Strings.CargoBuyNA);
-			btnBuyQty[i].setText("" + cmdr.CurrentSystem().TradeItems()[i]);
+			btnBuyQty[i].setText("" + cmdr.getCurrentSystem().TradeItems()[i]);
 			btnBuyQty[i].setVisible(buy[i] > 0);
 			btnBuyMax[i].setVisible(buy[i] > 0);
 
@@ -1837,7 +1837,7 @@ public class CargoBox extends jwinforms.GroupBox
 				int diff = price - buy[i];
 				lblTargetDiff[i].setText((diff > 0 ? "+" : "") + Functions.FormatMoney(diff));
 				lblTargetPct[i].setText((diff > 0 ? "+" : "") + Functions.FormatNumber(100 * diff / buy[i]) + "%");
-				lblBuyPrice[i].setFont((diff > 0 && cmdr.CurrentSystem().TradeItems()[i] > 0) ? BOLD_FONT : lblBuy
+				lblBuyPrice[i].setFont((diff > 0 && cmdr.getCurrentSystem().TradeItems()[i] > 0) ? BOLD_FONT : lblBuy
 						.getFont());
 			} else
 			{

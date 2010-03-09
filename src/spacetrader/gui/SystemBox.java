@@ -276,7 +276,7 @@ public class SystemBox extends jwinforms.GroupBox
 
 	public void Update()
 	{
-		if (game == null || commander.CurrentSystem() == null)
+		if (game == null || commander.getCurrentSystem() == null)
 		{
 			lblSystemName.setText("");
 			lblSystemSize.setText("");
@@ -292,7 +292,7 @@ public class SystemBox extends jwinforms.GroupBox
 			btnSpecial.setVisible(false);
 		} else
 		{
-			StarSystem system = commander.CurrentSystem();
+			StarSystem system = commander.getCurrentSystem();
 			CrewMember[] mercs = system.MercenariesForHire();
 
 			lblSystemName.setText(system.Name());
@@ -352,7 +352,7 @@ public class SystemBox extends jwinforms.GroupBox
 
 	private void btnSpecial_Click(Object sender, jwinforms.EventArgs e)
 	{
-		SpecialEvent specEvent = commander.CurrentSystem().SpecialEvent();
+		SpecialEvent specEvent = commander.getCurrentSystem().SpecialEvent();
 		String btn1, btn2;
 		DialogResult res1, res2;
 

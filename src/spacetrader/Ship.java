@@ -214,7 +214,7 @@ public class Ship extends ShipSpec
 		}
 
 		if (Trader() != skill)
-			Game.CurrentGame().RecalculateBuyPrices(Game.CurrentGame().Commander().CurrentSystem());
+			Game.CurrentGame().RecalculateBuyPrices(Game.CurrentGame().Commander().getCurrentSystem());
 
 		if (merc != null && !Util.ArrayContains(Consts.SpecialCrewMemberIds, (merc.Id())))
 		{
@@ -225,7 +225,7 @@ public class Ship extends ShipSpec
 			while (merc.getCurrentSystemId() == StarSystemId.NA)
 			{
 				StarSystem system = universe[Functions.GetRandom(universe.length)];
-				if (Functions.Distance(system, Game.CurrentGame().Commander().CurrentSystem()) < Consts.MaxRange)
+				if (Functions.Distance(system, Game.CurrentGame().Commander().getCurrentSystem()) < Consts.MaxRange)
 					merc.setCurrentSystemId(system.Id());
 			}
 		}
@@ -674,7 +674,7 @@ public class Ship extends ShipSpec
 			Crew()[slot] = merc;
 
 		if (Trader() != skill)
-			Game.CurrentGame().RecalculateBuyPrices(Game.CurrentGame().Commander().CurrentSystem());
+			Game.CurrentGame().RecalculateBuyPrices(Game.CurrentGame().Commander().getCurrentSystem());
 	}
 
 	public String IllegalSpecialCargoActions()
