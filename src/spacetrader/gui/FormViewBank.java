@@ -37,6 +37,7 @@ import spacetrader.Functions;
 import spacetrader.Game;
 import spacetrader.Strings;
 import spacetrader.enums.AlertType;
+import spacetrader.guifacade.GuiFacade;
 	public class FormViewBank extends SpaceTraderForm
 	{
 		//#region Control Declarations
@@ -347,7 +348,7 @@ btnPayBack_Click(sender, e);}});
 		private void btnGetLoan_Click(Object sender, EventArgs e)
 		{
 			if (cmdr.getDebt() >= MaxLoan)
-				FormAlert.Alert(AlertType.DebtTooLargeLoan);
+				GuiFacade.alert(AlertType.DebtTooLargeLoan);
 			else
 			{
 				FormGetLoan	form	= new FormGetLoan(MaxLoan - cmdr.getDebt());
@@ -365,7 +366,7 @@ btnPayBack_Click(sender, e);}});
 		private void btnPayBack_Click(Object sender, EventArgs e)
 		{
 			if (cmdr.getDebt() == 0)
-				FormAlert.Alert(AlertType.DebtNone);
+				GuiFacade.alert(AlertType.DebtNone);
 			else
 			{
 				FormPayBackLoan	form	= new FormPayBackLoan();
@@ -384,14 +385,14 @@ btnPayBack_Click(sender, e);}});
 		{
 			if (cmdr.getInsurance())
 			{
-				if (FormAlert.Alert(AlertType.InsuranceStop) == DialogResult.Yes)
+				if (GuiFacade.alert(AlertType.InsuranceStop) == DialogResult.Yes)
 				{
 					cmdr.setInsurance(false);
 					cmdr.NoClaim(0);
 				}
 			}
 			else if (!cmdr.getShip().getEscapePod())
-				FormAlert.Alert(AlertType.InsuranceNoEscapePod);
+				GuiFacade.alert(AlertType.InsuranceNoEscapePod);
 			else
 			{
 				cmdr.setInsurance(true);

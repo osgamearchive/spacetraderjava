@@ -34,10 +34,13 @@ import spacetrader.GameController;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.GameEndType;
 import spacetrader.enums.ShipType;
+import spacetrader.guifacade.GuiFacade;
+import spacetrader.guifacade.GuiEngine;
+import spacetrader.guifacade.MainWindow;
 import spacetrader.stub.Directory;
 import spacetrader.stub.RegistryKey;
 
-public class SpaceTrader extends jwinforms.WinformWindow
+public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 {
 	// #region Control Declarations
 
@@ -109,6 +112,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			// TODO: We get here if there's no windows UI; I think no special treatment is needed.
 		}
 		SpaceTrader spaceTrader = new SpaceTrader(args.length > 0 ? args[0] : null);
+		GuiEngine.installImplementation(new OriginalGuiImplementationProvider(spaceTrader));
 		spaceTrader.ShowWindow();
 	}
 
@@ -566,7 +570,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			key.Close();
 		} catch (NullPointerException ex)
 		{
-			FormAlert.Alert(AlertType.RegistryError, ex.getMessage());
+			GuiFacade.alert(AlertType.RegistryError, ex.getMessage());
 		}
 
 		return settingValue;
@@ -609,7 +613,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			key.Close();
 		} catch (NullPointerException ex)
 		{
-			FormAlert.Alert(AlertType.RegistryError, ex.getMessage());
+			GuiFacade.alert(AlertType.RegistryError, ex.getMessage());
 		}
 	}
 
@@ -628,7 +632,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private void SpaceTrader_Closing(Object sender, jwinforms.CancelEventArgs e)
 	{
 		if (game == null || commander.getDays() == controller.SaveGameDays
-				|| FormAlert.Alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
+				|| GuiFacade.alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
 		{
 			if (WindowState == FormWindowState.Normal)
 			{
@@ -651,7 +655,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 		FormsOwnerTree.add(this);
 
-		FormAlert.Alert(AlertType.AppStart);
+		GuiFacade.alert(AlertType.AppStart);
 	}
 
 	private void mnuGameExit_Click(Object sender, jwinforms.EventArgs e)
@@ -662,7 +666,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private void mnuGameNew_Click(Object sender, jwinforms.EventArgs e)
 	{
 		FormNewCommander form = new FormNewCommander();
-		if ((game == null || commander.getDays() == controller.SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
+		if ((game == null || commander.getDays() == controller.SaveGameDays || GuiFacade.alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
 				&& form.ShowDialog(this) == DialogResult.OK)
 		{
 			setGame(new Game(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form.Trader(), form
@@ -680,7 +684,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private void mnuGameLoad_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if ((game == null || commander.getDays() == controller.SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
+		if ((game == null || commander.getDays() == controller.SaveGameDays || GuiFacade.alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
 				&& dlgOpen.ShowDialog(this) == DialogResult.OK)
 			controller.LoadGame(dlgOpen.getFileName());
 	}
@@ -724,7 +728,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private void mnuRetire_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if (FormAlert.Alert(AlertType.GameRetire) == DialogResult.Yes)
+		if (GuiFacade.alert(AlertType.GameRetire) == DialogResult.Yes)
 		{
 			game.setEndStatus(GameEndType.Retired);
 			controller.GameEnd();

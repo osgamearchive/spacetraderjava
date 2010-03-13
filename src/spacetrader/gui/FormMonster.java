@@ -29,9 +29,11 @@ import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.ShipyardId;
 import spacetrader.stub.ArrayList;
+import spacetrader.util.CheatCode;
 import spacetrader.util.Util;
 
 @SuppressWarnings({"unchecked","synthetic-access"})
+@CheatCode
 public class FormMonster extends SpaceTraderForm
 {
 	// #region Constants
@@ -80,7 +82,7 @@ public class FormMonster extends SpaceTraderForm
 
 	// #region Member Declarations
 
-	private Game game = Game.CurrentGame();
+	private final Game game = Game.CurrentGame();
 	private Integer[] mercIds;
 	private Integer[] questSystemIds;
 	private Integer[] shipyardSystemIds;
@@ -107,499 +109,514 @@ public class FormMonster extends SpaceTraderForm
 	// / </summary>
 	private void InitializeComponent()
 	{
-		this.btnClose = new jwinforms.Button();
-		this.picLine1 = new jwinforms.PictureBox();
-		this.picLine0 = new jwinforms.PictureBox();
-		this.lblQuestsLabel = new jwinforms.Label();
-		this.lblMercLabel = new jwinforms.Label();
-		this.lblMercSkillLabelPilot = new jwinforms.LinkLabel();
-		this.lblMercSkillLabelFighter = new jwinforms.LinkLabel();
-		this.lblMercSkillLabelTrader = new jwinforms.LinkLabel();
-		this.lblMercSkillLabelEngineer = new jwinforms.LinkLabel();
-		this.lblMercSystemLabel = new jwinforms.LinkLabel();
-		this.lblQuestSystemLabel = new jwinforms.LinkLabel();
-		this.lblQuestDescLabel = new jwinforms.LinkLabel();
-		this.lblMercIDLabel = new jwinforms.LinkLabel();
-		this.lblMercNameLabel = new jwinforms.LinkLabel();
-		this.lblShipyardsDescLabel = new jwinforms.LinkLabel();
-		this.lblShipyardsSystemLabel = new jwinforms.LinkLabel();
-		this.lblShipyardsLabel = new jwinforms.Label();
-		this.pnlMercs = new jwinforms.Panel();
-		this.lblMercSkillsPilot = new jwinforms.Label();
-		this.lblMercSkillsFighter = new jwinforms.Label();
-		this.lblMercSkillsTrader = new jwinforms.Label();
-		this.lblMercSkillsEngineer = new jwinforms.Label();
-		this.lblMercSystems = new jwinforms.LinkLabel();
-		this.lblMercIds = new jwinforms.Label();
-		this.lblMercNames = new jwinforms.Label();
-		this.lblMercSystems2 = new jwinforms.LinkLabel();
-		this.pnlQuests = new jwinforms.Panel();
-		this.lblQuests = new jwinforms.Label();
-		this.lblQuestSystems = new jwinforms.LinkLabel();
-		this.pnlShipyards = new jwinforms.Panel();
-		this.lblShipyards = new jwinforms.Label();
-		this.lblShipyardSystems = new jwinforms.LinkLabel();
-		this.picLine2 = new jwinforms.PictureBox();
-		this.pnlMercs.SuspendLayout();
-		this.pnlQuests.SuspendLayout();
-		this.pnlShipyards.SuspendLayout();
+		btnClose = new jwinforms.Button();
+		picLine1 = new jwinforms.PictureBox();
+		picLine0 = new jwinforms.PictureBox();
+		lblQuestsLabel = new jwinforms.Label();
+		lblMercLabel = new jwinforms.Label();
+		lblMercSkillLabelPilot = new jwinforms.LinkLabel();
+		lblMercSkillLabelFighter = new jwinforms.LinkLabel();
+		lblMercSkillLabelTrader = new jwinforms.LinkLabel();
+		lblMercSkillLabelEngineer = new jwinforms.LinkLabel();
+		lblMercSystemLabel = new jwinforms.LinkLabel();
+		lblQuestSystemLabel = new jwinforms.LinkLabel();
+		lblQuestDescLabel = new jwinforms.LinkLabel();
+		lblMercIDLabel = new jwinforms.LinkLabel();
+		lblMercNameLabel = new jwinforms.LinkLabel();
+		lblShipyardsDescLabel = new jwinforms.LinkLabel();
+		lblShipyardsSystemLabel = new jwinforms.LinkLabel();
+		lblShipyardsLabel = new jwinforms.Label();
+		pnlMercs = new jwinforms.Panel();
+		lblMercSkillsPilot = new jwinforms.Label();
+		lblMercSkillsFighter = new jwinforms.Label();
+		lblMercSkillsTrader = new jwinforms.Label();
+		lblMercSkillsEngineer = new jwinforms.Label();
+		lblMercSystems = new jwinforms.LinkLabel();
+		lblMercIds = new jwinforms.Label();
+		lblMercNames = new jwinforms.Label();
+		lblMercSystems2 = new jwinforms.LinkLabel();
+		pnlQuests = new jwinforms.Panel();
+		lblQuests = new jwinforms.Label();
+		lblQuestSystems = new jwinforms.LinkLabel();
+		pnlShipyards = new jwinforms.Panel();
+		lblShipyards = new jwinforms.Label();
+		lblShipyardSystems = new jwinforms.LinkLabel();
+		picLine2 = new jwinforms.PictureBox();
+		pnlMercs.SuspendLayout();
+		pnlQuests.SuspendLayout();
+		pnlShipyards.SuspendLayout();
 		this.SuspendLayout();
-		// 
+		//
 		// btnClose
-		// 
-		this.btnClose.setDialogResult(DialogResult.Cancel);
-		this.btnClose.setLocation(new java.awt.Point(-32, -32));
-		this.btnClose.setName("btnClose");
-		this.btnClose.setSize(new jwinforms.Size(32, 32));
-		this.btnClose.setTabIndex(32);
-		this.btnClose.setTabStop(false);
-		this.btnClose.setText("X");
-		// 
+		//
+		btnClose.setDialogResult(DialogResult.Cancel);
+		btnClose.setLocation(new java.awt.Point(-32, -32));
+		btnClose.setName("btnClose");
+		btnClose.setSize(new jwinforms.Size(32, 32));
+		btnClose.setTabIndex(32);
+		btnClose.setTabStop(false);
+		btnClose.setText("X");
+		//
 		// picLine1
-		// 
-		this.picLine1.setBackColor(java.awt.Color.darkGray);
-		this.picLine1.setLocation(new java.awt.Point(4, 40));
-		this.picLine1.setName("picLine1");
-		this.picLine1.setSize(new jwinforms.Size(609, 1));
-		this.picLine1.setTabIndex(133);
-		this.picLine1.setTabStop(false);
-		// 
+		//
+		picLine1.setBackColor(java.awt.Color.darkGray);
+		picLine1.setLocation(new java.awt.Point(4, 40));
+		picLine1.setName("picLine1");
+		picLine1.setSize(new jwinforms.Size(609, 1));
+		picLine1.setTabIndex(133);
+		picLine1.setTabStop(false);
+		//
 		// picLine0
-		// 
-		this.picLine0.setBackColor(java.awt.Color.darkGray);
-		this.picLine0.setLocation(new java.awt.Point(234, 8));
-		this.picLine0.setName("picLine0");
-		this.picLine0.setSize(new jwinforms.Size(1, 347));
-		this.picLine0.setTabIndex(132);
-		this.picLine0.setTabStop(false);
-		// 
+		//
+		picLine0.setBackColor(java.awt.Color.darkGray);
+		picLine0.setLocation(new java.awt.Point(234, 8));
+		picLine0.setName("picLine0");
+		picLine0.setSize(new jwinforms.Size(1, 347));
+		picLine0.setTabIndex(132);
+		picLine0.setTabStop(false);
+		//
 		// lblQuestsLabel
-		// 
-		this.lblQuestsLabel.setAutoSize(true);
-		this.lblQuestsLabel.setFont(FontCollection.bold10);
-		this.lblQuestsLabel.setLocation(new java.awt.Point(88, 4));
-		this.lblQuestsLabel.setName("lblQuestsLabel");
-		this.lblQuestsLabel.setSize(new jwinforms.Size(50, 19));
-		this.lblQuestsLabel.setTabIndex(134);
-		this.lblQuestsLabel.setText("Quests");
-		// 
+		//
+		lblQuestsLabel.setAutoSize(true);
+		lblQuestsLabel.setFont(FontCollection.bold10);
+		lblQuestsLabel.setLocation(new java.awt.Point(88, 4));
+		lblQuestsLabel.setName("lblQuestsLabel");
+		lblQuestsLabel.setSize(new jwinforms.Size(50, 19));
+		lblQuestsLabel.setTabIndex(134);
+		lblQuestsLabel.setText("Quests");
+		//
 		// lblMercLabel
-		// 
-		this.lblMercLabel.setAutoSize(true);
-		this.lblMercLabel.setFont(FontCollection.bold10);
-		this.lblMercLabel.setLocation(new java.awt.Point(348, 4));
-		this.lblMercLabel.setName("lblMercLabel");
-		this.lblMercLabel.setSize(new jwinforms.Size(84, 19));
-		this.lblMercLabel.setTabIndex(141);
-		this.lblMercLabel.setText("Mercenaries");
-		// 
+		//
+		lblMercLabel.setAutoSize(true);
+		lblMercLabel.setFont(FontCollection.bold10);
+		lblMercLabel.setLocation(new java.awt.Point(348, 4));
+		lblMercLabel.setName("lblMercLabel");
+		lblMercLabel.setSize(new jwinforms.Size(84, 19));
+		lblMercLabel.setTabIndex(141);
+		lblMercLabel.setText("Mercenaries");
+		//
 		// lblMercSkillLabelPilot
-		// 
-		this.lblMercSkillLabelPilot.setAutoSize(true);
-		this.lblMercSkillLabelPilot.setFont(FontCollection.bold825);
-		this.lblMercSkillLabelPilot.setLocation(new java.awt.Point(341, 24));
-		this.lblMercSkillLabelPilot.setName("lblMercSkillLabelPilot");
-		this.lblMercSkillLabelPilot.setSize(new jwinforms.Size(12, 16));
-		this.lblMercSkillLabelPilot.setTabIndex(7);
-		this.lblMercSkillLabelPilot.setTabStop(true);
-		this.lblMercSkillLabelPilot.setText("P");
-		this.lblMercSkillLabelPilot.TextAlign = ContentAlignment.TopRight;
-		this.lblMercSkillLabelPilot.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblMercSkillLabelPilot.setAutoSize(true);
+		lblMercSkillLabelPilot.setFont(FontCollection.bold825);
+		lblMercSkillLabelPilot.setLocation(new java.awt.Point(341, 24));
+		lblMercSkillLabelPilot.setName("lblMercSkillLabelPilot");
+		lblMercSkillLabelPilot.setSize(new jwinforms.Size(12, 16));
+		lblMercSkillLabelPilot.setTabIndex(7);
+		lblMercSkillLabelPilot.setTabStop(true);
+		lblMercSkillLabelPilot.setText("P");
+		lblMercSkillLabelPilot.TextAlign = ContentAlignment.TopRight;
+		lblMercSkillLabelPilot.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercSkillLabelFighter
-		// 
-		this.lblMercSkillLabelFighter.setAutoSize(true);
-		this.lblMercSkillLabelFighter.setFont(FontCollection.bold825);
-		this.lblMercSkillLabelFighter.setLocation(new java.awt.Point(362, 24));
-		this.lblMercSkillLabelFighter.setName("lblMercSkillLabelFighter");
-		this.lblMercSkillLabelFighter.setSize(new jwinforms.Size(11, 16));
-		this.lblMercSkillLabelFighter.setTabIndex(8);
-		this.lblMercSkillLabelFighter.setTabStop(true);
-		this.lblMercSkillLabelFighter.setText("F");
-		this.lblMercSkillLabelFighter.TextAlign = ContentAlignment.TopRight;
-		this.lblMercSkillLabelFighter.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblMercSkillLabelFighter.setAutoSize(true);
+		lblMercSkillLabelFighter.setFont(FontCollection.bold825);
+		lblMercSkillLabelFighter.setLocation(new java.awt.Point(362, 24));
+		lblMercSkillLabelFighter.setName("lblMercSkillLabelFighter");
+		lblMercSkillLabelFighter.setSize(new jwinforms.Size(11, 16));
+		lblMercSkillLabelFighter.setTabIndex(8);
+		lblMercSkillLabelFighter.setTabStop(true);
+		lblMercSkillLabelFighter.setText("F");
+		lblMercSkillLabelFighter.TextAlign = ContentAlignment.TopRight;
+		lblMercSkillLabelFighter.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercSkillLabelTrader
-		// 
-		this.lblMercSkillLabelTrader.setAutoSize(true);
-		this.lblMercSkillLabelTrader.setFont(FontCollection.bold825);
-		this.lblMercSkillLabelTrader.setLocation(new java.awt.Point(382, 24));
-		this.lblMercSkillLabelTrader.setName("lblMercSkillLabelTrader");
-		this.lblMercSkillLabelTrader.setSize(new jwinforms.Size(11, 16));
-		this.lblMercSkillLabelTrader.setTabIndex(9);
-		this.lblMercSkillLabelTrader.setTabStop(true);
-		this.lblMercSkillLabelTrader.setText("T");
-		this.lblMercSkillLabelTrader.TextAlign = ContentAlignment.TopRight;
-		this.lblMercSkillLabelTrader.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblMercSkillLabelTrader.setAutoSize(true);
+		lblMercSkillLabelTrader.setFont(FontCollection.bold825);
+		lblMercSkillLabelTrader.setLocation(new java.awt.Point(382, 24));
+		lblMercSkillLabelTrader.setName("lblMercSkillLabelTrader");
+		lblMercSkillLabelTrader.setSize(new jwinforms.Size(11, 16));
+		lblMercSkillLabelTrader.setTabIndex(9);
+		lblMercSkillLabelTrader.setTabStop(true);
+		lblMercSkillLabelTrader.setText("T");
+		lblMercSkillLabelTrader.TextAlign = ContentAlignment.TopRight;
+		lblMercSkillLabelTrader.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercSkillLabelEngineer
-		// 
-		this.lblMercSkillLabelEngineer.setAutoSize(true);
-		this.lblMercSkillLabelEngineer.setFont(FontCollection.bold825);
-		this.lblMercSkillLabelEngineer.setLocation(new java.awt.Point(401, 24));
-		this.lblMercSkillLabelEngineer.setName("lblMercSkillLabelEngineer");
-		this.lblMercSkillLabelEngineer.setSize(new jwinforms.Size(12, 16));
-		this.lblMercSkillLabelEngineer.setTabIndex(10);
-		this.lblMercSkillLabelEngineer.setTabStop(true);
-		this.lblMercSkillLabelEngineer.setText("E");
-		this.lblMercSkillLabelEngineer.TextAlign = ContentAlignment.TopRight;
-		this.lblMercSkillLabelEngineer.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblMercSkillLabelEngineer.setAutoSize(true);
+		lblMercSkillLabelEngineer.setFont(FontCollection.bold825);
+		lblMercSkillLabelEngineer.setLocation(new java.awt.Point(401, 24));
+		lblMercSkillLabelEngineer.setName("lblMercSkillLabelEngineer");
+		lblMercSkillLabelEngineer.setSize(new jwinforms.Size(12, 16));
+		lblMercSkillLabelEngineer.setTabIndex(10);
+		lblMercSkillLabelEngineer.setTabStop(true);
+		lblMercSkillLabelEngineer.setText("E");
+		lblMercSkillLabelEngineer.TextAlign = ContentAlignment.TopRight;
+		lblMercSkillLabelEngineer.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercSystemLabel
-		// 
-		this.lblMercSystemLabel.setAutoSize(true);
-		this.lblMercSystemLabel.setFont(FontCollection.bold825);
-		this.lblMercSystemLabel.setLocation(new java.awt.Point(425, 24));
-		this.lblMercSystemLabel.setName("lblMercSystemLabel");
-		this.lblMercSystemLabel.setSize(new jwinforms.Size(43, 16));
-		this.lblMercSystemLabel.setTabIndex(11);
-		this.lblMercSystemLabel.setTabStop(true);
-		this.lblMercSystemLabel.setText("System");
-		this.lblMercSystemLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblMercSystemLabel.setAutoSize(true);
+		lblMercSystemLabel.setFont(FontCollection.bold825);
+		lblMercSystemLabel.setLocation(new java.awt.Point(425, 24));
+		lblMercSystemLabel.setName("lblMercSystemLabel");
+		lblMercSystemLabel.setSize(new jwinforms.Size(43, 16));
+		lblMercSystemLabel.setTabIndex(11);
+		lblMercSystemLabel.setTabStop(true);
+		lblMercSystemLabel.setText("System");
+		lblMercSystemLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblQuestSystemLabel
-		// 
-		this.lblQuestSystemLabel.setAutoSize(true);
-		this.lblQuestSystemLabel.setFont(FontCollection.bold825);
-		this.lblQuestSystemLabel.setLocation(new java.awt.Point(13, 24));
-		this.lblQuestSystemLabel.setName("lblQuestSystemLabel");
-		this.lblQuestSystemLabel.setSize(new jwinforms.Size(43, 16));
-		this.lblQuestSystemLabel.setTabIndex(1);
-		this.lblQuestSystemLabel.setTabStop(true);
-		this.lblQuestSystemLabel.setText("System");
-		this.lblQuestSystemLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblQuestSystemLabel.setAutoSize(true);
+		lblQuestSystemLabel.setFont(FontCollection.bold825);
+		lblQuestSystemLabel.setLocation(new java.awt.Point(13, 24));
+		lblQuestSystemLabel.setName("lblQuestSystemLabel");
+		lblQuestSystemLabel.setSize(new jwinforms.Size(43, 16));
+		lblQuestSystemLabel.setTabIndex(1);
+		lblQuestSystemLabel.setTabStop(true);
+		lblQuestSystemLabel.setText("System");
+		lblQuestSystemLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblQuestDescLabel
-		// 
-		this.lblQuestDescLabel.setAutoSize(true);
-		this.lblQuestDescLabel.setFont(FontCollection.bold825);
-		this.lblQuestDescLabel.setLocation(new java.awt.Point(85, 24));
-		this.lblQuestDescLabel.setName("lblQuestDescLabel");
-		this.lblQuestDescLabel.setSize(new jwinforms.Size(63, 16));
-		this.lblQuestDescLabel.setTabIndex(2);
-		this.lblQuestDescLabel.setTabStop(true);
-		this.lblQuestDescLabel.setText("Description");
-		this.lblQuestDescLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblQuestDescLabel.setAutoSize(true);
+		lblQuestDescLabel.setFont(FontCollection.bold825);
+		lblQuestDescLabel.setLocation(new java.awt.Point(85, 24));
+		lblQuestDescLabel.setName("lblQuestDescLabel");
+		lblQuestDescLabel.setSize(new jwinforms.Size(63, 16));
+		lblQuestDescLabel.setTabIndex(2);
+		lblQuestDescLabel.setTabStop(true);
+		lblQuestDescLabel.setText("Description");
+		lblQuestDescLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercIDLabel
-		// 
-		this.lblMercIDLabel.setAutoSize(true);
-		this.lblMercIDLabel.setFont(FontCollection.bold825);
-		this.lblMercIDLabel.setLocation(new java.awt.Point(247, 24));
-		this.lblMercIDLabel.setName("lblMercIDLabel");
-		this.lblMercIDLabel.setSize(new jwinforms.Size(16, 16));
-		this.lblMercIDLabel.setTabIndex(5);
-		this.lblMercIDLabel.setTabStop(true);
-		this.lblMercIDLabel.setText("ID");
-		this.lblMercIDLabel.TextAlign = ContentAlignment.TopRight;
-		this.lblMercIDLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblMercIDLabel.setAutoSize(true);
+		lblMercIDLabel.setFont(FontCollection.bold825);
+		lblMercIDLabel.setLocation(new java.awt.Point(247, 24));
+		lblMercIDLabel.setName("lblMercIDLabel");
+		lblMercIDLabel.setSize(new jwinforms.Size(16, 16));
+		lblMercIDLabel.setTabIndex(5);
+		lblMercIDLabel.setTabStop(true);
+		lblMercIDLabel.setText("ID");
+		lblMercIDLabel.TextAlign = ContentAlignment.TopRight;
+		lblMercIDLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercNameLabel
-		// 
-		this.lblMercNameLabel.setAutoSize(true);
-		this.lblMercNameLabel.setFont(FontCollection.bold825);
-		this.lblMercNameLabel.setLocation(new java.awt.Point(268, 24));
-		this.lblMercNameLabel.setName("lblMercNameLabel");
-		this.lblMercNameLabel.setSize(new jwinforms.Size(35, 16));
-		this.lblMercNameLabel.setTabIndex(6);
-		this.lblMercNameLabel.setTabStop(true);
-		this.lblMercNameLabel.setText("Name");
-		this.lblMercNameLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblMercNameLabel.setAutoSize(true);
+		lblMercNameLabel.setFont(FontCollection.bold825);
+		lblMercNameLabel.setLocation(new java.awt.Point(268, 24));
+		lblMercNameLabel.setName("lblMercNameLabel");
+		lblMercNameLabel.setSize(new jwinforms.Size(35, 16));
+		lblMercNameLabel.setTabIndex(6);
+		lblMercNameLabel.setTabStop(true);
+		lblMercNameLabel.setText("Name");
+		lblMercNameLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblShipyardsDescLabel
-		// 
-		this.lblShipyardsDescLabel.setAutoSize(true);
-		this.lblShipyardsDescLabel.setFont(FontCollection.bold825);
-		this.lblShipyardsDescLabel.setLocation(new java.awt.Point(85, 258));
-		this.lblShipyardsDescLabel.setName("lblShipyardsDescLabel");
-		this.lblShipyardsDescLabel.setSize(new jwinforms.Size(63, 16));
-		this.lblShipyardsDescLabel.setTabIndex(4);
-		this.lblShipyardsDescLabel.setTabStop(true);
-		this.lblShipyardsDescLabel.setText("Description");
-		this.lblShipyardsDescLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblShipyardsDescLabel.setAutoSize(true);
+		lblShipyardsDescLabel.setFont(FontCollection.bold825);
+		lblShipyardsDescLabel.setLocation(new java.awt.Point(85, 258));
+		lblShipyardsDescLabel.setName("lblShipyardsDescLabel");
+		lblShipyardsDescLabel.setSize(new jwinforms.Size(63, 16));
+		lblShipyardsDescLabel.setTabIndex(4);
+		lblShipyardsDescLabel.setTabStop(true);
+		lblShipyardsDescLabel.setText("Description");
+		lblShipyardsDescLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblShipyardsSystemLabel
-		// 
-		this.lblShipyardsSystemLabel.setAutoSize(true);
-		this.lblShipyardsSystemLabel.setFont(FontCollection.bold825);
-		this.lblShipyardsSystemLabel.setLocation(new java.awt.Point(13, 258));
-		this.lblShipyardsSystemLabel.setName("lblShipyardsSystemLabel");
-		this.lblShipyardsSystemLabel.setSize(new jwinforms.Size(43, 16));
-		this.lblShipyardsSystemLabel.setTabIndex(3);
-		this.lblShipyardsSystemLabel.setTabStop(true);
-		this.lblShipyardsSystemLabel.setText("System");
-		this.lblShipyardsSystemLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblShipyardsSystemLabel.setAutoSize(true);
+		lblShipyardsSystemLabel.setFont(FontCollection.bold825);
+		lblShipyardsSystemLabel.setLocation(new java.awt.Point(13, 258));
+		lblShipyardsSystemLabel.setName("lblShipyardsSystemLabel");
+		lblShipyardsSystemLabel.setSize(new jwinforms.Size(43, 16));
+		lblShipyardsSystemLabel.setTabIndex(3);
+		lblShipyardsSystemLabel.setTabStop(true);
+		lblShipyardsSystemLabel.setText("System");
+		lblShipyardsSystemLabel.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblShipyardsLabel
-		// 
-		this.lblShipyardsLabel.setAutoSize(true);
-		this.lblShipyardsLabel.setFont(FontCollection.bold10);
-		this.lblShipyardsLabel.setLocation(new java.awt.Point(79, 238));
-		this.lblShipyardsLabel.setName("lblShipyardsLabel");
-		this.lblShipyardsLabel.setSize(new jwinforms.Size(68, 19));
-		this.lblShipyardsLabel.setTabIndex(155);
-		this.lblShipyardsLabel.setText("Shipyards");
-		// 
+		//
+		lblShipyardsLabel.setAutoSize(true);
+		lblShipyardsLabel.setFont(FontCollection.bold10);
+		lblShipyardsLabel.setLocation(new java.awt.Point(79, 238));
+		lblShipyardsLabel.setName("lblShipyardsLabel");
+		lblShipyardsLabel.setSize(new jwinforms.Size(68, 19));
+		lblShipyardsLabel.setTabIndex(155);
+		lblShipyardsLabel.setText("Shipyards");
+		//
 		// pnlMercs
-		// 
-		this.pnlMercs.AutoScroll = true;
-		this.pnlMercs.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
-		this.pnlMercs.Controls.add(this.lblMercSkillsPilot);
-		this.pnlMercs.Controls.add(this.lblMercSkillsFighter);
-		this.pnlMercs.Controls.add(this.lblMercSkillsTrader);
-		this.pnlMercs.Controls.add(this.lblMercSkillsEngineer);
-		this.pnlMercs.Controls.add(this.lblMercSystems);
-		this.pnlMercs.Controls.add(this.lblMercIds);
-		this.pnlMercs.Controls.add(this.lblMercNames);
-		this.pnlMercs.Controls.add(this.lblMercSystems2);
-		this.pnlMercs.setLocation(new java.awt.Point(239, 44));
-		this.pnlMercs.setName("pnlMercs");
-		this.pnlMercs.setSize(new jwinforms.Size(371, 307));
-		this.pnlMercs.setTabIndex(158);
-		// 
+		//
+		pnlMercs.AutoScroll = true;
+		pnlMercs.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
+		pnlMercs.Controls.add(lblMercSkillsPilot);
+		pnlMercs.Controls.add(lblMercSkillsFighter);
+		pnlMercs.Controls.add(lblMercSkillsTrader);
+		pnlMercs.Controls.add(lblMercSkillsEngineer);
+		pnlMercs.Controls.add(lblMercSystems);
+		pnlMercs.Controls.add(lblMercIds);
+		pnlMercs.Controls.add(lblMercNames);
+		pnlMercs.Controls.add(lblMercSystems2);
+		pnlMercs.setLocation(new java.awt.Point(239, 44));
+		pnlMercs.setName("pnlMercs");
+		pnlMercs.setSize(new jwinforms.Size(371, 307));
+		pnlMercs.setTabIndex(158);
+		//
 		// lblMercSkillsPilot
-		// 
-		this.lblMercSkillsPilot.setLocation(new java.awt.Point(93, 4));
-		this.lblMercSkillsPilot.setName("lblMercSkillsPilot");
-		this.lblMercSkillsPilot.setSize(new jwinforms.Size(20, 563));
-		this.lblMercSkillsPilot.setTabIndex(144);
-		this.lblMercSkillsPilot.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
+		lblMercSkillsPilot.setLocation(new java.awt.Point(93, 4));
+		lblMercSkillsPilot.setName("lblMercSkillsPilot");
+		lblMercSkillsPilot.setSize(new jwinforms.Size(20, 563));
+		lblMercSkillsPilot.setTabIndex(144);
+		lblMercSkillsPilot.TextAlign = ContentAlignment.TopRight;
+		//
 		// lblMercSkillsFighter
-		// 
-		this.lblMercSkillsFighter.setLocation(new java.awt.Point(113, 4));
-		this.lblMercSkillsFighter.setName("lblMercSkillsFighter");
-		this.lblMercSkillsFighter.setSize(new jwinforms.Size(20, 563));
-		this.lblMercSkillsFighter.setTabIndex(145);
-		this.lblMercSkillsFighter.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
+		lblMercSkillsFighter.setLocation(new java.awt.Point(113, 4));
+		lblMercSkillsFighter.setName("lblMercSkillsFighter");
+		lblMercSkillsFighter.setSize(new jwinforms.Size(20, 563));
+		lblMercSkillsFighter.setTabIndex(145);
+		lblMercSkillsFighter.TextAlign = ContentAlignment.TopRight;
+		//
 		// lblMercSkillsTrader
-		// 
-		this.lblMercSkillsTrader.setLocation(new java.awt.Point(133, 4));
-		this.lblMercSkillsTrader.setName("lblMercSkillsTrader");
-		this.lblMercSkillsTrader.setSize(new jwinforms.Size(20, 563));
-		this.lblMercSkillsTrader.setTabIndex(146);
-		this.lblMercSkillsTrader.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
+		lblMercSkillsTrader.setLocation(new java.awt.Point(133, 4));
+		lblMercSkillsTrader.setName("lblMercSkillsTrader");
+		lblMercSkillsTrader.setSize(new jwinforms.Size(20, 563));
+		lblMercSkillsTrader.setTabIndex(146);
+		lblMercSkillsTrader.TextAlign = ContentAlignment.TopRight;
+		//
 		// lblMercSkillsEngineer
-		// 
-		this.lblMercSkillsEngineer.setLocation(new java.awt.Point(153, 4));
-		this.lblMercSkillsEngineer.setName("lblMercSkillsEngineer");
-		this.lblMercSkillsEngineer.setSize(new jwinforms.Size(20, 563));
-		this.lblMercSkillsEngineer.setTabIndex(147);
-		this.lblMercSkillsEngineer.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
+		lblMercSkillsEngineer.setLocation(new java.awt.Point(153, 4));
+		lblMercSkillsEngineer.setName("lblMercSkillsEngineer");
+		lblMercSkillsEngineer.setSize(new jwinforms.Size(20, 563));
+		lblMercSkillsEngineer.setTabIndex(147);
+		lblMercSkillsEngineer.TextAlign = ContentAlignment.TopRight;
+		//
 		// lblMercSystems
-		// 
-		this.lblMercSystems.LinkArea = new jwinforms.LinkArea(0, 0);
-		this.lblMercSystems.setLocation(new java.awt.Point(185, 4));
-		this.lblMercSystems.setName("lblMercSystems");
-		this.lblMercSystems.setSize(new jwinforms.Size(160, 387));
-		this.lblMercSystems.setTabIndex(14);
-		this.lblMercSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblMercSystems.LinkArea = new jwinforms.LinkArea(0, 0);
+		lblMercSystems.setLocation(new java.awt.Point(185, 4));
+		lblMercSystems.setName("lblMercSystems");
+		lblMercSystems.setSize(new jwinforms.Size(160, 387));
+		lblMercSystems.setTabIndex(14);
+		lblMercSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SystemLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercIds
-		// 
-		this.lblMercIds.setLocation(new java.awt.Point(0, 4));
-		this.lblMercIds.setName("lblMercIds");
-		this.lblMercIds.setSize(new jwinforms.Size(23, 563));
-		this.lblMercIds.setTabIndex(142);
-		this.lblMercIds.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
+		lblMercIds.setLocation(new java.awt.Point(0, 4));
+		lblMercIds.setName("lblMercIds");
+		lblMercIds.setSize(new jwinforms.Size(23, 563));
+		lblMercIds.setTabIndex(142);
+		lblMercIds.TextAlign = ContentAlignment.TopRight;
+		//
 		// lblMercNames
-		// 
-		this.lblMercNames.setLocation(new java.awt.Point(28, 4));
-		this.lblMercNames.setName("lblMercNames");
-		this.lblMercNames.setSize(new jwinforms.Size(69, 563));
-		this.lblMercNames.setTabIndex(141);
-		// 
+		//
+		lblMercNames.setLocation(new java.awt.Point(28, 4));
+		lblMercNames.setName("lblMercNames");
+		lblMercNames.setSize(new jwinforms.Size(69, 563));
+		lblMercNames.setTabIndex(141);
+		//
 		// lblMercSystems2
-		// 
-		this.lblMercSystems2.LinkArea = new jwinforms.LinkArea(0, 0);
-		this.lblMercSystems2.setLocation(new java.awt.Point(185, 391));
-		this.lblMercSystems2.setName("lblMercSystems2");
-		this.lblMercSystems2.setSize(new jwinforms.Size(160, 175));
-		this.lblMercSystems2.setTabIndex(148);
-		this.lblMercSystems2.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblMercSystems2.LinkArea = new jwinforms.LinkArea(0, 0);
+		lblMercSystems2.setLocation(new java.awt.Point(185, 391));
+		lblMercSystems2.setName("lblMercSystems2");
+		lblMercSystems2.setSize(new jwinforms.Size(160, 175));
+		lblMercSystems2.setTabIndex(148);
+		lblMercSystems2.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SystemLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// pnlQuests
-		// 
-		this.pnlQuests.AutoScroll = true;
-		this.pnlQuests.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
-		this.pnlQuests.Controls.add(this.lblQuests);
-		this.pnlQuests.Controls.add(this.lblQuestSystems);
-		this.pnlQuests.setLocation(new java.awt.Point(8, 44));
-		this.pnlQuests.setName("pnlQuests");
-		this.pnlQuests.setSize(new jwinforms.Size(222, 182));
-		this.pnlQuests.setTabIndex(159);
-		// 
+		//
+		pnlQuests.AutoScroll = true;
+		pnlQuests.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
+		pnlQuests.Controls.add(lblQuests);
+		pnlQuests.Controls.add(lblQuestSystems);
+		pnlQuests.setLocation(new java.awt.Point(8, 44));
+		pnlQuests.setName("pnlQuests");
+		pnlQuests.setSize(new jwinforms.Size(222, 182));
+		pnlQuests.setTabIndex(159);
+		//
 		// lblQuests
-		// 
-		this.lblQuests.setLocation(new java.awt.Point(76, 4));
-		this.lblQuests.setName("lblQuests");
-		this.lblQuests.setSize(new jwinforms.Size(120, 350));
-		this.lblQuests.setTabIndex(48);
-		// 
+		//
+		lblQuests.setLocation(new java.awt.Point(76, 4));
+		lblQuests.setName("lblQuests");
+		lblQuests.setSize(new jwinforms.Size(120, 350));
+		lblQuests.setTabIndex(48);
+		//
 		// lblQuestSystems
-		// 
-		this.lblQuestSystems.LinkArea = new jwinforms.LinkArea(0, 0);
-		this.lblQuestSystems.setLocation(new java.awt.Point(4, 4));
-		this.lblQuestSystems.setName("lblQuestSystems");
-		this.lblQuestSystems.setSize(new jwinforms.Size(68, 350));
-		this.lblQuestSystems.setTabIndex(12);
-		this.lblQuestSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblQuestSystems.LinkArea = new jwinforms.LinkArea(0, 0);
+		lblQuestSystems.setLocation(new java.awt.Point(4, 4));
+		lblQuestSystems.setName("lblQuestSystems");
+		lblQuestSystems.setSize(new jwinforms.Size(68, 350));
+		lblQuestSystems.setTabIndex(12);
+		lblQuestSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SystemLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// pnlShipyards
-		// 
-		this.pnlShipyards.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
-		this.pnlShipyards.Controls.add(this.lblShipyards);
-		this.pnlShipyards.Controls.add(this.lblShipyardSystems);
-		this.pnlShipyards.setLocation(new java.awt.Point(8, 278));
-		this.pnlShipyards.setName("pnlShipyards");
-		this.pnlShipyards.setSize(new jwinforms.Size(222, 73));
-		this.pnlShipyards.setTabIndex(160);
-		// 
+		//
+		pnlShipyards.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
+		pnlShipyards.Controls.add(lblShipyards);
+		pnlShipyards.Controls.add(lblShipyardSystems);
+		pnlShipyards.setLocation(new java.awt.Point(8, 278));
+		pnlShipyards.setName("pnlShipyards");
+		pnlShipyards.setSize(new jwinforms.Size(222, 73));
+		pnlShipyards.setTabIndex(160);
+		//
 		// lblShipyards
-		// 
-		this.lblShipyards.setLocation(new java.awt.Point(76, 4));
-		this.lblShipyards.setName("lblShipyards");
-		this.lblShipyards.setSize(new jwinforms.Size(120, 63));
-		this.lblShipyards.setTabIndex(158);
-		// 
+		//
+		lblShipyards.setLocation(new java.awt.Point(76, 4));
+		lblShipyards.setName("lblShipyards");
+		lblShipyards.setSize(new jwinforms.Size(120, 63));
+		lblShipyards.setTabIndex(158);
+		//
 		// lblShipyardSystems
-		// 
-		this.lblShipyardSystems.LinkArea = new jwinforms.LinkArea(0, 0);
-		this.lblShipyardSystems.setLocation(new java.awt.Point(4, 4));
-		this.lblShipyardSystems.setName("lblShipyardSystems");
-		this.lblShipyardSystems.setSize(new jwinforms.Size(68, 63));
-		this.lblShipyardSystems.setTabIndex(13);
-		this.lblShipyardSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
+		//
+		lblShipyardSystems.LinkArea = new jwinforms.LinkArea(0, 0);
+		lblShipyardSystems.setLocation(new java.awt.Point(4, 4));
+		lblShipyardSystems.setName("lblShipyardSystems");
+		lblShipyardSystems.setSize(new jwinforms.Size(68, 63));
+		lblShipyardSystems.setTabIndex(13);
+		lblShipyardSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
 				SystemLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// picLine2
-		// 
-		this.picLine2.setBackColor(java.awt.Color.darkGray);
-		this.picLine2.setLocation(new java.awt.Point(4, 274));
-		this.picLine2.setName("picLine2");
-		this.picLine2.setSize(new jwinforms.Size(222, 1));
-		this.picLine2.setTabIndex(161);
-		this.picLine2.setTabStop(false);
-		// 
+		//
+		picLine2.setBackColor(java.awt.Color.darkGray);
+		picLine2.setLocation(new java.awt.Point(4, 274));
+		picLine2.setName("picLine2");
+		picLine2.setSize(new jwinforms.Size(222, 1));
+		picLine2.setTabIndex(161);
+		picLine2.setTabStop(false);
+		//
 		// FormMonster
-		// 
+		//
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
-		this.setCancelButton(this.btnClose);
+		this.setCancelButton(btnClose);
 		this.setClientSize(new jwinforms.Size(617, 358));
-		this.Controls.add(this.picLine2);
-		this.Controls.add(this.pnlShipyards);
-		this.Controls.add(this.pnlQuests);
-		this.Controls.add(this.picLine1);
-		this.Controls.add(this.picLine0);
-		this.Controls.add(this.pnlMercs);
-		this.Controls.add(this.lblShipyardsLabel);
-		this.Controls.add(this.lblShipyardsDescLabel);
-		this.Controls.add(this.lblShipyardsSystemLabel);
-		this.Controls.add(this.lblMercNameLabel);
-		this.Controls.add(this.lblMercIDLabel);
-		this.Controls.add(this.lblQuestDescLabel);
-		this.Controls.add(this.lblQuestSystemLabel);
-		this.Controls.add(this.lblMercSystemLabel);
-		this.Controls.add(this.lblMercSkillLabelEngineer);
-		this.Controls.add(this.lblMercSkillLabelTrader);
-		this.Controls.add(this.lblMercSkillLabelFighter);
-		this.Controls.add(this.lblMercSkillLabelPilot);
-		this.Controls.add(this.lblMercLabel);
-		this.Controls.add(this.lblQuestsLabel);
-		this.Controls.add(this.btnClose);
+		Controls.add(picLine2);
+		Controls.add(pnlShipyards);
+		Controls.add(pnlQuests);
+		Controls.add(picLine1);
+		Controls.add(picLine0);
+		Controls.add(pnlMercs);
+		Controls.add(lblShipyardsLabel);
+		Controls.add(lblShipyardsDescLabel);
+		Controls.add(lblShipyardsSystemLabel);
+		Controls.add(lblMercNameLabel);
+		Controls.add(lblMercIDLabel);
+		Controls.add(lblQuestDescLabel);
+		Controls.add(lblQuestSystemLabel);
+		Controls.add(lblMercSystemLabel);
+		Controls.add(lblMercSkillLabelEngineer);
+		Controls.add(lblMercSkillLabelTrader);
+		Controls.add(lblMercSkillLabelFighter);
+		Controls.add(lblMercSkillLabelPilot);
+		Controls.add(lblMercLabel);
+		Controls.add(lblQuestsLabel);
+		Controls.add(btnClose);
 		this.setFormBorderStyle(FormBorderStyle.FixedDialog);
 		this.setMaximizeBox(false);
 		this.setMinimizeBox(false);
@@ -624,7 +641,7 @@ public class FormMonster extends SpaceTraderForm
 			Object valA = null;
 			Object valB = null;
 
-			switch (SomeStringsForSwitch.valueOf(sortBy))
+			switch (SomeStringsForCheatSwitch.valueOf(sortBy))
 			{
 			case I: // Id
 				valA = (int) A.Id().CastToInt();
@@ -676,7 +693,7 @@ public class FormMonster extends SpaceTraderForm
 				String nameA = "";
 				String nameB = "";
 
-				switch (SomeStringsForSwitch.valueOf(sortWhat))
+				switch (SomeStringsForCheatSwitch.valueOf(sortWhat))
 				{
 				case Q: // Quests
 					nameA = A.SpecialEvent().Title();
@@ -774,7 +791,7 @@ public class FormMonster extends SpaceTraderForm
 	private void Sort(String sortWhat, String sortBy)
 	{
 		Integer[] array = null;
-		switch (SomeStringsForSwitch.valueOf(sortWhat))
+		switch (SomeStringsForCheatSwitch.valueOf(sortWhat))
 		{
 		case M:
 			array = mercIds;

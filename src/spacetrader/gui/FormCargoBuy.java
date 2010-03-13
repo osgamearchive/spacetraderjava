@@ -40,6 +40,7 @@ import spacetrader.Functions;
 import spacetrader.Game;
 import spacetrader.Strings;
 import spacetrader.enums.CargoBuyOp;
+import spacetrader.guifacade.Facaded;
 
 public class FormCargoBuy extends SpaceTraderForm
 {
@@ -54,16 +55,9 @@ public class FormCargoBuy extends SpaceTraderForm
 	private jwinforms.Label lblAvailable;
 	private jwinforms.Label lblAfford;
 
-	// #endregion
-
-	// #region Member Declarations
-
 	private final Game game = Game.CurrentGame();
 
-	// #endregion
-
-	// #region Methods
-
+	@Facaded
 	public FormCargoBuy(int item, int maxAmount, CargoBuyOp op)
 	{
 		InitializeComponent();
@@ -241,25 +235,15 @@ public class FormCargoBuy extends SpaceTraderForm
 
 	}
 
-	// #endregion
-
-	// #endregion
-
-	// #region Event Handlers
-
 	private void btnAll_Click(Object sender, EventArgs e)
 	{
 		numAmount.setValue(numAmount.getMaximum());
 	}
 
-	// #endregion
 
-	// #region Properties
-
+	@Facaded
 	public int Amount()
 	{
 		return numAmount.getValue();
 	}
-
-	// #endregion
 }

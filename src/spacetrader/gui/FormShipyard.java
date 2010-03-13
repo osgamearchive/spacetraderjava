@@ -27,6 +27,8 @@ import spacetrader.*;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.ShipType;
 import spacetrader.enums.Size;
+import spacetrader.guifacade.GuiEngine;
+import spacetrader.guifacade.GuiFacade;
 import spacetrader.stub.ArrayList;
 import spacetrader.stub.Directory;
 import spacetrader.util.Hashtable;
@@ -135,8 +137,8 @@ public class FormShipyard extends SpaceTraderForm
 
 		dlgOpen.setInitialDirectory(Consts.CustomImagesDirectory);
 		dlgSave.setInitialDirectory(Consts.CustomTemplatesDirectory);
-		lblDisabledName.setImage(game.getParentWindow().DirectionImages().getImages()[Consts.DirectionDown]);
-		lblDisabledPct.setImage(game.getParentWindow().DirectionImages().getImages()[Consts.DirectionDown]);
+		lblDisabledName.setImage(GuiEngine.imageProvider.getDirectionImages()[Consts.DirectionDown]);
+		lblDisabledPct.setImage(GuiEngine.imageProvider.getDirectionImages()[Consts.DirectionDown]);
 
 		LoadSizes();
 		LoadTemplateList();
@@ -1067,7 +1069,7 @@ public class FormShipyard extends SpaceTraderForm
 			return new Bitmap(fileName);
 		} catch (Exception ex)
 		{
-			FormAlert.Alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
+			GuiFacade.alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
 			return null;
 		}
 	}
@@ -1095,7 +1097,7 @@ public class FormShipyard extends SpaceTraderForm
 			if (template.Images() != null)
 				customImages = template.Images();
 			else
-				customImages = game.getParentWindow().CustomShipImages();
+				customImages = GuiEngine.imageProvider.getCustomShipImages();
 
 			numCargoBays.setValue(template.CargoBays());
 			numFuelTanks.setValue(Math.min(Math.max(numFuelTanks.getMinimum(), template.FuelTanks()), numFuelTanks
@@ -1287,12 +1289,12 @@ public class FormShipyard extends SpaceTraderForm
 				// Replace the current custom images with the new ones.
 				if (game.Commander().getShip().ImageIndex() == ShipType.Custom.CastToInt())
 				{
-					game.getParentWindow().setCustomShipImages(customImages);
+					GuiEngine.imageProvider.setCustomShipImages(customImages);
 
 					game.Commander().getShip().UpdateCustomImageOffsetConstants();
 				}
 
-				FormAlert.Alert(AlertType.ShipDesignThanks, shipyard.Name());
+				GuiFacade.alert(AlertType.ShipDesignThanks, shipyard.Name());
 				Close();
 			}
 		}

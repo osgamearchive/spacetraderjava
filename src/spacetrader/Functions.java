@@ -40,7 +40,7 @@ import jwinforms.Image;
 import jwinforms.Rectangle;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.Difficulty;
-import spacetrader.gui.FormAlert;
+import spacetrader.guifacade.GuiFacade;
 import spacetrader.stub.BinaryFormatter;
 import spacetrader.stub.RegistryKey;
 import spacetrader.stub.SerializationException;
@@ -201,13 +201,13 @@ public class Functions
 		} catch (FileNotFoundException e)
 		{
 			if (!ignoreMissingFile)
-				FormAlert.Alert(AlertType.FileErrorOpen, fileName, e.getMessage());
+				GuiFacade.alert(AlertType.FileErrorOpen, fileName, e.getMessage());
 		} catch (IOException ex)
 		{
-			FormAlert.Alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
+			GuiFacade.alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
 		} catch (SerializationException ex)
 		{
-			FormAlert.Alert(AlertType.FileErrorOpen, fileName, Strings.FileFormatBad);
+			GuiFacade.alert(AlertType.FileErrorOpen, fileName, Strings.FileFormatBad);
 		} finally
 		{
 			if (inStream != null)
@@ -299,7 +299,7 @@ public class Functions
 		} catch (IOException ex)
 		{
 			ex.printStackTrace();
-			FormAlert.Alert(AlertType.FileErrorSave, fileName, ex.getMessage());
+			GuiFacade.alert(AlertType.FileErrorSave, fileName, ex.getMessage());
 		} finally
 		{
 			if (outStream != null)

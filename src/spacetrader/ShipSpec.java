@@ -30,6 +30,7 @@ package spacetrader;
 import jwinforms.Image;
 import spacetrader.util.*;
 import spacetrader.enums.*;
+import spacetrader.guifacade.GuiEngine;
 
 public class ShipSpec extends STSerializableObject
 {
@@ -104,8 +105,8 @@ public class ShipSpec extends STSerializableObject
 
 		// Get the images if the ship uses the custom images.
 		if (ImageIndex() == ShipType.Custom.CastToInt())
-			Game.CurrentGame().getParentWindow().setCustomShipImages(GetValueFromHash(hash,
-					"_images", Game.CurrentGame().getParentWindow().CustomShipImages()));
+			GuiEngine.imageProvider.setCustomShipImages(GetValueFromHash(hash, "_images", GuiEngine.imageProvider
+					.getCustomShipImages()));
 
 		// Get the name if the ship is a custom design.
 		if (Type() == ShipType.Custom)
@@ -120,6 +121,7 @@ public class ShipSpec extends STSerializableObject
 		}
 	}
 
+	@Override
 	public Hashtable Serialize()
 	{
 		Hashtable hash = super.Serialize();
@@ -153,7 +155,7 @@ public class ShipSpec extends STSerializableObject
 
 		// Save the images if the ship uses the custom images.
 		if (ImageIndex() == ShipType.Custom.CastToInt())
-			hash.add("_images", Game.CurrentGame().getParentWindow().CustomShipImages());
+			hash.add("_images", GuiEngine.imageProvider.getCustomShipImages());
 
 		return hash;
 	}
@@ -205,7 +207,7 @@ public class ShipSpec extends STSerializableObject
 
 	public void UpdateCustomImageOffsetConstants()
 	{
-		Image image = Game.CurrentGame().getParentWindow().CustomShipImages()[0];
+		Image image = GuiEngine.imageProvider.getCustomShipImages()[0];
 		int custIndex = ShipType.Custom.CastToInt();
 
 		// Find the first column of pixels that has a non-white pixel for the X
@@ -338,18 +340,19 @@ public class ShipSpec extends STSerializableObject
 
 	public Image Image()
 	{
-		return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip + Consts.ShipImgOffsetNormal];
+		return GuiEngine.imageProvider.getShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
+				+ Consts.ShipImgOffsetNormal];
 	}
 
 	public Image ImageDamaged()
 	{
-		return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
+		return GuiEngine.imageProvider.getShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
 				+ Consts.ShipImgOffsetDamage];
 	}
 
 	public Image ImageDamagedWithShields()
 	{
-		return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
+		return GuiEngine.imageProvider.getShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
 				+ Consts.ShipImgOffsetSheildDamage];
 	}
 
@@ -365,7 +368,7 @@ public class ShipSpec extends STSerializableObject
 
 	public Image ImageWithShields()
 	{
-		return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
+		return GuiEngine.imageProvider.getShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
 				+ Consts.ShipImgOffsetShield];
 	}
 

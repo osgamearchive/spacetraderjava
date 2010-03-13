@@ -22,6 +22,7 @@ package spacetrader;
 import jwinforms.Image;
 import spacetrader.enums.ShipType;
 import spacetrader.enums.Size;
+import spacetrader.guifacade.GuiEngine;
 import spacetrader.util.Hashtable;
 
 public class ShipTemplate extends STSerializableObject implements Comparable<ShipTemplate>
@@ -48,7 +49,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 	{
 		_name = name;
 		_size = size;
-		_images = Game.CurrentGame().getParentWindow().CustomShipImages();
+		_images = GuiEngine.imageProvider.getCustomShipImages();
 	}
 
 	public ShipTemplate(ShipSpec spec, String name)
@@ -65,7 +66,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 		_hullStrength = spec.HullStrength();
 
 		if (ImageIndex() == Consts.ShipImgUseDefault)
-			_images = Game.CurrentGame().getParentWindow().CustomShipImages();
+			_images = GuiEngine.imageProvider.getCustomShipImages();
 	}
 
 	public ShipTemplate(Hashtable hash)

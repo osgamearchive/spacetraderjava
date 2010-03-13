@@ -1,8 +1,11 @@
-package spacetrader.gui;
+package spacetrader;
 
 import java.util.Hashtable;
 
-public enum SomeStringsForSwitch
+import spacetrader.util.CheatCode;
+
+@CheatCode
+public enum SomeStringsForCheatSwitch
 {
 	Bazaar,
 	Cover,
@@ -62,16 +65,16 @@ public enum SomeStringsForSwitch
 
 	__void__;
 
-	static Hashtable<String, SomeStringsForSwitch> specialStrings = new Hashtable<String, SomeStringsForSwitch>();
+	static Hashtable<String, SomeStringsForCheatSwitch> specialStrings = new Hashtable<String, SomeStringsForCheatSwitch>();
 	static
 	{
 		specialStrings.put("Monster.com", MonsterCom);
 		specialStrings.put("L'Engle", L_Engle);
 	}
 
-	static public SomeStringsForSwitch find(String string)
+	static public SomeStringsForCheatSwitch find(String string)
 	{
-		SomeStringsForSwitch spacialvalue = specialStrings.get(string);
+		SomeStringsForCheatSwitch spacialvalue = specialStrings.get(string);
 		if (spacialvalue != null)
 			return spacialvalue;
 		try

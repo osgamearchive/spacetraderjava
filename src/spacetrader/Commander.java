@@ -30,7 +30,7 @@ package spacetrader;
 
 import jwinforms.DialogResult;
 import spacetrader.enums.*;
-import spacetrader.gui.FormAlert;
+import spacetrader.guifacade.GuiFacade;
 import spacetrader.util.Hashtable;
 
 public class Commander extends CrewMember
@@ -130,20 +130,20 @@ public class Commander extends CrewMember
 		boolean traded = false;
 
 		if (netPrice > 0 && getDebt() > 0)
-			FormAlert.Alert(AlertType.DebtNoBuy);
+			GuiFacade.alert(AlertType.DebtNoBuy);
 		else if (netPrice > CashToSpend())
-			FormAlert.Alert(AlertType.ShipBuyIF);
+			GuiFacade.alert(AlertType.ShipBuyIF);
 		else if (specToBuy.getCrewQuarters() < getShip().SpecialCrew().length)
 		{
 			String passengers = getShip().SpecialCrew()[1].Name();
 			if (getShip().SpecialCrew().length > 2)
 				passengers += " and " + getShip().SpecialCrew()[2].Name();
 
-			FormAlert.Alert(AlertType.ShipBuyPassengerQuarters, passengers);
+			GuiFacade.alert(AlertType.ShipBuyPassengerQuarters, passengers);
 		} else if (specToBuy.getCrewQuarters() < getShip().CrewCount())
-			FormAlert.Alert(AlertType.ShipBuyCrewQuarters);
+			GuiFacade.alert(AlertType.ShipBuyCrewQuarters);
 		else if (getShip().ReactorOnBoard())
-			FormAlert.Alert(AlertType.ShipBuyReactor);
+			GuiFacade.alert(AlertType.ShipBuyReactor);
 		else
 		{
 			Equipment[] special = new Equipment[] { Consts.Weapons[WeaponType.MorgansLaser.CastToInt()],
@@ -160,7 +160,7 @@ public class Commander extends CrewMember
 				if (getShip().HasEquipment(special[i]))
 				{
 					if (specToBuy.Slots(special[i].EquipmentType()) == 0)
-						FormAlert.Alert(AlertType.ShipBuyNoSlots, newShipName, special[i].Name(), Strings.EquipmentTypes[special[i].EquipmentType().CastToInt()]);
+						GuiFacade.alert(AlertType.ShipBuyNoSlots, newShipName, special[i].Name(), Strings.EquipmentTypes[special[i].EquipmentType().CastToInt()]);
 					else
 					{
 						extraCost += special[i].TransferPrice();
@@ -176,7 +176,7 @@ public class Commander extends CrewMember
 			}
 
 			if (netPrice + extraCost > CashToSpend())
-				FormAlert.Alert(AlertType.ShipBuyIFTransfer);
+				GuiFacade.alert(AlertType.ShipBuyIFTransfer);
 
 			extraCost = 0;
 
@@ -185,8 +185,8 @@ public class Commander extends CrewMember
 				if (add[i])
 				{
 					if (netPrice + extraCost + special[i].TransferPrice() > CashToSpend())
-						FormAlert.Alert(AlertType.ShipBuyNoTransfer, special[i].Name());
-					else if (FormAlert.Alert(AlertType.ShipBuyTransfer, special[i].Name(), special[i].Name()
+						GuiFacade.alert(AlertType.ShipBuyNoTransfer, special[i].Name());
+					else if (GuiFacade.alert(AlertType.ShipBuyTransfer, special[i].Name(), special[i].Name()
 					.toLowerCase(), Functions.FormatNumber(special[i].TransferPrice())) == DialogResult.Yes)
 						extraCost += special[i].TransferPrice();
 					else
@@ -197,14 +197,14 @@ public class Commander extends CrewMember
 			if (addPod)
 			{
 				if (netPrice + extraCost + Consts.PodTransferCost > CashToSpend())
-					FormAlert.Alert(AlertType.ShipBuyNoTransfer, Strings.ShipInfoEscapePod);
-				else if (FormAlert.Alert(AlertType.ShipBuyTransfer, Strings.ShipInfoEscapePod, Strings.ShipInfoEscapePod.toLowerCase(), Functions.FormatNumber(Consts.PodTransferCost)) == DialogResult.Yes)
+					GuiFacade.alert(AlertType.ShipBuyNoTransfer, Strings.ShipInfoEscapePod);
+				else if (GuiFacade.alert(AlertType.ShipBuyTransfer, Strings.ShipInfoEscapePod, Strings.ShipInfoEscapePod.toLowerCase(), Functions.FormatNumber(Consts.PodTransferCost)) == DialogResult.Yes)
 					extraCost += Consts.PodTransferCost;
 				else
 					addPod = false;
 			}
 
-			if (FormAlert.Alert(AlertType.ShipBuyConfirm, getShip().Name(), newShipName, (add[0] || add[1]
+			if (GuiFacade.alert(AlertType.ShipBuyConfirm, getShip().Name(), newShipName, (add[0] || add[1]
 			|| add[2] || addPod ? Strings.ShipBuyTransfer : "")) == DialogResult.Yes)
 			{
 				CrewMember[] oldCrew = getShip().Crew();

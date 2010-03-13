@@ -32,7 +32,10 @@ import spacetrader.Game;
 import spacetrader.Ship;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.EncounterResult;
+import spacetrader.guifacade.Facaded;
+import spacetrader.guifacade.GuiFacade;
 
+@Facaded
 public class FormEncounter extends SpaceTraderForm
 {
 	// #region Control Declarations
@@ -1672,7 +1675,7 @@ public class FormEncounter extends SpaceTraderForm
 
 	private void picTrib_Click(Object sender, EventArgs e)
 	{
-		FormAlert.Alert(AlertType.TribblesSqueek);
+		GuiFacade.alert(AlertType.TribblesSqueek);
 	}
 
 	private void tmrTick_Tick(Object sender, EventArgs e)

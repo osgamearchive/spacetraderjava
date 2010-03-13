@@ -7,6 +7,7 @@ import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.StarSystemId;
+import spacetrader.guifacade.GuiFacade;
 import spacetrader.util.Util;
 
 /*
@@ -247,10 +248,10 @@ public class GalacticChart extends jwinforms.GroupBox
 	private void btnJump_Click(Object sender, jwinforms.EventArgs e)
 	{
 		if (game.WarpSystem() == null)
-			FormAlert.Alert(AlertType.ChartJumpNoSystemSelected);
+			GuiFacade.alert(AlertType.ChartJumpNoSystemSelected);
 		else if (game.WarpSystem() == commander.getCurrentSystem())
-			FormAlert.Alert(AlertType.ChartJumpCurrent);
-		else if (FormAlert.Alert(AlertType.ChartJump, game.WarpSystem().Name()) == DialogResult.Yes)
+			GuiFacade.alert(AlertType.ChartJumpCurrent);
+		else if (GuiFacade.alert(AlertType.ChartJump, game.WarpSystem().Name()) == DialogResult.Yes)
 		{
 			game.setCanSuperWarp(false);
 			try

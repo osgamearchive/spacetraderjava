@@ -6,6 +6,7 @@ import java.awt.Point;
 import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.AlertType;
+import spacetrader.guifacade.GuiFacade;
 
 public class SystemBox extends jwinforms.GroupBox
 {
@@ -374,7 +375,7 @@ public class SystemBox extends jwinforms.GroupBox
 		if (alert.ShowDialog() != DialogResult.No)
 		{
 			if (commander.CashToSpend() < specEvent.Price())
-				FormAlert.Alert(AlertType.SpecialIF);
+				GuiFacade.alert(AlertType.SpecialIF);
 			else
 			{
 				try

@@ -33,6 +33,7 @@ package spacetrader.gui;import java.util.Arrays;
 import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.AlertType;
+import spacetrader.guifacade.GuiFacade;
 	public class FormShipList extends SpaceTraderForm
 	{
 		//#region Control Declarations
@@ -153,7 +154,7 @@ import spacetrader.enums.AlertType;
 
 			if (game.Commander().getShip().getTribbles() > 0 && !game.getTribbleMessage())
 			{
-				FormAlert.Alert(AlertType.TribblesTradeIn);
+				GuiFacade.alert(AlertType.TribblesTradeIn);
 				game.setTribbleMessage(true);
 			}
 		}

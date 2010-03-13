@@ -34,6 +34,7 @@ import jwinforms.*;
 import spacetrader.Game;
 import spacetrader.GameOptions;
 import spacetrader.enums.AlertType;
+import spacetrader.guifacade.GuiFacade;
 
 public class FormOptions extends SpaceTraderForm
 {
@@ -85,7 +86,7 @@ public class FormOptions extends SpaceTraderForm
 		{
 			Options().LoadFromDefaults(false);
 			btnOk.setEnabled(false);
-			FormAlert.Alert(AlertType.OptionsNoGame);
+			GuiFacade.alert(AlertType.OptionsNoGame);
 		}
 
 		UpdateAll();

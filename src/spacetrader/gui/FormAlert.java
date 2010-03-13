@@ -25,7 +25,9 @@ import spacetrader.Game;
 import spacetrader.Strings;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.GameEndType;
+import spacetrader.guifacade.Facaded;
 
+@Facaded
 public class FormAlert extends SpaceTraderForm
 {
 	private static final String _80_CHARS = "01234567890123456789012345678901234567890123456789012345678901234567890123456789";
@@ -208,26 +210,31 @@ public class FormAlert extends SpaceTraderForm
 		});
 	}
 
+	@Facaded
 	public static DialogResult Alert(AlertType type)
 	{
 		return Alert(type, new String[] {});
 	}
 
+	@Facaded
 	public static DialogResult Alert(AlertType type, String var1)
 	{
 		return Alert(type, new String[] { var1 });
 	}
 
+	@Facaded
 	public static DialogResult Alert(AlertType type, String var1, String var2)
 	{
 		return Alert(type, new String[] { var1, var2 });
 	}
 
+	@Facaded
 	public static DialogResult Alert(AlertType type, String var1, String var2, String var3)
 	{
 		return Alert(type, new String[] { var1, var2, var3 });
 	}
 
+	@Facaded
 	public static DialogResult Alert(AlertType type, String[] args)
 	{
 		return MakeDialog(type, args).Show();

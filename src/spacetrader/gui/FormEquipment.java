@@ -34,6 +34,7 @@ import spacetrader.*;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.EquipmentType;
 import spacetrader.enums.GadgetType;
+import spacetrader.guifacade.GuiFacade;
 
 public class FormEquipment extends SpaceTraderForm
 {
@@ -656,16 +657,16 @@ public class FormEquipment extends SpaceTraderForm
 
 			if (baseType == EquipmentType.Gadget && cmdr.getShip().HasGadget(((Gadget) selectedEquipment).Type())
 					&& ((Gadget) selectedEquipment).Type() != GadgetType.ExtraCargoBays)
-				FormAlert.Alert(AlertType.EquipmentAlreadyOwn);
+				GuiFacade.alert(AlertType.EquipmentAlreadyOwn);
 			else if (cmdr.getDebt() > 0)
-				FormAlert.Alert(AlertType.DebtNoBuy);
+				GuiFacade.alert(AlertType.DebtNoBuy);
 			else if (selectedEquipment.Price() > cmdr.CashToSpend())
-				FormAlert.Alert(AlertType.EquipmentIF);
+				GuiFacade.alert(AlertType.EquipmentIF);
 			else if ((baseType == EquipmentType.Weapon && cmdr.getShip().FreeSlotsWeapon() == 0)
 					|| (baseType == EquipmentType.Shield && cmdr.getShip().FreeSlotsShield() == 0)
 					|| (baseType == EquipmentType.Gadget && cmdr.getShip().FreeSlotsGadget() == 0))
-				FormAlert.Alert(AlertType.EquipmentNotEnoughSlots);
-			else if (FormAlert.Alert(AlertType.EquipmentBuy, selectedEquipment.Name(), Functions
+				GuiFacade.alert(AlertType.EquipmentNotEnoughSlots);
+			else if (GuiFacade.alert(AlertType.EquipmentBuy, selectedEquipment.Name(), Functions
 			.FormatNumber(selectedEquipment.Price())) == DialogResult.Yes)
 			{
 				cmdr.getShip().AddEquipment(selectedEquipment);
@@ -692,7 +693,7 @@ public class FormEquipment extends SpaceTraderForm
 	{
 		if (selectedEquipment != null && sellSideSelected)
 		{
-			if (FormAlert.Alert(AlertType.EquipmentSell) == DialogResult.Yes)
+			if (GuiFacade.alert(AlertType.EquipmentSell) == DialogResult.Yes)
 			{
 				// The slot is the selected index. Two of the three list boxes
 				// will have selected indices of -1, so adding
@@ -704,7 +705,7 @@ public class FormEquipment extends SpaceTraderForm
 						&& (((Gadget) selectedEquipment).Type() == GadgetType.ExtraCargoBays || ((Gadget) selectedEquipment)
 								.Type() == GadgetType.HiddenCargoBays) && cmdr.getShip().FreeCargoBays() < 5)
 				{
-					FormAlert.Alert(AlertType.EquipmentExtraBaysInUse);
+					GuiFacade.alert(AlertType.EquipmentExtraBaysInUse);
 				} else
 				{
 					cmdr.setCash(cmdr.getCash() + selectedEquipment.SellPrice());

@@ -5,10 +5,7 @@ import java.util.Iterator;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.CrewMemberId;
 import spacetrader.enums.VeryRareEncounter;
-import spacetrader.gui.FormAlert;
-import spacetrader.gui.FormMonster;
-import spacetrader.gui.FormTest;
-import spacetrader.gui.SomeStringsForSwitch;
+import spacetrader.guifacade.GuiFacade;
 import spacetrader.util.CheatCode;
 import spacetrader.util.Util;
 
@@ -40,7 +37,7 @@ public class GameCheats
 		if (cheatMode)
 		{
 
-			switch (SomeStringsForSwitch.find(first))
+			switch (SomeStringsForCheatSwitch.find(first))
 			{
 			case Bazaar:
 				game.setChanceOfTradeInOrbit(Math.max(0, Math.min(1000, num1)));
@@ -68,7 +65,7 @@ public class GameCheats
 						text += Strings.VeryRareEncounters[list.next().CastToInt()] + Strings.newline;
 					text = text.trim();
 
-					FormAlert.Alert(AlertType.Alert, "Remaining Very Rare Encounters", text);
+					GuiFacade.alert(AlertType.Alert, "Remaining Very Rare Encounters", text);
 				}
 				break;
 			case Fame:
@@ -87,7 +84,7 @@ public class GameCheats
 				break;
 			case Ice:
 			{
-				switch (SomeStringsForSwitch.find(second))
+				switch (SomeStringsForCheatSwitch.find(second))
 				{
 				case Pirate:
 					game.Commander().setKillsPirate(Math.max(0, num2));
@@ -133,7 +130,7 @@ public class GameCheats
 				ship.setEscapePod(!ship.getEscapePod());
 				break;
 			case MonsterCom:
-				(new FormMonster()).Show();
+				GuiFacade.performMonsterCom();
 				break;
 			case PlanB:
 				game.setAutoSave(true);
@@ -162,7 +159,7 @@ public class GameCheats
 				break;
 			case Status:
 			{
-				switch (SomeStringsForSwitch.find(second))
+				switch (SomeStringsForCheatSwitch.find(second))
 				{
 				case Artifact:
 					game.setQuestStatusArtifact(Math.max(0, num2));
@@ -216,7 +213,7 @@ public class GameCheats
 							+ "SpaceMonster: " + game.getQuestStatusSpaceMonster() + Strings.newline + "Wild: "
 							+ game.getQuestStatusWild();
 
-				FormAlert.Alert(AlertType.Alert, "Status of Quests", text);
+				GuiFacade.alert(AlertType.Alert, "Status of Quests", text);
 					break;
 				}
 			}
@@ -226,7 +223,7 @@ public class GameCheats
 					ship.Cargo()[num1] = Math.max(0, Math.min(ship.FreeCargoBays() + ship.Cargo()[num1], num2));
 				break;
 			case Test:
-				(new FormTest()).Show();
+				GuiFacade.performTestForm();
 				break;
 			case Tool:
 				if (num1 >= 0 && num1 < ship.Gadgets().length && num2 >= 0 && num2 < Consts.Gadgets.length)
@@ -243,10 +240,10 @@ public class GameCheats
 			}
 		} else
 		{
-			switch (SomeStringsForSwitch.find(first))
+			switch (SomeStringsForCheatSwitch.find(first))
 			{
 			case Cheetah:
-				FormAlert.Alert(AlertType.Cheater);
+				GuiFacade.alert(AlertType.Cheater);
 				cheatMode = true;
 				break;
 			default:

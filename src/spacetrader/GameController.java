@@ -1,8 +1,8 @@
 package spacetrader;
 
 import spacetrader.enums.AlertType;
-import spacetrader.gui.FormAlert;
-import spacetrader.gui.SpaceTrader;
+import spacetrader.guifacade.GuiFacade;
+import spacetrader.guifacade.MainWindow;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
@@ -18,9 +18,9 @@ import spacetrader.util.Util;
 public class GameController
 {
 	private final Game game;
-	private final SpaceTrader mainWindow;
+	private final MainWindow mainWindow;
 
-	public GameController(Game game, SpaceTrader spaceTrader)
+	public GameController(Game game, MainWindow spaceTrader)
 	{
 		this.game = game;
 		mainWindow = spaceTrader;
@@ -79,9 +79,9 @@ public class GameController
 			break;
 		}
 
-		FormAlert.Alert(alertType);
+		GuiFacade.alert(alertType);
 
-		FormAlert.Alert(AlertType.GameEndScore, Functions.FormatNumber(game.Score() / 10), Functions
+		GuiFacade.alert(AlertType.GameEndScore, Functions.FormatNumber(game.Score() / 10), Functions
 		.FormatNumber(game.Score() % 10));
 
 		HighScoreRecord candidate = new HighScoreRecord(game.Commander().Name(), game.Score(), game.getEndStatus(),
@@ -89,14 +89,14 @@ public class GameController
 		if (candidate.CompareTo(Functions.GetHighScores()[0]) > 0)
 		{
 			if (game.Cheats().cheatMode)
-				FormAlert.Alert(AlertType.GameEndHighScoreCheat);
+				GuiFacade.alert(AlertType.GameEndHighScoreCheat);
 			else
 			{
 				AddHighScore(candidate);
-				FormAlert.Alert(AlertType.GameEndHighScoreAchieved);
+				GuiFacade.alert(AlertType.GameEndHighScoreAchieved);
 			}
 		} else
-			FormAlert.Alert(AlertType.GameEndHighScoreMissed);
+			GuiFacade.alert(AlertType.GameEndHighScoreMissed);
 
 		Game.CurrentGame(null);
 		mainWindow.setGame(null);
@@ -118,7 +118,7 @@ public class GameController
 			}
 		} catch (FutureVersionException ex)
 		{
-			FormAlert.Alert(AlertType.FileErrorOpen, fileName, Strings.FileFutureVersion);
+			GuiFacade.alert(AlertType.FileErrorOpen, fileName, Strings.FileFutureVersion);
 		}
 	}
 

@@ -27,6 +27,7 @@ package spacetrader.gui;
 import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.*;
+import spacetrader.guifacade.GuiFacade;
 
 public class FormViewPersonnel extends SpaceTraderForm
 {
@@ -440,7 +441,7 @@ public class FormViewPersonnel extends SpaceTraderForm
 		{
 			if (game.Commander().getShip().HasCrew(selectedCrewMember.Id()))
 			{
-				if (FormAlert.Alert(AlertType.CrewFireMercenary, selectedCrewMember.Name()) == DialogResult.Yes)
+				if (GuiFacade.alert(AlertType.CrewFireMercenary, selectedCrewMember.Name()) == DialogResult.Yes)
 				{
 					game.Commander().getShip().Fire(selectedCrewMember.Id());
 
@@ -450,7 +451,7 @@ public class FormViewPersonnel extends SpaceTraderForm
 			} else
 			{
 				if (game.Commander().getShip().FreeCrewQuarters() == 0)
-					FormAlert.Alert(AlertType.CrewNoQuarters, selectedCrewMember.Name());
+					GuiFacade.alert(AlertType.CrewNoQuarters, selectedCrewMember.Name());
 				else
 				{
 					game.Commander().getShip().Hire(selectedCrewMember);
