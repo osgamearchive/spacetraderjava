@@ -19,7 +19,7 @@ public class WinformForm extends WinformPane
 		// super(new WinformJPanel());
 		super(new JDialog());
 		jdialog = (JDialog)swingVersion;
-		// panel = (WinformJPanel)swingVersion;
+		jdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		panel = new WinformJPanel(this);
 		jdialog.setContentPane(panel);
 		Controls = panel;

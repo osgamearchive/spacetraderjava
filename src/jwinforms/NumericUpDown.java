@@ -46,7 +46,7 @@ public class NumericUpDown extends WinformControl
 
 	public void Select(int i, int length)
 	{
-	// TODO Auto-generated method stub
+	// TODO implement NumericUpDown.Select (text)
 	}
 
 	public void setValueChanged(final EventHandler<Object, EventArgs> valueChanged)
@@ -103,7 +103,9 @@ public class NumericUpDown extends WinformControl
 	}
 
 	public void setLeave(EventHandler<Object, EventArgs> leave)
-	{}
+	{
+	// TODO: implement. Used --> Important.
+	}
 
 	public int getValue()
 	{
