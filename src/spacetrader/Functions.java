@@ -305,11 +305,10 @@ public class Functions
 		return StringVars(toParse, new String[] { var1, var2 });
 	}
 
-	// *************************************************************************
-	// Returns true if there exists a wormhole from a to b.
-	// If b < 0, then return true if there exists a wormhole
-	// at all from a.
-	// *************************************************************************
+	/**
+	 * Returns true if there exists a wormhole from a to b. If b < 0, then return true if
+	 * there exists a wormhole at all from a.
+	 */
 	public static boolean WormholeExists(int a, int b)
 	{
 		int[] wormholes = Game.CurrentGame().Wormholes();

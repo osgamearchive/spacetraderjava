@@ -21,12 +21,6 @@
  * You can contact the author at spacetrader@frenchfryz.com
  *
  ******************************************************************************/
-// using System;
-// using System.Drawing;
-// using System.Collections;
-// using System.ComponentModel;
-// using System.Windows.Forms;
-
 package spacetrader.gui;
 
 import java.util.Arrays;
@@ -42,8 +36,6 @@ import spacetrader.guifacade.GuiFacade;
 
 public class FormViewBank extends SpaceTraderForm
 {
-	//#region Control Declarations
-
 	private jwinforms.Label lblLoan;
 	private jwinforms.Label lblCurrentDebtLabel;
 	private jwinforms.Label lblMaxLoanLabel;
@@ -61,21 +53,10 @@ public class FormViewBank extends SpaceTraderForm
 	private jwinforms.Button btnPayBack;
 	private jwinforms.Button btnClose;
 	private jwinforms.Label lblMaxNoClaim;
-	private final Container components = null;
-
-	//#endregion
-
-	//#region Member Declarations
 
 	private final Game game = Game.CurrentGame();
 	private final Commander cmdr = Game.CurrentGame().Commander();
-	private final int MaxLoan = Game.CurrentGame().Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreClean ? Math
-			.min(25000, Math.max(1000, Game.CurrentGame().Commander().Worth() / 5000 * 500))
-			: 500;
-
-	//#endregion
-
-	//#region Methods
+	private final int MaxLoan = cmdr.getMaxLoan();
 
 	public FormViewBank()
 	{
@@ -84,11 +65,6 @@ public class FormViewBank extends SpaceTraderForm
 		UpdateAll();
 	}
 
-	//#region Windows Form Designer generated code
-	/// <summary>
-	/// Required method for Designer support - do not modify
-	/// the contents of this method with the code editor.
-	/// </summary>
 	private void InitializeComponent()
 	{
 		lblLoan = new jwinforms.Label();
@@ -171,7 +147,7 @@ public class FormViewBank extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnGetLoan_Click(sender, e);
+				btnGetLoan_Click();
 			}
 		});
 		//
@@ -188,7 +164,7 @@ public class FormViewBank extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnBuyInsurance_Click(sender, e);
+				btnBuyInsurance_Click();
 			}
 		});
 		//
@@ -272,7 +248,7 @@ public class FormViewBank extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnPayBack_Click(sender, e);
+				btnPayBack_Click();
 			}
 		});
 		//
@@ -313,8 +289,6 @@ public class FormViewBank extends SpaceTraderForm
 		this.setText("Bank");
 	}
 
-	//#endregion
-
 	private void UpdateAll()
 	{
 		// Loan Info
@@ -328,14 +302,10 @@ public class FormViewBank extends SpaceTraderForm
 		lblMaxNoClaim.setVisible((cmdr.NoClaim() == Consts.MaxNoClaim));
 		lblInsAmt.setText(Functions.StringVars(Strings.MoneyRateSuffix, Functions.FormatMoney(game.InsuranceCosts())));
 		btnBuyInsurance.setText(Functions.StringVars(Strings.BankInsuranceButtonText,
-				cmdr.getInsurance() ? Strings.BankInsuranceButtonStop : Strings.BankInsuranceButtonBuy));
+				cmdr.isInsured() ? Strings.BankInsuranceButtonStop : Strings.BankInsuranceButtonBuy));
 	}
 
-	//#endregion
-
-	//#region Event Handlers
-
-	private void btnGetLoan_Click(Object sender, EventArgs e)
+	private void btnGetLoan_Click()
 	{
 		if (cmdr.getDebt() >= MaxLoan)
 			GuiFacade.alert(AlertType.DebtTooLargeLoan);
@@ -344,8 +314,7 @@ public class FormViewBank extends SpaceTraderForm
 			FormGetLoan form = new FormGetLoan(MaxLoan - cmdr.getDebt());
 			if (form.ShowDialog(this) == DialogResult.OK)
 			{
-				cmdr.setCash(cmdr.getCash() + form.Amount());
-				cmdr.setDebt(cmdr.getDebt() + form.Amount());
+				cmdr.takeLoan(form.Amount());
 
 				UpdateAll();
 				game.getParentWindow().UpdateAll();
@@ -353,7 +322,7 @@ public class FormViewBank extends SpaceTraderForm
 		}
 	}
 
-	private void btnPayBack_Click(Object sender, EventArgs e)
+	private void btnPayBack_Click()
 	{
 		if (cmdr.getDebt() == 0)
 			GuiFacade.alert(AlertType.DebtNone);
@@ -362,8 +331,7 @@ public class FormViewBank extends SpaceTraderForm
 			FormPayBackLoan form = new FormPayBackLoan();
 			if (form.ShowDialog(this) == DialogResult.OK)
 			{
-				cmdr.setCash(cmdr.getCash() - form.Amount());
-				cmdr.setDebt(cmdr.getDebt() - form.Amount());
+				cmdr.takeLoan(-form.Amount());
 
 				UpdateAll();
 				game.getParentWindow().UpdateAll();
@@ -371,26 +339,17 @@ public class FormViewBank extends SpaceTraderForm
 		}
 	}
 
-	private void btnBuyInsurance_Click(Object sender, EventArgs e)
+	private void btnBuyInsurance_Click()
 	{
-		if (cmdr.getInsurance())
+		if (cmdr.isInsured())
 		{
 			if (FormAlert.Alert(AlertType.InsuranceStop) == DialogResult.Yes)
-			{
-				cmdr.setInsurance(false);
-				cmdr.NoClaim(0);
-			}
+				cmdr.stopInsurance();
 		} else if (!cmdr.getShip().getEscapePod())
 			GuiFacade.alert(AlertType.InsuranceNoEscapePod);
 		else
-		{
-			cmdr.setInsurance(true);
-			cmdr.NoClaim(0);
-		}
+			cmdr.startInsurance();
 
-		UpdateAll();
 		game.getParentWindow().UpdateAll();
 	}
-
-	//#endregion
 }

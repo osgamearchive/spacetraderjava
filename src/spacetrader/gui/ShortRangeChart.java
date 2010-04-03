@@ -9,12 +9,12 @@ import spacetrader.enums.StarSystemId;
 
 public class ShortRangeChart extends jwinforms.GroupBox
 {
-	private SystemTracker game = null;
+	private SystemTracker systemTracker = null;
 	private Commander commander;
 
 	void setGame(SystemTracker game, Commander commander)
 	{
-		this.game = game;
+		systemTracker = game;
 		this.commander = commander;
 	}
 
@@ -81,9 +81,9 @@ public class ShortRangeChart extends jwinforms.GroupBox
 
 	private void picShortRangeChart_MouseDown(Object sender, jwinforms.MouseEventArgs e)
 	{
-		if (e.Button == MouseButtons.Left && game != null)
+		if (e.Button == MouseButtons.Left && systemTracker != null)
 		{
-			StarSystem[] universe = game.Universe();
+			StarSystem[] universe = systemTracker.Universe();
 			StarSystem curSys = commander.getCurrentSystem();
 
 			boolean clickedSystem = false;
@@ -102,7 +102,7 @@ public class ShortRangeChart extends jwinforms.GroupBox
 					if (e.X >= x - OFF_X && e.X <= x + OFF_X && e.Y >= y - OFF_Y && e.Y <= y + OFF_Y)
 					{
 						clickedSystem = true;
-						game.SelectedSystemId(StarSystemId.FromInt(i));
+						systemTracker.SelectedSystemId(StarSystemId.FromInt(i));
 					} else if (Functions.WormholeExists(i, -1))
 					{
 						int xW = x + 9;
@@ -110,8 +110,7 @@ public class ShortRangeChart extends jwinforms.GroupBox
 						if (e.X >= xW - OFF_X && e.X <= xW + OFF_X && e.Y >= y - OFF_Y && e.Y <= y + OFF_Y)
 						{
 							clickedSystem = true;
-							game.SelectedSystemId((StarSystemId.FromInt(i)));
-							game.TargetWormhole(true);
+							systemTracker.selectTargetWormholeFrom(StarSystemId.FromInt(i));
 						}
 					}
 				}
@@ -130,11 +129,11 @@ public class ShortRangeChart extends jwinforms.GroupBox
 
 	private void picShortRangeChart_Paint(Object sender, jwinforms.PaintEventArgs e)
 	{
-		if (game != null)
+		if (systemTracker != null)
 		{
-			StarSystem[] universe = game.Universe();
-			int[] wormholes = game.Wormholes();
-			StarSystem trackSys = game.TrackedSystem();
+			StarSystem[] universe = systemTracker.Universe();
+			int[] wormholes = systemTracker.Wormholes();
+			StarSystem trackSys = systemTracker.TrackedSystem();
 			StarSystem curSys = commander.getCurrentSystem();
 			int fuel = commander.getShip().getFuel();
 
@@ -164,7 +163,7 @@ public class ShortRangeChart extends jwinforms.GroupBox
 							new Point(centerX + dX2, centerY + dY2) });
 				}
 
-				if (game.isShowTrackedRange())
+				if (systemTracker.isShowTrackedRange())
 					e.Graphics.DrawString(Functions.StringVars(Strings.ChartDistance, Functions.Multiples(dist,
 							Strings.DistanceUnit), trackSys.Name()), font, new SolidBrush(Color.black), 0,
 							picShortRangeChart.getHeight() - 13);
@@ -187,13 +186,13 @@ public class ShortRangeChart extends jwinforms.GroupBox
 
 						if (j == 1)
 						{
-							if (universe[i] == game.WarpSystem())
+							if (universe[i] == systemTracker.WarpSystem())
 							{
 								e.Graphics.DrawLine(DEFAULT_PEN, x - 6, y, x + 6, y);
 								e.Graphics.DrawLine(DEFAULT_PEN, x, y - 6, x, y + 6);
 							}
 
-							if (universe[i] == game.TrackedSystem())
+							if (universe[i] == systemTracker.TrackedSystem())
 							{
 								e.Graphics.DrawLine(DEFAULT_PEN, x - 5, y - 5, x + 5, y + 5);
 								e.Graphics.DrawLine(DEFAULT_PEN, x - 5, y + 5, x + 5, y - 5);
@@ -205,7 +204,7 @@ public class ShortRangeChart extends jwinforms.GroupBox
 							if (Functions.WormholeExists(i, -1))
 							{
 								int xW = x + 9;
-								if (game.TargetWormhole() && universe[i] == game.SelectedSystem())
+								if (systemTracker.TargetWormhole() && universe[i] == systemTracker.SelectedSystem())
 								{
 									e.Graphics.DrawLine(DEFAULT_PEN, xW - 6, y, xW + 6, y);
 									e.Graphics.DrawLine(DEFAULT_PEN, xW, y - 6, xW, y + 6);

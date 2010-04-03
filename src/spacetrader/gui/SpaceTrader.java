@@ -674,8 +674,6 @@ public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 		{
 			setGame(new Game(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form.Trader(), form
 					.Engineer(), this));
-			controller.SaveGameFile = null;
-			controller.SaveGameDays = 0;
 
 			SetInGameControlsEnabled(true);
 			UpdateAll();
@@ -830,10 +828,10 @@ public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 	public void setGame(Game game)
 	{
 		this.game = game;
-		controller = new GameController(game, this);
+		controller = game.makeController(this);
 		commander = game == null ? null : game.Commander();
 
-		dockBox.setGame(commander);
+		dockBox.setGame(controller, commander);
 		cargoBox.setGame(game, controller);
 		targetSystemBox.setGame(game, controller, commander);
 		galacticChart.setGame(game, controller, commander);

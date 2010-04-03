@@ -33,17 +33,9 @@ import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.EquipmentType;
-import spacetrader.enums.GadgetType;
-import spacetrader.guifacade.GuiFacade;
 
 public class FormEquipment extends SpaceTraderForm
 {
-	// #region Control Declarations
-	public static void main(String[] args) throws Exception
-	{
-		FormEquipment form = new FormEquipment();
-		Launcher.runForm(form);
-	}
 	private jwinforms.Button btnClose;
 	private jwinforms.GroupBox boxSell;
 	private jwinforms.GroupBox boxBuy;
@@ -83,19 +75,11 @@ public class FormEquipment extends SpaceTraderForm
 	private jwinforms.Label lblBuyShieldNone;
 	private jwinforms.Label lblBuyGadgetNone;
 
-	// #endregion
-
-	// #region Member Declarations
-
 	private final Game game = Game.CurrentGame();
 	private final Equipment[] equipBuy = Consts.EquipmentForSale;
 	private Equipment selectedEquipment = null;
 	private boolean sellSideSelected = false;
 	private boolean handlingSelect = false;
-
-	// #endregion
-
-	// #region Methods
 
 	public FormEquipment()
 	{
@@ -105,11 +89,6 @@ public class FormEquipment extends SpaceTraderForm
 		UpdateSell();
 	}
 
-	// #region Windows Form Designer generated code
-	// / <summary>
-	// / Required method for Designer support - do not modify
-	// / the contents of this method with the code editor.
-	// / </summary>
 	private void InitializeComponent()
 	{
 		btnClose = new jwinforms.Button();
@@ -654,42 +633,24 @@ public class FormEquipment extends SpaceTraderForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Buy/Sell Equipment");
-		GroupBox r = boxSell;
-		GroupBox r1 = boxBuy;
-		GroupBox r2 = boxShipInfo;
-
 	}
-
-	// #endregion
 
 	private void Buy()
 	{
-		if (selectedEquipment != null && !sellSideSelected)
+		if (selectedEquipment == null || sellSideSelected)
+			return;
+
+		Commander cmdr = game.Commander();
+
+		if (cmdr.canBuyEquipment(selectedEquipment)
+				&& FormAlert.Alert(AlertType.EquipmentBuy, selectedEquipment.Name(), Functions
+						.FormatNumber(selectedEquipment.Price())) == DialogResult.Yes)
 		{
-			Commander cmdr = game.Commander();
-			EquipmentType baseType = selectedEquipment.EquipmentType();
+			cmdr.performBuyEquipment(selectedEquipment);
 
-			if (baseType == EquipmentType.Gadget && cmdr.getShip().HasGadget(((Gadget) selectedEquipment).Type())
-					&& ((Gadget) selectedEquipment).Type() != GadgetType.ExtraCargoBays)
-				GuiFacade.alert(AlertType.EquipmentAlreadyOwn);
-			else if (cmdr.getDebt() > 0)
-				GuiFacade.alert(AlertType.DebtNoBuy);
-			else if (selectedEquipment.Price() > cmdr.CashToSpend())
-				GuiFacade.alert(AlertType.EquipmentIF);
-			else if ((baseType == EquipmentType.Weapon && cmdr.getShip().FreeSlotsWeapon() == 0)
-					|| (baseType == EquipmentType.Shield && cmdr.getShip().FreeSlotsShield() == 0)
-					|| (baseType == EquipmentType.Gadget && cmdr.getShip().FreeSlotsGadget() == 0))
-				GuiFacade.alert(AlertType.EquipmentNotEnoughSlots);
-			else if (FormAlert.Alert(AlertType.EquipmentBuy, selectedEquipment.Name(), Functions
-			.FormatNumber(selectedEquipment.Price())) == DialogResult.Yes)
-			{
-				cmdr.getShip().AddEquipment(selectedEquipment);
-				cmdr.setCash(cmdr.getCash() - selectedEquipment.Price());
-
-				DeselectAll();
-				UpdateSell();
-				game.getParentWindow().UpdateAll();
-			}
+			DeselectAll();
+			UpdateSell();
+			game.getParentWindow().UpdateAll();
 		}
 	}
 
@@ -705,30 +666,24 @@ public class FormEquipment extends SpaceTraderForm
 
 	private void Sell()
 	{
-		if (selectedEquipment != null && sellSideSelected)
+		if (selectedEquipment == null || !sellSideSelected)
+			return;
+		if (FormAlert.Alert(AlertType.EquipmentSell) != DialogResult.Yes)
+			return;
+
+		// The slot is the selected index. Two of the three list boxes
+		// will have selected indices of -1, so adding
+		// 2 to the total cancels those out.
+		int slot = lstSellWeapon.getSelectedIndex() + lstSellShield.getSelectedIndex()
+				+ lstSellGadget.getSelectedIndex() + 2;
+		Commander cmdr = game.Commander();
+
+		if (cmdr.canSellEquipment(selectedEquipment))
 		{
-			if (FormAlert.Alert(AlertType.EquipmentSell) == DialogResult.Yes)
-			{
-				// The slot is the selected index. Two of the three list boxes
-				// will have selected indices of -1, so adding
-				// 2 to the total cancels those out.
-				int slot = lstSellWeapon.getSelectedIndex() + lstSellShield.getSelectedIndex() + lstSellGadget.getSelectedIndex() + 2;
-				Commander cmdr = game.Commander();
+			cmdr.performSellEquipment(slot, selectedEquipment);
 
-				if (selectedEquipment.EquipmentType() == EquipmentType.Gadget
-						&& (((Gadget) selectedEquipment).Type() == GadgetType.ExtraCargoBays || ((Gadget) selectedEquipment)
-								.Type() == GadgetType.HiddenCargoBays) && cmdr.getShip().FreeCargoBays() < 5)
-				{
-					GuiFacade.alert(AlertType.EquipmentExtraBaysInUse);
-				} else
-				{
-					cmdr.setCash(cmdr.getCash() + selectedEquipment.SellPrice());
-					cmdr.getShip().RemoveEquipment(selectedEquipment.EquipmentType(), slot);
-
-					UpdateSell();
-					game.getParentWindow().UpdateAll();
-				}
-			}
+			UpdateSell();
+			game.getParentWindow().UpdateAll();
 		}
 	}
 
@@ -860,18 +815,11 @@ public class FormEquipment extends SpaceTraderForm
 		}
 	}
 
-	// #endregion
-
-	// #region Event Handlers
-
 	private void BuyClick(Object sender, EventArgs e)
 	{
 		if (selectedEquipment != null)
 			Buy();
 	}
-
-
-
 
 	private void SelectedIndexChanged(Object sender, EventArgs e)
 	{
@@ -900,6 +848,4 @@ public class FormEquipment extends SpaceTraderForm
 		if (selectedEquipment != null)
 			Sell();
 	}
-
-	// #endregion
 }

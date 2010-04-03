@@ -27,7 +27,6 @@ public class ShipyardBox extends jwinforms.GroupBox
 		this.mainWindow = mainWindow;
 	}
 
-
 	private jwinforms.Button btnDesign;
 	private jwinforms.Button btnPod;
 	private jwinforms.Label lblEquipForSale;
@@ -182,7 +181,7 @@ public class ShipyardBox extends jwinforms.GroupBox
 				lblEscapePod.setText(Strings.ShipyardPodInstalled);
 			else if (noTech)
 				lblEscapePod.setText(Strings.ShipyardPodNoSale);
-			else if (commander.getCash() < 2000)
+			else if (commander.getCash() < 2000) // TODO number...
 				lblEscapePod.setText(Strings.ShipyardPodIF);
 			else
 			{
@@ -214,8 +213,7 @@ public class ShipyardBox extends jwinforms.GroupBox
 	{
 		if (FormAlert.Alert(AlertType.EquipmentEscapePod) == DialogResult.Yes)
 		{
-			commander.setCash(commander.getCash() - 2000);
-			commander.getShip().setEscapePod(true);
+			commander.buyEscapePod();
 			mainWindow.UpdateAll();
 		}
 	}

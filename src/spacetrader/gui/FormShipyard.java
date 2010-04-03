@@ -27,7 +27,6 @@ import spacetrader.*;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.ShipType;
 import spacetrader.enums.Size;
-import spacetrader.guifacade.GuiEngine;
 import spacetrader.guifacade.GuiFacade;
 import spacetrader.stub.ArrayList;
 import spacetrader.stub.Directory;
@@ -37,8 +36,6 @@ import util.Path;
 @SuppressWarnings( { "synthetic-access", "unchecked" })
 public class FormShipyard extends SpaceTraderForm
 {
-	//#region Control Declarations
-
 	private IContainer components;
 	private jwinforms.Label lblWelcome;
 	private jwinforms.TextBox txtName;
@@ -108,7 +105,7 @@ public class FormShipyard extends SpaceTraderForm
 	//#region Member variables
 
 	private final Game game = Game.CurrentGame();
-	private final Shipyard shipyard = Game.CurrentGame().Commander().getCurrentSystem().Shipyard();
+	private final Shipyard shipyard = game.Commander().getCurrentSystem().Shipyard();
 	private boolean loading = false;
 	private ArrayList<Size> sizes = null;
 	private Image[] customImages = new Image[Consts.ImagesPerShip];
@@ -145,11 +142,6 @@ public class FormShipyard extends SpaceTraderForm
 		LoadSelectedTemplate();
 	}
 
-	//#region Windows Form Designer generated code
-	/// <summary>
-	/// Required method for Designer support - do not modify
-	/// the contents of this method with the code editor.
-	/// </summary>
 	private void InitializeComponent()
 	{
 		components = new Container();
@@ -1076,54 +1068,52 @@ public class FormShipyard extends SpaceTraderForm
 
 	private void LoadSelectedTemplate()
 	{
-		if (selTemplate.getSelectedItem() instanceof ShipTemplate)
-		{
-			loading = true;
+		if (!(selTemplate.getSelectedItem() instanceof ShipTemplate))
+			return;
 
-			ShipTemplate template = (ShipTemplate)selTemplate.getSelectedItem();
+		loading = true;
 
-			if (template.Name() == Strings.ShipNameCurrentShip)
-				txtName.setText(game.Commander().getShip().Name());
-			else if (template.Name().endsWith(Strings.ShipNameTemplateSuffixDefault)
-					|| template.Name().endsWith(Strings.ShipNameTemplateSuffixMinimum))
-				txtName.setText("");
-			else
-				txtName.setText(template.Name());
+		ShipTemplate template = (ShipTemplate)selTemplate.getSelectedItem();
 
-			selSize.setSelectedIndex(Math.max(0, sizes.indexOf(template.Size())));
-			imgIndex = template.ImageIndex() == ShipType.Custom.CastToInt() ? imgTypes.length - 1 : template
-					.ImageIndex();
+		if (template.Name() == Strings.ShipNameCurrentShip)
+			txtName.setText(game.Commander().getShip().Name());
+		else if (template.Name().endsWith(Strings.ShipNameTemplateSuffixDefault)
+				|| template.Name().endsWith(Strings.ShipNameTemplateSuffixMinimum))
+			txtName.setText("");
+		else
+			txtName.setText(template.Name());
 
-			if (template.Images() != null)
-				customImages = ShipImageMaker.produceCustomImages(template.Images());
-			else
-				customImages = SpaceTrader.INSTANCE.CustomShipImages();
+		selSize.setSelectedIndex(Math.max(0, sizes.indexOf(template.Size())));
+		imgIndex = template.ImageIndex() == ShipType.Custom.CastToInt() ? imgTypes.length - 1 : template.ImageIndex();
 
-			numCargoBays.setValue(template.CargoBays());
-			numFuelTanks.setValue(Math.min(Math.max(numFuelTanks.getMinimum(), template.FuelTanks()), numFuelTanks
-					.getMaximum()));
-			numHullStrength.setValue(Math.min(Math.max(numHullStrength.getMinimum(), template.HullStrength()),
-					numHullStrength.getMaximum()));
-			numWeaponSlots.setValue(template.WeaponSlots());
-			numShieldSlots.setValue(template.ShieldSlots());
-			numGadgetSlots.setValue(template.GadgetSlots());
-			numCrewQuarters.setValue(Math.max(numCrewQuarters.getMinimum(), template.CrewQuarters()));
+		if (template.Images() != null)
+			customImages = ShipImageMaker.produceCustomImages(template.Images());
+		else
+			customImages = SpaceTrader.INSTANCE.CustomShipImages();
 
-			UpdateShip();
-			UpdateCalculatedFigures();
+		numCargoBays.setValue(template.CargoBays());
+		numFuelTanks.setValue(Math.min(Math.max(numFuelTanks.getMinimum(), template.FuelTanks()), numFuelTanks
+				.getMaximum()));
+		numHullStrength.setValue(Math.min(Math.max(numHullStrength.getMinimum(), template.HullStrength()),
+				numHullStrength.getMaximum()));
+		numWeaponSlots.setValue(template.WeaponSlots());
+		numShieldSlots.setValue(template.ShieldSlots());
+		numGadgetSlots.setValue(template.GadgetSlots());
+		numCrewQuarters.setValue(Math.max(numCrewQuarters.getMinimum(), template.CrewQuarters()));
 
-			if (selTemplate.Items.get(0).toString() == Strings.ShipNameModified)
-				selTemplate.Items.remove(0);
+		UpdateShip();
+		UpdateCalculatedFigures();
 
-			loading = false;
-		}
+		if (selTemplate.Items.get(0).toString() == Strings.ShipNameModified)
+			selTemplate.Items.remove(0);
+
+		loading = false;
 	}
 
 	private void LoadSizes()
 	{
 		sizes = new ArrayList<Size>(6);
 
-//			foreach (Size size in shipyard.AvailableSizes)
 		for (Size size : shipyard.AvailableSizes())
 		{
 			sizes.add(size);
@@ -1271,30 +1261,21 @@ public class FormShipyard extends SpaceTraderForm
 				.CastToInt()].Name()));
 	}
 
-	//#endregion
-
-	//#region Event Handlers
-
 	private void btnConstruct_Click(Object sender, EventArgs e)
 	{
-		if (ConstructButtonEnabled())
+		if (!ConstructButtonEnabled())
+			return;
+
+		if (game.Commander().TradeShip(shipyard.ShipSpec(), shipyard.TotalCost(), txtName.getText()))
 		{
-			if (game.Commander().TradeShip(shipyard.ShipSpec(), shipyard.TotalCost(), txtName.getText()))
-			{
-				Strings.ShipNames[ShipType.Custom.CastToInt()] = txtName.getText();
+			Strings.ShipNames[ShipType.Custom.CastToInt()] = txtName.getText();
 
-				if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone)
-					game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
+			// Replace the current custom images with the new ones.
+			if (game.Commander().getShip().ImageIndex() == ShipType.Custom.CastToInt())
+				SpaceTrader.INSTANCE.setCustomShipImages(customImages);
 
-				// Replace the current custom images with the new ones.
-				if (game.Commander().getShip().ImageIndex() == ShipType.Custom.CastToInt())
-				{
-					SpaceTrader.INSTANCE.setCustomShipImages(customImages);
-				}
-
-				GuiFacade.alert(AlertType.ShipDesignThanks, shipyard.Name());
-				Close();
-			}
+			GuiFacade.alert(AlertType.ShipDesignThanks, shipyard.Name());
+			Close();
 		}
 	}
 
@@ -1331,24 +1312,23 @@ public class FormShipyard extends SpaceTraderForm
 
 	private void btnSave_Click(Object sender, EventArgs e)
 	{
-		if (SaveButtonEnabled())
+		if (!SaveButtonEnabled())
+			return;
+		if (dlgSave.ShowDialog(this) != DialogResult.OK)
+			return;
+
+		ShipTemplate template = new ShipTemplate(shipyard.ShipSpec(), txtName.getText());
+
+		if (imgIndex > Consts.MaxShip)
 		{
-			if (dlgSave.ShowDialog(this) == DialogResult.OK)
-			{
-				ShipTemplate template = new ShipTemplate(shipyard.ShipSpec(), txtName.getText());
+			template.ImageIndex(ShipType.Custom.CastToInt());
+			template.Images(ShipImageMaker.describeCustomImages(customImages));
+		} else
+			template.ImageIndex(imgIndex);
 
-				if (imgIndex > Consts.MaxShip)
-				{
-					template.ImageIndex(ShipType.Custom.CastToInt());
-					template.Images(ShipImageMaker.describeCustomImages(customImages));
-				} else
-					template.ImageIndex(imgIndex);
+		Functions.SaveFile(dlgSave.getFileName(), template.Serialize());
 
-				Functions.SaveFile(dlgSave.getFileName(), template.Serialize());
-
-				LoadTemplateList();
-			}
-		}
+		LoadTemplateList();
 	}
 
 	private void btnSave_MouseEnter(Object sender, EventArgs e)
@@ -1363,27 +1343,27 @@ public class FormShipyard extends SpaceTraderForm
 
 	private void btnSetCustomImage_Click(Object sender, EventArgs e)
 	{
-		if (dlgOpen.ShowDialog(this) == DialogResult.OK)
+		if (dlgOpen.ShowDialog(this) != DialogResult.OK)
+			return;
+
+		String baseFileName = Path.RemoveExtension(dlgOpen.getFileName());
+		String ext = Path.GetExtension(dlgOpen.getFileName());
+
+		Bitmap image = GetImageFile(baseFileName + ext);
+		Bitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
+		Bitmap imageShields = GetImageFile(baseFileName + "s" + ext);
+		Bitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
+
+		if (image != null && imageDamaged != null && imageShields != null && imageShieldsDamaged != null)
 		{
-			String baseFileName = Path.RemoveExtension(dlgOpen.getFileName());
-			String ext = Path.GetExtension(dlgOpen.getFileName());
-
-			Bitmap image = GetImageFile(baseFileName + ext);
-			Bitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
-			Bitmap imageShields = GetImageFile(baseFileName + "s" + ext);
-			Bitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
-
-			if (image != null && imageDamaged != null && imageShields != null && imageShieldsDamaged != null)
-			{
-				customImages[Consts.ShipImgOffsetNormal] = image;
-				customImages[Consts.ShipImgOffsetDamage] = imageDamaged;
-				customImages[Consts.ShipImgOffsetShield] = imageShields;
-				customImages[Consts.ShipImgOffsetSheildDamage] = imageShieldsDamaged;
-			}
-
-			imgIndex = imgTypes.length - 1;
-			UpdateShip();
+			customImages[Consts.ShipImgOffsetNormal] = image;
+			customImages[Consts.ShipImgOffsetDamage] = imageDamaged;
+			customImages[Consts.ShipImgOffsetShield] = imageShields;
+			customImages[Consts.ShipImgOffsetSheildDamage] = imageShieldsDamaged;
 		}
+
+		imgIndex = imgTypes.length - 1;
+		UpdateShip();
 	}
 
 	private void num_ValueChanged(Object sender, EventArgs e)

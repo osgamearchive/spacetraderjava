@@ -17,11 +17,6 @@
  * You can contact the author at spacetrader@frenchfryz.com
  * 
  ******************************************************************************/
-// using System;
-// using System.Drawing;
-// using System.Collections;
-// using System.ComponentModel;
-// using System.Windows.Forms;
 package spacetrader.gui;
 
 import java.util.*;
@@ -36,8 +31,6 @@ import spacetrader.enums.*;
 @SuppressWarnings("unchecked")
 public class FormViewShip extends SpaceTraderForm
 {
-	//#region Control Declarations
-
 	private jwinforms.Button btnClose;
 	private jwinforms.Label lblTypeLabel;
 	private jwinforms.Label lblType;
@@ -45,18 +38,9 @@ public class FormViewShip extends SpaceTraderForm
 	private jwinforms.Label lblSpecialCargo;
 	private jwinforms.Label lblEquipLabel;
 	private jwinforms.Label lblEquip;
-	private Container components = null;
 
-	//#endregion
-
-	//#region Member Declarations
-
-	private Game game = Game.CurrentGame();
-	private Ship ship = Game.CurrentGame().Commander().getShip();
-
-	//#endregion
-
-	//#region Methods
+	private final Game game = Game.CurrentGame();
+	private final Ship ship = Game.CurrentGame().Commander().getShip();
 
 	public FormViewShip()
 	{
@@ -70,96 +54,91 @@ public class FormViewShip extends SpaceTraderForm
 		DisplaySpecialCargo();
 	}
 
-	//#region Windows Form Designer generated code
-	/// <summary>
-	/// Required method for Designer support - do not modify
-	/// the contents of this method with the code editor.
-	/// </summary>
 	private void InitializeComponent()
 	{
-		this.lblTypeLabel = new jwinforms.Label();
-		this.lblType = new jwinforms.Label();
-		this.btnClose = new jwinforms.Button();
-		this.lblEquipLabel = new jwinforms.Label();
-		this.lblEquip = new jwinforms.Label();
-		this.boxSpecialCargo = new jwinforms.GroupBox();
-		this.lblSpecialCargo = new jwinforms.Label();
-		this.boxSpecialCargo.SuspendLayout();
+		lblTypeLabel = new jwinforms.Label();
+		lblType = new jwinforms.Label();
+		btnClose = new jwinforms.Button();
+		lblEquipLabel = new jwinforms.Label();
+		lblEquip = new jwinforms.Label();
+		boxSpecialCargo = new jwinforms.GroupBox();
+		lblSpecialCargo = new jwinforms.Label();
+		boxSpecialCargo.SuspendLayout();
 		this.SuspendLayout();
 		// 
 		// lblTypeLabel
 		// 
-		this.lblTypeLabel.setAutoSize(true);
-		this.lblTypeLabel.setFont(FontCollection.bold825);
-		this.lblTypeLabel.setLocation(new java.awt.Point(8, 8));
-		this.lblTypeLabel.setName("lblTypeLabel");
-		this.lblTypeLabel.setSize(new jwinforms.Size(34, 13));
-		this.lblTypeLabel.setTabIndex(2);
-		this.lblTypeLabel.setText("Type:");
+		lblTypeLabel.setAutoSize(true);
+		lblTypeLabel.setFont(FontCollection.bold825);
+		lblTypeLabel.setLocation(new java.awt.Point(8, 8));
+		lblTypeLabel.setName("lblTypeLabel");
+		lblTypeLabel.setSize(new jwinforms.Size(34, 13));
+		lblTypeLabel.setTabIndex(2);
+		lblTypeLabel.setText("Type:");
 		// 
 		// lblType
 		// 
-		this.lblType.setLocation(new java.awt.Point(80, 8));
-		this.lblType.setName("lblType");
-		this.lblType.setSize(new jwinforms.Size(100, 13));
-		this.lblType.setTabIndex(4);
-		this.lblType.setText("Grasshopper");
+		lblType.setLocation(new java.awt.Point(80, 8));
+		lblType.setName("lblType");
+		lblType.setSize(new jwinforms.Size(100, 13));
+		lblType.setTabIndex(4);
+		lblType.setText("Grasshopper");
 		// 
 		// btnClose
 		// 
-		this.btnClose.setDialogResult(DialogResult.Cancel);
-		this.btnClose.setLocation(new java.awt.Point(-32, -32));
-		this.btnClose.setName("btnClose");
-		this.btnClose.setSize(new jwinforms.Size(32, 32));
-		this.btnClose.setTabIndex(32);
-		this.btnClose.setTabStop(false);
-		this.btnClose.setText("X");
+		btnClose.setDialogResult(DialogResult.Cancel);
+		btnClose.setLocation(new java.awt.Point(-32, -32));
+		btnClose.setName("btnClose");
+		btnClose.setSize(new jwinforms.Size(32, 32));
+		btnClose.setTabIndex(32);
+		btnClose.setTabStop(false);
+		btnClose.setText("X");
 		// 
 		// lblEquipLabel
 		// 
-		this.lblEquipLabel.setFont(FontCollection.bold825);
-		this.lblEquipLabel.setLocation(new java.awt.Point(8, 34));
-		this.lblEquipLabel.setName("lblEquipLabel");
-		this.lblEquipLabel.setSize(new jwinforms.Size(64, 176));
-		this.lblEquipLabel.setTabIndex(43);
-		this.lblEquipLabel.setText("Hull:\r\n\r\nEquipment:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnfilled:");
+		lblEquipLabel.setFont(FontCollection.bold825);
+		lblEquipLabel.setLocation(new java.awt.Point(8, 34));
+		lblEquipLabel.setName("lblEquipLabel");
+		lblEquipLabel.setSize(new jwinforms.Size(64, 176));
+		lblEquipLabel.setTabIndex(43);
+		lblEquipLabel.setText("Hull:\r\n\r\nEquipment:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnfilled:");
 		// 
 		// lblEquip
 		// 
-		this.lblEquip.setLocation(new java.awt.Point(80, 34));
-		this.lblEquip.setName("lblEquip");
-		this.lblEquip.setSize(new jwinforms.Size(120, 176));
-		this.lblEquip.setTabIndex(44);
-		this.lblEquip
+		lblEquip.setLocation(new java.awt.Point(80, 34));
+		lblEquip.setName("lblEquip");
+		lblEquip.setSize(new jwinforms.Size(120, 176));
+		lblEquip.setTabIndex(44);
+		lblEquip
 				.setText("Hardened\r\n\r\n1 Military Laser\r\n1 Morgan\'s Laser\r\n1 Energy Shield\r\n1 Reflective Shi"
 						+ "eld\r\n1 Lightning Shield\r\nNavigating System\r\nAuto-Repair System\r\n10 Extra Cargo Bays\r\nAn Escape Pod\r\n"
 						+ "\r\n1 weapon slot\r\n1 gadget slot");
 		// 
 		// boxSpecialCargo
 		// 
-		this.boxSpecialCargo.Controls.addAll((new WinformControl[] { this.lblSpecialCargo }));
-		this.boxSpecialCargo.setLocation(new java.awt.Point(192, 8));
-		this.boxSpecialCargo.setName("boxSpecialCargo");
-		this.boxSpecialCargo.setSize(new jwinforms.Size(200, 204));
-		this.boxSpecialCargo.setTabIndex(64);
-		this.boxSpecialCargo.setTabStop(false);
-		this.boxSpecialCargo.setText("Special Cargo");
+		boxSpecialCargo.Controls.addAll((new WinformControl[] { lblSpecialCargo }));
+		boxSpecialCargo.setLocation(new java.awt.Point(192, 8));
+		boxSpecialCargo.setName("boxSpecialCargo");
+		boxSpecialCargo.setSize(new jwinforms.Size(200, 204));
+		boxSpecialCargo.setTabIndex(64);
+		boxSpecialCargo.setTabStop(false);
+		boxSpecialCargo.setText("Special Cargo");
 		// 
 		// lblSpecialCargo
 		// 
-		this.lblSpecialCargo.setLocation(new java.awt.Point(8, 16));
-		this.lblSpecialCargo.setName("lblSpecialCargo");
-		this.lblSpecialCargo.setSize(new jwinforms.Size(190, 176));
-		this.lblSpecialCargo.setTabIndex(0);
-		this.lblSpecialCargo.setText("No special items.");
+		lblSpecialCargo.setLocation(new java.awt.Point(8, 16));
+		lblSpecialCargo.setName("lblSpecialCargo");
+		lblSpecialCargo.setSize(new jwinforms.Size(190, 176));
+		lblSpecialCargo.setTabIndex(0);
+		lblSpecialCargo.setText("No special items.");
 		// 
 		// FormViewShip
 		// 
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
-		this.setCancelButton(this.btnClose);
+		this.setCancelButton(btnClose);
 		this.setClientSize(new jwinforms.Size(402, 219));
-		this.Controls.addAll(Arrays.asList(this.boxSpecialCargo, this.lblEquip, this.lblEquipLabel, this.btnClose,
-				this.lblTypeLabel, this.lblType));
+		Controls.addAll(Arrays.asList(boxSpecialCargo, lblEquip, lblEquipLabel, btnClose,
+				lblTypeLabel, lblType));
 		this.setFormBorderStyle(FormBorderStyle.FixedDialog);
 		this.setMaximizeBox(false);
 		this.setMinimizeBox(false);
@@ -168,8 +147,6 @@ public class FormViewShip extends SpaceTraderForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Current Ship");
 	}
-
-	//#endregion
 
 	private void DisplayEquipment()
 	{
@@ -308,6 +285,4 @@ public class FormViewShip extends SpaceTraderForm
 		lblSpecialCargo.setText(specialCargo.size() == 0 ? Strings.SpecialCargoNone : Util.StringsJoin(Strings.newline
 				+ Strings.newline, Functions.ArrayListtoStringArray(specialCargo)));
 	}
-
-	//#endregion
 }

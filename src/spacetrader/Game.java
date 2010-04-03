@@ -17,9 +17,6 @@
  * You can contact the author at spacetrader@frenchfryz.com
  *
  ******************************************************************************/
-// using System;
-// using System.Collections;
-// using System.Windows.Forms;
 package spacetrader;
 
 import java.util.Arrays;
@@ -78,7 +75,6 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	private Difficulty _difficulty = spacetrader.enums.Difficulty.Normal; // Difficulty
 	// level
 	private boolean _autoSave = false;
-	private boolean _easyEncounters = false;
 	private GameEndType _endStatus = GameEndType.NA;
 	private EncounterType _encounterType = spacetrader.enums.EncounterType.FromInt(0); // Type
 	// of
@@ -171,6 +167,8 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 @CheatCode	private final GameCheats _cheats;
 
+	private GameController controller;
+
 	// #endregion
 
 	// #region Methods
@@ -209,7 +207,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			// TODO: JAF - DEBUG
 			Commander().setCash(1000000);
 			_cheats.cheatMode = true;
-			setEasyEncounters(true);
+			_cheats.easyEncounters = true;
 			setCanSuperWarp(true);
 		}
 	}
@@ -248,7 +246,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		_cheats = new GameCheats(this);
 		_cheats.cheatMode = GetValueFromHash(hash, "_cheatEnabled", _cheats.cheatMode);
 		_autoSave = GetValueFromHash(hash, "_autoSave", _autoSave);
-		_easyEncounters = GetValueFromHash(hash, "_easyEncounters", _easyEncounters);
+		_cheats.easyEncounters = GetValueFromHash(hash, "_easyEncounters", _cheats.easyEncounters);
 		_endStatus = GameEndType.FromInt(GetValueFromHash(hash, "_endStatus", _endStatus, Integer.class));
 		_encounterType = EncounterType.FromInt(GetValueFromHash(hash, "_encounterType", _encounterType, Integer.class));
 		_selectedSystemId = StarSystemId.FromInt(GetValueFromHash(hash, "_selectedSystemId", _selectedSystemId,
@@ -326,11 +324,11 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			Commander().getShip().RemoveIllegalGoods();
 		}
 
-		if (Commander().getInsurance())
+		if (Commander().isInsured())
 		{
 			GuiFacade.alert(AlertType.JailInsuranceLost);
-			Commander().setInsurance(false);
-			Commander().NoClaim(0);
+			Commander().setIsInsured(false);
+			Commander().setNoClaim(0);
 		}
 
 		if (Commander().getShip().CrewCount() - Commander().getShip().SpecialCrew().length > 1)
@@ -973,16 +971,6 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return _encounterContinueFleeing;
 	}
 
-	public void setEasyEncounters(boolean easyEncounters)
-	{
-		_easyEncounters = easyEncounters;
-	}
-
-	public boolean getEasyEncounters()
-	{
-		return _easyEncounters;
-	}
-
 	public void setClicks(int clicks)
 	{
 		_clicks = clicks;
@@ -1224,8 +1212,8 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	{
 		Commander().setShip(new Ship(ShipType.Flea));
 		Commander().getShip().Crew()[0] = Commander();
-		Commander().setInsurance(false);
-		Commander().NoClaim(0);
+		Commander().setIsInsured(false);
+		Commander().setNoClaim(0);
 	}
 
 	private void CreateShips()
@@ -1906,6 +1894,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 											- Difficulty().CastToInt()) : 2));
 
 							// If the hull is hardened, damage is halved.
+							// TODO use a proper variable for this.
 							if (getQuestStatusScarab() == SpecialEvent.StatusScarabDone)
 								damage /= 2;
 
@@ -2636,7 +2625,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
 		}
 
-		if (Commander().getInsurance())
+		if (Commander().isInsured())
 		{
 			GuiFacade.alert(AlertType.InsurancePayoff);
 			Commander().setCash(Commander().getCash() + Commander().getShip().BaseWorth(true));
@@ -2845,6 +2834,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 	}
 
+	/**
+	 * The special event is selected by the current system.
+	 */
 	public void HandleSpecialEvent()
 	{
 		StarSystem curSys = Commander().getCurrentSystem();
@@ -3151,8 +3143,8 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	{
 		Commander().setDays(Commander().getDays() + num);
 
-		if (Commander().getInsurance())
-			Commander().NoClaim(Commander().NoClaim() + num);
+		if (Commander().isInsured())
+			Commander().setNoClaim(Commander().NoClaim() + num);
 
 		// Police Record will gravitate towards neutral (0).
 		if (Commander().getPoliceRecordScore() > Consts.PoliceRecordScoreClean)
@@ -3579,6 +3571,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		VeryRareEncounters().add(VeryRareEncounter.BottleGood);
 	}
 
+	// todo move.
 	public void SelectNextSystemWithinRange(boolean forward)
 	{
 		int[] dest = Destinations();
@@ -3649,7 +3642,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		hash.add("_difficulty", _difficulty.CastToInt());
 		hash.add("_cheatEnabled", _cheats.cheatMode);
 		hash.add("_autoSave", _autoSave);
-		hash.add("_easyEncounters", _easyEncounters);
+		hash.add("_easyEncounters", _cheats.easyEncounters);
 		hash.add("_endStatus", _endStatus.CastToInt());
 		hash.add("_encounterType", _encounterType.CastToInt());
 		hash.add("_selectedSystemId", _selectedSystemId.CastToInt());
@@ -3785,6 +3778,47 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				Arrival();
 			}
 		}
+	}
+
+	// todo change relations with these 3 methods.
+	public void jumpWithSingularity()
+	{
+
+		if (WarpSystem() == null)
+			GuiFacade.alert(AlertType.ChartJumpNoSystemSelected);
+		else if (WarpSystem() == Commander().getCurrentSystem())
+			GuiFacade.alert(AlertType.ChartJumpCurrent);
+		else if (GuiFacade.alert(AlertType.ChartJump, WarpSystem().Name()) == DialogResult.Yes)
+		{
+			setCanSuperWarp(false);
+			try
+			{
+				controller.autoSave_depart();
+
+				Warp(true);
+
+				controller.autoSave_arive();
+			} catch (GameEndException ex)
+			{
+				controller.GameEnd();
+			}
+			getParentWindow().UpdateAll();
+		}
+	}
+	public void jumpWithoutSingularity()
+	{
+		try
+		{
+			controller.autoSave_depart();
+
+			Warp(false);
+
+			controller.autoSave_arive();
+		} catch (GameEndException ex)
+		{
+			controller.GameEnd();
+		}
+		getParentWindow().UpdateAll();
 	}
 
 	@CheatCode
@@ -3944,6 +3978,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return text;
 	}
 
+	// TODO change from int to enum, and change name from Index to Type, and we're cool.
 	public int EncounterImageIndex()
 	{
 		int encounterImage = -1;
@@ -4141,7 +4176,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 	public int InsuranceCosts()
 	{
-		return Commander().getInsurance() ? (int)Math.max(1, Commander().getShip().BaseWorth(true) * Consts.InsRate
+		return Commander().isInsured() ? (int)Math.max(1, Commander().getShip().BaseWorth(true) * Consts.InsRate
 				* (100 - Commander().NoClaim()) / 100) : 0;
 	}
 
@@ -4333,7 +4368,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		_targetWormhole = false;
 	}
 
-	public void setSelectedSystemByName(String value)
+	public void setSelectedSystemByName(String value, boolean track)
 	{
 		String nameToFind = value;
 		boolean found = false;
@@ -4346,6 +4381,8 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				found = true;
 			}
 		}
+		if (found && track)
+			setTrackedSystemId(SelectedSystemId());
 	}
 
 	public Ship SpaceMonster()
@@ -4367,6 +4404,12 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			int wormIndex = Util.BruteSeek(Wormholes(), SelectedSystemId().CastToInt());
 			_warpSystemId = StarSystemId.FromInt(Wormholes()[(wormIndex + 1) % Wormholes().length]);
 		}
+	}
+
+	public void selectTargetWormholeFrom(StarSystemId value)
+	{
+		SelectedSystemId(value);
+		TargetWormhole(true);
 	}
 
 	public StarSystem TrackedSystem()
@@ -4409,6 +4452,11 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	public boolean isShowTrackedRange()
 	{
 		return Options().getShowTrackedRange();
+	}
+
+	public GameController makeController(MainWindow mainWindow)
+	{
+		return controller = new GameController(this, mainWindow);
 	}
 
 	// #endregion

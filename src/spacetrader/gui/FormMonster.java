@@ -28,7 +28,7 @@ package spacetrader.gui;
 import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.ShipyardId;
-import spacetrader.stub.ArrayList;
+import java.util.ArrayList;
 import spacetrader.util.CheatCode;
 import spacetrader.util.Util;
 
@@ -36,13 +36,7 @@ import spacetrader.util.Util;
 @CheatCode
 public class FormMonster extends SpaceTraderForm
 {
-	// #region Constants
-
 	private final int SplitSystems = 31;
-
-	// #endregion
-
-	// #region Control Declarations
 
 	private jwinforms.Button btnClose;
 	private jwinforms.Panel pnlMercs;
@@ -78,18 +72,10 @@ public class FormMonster extends SpaceTraderForm
 	private jwinforms.LinkLabel lblShipyardSystems;
 	private jwinforms.Label lblShipyards;
 
-	// #endregion
-
-	// #region Member Declarations
-
 	private final Game game = Game.CurrentGame();
 	private Integer[] mercIds;
 	private Integer[] questSystemIds;
 	private Integer[] shipyardSystemIds;
-
-	// #endregion
-
-	// #region Methods
 
 	public FormMonster()
 	{
@@ -102,11 +88,6 @@ public class FormMonster extends SpaceTraderForm
 		UpdateAll();
 	}
 
-	// #region Windows Form Designer generated code
-	// / <summary>
-	// / Required method for Designer support - do not modify
-	// / the contents of this method with the code editor.
-	// / </summary>
 	private void InitializeComponent()
 	{
 		btnClose = new jwinforms.Button();
@@ -211,7 +192,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -231,7 +212,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -251,7 +232,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -271,7 +252,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -290,7 +271,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -309,7 +290,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -328,7 +309,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -348,7 +329,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -367,7 +348,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -386,7 +367,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -405,7 +386,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SortLinkClicked(sender, e);
+				SortLinkClicked(sender);
 			}
 		};
 		//
@@ -480,7 +461,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SystemLinkClicked(sender, e);
+				SystemLinkClicked(e);
 			}
 		};
 		//
@@ -511,7 +492,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SystemLinkClicked(sender, e);
+				SystemLinkClicked(e);
 			}
 		};
 		//
@@ -545,7 +526,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SystemLinkClicked(sender, e);
+				SystemLinkClicked(e);
 			}
 		};
 		//
@@ -578,7 +559,7 @@ public class FormMonster extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
 			{
-				SystemLinkClicked(sender, e);
+				SystemLinkClicked(e);
 			}
 		};
 		//
@@ -625,8 +606,6 @@ public class FormMonster extends SpaceTraderForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Monster.com Job Listing");
 	}
-
-	// #endregion
 
 	private int Compare(int a, int b, String sortWhat, String sortBy)
 	{
@@ -917,22 +896,16 @@ public class FormMonster extends SpaceTraderForm
 		lblShipyards.setText(lblShipyards.getText().trim());
 	}
 
-	// #endregion
-
-	// #region Event Handlers
-
-	private void SystemLinkClicked(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
+	private void SystemLinkClicked(jwinforms.LinkLabelLinkClickedEventArgs e)
 	{
-		Game.CurrentGame().setSelectedSystemByName(e.Link.LinkData.toString());
+		Game.CurrentGame().setSelectedSystemByName(e.Link.LinkData.toString(), false);
 		Game.CurrentGame().getParentWindow().UpdateAll();
 		Close();
 	}
 
-	private void SortLinkClicked(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e)
+	private void SortLinkClicked(Object sender)
 	{
 		Sort(((LinkLabel) sender).getName().substring(3, 1), ((LinkLabel) sender).getText().substring(0, 1));
 		UpdateAll();
 	}
-
-	// #endregion
 }

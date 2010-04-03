@@ -28,7 +28,7 @@ public class GameController
 
 
 	public String SaveGameFile = null;
-	public int SaveGameDays = -1;
+	public int SaveGameDays = 0;
 
 
 	public void CargoBuy(int tradeItem, boolean max)
@@ -143,5 +143,17 @@ public class GameController
 	{
 		if (game.getAutoSave())
 			SaveGame(SAVE_DEPARTURE, false);
+	}
+
+	public void buyRepair(int toAdd)
+	{
+		game.Commander().getShip().setHull(game.Commander().getShip().getHull() + toAdd);
+		game.Commander().setCash(game.Commander().getCash() - (toAdd * game.Commander().getShip().getRepairCost()));
+	}
+
+	public void buyFuel(int toAdd)
+	{
+		game.Commander().getShip().setFuel(game.Commander().getShip().getFuel() + toAdd);
+		game.Commander().setCash(game.Commander().getCash() - (toAdd * game.Commander().getShip().getFuelCost()));
 	}
 }

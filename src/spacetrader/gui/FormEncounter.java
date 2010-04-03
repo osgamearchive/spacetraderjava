@@ -22,8 +22,9 @@
  * You can contact the author at spacetrader@frenchfryz.com
  *
  ******************************************************************************/
+package spacetrader.gui;
 
-package spacetrader.gui;import java.awt.Color;
+import java.awt.Color;
 
 import jwinforms.*;
 import spacetrader.Consts;
@@ -38,8 +39,6 @@ import spacetrader.guifacade.GuiFacade;
 @Facaded
 public class FormEncounter extends SpaceTraderForm
 {
-	// #region Control Declarations
-
 	private jwinforms.Label lblEncounter;
 	private jwinforms.PictureBox picShipYou;
 	private jwinforms.PictureBox picShipOpponent;
@@ -129,20 +128,12 @@ public class FormEncounter extends SpaceTraderForm
 	private final int TRADE = 11;
 	private final int YIELD = 12;
 
-	// #endregion
-
-	// #region Member Declarations
-
 	private final Game game = Game.CurrentGame();
 	private final Ship cmdrship = Game.CurrentGame().Commander().getShip();
 	private final Ship opponent = Game.CurrentGame().getOpponent();
 	private int contImg = 1;
 
 	private EncounterResult _result = EncounterResult.Continue;
-
-	// #endregion
-
-	// #region Methods
 
 	public FormEncounter()
 	{
@@ -152,8 +143,7 @@ public class FormEncounter extends SpaceTraderForm
 		game.EncounterBegin();
 
 		// Enable the control box (the X button) if cheats are enabled.
-		if (game.getEasyEncounters())
-			setControlBox(true);
+		setControlBox(game.Cheats().getEasyEncounters());
 
 		buttons = new Button[] { btnAttack, btnBoard, btnBribe, btnDrink,
 				btnFlee, btnIgnore, btnInt, btnMeet, btnPlunder, btnSubmit,
@@ -209,8 +199,7 @@ public class FormEncounter extends SpaceTraderForm
 		picContinuous = new jwinforms.PictureBox();
 		ilContinuous = new jwinforms.ImageList(components);
 		picEncounterType = new jwinforms.PictureBox();
-		ilEncounterType = new jwinforms.ImageList(
-				components);
+		ilEncounterType = new jwinforms.ImageList(components);
 		picTrib00 = new jwinforms.PictureBox();
 		ilTribbles = new jwinforms.ImageList(components);
 		picTrib50 = new jwinforms.PictureBox();
@@ -301,8 +290,8 @@ public class FormEncounter extends SpaceTraderForm
 		lblAction.setName("lblAction");
 		lblAction.setSize(new jwinforms.Size(232, 39));
 		lblAction.setTabIndex(15);
-		lblAction.setText("\"We know you removed illegal goods from the Marie Celeste. You must give them up "
-				+ "at once!\"");
+		lblAction
+				.setText("\"We know you removed illegal goods from the Marie Celeste. You must give them up at once!\"");
 		//
 		// lblOpponentLabel
 		//
@@ -1308,8 +1297,6 @@ public class FormEncounter extends SpaceTraderForm
 		//
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
 		this.setClientSize(new jwinforms.Size(234, 271));
-		this.setControlBox(false);
-		Controls.add(picTrib55);
 		Controls.add(picTrib54);
 		Controls.add(picTrib45);
 		Controls.add(picTrib44);
@@ -1379,10 +1366,7 @@ public class FormEncounter extends SpaceTraderForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Encounter");
-
 	}
-
-	// #endregion
 
 	private void DisableAuto()
 	{
@@ -1396,7 +1380,9 @@ public class FormEncounter extends SpaceTraderForm
 
 	private void ExecuteAction()
 	{
-		if ((_result = game.EncounterExecuteAction()) == EncounterResult.Continue)
+		if ((_result = game.EncounterExecuteAction()) != EncounterResult.Continue)
+			Close();
+		else
 		{
 			UpdateButtons();
 			UpdateShipStats();
@@ -1404,11 +1390,9 @@ public class FormEncounter extends SpaceTraderForm
 			lblEncounter.setText(game.EncounterText());
 			lblAction.setText(game.EncounterAction());
 
-			if (game.getEncounterContinueFleeing()
-					|| game.getEncounterContinueAttacking())
+			if (game.getEncounterContinueFleeing() || game.getEncounterContinueAttacking())
 				tmrTick.Start();
-		} else
-			Close();
+		}
 	}
 
 	private void Exit(EncounterResult result)
@@ -1565,10 +1549,6 @@ public class FormEncounter extends SpaceTraderForm
 		}
 	}
 
-	// #endregion
-
-	// #region Event Handlers
-
 	private void btnAttack_Click(Object sender, EventArgs e)
 	{
 		DisableAuto();
@@ -1684,15 +1664,8 @@ public class FormEncounter extends SpaceTraderForm
 		ExecuteAction();
 	}
 
-	// #endregion
-
-	// #region Properties
-
-
 	public EncounterResult Result()
 	{
 		return _result;
 	}
-
-	// #endregion
 }

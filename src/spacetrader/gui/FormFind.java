@@ -4,17 +4,16 @@
  *
  * Copyright (C) 2005 Jay French, All Rights Reserved
  *
- * Additional coding by David Pierron
- * Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
+ * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson,
+ * Samuel Goldstein, Matt Lee
  *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option) any
- * later version.
+ * This program is free software; you can redistribute it and/or modify it under the terms
+ * of the GNU General Public License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * If you'd like a copy of the GNU General Public License, go to
  * http://www.gnu.org/copyleft/gpl.html.
@@ -22,29 +21,18 @@
  * You can contact the author at spacetrader@frenchfryz.com
  *
  ******************************************************************************/
-//using System;
-//using System.Drawing;
-//using System.Collections;
-//using System.ComponentModel;
-//using System.Windows.Forms;
 package spacetrader.gui;
+
 import jwinforms.DialogResult;
 import jwinforms.FormStartPosition;
-import jwinforms.WinformForm;
 
 public class FormFind extends SpaceTraderForm
 {
-	// #region Control Declarations
-
 	private jwinforms.Label lblText;
 	private jwinforms.Button btnOk;
 	private jwinforms.Button btnCancel;
 	private jwinforms.TextBox txtSystem;
 	private jwinforms.CheckBox chkTrack;
-
-	// #endregion
-
-	// #region Methods
 
 	public FormFind()
 	{
@@ -54,11 +42,6 @@ public class FormFind extends SpaceTraderForm
 		chkTrack.setChecked(false);
 	}
 
-	// #region Windows Form Designer generated code
-	// / <summary>
-	// / Required method for Designer support - do not modify
-	// / the contents of this method with the code editor.
-	// / </summary>
 	private void InitializeComponent()
 	{
 		lblText = new jwinforms.Label();
@@ -120,8 +103,7 @@ public class FormFind extends SpaceTraderForm
 		this.setCancelButton(btnCancel);
 		this.setClientSize(new jwinforms.Size(184, 97));
 		this.setControlBox(false);
-		Controls.addAll(chkTrack, txtSystem,
-				btnCancel, btnOk, lblText);
+		Controls.addAll(chkTrack, txtSystem, btnCancel, btnOk, lblText);
 		this.setFormBorderStyle(jwinforms.FormBorderStyle.FixedDialog);
 		this.setName("FormFind");
 		this.setShowInTaskbar(false);

@@ -16,6 +16,7 @@ public class GameCheats
 {
 	private final Game game;
 	boolean cheatMode = false;
+	boolean easyEncounters = false;
 
 	public GameCheats(Game game)
 	{
@@ -73,7 +74,7 @@ public class GameCheats
 				game.Commander().setReputationScore(Math.max(0, num1));
 				break;
 			case Go:
-				game.setSelectedSystemByName(second);
+					game.setSelectedSystemByName(second, false);
 				if (game.SelectedSystem().Name().toLowerCase().equals(second.toLowerCase()))
 				{
 					controller.autoSave_depart();
@@ -100,7 +101,7 @@ public class GameCheats
 			}
 				break;
 			case Indemnity:
-				game.Commander().NoClaim(Math.max(0, num1));
+				game.Commander().setNoClaim(Math.max(0, num1));
 				break;
 			case IOU:
 				game.Commander().setDebt(Math.max(0, num1));
@@ -234,7 +235,7 @@ public class GameCheats
 				ship.setTribbles(Math.max(0, num1));
 				break;
 			case Yellow:
-				game.setEasyEncounters(true);
+					easyEncounters = true;
 				break;
 			default:
 				return true;
@@ -253,4 +254,10 @@ public class GameCheats
 		}
 		return false;
 	}
+
+	public boolean getEasyEncounters()
+	{
+		return easyEncounters;
+	}
+
 }

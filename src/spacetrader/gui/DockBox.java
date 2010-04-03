@@ -7,16 +7,19 @@ import jwinforms.EventArgs;
 import jwinforms.EventHandler;
 import spacetrader.Commander;
 import spacetrader.Functions;
+import spacetrader.GameController;
 import spacetrader.Ship;
 import spacetrader.Strings;
 
 public class DockBox extends jwinforms.GroupBox
 {
-	private Commander commander;
+	public Commander commander;
+	private GameController controller = null;
 
-	void setGame(Commander commander)
+	void setGame(GameController controller, Commander commander)
 	{
 		this.commander = commander;
+		this.controller = controller;
 	}
 
 	private final SpaceTrader mainWindow;
@@ -128,9 +131,7 @@ public class DockBox extends jwinforms.GroupBox
 		if (form.ShowDialog(mainWindow) == DialogResult.OK)
 		{
 			int toAdd = form.Amount() / commander.getShip().getFuelCost();
-			commander.getShip().setFuel(commander.getShip().getFuel() + toAdd);
-			commander.setCash(commander.getCash() - (toAdd * commander.getShip().getFuelCost()));
-			// todo inline when done
+			controller.buyFuel(toAdd);
 			mainWindow.UpdateAll();
 		}
 	}
@@ -141,9 +142,7 @@ public class DockBox extends jwinforms.GroupBox
 		if (form.ShowDialog(mainWindow) == DialogResult.OK)
 		{
 			int toAdd = form.Amount() / commander.getShip().getRepairCost();
-			commander.getShip().setHull(commander.getShip().getHull() + toAdd);
-			commander.setCash(commander.getCash() - (toAdd * commander.getShip().getRepairCost()));
-			// todo inline when done
+			controller.buyRepair(toAdd);
 			mainWindow.UpdateAll();
 		}
 	}

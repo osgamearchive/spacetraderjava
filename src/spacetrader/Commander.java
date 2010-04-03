@@ -223,11 +223,15 @@ public class Commander extends CrewMember
 
 				if (addPod)
 					getShip().setEscapePod(true);
-				else if (getInsurance())
+				else if (isInsured())
 				{
-					setInsurance(false);
-					NoClaim(0);
+					setIsInsured(false);
+					setNoClaim(0);
 				}
+
+				// TODO this is supposed to be "isArmorHardened".
+				if (Game.CurrentGame().getQuestStatusScarab() == SpecialEvent.StatusScarabDone)
+					Game.CurrentGame().setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
 
 				traded = true;
 			}
@@ -235,11 +239,6 @@ public class Commander extends CrewMember
 
 		return traded;
 	}
-
-	// //#endregion
-
-	// //#region Properties
-
 
 	public int CashToSpend()
 	{
@@ -256,7 +255,7 @@ public class Commander extends CrewMember
 		return _noclaim;
 	}
 
-	public void NoClaim(int value)
+	public void setNoClaim(int value)
 	{
 		_noclaim = Math.max(0, Math.min(Consts.MaxNoClaim, value));
 	}
@@ -336,25 +335,30 @@ public class Commander extends CrewMember
 		_killsPirate = killsPirate;
 	}
 
-	/**
-	 * @return
-	 */
 	public int getKillsPirate()
 	{
 		return _killsPirate;
 	}
 
-	public void setInsurance(boolean insurance)
+	public void setIsInsured(boolean insurance)
 	{
 		_insurance = insurance;
 	}
 
-	/**
-	 * @return
-	 */
-	public boolean getInsurance()
+	public boolean isInsured()
 	{
 		return _insurance;
+	}
+
+	public void stopInsurance()
+	{
+		setIsInsured(false);
+		setNoClaim(0);
+	}
+	public void startInsurance()
+	{
+		setIsInsured(true);
+		setNoClaim(0);
 	}
 
 	public void setDebt(int debt)
@@ -396,5 +400,79 @@ public class Commander extends CrewMember
 		return _cash;
 	}
 
-	// //#endregion
+	public void buyEscapePod()
+	{
+		setCash(getCash() - 2000);
+		getShip().setEscapePod(true);
+	}
+
+	public boolean canBuyEquipment(Equipment equipment)
+	{
+		EquipmentType baseType = equipment.EquipmentType();
+		boolean canbuy = false;
+		if (baseType == EquipmentType.Gadget && getShip().HasGadget(((Gadget)equipment).Type())
+				&& ((Gadget)equipment).Type() != GadgetType.ExtraCargoBays)
+			GuiFacade.alert(AlertType.EquipmentAlreadyOwn);
+		else if (getDebt() > 0)
+			GuiFacade.alert(AlertType.DebtNoBuy);
+		else if (equipment.Price() > CashToSpend())
+			GuiFacade.alert(AlertType.EquipmentIF);
+		else if ((baseType == EquipmentType.Weapon && getShip().FreeSlotsWeapon() == 0)
+				|| (baseType == EquipmentType.Shield && getShip().FreeSlotsShield() == 0)
+				|| (baseType == EquipmentType.Gadget && getShip().FreeSlotsGadget() == 0))
+			GuiFacade.alert(AlertType.EquipmentNotEnoughSlots);
+		else
+			canbuy = true;
+		return canbuy;
+	}
+
+	public void performBuyEquipment(Equipment equipment)
+	{
+		getShip().AddEquipment(equipment);
+		setCash(getCash() - equipment.Price());
+	}
+
+	public boolean canSellEquipment(Equipment equipment)
+	{
+		if (equipment.EquipmentType() == EquipmentType.Gadget
+				&& (((Gadget)equipment).Type() == GadgetType.ExtraCargoBays || ((Gadget)equipment).Type() == GadgetType.HiddenCargoBays)
+				&& getShip().FreeCargoBays() < 5)
+		{
+			GuiFacade.alert(AlertType.EquipmentExtraBaysInUse);
+			return false;
+		}
+		return true;
+	}
+
+	public void performSellEquipment(int slot, Equipment equipment)
+	{
+		setCash(getCash() + equipment.SellPrice());
+		getShip().RemoveEquipment(equipment.EquipmentType(), slot);
+	}
+
+	/** give negative value to pay back loan. */
+	public void takeLoan(int loan)
+	{
+		_cash += loan;
+		_debt += loan;
+	}
+
+	public int getMaxLoan()
+	{
+		return getPoliceRecordScore() < Consts.PoliceRecordScoreClean ? 500 : Math.min(25000, Math.max(1000,
+				Worth() / 5000 * 500));
+	}
+
+	public void HireMercenary(CrewMember crew)
+	{
+		if (getShip().FreeCrewQuarters() == 0)
+			GuiFacade.alert(AlertType.CrewNoQuarters, crew.Name());
+		else
+			getShip().Hire(crew);
+	}
+	public void FireMercenary(CrewMember crew)
+	{
+		if (GuiFacade.alert(AlertType.CrewFireMercenary, crew.Name()) == DialogResult.Yes)
+			getShip().Fire(crew.Id());
+	}
 }

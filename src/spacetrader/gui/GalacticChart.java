@@ -21,14 +21,14 @@ import spacetrader.util.Util;
  */
 public class GalacticChart extends jwinforms.GroupBox
 {
-	private SystemTracker game = null;
+	private SystemTracker systemTracker = null;
 	private GameController controller = null;
 	private Commander commander;
 	private GameCheats cheats;
 
 	void setGame(Game game, GameController controller, Commander commander)
 	{
-		this.game = game;
+		systemTracker = game;
 		this.controller = controller;
 		this.commander = commander;
 		cheats = game == null ? null : game.Cheats();
@@ -164,10 +164,10 @@ public class GalacticChart extends jwinforms.GroupBox
 
 	private void picGalacticChart_MouseDown(Object sender, jwinforms.MouseEventArgs e)
 	{
-		if (e.Button != MouseButtons.Left || game == null)
+		if (e.Button != MouseButtons.Left || systemTracker == null)
 			return;
 
-		StarSystem[] universe = game.Universe();
+		StarSystem[] universe = systemTracker.Universe();
 
 		boolean clickedSystem = false;
 
@@ -179,7 +179,7 @@ public class GalacticChart extends jwinforms.GroupBox
 			if (e.X >= x - 2 && e.X <= x + 2 && e.Y >= y - 2 && e.Y <= y + 2)
 			{
 				clickedSystem = true;
-				game.SelectedSystemId(StarSystemId.FromInt(i));
+				systemTracker.SelectedSystemId(StarSystemId.FromInt(i));
 			} else if (Functions.WormholeExists(i, -1))
 			{
 				int xW = x + OFF_X_WORM;
@@ -187,8 +187,7 @@ public class GalacticChart extends jwinforms.GroupBox
 				if (e.X >= xW - 2 && e.X <= xW + 2 && e.Y >= y - 2 && e.Y <= y + 2)
 				{
 					clickedSystem = true;
-					game.SelectedSystemId(StarSystemId.FromInt(i));
-					game.TargetWormhole(true);
+					systemTracker.selectTargetWormholeFrom(StarSystemId.FromInt(i));
 				}
 			}
 		}
@@ -200,74 +199,58 @@ public class GalacticChart extends jwinforms.GroupBox
 
 	private void picGalacticChart_Paint(Object sender, jwinforms.PaintEventArgs e)
 	{
-		if (game != null)
+		if (systemTracker == null)
 		{
-			StarSystem[] universe = game.Universe();
-			int[] wormholes = game.Wormholes();
-			StarSystem targetSys = game.SelectedSystem();
-			StarSystem curSys = commander.getCurrentSystem();
-			int fuel = commander.getShip().getFuel();
-
-			if (fuel > 0)
-				e.Graphics.DrawEllipse(DEFAULT_PEN, curSys.X() + OFF_X - fuel, curSys.Y() + OFF_Y - fuel, fuel * 2,
-						fuel * 2);
-
-			int index = game.SelectedSystemId().CastToInt();
-			if (game.TargetWormhole())
-			{
-				int dest = wormholes[(Util.BruteSeek(wormholes, index) + 1) % wormholes.length];
-				StarSystem destSys = universe[dest];
-				e.Graphics.DrawLine(DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X, targetSys.Y() + OFF_Y, destSys.X()
-						+ OFF_X, destSys.Y() + OFF_Y);
-			}
-
-			for (int i = 0; i < universe.length; i++)
-			{
-				int imageIndex = universe[i].Visited() ? IMG_S_V : IMG_S_N;
-				if (universe[i] == game.WarpSystem())
-					imageIndex++;
-				Image image = ilChartImages.getImages()[imageIndex];
-
-				if (universe[i] == game.TrackedSystem())
-				{
-					e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y(), universe[i].X()
-							+ image.getWidth() - 1, universe[i].Y() + image.getHeight() - 1);
-					e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y() + image.getHeight() - 1,
-							universe[i].X() + image.getWidth() - 1, universe[i].Y());
-				}
-
-				ilChartImages.Draw(e.Graphics, universe[i].X(), universe[i].Y(), imageIndex);
-
-				if (Functions.WormholeExists(i, -1))
-					ilChartImages.Draw(e.Graphics, universe[i].X() + OFF_X_WORM, universe[i].Y(), IMG_S_W);
-			}
-		} else
 			e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, picGalacticChart.getWidth(), picGalacticChart.getHeight());
+			return;
+		}
+
+		StarSystem[] universe = systemTracker.Universe();
+		int[] wormholes = systemTracker.Wormholes();
+		StarSystem targetSys = systemTracker.SelectedSystem();
+		StarSystem curSys = commander.getCurrentSystem();
+		int fuel = commander.getShip().getFuel();
+
+		if (fuel > 0)
+			e.Graphics.DrawEllipse(DEFAULT_PEN, curSys.X() + OFF_X - fuel, curSys.Y() + OFF_Y - fuel, fuel * 2,
+					fuel * 2);
+
+		int index = systemTracker.SelectedSystemId().CastToInt();
+		if (systemTracker.TargetWormhole())
+		{
+			int dest = wormholes[(Util.BruteSeek(wormholes, index) + 1) % wormholes.length];
+			StarSystem destSys = universe[dest];
+			e.Graphics.DrawLine(DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X, targetSys.Y() + OFF_Y, destSys.X()
+					+ OFF_X, destSys.Y() + OFF_Y);
+		}
+
+		for (int i = 0; i < universe.length; i++)
+		{
+			int imageIndex = universe[i].Visited() ? IMG_S_V : IMG_S_N;
+			if (universe[i] == systemTracker.WarpSystem())
+				imageIndex++;
+			Image image = ilChartImages.getImages()[imageIndex];
+
+			if (universe[i] == systemTracker.TrackedSystem())
+			{
+				e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y(), universe[i].X() + image.getWidth()
+						- 1, universe[i].Y() + image.getHeight() - 1);
+				e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y() + image.getHeight() - 1, universe[i]
+						.X()
+						+ image.getWidth() - 1, universe[i].Y());
+			}
+
+			ilChartImages.Draw(e.Graphics, universe[i].X(), universe[i].Y(), imageIndex);
+
+			if (Functions.WormholeExists(i, -1))
+				ilChartImages.Draw(e.Graphics, universe[i].X() + OFF_X_WORM, universe[i].Y(), IMG_S_W);
+		}
 	}
 
 	private void btnJump_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if (game.WarpSystem() == null)
-			GuiFacade.alert(AlertType.ChartJumpNoSystemSelected);
-		else if (game.WarpSystem() == commander.getCurrentSystem())
-			GuiFacade.alert(AlertType.ChartJumpCurrent);
-		else if (FormAlert.Alert(AlertType.ChartJump, game.WarpSystem().Name()) == DialogResult.Yes)
-		{
-			game.setCanSuperWarp(false);
-			try
-			{
-				controller.autoSave_depart();
-
-				game.Warp(true);
-
-				controller.autoSave_arive();
-			} catch (GameEndException ex)
-			{
-				controller.GameEnd();
-			}
-			// todo inline when done
-			mainWindow.UpdateAll();
-		}
+		if (FormAlert.Alert(AlertType.ChartJump, systemTracker.WarpSystem().Name()) == DialogResult.Yes)
+			systemTracker.jumpWithSingularity();
 	}
 
 	private void btnFind_Click()
@@ -280,14 +263,8 @@ public class GalacticChart extends jwinforms.GroupBox
 			boolean tryToFind = cheats.ConsiderCheat(words, controller);
 
 			if (tryToFind)
-			{
-				game.setSelectedSystemByName(form.SystemName());
-				if (form.TrackSystem()
-						&& game.SelectedSystem().Name().toLowerCase().equals(form.SystemName().toLowerCase()))
-					game.setTrackedSystemId(game.SelectedSystemId());
-			}
+				systemTracker.setSelectedSystemByName(form.SystemName(), form.TrackSystem());
 
-			// todo inline when done
 			mainWindow.UpdateAll();
 		}
 	}
@@ -295,7 +272,7 @@ public class GalacticChart extends jwinforms.GroupBox
 	void Refresh()
 	{
 		picGalacticChart.Refresh();
-		if (game == null)
+		if (systemTracker == null)
 		{
 			lblWormholeLabel.setVisible(false);
 			lblWormhole.setVisible(false);
@@ -303,17 +280,17 @@ public class GalacticChart extends jwinforms.GroupBox
 			btnFind.setVisible(false);
 		} else
 		{
-			if (game.TargetWormhole())
+			if (systemTracker.TargetWormhole())
 			{
 				lblWormholeLabel.setVisible(true);
 				lblWormhole.setVisible(true);
-				lblWormhole.setText(game.WarpSystem().Name());
+				lblWormhole.setText(systemTracker.WarpSystem().Name());
 			} else
 			{
 				lblWormholeLabel.setVisible(false);
 				lblWormhole.setVisible(false);
 			}
-			btnJump.setVisible(game.getCanSuperWarp());
+			btnJump.setVisible(systemTracker.getCanSuperWarp());
 			btnFind.setVisible(true);
 		}
 	}

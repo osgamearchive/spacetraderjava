@@ -30,15 +30,17 @@
 package spacetrader.gui;
 
 import jwinforms.*;
-import spacetrader.*;
-import spacetrader.enums.*;
+import spacetrader.Commander;
+import spacetrader.Consts;
+import spacetrader.Functions;
+import spacetrader.Game;
+import spacetrader.Strings;
+import spacetrader.enums.CargoSellOp;
 import spacetrader.guifacade.Facaded;
 
 @Facaded
 public class FormCargoSell extends SpaceTraderForm
 {
-	// #region Control Declarations
-
 	private jwinforms.Button btnOk;
 	private jwinforms.Button btnAll;
 	private jwinforms.Button btnNone;
@@ -47,23 +49,12 @@ public class FormCargoSell extends SpaceTraderForm
 	private jwinforms.NumericUpDown numAmount;
 	private jwinforms.Label lblPaid;
 	private jwinforms.Label lblProfit;
-	private final Container components = null;
-
-	// #endregion
-
-	// #region Member Declarations
-
-	private final Game game = Game.CurrentGame();
-
-	// #endregion
-
-	// #region Methods
 
 	public FormCargoSell(int item, int maxAmount, CargoSellOp op, int price)
 	{
 		InitializeComponent();
 
-		Commander cmdr = game.Commander();
+		Commander cmdr = Game.CurrentGame().Commander();
 		int cost = cmdr.PriceCargo()[item] / cmdr.getShip().Cargo()[item];
 
 		numAmount.setMaximum(maxAmount);
@@ -113,11 +104,6 @@ public class FormCargoSell extends SpaceTraderForm
 		}
 	}
 
-	// #region Windows Form Designer generated code
-	// / <summary>
-	// / Required method for Designer support - do not modify
-	// / the contents of this method with the code editor.
-	// / </summary>
 	private void InitializeComponent()
 	{
 		lblQuestion = new jwinforms.Label();
@@ -231,30 +217,15 @@ public class FormCargoSell extends SpaceTraderForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Sell Xxxxxxxxxx");
 		((ISupportInitialize) (numAmount)).EndInit();
-
 	}
-
-	// #endregion
-
-	// #endregion
-
-	// #region Event Handlers
 
 	private void btnAll_Click(Object sender, EventArgs e)
 	{
 		numAmount.setValue(numAmount.getMaximum());
 	}
 
-	// #endregion
-
-	// #region Properties
-
-
-
 	public int Amount()
 	{
 		return numAmount.getValue();
 	}
-
-	// #endregion
 }

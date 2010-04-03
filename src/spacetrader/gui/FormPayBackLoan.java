@@ -22,7 +22,6 @@
  * You can contact the author at spacetrader@frenchfryz.com
  *
  ******************************************************************************/
-
 package spacetrader.gui;
 
 import jwinforms.DialogResult;
@@ -56,11 +55,6 @@ public class FormPayBackLoan extends SpaceTraderForm
 				Strings.MoneyUnit)));
 	}
 
-	// #region Windows Form Designer generated code
-	// / <summary>
-	// / Required method for Designer support - do not modify
-	// / the contents of this method with the code editor.
-	// / </summary>
 	private void InitializeComponent()
 	{
 		lblQuestion = new jwinforms.Label();
@@ -116,7 +110,7 @@ public class FormPayBackLoan extends SpaceTraderForm
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
-				btnMax_Click(sender, e);
+				btnMax_Click();
 			}
 		});
 		//
@@ -155,7 +149,7 @@ public class FormPayBackLoan extends SpaceTraderForm
 		((ISupportInitialize)(numAmount)).EndInit();
 	}
 
-	private void btnMax_Click(Object sender, EventArgs e)
+	private void btnMax_Click()
 	{
 		numAmount.setValue(numAmount.getMaximum());
 	}
@@ -163,12 +157,5 @@ public class FormPayBackLoan extends SpaceTraderForm
 	public int Amount()
 	{
 		return numAmount.getValue();
-	}
-
-	public static void main(String[] args) throws Exception
-	{
-		FormPayBackLoan form = new FormPayBackLoan();
-		Launcher.runForm(form);
-		System.out.println(form.Amount());
 	}
 }

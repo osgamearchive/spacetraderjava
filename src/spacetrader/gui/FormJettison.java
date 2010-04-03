@@ -73,20 +73,10 @@ public class FormJettison extends SpaceTraderForm
 	private jwinforms.Label lblBaysLabel;
 	private jwinforms.Label lblBays;
 	private jwinforms.Button btnDone;
-	private final Container components = null;
 
 	private final Button[] btnJettisonQty;
-	private final Button[] btnJettisonAll;
-
-	//#endregion
-
-	//#region Member Declarations
 
 	private final Game game = Game.CurrentGame();
-
-	//#endregion
-
-	//#region Methods
 
 	public FormJettison()
 	{
@@ -96,18 +86,13 @@ public class FormJettison extends SpaceTraderForm
 		btnJettisonQty = new Button[] { btnJettisonQty0, btnJettisonQty1, btnJettisonQty2, btnJettisonQty3,
 				btnJettisonQty4, btnJettisonQty5, btnJettisonQty6, btnJettisonQty7, btnJettisonQty8, btnJettisonQty9 };
 
-		btnJettisonAll = new Button[] { btnJettisonAll0, btnJettisonAll1, btnJettisonAll2, btnJettisonAll3,
-				btnJettisonAll4, btnJettisonAll5, btnJettisonAll6, btnJettisonAll7, btnJettisonAll8, btnJettisonAll9 };
+//		btnJettisonAll = new Button[] { btnJettisonAll0, btnJettisonAll1, btnJettisonAll2, btnJettisonAll3,
+//				btnJettisonAll4, btnJettisonAll5, btnJettisonAll6, btnJettisonAll7, btnJettisonAll8, btnJettisonAll9 };
 		//#endregion
 
 		UpdateAll();
 	}
 
-	//#region Windows Form Designer generated code
-	/// <summary>
-	/// Required method for Designer support - do not modify
-	/// the contents of this method with the code editor.
-	/// </summary>
 	private void InitializeComponent()
 	{
 		btnJettisonAll9 = new jwinforms.Button();
@@ -623,8 +608,6 @@ public class FormJettison extends SpaceTraderForm
 		this.setText("Jettison Cargo");
 	}
 
-	//#endregion
-
 	private void Jettison(int tradeItem, boolean all)
 	{
 		game.CargoJettison(tradeItem, all);
@@ -641,10 +624,6 @@ public class FormJettison extends SpaceTraderForm
 		lblBays.setText(ship.FilledCargoBays() + "/" + ship.CargoBays());
 	}
 
-	//#endregion
-
-	//#region Event Handlers
-
 	private void btnJettison_Click(Object sender, EventArgs e)
 	{
 		String name = ((Button)sender).getName();
@@ -653,6 +632,4 @@ public class FormJettison extends SpaceTraderForm
 
 		Jettison(index, all);
 	}
-
-	//#endregion
 }

@@ -21,11 +21,6 @@
  * You can contact the author at spacetrader@frenchfryz.com
  *
  ******************************************************************************/
-// using System;
-// using System.Drawing;
-// using System.Collections;
-// using System.ComponentModel;
-// using System.Windows.Forms;
 package spacetrader.gui;
 
 import jwinforms.*;
@@ -36,8 +31,6 @@ import spacetrader.guifacade.Facaded;
 @Facaded
 public class FormPlunder extends SpaceTraderForm
 {
-	//#region Control Declarations
-
 	private jwinforms.Button btnPlunderAll9;
 	private jwinforms.Button btnPlunderQty9;
 	private jwinforms.Button btnPlunderAll8;
@@ -72,20 +65,9 @@ public class FormPlunder extends SpaceTraderForm
 	private jwinforms.Label lblBays;
 	private jwinforms.Button btnDone;
 	private jwinforms.Button btnJettison;
-	private final Container components = null;
 
 	private final Button[] btnPlunderQty;
-	private final Button[] btnPlunderAll;
-
-	//#endregion
-
-	//#region Member Declarations
-
 	private final Game game = Game.CurrentGame();
-
-	//#endregion
-
-	//#region Methods
 
 	public FormPlunder()
 	{
@@ -95,18 +77,13 @@ public class FormPlunder extends SpaceTraderForm
 		btnPlunderQty = new Button[] { btnPlunderQty0, btnPlunderQty1, btnPlunderQty2, btnPlunderQty3, btnPlunderQty4,
 				btnPlunderQty5, btnPlunderQty6, btnPlunderQty7, btnPlunderQty8, btnPlunderQty9 };
 
-		btnPlunderAll = new Button[] { btnPlunderAll0, btnPlunderAll1, btnPlunderAll2, btnPlunderAll3, btnPlunderAll4,
-				btnPlunderAll5, btnPlunderAll6, btnPlunderAll7, btnPlunderAll8, btnPlunderAll9 };
+//		btnPlunderAll = new Button[] { btnPlunderAll0, btnPlunderAll1, btnPlunderAll2, btnPlunderAll3, btnPlunderAll4,
+//				btnPlunderAll5, btnPlunderAll6, btnPlunderAll7, btnPlunderAll8, btnPlunderAll9 };
 		//#endregion
 
 		UpdateAll();
 	}
 
-	//#region Windows Form Designer generated code
-	/// <summary>
-	/// Required method for Designer support - do not modify
-	/// the contents of this method with the code editor.
-	/// </summary>
 	private void InitializeComponent()
 	{
 		btnPlunderAll9 = new jwinforms.Button();
@@ -667,10 +644,7 @@ public class FormPlunder extends SpaceTraderForm
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Plunder Cargo");
 		this.PerformLayout();
-
 	}
-
-	//#endregion
 
 	private void Plunder(int tradeItem, boolean all)
 	{
@@ -690,18 +664,10 @@ public class FormPlunder extends SpaceTraderForm
 		lblBays.setText(ship.FilledCargoBays() + "/" + ship.CargoBays());
 	}
 
-	//#endregion
-
-	//#region Event Handlers
-
 	private void btnJettison_Click(Object sender, EventArgs e)
 	{
 		(new FormJettison()).ShowDialog(this);
 	}
-
-	//#endregion
-
-	//#region Properties
 
 	private void btnPlunder_Click(Object sender, EventArgs e)
 	{
@@ -711,6 +677,4 @@ public class FormPlunder extends SpaceTraderForm
 
 		Plunder(index, all);
 	}
-
-	//#endregion
 }

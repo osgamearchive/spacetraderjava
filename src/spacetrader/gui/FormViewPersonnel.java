@@ -17,11 +17,6 @@
  * You can contact the author at spacetrader@frenchfryz.com
  *
  ******************************************************************************/
-// using System;
-// using System.Drawing;
-// using System.Collections;
-// using System.ComponentModel;
-// using System.Windows.Forms;
 package spacetrader.gui;
 
 import jwinforms.*;
@@ -31,8 +26,6 @@ import spacetrader.guifacade.GuiFacade;
 
 public class FormViewPersonnel extends SpaceTraderForm
 {
-	//#region Control Declarations
-
 	private jwinforms.Button btnClose;
 	private jwinforms.GroupBox boxForHire;
 	private jwinforms.GroupBox boxInfo;
@@ -52,13 +45,11 @@ public class FormViewPersonnel extends SpaceTraderForm
 	private jwinforms.ListBox lstCrew;
 	private jwinforms.Label lblCrewNoQuarters;
 	private jwinforms.Label lblForHireNone;
+
 	private final Game game = Game.CurrentGame();
+	private final Commander cmdr = game.Commander();
 	private CrewMember selectedCrewMember = null;
 	private boolean handlingSelect = false;
-
-	//#endregion
-
-	//#region Methods
 
 	public FormViewPersonnel()
 	{
@@ -67,11 +58,6 @@ public class FormViewPersonnel extends SpaceTraderForm
 		UpdateAll();
 	}
 
-	//#region Windows Form Designer generated code
-	/// <summary>
-	/// Required method for Designer support - do not modify
-	/// the contents of this method with the code editor.
-	/// </summary>
 	private void InitializeComponent()
 	{
 		btnClose = new jwinforms.Button();
@@ -336,8 +322,6 @@ public class FormViewPersonnel extends SpaceTraderForm
 		this.setText("Personnel");
 	}
 
-	//#endregion
-
 	private void DeselectAll()
 	{
 		lstForHire.clearSelected();
@@ -436,36 +420,17 @@ public class FormViewPersonnel extends SpaceTraderForm
 		btnHireFire.setVisible(hireFireVisible);
 	}
 
-	//#endregion
-
-	//#region Event Handlers
-
 	private void HireFire(Object sender, EventArgs e)
 	{
-		if (selectedCrewMember != null && btnHireFire.getVisible())
-		{
-			if (game.Commander().getShip().HasCrew(selectedCrewMember.Id()))
-			{
-				if (FormAlert.Alert(AlertType.CrewFireMercenary, selectedCrewMember.Name()) == DialogResult.Yes)
-				{
-					game.Commander().getShip().Fire(selectedCrewMember.Id());
+		if (selectedCrewMember == null || !btnHireFire.getVisible())
+			return;
 
-					UpdateAll();
-					game.getParentWindow().UpdateAll();
-				}
-			} else
-			{
-				if (game.Commander().getShip().FreeCrewQuarters() == 0)
-					GuiFacade.alert(AlertType.CrewNoQuarters, selectedCrewMember.Name());
-				else
-				{
-					game.Commander().getShip().Hire(selectedCrewMember);
-
-					UpdateAll();
-					game.getParentWindow().UpdateAll();
-				}
-			}
-		}
+		if (cmdr.getShip().HasCrew(selectedCrewMember.Id()))
+			cmdr.FireMercenary(selectedCrewMember);
+		else
+			cmdr.HireMercenary(selectedCrewMember);
+		UpdateAll();
+		game.getParentWindow().UpdateAll();
 	}
 
 	private void SelectedIndexChanged(Object sender, EventArgs e)
@@ -488,6 +453,4 @@ public class FormViewPersonnel extends SpaceTraderForm
 			UpdateInfo();
 		}
 	}
-
-	//#endregion
 }

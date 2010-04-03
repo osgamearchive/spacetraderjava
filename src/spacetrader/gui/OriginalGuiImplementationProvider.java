@@ -105,6 +105,8 @@ public class OriginalGuiImplementationProvider implements ImplementationProvider
 
 			DialogResult convert(jwinforms.DialogResult result)
 			{
+				if (result == null)
+					return null;
 				switch (result)
 				{
 					case Cancel:
