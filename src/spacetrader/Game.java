@@ -26,8 +26,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import jwinforms.DialogResult;
 import spacetrader.enums.*;
+import spacetrader.guifacade.DialogResult;
+import spacetrader.guifacade.GuiEngine;
 import spacetrader.guifacade.GuiFacade;
 import spacetrader.guifacade.MainWindow;
 import spacetrader.stub.ArrayList;
@@ -1094,7 +1095,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			if (max)
 				qty = maxAmount;
 			else
-				qty = GuiFacade.queryAmountAcquire(tradeItem, maxAmount, op);
+				qty = GuiEngine.cargo.queryAmountAcquire(tradeItem, maxAmount, op);
 
 			if (qty > 0)
 			{
@@ -1185,7 +1186,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 					qty = maxAmount;
 				else
 				{
-					qty = GuiFacade.queryAmountRelease(tradeItem, op, maxAmount, price);
+					qty = GuiEngine.cargo.queryAmountRelease(tradeItem, op, maxAmount, price);
 				}
 
 				if (qty > 0)
@@ -1985,7 +1986,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 	public void EncounterPlunder()
 	{
-		GuiFacade.performPlundering();
+		GuiEngine.cargo.performPlundering();
 
 		if (getEncounterType().CastToInt() >= spacetrader.enums.EncounterType.TraderAttack.CastToInt())
 		{
@@ -2034,7 +2035,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				if (Commander().getShip().FreeCargoBays() == 0
 						&& GuiFacade.alert(AlertType.EncounterScoopNoRoom) == DialogResult.Yes)
 				{
-					GuiFacade.performJettison();
+					GuiEngine.cargo.performJettison();
 					jettisoned = true;
 				}
 
@@ -2267,7 +2268,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 			int narcs = Commander().getShip().Cargo()[TradeItemType.Narcotics.CastToInt()];
 
-			GuiFacade.performPlundering();
+			GuiEngine.cargo.performPlundering();
 
 			if (Commander().getShip().Cargo()[TradeItemType.Narcotics.CastToInt()] > narcs)
 				setJustLootedMarie(true);
@@ -3706,7 +3707,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			{
 				uneventful = false;
 
-				EncounterResult result = GuiFacade.performEncounter(getParentWindow());
+				EncounterResult result = GuiEngine.cargo.performEncounter(getParentWindow());
 				getParentWindow().UpdateStatusBar();
 				switch (result)
 				{

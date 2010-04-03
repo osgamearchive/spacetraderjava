@@ -71,26 +71,6 @@ public abstract class Equipment extends STSerializableObject implements Cloneabl
 
 	public abstract boolean TypeEquals(Object type);
 
-	final protected int BaseImageIndex()
-	{
-		int baseImageIndex = 0;
-
-		switch (EquipmentType())
-		{
-		case Gadget:
-			baseImageIndex = Strings.WeaponNames.length + Strings.ShieldNames.length;
-			break;
-		case Shield:
-			baseImageIndex = Strings.WeaponNames.length;
-			break;
-		case Weapon:
-			// baseImageIndex should be 0
-			break;
-		}
-
-		return baseImageIndex;
-	}
-
 	public int Chance()
 	{
 		return _chance;
@@ -99,12 +79,6 @@ public abstract class Equipment extends STSerializableObject implements Cloneabl
 	public EquipmentType EquipmentType()
 	{
 		return _equipType;
-	}
-
-	final public Image Image()
-	{
-		return GuiEngine.imageProvider.getEquipmentImages().getImages()[BaseImageIndex()
-				+ SubType().CastToInt()];
 	}
 
 	public TechLevel MinimumTechLevel()

@@ -39,7 +39,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 	private int _crewQuarters = 0;
 	private int _fuelTanks = 0;
 	private int _hullStrength = 0;
-	private Image[] _images = null;
+	private String uiRepresentor;
 
 	// #endregion
 
@@ -49,7 +49,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 	{
 		_name = name;
 		_size = size;
-		_images = GuiEngine.imageProvider.getCustomShipImages();
+		uiRepresentor = GuiEngine.imageProvider.getCustomShipImages();
 	}
 
 	public ShipTemplate(ShipSpec spec, String name)
@@ -66,7 +66,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 		_hullStrength = spec.HullStrength();
 
 		if (ImageIndex() == Consts.ShipImgUseDefault)
-			_images = GuiEngine.imageProvider.getCustomShipImages();
+			uiRepresentor = GuiEngine.imageProvider.getCustomShipImages();
 	}
 
 	public ShipTemplate(Hashtable hash)
@@ -81,7 +81,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 		_crewQuarters = GetValueFromHash(hash, "_crewQuarters", _crewQuarters);
 		_fuelTanks = GetValueFromHash(hash, "_fuelTanks", _fuelTanks);
 		_hullStrength = GetValueFromHash(hash, "_hullStrength", _hullStrength);
-		_images = GetValueFromHash(hash, "_images", _images);
+		uiRepresentor = GetValueFromHash(hash, "_images", uiRepresentor);
 	}
 
 	public int compareTo(ShipTemplate other)
@@ -108,8 +108,8 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 		hash.add("_fuelTanks", _fuelTanks);
 		hash.add("_hullStrength", _hullStrength);
 
-		if (_images != null)
-			hash.add("_images", _images);
+		if (uiRepresentor != null)
+			hash.add("_images", uiRepresentor);
 
 		return hash;
 	}
@@ -184,14 +184,16 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 		_imageIndex = value;
 	}
 
-	public Image[] Images()
+	// TODO rename to uiRepresentor
+	public String Images()
 	{
-		return _images;
+		return uiRepresentor;
 	}
 
-	public void Images(Image[] value)
+	// TODO rename to uiRepresentor
+	public void Images(String value)
 	{
-		_images = value;
+		uiRepresentor = value;
 	}
 
 	public String Name()

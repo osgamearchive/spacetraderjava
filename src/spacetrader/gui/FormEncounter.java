@@ -1663,14 +1663,13 @@ public class FormEncounter extends SpaceTraderForm
 	private void picShipOpponent_Paint(Object sender,
 			jwinforms.PaintEventArgs e)
 	{
-		Functions.PaintShipImage(opponent, e.Graphics,
-				picShipOpponent.getBackColor());
+		ShipImageMaker.PaintShipImage(opponent, e.Graphics, picShipOpponent.getBackColor());
 	}
 
 	private void picShipYou_Paint(Object sender,
 			jwinforms.PaintEventArgs e)
 	{
-		Functions.PaintShipImage(cmdrship, e.Graphics, picShipYou.getBackColor());
+		ShipImageMaker.PaintShipImage(cmdrship, e.Graphics, picShipYou.getBackColor());
 	}
 
 	private void picTrib_Click(Object sender, EventArgs e)

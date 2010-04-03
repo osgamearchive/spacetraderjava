@@ -5,6 +5,7 @@ import java.util.Iterator;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.CrewMemberId;
 import spacetrader.enums.VeryRareEncounter;
+import spacetrader.guifacade.GuiEngine;
 import spacetrader.guifacade.GuiFacade;
 import spacetrader.util.CheatCode;
 import spacetrader.util.Util;
@@ -130,7 +131,7 @@ public class GameCheats
 				ship.setEscapePod(!ship.getEscapePod());
 				break;
 			case MonsterCom:
-				GuiFacade.performMonsterCom();
+					GuiEngine.cheat.showMonsterForm();
 				break;
 			case PlanB:
 				game.setAutoSave(true);
@@ -223,7 +224,7 @@ public class GameCheats
 					ship.Cargo()[num1] = Math.max(0, Math.min(ship.FreeCargoBays() + ship.Cargo()[num1], num2));
 				break;
 			case Test:
-				GuiFacade.performTestForm();
+					GuiEngine.cheat.showTestForm();
 				break;
 			case Tool:
 				if (num1 >= 0 && num1 < ship.Gadgets().length && num2 >= 0 && num2 < Consts.Gadgets.length)

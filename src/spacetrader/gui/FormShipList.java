@@ -999,7 +999,7 @@ btnBuyInfo_Click(sender, e);}});
 		{
 			ShipSpec	spec	= Consts.ShipSpecs[id];
 
-			picShip.setImage(spec.Image());
+			picShip.setImage(ShipImageMaker.Image(spec));
 			lblName.setText(spec.Name());
 			lblSize.setText(Strings.Sizes[spec.getSize().CastToInt()]);
 			lblBays.setText(Functions.FormatNumber(spec.CargoBays()));

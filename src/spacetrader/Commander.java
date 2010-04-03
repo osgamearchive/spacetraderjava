@@ -28,8 +28,8 @@
 
 package spacetrader;
 
-import jwinforms.DialogResult;
 import spacetrader.enums.*;
+import spacetrader.guifacade.DialogResult;
 import spacetrader.guifacade.GuiFacade;
 import spacetrader.util.Hashtable;
 

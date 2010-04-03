@@ -93,11 +93,6 @@ public class Functions
 		return (int)Math.floor(Math.sqrt(Math.pow(a.X() - x, 2) + Math.pow(a.Y() - y, 2)));
 	}
 
-	private static void DrawPartialImage(Graphics g, Image img, int start, int stop)
-	{
-		g.DrawImage(img, 2 + start, 2, new Rectangle(start, 0, stop - start, img.getHeight()), GraphicsUnit.Pixel);
-	}
-
 	public static String FormatNumber(int num)
 	{
 		// return String.format("{0:n0}", num);
@@ -226,32 +221,6 @@ public class Functions
 	public static String Multiples(int num, String unit)
 	{
 		return FormatNumber(num) + " " + unit + (num == 1 ? "" : "s");
-	}
-
-	public static void PaintShipImage(Ship ship, Graphics graphics, Color backgroundColor)
-	{
-		int x = Consts.ShipImageOffsets[ship.Type().CastToInt()].X;
-		int width = Consts.ShipImageOffsets[ship.Type().CastToInt()].Width;
-		int startDamage = x + width - ship.getHull() * width / ship.HullStrength();
-		int startShield = x + width + 2
-				- (ship.ShieldStrength() > 0 ? ship.ShieldCharge() * (width + 4) / ship.ShieldStrength() : 0);
-
-		graphics.clear(backgroundColor);
-
-		if (startDamage > x)
-		{
-			if (startShield > x)
-				DrawPartialImage(graphics, ship.ImageDamaged(), x, Math.min(startDamage, startShield));
-
-			if (startShield < startDamage)
-				DrawPartialImage(graphics, ship.ImageDamagedWithShields(), startShield, startDamage);
-		}
-
-		if (startShield > startDamage)
-			DrawPartialImage(graphics, ship.Image(), startDamage, startShield);
-
-		if (startShield < x + width + 2)
-			DrawPartialImage(graphics, ship.ImageWithShields(), startShield, x + width + 2);
 	}
 
 	private static long Rand()

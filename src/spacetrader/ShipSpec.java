@@ -27,7 +27,6 @@
 //using System.Drawing;
 package spacetrader;
 
-import jwinforms.Image;
 import spacetrader.util.*;
 import spacetrader.enums.*;
 import spacetrader.guifacade.GuiEngine;
@@ -105,8 +104,7 @@ public class ShipSpec extends STSerializableObject
 
 		// Get the images if the ship uses the custom images.
 		if (ImageIndex() == ShipType.Custom.CastToInt())
-			GuiEngine.imageProvider.setCustomShipImages(GetValueFromHash(hash, "_images", GuiEngine.imageProvider
-					.getCustomShipImages()));
+			GuiEngine.imageProvider.setCustomShipImages(GetValueFromHash(hash, "_images", ""));
 
 		// Get the name if the ship is a custom design.
 		if (Type() == ShipType.Custom)
@@ -117,7 +115,6 @@ public class ShipSpec extends STSerializableObject
 			Consts.ShipSpecs[ShipType.Custom.CastToInt()] = new ShipSpec(_type, _size, _cargoBays, _weaponSlots,
 					_shieldSlots, _gadgetSlots, _crewQuarters, _fuelTanks, _fuelCost, _hullStrength, _repairCost,
 					_price, _occurrence, _police, _pirates, _traders, _minTech);
-			UpdateCustomImageOffsetConstants();
 		}
 	}
 
@@ -203,19 +200,6 @@ public class ShipSpec extends STSerializableObject
 		}
 
 		return count;
-	}
-
-	public void UpdateCustomImageOffsetConstants()
-	{
-		Image image = GuiEngine.imageProvider.getCustomShipImages()[0];
-		int custIndex = ShipType.Custom.CastToInt();
-
-		// Find the first column of pixels that has a non-white pixel for the X
-		// value, and the last column for the width.
-		int x = Functions.GetColumnOfFirstNonWhitePixel(image, 1);
-		int width = Functions.GetColumnOfFirstNonWhitePixel(image, -1) - x + 1;
-		Consts.ShipImageOffsets[custIndex].X = Math.max(2, x);
-		Consts.ShipImageOffsets[custIndex].Width = Math.min(62 - Consts.ShipImageOffsets[custIndex].X, width);
 	}
 
 	public int CargoBays()
@@ -338,38 +322,16 @@ public class ShipSpec extends STSerializableObject
 		_hullStrength = value;
 	}
 
-	public Image Image()
-	{
-		return GuiEngine.imageProvider.getShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
-				+ Consts.ShipImgOffsetNormal];
-	}
-
-	public Image ImageDamaged()
-	{
-		return GuiEngine.imageProvider.getShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
-				+ Consts.ShipImgOffsetDamage];
-	}
-
-	public Image ImageDamagedWithShields()
-	{
-		return GuiEngine.imageProvider.getShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
-				+ Consts.ShipImgOffsetSheildDamage];
-	}
-
+	// TODO move to UI; Used (almost) only for the Custom ship.
 	public int ImageIndex()
 	{
 		return (_imageIndex == Consts.ShipImgUseDefault ? (int)Type().CastToInt() : _imageIndex);
 	}
 
+	// TODO move to UI; Used only for the Custom ship.
 	public void ImageIndex(int value)
 	{
 		_imageIndex = (value == Type().CastToInt() ? Consts.ShipImgUseDefault : value);
-	}
-
-	public Image ImageWithShields()
-	{
-		return GuiEngine.imageProvider.getShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip
-				+ Consts.ShipImgOffsetShield];
 	}
 
 	public TechLevel MinimumTechLevel()

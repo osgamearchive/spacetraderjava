@@ -10,7 +10,6 @@ import spacetrader.Consts;
 import spacetrader.Strings;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.ShipType;
-import spacetrader.guifacade.GuiFacade;
 
 public class ShipyardBox extends jwinforms.GroupBox
 {
@@ -213,7 +212,7 @@ public class ShipyardBox extends jwinforms.GroupBox
 
 	private void btnPod_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if (GuiFacade.alert(AlertType.EquipmentEscapePod) == DialogResult.Yes)
+		if (FormAlert.Alert(AlertType.EquipmentEscapePod) == DialogResult.Yes)
 		{
 			commander.setCash(commander.getCash() - 2000);
 			commander.getShip().setEscapePod(true);

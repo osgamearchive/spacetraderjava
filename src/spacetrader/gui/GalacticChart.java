@@ -251,7 +251,7 @@ public class GalacticChart extends jwinforms.GroupBox
 			GuiFacade.alert(AlertType.ChartJumpNoSystemSelected);
 		else if (game.WarpSystem() == commander.getCurrentSystem())
 			GuiFacade.alert(AlertType.ChartJumpCurrent);
-		else if (GuiFacade.alert(AlertType.ChartJump, game.WarpSystem().Name()) == DialogResult.Yes)
+		else if (FormAlert.Alert(AlertType.ChartJump, game.WarpSystem().Name()) == DialogResult.Yes)
 		{
 			game.setCanSuperWarp(false);
 			try

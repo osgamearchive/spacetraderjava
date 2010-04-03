@@ -137,8 +137,8 @@ public class FormShipyard extends SpaceTraderForm
 
 		dlgOpen.setInitialDirectory(Consts.CustomImagesDirectory);
 		dlgSave.setInitialDirectory(Consts.CustomTemplatesDirectory);
-		lblDisabledName.setImage(GuiEngine.imageProvider.getDirectionImages()[Consts.DirectionDown]);
-		lblDisabledPct.setImage(GuiEngine.imageProvider.getDirectionImages()[Consts.DirectionDown]);
+		lblDisabledName.setImage(SpaceTrader.INSTANCE.DirectionImages().getImages()[Consts.DirectionDown]);
+		lblDisabledPct.setImage(SpaceTrader.INSTANCE.DirectionImages().getImages()[Consts.DirectionUp]);
 
 		LoadSizes();
 		LoadTemplateList();
@@ -1095,9 +1095,9 @@ public class FormShipyard extends SpaceTraderForm
 					.ImageIndex();
 
 			if (template.Images() != null)
-				customImages = template.Images();
+				customImages = ShipImageMaker.produceCustomImages(template.Images());
 			else
-				customImages = GuiEngine.imageProvider.getCustomShipImages();
+				customImages = SpaceTrader.INSTANCE.CustomShipImages();
 
 			numCargoBays.setValue(template.CargoBays());
 			numFuelTanks.setValue(Math.min(Math.max(numFuelTanks.getMinimum(), template.FuelTanks()), numFuelTanks
@@ -1266,7 +1266,7 @@ public class FormShipyard extends SpaceTraderForm
 	{
 		shipyard.ShipSpec().ImageIndex(imgTypes[imgIndex].CastToInt());
 		picShip.setImage((imgIndex > Consts.MaxShip ? customImages[0]
-				: Consts.ShipSpecs[imgTypes[imgIndex].CastToInt()].Image()));
+				: ShipImageMaker.Image(Consts.ShipSpecs[imgTypes[imgIndex].CastToInt()])));
 		lblImage.setText((imgIndex > Consts.MaxShip ? Strings.ShipNameCustomShip : Consts.ShipSpecs[imgTypes[imgIndex]
 				.CastToInt()].Name()));
 	}
@@ -1289,9 +1289,7 @@ public class FormShipyard extends SpaceTraderForm
 				// Replace the current custom images with the new ones.
 				if (game.Commander().getShip().ImageIndex() == ShipType.Custom.CastToInt())
 				{
-					GuiEngine.imageProvider.setCustomShipImages(customImages);
-
-					game.Commander().getShip().UpdateCustomImageOffsetConstants();
+					SpaceTrader.INSTANCE.setCustomShipImages(customImages);
 				}
 
 				GuiFacade.alert(AlertType.ShipDesignThanks, shipyard.Name());
@@ -1342,7 +1340,7 @@ public class FormShipyard extends SpaceTraderForm
 				if (imgIndex > Consts.MaxShip)
 				{
 					template.ImageIndex(ShipType.Custom.CastToInt());
-					template.Images(customImages);
+					template.Images(ShipImageMaker.describeCustomImages(customImages));
 				} else
 					template.ImageIndex(imgIndex);
 

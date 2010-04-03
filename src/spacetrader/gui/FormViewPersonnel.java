@@ -1,21 +1,21 @@
 /*******************************************************************************
- * 
+ *
  * Space Trader for Windows 2.00
- * 
+ *
  * Copyright (C) 2005 Jay French, All Rights Reserved
- * 
+ *
  * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- * 
+ *
  * You can contact the author at spacetrader@frenchfryz.com
- * 
+ *
  ******************************************************************************/
 // using System;
 // using System.Drawing;
@@ -52,7 +52,7 @@ public class FormViewPersonnel extends SpaceTraderForm
 	private jwinforms.ListBox lstCrew;
 	private jwinforms.Label lblCrewNoQuarters;
 	private jwinforms.Label lblForHireNone;
-	private Game game = Game.CurrentGame();
+	private final Game game = Game.CurrentGame();
 	private CrewMember selectedCrewMember = null;
 	private boolean handlingSelect = false;
 
@@ -74,254 +74,259 @@ public class FormViewPersonnel extends SpaceTraderForm
 	/// </summary>
 	private void InitializeComponent()
 	{
-		this.btnClose = new jwinforms.Button();
-		this.boxCurrentCrew = new jwinforms.GroupBox();
-		this.lstCrew = new jwinforms.ListBox();
-		this.boxForHire = new jwinforms.GroupBox();
-		this.lstForHire = new jwinforms.ListBox();
-		this.boxInfo = new jwinforms.GroupBox();
-		this.btnHireFire = new jwinforms.Button();
-		this.lblRate = new jwinforms.Label();
-		this.lblName = new jwinforms.Label();
-		this.lblEngineer = new jwinforms.Label();
-		this.lblTrader = new jwinforms.Label();
-		this.lblFighter = new jwinforms.Label();
-		this.lblPilot = new jwinforms.Label();
-		this.lblEngineerLabel = new jwinforms.Label();
-		this.lblTraderLabel = new jwinforms.Label();
-		this.lblFighterLabel = new jwinforms.Label();
-		this.lblPilotLabel = new jwinforms.Label();
-		this.lblCrewNoQuarters = new jwinforms.Label();
-		this.lblForHireNone = new jwinforms.Label();
-		this.boxCurrentCrew.SuspendLayout();
-		this.boxForHire.SuspendLayout();
-		this.boxInfo.SuspendLayout();
+		btnClose = new jwinforms.Button();
+		boxCurrentCrew = new jwinforms.GroupBox();
+		lstCrew = new jwinforms.ListBox();
+		boxForHire = new jwinforms.GroupBox();
+		lstForHire = new jwinforms.ListBox();
+		boxInfo = new jwinforms.GroupBox();
+		btnHireFire = new jwinforms.Button();
+		lblRate = new jwinforms.Label();
+		lblName = new jwinforms.Label();
+		lblEngineer = new jwinforms.Label();
+		lblTrader = new jwinforms.Label();
+		lblFighter = new jwinforms.Label();
+		lblPilot = new jwinforms.Label();
+		lblEngineerLabel = new jwinforms.Label();
+		lblTraderLabel = new jwinforms.Label();
+		lblFighterLabel = new jwinforms.Label();
+		lblPilotLabel = new jwinforms.Label();
+		lblCrewNoQuarters = new jwinforms.Label();
+		lblForHireNone = new jwinforms.Label();
+		boxCurrentCrew.SuspendLayout();
+		boxForHire.SuspendLayout();
+		boxInfo.SuspendLayout();
 		this.SuspendLayout();
-		// 
+		//
 		// btnClose
-		// 
-		this.btnClose.setDialogResult(DialogResult.Cancel);
-		this.btnClose.setLocation(new java.awt.Point(-32, -32));
-		this.btnClose.setName("btnClose");
-		this.btnClose.setSize(new jwinforms.Size(32, 32));
-		this.btnClose.setTabIndex(32);
-		this.btnClose.setTabStop(false);
-		this.btnClose.setText("X");
-		// 
+		//
+		btnClose.setDialogResult(DialogResult.Cancel);
+		btnClose.setLocation(new java.awt.Point(-32, -32));
+		btnClose.setName("btnClose");
+		btnClose.setSize(new jwinforms.Size(32, 32));
+		btnClose.setTabIndex(32);
+		btnClose.setTabStop(false);
+		btnClose.setText("X");
+		//
 		// boxCurrentCrew
-		// 
-		this.boxCurrentCrew.Controls.add(this.lblCrewNoQuarters);
-		this.boxCurrentCrew.Controls.add(this.lstCrew);
-		this.boxCurrentCrew.setLocation(new java.awt.Point(8, 8));
-		this.boxCurrentCrew.setName("boxCurrentCrew");
-		this.boxCurrentCrew.setSize(new jwinforms.Size(144, 114));
-		this.boxCurrentCrew.setTabIndex(33);
-		this.boxCurrentCrew.setTabStop(false);
-		this.boxCurrentCrew.setText("Current Crew");
-		// 
+		//
+		boxCurrentCrew.Controls.add(lblCrewNoQuarters);
+		boxCurrentCrew.Controls.add(lstCrew);
+		boxCurrentCrew.setLocation(new java.awt.Point(8, 8));
+		boxCurrentCrew.setName("boxCurrentCrew");
+		boxCurrentCrew.setSize(new jwinforms.Size(144, 114));
+		boxCurrentCrew.setTabIndex(33);
+		boxCurrentCrew.setTabStop(false);
+		boxCurrentCrew.setText("Current Crew");
+		//
 		// lstCrew
-		// 
-		this.lstCrew.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
-		this.lstCrew.setLocation(new java.awt.Point(8, 24));
-		this.lstCrew.setName("lstCrew");
-		this.lstCrew.setSize(new jwinforms.Size(126, 80));
-		this.lstCrew.setTabIndex(6);
-		this.lstCrew.setDoubleClick(new EventHandler<Object, EventArgs>()
+		//
+		lstCrew.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
+		lstCrew.setLocation(new java.awt.Point(8, 24));
+		lstCrew.setName("lstCrew");
+		lstCrew.setSize(new jwinforms.Size(126, 80));
+		lstCrew.setTabIndex(6);
+		lstCrew.setDoubleClick(new EventHandler<Object, EventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				HireFire(sender, e);
 			}
 		});
-		this.lstCrew.setSelectedIndexChanged(new EventHandler<Object, EventArgs>()
+		lstCrew.setSelectedIndexChanged(new EventHandler<Object, EventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// boxForHire
-		// 
-		this.boxForHire.Controls.add(this.lblForHireNone);
-		this.boxForHire.Controls.add(this.lstForHire);
-		this.boxForHire.setLocation(new java.awt.Point(160, 8));
-		this.boxForHire.setName("boxForHire");
-		this.boxForHire.setSize(new jwinforms.Size(144, 114));
-		this.boxForHire.setTabIndex(34);
-		this.boxForHire.setTabStop(false);
-		this.boxForHire.setText("Mercenaries For Hire");
-		// 
+		//
+		boxForHire.Controls.add(lblForHireNone);
+		boxForHire.Controls.add(lstForHire);
+		boxForHire.setLocation(new java.awt.Point(160, 8));
+		boxForHire.setName("boxForHire");
+		boxForHire.setSize(new jwinforms.Size(144, 114));
+		boxForHire.setTabIndex(34);
+		boxForHire.setTabStop(false);
+		boxForHire.setText("Mercenaries For Hire");
+		//
 		// lstForHire
-		// 
-		this.lstForHire.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
-		this.lstForHire.setLocation(new java.awt.Point(8, 24));
-		this.lstForHire.setName("lstForHire");
-		this.lstForHire.setSize(new jwinforms.Size(126, 80));
-		this.lstForHire.setTabIndex(5);
-		this.lstForHire.setDoubleClick(new EventHandler<Object, EventArgs>()
+		//
+		lstForHire.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
+		lstForHire.setLocation(new java.awt.Point(8, 24));
+		lstForHire.setName("lstForHire");
+		lstForHire.setSize(new jwinforms.Size(126, 80));
+		lstForHire.setTabIndex(5);
+		lstForHire.setDoubleClick(new EventHandler<Object, EventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				HireFire(sender, e);
 			}
 		});
-		this.lstForHire.setSelectedIndexChanged(new EventHandler<Object, EventArgs>()
+		lstForHire.setSelectedIndexChanged(new EventHandler<Object, EventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// boxInfo
-		// 
-		this.boxInfo.Controls.add(this.btnHireFire);
-		this.boxInfo.Controls.add(this.lblRate);
-		this.boxInfo.Controls.add(this.lblName);
-		this.boxInfo.Controls.add(this.lblEngineer);
-		this.boxInfo.Controls.add(this.lblTrader);
-		this.boxInfo.Controls.add(this.lblFighter);
-		this.boxInfo.Controls.add(this.lblPilot);
-		this.boxInfo.Controls.add(this.lblEngineerLabel);
-		this.boxInfo.Controls.add(this.lblTraderLabel);
-		this.boxInfo.Controls.add(this.lblFighterLabel);
-		this.boxInfo.Controls.add(this.lblPilotLabel);
-		this.boxInfo.setLocation(new java.awt.Point(312, 8));
-		this.boxInfo.setName("boxInfo");
-		this.boxInfo.setSize(new jwinforms.Size(168, 114));
-		this.boxInfo.setTabIndex(35);
-		this.boxInfo.setTabStop(false);
-		this.boxInfo.setText("Mercenary Information");
-		// 
+		//
+		boxInfo.Controls.add(btnHireFire);
+		boxInfo.Controls.add(lblRate);
+		boxInfo.Controls.add(lblName);
+		boxInfo.Controls.add(lblEngineer);
+		boxInfo.Controls.add(lblTrader);
+		boxInfo.Controls.add(lblFighter);
+		boxInfo.Controls.add(lblPilot);
+		boxInfo.Controls.add(lblEngineerLabel);
+		boxInfo.Controls.add(lblTraderLabel);
+		boxInfo.Controls.add(lblFighterLabel);
+		boxInfo.Controls.add(lblPilotLabel);
+		boxInfo.setLocation(new java.awt.Point(312, 8));
+		boxInfo.setName("boxInfo");
+		boxInfo.setSize(new jwinforms.Size(168, 114));
+		boxInfo.setTabIndex(35);
+		boxInfo.setTabStop(false);
+		boxInfo.setText("Mercenary Information");
+		//
 		// btnHireFire
-		// 
-		this.btnHireFire.setFlatStyle(jwinforms.FlatStyle.Flat);
-		this.btnHireFire.setLocation(new java.awt.Point(120, 80));
-		this.btnHireFire.setName("btnHireFire");
-		this.btnHireFire.setSize(new jwinforms.Size(36, 22));
-		this.btnHireFire.setTabIndex(4);
-		this.btnHireFire.setText("Hire");
-		this.btnHireFire.setClick(new EventHandler<Object, EventArgs>()
+		//
+		btnHireFire.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnHireFire.setLocation(new java.awt.Point(120, 80));
+		btnHireFire.setName("btnHireFire");
+		btnHireFire.setSize(new jwinforms.Size(36, 22));
+		btnHireFire.setTabIndex(4);
+		btnHireFire.setText("Hire");
+		btnHireFire.setClick(new EventHandler<Object, EventArgs>()
 		{
+			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				HireFire(sender, e);
 			}
 		});
-		// 
+		//
 		// lblRate
-		// 
-		this.lblRate.setLocation(new java.awt.Point(104, 40));
-		this.lblRate.setName("lblRate");
-		this.lblRate.setSize(new jwinforms.Size(59, 13));
-		this.lblRate.setTabIndex(97);
-		this.lblRate.setText("88 cr. daily");
-		// 
+		//
+		lblRate.setLocation(new java.awt.Point(104, 40));
+		lblRate.setName("lblRate");
+		lblRate.setSize(new jwinforms.Size(59, 13));
+		lblRate.setTabIndex(97);
+		lblRate.setText("88 cr. daily");
+		//
 		// lblName
-		// 
-		this.lblName.setFont(FontCollection.bold825);
-		this.lblName.setLocation(new java.awt.Point(12, 18));
-		this.lblName.setName("lblName");
-		this.lblName.setSize(new jwinforms.Size(72, 13));
-		this.lblName.setTabIndex(96);
-		this.lblName.setText("Xxxxxxxxxxx");
-		// 
+		//
+		lblName.setFont(FontCollection.bold825);
+		lblName.setLocation(new java.awt.Point(12, 18));
+		lblName.setName("lblName");
+		lblName.setSize(new jwinforms.Size(72, 13));
+		lblName.setTabIndex(96);
+		lblName.setText("Xxxxxxxxxxx");
+		//
 		// lblEngineer
-		// 
-		this.lblEngineer.setLocation(new java.awt.Point(64, 88));
-		this.lblEngineer.setName("lblEngineer");
-		this.lblEngineer.setSize(new jwinforms.Size(17, 13));
-		this.lblEngineer.setTabIndex(95);
-		this.lblEngineer.setText("88");
-		// 
+		//
+		lblEngineer.setLocation(new java.awt.Point(64, 88));
+		lblEngineer.setName("lblEngineer");
+		lblEngineer.setSize(new jwinforms.Size(17, 13));
+		lblEngineer.setTabIndex(95);
+		lblEngineer.setText("88");
+		//
 		// lblTrader
-		// 
-		this.lblTrader.setLocation(new java.awt.Point(64, 72));
-		this.lblTrader.setName("lblTrader");
-		this.lblTrader.setSize(new jwinforms.Size(17, 13));
-		this.lblTrader.setTabIndex(94);
-		this.lblTrader.setText("88");
-		// 
+		//
+		lblTrader.setLocation(new java.awt.Point(64, 72));
+		lblTrader.setName("lblTrader");
+		lblTrader.setSize(new jwinforms.Size(17, 13));
+		lblTrader.setTabIndex(94);
+		lblTrader.setText("88");
+		//
 		// lblFighter
-		// 
-		this.lblFighter.setLocation(new java.awt.Point(64, 56));
-		this.lblFighter.setName("lblFighter");
-		this.lblFighter.setSize(new jwinforms.Size(17, 13));
-		this.lblFighter.setTabIndex(93);
-		this.lblFighter.setText("88");
-		// 
+		//
+		lblFighter.setLocation(new java.awt.Point(64, 56));
+		lblFighter.setName("lblFighter");
+		lblFighter.setSize(new jwinforms.Size(17, 13));
+		lblFighter.setTabIndex(93);
+		lblFighter.setText("88");
+		//
 		// lblPilot
-		// 
-		this.lblPilot.setLocation(new java.awt.Point(64, 40));
-		this.lblPilot.setName("lblPilot");
-		this.lblPilot.setSize(new jwinforms.Size(17, 13));
-		this.lblPilot.setTabIndex(92);
-		this.lblPilot.setText("88");
-		// 
+		//
+		lblPilot.setLocation(new java.awt.Point(64, 40));
+		lblPilot.setName("lblPilot");
+		lblPilot.setSize(new jwinforms.Size(17, 13));
+		lblPilot.setTabIndex(92);
+		lblPilot.setText("88");
+		//
 		// lblEngineerLabel
-		// 
-		this.lblEngineerLabel.setAutoSize(true);
-		this.lblEngineerLabel.setLocation(new java.awt.Point(12, 88));
-		this.lblEngineerLabel.setName("lblEngineerLabel");
-		this.lblEngineerLabel.setSize(new jwinforms.Size(53, 16));
-		this.lblEngineerLabel.setTabIndex(91);
-		this.lblEngineerLabel.setText("Engineer:");
-		// 
+		//
+		lblEngineerLabel.setAutoSize(true);
+		lblEngineerLabel.setLocation(new java.awt.Point(12, 88));
+		lblEngineerLabel.setName("lblEngineerLabel");
+		lblEngineerLabel.setSize(new jwinforms.Size(53, 16));
+		lblEngineerLabel.setTabIndex(91);
+		lblEngineerLabel.setText("Engineer:");
+		//
 		// lblTraderLabel
-		// 
-		this.lblTraderLabel.setAutoSize(true);
-		this.lblTraderLabel.setLocation(new java.awt.Point(12, 72));
-		this.lblTraderLabel.setName("lblTraderLabel");
-		this.lblTraderLabel.setSize(new jwinforms.Size(41, 16));
-		this.lblTraderLabel.setTabIndex(90);
-		this.lblTraderLabel.setText("Trader:");
-		// 
+		//
+		lblTraderLabel.setAutoSize(true);
+		lblTraderLabel.setLocation(new java.awt.Point(12, 72));
+		lblTraderLabel.setName("lblTraderLabel");
+		lblTraderLabel.setSize(new jwinforms.Size(41, 16));
+		lblTraderLabel.setTabIndex(90);
+		lblTraderLabel.setText("Trader:");
+		//
 		// lblFighterLabel
-		// 
-		this.lblFighterLabel.setAutoSize(true);
-		this.lblFighterLabel.setLocation(new java.awt.Point(12, 56));
-		this.lblFighterLabel.setName("lblFighterLabel");
-		this.lblFighterLabel.setSize(new jwinforms.Size(43, 16));
-		this.lblFighterLabel.setTabIndex(89);
-		this.lblFighterLabel.setText("Fighter:");
-		// 
+		//
+		lblFighterLabel.setAutoSize(true);
+		lblFighterLabel.setLocation(new java.awt.Point(12, 56));
+		lblFighterLabel.setName("lblFighterLabel");
+		lblFighterLabel.setSize(new jwinforms.Size(43, 16));
+		lblFighterLabel.setTabIndex(89);
+		lblFighterLabel.setText("Fighter:");
+		//
 		// lblPilotLabel
-		// 
-		this.lblPilotLabel.setAutoSize(true);
-		this.lblPilotLabel.setLocation(new java.awt.Point(12, 40));
-		this.lblPilotLabel.setName("lblPilotLabel");
-		this.lblPilotLabel.setSize(new jwinforms.Size(29, 16));
-		this.lblPilotLabel.setTabIndex(88);
-		this.lblPilotLabel.setText("Pilot:");
-		// 
+		//
+		lblPilotLabel.setAutoSize(true);
+		lblPilotLabel.setLocation(new java.awt.Point(12, 40));
+		lblPilotLabel.setName("lblPilotLabel");
+		lblPilotLabel.setSize(new jwinforms.Size(29, 16));
+		lblPilotLabel.setTabIndex(88);
+		lblPilotLabel.setText("Pilot:");
+		//
 		// lblCrewNoQuarters
-		// 
-		this.lblCrewNoQuarters.setLocation(new java.awt.Point(16, 24));
-		this.lblCrewNoQuarters.setName("lblCrewNoQuarters");
-		this.lblCrewNoQuarters.setSize(new jwinforms.Size(120, 16));
-		this.lblCrewNoQuarters.setTabIndex(7);
-		this.lblCrewNoQuarters.setText("No quarters available");
-		this.lblCrewNoQuarters.setVisible(false);
-		// 
+		//
+		lblCrewNoQuarters.setLocation(new java.awt.Point(16, 24));
+		lblCrewNoQuarters.setName("lblCrewNoQuarters");
+		lblCrewNoQuarters.setSize(new jwinforms.Size(120, 16));
+		lblCrewNoQuarters.setTabIndex(7);
+		lblCrewNoQuarters.setText("No quarters available");
+		lblCrewNoQuarters.setVisible(false);
+		//
 		// lblForHireNone
-		// 
-		this.lblForHireNone.setLocation(new java.awt.Point(16, 24));
-		this.lblForHireNone.setName("lblForHireNone");
-		this.lblForHireNone.setSize(new jwinforms.Size(120, 16));
-		this.lblForHireNone.setTabIndex(8);
-		this.lblForHireNone.setText("No one for hire");
-		this.lblForHireNone.setVisible(false);
-		// 
+		//
+		lblForHireNone.setLocation(new java.awt.Point(16, 24));
+		lblForHireNone.setName("lblForHireNone");
+		lblForHireNone.setSize(new jwinforms.Size(120, 16));
+		lblForHireNone.setTabIndex(8);
+		lblForHireNone.setText("No one for hire");
+		lblForHireNone.setVisible(false);
+		//
 		// FormViewPersonnel
-		// 
+		//
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
-		this.setCancelButton(this.btnClose);
+		this.setCancelButton(btnClose);
 		this.setClientSize(new jwinforms.Size(488, 129));
-		this.Controls.add(this.boxInfo);
-		this.Controls.add(this.boxForHire);
-		this.Controls.add(this.boxCurrentCrew);
-		this.Controls.add(this.btnClose);
+		Controls.add(boxInfo);
+		Controls.add(boxForHire);
+		Controls.add(boxCurrentCrew);
+		Controls.add(btnClose);
 		this.setFormBorderStyle(FormBorderStyle.FixedDialog);
 		this.setMaximizeBox(false);
 		this.setMinimizeBox(false);
@@ -441,7 +446,7 @@ public class FormViewPersonnel extends SpaceTraderForm
 		{
 			if (game.Commander().getShip().HasCrew(selectedCrewMember.Id()))
 			{
-				if (GuiFacade.alert(AlertType.CrewFireMercenary, selectedCrewMember.Name()) == DialogResult.Yes)
+				if (FormAlert.Alert(AlertType.CrewFireMercenary, selectedCrewMember.Name()) == DialogResult.Yes)
 				{
 					game.Commander().getShip().Fire(selectedCrewMember.Id());
 
