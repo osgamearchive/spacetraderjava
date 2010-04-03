@@ -6,6 +6,8 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+// TODO I think there's a Filter bug in this dialog, so it doesn't see any files when
+// used. Maybe it's case sensitivity.
 public class FileDialog //extends WinformForm
 {
 	protected final JFileChooser chooser = new JFileChooser();
