@@ -78,7 +78,7 @@ public class Commander extends CrewMember
 		_ship = new Ship(GetValueFromHash(hash, "_ship"/*,_ship*/, Hashtable.class));
 		_priceCargo = GetValueFromHash(hash, "_priceCargo", _priceCargo, int[].class);
 
-		Game.CurrentGame().Mercenaries()[CrewMemberId.Commander.CastToInt()] = this;
+		Game.currentGame().Mercenaries()[CrewMemberId.Commander.CastToInt()] = this;
 		Strings.CrewMemberNames[CrewMemberId.Commander.CastToInt()] = GetValueFromHash(hash, "_name",
 				Strings.CrewMemberNames[CrewMemberId.Commander.CastToInt()]);
 	}
@@ -230,8 +230,8 @@ public class Commander extends CrewMember
 				}
 
 				// TODO this is supposed to be "isArmorHardened".
-				if (Game.CurrentGame().getQuestStatusScarab() == SpecialEvent.StatusScarabDone)
-					Game.CurrentGame().setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
+				if (Game.currentGame().getQuestStatusScarab() == SpecialEvent.StatusScarabDone)
+					Game.currentGame().setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
 
 				traded = true;
 			}
@@ -242,12 +242,12 @@ public class Commander extends CrewMember
 
 	public int CashToSpend()
 	{
-		return _cash - (Game.CurrentGame().Options().getReserveMoney() ? CurrentCosts() : 0);
+		return _cash - (Game.currentGame().Options().getReserveMoney() ? CurrentCosts() : 0);
 	}
 
 	public int CurrentCosts()
 	{
-		return Game.CurrentGame().CurrentCosts();
+		return Game.currentGame().CurrentCosts();
 	}
 
 	public int NoClaim()
@@ -268,7 +268,7 @@ public class Commander extends CrewMember
 	public int Worth()
 	{
 		return getShip().getPrice() + _cash - _debt
-				+ (Game.CurrentGame().getQuestStatusMoon() > 0 ? SpecialEvent.MoonCost : 0);
+				+ (Game.currentGame().getQuestStatusMoon() > 0 ? SpecialEvent.MoonCost : 0);
 	}
 
 	public void setShip(Ship ship)

@@ -32,6 +32,7 @@ import java.util.Arrays;
 
 import jwinforms.*;
 import spacetrader.Game;
+import spacetrader.GameFacade;
 import spacetrader.Ship;
 import spacetrader.guifacade.Facaded;
 
@@ -76,7 +77,7 @@ public class FormJettison extends SpaceTraderForm
 
 	private final Button[] btnJettisonQty;
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 
 	public FormJettison()
 	{

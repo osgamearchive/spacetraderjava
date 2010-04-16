@@ -26,11 +26,7 @@ package spacetrader.gui;
 import java.util.Arrays;
 
 import jwinforms.*;
-import spacetrader.Commander;
-import spacetrader.Consts;
-import spacetrader.Functions;
-import spacetrader.Game;
-import spacetrader.Strings;
+import spacetrader.*;
 import spacetrader.enums.AlertType;
 import spacetrader.guifacade.GuiFacade;
 
@@ -54,8 +50,8 @@ public class FormViewBank extends SpaceTraderForm
 	private jwinforms.Button btnClose;
 	private jwinforms.Label lblMaxNoClaim;
 
-	private final Game game = Game.CurrentGame();
-	private final Commander cmdr = Game.CurrentGame().Commander();
+	private final Game game = GameFacade.currentGame();
+	private final Commander cmdr = GameFacade.currentGame().Commander();
 	private final int MaxLoan = cmdr.getMaxLoan();
 
 	public FormViewBank()

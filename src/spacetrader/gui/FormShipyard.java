@@ -28,6 +28,7 @@ import spacetrader.enums.AlertType;
 import spacetrader.enums.ShipType;
 import spacetrader.enums.Size;
 import spacetrader.guifacade.GuiFacade;
+import spacetrader.persistence.Persistence;
 import spacetrader.stub.ArrayList;
 import spacetrader.stub.Directory;
 import spacetrader.util.Hashtable;
@@ -104,7 +105,7 @@ public class FormShipyard extends SpaceTraderForm
 
 	//#region Member variables
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 	private final Shipyard shipyard = game.Commander().getCurrentSystem().Shipyard();
 	private boolean loading = false;
 	private ArrayList<Size> sizes = null;
@@ -132,8 +133,8 @@ public class FormShipyard extends SpaceTraderForm
 		lblWarning.setText(Functions.StringVars(Strings.ShipyardWarning, "" + Shipyard.PENALTY_FIRST_PCT, ""
 				+ Shipyard.PENALTY_SECOND_PCT));
 
-		dlgOpen.setInitialDirectory(Consts.CustomImagesDirectory);
-		dlgSave.setInitialDirectory(Consts.CustomTemplatesDirectory);
+		dlgOpen.setInitialDirectory(Persistence.getCustomImageDir());
+		dlgSave.setInitialDirectory(Persistence.getCustomTemplateDir());
 		lblDisabledName.setImage(SpaceTrader.INSTANCE.DirectionImages().getImages()[Consts.DirectionDown]);
 		lblDisabledPct.setImage(SpaceTrader.INSTANCE.DirectionImages().getImages()[Consts.DirectionUp]);
 
@@ -1147,7 +1148,7 @@ public class FormShipyard extends SpaceTraderForm
 
 		// Add the user-created templates.
 		ArrayList userTemplates = new ArrayList();
-		for (String fileName : Directory.GetFiles(Consts.CustomTemplatesDirectory, "*.sst"))
+		for (String fileName : Directory.GetFiles(Persistence.getCustomTemplateDir(), "*.sst"))
 		{
 			ShipTemplate template = new ShipTemplate((Hashtable)Functions.LoadFile(fileName, true));
 			if (sizes.contains(template.Size()))

@@ -79,7 +79,7 @@ public class PoliticalSystem
 	{
 		boolean likely = false;
 		int diffMod = Math
-				.max(0, Game.CurrentGame().Difficulty().CastToInt() - Difficulty.Normal.CastToInt());
+				.max(0, Game.currentGame().Difficulty().CastToInt() - Difficulty.Normal.CastToInt());
 
 		switch (oppType)
 		{

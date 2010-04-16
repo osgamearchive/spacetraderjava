@@ -19,6 +19,7 @@
  ******************************************************************************/
 package spacetrader;
 
+import spacetrader.persistence.Persistence;
 import spacetrader.util.Hashtable;
 
 public class GameOptions extends STSerializableObject
@@ -147,7 +148,7 @@ public class GameOptions extends STSerializableObject
 
 		GameOptions defaults = null;
 
-		Object obj = Functions.LoadFile(Consts.DefaultSettingsFile, !errorIfFileNotFound);
+		Object obj = Functions.LoadFile(Persistence.getDefultSettingsFilename(), !errorIfFileNotFound);
 		if (obj == null)
 			defaults = new GameOptions(false);
 		else
@@ -158,7 +159,7 @@ public class GameOptions extends STSerializableObject
 
 	public void SaveAsDefaults()
 	{
-		Functions.SaveFile(Consts.DefaultSettingsFile, Serialize());
+		Functions.SaveFile(Persistence.getDefultSettingsFilename(), Serialize());
 	}
 
 	public @Override

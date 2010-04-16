@@ -33,7 +33,7 @@ import jwinforms.*;
 import spacetrader.Commander;
 import spacetrader.Consts;
 import spacetrader.Functions;
-import spacetrader.Game;
+import spacetrader.GameFacade;
 import spacetrader.Strings;
 import spacetrader.enums.CargoSellOp;
 import spacetrader.guifacade.Facaded;
@@ -54,7 +54,7 @@ public class FormCargoSell extends SpaceTraderForm
 	{
 		InitializeComponent();
 
-		Commander cmdr = Game.CurrentGame().Commander();
+		Commander cmdr = GameFacade.currentGame().Commander();
 		int cost = cmdr.PriceCargo()[item] / cmdr.getShip().Cargo()[item];
 
 		numAmount.setMaximum(maxAmount);

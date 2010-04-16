@@ -28,6 +28,7 @@ import jwinforms.DialogResult;
 import jwinforms.FormStartPosition;
 import spacetrader.Functions;
 import spacetrader.Game;
+import spacetrader.GameFacade;
 
 public class FormCosts extends SpaceTraderForm
 {
@@ -44,7 +45,7 @@ public class FormCosts extends SpaceTraderForm
 	private jwinforms.Label lblInsLabel;
 	private jwinforms.PictureBox picLine;
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 
 	public FormCosts()
 	{

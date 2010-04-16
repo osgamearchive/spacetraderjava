@@ -31,11 +31,7 @@ import jwinforms.EventHandler;
 import jwinforms.FormBorderStyle;
 import jwinforms.FormStartPosition;
 import jwinforms.LinkLabelLinkClickedEventArgs;
-import spacetrader.Consts;
-import spacetrader.Functions;
-import spacetrader.Game;
-import spacetrader.SpecialEvent;
-import spacetrader.Strings;
+import spacetrader.*;
 import spacetrader.enums.CrewMemberId;
 import spacetrader.enums.SpecialEventType;
 import spacetrader.stub.ArrayList;
@@ -127,7 +123,7 @@ public class FormViewQuests extends SpaceTraderForm
 
 	private String[] GetQuestStrings()
 	{
-		Game game = Game.CurrentGame();
+		Game game = GameFacade.currentGame();
 		ArrayList quests = new ArrayList(12);
 
 		if (game.getQuestStatusGemulon() > SpecialEvent.StatusGemulonNotStarted
@@ -303,8 +299,8 @@ public class FormViewQuests extends SpaceTraderForm
 	private void lblQuests_LinkClicked(Object sender,
 			jwinforms.LinkLabelLinkClickedEventArgs e)
 	{
-		Game.CurrentGame().setSelectedSystemByName(e.Link.LinkData.toString(), false);
-		Game.CurrentGame().getParentWindow().UpdateAll();
+		GameFacade.currentGame().setSelectedSystemByName(e.Link.LinkData.toString(), false);
+		GameFacade.currentGame().getParentWindow().UpdateAll();
 		Close();
 	}
 }

@@ -30,6 +30,7 @@ import jwinforms.*;
 import spacetrader.Consts;
 import spacetrader.Functions;
 import spacetrader.Game;
+import spacetrader.GameFacade;
 import spacetrader.Ship;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.EncounterResult;
@@ -128,9 +129,9 @@ public class FormEncounter extends SpaceTraderForm
 	private final int TRADE = 11;
 	private final int YIELD = 12;
 
-	private final Game game = Game.CurrentGame();
-	private final Ship cmdrship = Game.CurrentGame().Commander().getShip();
-	private final Ship opponent = Game.CurrentGame().getOpponent();
+	private final Game game = GameFacade.currentGame();
+	private final Ship cmdrship = GameFacade.currentGame().Commander().getShip();
+	private final Ship opponent = GameFacade.currentGame().getOpponent();
 	private int contImg = 1;
 
 	private EncounterResult _result = EncounterResult.Continue;

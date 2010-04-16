@@ -27,6 +27,7 @@ import java.awt.Point;
 
 import jwinforms.*;
 import spacetrader.Game;
+import spacetrader.GameFacade;
 import spacetrader.GameOptions;
 import spacetrader.enums.AlertType;
 import spacetrader.guifacade.GuiFacade;
@@ -56,7 +57,7 @@ public class FormOptions extends SpaceTraderForm
 	private Button btnSave;
 	private Button btnLoad;
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 	private boolean initializing = true;
 
 	private final GameOptions _options = new GameOptions(false);

@@ -35,9 +35,8 @@ import java.util.Arrays;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import jwinforms.*;
-
 import spacetrader.Commander;
-import spacetrader.Game;
+import spacetrader.GameFacade;
 
 public class FormBuyRepairs extends jwinforms.WinformForm
 {
@@ -51,7 +50,7 @@ public class FormBuyRepairs extends jwinforms.WinformForm
 	{
 		InitializeComponent();
 
-		Commander cmdr = Game.CurrentGame().Commander();
+		Commander cmdr = GameFacade.currentGame().Commander();
 		numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().HullStrength() - cmdr.getShip().getHull())
 				* cmdr.getShip().getRepairCost()));
 		numAmount.setValue(numAmount.getMaximum());

@@ -173,7 +173,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 	// #region Methods
 
-	public Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer,
+	Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer,
 			MainWindow parentWin)
 	{
 		_game = this;
@@ -212,7 +212,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 	}
 
-	public Game(Hashtable hash, MainWindow parentWin)
+	Game(Hashtable hash, MainWindow parentWin)
 	{
 		super(hash);
 		_game = this;
@@ -3836,12 +3836,12 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 	// #region Properties
 
-	public static Game CurrentGame()
+	static Game currentGame()
 	{
 		return _game;
 	}
 
-	public static void CurrentGame(Game value)
+	static void CurrentGame(Game value)
 	{
 		_game = value;
 	}

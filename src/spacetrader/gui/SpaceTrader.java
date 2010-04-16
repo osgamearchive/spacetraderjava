@@ -26,17 +26,16 @@ import java.awt.Point;
 import javax.swing.UIManager;
 
 import jwinforms.*;
-import spacetrader.Commander;
-import spacetrader.Consts;
-import spacetrader.Functions;
-import spacetrader.Game;
-import spacetrader.GameController;
+import spacetrader.*;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.GameEndType;
 import spacetrader.enums.ShipType;
 import spacetrader.guifacade.GuiFacade;
 import spacetrader.guifacade.GuiEngine;
 import spacetrader.guifacade.MainWindow;
+import spacetrader.persistence.FileBasedPersistenceProvider;
+import spacetrader.persistence.Persistence;
+import spacetrader.persistence.PersistenceProvider;
 import spacetrader.stub.Directory;
 import spacetrader.stub.RegistryKey;
 
@@ -565,7 +564,7 @@ public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 
 		try
 		{
-			RegistryKey key = Functions.GetRegistryKey();
+			RegistryKey key = Util.GetRegistryKey();
 			Object ObjectValue = key.GetValue(settingName);
 			if (ObjectValue != null)
 				settingValue = ObjectValue.toString();
@@ -581,17 +580,12 @@ public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 	// Make sure all directories exists.
 	private void InitFileStructure()
 	{
-		String[] paths = new String[] { Consts.CustomDirectory, Consts.CustomImagesDirectory,
-				Consts.CustomTemplatesDirectory, Consts.DataDirectory, Consts.SaveDirectory };
+		FileBasedPersistenceProvider persistenceProvider = new FileBasedPersistenceProvider();
+		persistenceProvider.InitFileStructure();
+		Persistence.installProvider(persistenceProvider);
 
-		for (String path : paths)
-		{
-			if (!Directory.Exists(path))
-				Directory.CreateDirectory(path);
-		}
-
-		dlgOpen.setInitialDirectory(Consts.SaveDirectory);
-		dlgSave.setInitialDirectory(Consts.SaveDirectory);
+		dlgOpen.setInitialDirectory(persistenceProvider.getSaveDirectory());
+		dlgSave.setInitialDirectory(persistenceProvider.getSaveDirectory());
 	}
 
 	public void SetInGameControlsEnabled(boolean enabled)
@@ -610,7 +604,7 @@ public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 	{
 		try
 		{
-			RegistryKey key = Functions.GetRegistryKey();
+			RegistryKey key = Util.GetRegistryKey();
 			key.SetValue(settingName, settingValue);
 			key.Close();
 		} catch (NullPointerException ex)
@@ -667,13 +661,13 @@ public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 
 	private void mnuGameNew_Click(Object sender, jwinforms.EventArgs e)
 	{
-		FormNewCommander form = new FormNewCommander();
+		FormNewCommander form = new FormNewCommander(GameFacade.getRules());
 		if ((game == null || commander.getDays() == controller.SaveGameDays || FormAlert
 				.Alert(AlertType.GameAbandonConfirm) == DialogResult.Yes)
 				&& form.ShowDialog(this) == DialogResult.OK)
 		{
-			setGame(new Game(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form.Trader(), form
-					.Engineer(), this));
+			setGame(GameFacade.newGame(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form
+					.Trader(), form.Engineer(), this));
 
 			SetInGameControlsEnabled(true);
 			UpdateAll();
@@ -693,7 +687,7 @@ public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 
 	private void mnuGameSave_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if (Game.CurrentGame() != null)
+		if (GameFacade.hasActiveGame())
 		{
 			if (controller.SaveGameFile != null)
 				controller.SaveGame(controller.SaveGameFile, false);
@@ -704,7 +698,7 @@ public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 
 	private void mnuGameSaveAs_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if (Game.CurrentGame() != null && dlgSave.ShowDialog(this) == DialogResult.OK)
+		if (GameFacade.hasActiveGame() && dlgSave.ShowDialog(this) == DialogResult.OK)
 			controller.SaveGame(dlgSave.getFileName(), true);
 	}
 
@@ -828,7 +822,7 @@ public class SpaceTrader extends jwinforms.WinformWindow implements MainWindow
 	public void setGame(Game game)
 	{
 		this.game = game;
-		controller = game.makeController(this);
+		controller = game == null ? null : game.makeController(this);
 		commander = game == null ? null : game.Commander();
 
 		dockBox.setGame(controller, commander);

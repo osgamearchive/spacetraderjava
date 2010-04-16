@@ -25,6 +25,7 @@ package spacetrader.gui;
 
 import jwinforms.*;
 import spacetrader.Game;
+import spacetrader.GameFacade;
 import spacetrader.Ship;
 import spacetrader.guifacade.Facaded;
 
@@ -67,7 +68,7 @@ public class FormPlunder extends SpaceTraderForm
 	private jwinforms.Button btnJettison;
 
 	private final Button[] btnPlunderQty;
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 
 	public FormPlunder()
 	{

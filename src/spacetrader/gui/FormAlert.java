@@ -21,7 +21,7 @@ package spacetrader.gui;
 
 import jwinforms.*;
 import spacetrader.Functions;
-import spacetrader.Game;
+import spacetrader.GameFacade;
 import spacetrader.Strings;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.GameEndType;
@@ -410,7 +410,7 @@ public class FormAlert extends SpaceTraderForm
 					"You paid ^1 credits for these items. Are you sure you want to just dump them?", "Yes",
 					DialogResult.Yes, "No", DialogResult.No, args));
 		case EncounterDumpWarning:
-			Game.CurrentGame().setLitterWarning(true);
+			GameFacade.currentGame().setLitterWarning(true);
 			return (new FormAlert(
 					"Space Littering",
 					"Dumping cargo in space is considered littering. If the police find your dumped goods and track them to you, this will influence your record. Do you really wish to dump?",

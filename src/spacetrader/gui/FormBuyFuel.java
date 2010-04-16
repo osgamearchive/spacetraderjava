@@ -31,10 +31,13 @@ package spacetrader.gui;
 
 import java.util.Arrays;
 
-import jwinforms.*;
-
+import jwinforms.DialogResult;
+import jwinforms.EventArgs;
+import jwinforms.EventHandler;
+import jwinforms.FormStartPosition;
+import jwinforms.ISupportInitialize;
 import spacetrader.Commander;
-import spacetrader.Game;
+import spacetrader.GameFacade;
 
 public class FormBuyFuel extends SpaceTraderForm
 {
@@ -48,7 +51,7 @@ public class FormBuyFuel extends SpaceTraderForm
 	{
 		InitializeComponent();
 
-		Commander cmdr = Game.CurrentGame().Commander();
+		Commander cmdr = GameFacade.currentGame().Commander();
 		numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().FuelTanks() - cmdr.getShip().getFuel())
 				* cmdr.getShip().getFuelCost()));
 		numAmount.setValue(numAmount.getMaximum());

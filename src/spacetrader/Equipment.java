@@ -93,7 +93,7 @@ public abstract class Equipment extends STSerializableObject implements Cloneabl
 
 	public int Price()
 	{
-		Commander cmdr = Game.CurrentGame().Commander();
+		Commander cmdr = Game.currentGame().Commander();
 		int price = 0;
 
 		if (cmdr != null && cmdr.getCurrentSystem().TechLevel().CastToInt() >= MinimumTechLevel().CastToInt())

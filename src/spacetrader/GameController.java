@@ -3,6 +3,7 @@ package spacetrader;
 import spacetrader.enums.AlertType;
 import spacetrader.guifacade.GuiFacade;
 import spacetrader.guifacade.MainWindow;
+import spacetrader.persistence.Persistence;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
@@ -49,7 +50,7 @@ public class GameController
 	public void ClearHighScores()
 	{
 		HighScoreRecord[] highScores = new HighScoreRecord[3];
-		Functions.SaveFile(Consts.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores));
+		Functions.SaveFile(Persistence.getHighScoresFilename(), STSerializableObject.ArrayToArrayList(highScores));
 	}
 
 	public void AddHighScore(HighScoreRecord highScore)
@@ -58,7 +59,7 @@ public class GameController
 		highScores[0] = highScore;
 		Util.sort(highScores);
 
-		Functions.SaveFile(Consts.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores));
+		Functions.SaveFile(Persistence.getHighScoresFilename(), STSerializableObject.ArrayToArrayList(highScores));
 	}
 
 	public void GameEnd()

@@ -31,7 +31,7 @@ import jwinforms.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import spacetrader.Commander;
 import spacetrader.Functions;
-import spacetrader.Game;
+import spacetrader.GameFacade;
 import spacetrader.Strings;
 
 public class FormPayBackLoan extends SpaceTraderForm
@@ -47,7 +47,7 @@ public class FormPayBackLoan extends SpaceTraderForm
 	{
 		InitializeComponent();
 
-		Commander cmdr = Game.CurrentGame().Commander();
+		Commander cmdr = GameFacade.currentGame().Commander();
 		int max = Math.min(cmdr.getDebt(), cmdr.getCash());
 		numAmount.setMaximum(max);
 		numAmount.setValue(numAmount.getMinimum());

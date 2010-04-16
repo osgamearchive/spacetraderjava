@@ -97,7 +97,7 @@ public class FormShipList extends SpaceTraderForm
 	private final Label[] lblPrice;
 	private final Button[] btnBuy;
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 	private final int[] prices = new int[Consts.ShipSpecs.length];
 
 	public FormShipList()

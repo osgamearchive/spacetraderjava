@@ -24,10 +24,11 @@
  ******************************************************************************/
 package spacetrader.gui;
 
-import java.util.*;
+import java.util.Arrays;
 
 import jwinforms.*;
-import spacetrader.enums.*;
+import spacetrader.GameRules;
+import spacetrader.enums.Difficulty;
 
 public class FormNewCommander extends SpaceTraderForm
 {
@@ -49,8 +50,14 @@ public class FormNewCommander extends SpaceTraderForm
 	private jwinforms.NumericUpDown numTrader;
 	private jwinforms.NumericUpDown numEngineer;
 
-	public FormNewCommander()
+	private final int maxTotalPoints;
+	private final int maxSkillPoints;
+
+	public FormNewCommander(GameRules rules)
 	{
+		maxTotalPoints = rules.maxTotalInitialPoints();
+		maxSkillPoints = rules.maxInitialSkillPoints();
+
 		InitializeComponent();
 
 		selDifficulty.setSelectedIndex(2);
@@ -380,12 +387,12 @@ public class FormNewCommander extends SpaceTraderForm
 
 	private void num_ValueChanged(Object sender, EventArgs e)
 	{
-		int points = 20 - (Pilot() + Fighter() + Trader() + Engineer());
+		int points = maxTotalPoints - (Pilot() + Fighter() + Trader() + Engineer());
 		lblPoints.setText("" + points);
-		numPilot.setMaximum(Math.min(10, Pilot() + points));
-		numFighter.setMaximum(Math.min(10, Fighter() + points));
-		numTrader.setMaximum(Math.min(10, Trader() + points));
-		numEngineer.setMaximum(Math.min(10, Engineer() + points));
+		numPilot.setMaximum(Math.min(maxSkillPoints, Pilot() + points));
+		numFighter.setMaximum(Math.min(maxSkillPoints, Fighter() + points));
+		numTrader.setMaximum(Math.min(maxSkillPoints, Trader() + points));
+		numEngineer.setMaximum(Math.min(maxSkillPoints, Engineer() + points));
 
 		UpdateOkEnabled();
 	}

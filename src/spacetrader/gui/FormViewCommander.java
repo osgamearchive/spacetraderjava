@@ -72,7 +72,7 @@ public class FormViewCommander extends SpaceTraderForm
 	private jwinforms.Label lblBountyLabel;
 	private jwinforms.Label lblBounty;
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 
 	public FormViewCommander()
 	{

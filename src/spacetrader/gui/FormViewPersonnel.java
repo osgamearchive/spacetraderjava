@@ -46,7 +46,7 @@ public class FormViewPersonnel extends SpaceTraderForm
 	private jwinforms.Label lblCrewNoQuarters;
 	private jwinforms.Label lblForHireNone;
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 	private final Commander cmdr = game.Commander();
 	private CrewMember selectedCrewMember = null;
 	private boolean handlingSelect = false;

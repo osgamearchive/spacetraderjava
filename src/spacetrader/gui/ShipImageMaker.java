@@ -16,8 +16,8 @@ public class ShipImageMaker
 	public static void PaintShipImage(Ship ship, Graphics graphics, Color backgroundColor)
 	{
 		// TODO ShipImageOffsets is a nice idea, but needs to go if we want to be able to change images. Like, higher res ones.
-		int x = Consts.ShipImageOffsets[ship.Type().CastToInt()].X;
-		int width = Consts.ShipImageOffsets[ship.Type().CastToInt()].Width;
+		int x = Util.ShipImageOffsets[ship.Type().CastToInt()].X;
+		int width = Util.ShipImageOffsets[ship.Type().CastToInt()].Width;
 		int startDamage = x + width - ship.getHull() * width / ship.HullStrength();
 		int startShield = x + width + 2
 				- (ship.ShieldStrength() > 0 ? ship.ShieldCharge() * (width + 4) / ship.ShieldStrength() : 0);

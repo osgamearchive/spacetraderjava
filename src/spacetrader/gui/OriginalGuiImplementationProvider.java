@@ -2,10 +2,9 @@ package spacetrader.gui;
 
 import spacetrader.guifacade.DialogResult;
 import spacetrader.guifacade.GuiWindow;
+import jwinforms.Bitmap;
 import jwinforms.Image;
 import jwinforms.WinformPane;
-import spacetrader.Consts;
-import spacetrader.Functions;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.CargoBuyOp;
 import spacetrader.enums.CargoSellOp;
@@ -49,13 +48,31 @@ public class OriginalGuiImplementationProvider implements ImplementationProvider
 
 				// Find the first column of pixels that has a non-white pixel for the X
 				// value, and the last column for the width.
-				int x = Functions.GetColumnOfFirstNonWhitePixel(image, 1);
-				int width = Functions.GetColumnOfFirstNonWhitePixel(image, -1) - x + 1;
-				Consts.ShipImageOffsets[custIndex].X = Math.max(2, x);
-				Consts.ShipImageOffsets[custIndex].Width = Math.min(62 - Consts.ShipImageOffsets[custIndex].X, width);
+				int x = GetColumnOfFirstNonWhitePixel(image, 1);
+				int width = GetColumnOfFirstNonWhitePixel(image, -1) - x + 1;
+				Util.ShipImageOffsets[custIndex].X = Math.max(2, x);
+				Util.ShipImageOffsets[custIndex].Width = Math.min(62 - Util.ShipImageOffsets[custIndex].X, width);
 				System.out.println("Updates custom image: " + x + " " + width);
 			}
 		};
+	}
+	private static int GetColumnOfFirstNonWhitePixel(Image image, int direction)
+	{
+		Bitmap bitmap = new Bitmap(image);
+		int step = direction < 0 ? -1 : 1;
+		int col = step > 0 ? 0 : bitmap.getWidth() - 1;
+		int stop = step > 0 ? bitmap.getWidth() : -1;
+
+		for (; col != stop; col += step)
+		{
+			for (int row = 0; row < bitmap.getHeight(); row++)
+			{
+				if (bitmap.ToArgb(col, row) != 0)
+					return col;
+			}
+		}
+
+		return -1;
 	}
 
 	public CheatGui getCheatGuiProvider()

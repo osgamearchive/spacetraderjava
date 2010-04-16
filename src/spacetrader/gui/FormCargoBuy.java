@@ -34,11 +34,7 @@ import jwinforms.EventArgs;
 import jwinforms.EventHandler;
 import jwinforms.FormStartPosition;
 import jwinforms.ISupportInitialize;
-import spacetrader.Commander;
-import spacetrader.Consts;
-import spacetrader.Functions;
-import spacetrader.Game;
-import spacetrader.Strings;
+import spacetrader.*;
 import spacetrader.enums.CargoBuyOp;
 import spacetrader.guifacade.Facaded;
 
@@ -55,7 +51,7 @@ public class FormCargoBuy extends SpaceTraderForm
 	private jwinforms.Label lblAvailable;
 	private jwinforms.Label lblAfford;
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 
 	@Facaded
 	public FormCargoBuy(int item, int maxAmount, CargoBuyOp op)

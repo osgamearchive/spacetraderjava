@@ -25,10 +25,11 @@
 
 package spacetrader.gui;
 
+import java.util.ArrayList;
+
 import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.ShipyardId;
-import java.util.ArrayList;
 import spacetrader.util.CheatCode;
 import spacetrader.util.Util;
 
@@ -72,7 +73,7 @@ public class FormMonster extends SpaceTraderForm
 	private jwinforms.LinkLabel lblShipyardSystems;
 	private jwinforms.Label lblShipyards;
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 	private Integer[] mercIds;
 	private Integer[] questSystemIds;
 	private Integer[] shipyardSystemIds;
@@ -898,8 +899,8 @@ public class FormMonster extends SpaceTraderForm
 
 	private void SystemLinkClicked(jwinforms.LinkLabelLinkClickedEventArgs e)
 	{
-		Game.CurrentGame().setSelectedSystemByName(e.Link.LinkData.toString(), false);
-		Game.CurrentGame().getParentWindow().UpdateAll();
+		GameFacade.currentGame().setSelectedSystemByName(e.Link.LinkData.toString(), false);
+		GameFacade.currentGame().getParentWindow().UpdateAll();
 		Close();
 	}
 

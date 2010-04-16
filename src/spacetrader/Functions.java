@@ -24,25 +24,19 @@
  ******************************************************************************/
 package spacetrader;
 
-import java.awt.Color;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Random;
 
-import jwinforms.Bitmap;
-import jwinforms.Graphics;
-import jwinforms.GraphicsUnit;
-import jwinforms.Image;
-import jwinforms.Rectangle;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.Difficulty;
 import spacetrader.guifacade.GuiFacade;
+import spacetrader.persistence.Persistence;
 import spacetrader.stub.BinaryFormatter;
-import spacetrader.stub.RegistryKey;
 import spacetrader.stub.SerializationException;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Log;
@@ -50,8 +44,6 @@ import spacetrader.util.Util;
 
 public class Functions
 {
-	// #region Static Variable/Constant Declarations
-
 	private static Random rand = new Random();
 
 	private final static long DEFSEEDX = 521288629;
@@ -61,13 +53,9 @@ public class Functions
 	private static long SeedX = DEFSEEDX;
 	private static long SeedY = DEFSEEDY;
 
-	// #endregion
-
-	// #region Methods
-
 	public static int AdjustSkillForDifficulty(int skill)
 	{
-		Difficulty diff = Game.CurrentGame().Difficulty();
+		Difficulty diff = Game.currentGame().Difficulty();
 		skill = diff.adjustSkill(skill);
 
 		return skill;
@@ -79,6 +67,16 @@ public class Functions
 
 		for (int i = 0; i < items.length; i++)
 			items[i] = (String)list.get(i);
+
+		return items;
+	}
+
+	public static <T> String[] arrayToStringArray(T[] array)
+	{
+		String[] items = new String[array.length];
+
+		for (int i = 0; i < items.length; i++)
+			items[i] = array[i].toString();
 
 		return items;
 	}
@@ -116,28 +114,9 @@ public class Functions
 		return String.format("%,d%%", num);
 	}
 
-	public static int GetColumnOfFirstNonWhitePixel(Image image, int direction)
-	{
-		Bitmap bitmap = new Bitmap(image);
-		int step = direction < 0 ? -1 : 1;
-		int col = step > 0 ? 0 : bitmap.getWidth() - 1;
-		int stop = step > 0 ? bitmap.getWidth() : -1;
-
-		for (; col != stop; col += step)
-		{
-			for (int row = 0; row < bitmap.getHeight(); row++)
-			{
-				if (bitmap.ToArgb(col, row) != 0)
-					return col;
-			}
-		}
-
-		return -1;
-	}
-
 	public static HighScoreRecord[] GetHighScores()
 	{
-		Object obj = LoadFile(Consts.HighScoreFile, true);
+		Object obj = LoadFile(Persistence.getHighScoresFilename(), true);
 		if (obj == null)
 			return new HighScoreRecord[3];
 
@@ -151,6 +130,9 @@ public class Functions
 
 	public static int GetRandom(int min, int max)
 	{
+		if (max == min)
+			// Fix the Single Tribblet bug --avv
+			return max;
 		// return rand.Next(min, max);
 		return rand.nextInt(max - min) + min;
 	}
@@ -161,16 +143,6 @@ public class Functions
 	public static int GetRandom2(int max)
 	{
 		return (int)(Rand() % max);
-	}
-
-	public static RegistryKey GetRegistryKey()
-	{
-		File regfile = new File("registryKey.properties");
-
-		return new RegistryKey(regfile);
-
-		// return Registry.CurrentUser.OpenSubKey("Software",
-		// true).CreateSubKey("FrenchFryz").CreateSubKey("SpaceTrader");
 	}
 
 	public static boolean IsInt(String toParse)
@@ -187,16 +159,16 @@ public class Functions
 
 	public static Object LoadFile(String fileName, boolean ignoreMissingFile)
 	{
-		FileInputStream inStream = null;
+		InputStream inStream = null;
 
 		try
 		{
-			inStream = new FileInputStream(fileName/* , FileMode.Open */);
+			inStream = Persistence.openFileRead(fileName);
 			return (new BinaryFormatter()).Deserialize(inStream);
-		} catch (FileNotFoundException e)
+		} catch (FileNotFoundException ex)
 		{
 			if (!ignoreMissingFile)
-				GuiFacade.alert(AlertType.FileErrorOpen, fileName, e.getMessage());
+				GuiFacade.alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
 		} catch (IOException ex)
 		{
 			GuiFacade.alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
@@ -254,17 +226,14 @@ public class Functions
 
 	public static boolean SaveFile(String fileName, Object toSerialize)
 	{
-		System.out.println(fileName);
-		FileOutputStream outStream = null;
-		boolean saveOk = false;
+		OutputStream outStream = null;
 
 		try
 		{
 			new File(fileName).createNewFile();
-			outStream = new FileOutputStream(fileName, false);
+			outStream = Persistence.openFileWrite(fileName);
 			(new BinaryFormatter()).Serialize(outStream, toSerialize);
-
-			saveOk = true;
+			return true;
 		} catch (IOException ex)
 		{
 			ex.printStackTrace();
@@ -281,10 +250,9 @@ public class Functions
 				}
 		}
 
-		return saveOk;
+		return false;
 	}
 
-	// TODO replace w/String.format?
 	public static String StringVars(String toParse, String[] vars)
 	{
 		String parsed = toParse;
@@ -311,7 +279,7 @@ public class Functions
 	 */
 	public static boolean WormholeExists(int a, int b)
 	{
-		int[] wormholes = Game.CurrentGame().Wormholes();
+		int[] wormholes = Game.currentGame().Wormholes();
 		int i = Util.BruteSeek(wormholes, a);
 		// int i = Array.IndexOf(wormholes, a);
 
@@ -320,8 +288,8 @@ public class Functions
 
 	public static boolean WormholeExists(StarSystem a, StarSystem b)
 	{
-		StarSystem[] universe = Game.CurrentGame().Universe();
-		int[] wormholes = Game.CurrentGame().Wormholes();
+		StarSystem[] universe = Game.currentGame().Universe();
+		int[] wormholes = Game.currentGame().Wormholes();
 		// int i = Array.IndexOf(wormholes, (int) a.Id);
 		int i = Util.BruteSeek(wormholes, a.Id().CastToInt());
 
@@ -330,12 +298,10 @@ public class Functions
 
 	public static StarSystem WormholeTarget(int a)
 	{
-		int[] wormholes = Game.CurrentGame().Wormholes();
+		int[] wormholes = Game.currentGame().Wormholes();
 		// int i = Array.IndexOf(wormholes, a);
 		int i = Util.BruteSeek(wormholes, a);
 
-		return (i >= 0 ? (Game.CurrentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
+		return (i >= 0 ? (Game.currentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
 	}
-
-	// #endregion
 }

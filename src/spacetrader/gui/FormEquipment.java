@@ -75,7 +75,7 @@ public class FormEquipment extends SpaceTraderForm
 	private jwinforms.Label lblBuyShieldNone;
 	private jwinforms.Label lblBuyGadgetNone;
 
-	private final Game game = Game.CurrentGame();
+	private final Game game = GameFacade.currentGame();
 	private final Equipment[] equipBuy = Consts.EquipmentForSale;
 	private Equipment selectedEquipment = null;
 	private boolean sellSideSelected = false;
@@ -787,7 +787,7 @@ public class FormEquipment extends SpaceTraderForm
 		lstSellShield.Items.clear();
 		lstSellGadget.Items.clear();
 
-		Ship ship = Game.CurrentGame().Commander().getShip();
+		Ship ship = GameFacade.currentGame().Commander().getShip();
 		Equipment[] equipSell;
 		int index;
 

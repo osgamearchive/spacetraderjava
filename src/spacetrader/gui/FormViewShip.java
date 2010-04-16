@@ -1,32 +1,34 @@
 /*******************************************************************************
- * 
+ *
  * Space Trader for Windows 2.00
- * 
+ *
  * Copyright (C) 2005 Jay French, All Rights Reserved
- * 
+ *
  * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- * 
+ *
  * You can contact the author at spacetrader@frenchfryz.com
- * 
+ *
  ******************************************************************************/
 package spacetrader.gui;
 
-import java.util.*;
+import java.util.Arrays;
 
-import jwinforms.*;
-import spacetrader.stub.ArrayList;
-import spacetrader.util.*;
+import jwinforms.DialogResult;
+import jwinforms.FormBorderStyle;
+import jwinforms.FormStartPosition;
+import jwinforms.WinformControl;
 import spacetrader.*;
-import spacetrader.enums.*;
-
+import spacetrader.enums.GadgetType;
+import spacetrader.stub.ArrayList;
+import spacetrader.util.Util;
 
 @SuppressWarnings("unchecked")
 public class FormViewShip extends SpaceTraderForm
@@ -39,8 +41,8 @@ public class FormViewShip extends SpaceTraderForm
 	private jwinforms.Label lblEquipLabel;
 	private jwinforms.Label lblEquip;
 
-	private final Game game = Game.CurrentGame();
-	private final Ship ship = Game.CurrentGame().Commander().getShip();
+	private final Game game = GameFacade.currentGame();
+	private final Ship ship = GameFacade.currentGame().Commander().getShip();
 
 	public FormViewShip()
 	{
@@ -65,9 +67,9 @@ public class FormViewShip extends SpaceTraderForm
 		lblSpecialCargo = new jwinforms.Label();
 		boxSpecialCargo.SuspendLayout();
 		this.SuspendLayout();
-		// 
+		//
 		// lblTypeLabel
-		// 
+		//
 		lblTypeLabel.setAutoSize(true);
 		lblTypeLabel.setFont(FontCollection.bold825);
 		lblTypeLabel.setLocation(new java.awt.Point(8, 8));
@@ -75,17 +77,17 @@ public class FormViewShip extends SpaceTraderForm
 		lblTypeLabel.setSize(new jwinforms.Size(34, 13));
 		lblTypeLabel.setTabIndex(2);
 		lblTypeLabel.setText("Type:");
-		// 
+		//
 		// lblType
-		// 
+		//
 		lblType.setLocation(new java.awt.Point(80, 8));
 		lblType.setName("lblType");
 		lblType.setSize(new jwinforms.Size(100, 13));
 		lblType.setTabIndex(4);
 		lblType.setText("Grasshopper");
-		// 
+		//
 		// btnClose
-		// 
+		//
 		btnClose.setDialogResult(DialogResult.Cancel);
 		btnClose.setLocation(new java.awt.Point(-32, -32));
 		btnClose.setName("btnClose");
@@ -93,18 +95,18 @@ public class FormViewShip extends SpaceTraderForm
 		btnClose.setTabIndex(32);
 		btnClose.setTabStop(false);
 		btnClose.setText("X");
-		// 
+		//
 		// lblEquipLabel
-		// 
+		//
 		lblEquipLabel.setFont(FontCollection.bold825);
 		lblEquipLabel.setLocation(new java.awt.Point(8, 34));
 		lblEquipLabel.setName("lblEquipLabel");
 		lblEquipLabel.setSize(new jwinforms.Size(64, 176));
 		lblEquipLabel.setTabIndex(43);
 		lblEquipLabel.setText("Hull:\r\n\r\nEquipment:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnfilled:");
-		// 
+		//
 		// lblEquip
-		// 
+		//
 		lblEquip.setLocation(new java.awt.Point(80, 34));
 		lblEquip.setName("lblEquip");
 		lblEquip.setSize(new jwinforms.Size(120, 176));
@@ -113,9 +115,9 @@ public class FormViewShip extends SpaceTraderForm
 				.setText("Hardened\r\n\r\n1 Military Laser\r\n1 Morgan\'s Laser\r\n1 Energy Shield\r\n1 Reflective Shi"
 						+ "eld\r\n1 Lightning Shield\r\nNavigating System\r\nAuto-Repair System\r\n10 Extra Cargo Bays\r\nAn Escape Pod\r\n"
 						+ "\r\n1 weapon slot\r\n1 gadget slot");
-		// 
+		//
 		// boxSpecialCargo
-		// 
+		//
 		boxSpecialCargo.Controls.addAll((new WinformControl[] { lblSpecialCargo }));
 		boxSpecialCargo.setLocation(new java.awt.Point(192, 8));
 		boxSpecialCargo.setName("boxSpecialCargo");
@@ -123,17 +125,17 @@ public class FormViewShip extends SpaceTraderForm
 		boxSpecialCargo.setTabIndex(64);
 		boxSpecialCargo.setTabStop(false);
 		boxSpecialCargo.setText("Special Cargo");
-		// 
+		//
 		// lblSpecialCargo
-		// 
+		//
 		lblSpecialCargo.setLocation(new java.awt.Point(8, 16));
 		lblSpecialCargo.setName("lblSpecialCargo");
 		lblSpecialCargo.setSize(new jwinforms.Size(190, 176));
 		lblSpecialCargo.setTabIndex(0);
 		lblSpecialCargo.setText("No special items.");
-		// 
+		//
 		// FormViewShip
-		// 
+		//
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
 		this.setCancelButton(btnClose);
 		this.setClientSize(new jwinforms.Size(402, 219));
