@@ -26,6 +26,8 @@
 //using System.Collections;
 package spacetrader;
 
+import org.gts.bst.events.SpecialEventType;
+import org.gts.bst.ship.Size;
 import java.util.ArrayList;
 
 import spacetrader.util.*;
@@ -44,7 +46,7 @@ public class StarSystem extends STSerializableObject
 	private PoliticalSystemType _politicalSystemType;
 	private SystemPressure _systemPressure;
 	private SpecialResource _specialResource;
-	private SpecialEventType _specialEventType = spacetrader.enums.SpecialEventType.NA;
+	private SpecialEventType _specialEventType = org.gts.bst.events.SpecialEventType.NA;
 	private int[] _tradeItems = new int[10];
 	private int _countDown = 0;
 	private boolean _visited = false;
@@ -103,7 +105,7 @@ public class StarSystem extends STSerializableObject
 				// Because of the enormous profits possible, there shouldn't be
 				// too many robots or narcotics available.
 				if (i >= TradeItemType.Narcotics.CastToInt())
-					_tradeItems[i] = ((_tradeItems[i] * 
+					_tradeItems[i] = ((_tradeItems[i] *
 							(5 - Game.CurrentGame()
 									.Difficulty()
 									.CastToInt())) /
@@ -388,7 +390,7 @@ public class StarSystem extends STSerializableObject
 	public SpecialEvent SpecialEvent()
 	{
 		SpecialEventType();
-		return (_specialEventType == spacetrader.enums.SpecialEventType.NA ? null
+		return (_specialEventType == org.gts.bst.events.SpecialEventType.NA ? null
 				: Consts.SpecialEvents[_specialEventType.CastToInt()]);
 	}
 

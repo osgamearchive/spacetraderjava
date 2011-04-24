@@ -28,7 +28,7 @@
 package spacetrader;
 
 import spacetrader.enums.TechLevel;
-import spacetrader.enums.WeaponType;
+import org.gts.bst.ship.equip.WeaponType;
 import spacetrader.util.EquipmentSubType;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Log;
@@ -48,7 +48,7 @@ public class Weapon extends Equipment
 	public Weapon(WeaponType type, int power, boolean disabling, int price,
 			TechLevel minTechLevel, int chance)
 	{
-		super(spacetrader.enums.EquipmentType.Weapon, price, minTechLevel, chance);
+		super(org.gts.bst.ship.equip.EquipmentType.Weapon, price, minTechLevel, chance);
 		_type = type;
 		_power = power;
 		_disabling = disabling;
@@ -124,7 +124,7 @@ public class Weapon extends Equipment
 		return Type();
 	}
 
-	
+
 
 	public WeaponType Type()
 	{

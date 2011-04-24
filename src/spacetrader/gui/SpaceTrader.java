@@ -20,6 +20,8 @@
 
 package spacetrader.gui;
 
+import org.gts.bst.events.VeryRareEncounter;
+import org.gts.bst.ship.ShipType;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.Arrays;

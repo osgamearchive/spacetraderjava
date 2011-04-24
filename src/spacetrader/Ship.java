@@ -26,6 +26,12 @@
 //using System.Collections;
 package spacetrader;
 
+import org.gts.bst.difficulty.Difficulty;
+import org.gts.bst.ship.equip.EquipmentType;
+import org.gts.bst.ship.ShipType;
+import org.gts.bst.ship.equip.WeaponType;
+import org.gts.bst.ship.equip.GadgetType;
+import org.gts.bst.ship.equip.ShieldType;
 import spacetrader.enums.*;
 import spacetrader.stub.ArrayList;
 import spacetrader.util.Hashtable;
@@ -678,7 +684,7 @@ public class Ship extends ShipSpec
 	}
 
 	public String IllegalSpecialCargoActions()
-	{ 
+	{
 		ArrayList<String> actions = new ArrayList<String>();
 
 		if (ReactorOnBoard())

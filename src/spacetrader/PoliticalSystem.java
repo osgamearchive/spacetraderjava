@@ -25,6 +25,8 @@
 //using System;
 package spacetrader;
 
+import org.gts.bst.difficulty.Difficulty;
+import org.gts.bst.ship.ShipType;
 import spacetrader.enums.*;
 
 public class PoliticalSystem

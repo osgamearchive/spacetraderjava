@@ -1,5 +1,5 @@
-package spacetrader.enums;
-
+package org.gts.bst.events;
+import spacetrader.enums.SpaceTraderEnum;
 public enum SpecialEventType implements SpaceTraderEnum// : int
 {
 	NA, // = -1,

@@ -1,6 +1,7 @@
-package spacetrader.enums;
+package org.gts.bst.ship;
 
 // TODO rename "ShipSize". Is used as WorldSize too?
+import spacetrader.enums.SpaceTraderEnum;
 public enum Size implements SpaceTraderEnum// : int
 {
 	Tiny, // = 0,

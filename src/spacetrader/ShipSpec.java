@@ -27,6 +27,9 @@
 //using System.Drawing;
 package spacetrader;
 
+import org.gts.bst.ship.equip.EquipmentType;
+import org.gts.bst.ship.ShipType;
+import org.gts.bst.ship.Size;
 import jwinforms.Image;
 import spacetrader.util.*;
 import spacetrader.enums.*;
@@ -34,7 +37,7 @@ import spacetrader.enums.*;
 public class ShipSpec extends STSerializableObject
 {
 	private ShipType _type = ShipType.Custom;
-	private Size _size = spacetrader.enums.Size.Tiny;
+	private Size _size = org.gts.bst.ship.Size.Tiny;
 	private int _cargoBays = 0;
 	private int _weaponSlots = 0;
 	private int _shieldSlots = 0;

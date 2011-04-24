@@ -24,6 +24,12 @@
  ******************************************************************************/
 package spacetrader;
 
+import org.gts.bst.events.SpecialEventType;
+import org.gts.bst.ship.ShipType;
+import org.gts.bst.ship.Size;
+import org.gts.bst.ship.equip.WeaponType;
+import org.gts.bst.ship.equip.GadgetType;
+import org.gts.bst.ship.equip.ShieldType;
 import jwinforms.Rectangle;
 import spacetrader.enums.*;
 import spacetrader.util.Environment;

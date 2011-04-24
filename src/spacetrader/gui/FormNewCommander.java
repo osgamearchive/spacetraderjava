@@ -29,6 +29,7 @@
 //using System.Windows.Forms;
 package spacetrader.gui;
 
+import org.gts.bst.difficulty.Difficulty;
 import java.util.*;
 
 import jwinforms.*;

@@ -1,5 +1,5 @@
-package spacetrader.enums;
-
+package org.gts.bst.difficulty;
+import spacetrader.enums.SpaceTraderEnum;
 public enum Difficulty implements SpaceTraderEnum// : int
 {
 	Beginner(1), Easy(1), Normal(0), Hard(-1), Impossible(-1);

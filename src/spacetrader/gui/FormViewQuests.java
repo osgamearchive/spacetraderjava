@@ -39,7 +39,7 @@ import spacetrader.Game;
 import spacetrader.SpecialEvent;
 import spacetrader.Strings;
 import spacetrader.enums.CrewMemberId;
-import spacetrader.enums.SpecialEventType;
+import org.gts.bst.events.SpecialEventType;
 import spacetrader.stub.*;
 import spacetrader.util.Util;
 

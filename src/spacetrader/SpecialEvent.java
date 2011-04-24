@@ -26,7 +26,7 @@
 //using System.Collections;
 package spacetrader;
 
-import spacetrader.enums.SpecialEventType;
+import org.gts.bst.events.SpecialEventType;
 
 public class SpecialEvent
 {

@@ -35,7 +35,7 @@ import java.util.Random;
 import jwinforms.*;
 
 import spacetrader.enums.AlertType;
-import spacetrader.enums.Difficulty;
+import org.gts.bst.difficulty.Difficulty;
 import spacetrader.gui.FormAlert;
 import spacetrader.stub.ArrayList;
 import spacetrader.stub.BinaryFormatter;

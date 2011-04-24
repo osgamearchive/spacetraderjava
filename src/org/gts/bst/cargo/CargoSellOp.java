@@ -1,4 +1,5 @@
-package spacetrader.enums;
+package org.gts.bst.cargo;
+import spacetrader.enums.SpaceTraderEnum;
 	public enum CargoSellOp implements SpaceTraderEnum
 	{
 		SellSystem,

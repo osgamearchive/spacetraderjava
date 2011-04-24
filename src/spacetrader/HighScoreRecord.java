@@ -26,6 +26,7 @@
 //using System.Collections;
 
 package spacetrader;
+import org.gts.bst.difficulty.Difficulty;
 import spacetrader.util.*;
 import spacetrader.enums.*;
 	public class HighScoreRecord extends STSerializableObject implements Comparable<HighScoreRecord>// TODO implements Comparable
@@ -122,42 +123,42 @@ import spacetrader.enums.*;
 
 		//#region Properties
 
-		
+
 
   public int Days(){
 				return _days;
 			}
 
 
-		
+
 
   public Difficulty Difficulty(){
 				return _difficulty;
 			}
 
 
-		
+
 
   public String Name(){
 				return _name;
 			}
 
 
-		
+
 
   public int Score(){
 				return _score;
 			}
 
 
-		
+
 
   public GameEndType Type(){
 				return _type;
 			}
 
 
-		
+
 
   public int Worth(){
 				return _worth;

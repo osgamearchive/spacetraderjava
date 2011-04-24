@@ -1,21 +1,21 @@
 /*******************************************************************************
- * 
+ *
  * Space Trader for Windows 2.00
- * 
+ *
  * Copyright (C) 2005 Jay French, All Rights Reserved
- * 
+ *
  * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- * 
+ *
  * You can contact the author at spacetrader@frenchfryz.com
- * 
+ *
  ******************************************************************************/
 // using System;
 // using System.Collections;
@@ -23,10 +23,10 @@ package spacetrader;
 
 import java.util.ArrayList;
 
-import spacetrader.enums.ShipType;
+import org.gts.bst.ship.ShipType;
 import spacetrader.enums.ShipyardId;
 import spacetrader.enums.ShipyardSkill;
-import spacetrader.enums.Size;
+import org.gts.bst.ship.Size;
 
 // / <summary>
 // / Represents a shipyard orbiting a solar system in the universe.
@@ -251,7 +251,7 @@ public class Shipyard
 	{
 		return PRICE_PER_UNIT[ShipSpec().getSize().CastToInt()];
 	}
-	
+
 	public ShipSpec ShipSpec()
 	{
 		return Consts.ShipSpecs[ShipType.Custom.CastToInt()];
@@ -277,7 +277,7 @@ public class Shipyard
 		return Game.CurrentGame().Commander().getShip().Worth(false);
 	}
 
-	
+
 	public int UnitsCrew()
 	{
 		return UNITS_CREW[ShipSpec().getSize().CastToInt()] - modCrew;

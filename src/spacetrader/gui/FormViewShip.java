@@ -1,21 +1,21 @@
 /*******************************************************************************
- * 
+ *
  * Space Trader for Windows 2.00
- * 
+ *
  * Copyright (C) 2005 Jay French, All Rights Reserved
- * 
+ *
  * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- * 
+ *
  * You can contact the author at spacetrader@frenchfryz.com
- * 
+ *
  ******************************************************************************/
 // using System;
 // using System.Drawing;
@@ -24,6 +24,7 @@
 // using System.Windows.Forms;
 package spacetrader.gui;
 
+import org.gts.bst.ship.equip.GadgetType;
 import java.util.*;
 
 import jwinforms.*;
@@ -86,9 +87,9 @@ public class FormViewShip extends WinformForm
 		this.lblSpecialCargo = new jwinforms.Label();
 		this.boxSpecialCargo.SuspendLayout();
 		this.SuspendLayout();
-		// 
+		//
 		// lblTypeLabel
-		// 
+		//
 		this.lblTypeLabel.setAutoSize(true);
 		this.lblTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte)(0))));
@@ -97,17 +98,17 @@ public class FormViewShip extends WinformForm
 		this.lblTypeLabel.setSize(new jwinforms.Size(34, 13));
 		this.lblTypeLabel.setTabIndex(2);
 		this.lblTypeLabel.setText("Type:");
-		// 
+		//
 		// lblType
-		// 
+		//
 		this.lblType.setLocation(new java.awt.Point(80, 8));
 		this.lblType.setName("lblType");
 		this.lblType.setSize(new jwinforms.Size(100, 13));
 		this.lblType.setTabIndex(4);
 		this.lblType.setText("Grasshopper");
-		// 
+		//
 		// btnClose
-		// 
+		//
 		this.btnClose.setDialogResult(DialogResult.Cancel);
 		this.btnClose.setLocation(new java.awt.Point(-32, -32));
 		this.btnClose.setName("btnClose");
@@ -115,9 +116,9 @@ public class FormViewShip extends WinformForm
 		this.btnClose.setTabIndex(32);
 		this.btnClose.setTabStop(false);
 		this.btnClose.setText("X");
-		// 
+		//
 		// lblEquipLabel
-		// 
+		//
 		this.lblEquipLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte)(0))));
 		this.lblEquipLabel.setLocation(new java.awt.Point(8, 34));
@@ -125,9 +126,9 @@ public class FormViewShip extends WinformForm
 		this.lblEquipLabel.setSize(new jwinforms.Size(64, 176));
 		this.lblEquipLabel.setTabIndex(43);
 		this.lblEquipLabel.setText("Hull:\r\n\r\nEquipment:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnfilled:");
-		// 
+		//
 		// lblEquip
-		// 
+		//
 		this.lblEquip.setLocation(new java.awt.Point(80, 34));
 		this.lblEquip.setName("lblEquip");
 		this.lblEquip.setSize(new jwinforms.Size(120, 176));
@@ -136,9 +137,9 @@ public class FormViewShip extends WinformForm
 				.setText("Hardened\r\n\r\n1 Military Laser\r\n1 Morgan\'s Laser\r\n1 Energy Shield\r\n1 Reflective Shi"
 						+ "eld\r\n1 Lightning Shield\r\nNavigating System\r\nAuto-Repair System\r\n10 Extra Cargo Bays\r\nAn Escape Pod\r\n"
 						+ "\r\n1 weapon slot\r\n1 gadget slot");
-		// 
+		//
 		// boxSpecialCargo
-		// 
+		//
 		this.boxSpecialCargo.Controls.addAll((new WinformControl[] { this.lblSpecialCargo }));
 		this.boxSpecialCargo.setLocation(new java.awt.Point(192, 8));
 		this.boxSpecialCargo.setName("boxSpecialCargo");
@@ -146,17 +147,17 @@ public class FormViewShip extends WinformForm
 		this.boxSpecialCargo.setTabIndex(64);
 		this.boxSpecialCargo.setTabStop(false);
 		this.boxSpecialCargo.setText("Special Cargo");
-		// 
+		//
 		// lblSpecialCargo
-		// 
+		//
 		this.lblSpecialCargo.setLocation(new java.awt.Point(8, 16));
 		this.lblSpecialCargo.setName("lblSpecialCargo");
 		this.lblSpecialCargo.setSize(new jwinforms.Size(190, 176));
 		this.lblSpecialCargo.setTabIndex(0);
 		this.lblSpecialCargo.setText("No special items.");
-		// 
+		//
 		// FormViewShip
-		// 
+		//
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
 		this.setCancelButton(this.btnClose);
 		this.setClientSize(new jwinforms.Size(402, 219));

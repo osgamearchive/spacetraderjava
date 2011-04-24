@@ -26,7 +26,7 @@
 //using System.Collections;
 package spacetrader;
 
-import spacetrader.enums.GadgetType;
+import org.gts.bst.ship.equip.GadgetType;
 import spacetrader.enums.SkillType;
 import spacetrader.enums.TechLevel;
 import spacetrader.util.EquipmentSubType;
@@ -46,7 +46,7 @@ public class Gadget extends Equipment
 
 	public Gadget(GadgetType type, SkillType skillBonus, int price, TechLevel minTechLevel, int chance)
 	{
-		super(spacetrader.enums.EquipmentType.Gadget, price, minTechLevel, chance);
+		super(org.gts.bst.ship.equip.EquipmentType.Gadget, price, minTechLevel, chance);
 		_type = type;
 		_skillBonus = skillBonus;
 	}

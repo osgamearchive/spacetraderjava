@@ -28,7 +28,8 @@
 //using System.ComponentModel;
 //using System.Windows.Forms;
 
-package spacetrader.gui;import java.util.*;
+package spacetrader.gui;import org.gts.bst.events.SpecialEventType;
+import java.util.*;
 
 import jwinforms.*;
 import spacetrader.*;import spacetrader.enums.*;
@@ -62,7 +63,7 @@ import spacetrader.*;import spacetrader.enums.*;
 
 			AlertType[] alerts = Arrays.copyOfRange(AlertType.values(), AlertType.Alert.ordinal(), AlertType.WildWontStayAboardReactor.ordinal());
 //			for (AlertType type = AlertType.Alert; type.CastToInt() <= AlertType.WildWontStayAboardReactor.CastToInt(); type++)
-			for (AlertType type : alerts)		
+			for (AlertType type : alerts)
 				selAlertType.Items.add(type);
 			selAlertType.setSelectedIndex(0);
 
@@ -73,7 +74,7 @@ import spacetrader.*;import spacetrader.enums.*;
 			selSpecialEvent.setSelectedIndex(0);
 		}
 
-		
+
 
 		//#region Windows Form Designer generated code
 		/// <summary>

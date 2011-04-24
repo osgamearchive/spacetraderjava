@@ -27,6 +27,7 @@
 package spacetrader;
 
 
+import org.gts.bst.ship.equip.ShieldType;
 import spacetrader.enums.*;
 import spacetrader.util.*;
 
@@ -39,7 +40,7 @@ public class Shield extends Equipment
 	public Shield(ShieldType type, int power, int price,
 			TechLevel minTechLevel, int chance)
 	{
-		super(spacetrader.enums.EquipmentType.Shield, price, minTechLevel, chance);
+		super(org.gts.bst.ship.equip.EquipmentType.Shield, price, minTechLevel, chance);
 		_type = type;
 		_power = power;
 
@@ -118,6 +119,6 @@ public class Shield extends Equipment
 		return Charge;
 	}
 
-	
+
 
 }

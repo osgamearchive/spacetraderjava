@@ -22,6 +22,20 @@
 // using System.Windows.Forms;
 package spacetrader;
 
+import org.gts.bst.events.NewsEvent;
+import org.gts.bst.events.SpecialEventType;
+import org.gts.bst.events.VeryRareEncounter;
+import org.gts.bst.events.EncounterType;
+import org.gts.bst.events.EncounterResult;
+import org.gts.bst.difficulty.Difficulty;
+import org.gts.bst.ship.equip.EquipmentType;
+import org.gts.bst.cargo.CargoSellOp;
+import org.gts.bst.cargo.CargoBuyOp;
+import org.gts.bst.ship.ShipType;
+import org.gts.bst.ship.Size;
+import org.gts.bst.ship.equip.WeaponType;
+import org.gts.bst.ship.equip.GadgetType;
+import org.gts.bst.ship.equip.ShieldType;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -73,13 +87,13 @@ public class Game extends STSerializableObject
 	private ArrayList _newsEvents = new ArrayList(30);
 
 	// Current Selections
-	private Difficulty _difficulty = spacetrader.enums.Difficulty.Normal; // Difficulty
+	private Difficulty _difficulty = org.gts.bst.difficulty.Difficulty.Normal; // Difficulty
 	// level
 	private boolean _cheatEnabled = false;
 	private boolean _autoSave = false;
 	private boolean _easyEncounters = false;
 	private GameEndType _endStatus = GameEndType.NA;
-	private EncounterType _encounterType = spacetrader.enums.EncounterType.FromInt(0); // Type
+	private EncounterType _encounterType = org.gts.bst.events.EncounterType.FromInt(0); // Type
 	// of
 	// current
 	// encounter
@@ -1277,8 +1291,8 @@ public class Game extends STSerializableObject
 				&& getQuestStatusSpaceMonster() == SpecialEvent.StatusSpaceMonsterAtAcamar)
 		{
 			setOpponent(SpaceMonster());
-			setEncounterType(Commander().getShip().Cloaked() ? spacetrader.enums.EncounterType.SpaceMonsterIgnore
-					: spacetrader.enums.EncounterType.SpaceMonsterAttack);
+			setEncounterType(Commander().getShip().Cloaked() ? org.gts.bst.events.EncounterType.SpaceMonsterIgnore
+					: org.gts.bst.events.EncounterType.SpaceMonsterAttack);
 			showEncounter = true;
 		}
 		// Encounter with the stolen Scarab
@@ -1287,8 +1301,8 @@ public class Game extends STSerializableObject
 				&& getQuestStatusScarab() == SpecialEvent.StatusScarabHunting)
 		{
 			setOpponent(Scarab());
-			setEncounterType(Commander().getShip().Cloaked() ? spacetrader.enums.EncounterType.ScarabIgnore
-					: spacetrader.enums.EncounterType.ScarabAttack);
+			setEncounterType(Commander().getShip().Cloaked() ? org.gts.bst.events.EncounterType.ScarabIgnore
+					: org.gts.bst.events.EncounterType.ScarabAttack);
 			showEncounter = true;
 		}
 		// Encounter with stolen Dragonfly
@@ -1296,8 +1310,8 @@ public class Game extends STSerializableObject
 				&& getQuestStatusDragonfly() == SpecialEvent.StatusDragonflyFlyZalkon)
 		{
 			setOpponent(Dragonfly());
-			setEncounterType(Commander().getShip().Cloaked() ? spacetrader.enums.EncounterType.DragonflyIgnore
-					: spacetrader.enums.EncounterType.DragonflyAttack);
+			setEncounterType(Commander().getShip().Cloaked() ? org.gts.bst.events.EncounterType.DragonflyIgnore
+					: org.gts.bst.events.EncounterType.DragonflyAttack);
 			showEncounter = true;
 		}
 		// Encounter with kidnappers in the Scorpion
@@ -1305,15 +1319,15 @@ public class Game extends STSerializableObject
 				&& getQuestStatusPrincess() == SpecialEvent.StatusPrincessFlyQonos)
 		{
 			setOpponent(Scorpion());
-			setEncounterType(Commander().getShip().Cloaked() ? spacetrader.enums.EncounterType.ScorpionIgnore
-					: spacetrader.enums.EncounterType.ScorpionAttack);
+			setEncounterType(Commander().getShip().Cloaked() ? org.gts.bst.events.EncounterType.ScorpionIgnore
+					: org.gts.bst.events.EncounterType.ScorpionAttack);
 			showEncounter = true;
 		}
 		// ah, just when you thought you were gonna get away with it...
 		else if (getClicks() == 1 && getJustLootedMarie())
 		{
 			GenerateOpponent(OpponentType.Police);
-			setEncounterType(spacetrader.enums.EncounterType.MarieCelestePolice);
+			setEncounterType(org.gts.bst.events.EncounterType.MarieCelestePolice);
 			setJustLootedMarie(false);
 
 			showEncounter = true;
@@ -1329,14 +1343,14 @@ public class Game extends STSerializableObject
 		if (mantis)
 		{
 			GenerateOpponent(OpponentType.Mantis);
-			setEncounterType(spacetrader.enums.EncounterType.PirateAttack);
+			setEncounterType(org.gts.bst.events.EncounterType.PirateAttack);
 		} else
 		{
 			GenerateOpponent(OpponentType.Pirate);
 
 			// If you have a cloak, they don't see you
 			if (Commander().getShip().Cloaked())
-				setEncounterType(spacetrader.enums.EncounterType.PirateIgnore);
+				setEncounterType(org.gts.bst.events.EncounterType.PirateIgnore);
 			// Pirates will mostly attack, but they are cowardly: if your rep is
 			// too high, they tend to flee
 			// if Pirates are in a better ship, they won't flee, even if you
@@ -1346,9 +1360,9 @@ public class Game extends STSerializableObject
 					|| getOpponent().Type().CastToInt() >= ShipType.Grasshopper.CastToInt()
 					|| Functions.GetRandom(Consts.ReputationScoreElite) > (Commander().getReputationScore() * 4)
 							/ (1 + getOpponent().Type().CastToInt()))
-				setEncounterType(spacetrader.enums.EncounterType.PirateAttack);
+				setEncounterType(org.gts.bst.events.EncounterType.PirateAttack);
 			else
-				setEncounterType(spacetrader.enums.EncounterType.PirateFlee);
+				setEncounterType(org.gts.bst.events.EncounterType.PirateFlee);
 		}
 
 		// If they ignore you or flee and you can't see them, the encounter
@@ -1356,7 +1370,7 @@ public class Game extends STSerializableObject
 		// If you automatically don't want to confront someone who ignores you,
 		// the
 		// encounter may not take place
-		if (getEncounterType() == spacetrader.enums.EncounterType.PirateAttack
+		if (getEncounterType() == org.gts.bst.events.EncounterType.PirateAttack
 				|| !(getOpponent().Cloaked() || Options().getAlwaysIgnorePirates()))
 			showEncounter = true;
 
@@ -1370,7 +1384,7 @@ public class Game extends STSerializableObject
 		GenerateOpponent(OpponentType.Police);
 
 		// If you are cloaked, they don't see you
-		setEncounterType(spacetrader.enums.EncounterType.PoliceIgnore);
+		setEncounterType(org.gts.bst.events.EncounterType.PoliceIgnore);
 		if (!Commander().getShip().Cloaked())
 		{
 			if (Commander().getPoliceRecordScore() < Consts.PoliceRecordScoreDubious)
@@ -1389,13 +1403,13 @@ public class Game extends STSerializableObject
 					if (Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreCriminal)
 					{
 						getEncounterType();
-						setEncounterType(spacetrader.enums.EncounterType.PoliceSurrender);
+						setEncounterType(org.gts.bst.events.EncounterType.PoliceSurrender);
 					} else
-						setEncounterType(spacetrader.enums.EncounterType.PoliceAttack);
+						setEncounterType(org.gts.bst.events.EncounterType.PoliceAttack);
 				} else if (getOpponent().Cloaked())
-					setEncounterType(spacetrader.enums.EncounterType.PoliceIgnore);
+					setEncounterType(org.gts.bst.events.EncounterType.PoliceIgnore);
 				else
-					setEncounterType(spacetrader.enums.EncounterType.PoliceFlee);
+					setEncounterType(org.gts.bst.events.EncounterType.PoliceFlee);
 			} else if (!getInspected()
 					&& (Commander().getPoliceRecordScore() < Consts.PoliceRecordScoreClean
 							|| (Commander().getPoliceRecordScore() < Consts.PoliceRecordScoreLawful && Functions
@@ -1407,7 +1421,7 @@ public class Game extends STSerializableObject
 				// chance of 10% on Normal
 				// If your record indicates you are a lawful trader, the chance
 				// on inspection drops to 2.5%
-				setEncounterType(spacetrader.enums.EncounterType.PoliceInspect);
+				setEncounterType(org.gts.bst.events.EncounterType.PoliceInspect);
 				setInspected(true);
 			}
 		}
@@ -1417,8 +1431,8 @@ public class Game extends STSerializableObject
 		// If you automatically don't want to confront someone who ignores you,
 		// the
 		// encounter may not take place. Otherwise it will - JAF
-		if (getEncounterType() == spacetrader.enums.EncounterType.PoliceAttack
-				|| getEncounterType() == spacetrader.enums.EncounterType.PoliceInspect
+		if (getEncounterType() == org.gts.bst.events.EncounterType.PoliceAttack
+				|| getEncounterType() == org.gts.bst.events.EncounterType.PoliceInspect
 				|| !(getOpponent().Cloaked() || Options().getAlwaysIgnorePolice()))
 			showEncounter = true;
 
@@ -1489,7 +1503,7 @@ public class Game extends STSerializableObject
 		GenerateOpponent(OpponentType.Trader);
 
 		// If you are cloaked, they don't see you
-		setEncounterType(spacetrader.enums.EncounterType.TraderIgnore);
+		setEncounterType(org.gts.bst.events.EncounterType.TraderIgnore);
 		if (!Commander().getShip().Cloaked())
 		{
 			// If you're a criminal, traders tend to flee if you've got at least
@@ -1498,16 +1512,16 @@ public class Game extends STSerializableObject
 					&& Commander().getPoliceRecordScore() <= Consts.PoliceRecordScoreCriminal
 					&& Functions.GetRandom(Consts.ReputationScoreElite) <= (Commander().getReputationScore() * 10)
 							/ (1 + getOpponent().Type().CastToInt()))
-				setEncounterType(spacetrader.enums.EncounterType.TraderFlee);
+				setEncounterType(org.gts.bst.events.EncounterType.TraderFlee);
 			// Will there be trade in orbit?
 			else if (Functions.GetRandom(1000) < getChanceOfTradeInOrbit())
 			{
 				if (Commander().getShip().FreeCargoBays() > 0 && getOpponent().HasTradeableItems())
-					setEncounterType(spacetrader.enums.EncounterType.TraderSell);
+					setEncounterType(org.gts.bst.events.EncounterType.TraderSell);
 				// we fudge on whether the trader has capacity to carry the
 				// stuff he's buying.
 				else if (Commander().getShip().HasTradeableItems())
-					setEncounterType(spacetrader.enums.EncounterType.TraderBuy);
+					setEncounterType(org.gts.bst.events.EncounterType.TraderBuy);
 			}
 		}
 
@@ -1517,8 +1531,8 @@ public class Game extends STSerializableObject
 		// the
 		// encounter may not take place; otherwise it will.
 		if (!getOpponent().Cloaked()
-				&& !(Options().getAlwaysIgnoreTraders() && (getEncounterType() == spacetrader.enums.EncounterType.TraderIgnore || getEncounterType() == spacetrader.enums.EncounterType.TraderFlee))
-				&& !((getEncounterType() == spacetrader.enums.EncounterType.TraderBuy || getEncounterType() == spacetrader.enums.EncounterType.TraderSell) && Options()
+				&& !(Options().getAlwaysIgnoreTraders() && (getEncounterType() == org.gts.bst.events.EncounterType.TraderIgnore || getEncounterType() == org.gts.bst.events.EncounterType.TraderFlee))
+				&& !((getEncounterType() == org.gts.bst.events.EncounterType.TraderBuy || getEncounterType() == org.gts.bst.events.EncounterType.TraderSell) && Options()
 						.getAlwaysIgnoreTradeInOrbit()))
 			showEncounter = true;
 
@@ -1553,7 +1567,7 @@ public class Game extends STSerializableObject
 					&& Commander().getCurrentSystemId() != StarSystemId.Qonos)
 			{
 				VeryRareEncounters().remove(VeryRareEncounter.MarieCeleste);
-				setEncounterType(spacetrader.enums.EncounterType.MarieCeleste);
+				setEncounterType(org.gts.bst.events.EncounterType.MarieCeleste);
 				GenerateOpponent(OpponentType.Trader);
 				for (int i = 0; i < getOpponent().Cargo().length; i++)
 					getOpponent().Cargo()[i] = 0;
@@ -1569,7 +1583,7 @@ public class Game extends STSerializableObject
 			{
 				VeryRareEncounters().remove(VeryRareEncounter.CaptainAhab);
 				getEncounterType();
-				setEncounterType(spacetrader.enums.EncounterType.CaptainAhab);
+				setEncounterType(org.gts.bst.events.EncounterType.CaptainAhab);
 				GenerateOpponent(OpponentType.FamousCaptain);
 
 				showEncounter = true;
@@ -1581,7 +1595,7 @@ public class Game extends STSerializableObject
 			{
 				VeryRareEncounters().remove(VeryRareEncounter.CaptainConrad);
 				getEncounterType();
-				setEncounterType(spacetrader.enums.EncounterType.CaptainConrad);
+				setEncounterType(org.gts.bst.events.EncounterType.CaptainConrad);
 				GenerateOpponent(OpponentType.FamousCaptain);
 
 				showEncounter = true;
@@ -1593,7 +1607,7 @@ public class Game extends STSerializableObject
 			{
 				VeryRareEncounters().remove(VeryRareEncounter.CaptainHuie);
 				getEncounterType();
-				setEncounterType(spacetrader.enums.EncounterType.CaptainHuie);
+				setEncounterType(org.gts.bst.events.EncounterType.CaptainHuie);
 				GenerateOpponent(OpponentType.FamousCaptain);
 
 				showEncounter = true;
@@ -1601,14 +1615,14 @@ public class Game extends STSerializableObject
 			break;
 		case BottleOld:
 			VeryRareEncounters().remove(VeryRareEncounter.BottleOld);
-			setEncounterType(spacetrader.enums.EncounterType.BottleOld);
+			setEncounterType(org.gts.bst.events.EncounterType.BottleOld);
 			GenerateOpponent(OpponentType.Bottle);
 
 			showEncounter = true;
 			break;
 		case BottleGood:
 			VeryRareEncounters().remove(VeryRareEncounter.BottleGood);
-			setEncounterType(spacetrader.enums.EncounterType.BottleGood);
+			setEncounterType(org.gts.bst.events.EncounterType.BottleGood);
 			GenerateOpponent(OpponentType.Bottle);
 
 			showEncounter = true;
@@ -1649,11 +1663,11 @@ public class Game extends STSerializableObject
 	{
 		if (FormAlert.Alert(AlertType.EncounterDrinkContents, owner) == DialogResult.Yes)
 		{
-			if (getEncounterType() == spacetrader.enums.EncounterType.BottleGood)
+			if (getEncounterType() == org.gts.bst.events.EncounterType.BottleGood)
 			{
 				// two points if you're on beginner-normal, one otherwise
 				Commander().IncreaseRandomSkill();
-				if (Difficulty().CastToInt() <= spacetrader.enums.Difficulty.Normal.CastToInt())
+				if (Difficulty().CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt())
 					Commander().IncreaseRandomSkill();
 				FormAlert.Alert(AlertType.EncounterTonicConsumedGood, owner);
 			} else
@@ -1760,7 +1774,7 @@ public class Game extends STSerializableObject
 
 			// Determine whether someone gets away.
 			if (getEncounterCmdrFleeing()
-					&& (Difficulty() == spacetrader.enums.Difficulty.Beginner || (Functions.GetRandom(7) + Commander()
+					&& (Difficulty() == org.gts.bst.difficulty.Difficulty.Beginner || (Functions.GetRandom(7) + Commander()
 							.getShip().Pilot() / 3) * 2 >= Functions.GetRandom(getOpponent().Pilot())
 							* (2 + Difficulty().CastToInt())))
 			{
@@ -1802,8 +1816,8 @@ public class Game extends STSerializableObject
 				if (Options().getContinuousAttack()
 						&& (getEncounterCmdrFleeing() || !getEncounterOppFleeing() || Options()
 								.getContinuousAttackFleeing()
-								&& (getEncounterType() == prevEncounter || getEncounterType() != spacetrader.enums.EncounterType.PirateSurrender
-										&& getEncounterType() != spacetrader.enums.EncounterType.TraderSurrender)))
+								&& (getEncounterType() == prevEncounter || getEncounterType() != org.gts.bst.events.EncounterType.PirateSurrender
+										&& getEncounterType() != org.gts.bst.events.EncounterType.TraderSurrender)))
 				{
 					if (getEncounterCmdrFleeing())
 						setEncounterContinueFleeing(true);
@@ -1827,7 +1841,7 @@ public class Game extends STSerializableObject
 		// smaller
 		// JAF - if the opponent is disabled and attacker has targeting system,
 		// they WILL be hit.
-		if (!(Difficulty() == spacetrader.enums.Difficulty.Beginner && defender.CommandersShip() && fleeing)
+		if (!(Difficulty() == org.gts.bst.difficulty.Difficulty.Beginner && defender.CommandersShip() && fleeing)
 				&& (attacker.CommandersShip() && getOpponentDisabled()
 						&& attacker.HasGadget(GadgetType.TargetingSystem) || Functions.GetRandom(attacker.Fighter()
 						+ defender.getSize().CastToInt()) >= (fleeing ? 2 : 1)
@@ -1873,7 +1887,7 @@ public class Game extends STSerializableObject
 						// Reactor on board -- damage is boosted!
 						if (defender.ReactorOnBoard())
 							damage *= (int)(1 + (Difficulty().CastToInt() + 1)
-									* (Difficulty().CastToInt() < spacetrader.enums.Difficulty.Normal.CastToInt() ? 0.25
+									* (Difficulty().CastToInt() < org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 0.25
 											: 0.33));
 
 						// First, shields are depleted
@@ -1907,7 +1921,7 @@ public class Game extends STSerializableObject
 							// Impossible). For opponents,
 							// it is always 2.
 							damage = Math.min(damage, defender.HullStrength()
-									/ (defender.CommandersShip() ? Math.max(1, spacetrader.enums.Difficulty.Impossible
+									/ (defender.CommandersShip() ? Math.max(1, org.gts.bst.difficulty.Difficulty.Impossible
 											.CastToInt()
 											- Difficulty().CastToInt()) : 2));
 
@@ -1984,7 +1998,7 @@ public class Game extends STSerializableObject
 			// Add points to the appropriate skill - two points if
 			// beginner-normal, one otherwise.
 			Commander().Skills()[skill] = Math.min(Consts.MaxSkill, Commander().Skills()[skill]
-					+ (Difficulty().CastToInt() <= spacetrader.enums.Difficulty.Normal.CastToInt() ? 2 : 1));
+					+ (Difficulty().CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 2 : 1));
 
 			FormAlert.Alert(AlertType.SpecialTrainingCompleted, owner);
 		}
@@ -1994,7 +2008,7 @@ public class Game extends STSerializableObject
 	{
 		(new FormPlunder()).ShowDialog(owner);
 
-		if (getEncounterType().CastToInt() >= spacetrader.enums.EncounterType.TraderAttack.CastToInt())
+		if (getEncounterType().CastToInt() >= org.gts.bst.events.EncounterType.TraderAttack.CastToInt())
 		{
 			Commander().setPoliceRecordScore(Commander().getPoliceRecordScore() + Consts.ScorePlunderTrader);
 
@@ -2025,7 +2039,7 @@ public class Game extends STSerializableObject
 		// Chance 50% to pick something up on Normal level, 33% on Hard level,
 		// 25% on
 		// Impossible level, and 100% on Easy or Beginner.
-		if ((Difficulty().CastToInt() < spacetrader.enums.Difficulty.Normal.CastToInt() || Functions
+		if ((Difficulty().CastToInt() < org.gts.bst.difficulty.Difficulty.Normal.CastToInt() || Functions
 				.GetRandom(Difficulty().CastToInt()) == 0)
 				&& getOpponent().FilledCargoBays() > 0)
 		{
@@ -2057,13 +2071,13 @@ public class Game extends STSerializableObject
 
 	public void EncounterTrade(WinformPane owner)
 	{
-		boolean buy = (getEncounterType() == spacetrader.enums.EncounterType.TraderBuy);
+		boolean buy = (getEncounterType() == org.gts.bst.events.EncounterType.TraderBuy);
 		int item = (buy ? Commander().getShip() : getOpponent()).GetRandomTradeableItem();
 		String alertStr = (buy ? Strings.CargoSelling : Strings.CargoBuying);
 
 		int cash = Commander().getCash();
 
-		if (getEncounterType() == spacetrader.enums.EncounterType.TraderBuy)
+		if (getEncounterType() == org.gts.bst.events.EncounterType.TraderBuy)
 			CargoSellTrader(item, owner);
 		else
 			// EncounterType.TraderSell
@@ -2083,13 +2097,13 @@ public class Game extends STSerializableObject
 			{
 			case FamousCaptainAttack:
 				if (getOpponentDisabled())
-					setEncounterType(spacetrader.enums.EncounterType.FamousCaptDisabled);
+					setEncounterType(org.gts.bst.events.EncounterType.FamousCaptDisabled);
 				break;
 			case PirateAttack:
 			case PirateFlee:
 			case PirateSurrender:
 				if (getOpponentDisabled())
-					setEncounterType(spacetrader.enums.EncounterType.PirateDisabled);
+					setEncounterType(org.gts.bst.events.EncounterType.PirateDisabled);
 				else if (getOpponent().getHull() < (prevOppHull * 2) / 3)
 				{
 					if (Commander().getShip().getHull() < (prevCmdrHull * 2) / 3)
@@ -2097,36 +2111,36 @@ public class Game extends STSerializableObject
 						if (chance < 60)
 						{
 							getEncounterType();
-							setEncounterType(spacetrader.enums.EncounterType.PirateFlee);
+							setEncounterType(org.gts.bst.events.EncounterType.PirateFlee);
 						}
 					} else
 					{
 						if (chance < 10 && getOpponent().Type() != ShipType.Mantis)
-							setEncounterType(spacetrader.enums.EncounterType.PirateSurrender);
+							setEncounterType(org.gts.bst.events.EncounterType.PirateSurrender);
 						else
-							setEncounterType(spacetrader.enums.EncounterType.PirateFlee);
+							setEncounterType(org.gts.bst.events.EncounterType.PirateFlee);
 					}
 				}
 				break;
 			case PoliceAttack:
 			case PoliceFlee:
 				if (getOpponentDisabled())
-					setEncounterType(spacetrader.enums.EncounterType.PoliceDisabled);
+					setEncounterType(org.gts.bst.events.EncounterType.PoliceDisabled);
 				else if (getOpponent().getHull() < prevOppHull / 2
 						&& (Commander().getShip().getHull() >= prevCmdrHull / 2 || chance < 40))
-					setEncounterType(spacetrader.enums.EncounterType.PoliceFlee);
+					setEncounterType(org.gts.bst.events.EncounterType.PoliceFlee);
 				break;
 			case TraderAttack:
 			case TraderFlee:
 			case TraderSurrender:
 				if (getOpponentDisabled())
-					setEncounterType(spacetrader.enums.EncounterType.TraderDisabled);
+					setEncounterType(org.gts.bst.events.EncounterType.TraderDisabled);
 				else if (getOpponent().getHull() < (prevOppHull * 2) / 3)
 				{
 					if (chance < 60)
-						setEncounterType(spacetrader.enums.EncounterType.TraderSurrender);
+						setEncounterType(org.gts.bst.events.EncounterType.TraderSurrender);
 					else
-						setEncounterType(spacetrader.enums.EncounterType.TraderFlee);
+						setEncounterType(org.gts.bst.events.EncounterType.TraderFlee);
 				}
 				// If you get damaged a lot, the trader tends to keep shooting;
 				// if
@@ -2137,7 +2151,7 @@ public class Game extends STSerializableObject
 						&& (Commander().getShip().getHull() < (prevCmdrHull * 2) / 3 && chance < 20
 								|| Commander().getShip().getHull() < (prevCmdrHull * 9) / 10 && chance < 60 || Commander()
 								.getShip().getHull() >= (prevCmdrHull * 9) / 10))
-					setEncounterType(spacetrader.enums.EncounterType.TraderFlee);
+					setEncounterType(org.gts.bst.events.EncounterType.TraderFlee);
 				break;
 			default:
 				break;
@@ -2172,7 +2186,7 @@ public class Game extends STSerializableObject
 			case ScarabIgnore:
 			case ScorpionIgnore:
 			case SpaceMonsterIgnore:
-				setEncounterType(spacetrader.enums.EncounterType.FromInt(getEncounterType().CastToInt() - 1));
+				setEncounterType(org.gts.bst.events.EncounterType.FromInt(getEncounterType().CastToInt() - 1));
 
 				break;
 			case PoliceInspect:
@@ -2197,8 +2211,8 @@ public class Game extends STSerializableObject
 
 					Commander().setPoliceRecordScore(Commander().getPoliceRecordScore() + Consts.ScoreAttackPolice);
 
-					if (getEncounterType() != spacetrader.enums.EncounterType.PoliceFlee)
-						setEncounterType(spacetrader.enums.EncounterType.PoliceAttack);
+					if (getEncounterType() != org.gts.bst.events.EncounterType.PoliceFlee)
+						setEncounterType(org.gts.bst.events.EncounterType.PoliceAttack);
 				} else
 					attack = false;
 
@@ -2223,9 +2237,9 @@ public class Game extends STSerializableObject
 				if (Functions.GetRandom(Consts.ReputationScoreElite) <= Commander().getReputationScore() * 10
 						/ (getOpponent().Type().CastToInt() + 1)
 						|| getOpponent().WeaponStrength() == 0)
-					setEncounterType(spacetrader.enums.EncounterType.TraderFlee);
+					setEncounterType(org.gts.bst.events.EncounterType.TraderFlee);
 				else
-					setEncounterType(spacetrader.enums.EncounterType.TraderAttack);
+					setEncounterType(org.gts.bst.events.EncounterType.TraderAttack);
 
 				break;
 			case CaptainAhab:
@@ -2251,7 +2265,7 @@ public class Game extends STSerializableObject
 						break;
 					}
 
-					setEncounterType(spacetrader.enums.EncounterType.FamousCaptainAttack);
+					setEncounterType(org.gts.bst.events.EncounterType.FamousCaptainAttack);
 				} else
 					attack = false;
 
@@ -2289,7 +2303,7 @@ public class Game extends STSerializableObject
 	{
 		boolean bribed = false;
 
-		if (getEncounterType() == spacetrader.enums.EncounterType.MarieCelestePolice)
+		if (getEncounterType() == org.gts.bst.events.EncounterType.MarieCelestePolice)
 			FormAlert.Alert(AlertType.EncounterMarieCelesteNoBribe, owner);
 		else if (WarpSystem().PoliticalSystem().BribeLevel() <= 0)
 			FormAlert.Alert(AlertType.EncounterPoliceBribeCant, owner);
@@ -2298,8 +2312,8 @@ public class Game extends STSerializableObject
 		{
 			// Bribe depends on how easy it is to bribe the police and
 			// commander's current worth
-			int diffMod = 10 + 5 * (spacetrader.enums.Difficulty.Impossible.CastToInt() - Difficulty().CastToInt());
-			int passMod = Commander().getShip().IllegalSpecialCargo() ? (Difficulty().CastToInt() <= spacetrader.enums.Difficulty.Normal
+			int diffMod = 10 + 5 * (org.gts.bst.difficulty.Difficulty.Impossible.CastToInt() - Difficulty().CastToInt());
+			int passMod = Commander().getShip().IllegalSpecialCargo() ? (Difficulty().CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal
 					.CastToInt() ? 2 : 3)
 					: 1;
 
@@ -2325,26 +2339,26 @@ public class Game extends STSerializableObject
 	{
 		setEncounterCmdrFleeing(false);
 
-		if (getEncounterType() != spacetrader.enums.EncounterType.PoliceInspect
+		if (getEncounterType() != org.gts.bst.events.EncounterType.PoliceInspect
 				|| Commander().getShip().DetectableIllegalCargoOrPassengers()
 				|| FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes)
 		{
 			setEncounterCmdrFleeing(true);
 
-			if (getEncounterType() == spacetrader.enums.EncounterType.MarieCelestePolice
+			if (getEncounterType() == org.gts.bst.events.EncounterType.MarieCelestePolice
 					&& FormAlert.Alert(AlertType.EncounterPostMarieFlee, owner) == DialogResult.No)
 			{
 				setEncounterCmdrFleeing(false);
-			} else if (getEncounterType() == spacetrader.enums.EncounterType.PoliceInspect
-					|| getEncounterType() == spacetrader.enums.EncounterType.MarieCelestePolice)
+			} else if (getEncounterType() == org.gts.bst.events.EncounterType.PoliceInspect
+					|| getEncounterType() == org.gts.bst.events.EncounterType.MarieCelestePolice)
 			{
-				int scoreMod = getEncounterType() == spacetrader.enums.EncounterType.PoliceInspect ? Consts.ScoreFleePolice
+				int scoreMod = getEncounterType() == org.gts.bst.events.EncounterType.PoliceInspect ? Consts.ScoreFleePolice
 						: Consts.ScoreAttackPolice;
-				int scoreMin = getEncounterType() == spacetrader.enums.EncounterType.PoliceInspect ? Consts.PoliceRecordScoreDubious
-						- (Difficulty().CastToInt() < spacetrader.enums.Difficulty.Normal.CastToInt() ? 0 : 1)
+				int scoreMin = getEncounterType() == org.gts.bst.events.EncounterType.PoliceInspect ? Consts.PoliceRecordScoreDubious
+						- (Difficulty().CastToInt() < org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 0 : 1)
 						: Consts.PoliceRecordScoreCriminal;
 
-				setEncounterType(spacetrader.enums.EncounterType.PoliceAttack);
+				setEncounterType(org.gts.bst.events.EncounterType.PoliceAttack);
 				Commander().setPoliceRecordScore(Math.min(Commander().getPoliceRecordScore() + scoreMod, scoreMin));
 			}
 		}
@@ -2374,7 +2388,7 @@ public class Game extends STSerializableObject
 					int fine = (int)Math.max(100, Math.min(10000,
 							Math
 									.ceil((double)Commander().Worth()
-											/ ((spacetrader.enums.Difficulty.Impossible.CastToInt()
+											/ ((org.gts.bst.difficulty.Difficulty.Impossible.CastToInt()
 													- Difficulty().CastToInt() + 2) * 10) / 50) * 50));
 					int cashPayment = Math.min(Commander().getCash(), fine);
 					Commander().setDebt(Commander().getDebt() + (fine - cashPayment));
@@ -2415,8 +2429,8 @@ public class Game extends STSerializableObject
 				}
 			} else
 				FormAlert.Alert(AlertType.EncounterSurrenderRefused, owner);
-		} else if (getEncounterType() == spacetrader.enums.EncounterType.PoliceAttack
-				|| getEncounterType() == spacetrader.enums.EncounterType.PoliceSurrender)
+		} else if (getEncounterType() == org.gts.bst.events.EncounterType.PoliceAttack
+				|| getEncounterType() == org.gts.bst.events.EncounterType.PoliceSurrender)
 		{
 			if (Commander().getPoliceRecordScore() <= Consts.PoliceRecordScorePsychopath)
 				FormAlert.Alert(AlertType.EncounterSurrenderRefused, owner);
@@ -2530,8 +2544,8 @@ public class Game extends STSerializableObject
 
 	private void EncounterWon(WinformPane owner)
 	{
-		if (getEncounterType().CastToInt() >= spacetrader.enums.EncounterType.PirateAttack.CastToInt()
-				&& getEncounterType().CastToInt() <= spacetrader.enums.EncounterType.PirateDisabled.CastToInt()
+		if (getEncounterType().CastToInt() >= org.gts.bst.events.EncounterType.PirateAttack.CastToInt()
+				&& getEncounterType().CastToInt() <= org.gts.bst.events.EncounterType.PirateDisabled.CastToInt()
 				&& getOpponent().Type() != ShipType.Mantis
 				&& Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreDubious)
 			FormAlert.Alert(AlertType.EncounterPiratesBounty, owner, Strings.EncounterPiratesDestroyed, "", Functions
@@ -3174,7 +3188,7 @@ public class Game extends STSerializableObject
 			Commander().setPoliceRecordScore(
 					Math.min(Consts.PoliceRecordScoreDubious, Commander().getPoliceRecordScore()
 							+ num
-							/ (Difficulty().CastToInt() <= spacetrader.enums.Difficulty.Normal.CastToInt() ? 1
+							/ (Difficulty().CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 1
 									: Difficulty().CastToInt())));
 
 		// The Space Monster's strength increases 5% per day until it is back to
@@ -3873,8 +3887,8 @@ public class Game extends STSerializableObject
 			action = Functions.StringVars(Strings.EncounterActionOppDisabled, EncounterShipText());
 		else if (getEncounterOppFleeing())
 		{
-			if (getEncounterType() == spacetrader.enums.EncounterType.PirateSurrender
-					|| getEncounterType() == spacetrader.enums.EncounterType.TraderSurrender)
+			if (getEncounterType() == org.gts.bst.events.EncounterType.PirateSurrender
+					|| getEncounterType() == org.gts.bst.events.EncounterType.TraderSurrender)
 				action = Functions.StringVars(Strings.EncounterActionOppSurrender, EncounterShipText());
 			else
 				action = Functions.StringVars(Strings.EncounterActionOppFleeing, EncounterShipText());
@@ -4203,7 +4217,7 @@ public class Game extends STSerializableObject
 
 		for (Iterator en = NewsEvents().iterator(); en.hasNext();)
 			items.add(Functions
-					.StringVars(Strings.NewsEvent[((spacetrader.enums.NewsEvent)en.next()).CastToInt()], new String[] {
+					.StringVars(Strings.NewsEvent[((org.gts.bst.events.NewsEvent)en.next()).CastToInt()], new String[] {
 							Commander().Name(), Commander().CurrentSystem().Name(), Commander().getShip().Name() }));
 
 		if (curSys.SystemPressure() != SystemPressure.None)

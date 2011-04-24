@@ -26,8 +26,8 @@ import jwinforms.*;
 
 import spacetrader.*;
 import spacetrader.enums.AlertType;
-import spacetrader.enums.ShipType;
-import spacetrader.enums.Size;
+import org.gts.bst.ship.ShipType;
+import org.gts.bst.ship.Size;
 import spacetrader.stub.ArrayList;
 import spacetrader.stub.Directory;
 import spacetrader.util.Hashtable;

@@ -1,5 +1,6 @@
-package spacetrader.enums;
+package org.gts.bst.ship.equip;
 
+import spacetrader.enums.SpaceTraderEnum;
 import spacetrader.util.EquipmentSubType;
 
 public enum GadgetType implements EquipmentSubType, SpaceTraderEnum

@@ -1,5 +1,5 @@
-package spacetrader.enums;
-
+package org.gts.bst.events;
+import spacetrader.enums.SpaceTraderEnum;
 public enum VeryRareEncounter implements SpaceTraderEnum// : int
 {
 	MarieCeleste, // = 0,
@@ -9,7 +9,7 @@ public enum VeryRareEncounter implements SpaceTraderEnum// : int
 	BottleOld, // = 4,
 	BottleGood, // = 5
 		;
-	
+
 	public int CastToInt()
 	{
 		return ordinal();

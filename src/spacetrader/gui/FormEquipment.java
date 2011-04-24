@@ -32,8 +32,8 @@ package spacetrader.gui;
 import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.AlertType;
-import spacetrader.enums.EquipmentType;
-import spacetrader.enums.GadgetType;
+import org.gts.bst.ship.equip.EquipmentType;
+import org.gts.bst.ship.equip.GadgetType;
 
 public class FormEquipment extends WinformForm
 {
@@ -153,9 +153,9 @@ public class FormEquipment extends WinformForm
 		this.boxBuy.SuspendLayout();
 		this.boxShipInfo.SuspendLayout();
 		this.SuspendLayout();
-		// 
+		//
 		// btnClose
-		// 
+		//
 		this.btnClose.setDialogResult(DialogResult.Cancel);
 		this.btnClose.setLocation(new java.awt.Point(-32, -32));
 		this.btnClose.setName("btnClose");
@@ -163,9 +163,9 @@ public class FormEquipment extends WinformForm
 		this.btnClose.setTabIndex(32);
 		this.btnClose.setTabStop(false);
 		this.btnClose.setText("X");
-		// 
+		//
 		// boxSell
-		// 
+		//
 		this.boxSell.Controls.add(this.lblSellGadgetNoSlots);
 		this.boxSell.Controls.add(this.lblSellShieldNoSlots);
 		this.boxSell.Controls.add(this.lblSellWeaponNoSlots);
@@ -181,63 +181,63 @@ public class FormEquipment extends WinformForm
 		this.boxSell.setTabIndex(1);
 		this.boxSell.setTabStop(false);
 		this.boxSell.setText("Current Inventory");
-		// 
+		//
 		// lblSellGadgetNoSlots
-		// 
+		//
 		this.lblSellGadgetNoSlots.setLocation(new java.awt.Point(24, 228));
 		this.lblSellGadgetNoSlots.setName("lblSellGadgetNoSlots");
 		this.lblSellGadgetNoSlots.setSize(new jwinforms.Size(104, 16));
 		this.lblSellGadgetNoSlots.setTabIndex(149);
 		this.lblSellGadgetNoSlots.setText("No slots");
 		this.lblSellGadgetNoSlots.setVisible(false);
-		// 
+		//
 		// lblSellShieldNoSlots
-		// 
+		//
 		this.lblSellShieldNoSlots.setLocation(new java.awt.Point(24, 132));
 		this.lblSellShieldNoSlots.setName("lblSellShieldNoSlots");
 		this.lblSellShieldNoSlots.setSize(new jwinforms.Size(104, 16));
 		this.lblSellShieldNoSlots.setTabIndex(148);
 		this.lblSellShieldNoSlots.setText("No slots");
 		this.lblSellShieldNoSlots.setVisible(false);
-		// 
+		//
 		// lblSellWeaponNoSlots
-		// 
+		//
 		this.lblSellWeaponNoSlots.setLocation(new java.awt.Point(24, 36));
 		this.lblSellWeaponNoSlots.setName("lblSellWeaponNoSlots");
 		this.lblSellWeaponNoSlots.setSize(new jwinforms.Size(104, 16));
 		this.lblSellWeaponNoSlots.setTabIndex(147);
 		this.lblSellWeaponNoSlots.setText("No slots");
 		this.lblSellWeaponNoSlots.setVisible(false);
-		// 
+		//
 		// lblSellGadgets
-		// 
+		//
 		this.lblSellGadgets.setAutoSize(true);
 		this.lblSellGadgets.setLocation(new java.awt.Point(8, 212));
 		this.lblSellGadgets.setName("lblSellGadgets");
 		this.lblSellGadgets.setSize(new jwinforms.Size(47, 16));
 		this.lblSellGadgets.setTabIndex(146);
 		this.lblSellGadgets.setText("Gadgets");
-		// 
+		//
 		// lblSellShields
-		// 
+		//
 		this.lblSellShields.setAutoSize(true);
 		this.lblSellShields.setLocation(new java.awt.Point(8, 116));
 		this.lblSellShields.setName("lblSellShields");
 		this.lblSellShields.setSize(new jwinforms.Size(41, 16));
 		this.lblSellShields.setTabIndex(145);
 		this.lblSellShields.setText("Shields");
-		// 
+		//
 		// lblSellWeapons
-		// 
+		//
 		this.lblSellWeapons.setAutoSize(true);
 		this.lblSellWeapons.setLocation(new java.awt.Point(8, 20));
 		this.lblSellWeapons.setName("lblSellWeapons");
 		this.lblSellWeapons.setSize(new jwinforms.Size(52, 16));
 		this.lblSellWeapons.setTabIndex(144);
 		this.lblSellWeapons.setText("Weapons");
-		// 
+		//
 		// lstSellGadget
-		// 
+		//
 		this.lstSellGadget.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.lstSellGadget.setLocation(new java.awt.Point(8, 228));
 		this.lstSellGadget.setName("lstSellGadget");
@@ -257,9 +257,9 @@ public class FormEquipment extends WinformForm
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// lstSellShield
-		// 
+		//
 		this.lstSellShield.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.lstSellShield.setLocation(new java.awt.Point(8, 132));
 		this.lstSellShield.setName("lstSellShield");
@@ -279,9 +279,9 @@ public class FormEquipment extends WinformForm
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// lstSellWeapon
-		// 
+		//
 		this.lstSellWeapon.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.lstSellWeapon.setLocation(new java.awt.Point(8, 36));
 		this.lstSellWeapon.setName("lstSellWeapon");
@@ -301,9 +301,9 @@ public class FormEquipment extends WinformForm
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// boxBuy
-		// 
+		//
 		this.boxBuy.Controls.add(this.lblBuyGadgetNone);
 		this.boxBuy.Controls.add(this.lblBuyShieldNone);
 		this.boxBuy.Controls.add(this.lblBuyWeaponNone);
@@ -319,63 +319,63 @@ public class FormEquipment extends WinformForm
 		this.boxBuy.setTabIndex(2);
 		this.boxBuy.setTabStop(false);
 		this.boxBuy.setText("Equipment For Sale");
-		// 
+		//
 		// lblBuyGadgetNone
-		// 
+		//
 		this.lblBuyGadgetNone.setLocation(new java.awt.Point(24, 228));
 		this.lblBuyGadgetNone.setName("lblBuyGadgetNone");
 		this.lblBuyGadgetNone.setSize(new jwinforms.Size(104, 16));
 		this.lblBuyGadgetNone.setTabIndex(150);
 		this.lblBuyGadgetNone.setText("None for sale");
 		this.lblBuyGadgetNone.setVisible(false);
-		// 
+		//
 		// lblBuyShieldNone
-		// 
+		//
 		this.lblBuyShieldNone.setLocation(new java.awt.Point(24, 132));
 		this.lblBuyShieldNone.setName("lblBuyShieldNone");
 		this.lblBuyShieldNone.setSize(new jwinforms.Size(104, 16));
 		this.lblBuyShieldNone.setTabIndex(149);
 		this.lblBuyShieldNone.setText("None for sale");
 		this.lblBuyShieldNone.setVisible(false);
-		// 
+		//
 		// lblBuyWeaponNone
-		// 
+		//
 		this.lblBuyWeaponNone.setLocation(new java.awt.Point(24, 36));
 		this.lblBuyWeaponNone.setName("lblBuyWeaponNone");
 		this.lblBuyWeaponNone.setSize(new jwinforms.Size(104, 16));
 		this.lblBuyWeaponNone.setTabIndex(148);
 		this.lblBuyWeaponNone.setText("None for sale");
 		this.lblBuyWeaponNone.setVisible(false);
-		// 
+		//
 		// lblBuyGadgets
-		// 
+		//
 		this.lblBuyGadgets.setAutoSize(true);
 		this.lblBuyGadgets.setLocation(new java.awt.Point(8, 212));
 		this.lblBuyGadgets.setName("lblBuyGadgets");
 		this.lblBuyGadgets.setSize(new jwinforms.Size(47, 16));
 		this.lblBuyGadgets.setTabIndex(143);
 		this.lblBuyGadgets.setText("Gadgets");
-		// 
+		//
 		// lblBuyShields
-		// 
+		//
 		this.lblBuyShields.setAutoSize(true);
 		this.lblBuyShields.setLocation(new java.awt.Point(8, 116));
 		this.lblBuyShields.setName("lblBuyShields");
 		this.lblBuyShields.setSize(new jwinforms.Size(41, 16));
 		this.lblBuyShields.setTabIndex(142);
 		this.lblBuyShields.setText("Shields");
-		// 
+		//
 		// lblBuyWeapons
-		// 
+		//
 		this.lblBuyWeapons.setAutoSize(true);
 		this.lblBuyWeapons.setLocation(new java.awt.Point(8, 20));
 		this.lblBuyWeapons.setName("lblBuyWeapons");
 		this.lblBuyWeapons.setSize(new jwinforms.Size(52, 16));
 		this.lblBuyWeapons.setTabIndex(141);
 		this.lblBuyWeapons.setText("Weapons");
-		// 
+		//
 		// lstBuyGadget
-		// 
+		//
 		this.lstBuyGadget.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.lstBuyGadget.setLocation(new java.awt.Point(8, 228));
 		this.lstBuyGadget.setName("lstBuyGadget");
@@ -395,9 +395,9 @@ public class FormEquipment extends WinformForm
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// lstBuyShield
-		// 
+		//
 		this.lstBuyShield.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.lstBuyShield.setLocation(new java.awt.Point(8, 132));
 		this.lstBuyShield.setName("lstBuyShield");
@@ -417,9 +417,9 @@ public class FormEquipment extends WinformForm
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// lstBuyWeapon
-		// 
+		//
 		this.lstBuyWeapon.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.lstBuyWeapon.setLocation(new java.awt.Point(8, 36));
 		this.lstBuyWeapon.setName("lstBuyWeapon");
@@ -439,9 +439,9 @@ public class FormEquipment extends WinformForm
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// boxShipInfo
-		// 
+		//
 		this.boxShipInfo.Controls.add(this.lblCharge);
 		this.boxShipInfo.Controls.add(this.lblPower);
 		this.boxShipInfo.Controls.add(this.lblChargeLabel);
@@ -464,25 +464,25 @@ public class FormEquipment extends WinformForm
 		this.boxShipInfo.setTabIndex(3);
 		this.boxShipInfo.setTabStop(false);
 		this.boxShipInfo.setText("Equipment Information");
-		// 
+		//
 		// lblCharge
-		// 
+		//
 		this.lblCharge.setLocation(new java.awt.Point(80, 164));
 		this.lblCharge.setName("lblCharge");
 		this.lblCharge.setSize(new jwinforms.Size(116, 16));
 		this.lblCharge.setTabIndex(67);
 		this.lblCharge.setText("888");
-		// 
+		//
 		// lblPower
-		// 
+		//
 		this.lblPower.setLocation(new java.awt.Point(80, 148));
 		this.lblPower.setName("lblPower");
 		this.lblPower.setSize(new jwinforms.Size(116, 16));
 		this.lblPower.setTabIndex(66);
 		this.lblPower.setText("888");
-		// 
+		//
 		// lblChargeLabel
-		// 
+		//
 		this.lblChargeLabel.setAutoSize(true);
 		this.lblChargeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -491,9 +491,9 @@ public class FormEquipment extends WinformForm
 		this.lblChargeLabel.setSize(new jwinforms.Size(46, 16));
 		this.lblChargeLabel.setTabIndex(65);
 		this.lblChargeLabel.setText("Charge:");
-		// 
+		//
 		// lblPowerLabel
-		// 
+		//
 		this.lblPowerLabel.setAutoSize(true);
 		this.lblPowerLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -502,17 +502,17 @@ public class FormEquipment extends WinformForm
 		this.lblPowerLabel.setSize(new jwinforms.Size(41, 16));
 		this.lblPowerLabel.setTabIndex(64);
 		this.lblPowerLabel.setText("Power:");
-		// 
+		//
 		// lblType
-		// 
+		//
 		this.lblType.setLocation(new java.awt.Point(80, 100));
 		this.lblType.setName("lblType");
 		this.lblType.setSize(new jwinforms.Size(116, 16));
 		this.lblType.setTabIndex(63);
 		this.lblType.setText("Weapon");
-		// 
+		//
 		// lblTypeLabel
-		// 
+		//
 		this.lblTypeLabel.setAutoSize(true);
 		this.lblTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -521,9 +521,9 @@ public class FormEquipment extends WinformForm
 		this.lblTypeLabel.setSize(new jwinforms.Size(34, 16));
 		this.lblTypeLabel.setTabIndex(62);
 		this.lblTypeLabel.setText("Type:");
-		// 
+		//
 		// lblNameLabel
-		// 
+		//
 		this.lblNameLabel.setAutoSize(true);
 		this.lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -532,9 +532,9 @@ public class FormEquipment extends WinformForm
 		this.lblNameLabel.setSize(new jwinforms.Size(39, 16));
 		this.lblNameLabel.setTabIndex(61);
 		this.lblNameLabel.setText("Name:");
-		// 
+		//
 		// btnSell
-		// 
+		//
 		this.btnSell.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnSell.setLocation(new java.awt.Point(103, 272));
 		this.btnSell.setName("btnSell");
@@ -548,9 +548,9 @@ public class FormEquipment extends WinformForm
 				SellClick(sender, e);
 			}
 		});
-		// 
+		//
 		// btnBuy
-		// 
+		//
 		this.btnBuy.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnBuy.setLocation(new java.awt.Point(31, 272));
 		this.btnBuy.setName("btnBuy");
@@ -564,9 +564,9 @@ public class FormEquipment extends WinformForm
 				BuyClick(sender, e);
 			}
 		});
-		// 
+		//
 		// lblBuyPriceLabel
-		// 
+		//
 		this.lblBuyPriceLabel.setAutoSize(true);
 		this.lblBuyPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -575,17 +575,17 @@ public class FormEquipment extends WinformForm
 		this.lblBuyPriceLabel.setSize(new jwinforms.Size(58, 16));
 		this.lblBuyPriceLabel.setTabIndex(57);
 		this.lblBuyPriceLabel.setText("Buy Price:");
-		// 
+		//
 		// lblBuyPrice
-		// 
+		//
 		this.lblBuyPrice.setLocation(new java.awt.Point(80, 116));
 		this.lblBuyPrice.setName("lblBuyPrice");
 		this.lblBuyPrice.setSize(new jwinforms.Size(116, 16));
 		this.lblBuyPrice.setTabIndex(56);
 		this.lblBuyPrice.setText("888,888 cr.");
-		// 
+		//
 		// lblSellPriceLabel
-		// 
+		//
 		this.lblSellPriceLabel.setAutoSize(true);
 		this.lblSellPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -594,9 +594,9 @@ public class FormEquipment extends WinformForm
 		this.lblSellPriceLabel.setSize(new jwinforms.Size(58, 16));
 		this.lblSellPriceLabel.setTabIndex(55);
 		this.lblSellPriceLabel.setText("Sell Price:");
-		// 
+		//
 		// picEquipment
-		// 
+		//
 		this.picEquipment.setBackColor(java.awt.Color.white);
 		this.picEquipment.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.picEquipment.setLocation(new java.awt.Point(71, 20));
@@ -605,32 +605,32 @@ public class FormEquipment extends WinformForm
 		this.picEquipment.setTabIndex(54);
 		this.picEquipment.setTabStop(false);
 		this.picEquipment.setVisible(false);
-		// 
+		//
 		// lblSellPrice
-		// 
+		//
 		this.lblSellPrice.setLocation(new java.awt.Point(80, 132));
 		this.lblSellPrice.setName("lblSellPrice");
 		this.lblSellPrice.setSize(new jwinforms.Size(116, 16));
 		this.lblSellPrice.setTabIndex(52);
 		this.lblSellPrice.setText("888,888 cr.");
-		// 
+		//
 		// lblDescription
-		// 
+		//
 		this.lblDescription.setLocation(new java.awt.Point(8, 188));
 		this.lblDescription.setName("lblDescription");
 		this.lblDescription.setSize(new jwinforms.Size(196, 75));
 		this.lblDescription.setTabIndex(47);
-		// 
+		//
 		// lblName
-		// 
+		//
 		this.lblName.setLocation(new java.awt.Point(80, 84));
 		this.lblName.setName("lblName");
 		this.lblName.setSize(new jwinforms.Size(116, 16));
 		this.lblName.setTabIndex(35);
 		this.lblName.setText("Auto-Repair System");
-		// 
+		//
 		// FormEquipment
-		// 
+		//
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
 		this.setCancelButton(this.btnClose);
 		this.setClientSize(new jwinforms.Size(522, 311));
@@ -728,7 +728,7 @@ public class FormEquipment extends WinformForm
 	{
 		for (int i = 0; i < equipBuy.length; i++)
 		{
-			if (equipBuy[i].Price() > 0) 
+			if (equipBuy[i].Price() > 0)
 			{
 				switch (equipBuy[i].EquipmentType())
 				{
@@ -862,9 +862,9 @@ public class FormEquipment extends WinformForm
 			Buy();
 	}
 
-	
 
-	
+
+
 	private void SelectedIndexChanged(Object sender, EventArgs e)
 	{
 		if (!handlingSelect)
@@ -874,7 +874,7 @@ public class FormEquipment extends WinformForm
 			Object obj = ((ListBox) sender).getSelectedItem();
 			DeselectAll();
 			((ListBox) sender).setSelectedItem(obj);
-	
+
 			sellSideSelected = (((ListBox) sender).getName().indexOf("Sell") >= 0);
 
 			if (obj instanceof Equipment)

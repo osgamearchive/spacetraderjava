@@ -35,7 +35,7 @@ import spacetrader.Consts;
 import spacetrader.Functions;
 import spacetrader.Game;
 import spacetrader.Strings;
-import spacetrader.enums.CargoBuyOp;
+import org.gts.bst.cargo.CargoBuyOp;
 
 public class FormCargoBuy extends WinformForm
 {
@@ -129,26 +129,26 @@ public class FormCargoBuy extends WinformForm
 		this.lblAfford = new jwinforms.Label();
 		((ISupportInitialize)(this.numAmount)).BeginInit();
 		this.SuspendLayout();
-		// 
+		//
 		// lblQuestion
-		// 
+		//
 		this.lblQuestion.setAutoSize(true);
 		this.lblQuestion.setLocation(new java.awt.Point(8, 24));
 		this.lblQuestion.setName("lblQuestion");
 		this.lblQuestion.setSize(new jwinforms.Size(161, 16));
 		this.lblQuestion.setTabIndex(1);
 		this.lblQuestion.setText("How many do you want to buy?");
-		// 
+		//
 		// lblStatement
-		// 
+		//
 		this.lblStatement.setLocation(new java.awt.Point(8, 8));
 		this.lblStatement.setName("lblStatement");
 		this.lblStatement.setSize(new jwinforms.Size(326, 13));
 		this.lblStatement.setTabIndex(3);
 		this.lblStatement.setText("The trader wants to sell Machines for the price of 8,888 cr. each.");
-		// 
+		//
 		// numAmount
-		// 
+		//
 		this.numAmount.setLocation(new java.awt.Point(168, 22));
 		this.numAmount.setMaximum(999);
 		this.numAmount.setMinimum(1);
@@ -156,9 +156,9 @@ public class FormCargoBuy extends WinformForm
 		this.numAmount.setSize(new jwinforms.Size(44, 20));
 		this.numAmount.setTabIndex(1);
 		this.numAmount.setValue(1);
-		// 
+		//
 		// btnOk
-		// 
+		//
 		this.btnOk.setDialogResult(DialogResult.OK);
 		this.btnOk.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnOk.setLocation(new java.awt.Point(95, 48));
@@ -166,9 +166,9 @@ public class FormCargoBuy extends WinformForm
 		this.btnOk.setSize(new jwinforms.Size(41, 22));
 		this.btnOk.setTabIndex(2);
 		this.btnOk.setText("Ok");
-		// 
+		//
 		// btnAll
-		// 
+		//
 		this.btnAll.setDialogResult(DialogResult.OK);
 		this.btnAll.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnAll.setLocation(new java.awt.Point(143, 48));
@@ -183,9 +183,9 @@ public class FormCargoBuy extends WinformForm
 				btnAll_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnNone
-		// 
+		//
 		this.btnNone.setDialogResult(DialogResult.Cancel);
 		this.btnNone.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnNone.setLocation(new java.awt.Point(191, 48));
@@ -193,27 +193,27 @@ public class FormCargoBuy extends WinformForm
 		this.btnNone.setSize(new jwinforms.Size(41, 22));
 		this.btnNone.setTabIndex(4);
 		this.btnNone.setText("None");
-		// 
+		//
 		// lblAvailable
-		// 
+		//
 		this.lblAvailable.setLocation(new java.awt.Point(8, 21));
 		this.lblAvailable.setName("lblAvailable");
 		this.lblAvailable.setSize(new jwinforms.Size(163, 13));
 		this.lblAvailable.setTabIndex(5);
 		this.lblAvailable.setText("The trader has 88 units for sale.");
 		this.lblAvailable.setVisible(false);
-		// 
+		//
 		// lblAfford
-		// 
+		//
 		this.lblAfford.setLocation(new java.awt.Point(8, 34));
 		this.lblAfford.setName("lblAfford");
 		this.lblAfford.setSize(new jwinforms.Size(157, 13));
 		this.lblAfford.setTabIndex(6);
 		this.lblAfford.setText("You can afford to buy 88 units.");
 		this.lblAfford.setVisible(false);
-		// 
+		//
 		// FormCargoBuy
-		// 
+		//
 		this.setAcceptButton(this.btnOk);
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
 		this.setCancelButton(this.btnNone);

@@ -28,6 +28,10 @@
 
 package spacetrader;
 
+import org.gts.bst.ship.ShipType;
+import org.gts.bst.ship.equip.WeaponType;
+import org.gts.bst.ship.equip.GadgetType;
+import org.gts.bst.ship.equip.ShieldType;
 import jwinforms.DialogResult;
 import jwinforms.WinformPane;
 import spacetrader.enums.*;

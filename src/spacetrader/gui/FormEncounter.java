@@ -32,7 +32,7 @@ import spacetrader.Functions;
 import spacetrader.Game;
 import spacetrader.Ship;
 import spacetrader.enums.AlertType;
-import spacetrader.enums.EncounterResult;
+import org.gts.bst.events.EncounterResult;
 
 public class FormEncounter extends WinformForm
 {
@@ -248,17 +248,17 @@ public class FormEncounter extends WinformForm
 		this.picTrib55 = new jwinforms.PictureBox();
 		this.tmrTick = new jwinforms.Timer(this.components);
 		this.SuspendLayout();
-		// 
+		//
 		// lblEncounter
-		// 
+		//
 		this.lblEncounter.setLocation(new java.awt.Point(8, 152));
 		this.lblEncounter.setName("lblEncounter");
 		this.lblEncounter.setSize(new jwinforms.Size(232, 26));
 		this.lblEncounter.setTabIndex(0);
 		this.lblEncounter.setText("At 20 clicks from Tarchannen, you encounter the famous Captain Ahab.");
-		// 
+		//
 		// picShipYou
-		// 
+		//
 		this.picShipYou.setBackColor(java.awt.Color.white);
 		this.picShipYou.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.picShipYou.setLocation(new java.awt.Point(26, 24));
@@ -273,9 +273,9 @@ public class FormEncounter extends WinformForm
 				picShipYou_Paint(sender, e);
 			}
 		});
-		// 
+		//
 		// picShipOpponent
-		// 
+		//
 		this.picShipOpponent.setBackColor(java.awt.Color.white);
 		this.picShipOpponent.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.picShipOpponent.setLocation(new java.awt.Point(138, 24));
@@ -290,18 +290,18 @@ public class FormEncounter extends WinformForm
 				picShipOpponent_Paint(sender, e);
 			}
 		});
-		// 
+		//
 		// lblAction
-		// 
+		//
 		this.lblAction.setLocation(new java.awt.Point(8, 192));
 		this.lblAction.setName("lblAction");
 		this.lblAction.setSize(new jwinforms.Size(232, 39));
 		this.lblAction.setTabIndex(15);
 		this.lblAction.setText("\"We know you removed illegal goods from the Marie Celeste. You must give them up "
 				+ "at once!\"");
-		// 
+		//
 		// lblOpponentLabel
-		// 
+		//
 		this.lblOpponentLabel.setAutoSize(true);
 		this.lblOpponentLabel.setFont(new Font("Microsoft Sans Serif", 8.25F,
 				FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
@@ -310,9 +310,9 @@ public class FormEncounter extends WinformForm
 		this.lblOpponentLabel.setSize(new jwinforms.Size(59, 16));
 		this.lblOpponentLabel.setTabIndex(16);
 		this.lblOpponentLabel.setText("Opponent:");
-		// 
+		//
 		// lblYouLabel
-		// 
+		//
 		this.lblYouLabel.setAutoSize(true);
 		this.lblYouLabel.setFont(new Font("Microsoft Sans Serif", 8.25F,
 				FontStyle.Bold, GraphicsUnit.Point, ((byte) (0))));
@@ -321,57 +321,57 @@ public class FormEncounter extends WinformForm
 		this.lblYouLabel.setSize(new jwinforms.Size(28, 16));
 		this.lblYouLabel.setTabIndex(17);
 		this.lblYouLabel.setText("You:");
-		// 
+		//
 		// lblOpponentShip
-		// 
+		//
 		this.lblOpponentShip.setLocation(new java.awt.Point(138, 88));
 		this.lblOpponentShip.setName("lblOpponentShip");
 		this.lblOpponentShip.setSize(new jwinforms.Size(80, 13));
 		this.lblOpponentShip.setTabIndex(18);
 		this.lblOpponentShip.setText("Space Monster");
-		// 
+		//
 		// lblYouShip
-		// 
+		//
 		this.lblYouShip.setLocation(new java.awt.Point(26, 88));
 		this.lblYouShip.setName("lblYouShip");
 		this.lblYouShip.setSize(new jwinforms.Size(100, 13));
 		this.lblYouShip.setTabIndex(19);
 		this.lblYouShip.setText("Grasshopper");
-		// 
+		//
 		// lblYouHull
-		// 
+		//
 		this.lblYouHull.setLocation(new java.awt.Point(26, 104));
 		this.lblYouHull.setName("lblYouHull");
 		this.lblYouHull.setSize(new jwinforms.Size(68, 13));
 		this.lblYouHull.setTabIndex(20);
 		this.lblYouHull.setText("Hull at 100%");
-		// 
+		//
 		// lblYouShields
-		// 
+		//
 		this.lblYouShields.setLocation(new java.awt.Point(26, 120));
 		this.lblYouShields.setName("lblYouShields");
 		this.lblYouShields.setSize(new jwinforms.Size(86, 13));
 		this.lblYouShields.setTabIndex(21);
 		this.lblYouShields.setText("Shields at 100%");
-		// 
+		//
 		// lblOpponentShields
-		// 
+		//
 		this.lblOpponentShields.setLocation(new java.awt.Point(138, 120));
 		this.lblOpponentShields.setName("lblOpponentShields");
 		this.lblOpponentShields.setSize(new jwinforms.Size(86, 13));
 		this.lblOpponentShields.setTabIndex(23);
 		this.lblOpponentShields.setText("Shields at 100%");
-		// 
+		//
 		// lblOpponentHull
-		// 
+		//
 		this.lblOpponentHull.setLocation(new java.awt.Point(138, 104));
 		this.lblOpponentHull.setName("lblOpponentHull");
 		this.lblOpponentHull.setSize(new jwinforms.Size(68, 13));
 		this.lblOpponentHull.setTabIndex(22);
 		this.lblOpponentHull.setText("Hull at 100%");
-		// 
+		//
 		// btnAttack
-		// 
+		//
 		this.btnAttack.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnAttack.setLocation(new java.awt.Point(8, 240));
 		this.btnAttack.setName("btnAttack");
@@ -386,9 +386,9 @@ public class FormEncounter extends WinformForm
 				btnAttack_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnFlee
-		// 
+		//
 		this.btnFlee.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnFlee.setLocation(new java.awt.Point(62, 240));
 		this.btnFlee.setName("btnFlee");
@@ -403,9 +403,9 @@ public class FormEncounter extends WinformForm
 				btnFlee_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnSubmit
-		// 
+		//
 		this.btnSubmit.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnSubmit.setLocation(new java.awt.Point(106, 240));
 		this.btnSubmit.setName("btnSubmit");
@@ -420,9 +420,9 @@ public class FormEncounter extends WinformForm
 				btnSubmit_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnBribe
-		// 
+		//
 		this.btnBribe.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnBribe.setLocation(new java.awt.Point(163, 240));
 		this.btnBribe.setName("btnBribe");
@@ -437,9 +437,9 @@ public class FormEncounter extends WinformForm
 				btnBribe_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnSurrender
-		// 
+		//
 		this.btnSurrender.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnSurrender.setLocation(new java.awt.Point(106, 240));
 		this.btnSurrender.setName("btnSurrender");
@@ -454,9 +454,9 @@ public class FormEncounter extends WinformForm
 				btnSurrender_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnIgnore
-		// 
+		//
 		this.btnIgnore.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnIgnore.setLocation(new java.awt.Point(62, 240));
 		this.btnIgnore.setName("btnIgnore");
@@ -471,9 +471,9 @@ public class FormEncounter extends WinformForm
 				btnIgnore_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnTrade
-		// 
+		//
 		this.btnTrade.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnTrade.setLocation(new java.awt.Point(116, 240));
 		this.btnTrade.setName("btnTrade");
@@ -488,9 +488,9 @@ public class FormEncounter extends WinformForm
 				btnTrade_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnPlunder
-		// 
+		//
 		this.btnPlunder.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnPlunder.setLocation(new java.awt.Point(62, 240));
 		this.btnPlunder.setName("btnPlunder");
@@ -505,9 +505,9 @@ public class FormEncounter extends WinformForm
 				btnPlunder_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnBoard
-		// 
+		//
 		this.btnBoard.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnBoard.setLocation(new java.awt.Point(8, 240));
 		this.btnBoard.setName("btnBoard");
@@ -522,9 +522,9 @@ public class FormEncounter extends WinformForm
 				btnBoard_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnMeet
-		// 
+		//
 		this.btnMeet.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnMeet.setLocation(new java.awt.Point(116, 240));
 		this.btnMeet.setName("btnMeet");
@@ -539,9 +539,9 @@ public class FormEncounter extends WinformForm
 				btnMeet_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnDrink
-		// 
+		//
 		this.btnDrink.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnDrink.setLocation(new java.awt.Point(8, 240));
 		this.btnDrink.setName("btnDrink");
@@ -556,9 +556,9 @@ public class FormEncounter extends WinformForm
 				btnDrink_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnInt
-		// 
+		//
 		this.btnInt.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnInt.setLocation(new java.awt.Point(179, 240));
 		this.btnInt.setName("btnInt");
@@ -573,9 +573,9 @@ public class FormEncounter extends WinformForm
 				btnInt_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// btnYield
-		// 
+		//
 		this.btnYield.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnYield.setLocation(new java.awt.Point(106, 240));
 		this.btnYield.setName("btnYield");
@@ -590,40 +590,40 @@ public class FormEncounter extends WinformForm
 				btnYield_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picContinuous
-		// 
+		//
 		this.picContinuous.setLocation(new java.awt.Point(214, 247));
 		this.picContinuous.setName("picContinuous");
 		this.picContinuous.setSize(new jwinforms.Size(9, 9));
 		this.picContinuous.setTabIndex(38);
 		this.picContinuous.setTabStop(false);
 		this.picContinuous.setVisible(false);
-		// 
+		//
 		// ilContinuous
-		// 
+		//
 		this.ilContinuous.setImageSize(new jwinforms.Size(9, 9));
 		this.ilContinuous.setImageStream(((jwinforms.ImageListStreamer) (resources
 				.GetObject("ilContinuous.ImageStream"))));
 		this.ilContinuous.setTransparentColor(java.awt.Color.white);
-		// 
+		//
 		// picEncounterType
-		// 
+		//
 		this.picEncounterType.setLocation(new java.awt.Point(220, 2));
 		this.picEncounterType.setName("picEncounterType");
 		this.picEncounterType.setSize(new jwinforms.Size(12, 12));
 		this.picEncounterType.setTabIndex(39);
 		this.picEncounterType.setTabStop(false);
-		// 
+		//
 		// ilEncounterType
-		// 
+		//
 		this.ilEncounterType.setImageSize(new jwinforms.Size(12, 12));
 		this.ilEncounterType.setImageStream(((jwinforms.ImageListStreamer) (resources
 				.GetObject("ilEncounterType.ImageStream"))));
 		this.ilEncounterType.setTransparentColor(Color.white);
-		// 
+		//
 		// picTrib00
-		// 
+		//
 		this.picTrib00.setBackColor(SystemColors.Control);
 		this.picTrib00.setLocation(new java.awt.Point(16, 16));
 		this.picTrib00.setName("picTrib00");
@@ -638,16 +638,16 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// ilTribbles
-		// 
+		//
 		this.ilTribbles.setImageSize(new jwinforms.Size(12, 12));
 		this.ilTribbles.setImageStream(((jwinforms.ImageListStreamer) (resources
 				.GetObject("ilTribbles.ImageStream"))));
 		this.ilTribbles.setTransparentColor(java.awt.Color.white);
-		// 
+		//
 		// picTrib50
-		// 
+		//
 		this.picTrib50.setBackColor(SystemColors.Control);
 		this.picTrib50.setLocation(new java.awt.Point(16, 224));
 		this.picTrib50.setName("picTrib50");
@@ -662,9 +662,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib10
-		// 
+		//
 		this.picTrib10.setBackColor(SystemColors.Control);
 		this.picTrib10.setLocation(new java.awt.Point(8, 56));
 		this.picTrib10.setName("picTrib10");
@@ -679,9 +679,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib40
-		// 
+		//
 		this.picTrib40.setBackColor(SystemColors.Control);
 		this.picTrib40.setLocation(new java.awt.Point(8, 184));
 		this.picTrib40.setName("picTrib40");
@@ -696,9 +696,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib20
-		// 
+		//
 		this.picTrib20.setBackColor(SystemColors.Control);
 		this.picTrib20.setLocation(new java.awt.Point(8, 96));
 		this.picTrib20.setName("picTrib20");
@@ -713,9 +713,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib30
-		// 
+		//
 		this.picTrib30.setBackColor(SystemColors.Control);
 		this.picTrib30.setLocation(new java.awt.Point(16, 136));
 		this.picTrib30.setName("picTrib30");
@@ -730,9 +730,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib04
-		// 
+		//
 		this.picTrib04.setBackColor(SystemColors.Control);
 		this.picTrib04.setLocation(new java.awt.Point(176, 8));
 		this.picTrib04.setName("picTrib04");
@@ -747,9 +747,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib03
-		// 
+		//
 		this.picTrib03.setBackColor(SystemColors.Control);
 		this.picTrib03.setLocation(new java.awt.Point(128, 8));
 		this.picTrib03.setName("picTrib03");
@@ -764,9 +764,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib02
-		// 
+		//
 		this.picTrib02.setBackColor(SystemColors.Control);
 		this.picTrib02.setLocation(new java.awt.Point(96, 16));
 		this.picTrib02.setName("picTrib02");
@@ -781,9 +781,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib01
-		// 
+		//
 		this.picTrib01.setBackColor(SystemColors.Control);
 		this.picTrib01.setLocation(new java.awt.Point(56, 8));
 		this.picTrib01.setName("picTrib01");
@@ -798,9 +798,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib05
-		// 
+		//
 		this.picTrib05.setBackColor(SystemColors.Control);
 		this.picTrib05.setLocation(new java.awt.Point(208, 16));
 		this.picTrib05.setName("picTrib05");
@@ -815,9 +815,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib11
-		// 
+		//
 		this.picTrib11.setBackColor(SystemColors.Control);
 		this.picTrib11.setLocation(new java.awt.Point(32, 80));
 		this.picTrib11.setName("picTrib11");
@@ -832,9 +832,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib12
-		// 
+		//
 		this.picTrib12.setBackColor(SystemColors.Control);
 		this.picTrib12.setLocation(new java.awt.Point(88, 56));
 		this.picTrib12.setName("picTrib12");
@@ -849,9 +849,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib13
-		// 
+		//
 		this.picTrib13.setBackColor(SystemColors.Control);
 		this.picTrib13.setLocation(new java.awt.Point(128, 40));
 		this.picTrib13.setName("picTrib13");
@@ -866,9 +866,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib14
-		// 
+		//
 		this.picTrib14.setBackColor(SystemColors.Control);
 		this.picTrib14.setLocation(new java.awt.Point(192, 72));
 		this.picTrib14.setName("picTrib14");
@@ -883,9 +883,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib15
-		// 
+		//
 		this.picTrib15.setBackColor(SystemColors.Control);
 		this.picTrib15.setLocation(new java.awt.Point(216, 48));
 		this.picTrib15.setName("picTrib15");
@@ -900,9 +900,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib21
-		// 
+		//
 		this.picTrib21.setBackColor(SystemColors.Control);
 		this.picTrib21.setLocation(new java.awt.Point(56, 96));
 		this.picTrib21.setName("picTrib21");
@@ -917,9 +917,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib22
-		// 
+		//
 		this.picTrib22.setBackColor(SystemColors.Control);
 		this.picTrib22.setLocation(new java.awt.Point(96, 80));
 		this.picTrib22.setName("picTrib22");
@@ -934,9 +934,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib23
-		// 
+		//
 		this.picTrib23.setBackColor(SystemColors.Control);
 		this.picTrib23.setLocation(new java.awt.Point(136, 88));
 		this.picTrib23.setName("picTrib23");
@@ -951,9 +951,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib24
-		// 
+		//
 		this.picTrib24.setBackColor(SystemColors.Control);
 		this.picTrib24.setLocation(new java.awt.Point(176, 104));
 		this.picTrib24.setName("picTrib24");
@@ -968,9 +968,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib25
-		// 
+		//
 		this.picTrib25.setBackColor(SystemColors.Control);
 		this.picTrib25.setLocation(new java.awt.Point(216, 96));
 		this.picTrib25.setName("picTrib25");
@@ -985,9 +985,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib31
-		// 
+		//
 		this.picTrib31.setBackColor(SystemColors.Control);
 		this.picTrib31.setLocation(new java.awt.Point(56, 128));
 		this.picTrib31.setName("picTrib31");
@@ -1002,9 +1002,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib32
-		// 
+		//
 		this.picTrib32.setBackColor(SystemColors.Control);
 		this.picTrib32.setLocation(new java.awt.Point(96, 120));
 		this.picTrib32.setName("picTrib32");
@@ -1019,9 +1019,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib33
-		// 
+		//
 		this.picTrib33.setBackColor(SystemColors.Control);
 		this.picTrib33.setLocation(new java.awt.Point(128, 128));
 		this.picTrib33.setName("picTrib33");
@@ -1036,9 +1036,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib34
-		// 
+		//
 		this.picTrib34.setBackColor(SystemColors.Control);
 		this.picTrib34.setLocation(new java.awt.Point(168, 144));
 		this.picTrib34.setName("picTrib34");
@@ -1053,9 +1053,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib35
-		// 
+		//
 		this.picTrib35.setBackColor(SystemColors.Control);
 		this.picTrib35.setLocation(new java.awt.Point(208, 128));
 		this.picTrib35.setName("picTrib35");
@@ -1070,9 +1070,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib41
-		// 
+		//
 		this.picTrib41.setBackColor(SystemColors.Control);
 		this.picTrib41.setLocation(new java.awt.Point(48, 176));
 		this.picTrib41.setName("picTrib41");
@@ -1087,9 +1087,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib51
-		// 
+		//
 		this.picTrib51.setBackColor(SystemColors.Control);
 		this.picTrib51.setLocation(new java.awt.Point(64, 216));
 		this.picTrib51.setName("picTrib51");
@@ -1104,9 +1104,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib42
-		// 
+		//
 		this.picTrib42.setBackColor(SystemColors.Control);
 		this.picTrib42.setLocation(new java.awt.Point(88, 168));
 		this.picTrib42.setName("picTrib42");
@@ -1121,9 +1121,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib52
-		// 
+		//
 		this.picTrib52.setBackColor(SystemColors.Control);
 		this.picTrib52.setLocation(new java.awt.Point(96, 224));
 		this.picTrib52.setName("picTrib52");
@@ -1138,9 +1138,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib43
-		// 
+		//
 		this.picTrib43.setBackColor(SystemColors.Control);
 		this.picTrib43.setLocation(new java.awt.Point(136, 176));
 		this.picTrib43.setName("picTrib43");
@@ -1155,9 +1155,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib53
-		// 
+		//
 		this.picTrib53.setBackColor(SystemColors.Control);
 		this.picTrib53.setLocation(new java.awt.Point(144, 216));
 		this.picTrib53.setName("picTrib53");
@@ -1172,9 +1172,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib44
-		// 
+		//
 		this.picTrib44.setBackColor(SystemColors.Control);
 		this.picTrib44.setLocation(new java.awt.Point(184, 184));
 		this.picTrib44.setName("picTrib44");
@@ -1189,9 +1189,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib45
-		// 
+		//
 		this.picTrib45.setBackColor(SystemColors.Control);
 		this.picTrib45.setLocation(new java.awt.Point(216, 176));
 		this.picTrib45.setName("picTrib45");
@@ -1206,9 +1206,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib54
-		// 
+		//
 		this.picTrib54.setBackColor(SystemColors.Control);
 		this.picTrib54.setLocation(new java.awt.Point(176, 224));
 		this.picTrib54.setName("picTrib54");
@@ -1223,9 +1223,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// picTrib55
-		// 
+		//
 		this.picTrib55.setBackColor(SystemColors.Control);
 		this.picTrib55.setLocation(new java.awt.Point(208, 216));
 		this.picTrib55.setName("picTrib55");
@@ -1240,9 +1240,9 @@ public class FormEncounter extends WinformForm
 				picTrib_Click(sender, e);
 			}
 		});
-		// 
+		//
 		// tmrTick
-		// 
+		//
 		this.tmrTick.setInterval(1000);
 		this.tmrTick.Tick = new EventHandler<Object, EventArgs>()
 		{
@@ -1251,9 +1251,9 @@ public class FormEncounter extends WinformForm
 				tmrTick_Tick(sender, e);
 			}
 		};
-		// 
+		//
 		// FormEncounter
-		// 
+		//
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
 		this.setClientSize(new jwinforms.Size(234, 271));
 		this.setControlBox(false);
