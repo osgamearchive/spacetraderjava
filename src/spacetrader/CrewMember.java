@@ -78,10 +78,10 @@ public class CrewMember extends STSerializableObject
 		{
 			int skill = (Integer)skillIdList.get(Functions.GetRandom(skillIdList.size()));
 
-			int curTrader = Game.currentGame().Commander().getShip().Trader();
+			int curTrader = Game.CurrentGame().Commander().getShip().Trader();
 			Skills()[skill] += amount;
-			if (Game.currentGame().Commander().getShip().Trader() != curTrader)
-				Game.currentGame().RecalculateBuyPrices(Game.currentGame().Commander().getCurrentSystem());
+			if (Game.CurrentGame().Commander().getShip().Trader() != curTrader)
+				Game.CurrentGame().RecalculateBuyPrices(Game.CurrentGame().Commander().CurrentSystem());
 		}
 	}
 
@@ -138,7 +138,7 @@ public class CrewMember extends STSerializableObject
 	{
 		int[] oldSkills = Arrays.copyOf(Skills(), Skills().length);
 
-		if (Game.currentGame().Difficulty().CastToInt() < Difficulty.Hard.CastToInt())
+		if (Game.CurrentGame().Difficulty().CastToInt() < Difficulty.Hard.CastToInt())
 		{
 			// add one to a random skill, subtract one from a random skill
 			while (Skills()[0] == oldSkills[0] && Skills()[1] == oldSkills[1] && Skills()[2] == oldSkills[2]
@@ -167,12 +167,12 @@ public class CrewMember extends STSerializableObject
 
 	// #region Properties
 
-	public StarSystem getCurrentSystem()
+	public StarSystem CurrentSystem()
 	{
-		return _curSystemId == StarSystemId.NA ? null : Game.currentGame().Universe()[_curSystemId.CastToInt()];
+		return _curSystemId == StarSystemId.NA ? null : Game.CurrentGame().Universe()[_curSystemId.CastToInt()];
 	}
 
-	public void setCurrentSystem(StarSystem value)
+	public void CurrentSystem(StarSystem value)
 	{
 		_curSystemId = value.Id();
 	}

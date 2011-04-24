@@ -31,7 +31,25 @@ import util.Path;
 
 public class Consts
 {
+	// #region Individual Constants
+
 	// Directory structure and File Constsants.
+	public static String BaseDirectory = Environment.CurrentDirectory;
+	public static String CustomDirectory = Path
+			.Combine(BaseDirectory, "custom");
+	public static String DataDirectory = Path.Combine(BaseDirectory, "data");
+	public static String SaveDirectory = Path.Combine(BaseDirectory, "save");
+
+	public static String CustomImagesDirectory = Path.Combine(CustomDirectory,
+			"images");
+	public static String CustomTemplatesDirectory = Path.Combine(
+			CustomDirectory, "templates");
+
+	public static String HighScoreFile = Path.Combine(DataDirectory,
+			"HighScores.bin");
+	public static String DefaultSettingsFile = Path.Combine(DataDirectory,
+			"DefaultSettings.bin");
+
 	public static final String CurrentVersion = "2.00";
 
 	// Price paid by government for each negative PoliceScore point
@@ -123,8 +141,12 @@ public class Consts
 	public static final int ScoreTrafficking = -1;
 
 	public static final String ShipTemplateSeparator = "----------------------------";
+	// #endregion
+
+	// #region Constant Arrays
 
 	// TODO many of these can become enums.
+	// #region Gadgets
 	public static Gadget[] Gadgets = new Gadget[] {
 			new Gadget(GadgetType.ExtraCargoBays, SkillType.NA, 2500,
 					TechLevel.EarlyIndustrial, 35), // 5 extra holds
@@ -146,7 +168,9 @@ public class Consts
 					TechLevel.Unavailable, 0),
 			new Gadget(GadgetType.HiddenCargoBays, SkillType.NA, 60000,
 					TechLevel.Unavailable, 0) };
+	// #endregion
 
+	// #region PoliceRecords
 	public static PoliceRecord[] PoliceRecords = new PoliceRecord[] {
 			new PoliceRecord(PoliceRecordType.Psychopath,
 					PoliceRecordScorePsychopath),
@@ -160,7 +184,9 @@ public class Consts
 			new PoliceRecord(PoliceRecordType.Trusted, PoliceRecordScoreTrusted),
 			new PoliceRecord(PoliceRecordType.Liked, PoliceRecordScoreLiked),
 			new PoliceRecord(PoliceRecordType.Hero, PoliceRecordScoreHero) };
+	// #endregion
 
+	// #region PoliticalSystems
 	public static PoliticalSystem[] PoliticalSystems = new PoliticalSystem[] {
 			new PoliticalSystem(PoliticalSystemType.Anarchy, 0,
 					Activity.Absent, Activity.Swarms, Activity.Minimal,
@@ -228,7 +254,9 @@ public class Consts
 					Activity.Abundant, Activity.Minimal, Activity.Moderate,
 					TechLevel.PreAgricultural, TechLevel.EarlyIndustrial, 0,
 					true, true, TradeItemType.Narcotics) };
+	// #endregion
 
+	// #region Reputations
 	public static Reputation[] Reputations = new Reputation[] {
 			new Reputation(ReputationType.Harmless, ReputationScoreHarmless),
 			new Reputation(ReputationType.MostlyHarmless,
@@ -241,7 +269,9 @@ public class Consts
 			new Reputation(ReputationType.Dangerous, ReputationScoreDangerous),
 			new Reputation(ReputationType.Deadly, ReputationScoreDeadly),
 			new Reputation(ReputationType.Elite, ReputationScoreElite) };
+	// #endregion
 
+	// #region Shields
 	public static Shield[] Shields = new Shield[] {
 			new Shield(ShieldType.Energy, 100, 5000, TechLevel.Industrial, 70),
 			new Shield(ShieldType.Reflective, 200, 20000,
@@ -249,7 +279,32 @@ public class Consts
 			// The weapons below cannot be bought
 			new Shield(ShieldType.Lightning, 350, 45000, TechLevel.Unavailable,
 					0) };
+	// #endregion
 
+	// #region ShipImageOffsets
+	public static Rectangle[] ShipImageOffsets = new Rectangle[] {
+	// We only care about X and Width, so set Y and Height to 0.
+			new Rectangle(22, 0, 19, 0), // Flea
+			new Rectangle(18, 0, 27, 0), // Gnat
+			new Rectangle(18, 0, 27, 0), // Firefly
+			new Rectangle(18, 0, 27, 0), // Mosquito
+			new Rectangle(12, 0, 40, 0), // Bumblebee
+			new Rectangle(12, 0, 40, 0), // Beetle
+			new Rectangle(7, 0, 50, 0), // Hornet
+			new Rectangle(7, 0, 50, 0), // Grasshopper
+			new Rectangle(2, 0, 60, 0), // Termite
+			new Rectangle(2, 0, 60, 0), // Wasp
+			new Rectangle(7, 0, 49, 0), // Space Monster
+			new Rectangle(21, 0, 22, 0), // Dragonfly
+			new Rectangle(15, 0, 34, 0), // Mantis
+			new Rectangle(7, 0, 49, 0), // Scarab
+			new Rectangle(9, 0, 46, 0), // Bottle
+			new Rectangle(2, 0, 60, 0), // Custom
+			new Rectangle(2, 0, 60, 0) // Scorpion
+	};
+	// #endregion
+
+	// #region ShipSpecs
 	public static ShipSpec[] ShipSpecs = new ShipSpec[] {
 			// Type Size Bays W S G Cr F FC Hull RC Price % Police Pirates
 			// Traders MinTechLevel
@@ -305,7 +360,9 @@ public class Consts
 			new ShipSpec(ShipType.Scorpion, Size.Huge, 30, 2, 2, 2, 2, 1, 1,
 					300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA,
 					TechLevel.Unavailable) };
+	// #endregion
 
+	// #region Shipyards
 	public static Shipyard[] Shipyards = new Shipyard[] {
 			new Shipyard(ShipyardId.Corellian, Size.Large,
 					ShipyardSkill.CrewQuarters),
@@ -316,7 +373,6 @@ public class Consts
 					ShipyardSkill.WeaponSlotUnits),
 			new Shipyard(ShipyardId.Sorosuub, Size.Small,
 					ShipyardSkill.FuelBase) };
-
 	//TODO was ArrayList
 	public static CrewMemberId[] SpecialCrewMemberIds =// new ArrayList(
 			new CrewMemberId[] { CrewMemberId.Commander,
@@ -359,7 +415,8 @@ public class Consts
 			new SpecialEvent(SpecialEventType.ScarabUpgradeHull, 0, 0, false),
 			new SpecialEvent(SpecialEventType.Skill, 3000, 3, false),
 			new SpecialEvent(SpecialEventType.SpaceMonster, 0, 1, true),
-			new SpecialEvent(SpecialEventType.SpaceMonsterKilled, -15000, 0, true),
+			new SpecialEvent(SpecialEventType.SpaceMonsterKilled, -15000, 0,
+					true),
 			new SpecialEvent(SpecialEventType.Tribble, 1000, 1, false),
 			new SpecialEvent(SpecialEventType.TribbleBuyer, 0, 3, false),
 			new SpecialEvent(SpecialEventType.Wild, 0, 1, false),
@@ -373,7 +430,9 @@ public class Consts
 			new SpecialEvent(SpecialEventType.PrincessQonos, 0, 0, false),
 			new SpecialEvent(SpecialEventType.PrincessQuantum, 0, 0, false),
 			new SpecialEvent(SpecialEventType.PrincessReturned, 0, 0, true) };
+	// #endregion
 
+	// #region TradeItems
 	public static TradeItem[] TradeItems = new TradeItem[] {
 			new TradeItem(TradeItemType.Water, TechLevel.PreAgricultural,
 					TechLevel.PreAgricultural, TechLevel.Medieval, 30, 3, 4,
@@ -416,7 +475,9 @@ public class Consts
 					TechLevel.EarlyIndustrial, TechLevel.HiTech, 5000, -150,
 					100, SystemPressure.Employment, SpecialResource.NA,
 					SpecialResource.NA, 3500, 5000, 100) };
+	// #endregion
 
+	// #region Weapons
 	public static Weapon[] Weapons = new Weapon[] {
 			new Weapon(WeaponType.PulseLaser, 15, false, 2000,
 					TechLevel.Industrial, 50),
@@ -430,8 +491,10 @@ public class Consts
 					TechLevel.PostIndustrial, 0),
 			new Weapon(WeaponType.QuantumDistruptor, 60, true, 50000,
 					TechLevel.Unavailable, 0) };
+	// #endregion
 
-	// This comes at the end because it depends on other Constant Arrays
+	// #region EquipmentForSale (This comes at the end because it depends on
+	// other Constant Arrays)
 	public static Equipment[] EquipmentForSale = new Equipment[] {
 			Weapons[WeaponType.PulseLaser.CastToInt()],
 			Weapons[WeaponType.BeamLaser.CastToInt()],
@@ -444,4 +507,7 @@ public class Consts
 			Gadgets[GadgetType.NavigatingSystem.CastToInt()],
 			Gadgets[GadgetType.TargetingSystem.CastToInt()],
 			Gadgets[GadgetType.CloakingDevice.CastToInt()] };
+	// #endregion
+
+	// #endregion
 }

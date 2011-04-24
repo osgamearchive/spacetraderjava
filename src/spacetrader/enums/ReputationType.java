@@ -1,7 +1,5 @@
 package spacetrader.enums;
 
-import spacetrader.Strings;
-
 public enum ReputationType implements SpaceTraderEnum// : int
 {
 	Harmless, // = 0,
@@ -13,14 +11,9 @@ public enum ReputationType implements SpaceTraderEnum// : int
 	Dangerous, // = 6,
 	Deadly, // = 7,
 	Elite;// = 8
-
+	
 	public int CastToInt()
 	{
 		return ordinal();
-	}
-
-	public String getName()
-	{
-		return Strings.ReputationNames[ordinal()];
 	}
 }

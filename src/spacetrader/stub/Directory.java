@@ -30,25 +30,27 @@ public class Directory
 
 		File[] files = new File(path).listFiles(new FilenameFilter()
 		{
+			@Override
 			public boolean accept(File arg0, String filename)
 			{
 				return filename.endsWith(suffix);
 			}
 		});
 
-		if (files == null)
-		{
+		if (files==null){
 			System.out.println("getFiles rets null!");
 			return new String[0];
 		}
 		List<String> names = Lisp.map(files, new Convertor<String, File>()
-		{
+				{
+			@Override
 			public String convert(File file)
 			{
 				return file.getPath();
 			}
-		});
+				});
 
 		return names.toArray(new String[names.size()]);
 	}
+
 }

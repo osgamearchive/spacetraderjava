@@ -1,40 +1,41 @@
 /*******************************************************************************
- *
+ * 
  * Space Trader for Windows 2.00
- *
+ * 
  * Copyright (C) 2005 Jay French, All Rights Reserved
- *
+ * 
  * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- *
+ * 
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
+ * 
  * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- *
+ * 
  * You can contact the author at spacetrader@frenchfryz.com
- *
+ * 
  ******************************************************************************/
+// using System;
+// using System.Collections;
+// using System.Windows.Forms;
 package spacetrader;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
+
+import jwinforms.DialogResult;
+import jwinforms.WinformPane;
 
 import spacetrader.enums.*;
-import spacetrader.guifacade.DialogResult;
-import spacetrader.guifacade.GuiEngine;
-import spacetrader.guifacade.GuiFacade;
-import spacetrader.guifacade.MainWindow;
+import spacetrader.gui.*;
 import spacetrader.stub.ArrayList;
-import spacetrader.util.CheatCode;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
 @SuppressWarnings( { "unchecked" })
-public class Game extends STSerializableObject implements SpaceTraderGame, SystemTracker, CurrentSystemMgr
+public class Game extends STSerializableObject
 {
 	// #region Member Declarations
 
@@ -44,7 +45,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	private StarSystem[] _universe;
 	private int[] _wormholes = new int[6];
 	private CrewMember[] _mercenaries = new CrewMember[Strings.CrewMemberNames.length];
-	private final Commander _commander;
+	private Commander _commander;
 	private Ship _dragonfly = new Ship(ShipType.Dragonfly);
 	private Ship _scarab = new Ship(ShipType.Scarab);
 	private Ship _scorpion = new Ship(ShipType.Scorpion);
@@ -74,7 +75,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	// Current Selections
 	private Difficulty _difficulty = spacetrader.enums.Difficulty.Normal; // Difficulty
 	// level
+	private boolean _cheatEnabled = false;
 	private boolean _autoSave = false;
+	private boolean _easyEncounters = false;
 	private GameEndType _endStatus = GameEndType.NA;
 	private EncounterType _encounterType = spacetrader.enums.EncounterType.FromInt(0); // Type
 	// of
@@ -156,7 +159,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	private GameOptions _options = new GameOptions(true);
 
 	// The rest of the member variables are not saved between games.
-	private MainWindow _parentWin = null;
+	private SpaceTrader _parentWin = null;
 	private boolean _encounterContinueFleeing = false;
 	private boolean _encounterContinueAttacking = false;
 	private boolean _encounterCmdrFleeing = false;
@@ -165,16 +168,12 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	private boolean _encounterOppFleeing = false;
 	private boolean _encounterOppHit = false;
 
-@CheatCode	private final GameCheats _cheats;
-
-	private GameController controller;
-
 	// #endregion
 
 	// #region Methods
 
-	Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer,
-			MainWindow parentWin)
+	public Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer,
+			SpaceTrader parentWin)
 	{
 		_game = this;
 		_parentWin = parentWin;
@@ -187,32 +186,30 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			GenerateUniverse();
 		while (!(PlaceSpecialEvents() && PlaceShipyards()));
 
-		_commander = InitializeCommander(name, new CrewMember(CrewMemberId.Commander, pilot, fighter, trader, engineer,
+		InitializeCommander(name, new CrewMember(CrewMemberId.Commander, pilot, fighter, trader, engineer,
 				StarSystemId.NA));
 		GenerateCrewMemberList();
 
 		CreateShips();
 
-		CalculatePrices(Commander().getCurrentSystem());
+		CalculatePrices(Commander().CurrentSystem());
 
 		ResetVeryRareEncounters();
 
 		Difficulty();
 		if (Difficulty().CastToInt() < Difficulty.Normal.CastToInt())
-			Commander().getCurrentSystem().SpecialEventType(SpecialEventType.Lottery);
+			Commander().CurrentSystem().SpecialEventType(SpecialEventType.Lottery);
 
-		_cheats = new GameCheats(this);
-		if (name.length() == 0)
 		{
 			// TODO: JAF - DEBUG
 			Commander().setCash(1000000);
-			_cheats.cheatMode = true;
-			_cheats.easyEncounters = true;
+			setCheatEnabled(true);
+			setEasyEncounters(true);
 			setCanSuperWarp(true);
 		}
 	}
 
-	Game(Hashtable hash, MainWindow parentWin)
+	public Game(Hashtable hash, SpaceTrader parentWin)
 	{
 		super(hash);
 		_game = this;
@@ -224,8 +221,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 		_universe = (StarSystem[])ArrayListToArray(GetValueFromHash(hash, "_universe", ArrayList.class), "StarSystem");
 		_wormholes = GetValueFromHash(hash, "_wormholes", _wormholes, int[].class);
-		_mercenaries = (CrewMember[])ArrayListToArray(GetValueFromHash(hash, "_mercenaries", ArrayList.class),
-				"CrewMember");
+		_mercenaries = (CrewMember[])ArrayListToArray(GetValueFromHash(hash, "_mercenaries", ArrayList.class), "CrewMember");
 		_commander = new Commander(GetValueFromHash(hash, "_commander", Hashtable.class));
 		_dragonfly = new Ship(GetValueFromHash(hash, "_dragonfly", _dragonfly.Serialize(), Hashtable.class));
 		_scarab = new Ship(GetValueFromHash(hash, "_scarab", _scarab.Serialize(), Hashtable.class));
@@ -240,20 +236,17 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		_arrivedViaWormhole = GetValueFromHash(hash, "_arrivedViaWormhole", _arrivedViaWormhole);
 		_paidForNewspaper = GetValueFromHash(hash, "_paidForNewspaper", _paidForNewspaper);
 		_litterWarning = GetValueFromHash(hash, "_litterWarning", _litterWarning);
-		_newsEvents = new ArrayList(Arrays.asList((Integer[])GetValueFromHash(hash, "_newsEvents", _newsEvents
-				.toArray(new Integer[0]))));
-		_difficulty = Difficulty.FromInt(GetValueFromHash(hash, "_difficulty", _difficulty, Integer.class));
-		_cheats = new GameCheats(this);
-		_cheats.cheatMode = GetValueFromHash(hash, "_cheatEnabled", _cheats.cheatMode);
+		_newsEvents = new ArrayList(Arrays.asList((Integer[])GetValueFromHash(hash, "_newsEvents",
+				_newsEvents.ToArray(new Integer[0]))));
+		_difficulty = Difficulty.FromInt( GetValueFromHash(hash, "_difficulty", _difficulty, Integer.class));
+		_cheatEnabled = GetValueFromHash(hash, "_cheatEnabled", _cheatEnabled);
 		_autoSave = GetValueFromHash(hash, "_autoSave", _autoSave);
-		_cheats.easyEncounters = GetValueFromHash(hash, "_easyEncounters", _cheats.easyEncounters);
-		_endStatus = GameEndType.FromInt(GetValueFromHash(hash, "_endStatus", _endStatus, Integer.class));
-		_encounterType = EncounterType.FromInt(GetValueFromHash(hash, "_encounterType", _encounterType, Integer.class));
-		_selectedSystemId = StarSystemId.FromInt(GetValueFromHash(hash, "_selectedSystemId", _selectedSystemId,
-				Integer.class));
-		_warpSystemId = StarSystemId.FromInt(GetValueFromHash(hash, "_warpSystemId", _warpSystemId, Integer.class));
-		_trackedSystemId = StarSystemId.FromInt(GetValueFromHash(hash, "_trackedSystemId", _trackedSystemId,
-				Integer.class));
+		_easyEncounters = GetValueFromHash(hash, "_easyEncounters", _easyEncounters);
+		_endStatus = GameEndType.FromInt( GetValueFromHash(hash, "_endStatus", _endStatus, Integer.class));
+		_encounterType = EncounterType.FromInt( GetValueFromHash(hash, "_encounterType", _encounterType, Integer.class));
+		_selectedSystemId = StarSystemId.FromInt( GetValueFromHash(hash, "_selectedSystemId", _selectedSystemId, Integer.class));
+		_warpSystemId = StarSystemId.FromInt( GetValueFromHash(hash, "_warpSystemId", _warpSystemId, Integer.class));
+		_trackedSystemId = StarSystemId.FromInt( GetValueFromHash(hash, "_trackedSystemId", _trackedSystemId, Integer.class));
 		_targetWormhole = GetValueFromHash(hash, "_targetWormhole", _targetWormhole);
 		_priceCargoBuy = GetValueFromHash(hash, "_priceCargoBuy", _priceCargoBuy, int[].class);
 		_priceCargoSell = GetValueFromHash(hash, "_priceCargoSell", _priceCargoSell, int[].class);
@@ -273,86 +266,87 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		_fabricRipProbability = GetValueFromHash(hash, "_fabricRipProbability", _fabricRipProbability);
 		_justLootedMarie = GetValueFromHash(hash, "_justLootedMarie", _justLootedMarie);
 		_canSuperWarp = GetValueFromHash(hash, "_canSuperWarp", _canSuperWarp);
-		_chanceOfVeryRareEncounter = GetValueFromHash(hash, "_chanceOfVeryRareEncounter", _chanceOfVeryRareEncounter);
+		_chanceOfVeryRareEncounter = GetValueFromHash(hash, "_chanceOfVeryRareEncounter",
+				_chanceOfVeryRareEncounter);
 		_veryRareEncounters = new ArrayList(Arrays.asList(GetValueFromHash(hash, "_veryRareEncounters",
-				_veryRareEncounters.toArray(new Integer[0]))));
+				_veryRareEncounters.ToArray(new Integer[0]))));
 		_options = new GameOptions(GetValueFromHash(hash, "_options", _options.Serialize(), Hashtable.class));
 	}
 
-	private void Arrested()
+	public void Arrested()
 	{
 		int term = Math.max(30, -Commander().getPoliceRecordScore());
 		int fine = (1 + Commander().Worth() * Math.min(80, -Commander().getPoliceRecordScore()) / 50000) * 500;
 		if (Commander().getShip().WildOnBoard())
 			fine = (int)(fine * 1.05);
 
-		GuiFacade.alert(AlertType.EncounterArrested);
+		FormAlert.Alert(AlertType.EncounterArrested, getParentWindow());
 
-		GuiFacade.alert(AlertType.JailConvicted, Functions.Multiples(term, Strings.TimeUnit), Functions.Multiples(fine,
-				Strings.MoneyUnit));
+		FormAlert.Alert(AlertType.JailConvicted, getParentWindow(), Functions.Multiples(term, Strings.TimeUnit),
+				Functions.Multiples(fine, Strings.MoneyUnit));
 
 		if (Commander().getShip().HasGadget(GadgetType.HiddenCargoBays))
 		{
 			while (Commander().getShip().HasGadget(GadgetType.HiddenCargoBays))
 				Commander().getShip().RemoveEquipment(EquipmentType.Gadget, GadgetType.HiddenCargoBays);
 
-			GuiFacade.alert(AlertType.JailHiddenCargoBaysRemoved);
+			FormAlert.Alert(AlertType.JailHiddenCargoBaysRemoved, getParentWindow());
 		}
 
 		if (Commander().getShip().ReactorOnBoard())
 		{
-			GuiFacade.alert(AlertType.ReactorConfiscated);
+			FormAlert.Alert(AlertType.ReactorConfiscated, getParentWindow());
 			setQuestStatusReactor(SpecialEvent.StatusReactorNotStarted);
 		}
 
 		if (Commander().getShip().SculptureOnBoard())
 		{
-			GuiFacade.alert(AlertType.SculptureConfiscated);
+			FormAlert.Alert(AlertType.SculptureConfiscated, getParentWindow());
 			setQuestStatusSculpture(SpecialEvent.StatusSculptureNotStarted);
 		}
 
 		if (Commander().getShip().WildOnBoard())
 		{
-			GuiFacade.alert(AlertType.WildArrested);
+			FormAlert.Alert(AlertType.WildArrested, getParentWindow());
 			NewsAddEvent(NewsEvent.WildArrested);
 			setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
 		}
 
 		if (Commander().getShip().AnyIllegalCargo())
 		{
-			GuiFacade.alert(AlertType.JailIllegalGoodsImpounded);
+			FormAlert.Alert(AlertType.JailIllegalGoodsImpounded, getParentWindow());
 			Commander().getShip().RemoveIllegalGoods();
 		}
 
-		if (Commander().isInsured())
+		if (Commander().getInsurance())
 		{
-			GuiFacade.alert(AlertType.JailInsuranceLost);
-			Commander().setIsInsured(false);
-			Commander().setNoClaim(0);
+			FormAlert.Alert(AlertType.JailInsuranceLost, getParentWindow());
+			Commander().setInsurance(false);
+			Commander().NoClaim(0);
 		}
 
 		if (Commander().getShip().CrewCount() - Commander().getShip().SpecialCrew().length > 1)
 		{
-			GuiFacade.alert(AlertType.JailMercenariesLeave);
+			FormAlert.Alert(AlertType.JailMercenariesLeave, getParentWindow());
 			for (int i = 1; i < Commander().getShip().Crew().length; i++)
 				Commander().getShip().Crew()[i] = null;
 		}
 
 		if (Commander().getShip().JarekOnBoard())
 		{
-			GuiFacade.alert(AlertType.JarekTakenHome);
+			FormAlert.Alert(AlertType.JarekTakenHome, getParentWindow());
 			setQuestStatusJarek(SpecialEvent.StatusJarekNotStarted);
 		}
 
 		if (Commander().getShip().PrincessOnBoard())
 		{
-			GuiFacade.alert(AlertType.PrincessTakenHome);
+			FormAlert.Alert(AlertType.PrincessTakenHome, getParentWindow());
 			setQuestStatusPrincess(SpecialEvent.StatusPrincessNotStarted);
 		}
 
 		if (getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit)
 		{
-			GuiFacade.alert(AlertType.AntidoteTaken);
+			FormAlert.Alert(AlertType.AntidoteTaken, getParentWindow());
 			setQuestStatusJapori(SpecialEvent.StatusJaporiDone);
 		}
 
@@ -362,12 +356,12 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		{
 			Commander().setCash(Math.max(0, Commander().getCash() + Commander().getShip().Worth(true) - fine));
 
-			GuiFacade.alert(AlertType.JailShipSold);
+			FormAlert.Alert(AlertType.JailShipSold, getParentWindow());
 
 			if (Commander().getShip().getTribbles() > 0)
-				GuiFacade.alert(AlertType.TribblesRemoved);
+				FormAlert.Alert(AlertType.TribblesRemoved, getParentWindow());
 
-			GuiFacade.alert(AlertType.FleaBuilt);
+			FormAlert.Alert(AlertType.FleaBuilt, getParentWindow());
 			CreateFlea();
 		}
 
@@ -383,16 +377,16 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 
 		Commander().setPoliceRecordScore(Consts.PoliceRecordScoreDubious);
-		IncDays(term);
+		IncDays(term, getParentWindow());
 	}
 
 	private void Arrival()
 	{
-		Commander().setCurrentSystem(WarpSystem());
-		Commander().getCurrentSystem().Visited(true);
+		Commander().CurrentSystem(WarpSystem());
+		Commander().CurrentSystem().Visited(true);
 		setPaidForNewspaper(false);
 
-		if (TrackedSystem() == Commander().getCurrentSystem() && Options().getTrackAutoOff())
+		if (TrackedSystem() == Commander().CurrentSystem() && Options().getTrackAutoOff())
 			setTrackedSystemId(StarSystemId.NA);
 
 		ArrivalCheckReactor();
@@ -402,7 +396,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		ArrivalUpdatePressuresAndQuantities();
 		ArrivalCheckEasterEgg();
 
-		CalculatePrices(Commander().getCurrentSystem());
+		CalculatePrices(Commander().CurrentSystem());
 		NewsAddEventsOnArrival();
 
 		if (Options().getNewsAutoShow())
@@ -413,28 +407,32 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	{
 		// Check for Large Debt - 06/30/01 SRA
 		if (Commander().getDebt() >= Consts.DebtWarning)
-			GuiFacade.alert(AlertType.DebtWarning);
+			FormAlert.Alert(AlertType.DebtWarning, getParentWindow());
+		// Debt Reminder
 		else if (Commander().getDebt() > 0 && Options().getRemindLoans() && Commander().getDays() % 5 == 0)
-			GuiFacade.alert(AlertType.DebtReminder, Functions.Multiples(Commander().getDebt(), Strings.MoneyUnit));
+			FormAlert.Alert(AlertType.DebtReminder, getParentWindow(), Functions.Multiples(Commander().getDebt(),
+					Strings.MoneyUnit));
 	}
 
 	private void ArrivalCheckEasterEgg()
 	{
 		/* This Easter Egg gives the commander a Lighting Shield */
-		if (Commander().getCurrentSystem().Id() == StarSystemId.Og)
+		if (Commander().CurrentSystem().Id() == StarSystemId.Og)
 		{
-			if (Commander().getShip().FreeSlotsShield() <= 0)
-				return;
-			for (int i = 0; i < Commander().getShip().Cargo().length; i++)
+			boolean egg = true;
+			for (int i = 0; i < Commander().getShip().Cargo().length && egg; i++)
 				if (Commander().getShip().Cargo()[i] != 1)
-					return;
+					egg = false;
 
-			GuiFacade.alert(AlertType.Egg);
-			Commander().getShip().AddEquipment(Consts.Shields[ShieldType.Lightning.CastToInt()]);
-			for (int i = 0; i < Commander().getShip().Cargo().length; i++)
+			if (egg && Commander().getShip().FreeSlotsShield() > 0)
 			{
-				Commander().getShip().Cargo()[i] = 0;
-				Commander().PriceCargo()[i] = 0;
+				FormAlert.Alert(AlertType.Egg, getParentWindow());
+				Commander().getShip().AddEquipment(Consts.Shields[ShieldType.Lightning.CastToInt()]);
+				for (int i = 0; i < Commander().getShip().Cargo().length; i++)
+				{
+					Commander().getShip().Cargo()[i] = 0;
+					Commander().PriceCargo()[i] = 0;
+				}
 			}
 		}
 	}
@@ -443,13 +441,13 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	{
 		if (getQuestStatusReactor() == SpecialEvent.StatusReactorDate)
 		{
-			GuiFacade.alert(AlertType.ReactorMeltdown);
+			FormAlert.Alert(AlertType.ReactorMeltdown, getParentWindow());
 			setQuestStatusReactor(SpecialEvent.StatusReactorNotStarted);
 			if (Commander().getShip().getEscapePod())
 				EscapeWithPod();
 			else
 			{
-				GuiFacade.alert(AlertType.ReactorDestroyed);
+				FormAlert.Alert(AlertType.ReactorDestroyed, getParentWindow());
 
 				throw new GameEndException(GameEndType.Killed);
 			}
@@ -458,11 +456,13 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			// Reactor warnings:
 			// now they know the quest has a time finalraint!
 			if (getQuestStatusReactor() == SpecialEvent.StatusReactorFuelOk + 1)
-				GuiFacade.alert(AlertType.ReactorWarningFuel);
+				FormAlert.Alert(AlertType.ReactorWarningFuel, getParentWindow());
+			// better deliver it soon!
 			else if (getQuestStatusReactor() == SpecialEvent.StatusReactorDate - 4)
-				GuiFacade.alert(AlertType.ReactorWarningFuelGone);
+				FormAlert.Alert(AlertType.ReactorWarningFuelGone, getParentWindow());
+			// last warning!
 			else if (getQuestStatusReactor() == SpecialEvent.StatusReactorDate - 2)
-				GuiFacade.alert(AlertType.ReactorWarningTemp);
+				FormAlert.Alert(AlertType.ReactorWarningTemp, getParentWindow());
 		}
 	}
 
@@ -481,11 +481,11 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				if (ship.getTribbles() < 20)
 				{
 					ship.setTribbles(0);
-					GuiFacade.alert(AlertType.TribblesAllDied);
+					FormAlert.Alert(AlertType.TribblesAllDied, getParentWindow());
 				} else
 				{
 					ship.setTribbles(ship.getTribbles() / 2);
-					GuiFacade.alert(AlertType.TribblesHalfDied);
+					FormAlert.Alert(AlertType.TribblesHalfDied, getParentWindow());
 				}
 			} else if (ship.Cargo()[narc] > 0)
 			{
@@ -496,7 +496,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				ship.Cargo()[TradeItemType.Furs.CastToInt()] += dead;
 				ship.setTribbles(ship.getTribbles()
 						- Math.min(dead * (Functions.GetRandom(5) + 98), ship.getTribbles() - 1));
-				GuiFacade.alert(AlertType.TribblesMostDied);
+				FormAlert.Alert(AlertType.TribblesMostDied, getParentWindow());
 			} else
 			{
 				if (ship.Cargo()[food] > 0 && ship.getTribbles() < Consts.MaxTribbles)
@@ -505,7 +505,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 					Commander().PriceCargo()[food] -= Commander().PriceCargo()[food] * eaten / ship.Cargo()[food];
 					ship.Cargo()[food] -= eaten;
 					ship.setTribbles(ship.getTribbles() + (eaten * 100));
-					GuiFacade.alert(AlertType.TribblesAteFood);
+					FormAlert.Alert(AlertType.TribblesAteFood, getParentWindow());
 				}
 
 				if (ship.getTribbles() < Consts.MaxTribbles)
@@ -524,7 +524,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				{
 					String qty = ship.getTribbles() == Consts.MaxTribbles ? Strings.TribbleDangerousNumber : Functions
 							.FormatNumber(ship.getTribbles());
-					GuiFacade.alert(AlertType.TribblesInspector, qty);
+					FormAlert.Alert(AlertType.TribblesInspector, getParentWindow(), qty);
 				}
 			}
 
@@ -569,11 +569,11 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 
 		if (!fuelOk && !repairOk)
-			GuiFacade.alert(AlertType.ArrivalIFFuelRepairs);
+			FormAlert.Alert(AlertType.ArrivalIFFuelRepairs, getParentWindow());
 		else if (!fuelOk)
-			GuiFacade.alert(AlertType.ArrivalIFFuel);
+			FormAlert.Alert(AlertType.ArrivalIFFuel, getParentWindow());
 		else if (!repairOk)
-			GuiFacade.alert(AlertType.ArrivalIFRepairs);
+			FormAlert.Alert(AlertType.ArrivalIFRepairs, getParentWindow());
 	}
 
 	private void ArrivalUpdatePressuresAndQuantities()
@@ -794,27 +794,22 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return _questStatusArtifact;
 	}
 
-	public void setParentWindow(MainWindow parentWindow)
+	public void setParentWindow(SpaceTrader parentWindow)
 	{
 		_parentWin = parentWindow;
 	}
 
-	/**
-	 * todo Root of much evil.
-	 *
-	 * @return
-	 */
-	public MainWindow getParentWindow()
+	public SpaceTrader getParentWindow()
 	{
 		return _parentWin;
 	}
 
-	private void setPaidForNewspaper(boolean paidForNewspaper)
+	public void setPaidForNewspaper(boolean paidForNewspaper)
 	{
 		_paidForNewspaper = paidForNewspaper;
 	}
 
-	private boolean getPaidForNewspaper()
+	public boolean getPaidForNewspaper()
 	{
 		return _paidForNewspaper;
 	}
@@ -971,6 +966,16 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return _encounterContinueFleeing;
 	}
 
+	public void setEasyEncounters(boolean easyEncounters)
+	{
+		_easyEncounters = easyEncounters;
+	}
+
+	public boolean getEasyEncounters()
+	{
+		return _easyEncounters;
+	}
+
 	public void setClicks(int clicks)
 	{
 		_clicks = clicks;
@@ -981,9 +986,14 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return _clicks;
 	}
 
-	public GameCheats Cheats()
+	public void setCheatEnabled(boolean cheatEnabled)
 	{
-		return _cheats;
+		_cheatEnabled = cheatEnabled;
+	}
+
+	public boolean getCheatEnabled()
+	{
+		return _cheatEnabled;
 	}
 
 	public void setChanceOfVeryRareEncounter(int chanceOfVeryRareEncounter)
@@ -1036,7 +1046,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return _arrivedViaWormhole;
 	}
 
-	private void CargoBuy(int tradeItem, boolean max, CargoBuyOp op)
+	private void CargoBuy(int tradeItem, boolean max, WinformPane owner, CargoBuyOp op)
 	{
 		int freeBays = Commander().getShip().FreeCargoBays();
 		int[] items = null;
@@ -1047,7 +1057,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		{
 		case BuySystem:
 			freeBays = Math.max(0, Commander().getShip().FreeCargoBays() - Options().getLeaveEmpty());
-			items = Commander().getCurrentSystem().TradeItems();
+			items = Commander().CurrentSystem().TradeItems();
 			unitPrice = PriceCargoBuy()[tradeItem];
 			cashToSpend = Commander().CashToSpend();
 			break;
@@ -1066,13 +1076,13 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 
 		if (op == CargoBuyOp.BuySystem && Commander().getDebt() > Consts.DebtTooLarge)
-			GuiFacade.alert(AlertType.DebtTooLargeTrade);
+			FormAlert.Alert(AlertType.DebtTooLargeTrade, owner);
 		else if (op == CargoBuyOp.BuySystem && (items[tradeItem] <= 0 || unitPrice <= 0))
-			GuiFacade.alert(AlertType.CargoNoneAvailable);
+			FormAlert.Alert(AlertType.CargoNoneAvailable, owner);
 		else if (freeBays == 0)
-			GuiFacade.alert(AlertType.CargoNoEmptyBays);
+			FormAlert.Alert(AlertType.CargoNoEmptyBays, owner);
 		else if (op != CargoBuyOp.Plunder && cashToSpend < unitPrice)
-			GuiFacade.alert(AlertType.CargoIF);
+			FormAlert.Alert(AlertType.CargoIF, owner);
 		else
 		{
 			int qty = 0;
@@ -1083,7 +1093,11 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			if (max)
 				qty = maxAmount;
 			else
-				qty = GuiEngine.cargo.queryAmountAcquire(tradeItem, maxAmount, op);
+			{
+				FormCargoBuy form = new FormCargoBuy(tradeItem, maxAmount, op);
+				if (form.ShowDialog(owner) == DialogResult.OK)
+					qty = form.Amount();
+			}
 
 			if (qty > 0)
 			{
@@ -1097,37 +1111,37 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 	}
 
-	public void CargoBuySystem(int tradeItem, boolean max)
+	public void CargoBuySystem(int tradeItem, boolean max, WinformPane owner)
 	{
-		CargoBuy(tradeItem, max, CargoBuyOp.BuySystem);
+		CargoBuy(tradeItem, max, owner, CargoBuyOp.BuySystem);
 	}
 
-	public void CargoBuyTrader(int tradeItem)
+	public void CargoBuyTrader(int tradeItem, WinformPane owner)
 	{
-		CargoBuy(tradeItem, false, CargoBuyOp.BuyTrader);
+		CargoBuy(tradeItem, false, owner, CargoBuyOp.BuyTrader);
 	}
 
-	public void CargoPlunder(int tradeItem, boolean max)
+	public void CargoPlunder(int tradeItem, boolean max, WinformPane owner)
 	{
-		CargoBuy(tradeItem, max, CargoBuyOp.Plunder);
+		CargoBuy(tradeItem, max, owner, CargoBuyOp.Plunder);
 	}
 
-	public void CargoDump(int tradeItem)
+	public void CargoDump(int tradeItem, WinformPane owner)
 	{
-		CargoSell(tradeItem, false, CargoSellOp.Dump);
+		CargoSell(tradeItem, false, owner, CargoSellOp.Dump);
 	}
 
-	public void CargoJettison(int tradeItem, boolean all)
+	public void CargoJettison(int tradeItem, boolean all, WinformPane owner)
 	{
-		CargoSell(tradeItem, all, CargoSellOp.Jettison);
+		CargoSell(tradeItem, all, owner, CargoSellOp.Jettison);
 	}
 
-	public void CargoSellSystem(int tradeItem, boolean all)
+	public void CargoSellSystem(int tradeItem, boolean all, WinformPane owner)
 	{
-		CargoSell(tradeItem, all, CargoSellOp.SellSystem);
+		CargoSell(tradeItem, all, owner, CargoSellOp.SellSystem);
 	}
 
-	private void CargoSell(int tradeItem, boolean all, CargoSellOp op)
+	private void CargoSell(int tradeItem, boolean all, WinformPane owner, CargoSellOp op)
 	{
 		int qtyInHand = Commander().getShip().Cargo()[tradeItem];
 		int unitPrice;
@@ -1150,14 +1164,14 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 
 		if (qtyInHand == 0)
-			GuiFacade.alert(AlertType.CargoNoneToSell, Strings.CargoSellOps[op.CastToInt()]);
+			FormAlert.Alert(AlertType.CargoNoneToSell, owner, Strings.CargoSellOps[op.CastToInt()]);
 		else if (op == CargoSellOp.SellSystem && unitPrice <= 0)
-			GuiFacade.alert(AlertType.CargoNotInterested);
+			FormAlert.Alert(AlertType.CargoNotInterested, owner);
 		else
 		{
 			if (op != CargoSellOp.Jettison || getLitterWarning()
 					|| Commander().getPoliceRecordScore() <= Consts.PoliceRecordScoreDubious
-					|| GuiFacade.alert(AlertType.EncounterDumpWarning) == DialogResult.Yes)
+					|| FormAlert.Alert(AlertType.EncounterDumpWarning, owner) == DialogResult.Yes)
 			{
 				int unitCost = 0;
 				int maxAmount = (op == CargoSellOp.SellTrader) ? Math.min(qtyInHand, getOpponent().FreeCargoBays())
@@ -1174,7 +1188,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 					qty = maxAmount;
 				else
 				{
-					qty = GuiEngine.cargo.queryAmountRelease(tradeItem, op, maxAmount, price);
+					FormCargoSell form = new FormCargoSell(tradeItem, maxAmount, op, price);
+					if (form.ShowDialog(owner) == DialogResult.OK)
+						qty = form.Amount();
 				}
 
 				if (qty > 0)
@@ -1203,17 +1219,17 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 	}
 
-	public void CargoSellTrader(int tradeItem)
+	public void CargoSellTrader(int tradeItem, WinformPane owner)
 	{
-		CargoSell(tradeItem, false, CargoSellOp.SellTrader);
+		CargoSell(tradeItem, false, owner, CargoSellOp.SellTrader);
 	}
 
 	public void CreateFlea()
 	{
 		Commander().setShip(new Ship(ShipType.Flea));
 		Commander().getShip().Crew()[0] = Commander();
-		Commander().setIsInsured(false);
-		Commander().setNoClaim(0);
+		Commander().setInsurance(false);
+		Commander().NoClaim(0);
 	}
 
 	private void CreateShips()
@@ -1541,7 +1557,8 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				GenerateOpponent(OpponentType.Trader);
 				for (int i = 0; i < getOpponent().Cargo().length; i++)
 					getOpponent().Cargo()[i] = 0;
-				getOpponent().Cargo()[TradeItemType.Narcotics.CastToInt()] = Math.min(getOpponent().CargoBays(), 5);
+				getOpponent().Cargo()[TradeItemType.Narcotics.CastToInt()] = Math
+						.min(getOpponent().CargoBays(), 5);
 
 				showEncounter = true;
 			}
@@ -1628,9 +1645,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		setQuestStatusPrincess(SpecialEvent.StatusPrincessRescued);
 	}
 
-	public void EncounterDrink()
+	public void EncounterDrink(WinformPane owner)
 	{
-		if (GuiFacade.alert(AlertType.EncounterDrinkContents) == DialogResult.Yes)
+		if (FormAlert.Alert(AlertType.EncounterDrinkContents, owner) == DialogResult.Yes)
 		{
 			if (getEncounterType() == spacetrader.enums.EncounterType.BottleGood)
 			{
@@ -1638,16 +1655,16 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				Commander().IncreaseRandomSkill();
 				if (Difficulty().CastToInt() <= spacetrader.enums.Difficulty.Normal.CastToInt())
 					Commander().IncreaseRandomSkill();
-				GuiFacade.alert(AlertType.EncounterTonicConsumedGood);
+				FormAlert.Alert(AlertType.EncounterTonicConsumedGood, owner);
 			} else
 			{
 				Commander().TonicTweakRandomSkill();
-				GuiFacade.alert(AlertType.EncounterTonicConsumedStrange);
+				FormAlert.Alert(AlertType.EncounterTonicConsumedStrange, owner);
 			}
 		}
 	}
 
-	public EncounterResult EncounterExecuteAction()
+	public EncounterResult EncounterExecuteAction(WinformPane owner)
 	{
 		EncounterResult result = EncounterResult.Continue;
 		int prevCmdrHull = Commander().getShip().getHull();
@@ -1696,8 +1713,8 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				result = EncounterResult.EscapePod;
 			else
 			{
-				GuiFacade.alert((getOpponent().getHull() <= 0 ? AlertType.EncounterBothDestroyed
-						: AlertType.EncounterYouLose));
+				FormAlert.Alert(getOpponent().getHull() <= 0 ? AlertType.EncounterBothDestroyed
+						: AlertType.EncounterYouLose, owner);
 
 				result = EncounterResult.Killed;
 			}
@@ -1722,7 +1739,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 					break;
 				}
 
-				GuiFacade.alert(AlertType.EncounterDisabledOpponent, EncounterShipText(), str2);
+				FormAlert.Alert(AlertType.EncounterDisabledOpponent, owner, EncounterShipText(), str2);
 
 				Commander().setReputationScore(
 						Commander().getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
@@ -1734,7 +1751,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			}
 		} else if (getOpponent().getHull() <= 0)
 		{
-			EncounterWon();
+			EncounterWon(owner);
 
 			result = EncounterResult.Normal;
 		} else
@@ -1747,13 +1764,14 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 							.getShip().Pilot() / 3) * 2 >= Functions.GetRandom(getOpponent().Pilot())
 							* (2 + Difficulty().CastToInt())))
 			{
-				GuiFacade.alert((getEncounterCmdrHit() ? AlertType.EncounterEscapedHit : AlertType.EncounterEscaped));
+				FormAlert.Alert(getEncounterCmdrHit() ? AlertType.EncounterEscapedHit : AlertType.EncounterEscaped,
+						owner);
 				escaped = true;
 			} else if (getEncounterOppFleeing()
 					&& Functions.GetRandom(Commander().getShip().Pilot()) * 4 <= Functions.GetRandom(7 + getOpponent()
 							.Pilot() / 3) * 2)
 			{
-				GuiFacade.alert(AlertType.EncounterOpponentEscaped);
+				FormAlert.Alert(AlertType.EncounterOpponentEscaped, owner);
 				escaped = true;
 			}
 
@@ -1894,7 +1912,6 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 											- Difficulty().CastToInt()) : 2));
 
 							// If the hull is hardened, damage is halved.
-							// TODO use a proper variable for this.
 							if (getQuestStatusScarab() == SpecialEvent.StatusScarabDone)
 								damage /= 2;
 
@@ -1924,7 +1941,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return hit;
 	}
 
-	public void EncounterMeet()
+	public void EncounterMeet(WinformPane owner)
 	{
 		AlertType initialAlert = AlertType.Alert;
 		int skill = 0;
@@ -1959,7 +1976,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			break;
 		}
 
-		if (GuiFacade.alert(initialAlert) == DialogResult.Yes)
+		if (FormAlert.Alert(initialAlert, owner) == DialogResult.Yes)
 		{
 			// Remove the equipment we're trading.
 			Commander().getShip().RemoveEquipment(equipType, equipSubType);
@@ -1969,13 +1986,13 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			Commander().Skills()[skill] = Math.min(Consts.MaxSkill, Commander().Skills()[skill]
 					+ (Difficulty().CastToInt() <= spacetrader.enums.Difficulty.Normal.CastToInt() ? 2 : 1));
 
-			GuiFacade.alert(AlertType.SpecialTrainingCompleted);
+			FormAlert.Alert(AlertType.SpecialTrainingCompleted, owner);
 		}
 	}
 
-	public void EncounterPlunder()
+	public void EncounterPlunder(WinformPane owner)
 	{
-		GuiEngine.cargo.performPlundering();
+		(new FormPlunder()).ShowDialog(owner);
 
 		if (getEncounterType().CastToInt() >= spacetrader.enums.EncounterType.TraderAttack.CastToInt())
 		{
@@ -1987,8 +2004,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		{
 			if (Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreDubious)
 			{
-				GuiFacade.alert(AlertType.EncounterPiratesBounty, Strings.EncounterPiratesDisabled, Strings.EncounterPiratesLocation, Functions
-						.Multiples(getOpponent().Bounty(), Strings.MoneyUnit));
+				FormAlert.Alert(AlertType.EncounterPiratesBounty, owner, Strings.EncounterPiratesDisabled,
+						Strings.EncounterPiratesLocation, Functions
+								.Multiples(getOpponent().Bounty(), Strings.MoneyUnit));
 
 				Commander().setCash(Commander().getCash() + getOpponent().Bounty());
 			}
@@ -1998,10 +2016,11 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		} else
 			Commander().setPoliceRecordScore(Commander().getPoliceRecordScore() + Consts.ScorePlunderPirate);
 
-		Commander().setReputationScore(Commander().getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
+		Commander().setReputationScore(
+				Commander().getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
 	}
 
-	private void EncounterScoop()
+	private void EncounterScoop(WinformPane owner)
 	{
 		// Chance 50% to pick something up on Normal level, 33% on Hard level,
 		// 25% on
@@ -2017,26 +2036,26 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			for (int sum = 0; sum <= index; sum += getOpponent().Cargo()[++tradeItem])
 				;
 
-			if (GuiFacade.alert(AlertType.EncounterScoop, Consts.TradeItems[tradeItem].Name()) == DialogResult.Yes)
+			if (FormAlert.Alert(AlertType.EncounterScoop, owner, Consts.TradeItems[tradeItem].Name()) == DialogResult.Yes)
 			{
 				boolean jettisoned = false;
 
 				if (Commander().getShip().FreeCargoBays() == 0
-						&& GuiFacade.alert(AlertType.EncounterScoopNoRoom) == DialogResult.Yes)
+						&& FormAlert.Alert(AlertType.EncounterScoopNoRoom, owner) == DialogResult.Yes)
 				{
-					GuiEngine.cargo.performJettison();
+					(new FormJettison()).ShowDialog(owner);
 					jettisoned = true;
 				}
 
 				if (Commander().getShip().FreeCargoBays() > 0)
 					Commander().getShip().Cargo()[tradeItem]++;
 				else if (jettisoned)
-					GuiFacade.alert(AlertType.EncounterScoopNoScoop);
+					FormAlert.Alert(AlertType.EncounterScoopNoScoop, owner);
 			}
 		}
 	}
 
-	public void EncounterTrade()
+	public void EncounterTrade(WinformPane owner)
 	{
 		boolean buy = (getEncounterType() == spacetrader.enums.EncounterType.TraderBuy);
 		int item = (buy ? Commander().getShip() : getOpponent()).GetRandomTradeableItem();
@@ -2045,13 +2064,13 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		int cash = Commander().getCash();
 
 		if (getEncounterType() == spacetrader.enums.EncounterType.TraderBuy)
-			CargoSellTrader(item);
+			CargoSellTrader(item, owner);
 		else
 			// EncounterType.TraderSell
-			CargoBuyTrader(item);
+			CargoBuyTrader(item, owner);
 
 		if (Commander().getCash() != cash)
-			GuiFacade.alert(AlertType.EncounterTradeCompleted, alertStr, Consts.TradeItems[item].Name());
+			FormAlert.Alert(AlertType.EncounterTradeCompleted, owner, alertStr, Consts.TradeItems[item].Name());
 	}
 
 	private void EncounterUpdateEncounterType(int prevCmdrHull, int prevOppHull)
@@ -2126,23 +2145,23 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 	}
 
-	public boolean EncounterVerifyAttack()
+	public boolean EncounterVerifyAttack(WinformPane owner)
 	{
 		boolean attack = true;
 
 		if (Commander().getShip().WeaponStrength() == 0)
 		{
-			GuiFacade.alert(AlertType.EncounterAttackNoWeapons);
+			FormAlert.Alert(AlertType.EncounterAttackNoWeapons, owner);
 			attack = false;
 		} else if (!getOpponent().Disableable()
 				&& Commander().getShip().WeaponStrength(WeaponType.PulseLaser, WeaponType.MorgansLaser) == 0)
 		{
-			GuiFacade.alert(AlertType.EncounterAttackNoLasers);
+			FormAlert.Alert(AlertType.EncounterAttackNoLasers, owner);
 			attack = false;
 		} else if (getOpponent().Type() == ShipType.Scorpion
 				&& Commander().getShip().WeaponStrength(WeaponType.PhotonDisruptor, WeaponType.QuantumDistruptor) == 0)
 		{
-			GuiFacade.alert(AlertType.EncounterAttackNoDisruptors);
+			FormAlert.Alert(AlertType.EncounterAttackNoDisruptors, owner);
 			attack = false;
 		} else
 		{
@@ -2158,7 +2177,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				break;
 			case PoliceInspect:
 				if (!Commander().getShip().DetectableIllegalCargoOrPassengers()
-						&& GuiFacade.alert(AlertType.EncounterPoliceNothingIllegal) != DialogResult.Yes)
+						&& FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) != DialogResult.Yes)
 					attack = false;
 
 				// Fall through...
@@ -2171,7 +2190,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			case PoliceIgnore:
 			case PoliceSurrender:
 				if (Commander().getPoliceRecordScore() <= Consts.PoliceRecordScoreCriminal
-						|| GuiFacade.alert(AlertType.EncounterAttackPolice) == DialogResult.Yes)
+						|| FormAlert.Alert(AlertType.EncounterAttackPolice, owner) == DialogResult.Yes)
 				{
 					if (Commander().getPoliceRecordScore() > Consts.PoliceRecordScoreCriminal)
 						Commander().setPoliceRecordScore(Consts.PoliceRecordScoreCriminal);
@@ -2189,7 +2208,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			case TraderSell:
 				if (Commander().getPoliceRecordScore() < Consts.PoliceRecordScoreClean)
 					Commander().setPoliceRecordScore(Commander().getPoliceRecordScore() + Consts.ScoreAttackTrader);
-				else if (GuiFacade.alert(AlertType.EncounterAttackTrader) == DialogResult.Yes)
+				else if (FormAlert.Alert(AlertType.EncounterAttackTrader, owner) == DialogResult.Yes)
 					Commander().setPoliceRecordScore(Consts.PoliceRecordScoreDubious);
 				else
 					attack = false;
@@ -2212,7 +2231,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			case CaptainAhab:
 			case CaptainConrad:
 			case CaptainHuie:
-				if (GuiFacade.alert(AlertType.EncounterAttackCaptain) == DialogResult.Yes)
+				if (FormAlert.Alert(AlertType.EncounterAttackCaptain, owner) == DialogResult.Yes)
 				{
 					if (Commander().getPoliceRecordScore() > Consts.PoliceRecordScoreVillain)
 						Commander().setPoliceRecordScore(Consts.PoliceRecordScoreVillain);
@@ -2247,17 +2266,17 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return attack;
 	}
 
-	public boolean EncounterVerifyBoard()
+	public boolean EncounterVerifyBoard(WinformPane owner)
 	{
 		boolean board = false;
 
-		if (GuiFacade.alert(AlertType.EncounterMarieCeleste) == DialogResult.Yes)
+		if (FormAlert.Alert(AlertType.EncounterMarieCeleste, owner) == DialogResult.Yes)
 		{
 			board = true;
 
 			int narcs = Commander().getShip().Cargo()[TradeItemType.Narcotics.CastToInt()];
 
-			GuiEngine.cargo.performPlundering();
+			(new FormPlunder()).ShowDialog(owner);
 
 			if (Commander().getShip().Cargo()[TradeItemType.Narcotics.CastToInt()] > narcs)
 				setJustLootedMarie(true);
@@ -2266,16 +2285,16 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return board;
 	}
 
-	public boolean EncounterVerifyBribe()
+	public boolean EncounterVerifyBribe(WinformPane owner)
 	{
 		boolean bribed = false;
 
 		if (getEncounterType() == spacetrader.enums.EncounterType.MarieCelestePolice)
-			GuiFacade.alert(AlertType.EncounterMarieCelesteNoBribe);
+			FormAlert.Alert(AlertType.EncounterMarieCelesteNoBribe, owner);
 		else if (WarpSystem().PoliticalSystem().BribeLevel() <= 0)
-			GuiFacade.alert(AlertType.EncounterPoliceBribeCant);
+			FormAlert.Alert(AlertType.EncounterPoliceBribeCant, owner);
 		else if (Commander().getShip().DetectableIllegalCargoOrPassengers()
-				|| GuiFacade.alert(AlertType.EncounterPoliceNothingIllegal) == DialogResult.Yes)
+				|| FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes)
 		{
 			// Bribe depends on how easy it is to bribe the police and
 			// commander's current worth
@@ -2288,32 +2307,32 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 					/ WarpSystem().PoliticalSystem().BribeLevel() / diffMod / 100)
 					* 100 * passMod));
 
-			if (GuiFacade.alert(AlertType.EncounterPoliceBribe, Functions.Multiples(bribe, Strings.MoneyUnit)) == DialogResult.Yes)
+			if (FormAlert.Alert(AlertType.EncounterPoliceBribe, owner, Functions.Multiples(bribe, Strings.MoneyUnit)) == DialogResult.Yes)
 			{
 				if (Commander().getCash() >= bribe)
 				{
 					Commander().setCash(Commander().getCash() - bribe);
 					bribed = true;
 				} else
-					GuiFacade.alert(AlertType.EncounterPoliceBribeLowCash);
+					FormAlert.Alert(AlertType.EncounterPoliceBribeLowCash, owner);
 			}
 		}
 
 		return bribed;
 	}
 
-	public boolean EncounterVerifyFlee()
+	public boolean EncounterVerifyFlee(WinformPane owner)
 	{
 		setEncounterCmdrFleeing(false);
 
 		if (getEncounterType() != spacetrader.enums.EncounterType.PoliceInspect
 				|| Commander().getShip().DetectableIllegalCargoOrPassengers()
-				|| GuiFacade.alert(AlertType.EncounterPoliceNothingIllegal) == DialogResult.Yes)
+				|| FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes)
 		{
 			setEncounterCmdrFleeing(true);
 
 			if (getEncounterType() == spacetrader.enums.EncounterType.MarieCelestePolice
-					&& GuiFacade.alert(AlertType.EncounterPostMarieFlee) == DialogResult.No)
+					&& FormAlert.Alert(AlertType.EncounterPostMarieFlee, owner) == DialogResult.No)
 			{
 				setEncounterCmdrFleeing(false);
 			} else if (getEncounterType() == spacetrader.enums.EncounterType.PoliceInspect
@@ -2333,7 +2352,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return getEncounterCmdrFleeing();
 	}
 
-	public boolean EncounterVerifySubmit()
+	public boolean EncounterVerifySubmit(WinformPane owner)
 	{
 		boolean submit = false;
 
@@ -2342,7 +2361,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			String str1 = Commander().getShip().IllegalSpecialCargoDescription("", true, true);
 			String str2 = Commander().getShip().IllegalSpecialCargo() ? Strings.EncounterPoliceSubmitArrested : "";
 
-			if (GuiFacade.alert(AlertType.EncounterPoliceSubmit, str1, str2) == DialogResult.Yes)
+			if (FormAlert.Alert(AlertType.EncounterPoliceSubmit, owner, str1, str2) == DialogResult.Yes)
 			{
 				submit = true;
 
@@ -2361,7 +2380,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 					Commander().setDebt(Commander().getDebt() + (fine - cashPayment));
 					Commander().setCash(Commander().getCash() - cashPayment);
 
-					GuiFacade.alert(AlertType.EncounterPoliceFine, Functions.Multiples(fine, Strings.MoneyUnit));
+					FormAlert.Alert(AlertType.EncounterPoliceFine, owner, Functions.Multiples(fine, Strings.MoneyUnit));
 
 					Commander().setPoliceRecordScore(Commander().getPoliceRecordScore() + Consts.ScoreTrafficking);
 				}
@@ -2372,14 +2391,14 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 			// If you aren't carrying illegal cargo or passengers, the police
 			// will increase your lawfulness record
-			GuiFacade.alert(AlertType.EncounterPoliceNothingFound);
+			FormAlert.Alert(AlertType.EncounterPoliceNothingFound, owner);
 			Commander().setPoliceRecordScore(Commander().getPoliceRecordScore() - Consts.ScoreTrafficking);
 		}
 
 		return submit;
 	}
 
-	public EncounterResult EncounterVerifySurrender()
+	public EncounterResult EncounterVerifySurrender(WinformPane owner)
 	{
 		EncounterResult result = EncounterResult.Continue;
 
@@ -2387,28 +2406,28 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		{
 			if (Commander().getShip().ArtifactOnBoard())
 			{
-				if (GuiFacade.alert(AlertType.EncounterAliensSurrender) == DialogResult.Yes)
+				if (FormAlert.Alert(AlertType.EncounterAliensSurrender, owner) == DialogResult.Yes)
 				{
-					GuiFacade.alert(AlertType.ArtifactRelinquished);
+					FormAlert.Alert(AlertType.ArtifactRelinquished, owner);
 					setQuestStatusArtifact(SpecialEvent.StatusArtifactNotStarted);
 
 					result = EncounterResult.Normal;
 				}
 			} else
-				GuiFacade.alert(AlertType.EncounterSurrenderRefused);
+				FormAlert.Alert(AlertType.EncounterSurrenderRefused, owner);
 		} else if (getEncounterType() == spacetrader.enums.EncounterType.PoliceAttack
 				|| getEncounterType() == spacetrader.enums.EncounterType.PoliceSurrender)
 		{
 			if (Commander().getPoliceRecordScore() <= Consts.PoliceRecordScorePsychopath)
-				GuiFacade.alert(AlertType.EncounterSurrenderRefused);
-			else if (GuiFacade.alert(AlertType.EncounterPoliceSurrender, (new String[] {
+				FormAlert.Alert(AlertType.EncounterSurrenderRefused, owner);
+			else if (FormAlert.Alert(AlertType.EncounterPoliceSurrender, owner, new String[] {
 					Commander().getShip().IllegalSpecialCargoDescription(Strings.EncounterPoliceSurrenderCargo, true,
-							false), Commander().getShip().IllegalSpecialCargoActions() })) == DialogResult.Yes)
+							false), Commander().getShip().IllegalSpecialCargoActions() }) == DialogResult.Yes)
 				result = EncounterResult.Arrested;
 		} else if (Commander().getShip().PrincessOnBoard()
 				&& !Commander().getShip().HasGadget(GadgetType.HiddenCargoBays))
 		{
-			GuiFacade.alert(AlertType.EncounterPiratesSurrenderPrincess);
+			FormAlert.Alert(AlertType.EncounterPiratesSurrenderPrincess, owner);
 		} else
 		{
 			setRaided(true);
@@ -2421,12 +2440,12 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				if (Commander().getShip().SculptureOnBoard())
 					precious.add(Strings.EncounterHideSculpture);
 
-				GuiFacade.alert(AlertType.PreciousHidden, Functions.StringVars(Strings.ListStrings[precious.size()],
-				(String[])precious.toArray(new String[0])));
+				FormAlert.Alert(AlertType.PreciousHidden, owner, Functions.StringVars(Strings.ListStrings[precious
+						.size()], (String[])precious.toArray(new String[0])));
 			} else if (Commander().getShip().SculptureOnBoard())
 			{
 				setQuestStatusSculpture(SpecialEvent.StatusSculptureNotStarted);
-				GuiFacade.alert(AlertType.EncounterPiratesTakeSculpture);
+				FormAlert.Alert(AlertType.EncounterPiratesTakeSculpture, owner);
 			}
 
 			ArrayList cargoToSteal = Commander().getShip().StealableCargo();
@@ -2436,11 +2455,11 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				int cashPayment = Math.min(Commander().getCash(), blackmail);
 				Commander().setDebt(Commander().getDebt() + (blackmail - cashPayment));
 				Commander().setCash(Commander().getCash() - cashPayment);
-				GuiFacade.alert(AlertType.EncounterPiratesFindNoCargo, Functions
-				.Multiples(blackmail, Strings.MoneyUnit));
+				FormAlert.Alert(AlertType.EncounterPiratesFindNoCargo, owner, Functions.Multiples(blackmail,
+						Strings.MoneyUnit));
 			} else
 			{
-				GuiFacade.alert(AlertType.EncounterLooting);
+				FormAlert.Alert(AlertType.EncounterLooting, owner);
 
 				// Pirates steal as much as they have room for, which could be
 				// everything - JAF.
@@ -2464,14 +2483,15 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				{
 					// Wild hops onto Pirate Ship
 					setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
-					GuiFacade.alert(AlertType.WildGoesPirates);
+					FormAlert.Alert(AlertType.WildGoesPirates, owner);
 				} else
-					GuiFacade.alert(AlertType.WildChatsPirates);
+					// no room on pirate ship
+					FormAlert.Alert(AlertType.WildChatsPirates, owner);
 			}
 
 			// pirates puzzled by reactor
 			if (Commander().getShip().ReactorOnBoard())
-				GuiFacade.alert(AlertType.EncounterPiratesExamineReactor);
+				FormAlert.Alert(AlertType.EncounterPiratesExamineReactor, owner);
 
 			result = EncounterResult.Normal;
 		}
@@ -2479,21 +2499,21 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return result;
 	}
 
-	public EncounterResult EncounterVerifyYield()
+	public EncounterResult EncounterVerifyYield(WinformPane owner)
 	{
 		EncounterResult result = EncounterResult.Continue;
 
 		if (Commander().getShip().IllegalSpecialCargo())
 		{
-			if (GuiFacade.alert(AlertType.EncounterPoliceSurrender, (new String[] {
+			if (FormAlert.Alert(AlertType.EncounterPoliceSurrender, owner, new String[] {
 					Commander().getShip().IllegalSpecialCargoDescription(Strings.EncounterPoliceSurrenderCargo, true,
-							true), Commander().getShip().IllegalSpecialCargoActions() })) == DialogResult.Yes)
+							true), Commander().getShip().IllegalSpecialCargoActions() }) == DialogResult.Yes)
 				result = EncounterResult.Arrested;
 		} else
 		{
 			String str1 = Commander().getShip().IllegalSpecialCargoDescription("", false, true);
 
-			if (GuiFacade.alert(AlertType.EncounterPoliceSubmit, str1, "") == DialogResult.Yes)
+			if (FormAlert.Alert(AlertType.EncounterPoliceSubmit, owner, str1, "") == DialogResult.Yes)
 			{
 				// Police Record becomes dubious, if it wasn't already.
 				if (Commander().getPoliceRecordScore() > Consts.PoliceRecordScoreDubious)
@@ -2508,16 +2528,16 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return result;
 	}
 
-	private void EncounterWon()
+	private void EncounterWon(WinformPane owner)
 	{
 		if (getEncounterType().CastToInt() >= spacetrader.enums.EncounterType.PirateAttack.CastToInt()
 				&& getEncounterType().CastToInt() <= spacetrader.enums.EncounterType.PirateDisabled.CastToInt()
 				&& getOpponent().Type() != ShipType.Mantis
 				&& Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreDubious)
-			GuiFacade.alert(AlertType.EncounterPiratesBounty, Strings.EncounterPiratesDestroyed, "", Functions
+			FormAlert.Alert(AlertType.EncounterPiratesBounty, owner, Strings.EncounterPiratesDestroyed, "", Functions
 					.Multiples(getOpponent().Bounty(), Strings.MoneyUnit));
 		else
-			GuiFacade.alert(AlertType.EncounterYouWin);
+			FormAlert.Alert(AlertType.EncounterYouWin, owner);
 
 		switch (getEncounterType())
 		{
@@ -2543,7 +2563,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				if (Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreDubious)
 					Commander().setCash(Commander().getCash() + getOpponent().Bounty());
 				Commander().setPoliceRecordScore(Commander().getPoliceRecordScore() + Consts.ScoreKillPirate);
-				EncounterScoop();
+				EncounterScoop(owner);
 			}
 			break;
 		case PoliceAttack:
@@ -2564,30 +2584,31 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		case TraderSurrender:
 			Commander().setKillsTrader(Commander().getKillsTrader() + 1);
 			Commander().setPoliceRecordScore(Commander().getPoliceRecordScore() + Consts.ScoreKillTrader);
-			EncounterScoop();
+			EncounterScoop(owner);
 			break;
 		default:
 			break;
 		}
 
-		Commander().setReputationScore(Commander().getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
+		Commander().setReputationScore(
+				Commander().getReputationScore() + (getOpponent().Type().CastToInt() / 2 + 1));
 	}
 
 	public void EscapeWithPod()
 	{
-		GuiFacade.alert(AlertType.EncounterEscapePodActivated);
+		FormAlert.Alert(AlertType.EncounterEscapePodActivated, getParentWindow());
 
 		if (Commander().getShip().SculptureOnBoard())
-			GuiFacade.alert(AlertType.SculptureSaved);
+			FormAlert.Alert(AlertType.SculptureSaved, getParentWindow());
 
 		if (Commander().getShip().ReactorOnBoard())
 		{
-			GuiFacade.alert(AlertType.ReactorDestroyed);
+			FormAlert.Alert(AlertType.ReactorDestroyed, getParentWindow());
 			setQuestStatusReactor(SpecialEvent.StatusReactorDone);
 		}
 
 		if (Commander().getShip().getTribbles() > 0)
-			GuiFacade.alert(AlertType.TribblesKilled);
+			FormAlert.Alert(AlertType.TribblesKilled, getParentWindow());
 
 		if (getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit)
 		{
@@ -2595,39 +2616,39 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			for (system = 0; system < Universe().length
 					&& Universe()[system].SpecialEventType() != SpecialEventType.Japori; system++)
 				;
-			GuiFacade.alert(AlertType.AntidoteDestroyed, Universe()[system].Name());
+			FormAlert.Alert(AlertType.AntidoteDestroyed, getParentWindow(), Universe()[system].Name());
 			setQuestStatusJapori(SpecialEvent.StatusJaporiNotStarted);
 		}
 
 		if (Commander().getShip().ArtifactOnBoard())
 		{
-			GuiFacade.alert(AlertType.ArtifactLost);
+			FormAlert.Alert(AlertType.ArtifactLost, getParentWindow());
 			setQuestStatusArtifact(SpecialEvent.StatusArtifactDone);
 		}
 
 		if (Commander().getShip().JarekOnBoard())
 		{
-			GuiFacade.alert(AlertType.JarekTakenHome);
+			FormAlert.Alert(AlertType.JarekTakenHome, getParentWindow());
 			setQuestStatusJarek(SpecialEvent.StatusJarekNotStarted);
 		}
 
 		if (Commander().getShip().PrincessOnBoard())
 		{
-			GuiFacade.alert(AlertType.PrincessTakenHome);
+			FormAlert.Alert(AlertType.PrincessTakenHome, getParentWindow());
 			setQuestStatusPrincess(SpecialEvent.StatusPrincessNotStarted);
 		}
 
 		if (Commander().getShip().WildOnBoard())
 		{
-			GuiFacade.alert(AlertType.WildArrested);
+			FormAlert.Alert(AlertType.WildArrested, getParentWindow());
 			Commander().setPoliceRecordScore(Commander().getPoliceRecordScore() + Consts.ScoreCaughtWithWild);
 			NewsAddEvent(NewsEvent.WildArrested);
 			setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
 		}
 
-		if (Commander().isInsured())
+		if (Commander().getInsurance())
 		{
-			GuiFacade.alert(AlertType.InsurancePayoff);
+			FormAlert.Alert(AlertType.InsurancePayoff, getParentWindow());
 			Commander().setCash(Commander().getCash() + Commander().getShip().BaseWorth(true));
 		}
 
@@ -2639,9 +2660,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			Commander().setCash(0);
 		}
 
-		GuiFacade.alert(AlertType.FleaBuilt);
+		FormAlert.Alert(AlertType.FleaBuilt, getParentWindow());
 
-		IncDays(3);
+		IncDays(3, getParentWindow());
 
 		CreateFlea();
 	}
@@ -2682,20 +2703,22 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				StarSystemId.NA);
 		Mercenaries()[CrewMemberId.Opponent.CastToInt()] = new CrewMember(CrewMemberId.Opponent, 5, 5, 5, 5,
 				StarSystemId.NA);
-		Mercenaries()[CrewMemberId.Wild.CastToInt()] = new CrewMember(CrewMemberId.Wild, 7, 10, 2, 5, StarSystemId.NA);
-		Mercenaries()[CrewMemberId.Jarek.CastToInt()] = new CrewMember(CrewMemberId.Jarek, 3, 2, 10, 4, StarSystemId.NA);
+		Mercenaries()[CrewMemberId.Wild.CastToInt()] = new CrewMember(CrewMemberId.Wild, 7, 10, 2, 5,
+				StarSystemId.NA);
+		Mercenaries()[CrewMemberId.Jarek.CastToInt()] = new CrewMember(CrewMemberId.Jarek, 3, 2, 10, 4,
+				StarSystemId.NA);
 		Mercenaries()[CrewMemberId.Princess.CastToInt()] = new CrewMember(CrewMemberId.Princess, 4, 3, 8, 9,
 				StarSystemId.NA);
-		Mercenaries()[CrewMemberId.FamousCaptain.CastToInt()] = new CrewMember(CrewMemberId.FamousCaptain, 10, 10, 10,
-				10, StarSystemId.NA);
-		Mercenaries()[CrewMemberId.Dragonfly.CastToInt()] = new CrewMember(CrewMemberId.Dragonfly, 4 + d, 6 + d, 1,
+		Mercenaries()[CrewMemberId.FamousCaptain.CastToInt()] = new CrewMember(CrewMemberId.FamousCaptain, 10, 10,
+				10, 10, StarSystemId.NA);
+		Mercenaries()[CrewMemberId.Dragonfly.CastToInt()] = new CrewMember(CrewMemberId.Dragonfly, 4 + d, 6 + d,
+				1, 6 + d, StarSystemId.NA);
+		Mercenaries()[CrewMemberId.Scarab.CastToInt()] = new CrewMember(CrewMemberId.Scarab, 5 + d, 6 + d, 1,
 				6 + d, StarSystemId.NA);
-		Mercenaries()[CrewMemberId.Scarab.CastToInt()] = new CrewMember(CrewMemberId.Scarab, 5 + d, 6 + d, 1, 6 + d,
-				StarSystemId.NA);
 		Mercenaries()[CrewMemberId.Scorpion.CastToInt()] = new CrewMember(CrewMemberId.Scorpion, 8 + d, 8 + d, 1,
 				6 + d, StarSystemId.NA);
-		Mercenaries()[CrewMemberId.SpaceMonster.CastToInt()] = new CrewMember(CrewMemberId.SpaceMonster, 8 + d, 8 + d,
-				1, 1 + d, StarSystemId.NA);
+		Mercenaries()[CrewMemberId.SpaceMonster.CastToInt()] = new CrewMember(CrewMemberId.SpaceMonster, 8 + d,
+				8 + d, 1, 1 + d, StarSystemId.NA);
 
 		// JAF - Changing this to allow multiple mercenaries in each system, but
 		// no more
@@ -2745,8 +2768,8 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			SpecialResource specRes = SpecialResource.Nothing;
 			Size size = Size.FromInt(Functions.GetRandom(Size.Huge.CastToInt() + 1));
 			PoliticalSystem polSys = Consts.PoliticalSystems[Functions.GetRandom(Consts.PoliticalSystems.length)];
-			TechLevel tech = TechLevel.FromInt(Functions.GetRandom(polSys.MinimumTechLevel().CastToInt(), polSys
-					.MaximumTechLevel().CastToInt() + 1));
+			TechLevel tech = TechLevel.FromInt(Functions.GetRandom(polSys.MinimumTechLevel().CastToInt(),
+					polSys.MaximumTechLevel().CastToInt() + 1));
 
 			// Galvon must be a Monarchy.
 			if (id == StarSystemId.Galvon)
@@ -2834,12 +2857,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 	}
 
-	/**
-	 * The special event is selected by the current system.
-	 */
 	public void HandleSpecialEvent()
 	{
-		StarSystem curSys = Commander().getCurrentSystem();
+		StarSystem curSys = Commander().CurrentSystem();
 		boolean remove = true;
 
 		switch (curSys.SpecialEventType())
@@ -2851,10 +2871,10 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			setQuestStatusArtifact(SpecialEvent.StatusArtifactDone);
 			break;
 		case CargoForSale:
-			GuiFacade.alert(AlertType.SpecialSealedCanisters);
+			FormAlert.Alert(AlertType.SpecialSealedCanisters, getParentWindow());
 			int tradeItem = Functions.GetRandom(Consts.TradeItems.length);
 			Commander().getShip().Cargo()[tradeItem] += 3;
-			Commander().PriceCargo()[tradeItem] += Commander().getCurrentSystem().SpecialEvent().Price();
+			Commander().PriceCargo()[tradeItem] += Commander().CurrentSystem().SpecialEvent().Price();
 			break;
 		case Dragonfly:
 		case DragonflyBaratas:
@@ -2869,17 +2889,17 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		case DragonflyShield:
 			if (Commander().getShip().FreeSlotsShield() == 0)
 			{
-				GuiFacade.alert(AlertType.EquipmentNotEnoughSlots);
+				FormAlert.Alert(AlertType.EquipmentNotEnoughSlots, getParentWindow());
 				remove = false;
 			} else
 			{
-				GuiFacade.alert(AlertType.EquipmentLightningShield);
+				FormAlert.Alert(AlertType.EquipmentLightningShield, getParentWindow());
 				Commander().getShip().AddEquipment(Consts.Shields[ShieldType.Lightning.CastToInt()]);
 				setQuestStatusDragonfly(SpecialEvent.StatusDragonflyDone);
 			}
 			break;
 		case EraseRecord:
-			GuiFacade.alert(AlertType.SpecialCleanRecord);
+			FormAlert.Alert(AlertType.SpecialCleanRecord, getParentWindow());
 			Commander().setPoliceRecordScore(Consts.PoliceRecordScoreClean);
 			RecalculateSellPrices(curSys);
 			break;
@@ -2898,11 +2918,11 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		case GemulonFuel:
 			if (Commander().getShip().FreeSlotsGadget() == 0)
 			{
-				GuiFacade.alert(AlertType.EquipmentNotEnoughSlots);
+				FormAlert.Alert(AlertType.EquipmentNotEnoughSlots, getParentWindow());
 				remove = false;
 			} else
 			{
-				GuiFacade.alert(AlertType.EquipmentFuelCompactor);
+				FormAlert.Alert(AlertType.EquipmentFuelCompactor, getParentWindow());
 				Commander().getShip().AddEquipment(Consts.Gadgets[GadgetType.FuelCompactor.CastToInt()]);
 				setQuestStatusGemulon(SpecialEvent.StatusGemulonDone);
 			}
@@ -2918,10 +2938,10 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			remove = false;
 
 			if (Commander().getShip().FreeCargoBays() < 10)
-				GuiFacade.alert(AlertType.CargoNoEmptyBays);
+				FormAlert.Alert(AlertType.CargoNoEmptyBays, getParentWindow());
 			else
 			{
-				GuiFacade.alert(AlertType.AntidoteOnBoard);
+				FormAlert.Alert(AlertType.AntidoteOnBoard, getParentWindow());
 				setQuestStatusJapori(SpecialEvent.StatusJaporiInTransit);
 			}
 			break;
@@ -2933,12 +2953,12 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		case Jarek:
 			if (Commander().getShip().FreeCrewQuarters() == 0)
 			{
-				GuiFacade.alert(AlertType.SpecialNoQuarters);
+				FormAlert.Alert(AlertType.SpecialNoQuarters, getParentWindow());
 				remove = false;
 			} else
 			{
 				CrewMember jarek = Mercenaries()[CrewMemberId.Jarek.CastToInt()];
-				GuiFacade.alert(AlertType.SpecialPassengerOnBoard, jarek.Name());
+				FormAlert.Alert(AlertType.SpecialPassengerOnBoard, getParentWindow(), jarek.Name());
 				Commander().getShip().Hire(jarek);
 				setQuestStatusJarek(SpecialEvent.StatusJarekStarted);
 			}
@@ -2950,7 +2970,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		case Lottery:
 			break;
 		case Moon:
-			GuiFacade.alert(AlertType.SpecialMoonBought);
+			FormAlert.Alert(AlertType.SpecialMoonBought, getParentWindow());
 			setQuestStatusMoon(SpecialEvent.StatusMoonBought);
 			break;
 		case MoonRetirement:
@@ -2968,23 +2988,23 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		case PrincessQonos:
 			if (Commander().getShip().FreeCrewQuarters() == 0)
 			{
-				GuiFacade.alert(AlertType.SpecialNoQuarters);
+				FormAlert.Alert(AlertType.SpecialNoQuarters, getParentWindow());
 				remove = false;
 			} else
 			{
 				CrewMember princess = Mercenaries()[CrewMemberId.Princess.CastToInt()];
-				GuiFacade.alert(AlertType.SpecialPassengerOnBoard, princess.Name());
+				FormAlert.Alert(AlertType.SpecialPassengerOnBoard, getParentWindow(), princess.Name());
 				Commander().getShip().Hire(princess);
 			}
 			break;
 		case PrincessQuantum:
 			if (Commander().getShip().FreeSlotsWeapon() == 0)
 			{
-				GuiFacade.alert(AlertType.EquipmentNotEnoughSlots);
+				FormAlert.Alert(AlertType.EquipmentNotEnoughSlots, getParentWindow());
 				remove = false;
 			} else
 			{
-				GuiFacade.alert(AlertType.EquipmentQuantumDisruptor);
+				FormAlert.Alert(AlertType.EquipmentQuantumDisruptor, getParentWindow());
 				Commander().getShip().AddEquipment(Consts.Weapons[WeaponType.QuantumDistruptor.CastToInt()]);
 				setQuestStatusPrincess(SpecialEvent.StatusPrincessDone);
 			}
@@ -2998,15 +3018,15 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		case Reactor:
 			if (Commander().getShip().FreeCargoBays() < 15)
 			{
-				GuiFacade.alert(AlertType.CargoNoEmptyBays);
+				FormAlert.Alert(AlertType.CargoNoEmptyBays, getParentWindow());
 				remove = false;
 			} else
 			{
 				if (Commander().getShip().WildOnBoard())
 				{
-					if (GuiFacade.alert(AlertType.WildWontStayAboardReactor, curSys.Name()) == DialogResult.OK)
+					if (FormAlert.Alert(AlertType.WildWontStayAboardReactor, getParentWindow(), curSys.Name()) == DialogResult.OK)
 					{
-						GuiFacade.alert(AlertType.WildLeavesShip, curSys.Name());
+						FormAlert.Alert(AlertType.WildLeavesShip, getParentWindow(), curSys.Name());
 						setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
 					} else
 						remove = false;
@@ -3014,7 +3034,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 				if (remove)
 				{
-					GuiFacade.alert(AlertType.ReactorOnBoard);
+					FormAlert.Alert(AlertType.ReactorOnBoard, getParentWindow());
 					setQuestStatusReactor(SpecialEvent.StatusReactorFuelOk);
 				}
 			}
@@ -3027,11 +3047,11 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		case ReactorLaser:
 			if (Commander().getShip().FreeSlotsWeapon() == 0)
 			{
-				GuiFacade.alert(AlertType.EquipmentNotEnoughSlots);
+				FormAlert.Alert(AlertType.EquipmentNotEnoughSlots, getParentWindow());
 				remove = false;
 			} else
 			{
-				GuiFacade.alert(AlertType.EquipmentMorgansLaser);
+				FormAlert.Alert(AlertType.EquipmentMorgansLaser, getParentWindow());
 				Commander().getShip().AddEquipment(Consts.Weapons[WeaponType.MorgansLaser.CastToInt()]);
 				setQuestStatusReactor(SpecialEvent.StatusReactorDone);
 			}
@@ -3045,7 +3065,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			remove = false;
 			break;
 		case ScarabUpgradeHull:
-			GuiFacade.alert(AlertType.ShipHullUpgraded);
+			FormAlert.Alert(AlertType.ShipHullUpgraded, getParentWindow());
 			Commander().getShip().setHullUpgraded(true);
 			Commander().getShip().setHull(Commander().getShip().getHull() + Consts.HullUpgrade);
 			setQuestStatusScarab(SpecialEvent.StatusScarabDone);
@@ -3063,17 +3083,17 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			setQuestStatusSculpture(SpecialEvent.StatusSculptureDone);
 			if (Commander().getShip().FreeSlotsGadget() == 0)
 			{
-				GuiFacade.alert(AlertType.EquipmentNotEnoughSlots);
+				FormAlert.Alert(AlertType.EquipmentNotEnoughSlots, getParentWindow());
 				remove = false;
 			} else
 			{
-				GuiFacade.alert(AlertType.EquipmentHiddenCompartments);
+				FormAlert.Alert(AlertType.EquipmentHiddenCompartments, getParentWindow());
 				Commander().getShip().AddEquipment(Consts.Gadgets[GadgetType.HiddenCargoBays.CastToInt()]);
 				setQuestStatusSculpture(SpecialEvent.StatusSculptureDone);
 			}
 			break;
 		case Skill:
-			GuiFacade.alert(AlertType.SpecialSkillIncrease);
+			FormAlert.Alert(AlertType.SpecialSkillIncrease, getParentWindow());
 			Commander().IncreaseRandomSkill();
 			break;
 		case SpaceMonster:
@@ -3083,43 +3103,43 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			setQuestStatusSpaceMonster(SpecialEvent.StatusSpaceMonsterDone);
 			break;
 		case Tribble:
-			GuiFacade.alert(AlertType.TribblesOwn);
+			FormAlert.Alert(AlertType.TribblesOwn, getParentWindow());
 			Commander().getShip().setTribbles(1);
 			break;
 		case TribbleBuyer:
-			GuiFacade.alert(AlertType.TribblesGone);
+			FormAlert.Alert(AlertType.TribblesGone, getParentWindow());
 			Commander().setCash(Commander().getCash() + (Commander().getShip().getTribbles() / 2));
 			Commander().getShip().setTribbles(0);
 			break;
 		case Wild:
 			if (Commander().getShip().FreeCrewQuarters() == 0)
 			{
-				GuiFacade.alert(AlertType.SpecialNoQuarters);
+				FormAlert.Alert(AlertType.SpecialNoQuarters, getParentWindow());
 				remove = false;
 			} else if (!Commander().getShip().HasWeapon(WeaponType.BeamLaser, false))
 			{
-				GuiFacade.alert(AlertType.WildWontBoardLaser);
+				FormAlert.Alert(AlertType.WildWontBoardLaser, getParentWindow());
 				remove = false;
 			} else if (Commander().getShip().ReactorOnBoard())
 			{
-				GuiFacade.alert(AlertType.WildWontBoardReactor);
+				FormAlert.Alert(AlertType.WildWontBoardReactor, getParentWindow());
 				remove = false;
 			} else
 			{
 				CrewMember wild = Mercenaries()[CrewMemberId.Wild.CastToInt()];
-				GuiFacade.alert(AlertType.SpecialPassengerOnBoard, wild.Name());
+				FormAlert.Alert(AlertType.SpecialPassengerOnBoard, getParentWindow(), wild.Name());
 				Commander().getShip().Hire(wild);
 				setQuestStatusWild(SpecialEvent.StatusWildStarted);
 
 				if (Commander().getShip().SculptureOnBoard())
-					GuiFacade.alert(AlertType.WildSculpture);
+					FormAlert.Alert(AlertType.WildSculpture, getParentWindow());
 			}
 			break;
 		case WildGetsOut:
 			// Zeethibal has a 10 in player's lowest score, an 8
 			// in the next lowest score, and 5 elsewhere.
 			CrewMember zeethibal = Mercenaries()[CrewMemberId.Zeethibal.CastToInt()];
-			zeethibal.setCurrentSystem(Universe()[StarSystemId.Kravat.CastToInt()]);
+			zeethibal.CurrentSystem(Universe()[StarSystemId.Kravat.CastToInt()]);
 			int lowest1 = Commander().NthLowestSkill(1);
 			int lowest2 = Commander().NthLowestSkill(2);
 			for (int i = 0; i < zeethibal.Skills().length; i++)
@@ -3139,12 +3159,12 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			curSys.SpecialEventType(SpecialEventType.NA);
 	}
 
-	public void IncDays(int num)
+	public void IncDays(int num, WinformPane owner)
 	{
 		Commander().setDays(Commander().getDays() + num);
 
-		if (Commander().isInsured())
-			Commander().setNoClaim(Commander().NoClaim() + num);
+		if (Commander().getInsurance())
+			Commander().NoClaim(Commander().NoClaim() + num);
 
 		// Police Record will gravitate towards neutral (0).
 		if (Commander().getPoliceRecordScore() > Consts.PoliceRecordScoreClean)
@@ -3187,7 +3207,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			{
 				setFabricRipProbability(Consts.FabricRipInitialProbability);
 				Universe()[StarSystemId.Daled.CastToInt()].SpecialEventType(SpecialEventType.ExperimentFailed);
-				GuiFacade.alert(AlertType.SpecialExperimentPerformed);
+				FormAlert.Alert(AlertType.SpecialExperimentPerformed, owner);
 				NewsAddEvent(NewsEvent.ExperimentPerformed);
 			}
 		} else if (getQuestStatusExperiment() == SpecialEvent.StatusExperimentPerformed
@@ -3197,10 +3217,10 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		if (Commander().getShip().JarekOnBoard())
 		{
 			if (getQuestStatusJarek() == SpecialEvent.StatusJarekImpatient / 2)
-				GuiFacade.alert(AlertType.SpecialPassengerConcernedJarek);
+				FormAlert.Alert(AlertType.SpecialPassengerConcernedJarek, owner);
 			else if (getQuestStatusJarek() == SpecialEvent.StatusJarekImpatient - 1)
 			{
-				GuiFacade.alert(AlertType.SpecialPassengerImpatientJarek);
+				FormAlert.Alert(AlertType.SpecialPassengerImpatientJarek, owner);
 				Mercenaries()[CrewMemberId.Jarek.CastToInt()].Pilot(0);
 				Mercenaries()[CrewMemberId.Jarek.CastToInt()].Fighter(0);
 				Mercenaries()[CrewMemberId.Jarek.CastToInt()].Trader(0);
@@ -3214,10 +3234,10 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		if (Commander().getShip().PrincessOnBoard())
 		{
 			if (getQuestStatusPrincess() == (SpecialEvent.StatusPrincessImpatient + SpecialEvent.StatusPrincessRescued) / 2)
-				GuiFacade.alert(AlertType.SpecialPassengerConcernedPrincess);
+				FormAlert.Alert(AlertType.SpecialPassengerConcernedPrincess, owner);
 			else if (getQuestStatusPrincess() == SpecialEvent.StatusPrincessImpatient - 1)
 			{
-				GuiFacade.alert(AlertType.SpecialPassengerImpatientPrincess);
+				FormAlert.Alert(AlertType.SpecialPassengerImpatientPrincess, owner);
 				Mercenaries()[CrewMemberId.Princess.CastToInt()].Pilot(0);
 				Mercenaries()[CrewMemberId.Princess.CastToInt()].Fighter(0);
 				Mercenaries()[CrewMemberId.Princess.CastToInt()].Trader(0);
@@ -3231,10 +3251,10 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		if (Commander().getShip().WildOnBoard())
 		{
 			if (getQuestStatusWild() == SpecialEvent.StatusWildImpatient / 2)
-				GuiFacade.alert(AlertType.SpecialPassengerConcernedWild);
+				FormAlert.Alert(AlertType.SpecialPassengerConcernedWild, owner);
 			else if (getQuestStatusWild() == SpecialEvent.StatusWildImpatient - 1)
 			{
-				GuiFacade.alert(AlertType.SpecialPassengerImpatientWild);
+				FormAlert.Alert(AlertType.SpecialPassengerImpatientWild, owner);
 				Mercenaries()[CrewMemberId.Wild.CastToInt()].Pilot(0);
 				Mercenaries()[CrewMemberId.Wild.CastToInt()].Fighter(0);
 				Mercenaries()[CrewMemberId.Wild.CastToInt()].Trader(0);
@@ -3246,13 +3266,13 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 	}
 
-	private Commander InitializeCommander(String name, CrewMember commanderCrewMember)
+	private void InitializeCommander(String name, CrewMember commanderCrewMember)
 	{
-		Commander commander = new Commander(commanderCrewMember);
-		Mercenaries()[CrewMemberId.Commander.CastToInt()] = commander;
+		_commander = new Commander(commanderCrewMember);
+		Mercenaries()[CrewMemberId.Commander.CastToInt()] = Commander();
 		Strings.CrewMemberNames[CrewMemberId.Commander.CastToInt()] = name;
 
-		while (commander.getCurrentSystem() == null)
+		while (Commander().CurrentSystem() == null)
 		{
 			StarSystem system = Universe()[Functions.GetRandom(Universe().length)];
 			if (system.SpecialEventType() == SpecialEventType.NA
@@ -3264,17 +3284,16 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				for (int i = 0; i < Universe().length && close < 3; i++)
 				{
 					if (i != system.Id().CastToInt()
-							&& Functions.Distance(Universe()[i], system) <= commander.getShip().FuelTanks())
+							&& Functions.Distance(Universe()[i], system) <= Commander().getShip().FuelTanks())
 						close++;
 				}
 
 				if (close >= 3)
-					commander.setCurrentSystem(system);
+					Commander().CurrentSystem(system);
 			}
 		}
 
-		commander.getCurrentSystem().Visited(true);
-		return commander;
+		Commander().CurrentSystem().Visited(true);
 	}
 
 	public void NewsAddEvent(NewsEvent newEvent)
@@ -3284,9 +3303,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 	public void NewsAddEventsOnArrival()
 	{
-		if (Commander().getCurrentSystem().SpecialEventType() != SpecialEventType.NA)
+		if (Commander().CurrentSystem().SpecialEventType() != SpecialEventType.NA)
 		{
-			switch (Commander().getCurrentSystem().SpecialEventType())
+			switch (Commander().CurrentSystem().SpecialEventType())
 			{
 			case ArtifactDelivery:
 				if (Commander().getShip().ArtifactOnBoard())
@@ -3417,7 +3436,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		Commander().setCash(Commander().getCash() - (MercenaryCosts() + InsuranceCosts() + WormholeCosts()));
 		Commander().getShip().setFuel(Commander().getShip().getFuel() - fuel);
 		Commander().PayInterest();
-		IncDays(1);
+		IncDays(1, getParentWindow());
 	}
 
 	private boolean PlaceShipyards()
@@ -3571,7 +3590,6 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		VeryRareEncounters().add(VeryRareEncounter.BottleGood);
 	}
 
-	// todo move.
 	public void SelectNextSystemWithinRange(boolean forward)
 	{
 		int[] dest = Destinations();
@@ -3585,7 +3603,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			else
 				index = (dest.length + index + (forward ? 1 : -1)) % dest.length;
 
-			if (Functions.WormholeExists(Commander().getCurrentSystem(), Universe()[dest[index]]))
+			if (Functions.WormholeExists(Commander().CurrentSystem(), Universe()[dest[index]]))
 			{
 				SelectedSystemId(Commander().getCurrentSystemId());
 				TargetWormhole(true);
@@ -3601,9 +3619,10 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			int cost = Difficulty().CastToInt() + 1;
 
 			if (Commander().getCash() < cost)
-				GuiFacade.alert(AlertType.ArrivalIFNewspaper, Functions.Multiples(cost, "credit"));
+				FormAlert.Alert(AlertType.ArrivalIFNewspaper, getParentWindow(), Functions.Multiples(cost, "credit"));
 			else if (Options().getNewsAutoPay()
-					|| GuiFacade.alert(AlertType.ArrivalBuyNewspaper, Functions.Multiples(cost, "credit")) == DialogResult.Yes)
+					|| FormAlert.Alert(AlertType.ArrivalBuyNewspaper, getParentWindow(), Functions.Multiples(cost,
+							"credit")) == DialogResult.Yes)
 			{
 				Commander().setCash(Commander().getCash() - cost);
 				setPaidForNewspaper(true);
@@ -3612,7 +3631,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		}
 
 		if (getPaidForNewspaper())
-			GuiFacade.alert(AlertType.Alert, NewspaperHead(), NewspaperText());
+			FormAlert.Alert(AlertType.Alert, getParentWindow(), NewspaperHead(), NewspaperText());
 	}
 
 	public @Override
@@ -3640,9 +3659,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		hash.add("_litterWarning", _litterWarning);
 		hash.add("_newsEvents", ArrayListToIntArray(_newsEvents));
 		hash.add("_difficulty", _difficulty.CastToInt());
-		hash.add("_cheatEnabled", _cheats.cheatMode);
+		hash.add("_cheatEnabled", _cheatEnabled);
 		hash.add("_autoSave", _autoSave);
-		hash.add("_easyEncounters", _cheats.easyEncounters);
+		hash.add("_easyEncounters", _easyEncounters);
 		hash.add("_endStatus", _endStatus.CastToInt());
 		hash.add("_encounterType", _encounterType.CastToInt());
 		hash.add("_selectedSystemId", _selectedSystemId.CastToInt());
@@ -3682,7 +3701,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				&& getFabricRipProbability() > 0
 				&& (getFabricRipProbability() == Consts.FabricRipInitialProbability || Functions.GetRandom(100) < getFabricRipProbability()))
 		{
-			GuiFacade.alert(AlertType.SpecialTimespaceFabricRip);
+			FormAlert.Alert(AlertType.SpecialTimespaceFabricRip, getParentWindow());
 			SelectedSystemId(StarSystemId.FromInt(Functions.GetRandom(Universe().length)));
 		}
 
@@ -3700,9 +3719,10 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			{
 				uneventful = false;
 
-				EncounterResult result = GuiEngine.cargo.performEncounter(getParentWindow());
+				FormEncounter form = new FormEncounter();
+				form.ShowDialog(getParentWindow());
 				getParentWindow().UpdateStatusBar();
-				switch (result)
+				switch (form.Result())
 				{
 				case Arrested:
 					setClicks(0);
@@ -3726,13 +3746,13 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 	public void Warp(boolean viaSingularity)
 	{
 		if (Commander().getDebt() > Consts.DebtTooLarge)
-			GuiFacade.alert(AlertType.DebtTooLargeGrounded);
+			FormAlert.Alert(AlertType.DebtTooLargeGrounded, getParentWindow());
 		else if (Commander().getCash() < MercenaryCosts())
-			GuiFacade.alert(AlertType.LeavingIFMercenaries);
+			FormAlert.Alert(AlertType.LeavingIFMercenaries, getParentWindow());
 		else if (Commander().getCash() < MercenaryCosts() + InsuranceCosts())
-			GuiFacade.alert(AlertType.LeavingIFInsurance);
+			FormAlert.Alert(AlertType.LeavingIFInsurance, getParentWindow());
 		else if (Commander().getCash() < MercenaryCosts() + InsuranceCosts() + WormholeCosts())
-			GuiFacade.alert(AlertType.LeavingIFWormholeTax);
+			FormAlert.Alert(AlertType.LeavingIFWormholeTax, getParentWindow());
 		else
 		{
 			boolean wildOk = true;
@@ -3740,26 +3760,27 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			// if Wild is aboard, make sure ship is armed!
 			if (Commander().getShip().WildOnBoard() && !Commander().getShip().HasWeapon(WeaponType.BeamLaser, false))
 			{
-				if (GuiFacade.alert(AlertType.WildWontStayAboardLaser, Commander().getCurrentSystem().Name()) == DialogResult.Cancel)
+				if (FormAlert.Alert(AlertType.WildWontStayAboardLaser, getParentWindow(), Commander().CurrentSystem()
+						.Name()) == DialogResult.Cancel)
 					wildOk = false;
 				else
 				{
-					GuiFacade.alert(AlertType.WildLeavesShip, Commander().getCurrentSystem().Name());
+					FormAlert.Alert(AlertType.WildLeavesShip, getParentWindow(), Commander().CurrentSystem().Name());
 					setQuestStatusWild(SpecialEvent.StatusWildNotStarted);
 				}
 			}
 
 			if (wildOk)
 			{
-				setArrivedViaWormhole(Functions.WormholeExists(Commander().getCurrentSystem(), WarpSystem()));
+				setArrivedViaWormhole(Functions.WormholeExists(Commander().CurrentSystem(), WarpSystem()));
 
 				if (viaSingularity)
 					NewsAddEvent(NewsEvent.ExperimentArrival);
 				else
 					NormalDeparture(viaSingularity || getArrivedViaWormhole() ? 0 : Functions.Distance(Commander()
-							.getCurrentSystem(), WarpSystem()));
+							.CurrentSystem(), WarpSystem()));
 
-				Commander().getCurrentSystem().CountDown(CountDownStart());
+				Commander().CurrentSystem().CountDown(CountDownStart());
 
 				NewsResetEvents();
 
@@ -3773,60 +3794,18 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 					 * if (Clicks == 0) FormAlert.Alert(AlertType.TravelArrival, ParentWindow);
 					 */
 				} else
-					GuiFacade.alert(AlertType.TravelUneventfulTrip);
+					FormAlert.Alert(AlertType.TravelUneventfulTrip, getParentWindow());
 
 				Arrival();
 			}
 		}
 	}
 
-	// todo change relations with these 3 methods.
-	public void jumpWithSingularity()
-	{
-
-		if (WarpSystem() == null)
-			GuiFacade.alert(AlertType.ChartJumpNoSystemSelected);
-		else if (WarpSystem() == Commander().getCurrentSystem())
-			GuiFacade.alert(AlertType.ChartJumpCurrent);
-		else if (GuiFacade.alert(AlertType.ChartJump, WarpSystem().Name()) == DialogResult.Yes)
-		{
-			setCanSuperWarp(false);
-			try
-			{
-				controller.autoSave_depart();
-
-				Warp(true);
-
-				controller.autoSave_arive();
-			} catch (GameEndException ex)
-			{
-				controller.GameEnd();
-			}
-			getParentWindow().UpdateAll();
-		}
-	}
-	public void jumpWithoutSingularity()
-	{
-		try
-		{
-			controller.autoSave_depart();
-
-			Warp(false);
-
-			controller.autoSave_arive();
-		} catch (GameEndException ex)
-		{
-			controller.GameEnd();
-		}
-		getParentWindow().UpdateAll();
-	}
-
-	@CheatCode
 	public void WarpDirect()
 	{
 		_warpSystemId = SelectedSystemId();
 
-		Commander().getCurrentSystem().CountDown(CountDownStart());
+		Commander().CurrentSystem().CountDown(CountDownStart());
 		NewsResetEvents();
 		CalculatePrices(WarpSystem());
 		Arrival();
@@ -3836,12 +3815,12 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 	// #region Properties
 
-	static Game currentGame()
+	public static Game CurrentGame()
 	{
 		return _game;
 	}
 
-	static void CurrentGame(Game value)
+	public static void CurrentGame(Game value)
 	{
 		_game = value;
 	}
@@ -3978,7 +3957,6 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return text;
 	}
 
-	// TODO change from int to enum, and change name from Index to Type, and we're cool.
 	public int EncounterImageIndex()
 	{
 		int encounterImage = -1;
@@ -4176,7 +4154,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 	public int InsuranceCosts()
 	{
-		return Commander().isInsured() ? (int)Math.max(1, Commander().getShip().BaseWorth(true) * Consts.InsRate
+		return Commander().getInsurance() ? (int)Math.max(1, Commander().getShip().BaseWorth(true) * Consts.InsRate
 				* (100 - Commander().NoClaim()) / 100) : 0;
 	}
 
@@ -4207,16 +4185,16 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 	public String NewspaperHead()
 	{
-		String[] heads = Strings.NewsMastheads[Commander().getCurrentSystem().PoliticalSystemType().CastToInt()];
-		String head = heads[Commander().getCurrentSystem().Id().CastToInt() % heads.length];
+		String[] heads = Strings.NewsMastheads[Commander().CurrentSystem().PoliticalSystemType().CastToInt()];
+		String head = heads[Commander().CurrentSystem().Id().CastToInt() % heads.length];
 
-		return Functions.StringVars(head, Commander().getCurrentSystem().Name());
+		return Functions.StringVars(head, Commander().CurrentSystem().Name());
 	}
 
 	public String NewspaperText()
 	{
-		StarSystem curSys = Commander().getCurrentSystem();
-		List items = new ArrayList();
+		StarSystem curSys = Commander().CurrentSystem();
+		ArrayList items = new ArrayList();
 
 		// We're //using the GetRandom2 function so that the same number is
 		// generated each time for the same
@@ -4224,9 +4202,9 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		Functions.RandSeed(curSys.Id().CastToInt(), Commander().getDays());
 
 		for (Iterator en = NewsEvents().iterator(); en.hasNext();)
-			items.add(Functions.StringVars(Strings.NewsEvent[((spacetrader.enums.NewsEvent)en.next()).CastToInt()],
-					new String[] { Commander().Name(), Commander().getCurrentSystem().Name(),
-							Commander().getShip().Name() }));
+			items.add(Functions
+					.StringVars(Strings.NewsEvent[((spacetrader.enums.NewsEvent)en.next()).CastToInt()], new String[] {
+							Commander().Name(), Commander().CurrentSystem().Name(), Commander().getShip().Name() }));
 
 		if (curSys.SystemPressure() != SystemPressure.None)
 			items.add(Strings.NewsPressureInternal[curSys.SystemPressure().CastToInt()]);
@@ -4268,12 +4246,13 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 				// And not-always-shown stories
 				if (Universe()[i].SystemPressure() != SystemPressure.None
-						&& Functions.GetRandom2(100) <= Consts.StoryProbability * curSys.TechLevel().CastToInt() + 10
-								* (5 - Difficulty().CastToInt()))
+						&& Functions.GetRandom2(100) <= Consts.StoryProbability * curSys.TechLevel().CastToInt()
+								+ 10 * (5 - Difficulty().CastToInt()))
 				{
 					int index = Functions.GetRandom2(Strings.NewsPressureExternal.length);
 					String baseStr = Strings.NewsPressureExternal[index];
-					String pressure = Strings.NewsPressureExternalPressures[Universe()[i].SystemPressure().CastToInt()];
+					String pressure = Strings.NewsPressureExternalPressures[Universe()[i].SystemPressure()
+							.CastToInt()];
 					items.add(Functions.StringVars(baseStr, pressure, Universe()[i].Name()));
 					realNews = true;
 				}
@@ -4368,7 +4347,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		_targetWormhole = false;
 	}
 
-	public void setSelectedSystemByName(String value, boolean track)
+	public void setSelectedSystemByName(String value)
 	{
 		String nameToFind = value;
 		boolean found = false;
@@ -4381,8 +4360,6 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 				found = true;
 			}
 		}
-		if (found && track)
-			setTrackedSystemId(SelectedSystemId());
 	}
 
 	public Ship SpaceMonster()
@@ -4404,12 +4381,6 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 			int wormIndex = Util.BruteSeek(Wormholes(), SelectedSystemId().CastToInt());
 			_warpSystemId = StarSystemId.FromInt(Wormholes()[(wormIndex + 1) % Wormholes().length]);
 		}
-	}
-
-	public void selectTargetWormholeFrom(StarSystemId value)
-	{
-		SelectedSystemId(value);
-		TargetWormhole(true);
 	}
 
 	public StarSystem TrackedSystem()
@@ -4440,7 +4411,7 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 
 	public int WormholeCosts()
 	{
-		return Functions.WormholeExists(Commander().getCurrentSystem(), WarpSystem()) ? Consts.WormDist
+		return Functions.WormholeExists(Commander().CurrentSystem(), WarpSystem()) ? Consts.WormDist
 				* Commander().getShip().getFuelCost() : 0;
 	}
 
@@ -4449,15 +4420,6 @@ public class Game extends STSerializableObject implements SpaceTraderGame, Syste
 		return _wormholes;
 	}
 
-	public boolean isShowTrackedRange()
-	{
-		return Options().getShowTrackedRange();
-	}
-
-	public GameController makeController(MainWindow mainWindow)
-	{
-		return controller = new GameController(this, mainWindow);
-	}
-
 	// #endregion
+
 }

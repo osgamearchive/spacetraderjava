@@ -104,10 +104,10 @@ public class StarSystem extends STSerializableObject
 				// too many robots or narcotics available.
 				if (i >= TradeItemType.Narcotics.CastToInt())
 					_tradeItems[i] = ((_tradeItems[i] * 
-							(5 - Game.currentGame()
+							(5 - Game.CurrentGame()
 									.Difficulty()
 									.CastToInt())) /
-							(6 - Game.currentGame().Difficulty().CastToInt())) + 1;
+							(6 - Game.CurrentGame().Difficulty().CastToInt())) + 1;
 
 				if (this.SpecialResource() == Consts.TradeItems[i].ResourceLowPrice())
 					_tradeItems[i] = _tradeItems[i] * 4 / 3;
@@ -164,7 +164,7 @@ public class StarSystem extends STSerializableObject
 
 	public boolean ShowSpecialButton()
 	{
-		Game game = Game.currentGame();
+		Game game = Game.CurrentGame();
 		boolean show = false;
 
 		switch (SpecialEventType())
@@ -314,14 +314,14 @@ public class StarSystem extends STSerializableObject
 
 	public boolean DestOk()
 	{
-		Commander comm = Game.currentGame().Commander();
-		return this != comm.getCurrentSystem()
-				&& (Distance() <= comm.getShip().getFuel() || Functions.WormholeExists(comm.getCurrentSystem(), this));
+		Commander comm = Game.CurrentGame().Commander();
+		return this != comm.CurrentSystem()
+				&& (Distance() <= comm.getShip().getFuel() || Functions.WormholeExists(comm.CurrentSystem(), this));
 	}
 
 	public int Distance()
 	{
-		return Functions.Distance(this, Game.currentGame().Commander().getCurrentSystem());
+		return Functions.Distance(this, Game.CurrentGame().Commander().CurrentSystem());
 	}
 
 	public StarSystemId Id()
@@ -331,13 +331,13 @@ public class StarSystem extends STSerializableObject
 
 	public CrewMember[] MercenariesForHire()
 	{
-		Commander cmdr = Game.currentGame().Commander();
-		CrewMember[] mercs = Game.currentGame().Mercenaries();
+		Commander cmdr = Game.CurrentGame().Commander();
+		CrewMember[] mercs = Game.CurrentGame().Mercenaries();
 		ArrayList forHire = new ArrayList(3);
 
 		for (int i = 1; i < mercs.length; i++)
 		{
-			if (mercs[i].getCurrentSystem() == cmdr.getCurrentSystem() && !cmdr.getShip().HasCrew(mercs[i].Id()))
+			if (mercs[i].CurrentSystem() == cmdr.CurrentSystem() && !cmdr.getShip().HasCrew(mercs[i].Id()))
 				forHire.add(mercs[i]);
 		}
 

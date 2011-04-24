@@ -1,28 +1,27 @@
 /*******************************************************************************
- *
+ * 
  * Space Trader for Windows 2.00
- *
+ * 
  * Copyright (C) 2005 Jay French, All Rights Reserved
- *
+ * 
  * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- *
+ * 
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
+ * 
  * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- *
+ * 
  * You can contact the author at spacetrader@frenchfryz.com
- *
+ * 
  ******************************************************************************/
 package spacetrader;
 
 import jwinforms.Image;
 import spacetrader.enums.ShipType;
 import spacetrader.enums.Size;
-import spacetrader.guifacade.GuiEngine;
 import spacetrader.util.Hashtable;
 
 public class ShipTemplate extends STSerializableObject implements Comparable<ShipTemplate>
@@ -39,7 +38,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 	private int _crewQuarters = 0;
 	private int _fuelTanks = 0;
 	private int _hullStrength = 0;
-	private String uiRepresentor;
+	private Image[] _images = null;
 
 	// #endregion
 
@@ -49,7 +48,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 	{
 		_name = name;
 		_size = size;
-		uiRepresentor = GuiEngine.imageProvider.getCustomShipImages();
+		_images = Game.CurrentGame().getParentWindow().CustomShipImages();
 	}
 
 	public ShipTemplate(ShipSpec spec, String name)
@@ -66,13 +65,13 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 		_hullStrength = spec.HullStrength();
 
 		if (ImageIndex() == Consts.ShipImgUseDefault)
-			uiRepresentor = GuiEngine.imageProvider.getCustomShipImages();
+			_images = Game.CurrentGame().getParentWindow().CustomShipImages();
 	}
 
 	public ShipTemplate(Hashtable hash)
 	{
 		_name = GetValueFromHash(hash, "_name", _name, String.class);
-		_size = (GetValueFromHash(hash, "_size", _size));
+		_size =(GetValueFromHash(hash, "_size", _size));
 		_imageIndex = GetValueFromHash(hash, "_imageIndex", _imageIndex);
 		_cargoBays = GetValueFromHash(hash, "_cargoBays", _cargoBays);
 		_weaponSlots = GetValueFromHash(hash, "_weaponSlots", _weaponSlots);
@@ -81,9 +80,10 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 		_crewQuarters = GetValueFromHash(hash, "_crewQuarters", _crewQuarters);
 		_fuelTanks = GetValueFromHash(hash, "_fuelTanks", _fuelTanks);
 		_hullStrength = GetValueFromHash(hash, "_hullStrength", _hullStrength);
-		uiRepresentor = GetValueFromHash(hash, "_images", uiRepresentor);
+		_images = GetValueFromHash(hash, "_images", _images);
 	}
 
+	@Override
 	public int compareTo(ShipTemplate other)
 	{
 		if (other == null)
@@ -92,8 +92,8 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 			return Name().compareTo((other).Name());
 	}
 
-	@Override
-	public Hashtable Serialize()
+	public @Override
+	Hashtable Serialize()
 	{
 		Hashtable hash = super.Serialize();
 
@@ -108,8 +108,8 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 		hash.add("_fuelTanks", _fuelTanks);
 		hash.add("_hullStrength", _hullStrength);
 
-		if (uiRepresentor != null)
-			hash.add("_images", uiRepresentor);
+		if (_images != null)
+			hash.add("_images", _images);
 
 		return hash;
 	}
@@ -184,16 +184,14 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
 		_imageIndex = value;
 	}
 
-	// TODO rename to uiRepresentor
-	public String Images()
+	public Image[] Images()
 	{
-		return uiRepresentor;
+		return _images;
 	}
 
-	// TODO rename to uiRepresentor
-	public void Images(String value)
+	public void Images(Image[] value)
 	{
-		uiRepresentor = value;
+		_images = value;
 	}
 
 	public String Name()

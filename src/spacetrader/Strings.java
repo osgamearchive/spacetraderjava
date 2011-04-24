@@ -560,7 +560,6 @@ public class Strings
 	// #endregion
 
 	// #region ShipNames
-	// TODO implement a bit differently.
 	public static final String[] ShipNames = new String[] { "Flea", "Gnat",
 			"Firefly", "Mosquito", "Bumblebee", "Beetle", "Hornet",
 			"Grasshopper", "Termite", "Wasp", "Space Monster", "Dragonfly",

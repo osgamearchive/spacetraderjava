@@ -1,28 +1,27 @@
 /*******************************************************************************
- *
+ * 
  * Space Trader for Windows 2.00
- *
+ * 
  * Copyright (C) 2005 Jay French, All Rights Reserved
- *
+ * 
  * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- *
+ * 
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
+ * 
  * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- *
+ * 
  * You can contact the author at spacetrader@frenchfryz.com
- *
+ * 
  ******************************************************************************/
 package spacetrader;
 
 import jwinforms.Image;
 import spacetrader.util.*;
 import spacetrader.enums.*;
-import spacetrader.guifacade.GuiEngine;
 
 public abstract class Equipment extends STSerializableObject implements Cloneable
 {
@@ -50,7 +49,6 @@ public abstract class Equipment extends STSerializableObject implements Cloneabl
 
 	public abstract Equipment Clone();
 
-	@Override
 	public Hashtable Serialize()
 	{
 		Hashtable hash = super.Serialize();
@@ -63,13 +61,32 @@ public abstract class Equipment extends STSerializableObject implements Cloneabl
 		return hash;
 	}
 
-	@Override
 	public String toString()
 	{
 		return Name();
 	}
 
 	public abstract boolean TypeEquals(Object type);
+
+	final protected int BaseImageIndex()
+	{
+		int baseImageIndex = 0;
+
+		switch (EquipmentType())
+		{
+		case Gadget:
+			baseImageIndex = Strings.WeaponNames.length + Strings.ShieldNames.length;
+			break;
+		case Shield:
+			baseImageIndex = Strings.WeaponNames.length;
+			break;
+		case Weapon:
+			// baseImageIndex should be 0
+			break;
+		}
+
+		return baseImageIndex;
+	}
 
 	public int Chance()
 	{
@@ -79,6 +96,12 @@ public abstract class Equipment extends STSerializableObject implements Cloneabl
 	public EquipmentType EquipmentType()
 	{
 		return _equipType;
+	}
+
+	final public Image Image()
+	{
+		return Game.CurrentGame().getParentWindow().EquipmentImages().getImages()[BaseImageIndex()
+				+ SubType().CastToInt()];
 	}
 
 	public TechLevel MinimumTechLevel()
@@ -93,10 +116,10 @@ public abstract class Equipment extends STSerializableObject implements Cloneabl
 
 	public int Price()
 	{
-		Commander cmdr = Game.currentGame().Commander();
+		Commander cmdr = Game.CurrentGame().Commander();
 		int price = 0;
 
-		if (cmdr != null && cmdr.getCurrentSystem().TechLevel().CastToInt() >= MinimumTechLevel().CastToInt())
+		if (cmdr != null && cmdr.CurrentSystem().TechLevel().CastToInt() >= MinimumTechLevel().CastToInt())
 			price = (_price * (100 - cmdr.getShip().Trader())) / 100;
 
 		return price;

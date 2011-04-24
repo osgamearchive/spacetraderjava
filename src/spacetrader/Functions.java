@@ -24,19 +24,22 @@
  ******************************************************************************/
 package spacetrader;
 
+import java.awt.Color;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.List;
 import java.util.Random;
+
+import jwinforms.*;
 
 import spacetrader.enums.AlertType;
 import spacetrader.enums.Difficulty;
-import spacetrader.guifacade.GuiFacade;
-import spacetrader.persistence.Persistence;
+import spacetrader.gui.FormAlert;
+import spacetrader.stub.ArrayList;
 import spacetrader.stub.BinaryFormatter;
+import spacetrader.stub.RegistryKey;
 import spacetrader.stub.SerializationException;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Log;
@@ -44,6 +47,8 @@ import spacetrader.util.Util;
 
 public class Functions
 {
+	// #region Static Variable/Constant Declarations
+
 	private static Random rand = new Random();
 
 	private final static long DEFSEEDX = 521288629;
@@ -53,30 +58,24 @@ public class Functions
 	private static long SeedX = DEFSEEDX;
 	private static long SeedY = DEFSEEDY;
 
+	// #endregion
+
+	// #region Methods
+
 	public static int AdjustSkillForDifficulty(int skill)
 	{
-		Difficulty diff = Game.currentGame().Difficulty();
+		Difficulty diff = Game.CurrentGame().Difficulty();
 		skill = diff.adjustSkill(skill);
 
 		return skill;
 	}
 
-	public static String[] ArrayListtoStringArray(List<?> list)
+	public static String[] ArrayListtoStringArray(spacetrader.stub.ArrayList<?> list)
 	{
 		String[] items = new String[list.size()];
 
 		for (int i = 0; i < items.length; i++)
 			items[i] = (String)list.get(i);
-
-		return items;
-	}
-
-	public static <T> String[] arrayToStringArray(T[] array)
-	{
-		String[] items = new String[array.length];
-
-		for (int i = 0; i < items.length; i++)
-			items[i] = array[i].toString();
 
 		return items;
 	}
@@ -89,6 +88,11 @@ public class Functions
 	public static int Distance(StarSystem a, int x, int y)
 	{
 		return (int)Math.floor(Math.sqrt(Math.pow(a.X() - x, 2) + Math.pow(a.Y() - y, 2)));
+	}
+
+	private static void DrawPartialImage(Graphics g, Image img, int start, int stop)
+	{
+		g.DrawImage(img, 2 + start, 2, new Rectangle(start, 0, stop - start, img.getHeight()), GraphicsUnit.Pixel);
 	}
 
 	public static String FormatNumber(int num)
@@ -114,13 +118,34 @@ public class Functions
 		return String.format("%,d%%", num);
 	}
 
-	public static HighScoreRecord[] GetHighScores()
+	public static int GetColumnOfFirstNonWhitePixel(Image image, int direction)
 	{
-		Object obj = LoadFile(Persistence.getHighScoresFilename(), true);
-		if (obj == null)
-			return new HighScoreRecord[3];
+		Bitmap bitmap = new Bitmap(image);
+		int step = direction < 0 ? -1 : 1;
+		int col = step > 0 ? 0 : bitmap.getWidth() - 1;
+		int stop = step > 0 ? bitmap.getWidth() : -1;
 
-		return (HighScoreRecord[])STSerializableObject.ArrayListToArray((List<Hashtable>)obj, "HighScoreRecord");
+		for (; col != stop; col += step)
+		{
+			for (int row = 0; row < bitmap.getHeight(); row++)
+			{
+				if (bitmap.ToArgb(col, row) != 0)
+					return col;
+			}
+		}
+
+		return -1;
+	}
+
+	public static HighScoreRecord[] GetHighScores(WinformPane owner)
+	{
+		HighScoreRecord[] highScores = new HighScoreRecord[3];
+
+		Object obj = LoadFile(Consts.HighScoreFile, true, owner);
+		if (obj != null)
+			highScores = (HighScoreRecord[])STSerializableObject.ArrayListToArray((ArrayList<Hashtable>)obj, "HighScoreRecord");
+
+		return highScores;
 	}
 
 	public static int GetRandom(int max)
@@ -130,9 +155,6 @@ public class Functions
 
 	public static int GetRandom(int min, int max)
 	{
-		if (max == min)
-			// Fix the Single Tribblet bug --avv
-			return max;
 		// return rand.Next(min, max);
 		return rand.nextInt(max - min) + min;
 	}
@@ -145,36 +167,50 @@ public class Functions
 		return (int)(Rand() % max);
 	}
 
+	public static RegistryKey GetRegistryKey()
+	{
+		File regfile = new File("registryKey.properties");
+
+		return new RegistryKey(regfile);
+
+		// return Registry.CurrentUser.OpenSubKey("Software",
+		// true).CreateSubKey("FrenchFryz").CreateSubKey("SpaceTrader");
+	}
+
 	public static boolean IsInt(String toParse)
 	{
+		boolean isInt = true;
+
 		try
 		{
 			Integer.parseInt(toParse);
-			return true;
 		} catch (Exception e)
 		{
 			return false;
 		}
+
+		return isInt;
 	}
 
-	public static Object LoadFile(String fileName, boolean ignoreMissingFile)
+	public static Object LoadFile(String fileName, boolean ignoreMissingFile, WinformPane owner)
 	{
-		InputStream inStream = null;
+		Object obj = null;
+		FileInputStream inStream = null;
 
 		try
 		{
-			inStream = Persistence.openFileRead(fileName);
-			return (new BinaryFormatter()).Deserialize(inStream);
-		} catch (FileNotFoundException ex)
+			inStream = new FileInputStream(fileName/* , FileMode.Open */);
+			obj = (new BinaryFormatter()).Deserialize(inStream);
+		} catch (FileNotFoundException e)
 		{
 			if (!ignoreMissingFile)
-				GuiFacade.alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
+				FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, e.getMessage());
 		} catch (IOException ex)
 		{
-			GuiFacade.alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
+			FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, ex.getMessage());
 		} catch (SerializationException ex)
 		{
-			GuiFacade.alert(AlertType.FileErrorOpen, fileName, Strings.FileFormatBad);
+			FormAlert.Alert(AlertType.FileErrorOpen, owner, fileName, Strings.FileFormatBad);
 		} finally
 		{
 			if (inStream != null)
@@ -187,12 +223,38 @@ public class Functions
 				}
 		}
 
-		return null;
+		return obj;
 	}
 
 	public static String Multiples(int num, String unit)
 	{
 		return FormatNumber(num) + " " + unit + (num == 1 ? "" : "s");
+	}
+
+	public static void PaintShipImage(Ship ship, Graphics graphics, Color backgroundColor)
+	{
+		int x = Consts.ShipImageOffsets[ship.Type().CastToInt()].X;
+		int width = Consts.ShipImageOffsets[ship.Type().CastToInt()].Width;
+		int startDamage = x + width - ship.getHull() * width / ship.HullStrength();
+		int startShield = x + width + 2
+				- (ship.ShieldStrength() > 0 ? ship.ShieldCharge() * (width + 4) / ship.ShieldStrength() : 0);
+
+		graphics.clear(backgroundColor);
+
+		if (startDamage > x)
+		{
+			if (startShield > x)
+				DrawPartialImage(graphics, ship.ImageDamaged(), x, Math.min(startDamage, startShield));
+
+			if (startShield < startDamage)
+				DrawPartialImage(graphics, ship.ImageDamagedWithShields(), startShield, startDamage);
+		}
+
+		if (startShield > startDamage)
+			DrawPartialImage(graphics, ship.Image(), startDamage, startShield);
+
+		if (startShield < x + width + 2)
+			DrawPartialImage(graphics, ship.ImageWithShields(), startShield, x + width + 2);
 	}
 
 	private static long Rand()
@@ -224,20 +286,23 @@ public class Functions
 			SeedY = DEFSEEDY;
 	}
 
-	public static boolean SaveFile(String fileName, Object toSerialize)
+	public static boolean SaveFile(String fileName, Object toSerialize, WinformPane owner)
 	{
-		OutputStream outStream = null;
+		System.out.println(fileName);
+		FileOutputStream outStream = null;
+		boolean saveOk = false;
 
 		try
 		{
 			new File(fileName).createNewFile();
-			outStream = Persistence.openFileWrite(fileName);
+			outStream = new FileOutputStream(fileName, false);
 			(new BinaryFormatter()).Serialize(outStream, toSerialize);
-			return true;
+
+			saveOk = true;
 		} catch (IOException ex)
 		{
 			ex.printStackTrace();
-			GuiFacade.alert(AlertType.FileErrorSave, fileName, ex.getMessage());
+			FormAlert.Alert(AlertType.FileErrorSave, owner, fileName, ex.getMessage());
 		} finally
 		{
 			if (outStream != null)
@@ -250,9 +315,10 @@ public class Functions
 				}
 		}
 
-		return false;
+		return saveOk;
 	}
 
+	// TODO replace w/String.format?
 	public static String StringVars(String toParse, String[] vars)
 	{
 		String parsed = toParse;
@@ -273,13 +339,14 @@ public class Functions
 		return StringVars(toParse, new String[] { var1, var2 });
 	}
 
-	/**
-	 * Returns true if there exists a wormhole from a to b. If b < 0, then return true if
-	 * there exists a wormhole at all from a.
-	 */
+	// *************************************************************************
+	// Returns true if there exists a wormhole from a to b.
+	// If b < 0, then return true if there exists a wormhole
+	// at all from a.
+	// *************************************************************************
 	public static boolean WormholeExists(int a, int b)
 	{
-		int[] wormholes = Game.currentGame().Wormholes();
+		int[] wormholes = Game.CurrentGame().Wormholes();
 		int i = Util.BruteSeek(wormholes, a);
 		// int i = Array.IndexOf(wormholes, a);
 
@@ -288,8 +355,8 @@ public class Functions
 
 	public static boolean WormholeExists(StarSystem a, StarSystem b)
 	{
-		StarSystem[] universe = Game.currentGame().Universe();
-		int[] wormholes = Game.currentGame().Wormholes();
+		StarSystem[] universe = Game.CurrentGame().Universe();
+		int[] wormholes = Game.CurrentGame().Wormholes();
 		// int i = Array.IndexOf(wormholes, (int) a.Id);
 		int i = Util.BruteSeek(wormholes, a.Id().CastToInt());
 
@@ -298,10 +365,12 @@ public class Functions
 
 	public static StarSystem WormholeTarget(int a)
 	{
-		int[] wormholes = Game.currentGame().Wormholes();
+		int[] wormholes = Game.CurrentGame().Wormholes();
 		// int i = Array.IndexOf(wormholes, a);
 		int i = Util.BruteSeek(wormholes, a);
 
-		return (i >= 0 ? (Game.currentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
+		return (i >= 0 ? (Game.CurrentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
 	}
+
+	// #endregion
 }

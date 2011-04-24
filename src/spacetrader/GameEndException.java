@@ -7,7 +7,7 @@ public class GameEndException extends RuntimeException
 
 	public GameEndException(GameEndType endType)
 	{
-		Game.currentGame().setEndStatus(endType);
+		Game.CurrentGame().setEndStatus(endType);
 	}
 
 }

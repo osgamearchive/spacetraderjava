@@ -23,20 +23,21 @@ import java.awt.Color;
 import java.util.Arrays;
 
 import jwinforms.*;
+
 import spacetrader.*;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.ShipType;
 import spacetrader.enums.Size;
-import spacetrader.guifacade.GuiFacade;
-import spacetrader.persistence.Persistence;
 import spacetrader.stub.ArrayList;
 import spacetrader.stub.Directory;
 import spacetrader.util.Hashtable;
 import util.Path;
 
-@SuppressWarnings( { "synthetic-access", "unchecked" })
-public class FormShipyard extends SpaceTraderForm
+@SuppressWarnings({"synthetic-access","unchecked"})
+public class FormShipyard extends WinformForm
 {
+	//#region Control Declarations
+
 	private IContainer components;
 	private jwinforms.Label lblWelcome;
 	private jwinforms.TextBox txtName;
@@ -105,16 +106,16 @@ public class FormShipyard extends SpaceTraderForm
 
 	//#region Member variables
 
-	private final Game game = GameFacade.currentGame();
-	private final Shipyard shipyard = game.Commander().getCurrentSystem().Shipyard();
+	private final Game game = Game.CurrentGame();
+	private final Shipyard shipyard = Game.CurrentGame().Commander().CurrentSystem().Shipyard();
 	private boolean loading = false;
 	private ArrayList<Size> sizes = null;
 	private Image[] customImages = new Image[Consts.ImagesPerShip];
 	private int imgIndex = 0;
 	private jwinforms.Label lblDisabledName;
-	private final ShipType[] imgTypes = new ShipType[] { ShipType.Flea, ShipType.Gnat, ShipType.Firefly,
-			ShipType.Mosquito, ShipType.Bumblebee, ShipType.Beetle, ShipType.Hornet, ShipType.Grasshopper,
-			ShipType.Termite, ShipType.Wasp, ShipType.Custom };
+	private final ShipType[] imgTypes = new ShipType[] { ShipType.Flea, ShipType.Gnat, ShipType.Firefly, ShipType.Mosquito,
+			ShipType.Bumblebee, ShipType.Beetle, ShipType.Hornet, ShipType.Grasshopper, ShipType.Termite,
+			ShipType.Wasp, ShipType.Custom };
 
 	//#endregion
 
@@ -133,16 +134,21 @@ public class FormShipyard extends SpaceTraderForm
 		lblWarning.setText(Functions.StringVars(Strings.ShipyardWarning, "" + Shipyard.PENALTY_FIRST_PCT, ""
 				+ Shipyard.PENALTY_SECOND_PCT));
 
-		dlgOpen.setInitialDirectory(Persistence.getCustomImageDir());
-		dlgSave.setInitialDirectory(Persistence.getCustomTemplateDir());
-		lblDisabledName.setImage(SpaceTrader.INSTANCE.DirectionImages().getImages()[Consts.DirectionDown]);
-		lblDisabledPct.setImage(SpaceTrader.INSTANCE.DirectionImages().getImages()[Consts.DirectionUp]);
+		dlgOpen.setInitialDirectory(Consts.CustomImagesDirectory);
+		dlgSave.setInitialDirectory(Consts.CustomTemplatesDirectory);
+		lblDisabledName.setImage(game.getParentWindow().DirectionImages().getImages()[Consts.DirectionDown]);
+		lblDisabledPct.setImage(game.getParentWindow().DirectionImages().getImages()[Consts.DirectionDown]);
 
 		LoadSizes();
 		LoadTemplateList();
 		LoadSelectedTemplate();
 	}
 
+	//#region Windows Form Designer generated code
+	/// <summary>
+	/// Required method for Designer support - do not modify
+	/// the contents of this method with the code editor.
+	/// </summary>
 	private void InitializeComponent()
 	{
 		components = new Container();
@@ -225,8 +231,9 @@ public class FormShipyard extends SpaceTraderForm
 		//
 		// boxWelcome
 		//
-		boxWelcome.Controls.addAll((new WinformControl[] { lblSkillDescription, lblSkill, lblSizeSpecialty,
-				lblSkillLabel, lblSizeSpecialtyLabel, lblWarning, picLogo, lblWelcome }));
+		boxWelcome.Controls.addAll((new WinformControl[] { lblSkillDescription, lblSkill,
+				lblSizeSpecialty, lblSkillLabel, lblSizeSpecialtyLabel, lblWarning, picLogo,
+				lblWelcome }));
 		boxWelcome.setLocation(new java.awt.Point(8, 0));
 		boxWelcome.setName("boxWelcome");
 		boxWelcome.setSize(new jwinforms.Size(270, 204));
@@ -260,7 +267,8 @@ public class FormShipyard extends SpaceTraderForm
 		// lblSkillLabel
 		//
 		lblSkillLabel.setAutoSize(true);
-		lblSkillLabel.setFont(FontCollection.bold825);
+		lblSkillLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
+				((byte)(0))));
 		lblSkillLabel.setLocation(new java.awt.Point(92, 79));
 		lblSkillLabel.setName("lblSkillLabel");
 		lblSkillLabel.setSize(new jwinforms.Size(72, 13));
@@ -270,7 +278,8 @@ public class FormShipyard extends SpaceTraderForm
 		// lblSizeSpecialtyLabel
 		//
 		lblSizeSpecialtyLabel.setAutoSize(true);
-		lblSizeSpecialtyLabel.setFont(FontCollection.bold825);
+		lblSizeSpecialtyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
+				((byte)(0))));
 		lblSizeSpecialtyLabel.setLocation(new java.awt.Point(92, 65));
 		lblSizeSpecialtyLabel.setName("lblSizeSpecialtyLabel");
 		lblSizeSpecialtyLabel.setSize(new jwinforms.Size(82, 13));
@@ -308,9 +317,10 @@ public class FormShipyard extends SpaceTraderForm
 		//
 		// boxInfo
 		//
-		boxInfo.Controls.addAll((new WinformControl[] { btnSave, btnLoad, picInfoLine, btnPrevImage, btnNextImage,
-				lblImage, lblImageLabel, selTemplate, lblTemplate, selSize, lblSize, btnSetCustomImage, picShip,
-				txtName, lblName }));
+		boxInfo.Controls.addAll((new WinformControl[] { btnSave, btnLoad, picInfoLine,
+				btnPrevImage, btnNextImage, lblImage, lblImageLabel, selTemplate,
+				lblTemplate, selSize, lblSize, btnSetCustomImage, picShip, txtName,
+				lblName }));
 		boxInfo.setLocation(new java.awt.Point(8, 208));
 		boxInfo.setName("boxInfo");
 		boxInfo.setSize(new jwinforms.Size(270, 160));
@@ -327,29 +337,29 @@ public class FormShipyard extends SpaceTraderForm
 		btnSave.setTabIndex(4);
 		btnSave.setText("Save");
 		btnSave.setClick(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnSave_Click(sender, e);
 			}
-		});
+				});
 		btnSave.setMouseEnter(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnSave_MouseEnter(sender, e);
 			}
-		});
+				});
 		btnSave.setMouseLeave(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnSave_MouseLeave(sender, e);
 			}
-		});
+				});
 		//
 		// btnLoad
 		//
@@ -360,13 +370,13 @@ public class FormShipyard extends SpaceTraderForm
 		btnLoad.setTabIndex(2);
 		btnLoad.setText("Load");
 		btnLoad.setClick(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnLoad_Click(sender, e);
 			}
-		});
+				});
 		//
 		// picInfoLine
 		//
@@ -386,13 +396,13 @@ public class FormShipyard extends SpaceTraderForm
 		btnPrevImage.setTabIndex(6);
 		btnPrevImage.setText("<");
 		btnPrevImage.setClick(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnPrevImage_Click(sender, e);
 			}
-		});
+				});
 		//
 		// btnNextImage
 		//
@@ -403,13 +413,13 @@ public class FormShipyard extends SpaceTraderForm
 		btnNextImage.setTabIndex(7);
 		btnNextImage.setText(">");
 		btnNextImage.setClick(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnNextImage_Click(sender, e);
 			}
-		});
+				});
 		//
 		// lblImage
 		//
@@ -454,13 +464,13 @@ public class FormShipyard extends SpaceTraderForm
 		selSize.setSize(new jwinforms.Size(180, 21));
 		selSize.setTabIndex(5);
 		selSize.setSelectedIndexChanged(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				selSize_SelectedIndexChanged(sender, e);
 			}
-		});
+				});
 		//
 		// lblSize
 		//
@@ -480,13 +490,13 @@ public class FormShipyard extends SpaceTraderForm
 		btnSetCustomImage.setTabIndex(8);
 		btnSetCustomImage.setText("Set Custom...");
 		btnSetCustomImage.setClick(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnSetCustomImage_Click(sender, e);
 			}
-		});
+				});
 		//
 		// picShip
 		//
@@ -506,13 +516,13 @@ public class FormShipyard extends SpaceTraderForm
 		txtName.setTabIndex(3);
 		txtName.setText("");
 		txtName.setTextChanged(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				txtName_TextChanged(sender, e);
 			}
-		});
+				});
 		//
 		// lblName
 		//
@@ -543,9 +553,9 @@ public class FormShipyard extends SpaceTraderForm
 		//
 		// boxCosts
 		//
-		boxCosts.Controls.addAll((new WinformControl[] { lblTradeIn, lblTradeInLabel, picCostsLine, lblPenalty,
-				lblPenaltyLabel, lblShipCost, lblTotalCost, lblTotalCostLabel, lblShipCostLabel, lblDesignFee,
-				lblDesignFeeLabel }));
+		boxCosts.Controls.addAll((new WinformControl[] { lblTradeIn, lblTradeInLabel, picCostsLine,
+				lblPenalty, lblPenaltyLabel, lblShipCost, lblTotalCost, lblTotalCostLabel,
+				lblShipCostLabel, lblDesignFee, lblDesignFeeLabel }));
 		boxCosts.setLocation(new java.awt.Point(286, 230));
 		boxCosts.setName("boxCosts");
 		boxCosts.setSize(new jwinforms.Size(184, 106));
@@ -662,29 +672,29 @@ public class FormShipyard extends SpaceTraderForm
 		btnConstruct.setTabIndex(6);
 		btnConstruct.setText("Construct Ship");
 		btnConstruct.setClick(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnConstruct_Click(sender, e);
 			}
-		});
+				});
 		btnConstruct.setMouseEnter(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnConstruct_MouseEnter(sender, e);
 			}
-		});
+				});
 		btnConstruct.setMouseLeave(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				btnConstruct_MouseLeave(sender, e);
 			}
-		});
+				});
 		//
 		// btnCancel
 		//
@@ -699,9 +709,10 @@ public class FormShipyard extends SpaceTraderForm
 		// boxAllocation
 		//
 		boxAllocation.Controls.addAll((new WinformControl[] { lblPct, lblPctLabel, numHullStrength,
-				lblHullStrenghLabel, numCargoBays, numCrewQuarters, numFuelTanks, numShieldSlots, numGadgetSlots,
-				numWeaponSlots, lblCargoBays, lblFuelTanks, lblCrewQuarters, lblShieldSlots, lblGadgetSlots,
-				lblWeaponsSlots, lblUnitsUsedLabel, lblUnitsUsed }));
+				lblHullStrenghLabel, numCargoBays, numCrewQuarters, numFuelTanks,
+				numShieldSlots, numGadgetSlots, numWeaponSlots, lblCargoBays, lblFuelTanks,
+				lblCrewQuarters, lblShieldSlots, lblGadgetSlots, lblWeaponsSlots,
+				lblUnitsUsedLabel, lblUnitsUsed }));
 		boxAllocation.setLocation(new java.awt.Point(286, 0));
 		boxAllocation.setName("boxAllocation");
 		boxAllocation.setSize(new jwinforms.Size(184, 226));
@@ -711,7 +722,7 @@ public class FormShipyard extends SpaceTraderForm
 		//
 		// lblPct
 		//
-		lblPct.setFont(FontCollection.bold825);
+		lblPct.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblPct.setForeColor(java.awt.Color.red);
 		lblPct.setLocation(new java.awt.Point(110, 204));
 		lblPct.setName("lblPct");
@@ -740,21 +751,21 @@ public class FormShipyard extends SpaceTraderForm
 		numHullStrength.setTabIndex(1);
 		numHullStrength.TextAlign = jwinforms.HorizontalAlignment.Right;
 		numHullStrength.setEnter(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueEnter(sender, e);
 			}
-		});
+				});
 		numHullStrength.setValueChanged(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueChanged(sender, e);
 			}
-		});
+				});
 		//
 		// lblHullStrenghLabel
 		//
@@ -776,21 +787,21 @@ public class FormShipyard extends SpaceTraderForm
 		numCargoBays.setTabIndex(3);
 		numCargoBays.TextAlign = jwinforms.HorizontalAlignment.Right;
 		numCargoBays.setEnter(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueEnter(sender, e);
 			}
-		});
+				});
 		numCargoBays.setValueChanged(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueChanged(sender, e);
 			}
-		});
+				});
 		//
 		// numCrewQuarters
 		//
@@ -804,21 +815,21 @@ public class FormShipyard extends SpaceTraderForm
 		numCrewQuarters.TextAlign = jwinforms.HorizontalAlignment.Right;
 		numCrewQuarters.setValue(1);
 		numCrewQuarters.setEnter(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueEnter(sender, e);
 			}
-		});
+				});
 		numCrewQuarters.setValueChanged(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueChanged(sender, e);
 			}
-		});
+				});
 		//
 		// numFuelTanks
 		//
@@ -830,21 +841,21 @@ public class FormShipyard extends SpaceTraderForm
 		numFuelTanks.setTabIndex(2);
 		numFuelTanks.TextAlign = jwinforms.HorizontalAlignment.Right;
 		numFuelTanks.setEnter(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueEnter(sender, e);
 			}
-		});
+				});
 		numFuelTanks.setValueChanged(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueChanged(sender, e);
 			}
-		});
+				});
 		//
 		// numShieldSlots
 		//
@@ -856,21 +867,21 @@ public class FormShipyard extends SpaceTraderForm
 		numShieldSlots.setTabIndex(6);
 		numShieldSlots.TextAlign = jwinforms.HorizontalAlignment.Right;
 		numShieldSlots.setEnter(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueEnter(sender, e);
 			}
-		});
+				});
 		numShieldSlots.setValueChanged(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueChanged(sender, e);
 			}
-		});
+				});
 		//
 		// numGadgetSlots
 		//
@@ -882,21 +893,21 @@ public class FormShipyard extends SpaceTraderForm
 		numGadgetSlots.setTabIndex(7);
 		numGadgetSlots.TextAlign = jwinforms.HorizontalAlignment.Right;
 		numGadgetSlots.setEnter(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueEnter(sender, e);
 			}
-		});
+				});
 		numGadgetSlots.setValueChanged(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueChanged(sender, e);
 			}
-		});
+				});
 		//
 		// numWeaponSlots
 		//
@@ -908,21 +919,21 @@ public class FormShipyard extends SpaceTraderForm
 		numWeaponSlots.setTabIndex(5);
 		numWeaponSlots.TextAlign = jwinforms.HorizontalAlignment.Right;
 		numWeaponSlots.setEnter(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueEnter(sender, e);
 			}
-		});
+				});
 		numWeaponSlots.setValueChanged(new EventHandler<Object, EventArgs>()
-		{
+				{
 			@Override
 			public void handle(Object sender, jwinforms.EventArgs e)
 			{
 				num_ValueChanged(sender, e);
 			}
-		});
+				});
 		//
 		// lblCargoBays
 		//
@@ -1030,8 +1041,8 @@ public class FormShipyard extends SpaceTraderForm
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
 		this.setCancelButton(btnCancel);
 		this.setClientSize(new jwinforms.Size(478, 375));
-		Controls.addAll(Arrays.asList(lblDisabledPct, boxWelcome, lblDisabledName, boxAllocation, boxCosts, boxInfo,
-				btnCancel, btnConstruct));
+		Controls.addAll(Arrays.asList(lblDisabledPct, boxWelcome, lblDisabledName,
+				boxAllocation, boxCosts, boxInfo, btnCancel, btnConstruct));
 		this.setFormBorderStyle(FormBorderStyle.FixedDialog);
 		this.setMaximizeBox(false);
 		this.setMinimizeBox(false);
@@ -1039,6 +1050,10 @@ public class FormShipyard extends SpaceTraderForm
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Ship Design at XXXX Shipyards");
+		boxWelcome.ResumeLayout(false);
+		boxInfo.ResumeLayout(false);
+		boxCosts.ResumeLayout(false);
+		boxAllocation.ResumeLayout(false);
 		((ISupportInitialize)(numHullStrength)).EndInit();
 		((ISupportInitialize)(numCargoBays)).EndInit();
 		((ISupportInitialize)(numCrewQuarters)).EndInit();
@@ -1046,6 +1061,8 @@ public class FormShipyard extends SpaceTraderForm
 		((ISupportInitialize)(numShieldSlots)).EndInit();
 		((ISupportInitialize)(numGadgetSlots)).EndInit();
 		((ISupportInitialize)(numWeaponSlots)).EndInit();
+		this.ResumeLayout(false);
+
 	}
 
 	//#endregion
@@ -1057,69 +1074,74 @@ public class FormShipyard extends SpaceTraderForm
 
 	private Bitmap GetImageFile(String fileName)
 	{
+		Bitmap image = null;
+
 		try
 		{
-			return new Bitmap(fileName);
+			image = new Bitmap(fileName);
 		} catch (Exception ex)
 		{
-			GuiFacade.alert(AlertType.FileErrorOpen, fileName, ex.getMessage());
-			return null;
+			FormAlert.Alert(AlertType.FileErrorOpen, this, fileName, ex.getMessage());
 		}
+
+		return image;
 	}
 
 	private void LoadSelectedTemplate()
 	{
-		if (!(selTemplate.getSelectedItem() instanceof ShipTemplate))
-			return;
+		if (selTemplate.getSelectedItem() instanceof ShipTemplate)
+		{
+			loading = true;
 
-		loading = true;
+			ShipTemplate template = (ShipTemplate)selTemplate.getSelectedItem();
 
-		ShipTemplate template = (ShipTemplate)selTemplate.getSelectedItem();
+			if (template.Name() == Strings.ShipNameCurrentShip)
+				txtName.setText(game.Commander().getShip().Name());
+			else if (template.Name().endsWith(Strings.ShipNameTemplateSuffixDefault)
+					|| template.Name().endsWith(Strings.ShipNameTemplateSuffixMinimum))
+				txtName.setText("");
+			else
+				txtName.setText(template.Name());
 
-		if (template.Name() == Strings.ShipNameCurrentShip)
-			txtName.setText(game.Commander().getShip().Name());
-		else if (template.Name().endsWith(Strings.ShipNameTemplateSuffixDefault)
-				|| template.Name().endsWith(Strings.ShipNameTemplateSuffixMinimum))
-			txtName.setText("");
-		else
-			txtName.setText(template.Name());
+			selSize.setSelectedIndex(Math.max(0, sizes.indexOf(template.Size())));
+			imgIndex = template.ImageIndex() == ShipType.Custom.CastToInt() ? imgTypes.length - 1 : template
+					.ImageIndex();
 
-		selSize.setSelectedIndex(Math.max(0, sizes.indexOf(template.Size())));
-		imgIndex = template.ImageIndex() == ShipType.Custom.CastToInt() ? imgTypes.length - 1 : template.ImageIndex();
+			if (template.Images() != null)
+				customImages = template.Images();
+			else
+				customImages = game.getParentWindow().CustomShipImages();
 
-		if (template.Images() != null)
-			customImages = ShipImageMaker.produceCustomImages(template.Images());
-		else
-			customImages = SpaceTrader.INSTANCE.CustomShipImages();
+			numCargoBays.setValue(template.CargoBays());
+			numFuelTanks.setValue(Math.min(Math.max(numFuelTanks.getMinimum(), template.FuelTanks()), numFuelTanks
+					.getMaximum()));
+			numHullStrength.setValue(Math.min(Math.max(numHullStrength.getMinimum(), template.HullStrength()),
+					numHullStrength.getMaximum()));
+			numWeaponSlots.setValue(template.WeaponSlots());
+			numShieldSlots.setValue(template.ShieldSlots());
+			numGadgetSlots.setValue(template.GadgetSlots());
+			numCrewQuarters.setValue(Math.max(numCrewQuarters.getMinimum(), template.CrewQuarters()));
 
-		numCargoBays.setValue(template.CargoBays());
-		numFuelTanks.setValue(Math.min(Math.max(numFuelTanks.getMinimum(), template.FuelTanks()), numFuelTanks
-				.getMaximum()));
-		numHullStrength.setValue(Math.min(Math.max(numHullStrength.getMinimum(), template.HullStrength()),
-				numHullStrength.getMaximum()));
-		numWeaponSlots.setValue(template.WeaponSlots());
-		numShieldSlots.setValue(template.ShieldSlots());
-		numGadgetSlots.setValue(template.GadgetSlots());
-		numCrewQuarters.setValue(Math.max(numCrewQuarters.getMinimum(), template.CrewQuarters()));
+			UpdateShip();
+			UpdateCalculatedFigures();
 
-		UpdateShip();
-		UpdateCalculatedFigures();
+			if (selTemplate.Items.get(0).toString() == Strings.ShipNameModified)
+				selTemplate.Items.remove(0);
 
-		if (selTemplate.Items.get(0).toString() == Strings.ShipNameModified)
-			selTemplate.Items.remove(0);
-
-		loading = false;
+			loading = false;
+		}
 	}
 
 	private void LoadSizes()
 	{
 		sizes = new ArrayList<Size>(6);
 
+//			foreach (Size size in shipyard.AvailableSizes)
 		for (Size size : shipyard.AvailableSizes())
 		{
 			sizes.add(size);
-			selSize.Items.add(Functions.StringVars(Strings.ShipyardSizeItem, Strings.Sizes[size.CastToInt()], Functions
-					.Multiples(Shipyard.MAX_UNITS[size.CastToInt()], Strings.ShipyardUnit)));
+			selSize.Items.add(Functions.StringVars(Strings.ShipyardSizeItem, Strings.Sizes[size.CastToInt()],
+					Functions.Multiples(Shipyard.MAX_UNITS[size.CastToInt()], Strings.ShipyardUnit)));
 		}
 	}
 
@@ -1133,7 +1155,7 @@ public class FormShipyard extends SpaceTraderForm
 		// Add the minimal sizes templates.
 		for (Size size : sizes)
 			selTemplate.Items.add(new ShipTemplate(size, Strings.Sizes[size.CastToInt()]
-					+ Strings.ShipNameTemplateSuffixMinimum));
+			                                                           + Strings.ShipNameTemplateSuffixMinimum));
 
 		selTemplate.Items.add(Consts.ShipTemplateSeparator);
 
@@ -1148,9 +1170,9 @@ public class FormShipyard extends SpaceTraderForm
 
 		// Add the user-created templates.
 		ArrayList userTemplates = new ArrayList();
-		for (String fileName : Directory.GetFiles(Persistence.getCustomTemplateDir(), "*.sst"))
+		for (String fileName : Directory.GetFiles(Consts.CustomTemplatesDirectory, "*.sst"))
 		{
-			ShipTemplate template = new ShipTemplate((Hashtable)Functions.LoadFile(fileName, true));
+			ShipTemplate template = new ShipTemplate((Hashtable)Functions.LoadFile(fileName, true, this));
 			if (sizes.contains(template.Size()))
 				userTemplates.add(template);
 		}
@@ -1167,7 +1189,7 @@ public class FormShipyard extends SpaceTraderForm
 
 	private void SetTemplateModified()
 	{
-		if (!loading && selTemplate.Items.getSize() > 0)
+		if (!loading && selTemplate.Items.getSize()>0)
 		{
 			if (selTemplate.Items.get(0).toString() != Strings.ShipNameModified)
 				selTemplate.Items.Insert(0, Strings.ShipNameModified);
@@ -1205,7 +1227,7 @@ public class FormShipyard extends SpaceTraderForm
 		if (extraFuel % shipyard.PerUnitFuel() > 0 && numFuelTanks.getValue() < numFuelTanks.getMaximum())
 			numFuelTanks.setValue(Math.max(numFuelTanks.getMinimum(), Math.min(numFuelTanks.getMaximum(),
 					(extraFuel + shipyard.PerUnitFuel()) / shipyard.PerUnitFuel() * shipyard.PerUnitFuel()
-							+ shipyard.BaseFuel())));
+					+ shipyard.BaseFuel())));
 
 		// Fix the hull value to be a multiple of the unit value value less the super.
 		int extraHull = numHullStrength.getValue() - shipyard.BaseHull();
@@ -1256,27 +1278,38 @@ public class FormShipyard extends SpaceTraderForm
 	private void UpdateShip()
 	{
 		shipyard.ShipSpec().ImageIndex(imgTypes[imgIndex].CastToInt());
-		picShip.setImage((imgIndex > Consts.MaxShip ? customImages[0]
-				: ShipImageMaker.Image(Consts.ShipSpecs[imgTypes[imgIndex].CastToInt()])));
-		lblImage.setText((imgIndex > Consts.MaxShip ? Strings.ShipNameCustomShip : Consts.ShipSpecs[imgTypes[imgIndex]
-				.CastToInt()].Name()));
+		picShip.setImage((imgIndex > Consts.MaxShip ? customImages[0] : Consts.ShipSpecs[imgTypes[imgIndex]
+		                                                                                          .CastToInt()].Image()));
+		lblImage.setText((imgIndex > Consts.MaxShip ? Strings.ShipNameCustomShip
+				: Consts.ShipSpecs[imgTypes[imgIndex].CastToInt()].Name()));
 	}
+
+	//#endregion
+
+	//#region Event Handlers
 
 	private void btnConstruct_Click(Object sender, EventArgs e)
 	{
-		if (!ConstructButtonEnabled())
-			return;
-
-		if (game.Commander().TradeShip(shipyard.ShipSpec(), shipyard.TotalCost(), txtName.getText()))
+		if (ConstructButtonEnabled())
 		{
-			Strings.ShipNames[ShipType.Custom.CastToInt()] = txtName.getText();
+			if (game.Commander().TradeShip(shipyard.ShipSpec(), shipyard.TotalCost(), txtName.getText(), this))
+			{
+				Strings.ShipNames[ShipType.Custom.CastToInt()] = txtName.getText();
 
-			// Replace the current custom images with the new ones.
-			if (game.Commander().getShip().ImageIndex() == ShipType.Custom.CastToInt())
-				SpaceTrader.INSTANCE.setCustomShipImages(customImages);
+				if (game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone)
+					game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
 
-			GuiFacade.alert(AlertType.ShipDesignThanks, shipyard.Name());
-			Close();
+				// Replace the current custom images with the new ones.
+				if (game.Commander().getShip().ImageIndex() == ShipType.Custom.CastToInt())
+				{
+					game.getParentWindow().setCustomShipImages(customImages);
+
+					game.Commander().getShip().UpdateCustomImageOffsetConstants();
+				}
+
+				FormAlert.Alert(AlertType.ShipDesignThanks, this, shipyard.Name());
+				Close();
+			}
 		}
 	}
 
@@ -1313,23 +1346,24 @@ public class FormShipyard extends SpaceTraderForm
 
 	private void btnSave_Click(Object sender, EventArgs e)
 	{
-		if (!SaveButtonEnabled())
-			return;
-		if (dlgSave.ShowDialog(this) != DialogResult.OK)
-			return;
-
-		ShipTemplate template = new ShipTemplate(shipyard.ShipSpec(), txtName.getText());
-
-		if (imgIndex > Consts.MaxShip)
+		if (SaveButtonEnabled())
 		{
-			template.ImageIndex(ShipType.Custom.CastToInt());
-			template.Images(ShipImageMaker.describeCustomImages(customImages));
-		} else
-			template.ImageIndex(imgIndex);
+			if (dlgSave.ShowDialog(this) == DialogResult.OK)
+			{
+				ShipTemplate template = new ShipTemplate(shipyard.ShipSpec(), txtName.getText());
 
-		Functions.SaveFile(dlgSave.getFileName(), template.Serialize());
+				if (imgIndex > Consts.MaxShip)
+				{
+					template.ImageIndex(ShipType.Custom.CastToInt());
+					template.Images(customImages);
+				} else
+					template.ImageIndex(imgIndex);
 
-		LoadTemplateList();
+				Functions.SaveFile(dlgSave.getFileName(), template.Serialize(), this);
+
+				LoadTemplateList();
+			}
+		}
 	}
 
 	private void btnSave_MouseEnter(Object sender, EventArgs e)
@@ -1344,27 +1378,27 @@ public class FormShipyard extends SpaceTraderForm
 
 	private void btnSetCustomImage_Click(Object sender, EventArgs e)
 	{
-		if (dlgOpen.ShowDialog(this) != DialogResult.OK)
-			return;
-
-		String baseFileName = Path.RemoveExtension(dlgOpen.getFileName());
-		String ext = Path.GetExtension(dlgOpen.getFileName());
-
-		Bitmap image = GetImageFile(baseFileName + ext);
-		Bitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
-		Bitmap imageShields = GetImageFile(baseFileName + "s" + ext);
-		Bitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
-
-		if (image != null && imageDamaged != null && imageShields != null && imageShieldsDamaged != null)
+		if (dlgOpen.ShowDialog(this) == DialogResult.OK)
 		{
-			customImages[Consts.ShipImgOffsetNormal] = image;
-			customImages[Consts.ShipImgOffsetDamage] = imageDamaged;
-			customImages[Consts.ShipImgOffsetShield] = imageShields;
-			customImages[Consts.ShipImgOffsetSheildDamage] = imageShieldsDamaged;
-		}
+			String baseFileName = Path.RemoveExtension(dlgOpen.getFileName());
+			String ext = Path.GetExtension(dlgOpen.getFileName());
 
-		imgIndex = imgTypes.length - 1;
-		UpdateShip();
+			Bitmap image = GetImageFile(baseFileName + ext);
+			Bitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
+			Bitmap imageShields = GetImageFile(baseFileName + "s" + ext);
+			Bitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
+
+			if (image != null && imageDamaged != null && imageShields != null && imageShieldsDamaged != null)
+			{
+				customImages[Consts.ShipImgOffsetNormal] = image;
+				customImages[Consts.ShipImgOffsetDamage] = imageDamaged;
+				customImages[Consts.ShipImgOffsetShield] = imageShields;
+				customImages[Consts.ShipImgOffsetSheildDamage] = imageShieldsDamaged;
+			}
+
+			imgIndex = imgTypes.length - 1;
+			UpdateShip();
+		}
 	}
 
 	private void num_ValueChanged(Object sender, EventArgs e)

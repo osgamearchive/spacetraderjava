@@ -31,26 +31,26 @@ public class PoliticalSystem
 {
 	// #region Member Declarations
 
-	private final PoliticalSystemType _type;
-	private final int _reactionIllegal; // Reaction level of illegal goods 0 = total
+	private PoliticalSystemType _type;
+	private int _reactionIllegal; // Reaction level of illegal goods 0 = total
 	// acceptance (determines how police reacts
 	// if they find you carry them)
-	private final Activity _activityPolice; // Activity level of police force 0 = no
+	private Activity _activityPolice; // Activity level of police force 0 = no
 	// police (determines occurrence rate)
-	private final Activity _activityPirates; // Activity level of pirates 0 = no
+	private Activity _activityPirates; // Activity level of pirates 0 = no
 	// pirates
-	private final Activity _activityTraders; // Activity level of traders 0 = no
+	private Activity _activityTraders; // Activity level of traders 0 = no
 	// traders
-	private final TechLevel _minTech; // Mininum tech level needed
-	private final TechLevel _maxTech; // Maximum tech level where this is found
-	private final int _bribeLevel; // Indicates how easily someone can be bribed 0 =
+	private TechLevel _minTech; // Mininum tech level needed
+	private TechLevel _maxTech; // Maximum tech level where this is found
+	private int _bribeLevel; // Indicates how easily someone can be bribed 0 =
 	// unbribeable/high bribe costs
-	private final boolean _drugsOk; // Drugs can be traded (if not, people aren't
+	private boolean _drugsOk; // Drugs can be traded (if not, people aren't
 	// interested or the governemnt is too strict)
-	private final boolean _firearmsOk; // Firearms can be traded (if not, people
+	private boolean _firearmsOk; // Firearms can be traded (if not, people
 	// aren't interested or the governemnt is
 	// too strict)
-	private final TradeItemType _wanted; // Tradeitem requested in particular in this
+	private TradeItemType _wanted; // Tradeitem requested in particular in this
 
 	// type of government
 
@@ -79,7 +79,7 @@ public class PoliticalSystem
 	{
 		boolean likely = false;
 		int diffMod = Math
-				.max(0, Game.currentGame().Difficulty().CastToInt() - Difficulty.Normal.CastToInt());
+				.max(0, Game.CurrentGame().Difficulty().CastToInt() - Difficulty.Normal.CastToInt());
 
 		switch (oppType)
 		{
@@ -146,7 +146,7 @@ public class PoliticalSystem
 
 	public String Name()
 	{
-		return _type.getName();
+		return Strings.PoliticalSystemNames[_type.CastToInt()];
 	}
 
 	public int ReactionIllegal()

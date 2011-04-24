@@ -35,111 +35,127 @@ import java.util.Arrays;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import jwinforms.*;
+
 import spacetrader.Commander;
-import spacetrader.GameFacade;
+import spacetrader.Game;
 
 public class FormBuyRepairs extends jwinforms.WinformForm
 {
+	// #region Control Declarations
+
 	private jwinforms.Button btnOk;
 	private jwinforms.Label lblQuestion;
 	private jwinforms.Button btnMax;
 	private jwinforms.Button btnNothing;
 	private jwinforms.NumericUpDown numAmount;
 
+	// #endregion
+
+	// #region Member Declarations
+
+	private Game game = Game.CurrentGame();
+
+	// #endregion
+
+	// #region Methods
+
 	public FormBuyRepairs()
 	{
 		InitializeComponent();
 
-		Commander cmdr = GameFacade.currentGame().Commander();
+		Commander cmdr = game.Commander();
 		numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().HullStrength() - cmdr.getShip().getHull())
 				* cmdr.getShip().getRepairCost()));
 		numAmount.setValue(numAmount.getMaximum());
 	}
 
+	// #region Windows Form Designer generated code
+	// / <summary>
+	// / Required method for Designer support - do not modify
+	// / the contents of this method with the code editor.
+	// / </summary>
 	private void InitializeComponent()
 	{
-		lblQuestion = new jwinforms.Label();
-		numAmount = new jwinforms.NumericUpDown();
-		btnOk = new jwinforms.Button();
-		btnMax = new jwinforms.Button();
-		btnNothing = new jwinforms.Button();
-		((ISupportInitialize)(numAmount)).BeginInit();
+		this.lblQuestion = new jwinforms.Label();
+		this.numAmount = new jwinforms.NumericUpDown();
+		this.btnOk = new jwinforms.Button();
+		this.btnMax = new jwinforms.Button();
+		this.btnNothing = new jwinforms.Button();
+		((ISupportInitialize)(this.numAmount)).BeginInit();
 		this.SuspendLayout();
 		//
 		// lblQuestion
 		//
-		lblQuestion.setAutoSize(true);
-		lblQuestion.setLocation(new Point(8, 8));
-		lblQuestion.setName("lblQuestion");
-		lblQuestion.setSize(new Size(227, 13));
-		lblQuestion.setTabIndex(3);
-		lblQuestion.setText("How much do you want to spend on repairs?");
+		this.lblQuestion.setAutoSize(true);
+		this.lblQuestion.setLocation(new Point(8, 8));
+		this.lblQuestion.setName("lblQuestion");
+		this.lblQuestion.setSize(new Size(227, 13));
+		this.lblQuestion.setTabIndex(3);
+		this.lblQuestion.setText("How much do you want to spend on repairs?");
 		//
 		// numAmount
 		//
-		numAmount.setLocation(new Point(232, 6));
-		numAmount.setMaximum(999);
-		numAmount.setMinimum(1);
-		numAmount.setName("numAmount");
-		numAmount.setSize(new Size(44, 20));
-		numAmount.setTabIndex(1);
-		numAmount.setValue(888);
+		this.numAmount.setLocation(new Point(232, 6));
+		this.numAmount.setMaximum(999);
+		this.numAmount.setMinimum(1);
+		this.numAmount.setName("numAmount");
+		this.numAmount.setSize(new Size(44, 20));
+		this.numAmount.setTabIndex(1);
+		this.numAmount.setValue(888);
 		//
 		// btnOk
 		//
-		btnOk.setDialogResult(DialogResult.OK);
-		btnOk.setFlatStyle(jwinforms.FlatStyle.Flat);
-		btnOk.setLocation(new Point(69, 32));
-		btnOk.setName("btnOk");
-		btnOk.setSize(new Size(41, 22));
-		btnOk.setTabIndex(2);
-		btnOk.setText("Ok");
+		this.btnOk.setDialogResult(DialogResult.OK);
+		this.btnOk.setFlatStyle(jwinforms.FlatStyle.Flat);
+		this.btnOk.setLocation(new Point(69, 32));
+		this.btnOk.setName("btnOk");
+		this.btnOk.setSize(new Size(41, 22));
+		this.btnOk.setTabIndex(2);
+		this.btnOk.setText("Ok");
 		//
 		// btnMax
 		//
-		btnMax.setDialogResult(DialogResult.OK);
-		btnMax.setFlatStyle(jwinforms.FlatStyle.Flat);
-		btnMax.setLocation(new Point(117, 32));
-		btnMax.setName("btnMax");
-		btnMax.setSize(new Size(41, 22));
-		btnMax.setTabIndex(3);
-		btnMax.setText("Max");
-		btnMax.setClick(new EventHandler<Object, EventArgs>()
-		{
-			@Override
-			public void handle(Object sender, EventArgs e)
-			{
-				btnMax_Click(sender, e);
-			}
-		});
+		this.btnMax.setDialogResult(DialogResult.OK);
+		this.btnMax.setFlatStyle(jwinforms.FlatStyle.Flat);
+		this.btnMax.setLocation(new Point(117, 32));
+		this.btnMax.setName("btnMax");
+		this.btnMax.setSize(new Size(41, 22));
+		this.btnMax.setTabIndex(3);
+		this.btnMax.setText("Max");
 		//
 		// btnNothing
 		//
-		btnNothing.setDialogResult(DialogResult.Cancel);
-		btnNothing.setFlatStyle(jwinforms.FlatStyle.Flat);
-		btnNothing.setLocation(new Point(165, 32));
-		btnNothing.setName("btnNothing");
-		btnNothing.setSize(new Size(53, 22));
-		btnNothing.setTabIndex(4);
-		btnNothing.setText("Nothing");
+		this.btnNothing.setDialogResult(DialogResult.Cancel);
+		this.btnNothing.setFlatStyle(jwinforms.FlatStyle.Flat);
+		this.btnNothing.setLocation(new Point(165, 32));
+		this.btnNothing.setName("btnNothing");
+		this.btnNothing.setSize(new Size(53, 22));
+		this.btnNothing.setTabIndex(4);
+		this.btnNothing.setText("Nothing");
 		//
 		// FormBuyRepairs
 		//
-		this.setAcceptButton(btnOk);
+		this.setAcceptButton(this.btnOk);
 		this.setAutoScaleBaseSize(new Size(5, 13));
-		this.setCancelButton(btnNothing);
+		this.setCancelButton(this.btnNothing);
 		this.setClientSize(new Size(286, 63));
 		this.setControlBox(false);
-		Controls.addAll(Arrays.asList(new WinformControl[] { btnNothing, btnMax, btnOk,
-				numAmount, lblQuestion }));
+		this.Controls.addAll(Arrays.asList(new WinformControl[] { this.btnNothing, this.btnMax, this.btnOk,
+				this.numAmount, this.lblQuestion }));
 		this.setFormBorderStyle(jwinforms.FormBorderStyle.FixedDialog);
 		this.setName("FormBuyRepairs");
 		this.setShowInTaskbar(false);
 		this.setStartPosition(FormStartPosition.CenterParent);
 		this.setText("Hull Repair");
-		((ISupportInitialize)(numAmount)).EndInit();
+		((ISupportInitialize)(this.numAmount)).EndInit();
+		this.ResumeLayout(false);
 	}
 
+	// #endregion
+
+	// #endregion
+
+	// #region Event Handlers
 	// This action is not connected in the .NET version either.
 	private void btnMax_Click(Object sender, EventArgs e)
 	{

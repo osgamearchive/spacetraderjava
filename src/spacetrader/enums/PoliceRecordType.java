@@ -1,7 +1,5 @@
 package spacetrader.enums;
 
-import spacetrader.Strings;
-
 public enum PoliceRecordType implements SpaceTraderEnum// : int
 {
 	Psychopath, // = 0,
@@ -18,10 +16,5 @@ public enum PoliceRecordType implements SpaceTraderEnum// : int
 	public int CastToInt()
 	{
 		return ordinal();
-	}
-
-	public String getName()
-	{
-		return Strings.PoliceRecordNames[ordinal()];
 	}
 }
