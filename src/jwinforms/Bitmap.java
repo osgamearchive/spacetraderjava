@@ -6,13 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
-
 import javax.imageio.ImageIO;
 
 
 public class Bitmap extends Image implements Icon, Serializable {
-  private transient BufferedImage image;
   private static final long serialVersionUID = 2134761799614301086L;
+  private transient BufferedImage image;
+  private transient boolean transSet = false;
   private final URL imageUrl;
   private Color transparent = null;
 
@@ -45,7 +45,6 @@ public class Bitmap extends Image implements Icon, Serializable {
       throw new Error(e);
     }
   }
-  private transient boolean transSet = false;
 
   @Override
   public void setTransparentColor(Color transparentColor) {
@@ -53,11 +52,9 @@ public class Bitmap extends Image implements Icon, Serializable {
       throw new Error("setTransparentColor called twice");
     }
     transSet = true;
-
     if(transparentColor == null) {
       return;
     }
-
     // Don't yet support all colors.
     if(!transparentColor.equals(Color.white)) {
       BufferedImage bi = (BufferedImage)asSwingImage();
@@ -70,13 +67,10 @@ public class Bitmap extends Image implements Icon, Serializable {
       //		throw new Error("This bg color not yet supported");
       return;
     }
-
     int transparent = 0;
     this.transparent = transparentColor;
-
     BufferedImage bi = (BufferedImage)this.asSwingImage();
     BufferedImage newImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-
     int[] arr = new int[1];
     WritableRaster raster1 = bi.getRaster();
     WritableRaster raster2 = newImage.getRaster();

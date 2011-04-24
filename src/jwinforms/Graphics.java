@@ -28,16 +28,13 @@ public class Graphics {
 
   public void FillPolygon(Brush brush, Point[] points) {
     impl.setColor(brush.color);
-
     int[] xs = new int[points.length];
     int[] ys = new int[points.length];
-
     for(int i = 0; i < points.length; i++) {
       Point point = points[i];
       xs[i] = point.x;
       ys[i] = point.y;
     }
-
     impl.fillPolygon(xs, ys, points.length);
   }
 
@@ -50,22 +47,18 @@ public class Graphics {
   public void clear(Color backgroundColor) {
     Color bk = impl.getColor();
     impl.setColor(backgroundColor);
-
     impl.fillRect(0, 0, 1000000, 1000000);
-
     impl.setColor(bk);
   }
 
   public void DrawImage(Image img, int x, int y, Rectangle rect, @Deprecated int pixel) {
-    impl.drawImage(img.asSwingImage(), x, y, x + rect.Width, y + rect.Hight,
-                   rect.X, rect.Y, rect.X + rect.Width, rect.Y + rect.Hight, null);
+    impl.drawImage(img.asSwingImage(), x, y, x + rect.Width, y + rect.Hight, rect.X, rect.Y, rect.X + rect.Width, rect.Y + rect.Hight, null);
   }
 
   public SizeF MeasureString(String text, java.awt.Font font) {
     if(impl == null) {
       return new SizeF(30, text.length() * 5);
     }
-
     FontMetrics metrics = impl.getFontMetrics(font);
     int w = metrics.stringWidth(text);
     int h = metrics.getHeight();

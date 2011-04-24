@@ -17,7 +17,7 @@ public class GroupBox extends WinformControl {
 
   @Override
   public void SuspendLayout() {
-    // TODO Auto-generated method stub
+    //TODO Auto-generated method stub
   }
 
   public void setText(String text) {

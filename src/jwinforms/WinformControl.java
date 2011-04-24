@@ -14,6 +14,7 @@ public class WinformControl implements ISupportInitialize {
   private int tabIndex;
   EventHandler<Object, EventArgs> click;
   EventHandler<Object, EventArgs> doubleClick;
+  private Color BackColor;
 
   public void setDoubleClick(EventHandler<Object, EventArgs> doubleClick) {
     this.doubleClick = doubleClick;
@@ -40,7 +41,6 @@ public class WinformControl implements ISupportInitialize {
   public Component asSwingObject() {
     return swingVersion;
   }
-  private Color BackColor;
 
   public Color getBackColor() {
     return BackColor;

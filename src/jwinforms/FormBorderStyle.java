@@ -2,5 +2,7 @@ package jwinforms;
 
 
 public enum FormBorderStyle {
-  FixedSingle, FixedDialog, None
+  FixedSingle,
+  FixedDialog,
+  None;
 }

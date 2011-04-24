@@ -10,8 +10,7 @@ public class TextBox extends WinformControl {
   }
 
   public void setTextChanged(final EventHandler<Object, EventArgs> valueChanged) {
-    asJTextField().getDocument().addDocumentListener(new DocumentListener()
-		 {
+    asJTextField().getDocument().addDocumentListener(new DocumentListener() {
       @Override
       public void changedUpdate(DocumentEvent e) {
       }

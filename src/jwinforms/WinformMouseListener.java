@@ -8,10 +8,10 @@ public class WinformMouseListener extends MouseAdapter {
   private final EventHandler<Object, EventArgs> doubleClick;
   private final Object sender;
 
-  public WinformMouseListener(Object sender, EventHandler<Object, EventArgs> normalClick, EventHandler<Object, EventArgs> doubleClick) {
-    this.sender = sender;
-    this.doubleClick = doubleClick;
-    this.normalClick = normalClick;
+  public WinformMouseListener(Object o, EventHandler<Object, EventArgs> e1, EventHandler<Object, EventArgs> e2) {
+    sender = o;
+    normalClick = e1;
+    doubleClick = e2;
   }
 
   @Override

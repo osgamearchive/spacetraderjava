@@ -23,7 +23,6 @@ public class JStatusBar extends JPanel {
       c.fill = GridBagConstraints.NONE;
       c.weightx = 0.0;
     }
-
     this.add(section, c);
   }
 
@@ -37,10 +36,8 @@ public class JStatusBar extends JPanel {
     panel.addSection(new JStatusBarSection("eastest!"), false);
     panel.addSection(new JStatusBarSection("Foo bar!"), false);
     panel.addSection(new JStatusBarSection("--fill--"), true);
-
-//		panel.addSection(new JStatusBarSection("Foo bar!"), false);
-//		panel.addSection(new JStatusBarSection("westest"), false);
-
+//	panel.addSection(new JStatusBarSection("Foo bar!"), false);
+//	panel.addSection(new JStatusBarSection("westest"), false);
     frame.setSize(400, 400);
     frame.setLocationRelativeTo(null);
     frame.setDefaultCloseOperation(3);

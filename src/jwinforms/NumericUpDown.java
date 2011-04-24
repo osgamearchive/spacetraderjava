@@ -1,7 +1,6 @@
 package jwinforms;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
@@ -12,17 +11,15 @@ import javax.swing.text.JTextComponent;
 
 public class NumericUpDown extends WinformControl {
   private final SpinnerNumberModel model = new SpinnerNumberModel();
-  public boolean ThousandsSeparator;
   public HorizontalAlignment TextAlign;
+  public boolean ThousandsSeparator;
 
   public NumericUpDown() {
     super(new JSpinner());
     JSpinner spinner = asJSpinner();
     spinner.setModel(model);
-
-    /// this bunch of code selects all text when entering the spinner.
-    ((JSpinner.DefaultEditor)spinner.getEditor()).getTextField().addFocusListener(new FocusAdapter()
-		  {
+    // this bunch of code selects all text when entering the spinner.
+    ((JSpinner.DefaultEditor)spinner.getEditor()).getTextField().addFocusListener(new FocusAdapter() {
       @Override
       public void focusGained(FocusEvent e) {
         if(e.getSource() instanceof JTextComponent) {
@@ -40,12 +37,11 @@ public class NumericUpDown extends WinformControl {
   }
 
   public void Select(int i, int length) {
-    // TODO Auto-generated method stub
+    //TODO Auto-generated method stub
   }
 
   public void setValueChanged(final EventHandler<Object, EventArgs> valueChanged) {
-    asJSpinner().addChangeListener(new ChangeListener()
-		  {
+    asJSpinner().addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {
         valueChanged.handle(NumericUpDown.this, null);
@@ -85,7 +81,7 @@ public class NumericUpDown extends WinformControl {
    * TODO: implement this. Possibly by installing filter on key-presses.
    */
   public void setReadOnly(boolean readOnly) {
-//		asJSpinner().setEnabled(!readOnly);
+    //asJSpinner().setEnabled(!readOnly);
   }
 
   public void setLeave(EventHandler<Object, EventArgs> leave) {

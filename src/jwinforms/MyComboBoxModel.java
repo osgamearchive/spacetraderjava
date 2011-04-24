@@ -6,6 +6,10 @@ public class MyComboBoxModel extends DefaultComboBoxModel {
   private static final long serialVersionUID = 1L;
   // TODO inline methods, use super-class.
 
+  public Object get(int index) {
+    return getElementAt(index);
+  }
+
   public void add(Object obj) {
     this.addElement(obj);
   }
@@ -16,15 +20,11 @@ public class MyComboBoxModel extends DefaultComboBoxModel {
     }
   }
 
-  public Object get(int index) {
-    return getElementAt(index);
+  public void Insert(int index, Object obj) {
+    insertElementAt(obj, index);
   }
 
   public void remove(int index) {
     removeElementAt(index);
-  }
-
-  public void Insert(int index, Object obj) {
-    insertElementAt(obj, index);
   }
 }

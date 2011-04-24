@@ -1,5 +1,5 @@
 package jwinforms;
-import javax.swing.*;
+import javax.swing.JMenuBar;
 
 
 public class MainMenu extends WinformControl {
@@ -15,7 +15,6 @@ public class MainMenu extends WinformControl {
     for(MenuItem item : items) {
       this.add(item);
     }
-
   }
 
   private JMenuBar asJMenuBar() {

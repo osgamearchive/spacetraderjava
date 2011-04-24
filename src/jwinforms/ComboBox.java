@@ -1,7 +1,6 @@
 package jwinforms;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JComboBox;
 
 
@@ -32,8 +31,7 @@ public class ComboBox extends WinformControl {
   }
 
   public void setSelectedIndexChanged(final EventHandler<Object, EventArgs> handler) {
-    asJComboBox().addActionListener(new ActionListener()
-		  {
+    asJComboBox().addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         handler.handle(ComboBox.this, null);

@@ -18,7 +18,6 @@ public class MouseEventArgs extends EventArgs {
         return MouseButtons.Left;
       case MouseEvent.BUTTON2:
         return MouseButtons.Right;
-
       default:
         throw new Error("Unknown mouse button: " + button);
     }

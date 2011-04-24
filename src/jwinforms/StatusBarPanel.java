@@ -1,12 +1,11 @@
 package jwinforms;
 import java.awt.Dimension;
-
 import swingextra.JStatusBarSection;
 
 
 public class StatusBarPanel implements ISupportInitialize {
-  public final StatusBarPanelAutoSize AutoSize;
   private JStatusBarSection jpanel = new JStatusBarSection(" ");
+  public final StatusBarPanelAutoSize AutoSize;
 
   public StatusBarPanel() {
     this(StatusBarPanelAutoSize.None);

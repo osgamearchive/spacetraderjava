@@ -1,7 +1,6 @@
 package jwinforms;
 import java.awt.Dimension;
 import java.awt.Dialog.ModalityType;
-
 import javax.swing.JDialog;
 
 
@@ -10,6 +9,19 @@ public class WinformForm extends WinformControl implements WinformPane {
   private final WinformJPanel panel;
   protected final WinformJPanel Controls;
   DialogResult result;
+  // Must encapsulate most of these.
+  private Size AutoScaleBaseSize;
+  private boolean ShowInTaskbar;
+  private boolean MinimizeBox;
+  private boolean MaximizeBox;
+  private FormStartPosition StartPosition;
+  private EventHandler<Object, CancelEventArgs> Closing;
+  private EventHandler<Object, EventArgs> Load;
+  private Button AcceptButton;
+  private Button CancelButton;
+  protected EventHandler<Object, EventArgs> Closed;
+  private String Title;
+  private WinformPane parent;
 
   public WinformForm() {
     // super(new WinformJPanel());
@@ -69,19 +81,6 @@ public class WinformForm extends WinformControl implements WinformPane {
 
   public void PerformLayout() {
   }
-  // Must encapsulate most of these.
-  private Size AutoScaleBaseSize;
-  private boolean ShowInTaskbar;
-  private boolean MinimizeBox;
-  private boolean MaximizeBox;
-  private FormStartPosition StartPosition;
-  private EventHandler<Object, CancelEventArgs> Closing;
-  private EventHandler<Object, EventArgs> Load;
-  private Button AcceptButton;
-  private Button CancelButton;
-  protected EventHandler<Object, EventArgs> Closed;
-  private String Title;
-  private WinformPane parent;
 
   public void setAutoScaleBaseSize(Size autoScaleBaseSize) {
     AutoScaleBaseSize = autoScaleBaseSize;

@@ -3,9 +3,9 @@ import java.awt.Component;
 
 
 public interface WinformPane {
-  void setResult(DialogResult dialogResult);
+  Component asSwingObject();
 
   void dispose();
 
-  Component asSwingObject();
+  void setResult(DialogResult dialogResult);
 }

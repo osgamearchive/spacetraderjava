@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -51,7 +50,6 @@ public class PictureBox extends WinformControl implements ISupportInitialize {
       case FixedSingle:
         asJLabel().setBorder(BorderFactory.createLineBorder(Color.black, 1));
         break;
-
       default:
         throw new Error();
     }

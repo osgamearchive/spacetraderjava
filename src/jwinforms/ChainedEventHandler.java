@@ -17,5 +17,5 @@ public abstract class ChainedEventHandler<Sender, Args> extends EventHandler<Sen
     this.instanceHandle(sender, e);
   }
 
-  protected abstract void instanceHandle(Sender sender, Args e);
+  abstract protected void instanceHandle(Sender sender, Args e);
 }

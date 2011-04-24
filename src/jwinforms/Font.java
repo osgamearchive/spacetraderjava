@@ -2,6 +2,7 @@ package jwinforms;
 
 
 public class Font extends java.awt.Font {
+  private static final long serialVersionUID = 1L;
   public final String FontFamily;
   public final String Name;
 

@@ -14,7 +14,6 @@ public class ListBox extends WinformControl {
     if(borderStyle != BorderStyle.FixedSingle) {
       throw new Error("Unknown border style");
     }
-
     asJList().setBorder(BorderFactory.createLineBorder(Color.black, 1));
   }
 
@@ -32,8 +31,7 @@ public class ListBox extends WinformControl {
   }
 
   public void setSelectedIndexChanged(final EventHandler<Object, EventArgs> handler) {
-    asJList().addListSelectionListener(new ListSelectionListener()
-		 {
+    asJList().addListSelectionListener(new ListSelectionListener() {
       @Override
       public void valueChanged(ListSelectionEvent e) {
         handler.handle(ListBox.this, null);

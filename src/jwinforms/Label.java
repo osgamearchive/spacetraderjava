@@ -8,12 +8,25 @@ public class Label extends WinformControl {
   private static final String END = "</HTML>";
   private static final String START = "<HTML>";
   private static final String NEWLINE = "<br>";
-  public ContentAlignment TextAlign;
-  public ContentAlignment ImageAlign;
   private boolean convertedToHtml;
+  public ContentAlignment ImageAlign;
+  public ContentAlignment TextAlign;
 
   public Label() {
     super(new JLabel());
+  }
+
+  public String getText() {
+    String text = ((JLabel)swingVersion).getText();
+    if(convertedToHtml) {
+      text = text.substring(START.length(), text.length() - END.length());
+      text = text.replaceAll(NEWLINE, NEWLINE_LITERAL);
+    }
+    return text;
+  }
+
+  public void setImage(Image image) {
+    ((JLabel)swingVersion).setIcon(new ImageIcon(image.asSwingImage()));
   }
 
   public void setText(String text) {
@@ -24,20 +37,5 @@ public class Label extends WinformControl {
       convertedToHtml = false;
     }
     ((JLabel)swingVersion).setText(text);
-  }
-
-  public String getText() {
-    String text = ((JLabel)swingVersion).getText();
-
-    if(convertedToHtml) {
-      text = text.substring(START.length(), text.length() - END.length());
-      text = text.replaceAll(NEWLINE, NEWLINE_LITERAL);
-    }
-
-    return text;
-  }
-
-  public void setImage(Image image) {
-    ((JLabel)swingVersion).setIcon(new ImageIcon(image.asSwingImage()));
   }
 }

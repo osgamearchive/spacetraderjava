@@ -1,14 +1,13 @@
 package jwinforms;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JMenuItem;
 
 
 public class MenuItem {
   protected JMenuItem swingVersion;
-  public int Index;
   public Shortcut Shortcut;
+  public int Index;
 
   public MenuItem() {
     this(new JMenuItem());
@@ -27,8 +26,7 @@ public class MenuItem {
   }
 
   public void setClick(final EventHandler<Object, EventArgs> eventHandler) {
-    asJMenuItem().addActionListener(new ActionListener()
-		 {
+    asJMenuItem().addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
         eventHandler.handle(this, null);

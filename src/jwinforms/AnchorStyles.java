@@ -2,5 +2,5 @@ package jwinforms;
 
 
 public enum AnchorStyles {
-  Top_Right
+  Top_Right;
 }

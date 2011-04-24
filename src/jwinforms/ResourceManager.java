@@ -18,31 +18,28 @@ public class ResourceManager {
   }
 
   public ResourceManager(Class<?> className) {
-    this(classLoader.getResource(classToPath(className) + className.getSimpleName() + ".properties"),
-         classToPath(className));
+    this(classLoader.getResource(classToPath(className) + className.getSimpleName() + ".properties"), classToPath(className));
   }
 
   private static String classToPath(Class<?> className) {
     String path = className.getCanonicalName().replace('.', '/');
     path = path.substring(0, path.lastIndexOf('/') + 1);
-//		System.out.println("classToPath " + path);
+    //System.out.println("classToPath " + path);
     return path;
   }
 
   public Object GetObject(String key) {
     String objectType = properties.getProperty(key + ".type", null);
-
     if(objectType == null) {
       throw new Error("No object type for: " + key);
     }
-
     if(objectType.equals("ImageListStreamer")) {
       // value is name of properties file with image names in it
       String streamFilename = properties.getProperty(key);
-//			System.out.println(path + streamFilename);
+      //System.out.println(path + streamFilename);
       try {
         return new ImageStreamResourceManager(classLoader.getResource(path + streamFilename), path).getStream();
-        //			return new ImageStreamResourceManager(classLoader.getResource(streamFilename)).getStream();
+      //return new ImageStreamResourceManager(classLoader.getResource(streamFilename)).getStream();
       } catch(NullPointerException e) {
         throw new Error("NPE while seeking for " + streamFilename);
       }
@@ -54,7 +51,7 @@ public class ResourceManager {
     }
   }
 
-  Object getImage(String imageName) {
+  public Object getImage(String imageName) {
     return new Bitmap(classLoader.getResource(imageName.trim()));
   }
 

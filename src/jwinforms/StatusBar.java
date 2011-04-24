@@ -1,18 +1,18 @@
 package jwinforms;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import swingextra.JStatusBar;
 
 
 public class StatusBar extends WinformControl {
-  public StatusBar() {
-    super(new JStatusBar());
-  }
   public StatusBar Panels = this;
   public EventHandler<Object, StatusBarPanelClickEventArgs> PanelClick;
   public boolean ShowPanels;
   public boolean SizingGrip;
+
+  public StatusBar() {
+    super(new JStatusBar());
+  }
 
   public void addAll(Iterable<StatusBarPanel> asList) {
     for(StatusBarPanel panel : asList) {
