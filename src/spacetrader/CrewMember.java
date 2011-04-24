@@ -22,6 +22,7 @@
 package spacetrader;
 
 // import java.util.ArrayList;
+import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.difficulty.Difficulty;
 import java.util.Arrays;
 

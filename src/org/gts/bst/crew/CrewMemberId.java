@@ -1,5 +1,5 @@
-package spacetrader.enums;
-
+package org.gts.bst.crew;
+import spacetrader.enums.SpaceTraderEnum;
 public enum CrewMemberId implements SpaceTraderEnum
 {
 	NA, // = -1,

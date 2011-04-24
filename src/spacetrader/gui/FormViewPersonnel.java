@@ -1,21 +1,21 @@
 /*******************************************************************************
- * 
+ *
  * Space Trader for Windows 2.00
- * 
+ *
  * Copyright (C) 2005 Jay French, All Rights Reserved
- * 
+ *
  * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
+ *
  * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- * 
+ *
  * You can contact the author at spacetrader@frenchfryz.com
- * 
+ *
  ******************************************************************************/
 // using System;
 // using System.Drawing;
@@ -24,6 +24,7 @@
 // using System.Windows.Forms;
 package spacetrader.gui;
 
+import org.gts.bst.crew.CrewMemberId;
 import jwinforms.*;
 import spacetrader.*;
 import spacetrader.enums.*;
@@ -96,9 +97,9 @@ public class FormViewPersonnel extends WinformForm
 		this.boxForHire.SuspendLayout();
 		this.boxInfo.SuspendLayout();
 		this.SuspendLayout();
-		// 
+		//
 		// btnClose
-		// 
+		//
 		this.btnClose.setDialogResult(DialogResult.Cancel);
 		this.btnClose.setLocation(new java.awt.Point(-32, -32));
 		this.btnClose.setName("btnClose");
@@ -106,9 +107,9 @@ public class FormViewPersonnel extends WinformForm
 		this.btnClose.setTabIndex(32);
 		this.btnClose.setTabStop(false);
 		this.btnClose.setText("X");
-		// 
+		//
 		// boxCurrentCrew
-		// 
+		//
 		this.boxCurrentCrew.Controls.add(this.lblCrewNoQuarters);
 		this.boxCurrentCrew.Controls.add(this.lstCrew);
 		this.boxCurrentCrew.setLocation(new java.awt.Point(8, 8));
@@ -117,9 +118,9 @@ public class FormViewPersonnel extends WinformForm
 		this.boxCurrentCrew.setTabIndex(33);
 		this.boxCurrentCrew.setTabStop(false);
 		this.boxCurrentCrew.setText("Current Crew");
-		// 
+		//
 		// lstCrew
-		// 
+		//
 		this.lstCrew.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.lstCrew.setLocation(new java.awt.Point(8, 24));
 		this.lstCrew.setName("lstCrew");
@@ -139,9 +140,9 @@ public class FormViewPersonnel extends WinformForm
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// boxForHire
-		// 
+		//
 		this.boxForHire.Controls.add(this.lblForHireNone);
 		this.boxForHire.Controls.add(this.lstForHire);
 		this.boxForHire.setLocation(new java.awt.Point(160, 8));
@@ -150,9 +151,9 @@ public class FormViewPersonnel extends WinformForm
 		this.boxForHire.setTabIndex(34);
 		this.boxForHire.setTabStop(false);
 		this.boxForHire.setText("Mercenaries For Hire");
-		// 
+		//
 		// lstForHire
-		// 
+		//
 		this.lstForHire.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.lstForHire.setLocation(new java.awt.Point(8, 24));
 		this.lstForHire.setName("lstForHire");
@@ -172,9 +173,9 @@ public class FormViewPersonnel extends WinformForm
 				SelectedIndexChanged(sender, e);
 			}
 		});
-		// 
+		//
 		// boxInfo
-		// 
+		//
 		this.boxInfo.Controls.add(this.btnHireFire);
 		this.boxInfo.Controls.add(this.lblRate);
 		this.boxInfo.Controls.add(this.lblName);
@@ -192,9 +193,9 @@ public class FormViewPersonnel extends WinformForm
 		this.boxInfo.setTabIndex(35);
 		this.boxInfo.setTabStop(false);
 		this.boxInfo.setText("Mercenary Information");
-		// 
+		//
 		// btnHireFire
-		// 
+		//
 		this.btnHireFire.setFlatStyle(jwinforms.FlatStyle.Flat);
 		this.btnHireFire.setLocation(new java.awt.Point(120, 80));
 		this.btnHireFire.setName("btnHireFire");
@@ -208,112 +209,112 @@ public class FormViewPersonnel extends WinformForm
 				HireFire(sender, e);
 			}
 		});
-		// 
+		//
 		// lblRate
-		// 
+		//
 		this.lblRate.setLocation(new java.awt.Point(104, 40));
 		this.lblRate.setName("lblRate");
 		this.lblRate.setSize(new jwinforms.Size(59, 13));
 		this.lblRate.setTabIndex(97);
 		this.lblRate.setText("88 cr. daily");
-		// 
+		//
 		// lblName
-		// 
+		//
 		this.lblName.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		this.lblName.setLocation(new java.awt.Point(12, 18));
 		this.lblName.setName("lblName");
 		this.lblName.setSize(new jwinforms.Size(72, 13));
 		this.lblName.setTabIndex(96);
 		this.lblName.setText("Xxxxxxxxxxx");
-		// 
+		//
 		// lblEngineer
-		// 
+		//
 		this.lblEngineer.setLocation(new java.awt.Point(64, 88));
 		this.lblEngineer.setName("lblEngineer");
 		this.lblEngineer.setSize(new jwinforms.Size(17, 13));
 		this.lblEngineer.setTabIndex(95);
 		this.lblEngineer.setText("88");
-		// 
+		//
 		// lblTrader
-		// 
+		//
 		this.lblTrader.setLocation(new java.awt.Point(64, 72));
 		this.lblTrader.setName("lblTrader");
 		this.lblTrader.setSize(new jwinforms.Size(17, 13));
 		this.lblTrader.setTabIndex(94);
 		this.lblTrader.setText("88");
-		// 
+		//
 		// lblFighter
-		// 
+		//
 		this.lblFighter.setLocation(new java.awt.Point(64, 56));
 		this.lblFighter.setName("lblFighter");
 		this.lblFighter.setSize(new jwinforms.Size(17, 13));
 		this.lblFighter.setTabIndex(93);
 		this.lblFighter.setText("88");
-		// 
+		//
 		// lblPilot
-		// 
+		//
 		this.lblPilot.setLocation(new java.awt.Point(64, 40));
 		this.lblPilot.setName("lblPilot");
 		this.lblPilot.setSize(new jwinforms.Size(17, 13));
 		this.lblPilot.setTabIndex(92);
 		this.lblPilot.setText("88");
-		// 
+		//
 		// lblEngineerLabel
-		// 
+		//
 		this.lblEngineerLabel.setAutoSize(true);
 		this.lblEngineerLabel.setLocation(new java.awt.Point(12, 88));
 		this.lblEngineerLabel.setName("lblEngineerLabel");
 		this.lblEngineerLabel.setSize(new jwinforms.Size(53, 16));
 		this.lblEngineerLabel.setTabIndex(91);
 		this.lblEngineerLabel.setText("Engineer:");
-		// 
+		//
 		// lblTraderLabel
-		// 
+		//
 		this.lblTraderLabel.setAutoSize(true);
 		this.lblTraderLabel.setLocation(new java.awt.Point(12, 72));
 		this.lblTraderLabel.setName("lblTraderLabel");
 		this.lblTraderLabel.setSize(new jwinforms.Size(41, 16));
 		this.lblTraderLabel.setTabIndex(90);
 		this.lblTraderLabel.setText("Trader:");
-		// 
+		//
 		// lblFighterLabel
-		// 
+		//
 		this.lblFighterLabel.setAutoSize(true);
 		this.lblFighterLabel.setLocation(new java.awt.Point(12, 56));
 		this.lblFighterLabel.setName("lblFighterLabel");
 		this.lblFighterLabel.setSize(new jwinforms.Size(43, 16));
 		this.lblFighterLabel.setTabIndex(89);
 		this.lblFighterLabel.setText("Fighter:");
-		// 
+		//
 		// lblPilotLabel
-		// 
+		//
 		this.lblPilotLabel.setAutoSize(true);
 		this.lblPilotLabel.setLocation(new java.awt.Point(12, 40));
 		this.lblPilotLabel.setName("lblPilotLabel");
 		this.lblPilotLabel.setSize(new jwinforms.Size(29, 16));
 		this.lblPilotLabel.setTabIndex(88);
 		this.lblPilotLabel.setText("Pilot:");
-		// 
+		//
 		// lblCrewNoQuarters
-		// 
+		//
 		this.lblCrewNoQuarters.setLocation(new java.awt.Point(16, 24));
 		this.lblCrewNoQuarters.setName("lblCrewNoQuarters");
 		this.lblCrewNoQuarters.setSize(new jwinforms.Size(120, 16));
 		this.lblCrewNoQuarters.setTabIndex(7);
 		this.lblCrewNoQuarters.setText("No quarters available");
 		this.lblCrewNoQuarters.setVisible(false);
-		// 
+		//
 		// lblForHireNone
-		// 
+		//
 		this.lblForHireNone.setLocation(new java.awt.Point(16, 24));
 		this.lblForHireNone.setName("lblForHireNone");
 		this.lblForHireNone.setSize(new jwinforms.Size(120, 16));
 		this.lblForHireNone.setTabIndex(8);
 		this.lblForHireNone.setText("No one for hire");
 		this.lblForHireNone.setVisible(false);
-		// 
+		//
 		// FormViewPersonnel
-		// 
+		//
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
 		this.setCancelButton(this.btnClose);
 		this.setClientSize(new jwinforms.Size(488, 129));

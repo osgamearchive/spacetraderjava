@@ -28,6 +28,7 @@
 
 package spacetrader;
 
+import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.equip.WeaponType;
 import org.gts.bst.ship.equip.GadgetType;

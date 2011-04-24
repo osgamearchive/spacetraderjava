@@ -20,6 +20,7 @@
 
 package spacetrader.gui;
 
+import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.events.VeryRareEncounter;
 import org.gts.bst.ship.ShipType;
 import java.awt.Color;

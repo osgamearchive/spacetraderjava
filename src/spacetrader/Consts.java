@@ -24,6 +24,7 @@
  ******************************************************************************/
 package spacetrader;
 
+import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.events.SpecialEventType;
 import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.Size;

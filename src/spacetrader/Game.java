@@ -22,6 +22,7 @@
 // using System.Windows.Forms;
 package spacetrader;
 
+import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.events.NewsEvent;
 import org.gts.bst.events.SpecialEventType;
 import org.gts.bst.events.VeryRareEncounter;

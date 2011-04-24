@@ -26,6 +26,7 @@
 //using System.Collections;
 package spacetrader;
 
+import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.difficulty.Difficulty;
 import org.gts.bst.ship.equip.EquipmentType;
 import org.gts.bst.ship.ShipType;
