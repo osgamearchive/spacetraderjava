@@ -1,68 +1,59 @@
 package jwinforms;
-
-import java.awt.*;
-
-import javax.swing.*;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class ListBox extends WinformControl
-{
-	public final MyListModel Items = new MyListModel();
 
-	public void setBorderStyle(BorderStyle borderStyle)
-	{
-		if (borderStyle != BorderStyle.FixedSingle)
-			throw new Error("Unknown border style");
+public class ListBox extends WinformControl {
+  public final MyListModel Items = new MyListModel();
 
-		asJList().setBorder(BorderFactory.createLineBorder(Color.black, 1));
-	}
+  @Override
+  public void setBorderStyle(BorderStyle borderStyle) {
+    if(borderStyle != BorderStyle.FixedSingle) {
+      throw new Error("Unknown border style");
+    }
 
-	public ListBox()
-	{
-		super(new JList());
-		asJList().setModel(Items);
-	}
+    asJList().setBorder(BorderFactory.createLineBorder(Color.black, 1));
+  }
 
-	public void clearSelected()
-	{
-		asJList().clearSelection();
-	}
+  public ListBox() {
+    super(new JList());
+    asJList().setModel(Items);
+  }
 
-	public JList asJList()
-	{
-		return (JList)swingVersion;
-	}
+  public void clearSelected() {
+    asJList().clearSelection();
+  }
 
-	public void setSelectedIndexChanged(final EventHandler<Object, EventArgs> handler)
-	{
-		asJList().addListSelectionListener(new ListSelectionListener()
-		{
-			@Override
-			public void valueChanged(ListSelectionEvent e)
-			{
-				handler.handle(ListBox.this, null);
-			}
-		});
-	}
+  public JList asJList() {
+    return (JList)swingVersion;
+  }
 
-	public int getSelectedIndex()
-	{
-		return asJList().getSelectedIndex();
-	}
+  public void setSelectedIndexChanged(final EventHandler<Object, EventArgs> handler) {
+    asJList().addListSelectionListener(new ListSelectionListener()
+		 {
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        handler.handle(ListBox.this, null);
+      }
+    });
+  }
 
-	public int getItemHeight()
-	{
-		return 15;
-	}
+  public int getSelectedIndex() {
+    return asJList().getSelectedIndex();
+  }
 
-	public void setSelectedItem(Object selectedItem)
-	{
-		asJList().setSelectedValue(selectedItem, true);
-	}
+  public int getItemHeight() {
+    return 15;
+  }
 
-	public Object getSelectedItem()
-	{
-		return asJList().getSelectedValue();
-	}
+  public void setSelectedItem(Object selectedItem) {
+    asJList().setSelectedValue(selectedItem, true);
+  }
+
+  public Object getSelectedItem() {
+    return asJList().getSelectedValue();
+  }
 }

@@ -1,82 +1,70 @@
 package jwinforms;
-
 import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+
 public class FileDialog //extends WinformForm
 {
-	protected final JFileChooser chooser = new JFileChooser();
+  protected final JFileChooser chooser = new JFileChooser();
+  private String buttonText;
+  private String Filter;
+  private String DefaultExt;
+  private String title;
 
-	private String buttonText;
-	private String Filter;
-	private String DefaultExt;
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	private String title;
+  protected void setButtonText(String text) {
+    buttonText = text;
+  }
 
-	public void setTitle(String title)
-	{
-		this.title = title;
-	}
+  public DialogResult ShowDialog(WinformPane owner) {
+    int returnVal = chooser.showDialog(owner.asSwingObject(), buttonText);
 
-	protected void setButtonText(String text)
-	{
-		buttonText = text;
-	}
+    switch(returnVal) {
+      case JFileChooser.CANCEL_OPTION:
+      case JFileChooser.ERROR_OPTION:
+        return DialogResult.Cancel;
+      case JFileChooser.APPROVE_OPTION:
+        return DialogResult.OK;
+      default:
+        throw new Error("JFileChooser returned unknown value " + returnVal);
+    }
+  }
 
-	public DialogResult ShowDialog(WinformPane owner)
-	{
-		int returnVal = chooser.showDialog(owner.asSwingObject(), buttonText);
+  public void setInitialDirectory(String dir) {
+    chooser.setCurrentDirectory(new File(dir));
+  }
 
-		switch (returnVal)
-		{
-		case JFileChooser.CANCEL_OPTION:
-		case JFileChooser.ERROR_OPTION:
-			return DialogResult.Cancel;
-		case JFileChooser.APPROVE_OPTION:
-			return DialogResult.OK;
-		default:
-			throw new Error("JFileChooser returned unknown value " + returnVal);
-		}
-	}
+  public void setFilter(String filter) {
+    //setFilter("Windows Bitmaps (*.bmp)|*bmp")
+    String[] parts = filter.split("\\|");
 
-	public void setInitialDirectory(String dir)
-	{
-		chooser.setCurrentDirectory(new File(dir));
-	}
+    String desc = parts[0];
+    String[] extensions = parts[1].split(";");
+    // I assume the format is "*.bmp;*.txt;*.gif".
+    for(int i = 0; i < extensions.length; i++) {
+      String extension = extensions[i];
+      extensions[i] = extension.substring(extension.lastIndexOf('.') + 1);
+    }
 
-	public void setFilter(String filter)
-	{
-		//setFilter("Windows Bitmaps (*.bmp)|*bmp")
-		String[] parts = filter.split("\\|");
+    FileFilter filefilter = new FileNameExtensionFilter(desc, extensions);
+    chooser.setFileFilter(filefilter);
+  }
 
-		String desc = parts[0];
-		String[] extensions = parts[1].split(";");
-		// I assume the format is "*.bmp;*.txt;*.gif".
-		for (int i = 0; i < extensions.length; i++)
-		{
-			String extension = extensions[i];
-			extensions[i] = extension.substring(extension.lastIndexOf('.') + 1);
-		}
+  public void setDefaultExt(String defaultExt) {
+    DefaultExt = defaultExt;
+  }
 
-		FileFilter filefilter = new FileNameExtensionFilter(desc, extensions);
-		chooser.setFileFilter(filefilter);
-	}
+  public void setFileName(String fileName) {
+    chooser.setSelectedFile(new File(fileName));
+  }
 
-	public void setDefaultExt(String defaultExt)
-	{
-		DefaultExt = defaultExt;
-	}
-
-	public void setFileName(String fileName)
-	{
-		chooser.setSelectedFile(new File(fileName));
-	}
-
-	public String getFileName()
-	{
-		return chooser.getSelectedFile().getAbsolutePath();
-	}
+  public String getFileName() {
+    return chooser.getSelectedFile().getAbsolutePath();
+  }
 }

@@ -1,6 +1,6 @@
 package jwinforms;
 
-public interface Icon
-{
-	java.awt.Image asSwingImage();
+
+public interface Icon {
+  java.awt.Image asSwingImage();
 }

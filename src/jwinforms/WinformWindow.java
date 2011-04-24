@@ -1,200 +1,168 @@
 package jwinforms;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-public class WinformWindow extends WinformControl implements WinformPane
-{
-	private final JFrame frame;
-	private final WinformJPanel panel;
-	protected final WinformJPanel Controls;
 
-	DialogResult result;
+public class WinformWindow extends WinformControl implements WinformPane {
+  private final JFrame frame;
+  private final WinformJPanel panel;
+  protected final WinformJPanel Controls;
+  DialogResult result;
+  protected Integer Left, Top;
+  protected FormWindowState WindowState;
+  // Must encapsulate most of these.
+  private Size AutoScaleBaseSize;
+  private FormBorderStyle FormBorderStyle;
+  private Icon Icon;
+  private boolean ControlBox;
+  private boolean MinimizeBox;
+  private boolean MaximizeBox;
+  private EventHandler<Object, CancelEventArgs> Closing;
+  private String Title;
+  private EventHandler<Object, EventArgs> onLoad;
 
-	public WinformWindow()
-	{
-		// super(new WinformJPanel());
-		super(new JFrame());
-		frame = (JFrame)swingVersion;
-		// panel = (WinformJPanel)swingVersion;
-		panel = new WinformJPanel(this);
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		Controls = panel;
-		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+  public WinformWindow() {
+    // super(new WinformJPanel());
+    super(new JFrame());
+    frame = (JFrame)swingVersion;
+    // panel = (WinformJPanel)swingVersion;
+    panel = new WinformJPanel(this);
+    frame.getContentPane().add(panel, BorderLayout.CENTER);
+    Controls = panel;
+    frame.setResizable(false);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }
 
-	// ///////////// implementation ends here.
-	protected enum FormWindowState
-	{
-		Normal
+  // ///////////// implementation ends here.
 
-	}
+  protected enum FormWindowState {
+    Normal
+  }
 
-	public void ShowWindow()
-	{
-		EventHandler<Object, EventArgs> loadHandler = onLoad;
-		if (loadHandler != null)
-			loadHandler.handle(this, null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		fixLocation();
+  public void ShowWindow() {
+    EventHandler<Object, EventArgs> loadHandler = onLoad;
+    if(loadHandler != null) {
+      loadHandler.handle(this, null);
+    }
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    fixLocation();
 
-		frame.setVisible(true);
-	}
+    frame.setVisible(true);
+  }
 
-	private void fixLocation()
-	{
-		frame.setLocationRelativeTo(null);
-	}
+  private void fixLocation() {
+    frame.setLocationRelativeTo(null);
+  }
 
-	protected Integer Left, Top;
-	protected FormWindowState WindowState;
+  public void Close() {
+    // TODO am I sure I want this?
+    System.exit(0);
+  }
 
-	public void Close()
-	{
-		// TODO am I sure I want this?
-		System.exit(0);
-	}
+  @Override
+  public void ResumeLayout(boolean foo) {
+  }
 
-	@Override
-	public void ResumeLayout(boolean foo)
-	{}
+  public void setAutoScaleBaseSize(Size autoScaleBaseSize) {
+    AutoScaleBaseSize = autoScaleBaseSize;
+  }
 
-	// Must encapsulate most of these.
-	private Size AutoScaleBaseSize;
-	private FormBorderStyle FormBorderStyle;
-	private Icon Icon;
-	private boolean ControlBox;
-	private boolean MinimizeBox;
-	private boolean MaximizeBox;
-	private EventHandler<Object, CancelEventArgs> Closing;
-	private String Title;
-	private EventHandler<Object, EventArgs> onLoad;
+  public Size getAutoScaleBaseSize() {
+    return AutoScaleBaseSize;
+  }
 
-	public void setAutoScaleBaseSize(Size autoScaleBaseSize)
-	{
-		AutoScaleBaseSize = autoScaleBaseSize;
-	}
+  public void setTitle(String title) {
+    Title = title;
+  }
 
-	public Size getAutoScaleBaseSize()
-	{
-		return AutoScaleBaseSize;
-	}
+  public String getTitle() {
+    return Title;
+  }
 
-	public void setTitle(String title)
-	{
-		Title = title;
-	}
+  public void setLoad(EventHandler<Object, EventArgs> load) {
+    onLoad = load;
+  }
 
-	public String getTitle()
-	{
-		return Title;
-	}
+  public void setClosing(EventHandler<Object, CancelEventArgs> closing) {
+    Closing = closing;
+  }
 
-	public void setLoad(EventHandler<Object, EventArgs> load)
-	{
-		onLoad = load;
-	}
+  public EventHandler<Object, CancelEventArgs> getClosing() {
+    return Closing;
+  }
 
-	public void setClosing(EventHandler<Object, CancelEventArgs> closing)
-	{
-		Closing = closing;
-	}
+  public void setStartPosition(FormStartPosition startPosition) {
+    //TODO implmnt method.
+  }
 
-	public EventHandler<Object, CancelEventArgs> getClosing()
-	{
-		return Closing;
-	}
+  public void setMenu(MainMenu menu) {
+    frame.getContentPane().add(menu.asSwingObject(), BorderLayout.PAGE_START);
+  }
 
-	public void setStartPosition(FormStartPosition startPosition)
-	{
-		//TODO implmnt method.
-	}
+  public void setControlBox(boolean controlBox) {
+    ControlBox = controlBox;
+  }
 
-	public void setMenu(MainMenu menu)
-	{
-		frame.getContentPane().add(menu.asSwingObject(), BorderLayout.PAGE_START);
-	}
+  public boolean getControlBox() {
+    return ControlBox;
+  }
 
-	public void setControlBox(boolean controlBox)
-	{
-		ControlBox = controlBox;
-	}
+  public void setMinimizeBox(boolean minimizeBox) {
+    MinimizeBox = minimizeBox;
+  }
 
-	public boolean getControlBox()
-	{
-		return ControlBox;
-	}
+  public boolean getMinimizeBox() {
+    return MinimizeBox;
+  }
 
-	public void setMinimizeBox(boolean minimizeBox)
-	{
-		MinimizeBox = minimizeBox;
-	}
+  public void setMaximizeBox(boolean maximizeBox) {
+    MaximizeBox = maximizeBox;
+  }
 
-	public boolean getMinimizeBox()
-	{
-		return MinimizeBox;
-	}
+  public boolean getMaximizeBox() {
+    return MaximizeBox;
+  }
 
-	public void setMaximizeBox(boolean maximizeBox)
-	{
-		MaximizeBox = maximizeBox;
-	}
-
-	public boolean getMaximizeBox()
-	{
-		return MaximizeBox;
-	}
-
-	public void setIcon(Icon icon)
-	{
-		Icon = icon;
+  public void setIcon(Icon icon) {
+    Icon = icon;
 //		Image icon = Toolkit.getDefaultToolkit().getImage("icon.gif");
-		frame.setIconImage(icon.asSwingImage());
-	}
+    frame.setIconImage(icon.asSwingImage());
+  }
 
-	public void setFormBorderStyle(FormBorderStyle formBorderStyle)
-	{
-		FormBorderStyle = formBorderStyle;
-	}
+  public void setFormBorderStyle(FormBorderStyle formBorderStyle) {
+    FormBorderStyle = formBorderStyle;
+  }
 
-	public FormBorderStyle getFormBorderStyle()
-	{
-		return FormBorderStyle;
-	}
+  public FormBorderStyle getFormBorderStyle() {
+    return FormBorderStyle;
+  }
 
-	public void setClientSize(Dimension clientSize)
-	{
-		// heigher, cause decorations count in swing.
-		frame.setSize(new Dimension(clientSize.width, clientSize.height + 45));
-	}
+  public void setClientSize(Dimension clientSize) {
+    // heigher, cause decorations count in swing.
+    frame.setSize(new Dimension(clientSize.width, clientSize.height + 45));
+  }
 
-	public String getText()
-	{
-		return frame.getTitle();
-	}
+  public String getText() {
+    return frame.getTitle();
+  }
 
-	public void setText(String text)
-	{
-		frame.setTitle(text);
-	}
+  public void setText(String text) {
+    frame.setTitle(text);
+  }
 
-	public void setStatusBar(StatusBar statusBar)
-	{
-		frame.getContentPane().add(statusBar.asSwingObject(), BorderLayout.PAGE_END);
-	}
+  public void setStatusBar(StatusBar statusBar) {
+    frame.getContentPane().add(statusBar.asSwingObject(), BorderLayout.PAGE_END);
+  }
 
-	@Override
-	public void dispose()
-	{
-		frame.dispose();
-	}
+  @Override
+  public void dispose() {
+    frame.dispose();
+  }
 
-	@Override
-	public void setResult(DialogResult dialogResult)
-	{
-		result = dialogResult;
-	}
+  @Override
+  public void setResult(DialogResult dialogResult) {
+    result = dialogResult;
+  }
 }

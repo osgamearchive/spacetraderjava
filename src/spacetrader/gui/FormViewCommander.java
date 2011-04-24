@@ -28,12 +28,22 @@
 //using System.ComponentModel;
 //using System.Windows.Forms;
 package spacetrader.gui;
-
 import java.util.Arrays;
-
-import jwinforms.*;
-
-import spacetrader.*;
+import jwinforms.ContentAlignment;
+import jwinforms.DialogResult;
+import jwinforms.Font;
+import jwinforms.FontStyle;
+import jwinforms.FormStartPosition;
+import jwinforms.GraphicsUnit;
+import jwinforms.WinformControl;
+import jwinforms.WinformForm;
+import spacetrader.Commander;
+import spacetrader.Consts;
+import spacetrader.Functions;
+import spacetrader.Game;
+import spacetrader.PoliceRecord;
+import spacetrader.Reputation;
+import spacetrader.Strings;
 
 public class FormViewCommander extends WinformForm
 {
@@ -476,7 +486,7 @@ public class FormViewCommander extends WinformForm
 	private void InitializeScreen()
 	{
 		Commander cmdr = game.Commander();
-		
+
 		lblName.setText(cmdr.Name());
 		lblDifficulty.setText(Strings.DifficultyLevels[game.Difficulty().CastToInt()]);
 		lblTime.setText(Functions.Multiples(cmdr.getDays(), Strings.TimeUnit));

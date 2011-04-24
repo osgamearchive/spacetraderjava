@@ -1,7 +1,6 @@
 package jwinforms;
 
-public enum ColorDepth
-{
-	Depth24Bit
 
+public enum ColorDepth {
+  Depth24Bit
 }

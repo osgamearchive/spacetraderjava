@@ -34,135 +34,122 @@ import jwinforms.EventHandler;
 import jwinforms.FormStartPosition;
 import jwinforms.WinformForm;
 
-public class FormFind extends WinformForm
-{
-	// #region Control Declarations
 
-	private jwinforms.Label lblText;
-	private jwinforms.Button btnOk;
-	private jwinforms.Button btnCancel;
-	private jwinforms.TextBox txtSystem;
-	private jwinforms.CheckBox chkTrack;
-	private static String text = "";
-	private static boolean boxChecked = false;
+public class FormFind extends WinformForm {
+  // #region Control Declarations
+  private jwinforms.Label lblText;
+  private jwinforms.Button btnOk;
+  private jwinforms.Button btnCancel;
+  private jwinforms.TextBox txtSystem;
+  private jwinforms.CheckBox chkTrack;
+  private static String text = "";
+  private static boolean boxChecked = false;
 
-	// #endregion
+  // #endregion
+  // #region Methods
+  public FormFind() {
+    InitializeComponent();
 
-	// #region Methods
+    txtSystem.setText(text);
+    chkTrack.setChecked(boxChecked);
+  }
 
-	public FormFind()
-	{
-		InitializeComponent();
+  // #region Windows Form Designer generated code
+  // / <summary>
+  // / Required method for Designer support - do not modify
+  // / the contents of this method with the code editor.
+  // / </summary>
+  private void InitializeComponent() {
+    this.lblText = new jwinforms.Label();
+    this.btnOk = new jwinforms.Button();
+    this.btnCancel = new jwinforms.Button();
+    this.txtSystem = new jwinforms.TextBox();
+    this.chkTrack = new jwinforms.CheckBox();
+    this.SuspendLayout();
+    //
+    // lblText
+    //
+    this.lblText.setAutoSize(true);
+    this.lblText.setLocation(new java.awt.Point(8, 8));
+    this.lblText.setName("lblText");
+    this.lblText.setSize(new jwinforms.Size(177, 13));
+    this.lblText.setTabIndex(3);
+    this.lblText.setText("Which system are you looking for?");
+    //
+    // btnOk
+    //
+    this.btnOk.setDialogResult(DialogResult.OK);
+    this.btnOk.setFlatStyle(jwinforms.FlatStyle.Flat);
+    this.btnOk.setLocation(new java.awt.Point(43, 68));
+    this.btnOk.setName("btnOk");
+    this.btnOk.setSize(new jwinforms.Size(40, 22));
+    this.btnOk.setTabIndex(3);
+    this.btnOk.setText("Ok");
+    //
+    // btnCancel
+    //
+    this.btnCancel.setDialogResult(DialogResult.Cancel);
+    this.btnCancel.setFlatStyle(jwinforms.FlatStyle.Flat);
+    this.btnCancel.setLocation(new java.awt.Point(91, 68));
+    this.btnCancel.setName("btnCancel");
+    this.btnCancel.setSize(new jwinforms.Size(50, 22));
+    this.btnCancel.setTabIndex(4);
+    this.btnCancel.setText("Cancel");
+    //
+    // txtSystem
+    //
+    this.txtSystem.setLocation(new java.awt.Point(8, 24));
+    this.txtSystem.setName("txtSystem");
+    this.txtSystem.setSize(new jwinforms.Size(168, 20));
+    this.txtSystem.setTabIndex(1);
+    this.txtSystem.setText("");
+    //
+    // chkTrack
+    //
+    this.chkTrack.setLocation(new java.awt.Point(8, 48));
+    this.chkTrack.setName("chkTrack");
+    this.chkTrack.setSize(new jwinforms.Size(112, 16));
+    this.chkTrack.setTabIndex(2);
+    this.chkTrack.setText("Track this system");
+    //
+    // FormFind
+    //
+    this.setAcceptButton(this.btnOk);
+    this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
+    this.setCancelButton(this.btnCancel);
+    this.setClientSize(new jwinforms.Size(184, 97));
+    this.setControlBox(false);
+    this.Controls.addAll(this.chkTrack, this.txtSystem, this.btnCancel, this.btnOk, this.lblText);
+    this.setFormBorderStyle(jwinforms.FormBorderStyle.FixedDialog);
+    this.setName("FormFind");
+    this.setShowInTaskbar(false);
+    this.setStartPosition(FormStartPosition.CenterParent);
+    this.setText("Find System");
+    this.Closed = new EventHandler<Object, EventArgs>()
+		  {
+      @Override
+      public void handle(Object sender, jwinforms.EventArgs e) {
+        FormFind_Closed(sender, e);
+      }
+    };
+    this.ResumeLayout(false);
+  }
 
-		txtSystem.setText(text);
-		chkTrack.setChecked(boxChecked);
-	}
+  // #endregion
+  // #endregion
+  // #region Event Handlers
+  private void FormFind_Closed(Object sender, EventArgs e) {
+    text = txtSystem.getText();
+    boxChecked = chkTrack.isChecked();
+  }
 
-	// #region Windows Form Designer generated code
-	// / <summary>
-	// / Required method for Designer support - do not modify
-	// / the contents of this method with the code editor.
-	// / </summary>
-	private void InitializeComponent()
-	{
-		this.lblText = new jwinforms.Label();
-		this.btnOk = new jwinforms.Button();
-		this.btnCancel = new jwinforms.Button();
-		this.txtSystem = new jwinforms.TextBox();
-		this.chkTrack = new jwinforms.CheckBox();
-		this.SuspendLayout();
-		//
-		// lblText
-		//
-		this.lblText.setAutoSize(true);
-		this.lblText.setLocation(new java.awt.Point(8, 8));
-		this.lblText.setName("lblText");
-		this.lblText.setSize(new jwinforms.Size(177, 13));
-		this.lblText.setTabIndex(3);
-		this.lblText.setText("Which system are you looking for?");
-		//
-		// btnOk
-		//
-		this.btnOk.setDialogResult(DialogResult.OK);
-		this.btnOk.setFlatStyle(jwinforms.FlatStyle.Flat);
-		this.btnOk.setLocation(new java.awt.Point(43, 68));
-		this.btnOk.setName("btnOk");
-		this.btnOk.setSize(new jwinforms.Size(40, 22));
-		this.btnOk.setTabIndex(3);
-		this.btnOk.setText("Ok");
-		//
-		// btnCancel
-		//
-		this.btnCancel.setDialogResult(DialogResult.Cancel);
-		this.btnCancel.setFlatStyle(jwinforms.FlatStyle.Flat);
-		this.btnCancel.setLocation(new java.awt.Point(91, 68));
-		this.btnCancel.setName("btnCancel");
-		this.btnCancel.setSize(new jwinforms.Size(50, 22));
-		this.btnCancel.setTabIndex(4);
-		this.btnCancel.setText("Cancel");
-		//
-		// txtSystem
-		//
-		this.txtSystem.setLocation(new java.awt.Point(8, 24));
-		this.txtSystem.setName("txtSystem");
-		this.txtSystem.setSize(new jwinforms.Size(168, 20));
-		this.txtSystem.setTabIndex(1);
-		this.txtSystem.setText("");
-		//
-		// chkTrack
-		//
-		this.chkTrack.setLocation(new java.awt.Point(8, 48));
-		this.chkTrack.setName("chkTrack");
-		this.chkTrack.setSize(new jwinforms.Size(112, 16));
-		this.chkTrack.setTabIndex(2);
-		this.chkTrack.setText("Track this system");
-		//
-		// FormFind
-		//
-		this.setAcceptButton(this.btnOk);
-		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
-		this.setCancelButton(this.btnCancel);
-		this.setClientSize(new jwinforms.Size(184, 97));
-		this.setControlBox(false);
-		this.Controls.addAll(this.chkTrack, this.txtSystem,
-				this.btnCancel, this.btnOk, this.lblText);
-		this.setFormBorderStyle(jwinforms.FormBorderStyle.FixedDialog);
-		this.setName("FormFind");
-		this.setShowInTaskbar(false);
-		this.setStartPosition(FormStartPosition.CenterParent);
-		this.setText("Find System");
-		this.Closed = new EventHandler<Object, EventArgs>()
-		{
-			public void handle(Object sender, jwinforms.EventArgs e)
-			{
-				FormFind_Closed(sender, e);
-			}
-		};
-		this.ResumeLayout(false);
-	}
+  // #endregion
+  // #region Properties
+  public String SystemName() {
+    return txtSystem.getText();
+  }
 
-	// #endregion
-
-	// #endregion
-
-	// #region Event Handlers
-
-	private void FormFind_Closed(Object sender, EventArgs e)
-	{
-		text = txtSystem.getText();
-		boxChecked = chkTrack.isChecked();
-	}
-
-	// #endregion
-
-	// #region Properties
-	public String SystemName()
-	{
-		return txtSystem.getText();
-	}
-
-	public boolean TrackSystem()
-	{
-		return chkTrack.isChecked();
-	}
+  public boolean TrackSystem() {
+    return chkTrack.isChecked();
+  }
 }

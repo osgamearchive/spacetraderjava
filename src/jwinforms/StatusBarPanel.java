@@ -1,59 +1,50 @@
 package jwinforms;
-
 import java.awt.Dimension;
 
 import swingextra.JStatusBarSection;
 
-public class StatusBarPanel implements ISupportInitialize
-{
-	public final StatusBarPanelAutoSize AutoSize;
-	private JStatusBarSection jpanel = new JStatusBarSection(" ");
 
-	public StatusBarPanel()
-	{
-		this(StatusBarPanelAutoSize.None);
-	}
+public class StatusBarPanel implements ISupportInitialize {
+  public final StatusBarPanelAutoSize AutoSize;
+  private JStatusBarSection jpanel = new JStatusBarSection(" ");
 
-	public StatusBarPanel(StatusBarPanelAutoSize autoSize)
-	{
-		AutoSize = autoSize;
-	}
+  public StatusBarPanel() {
+    this(StatusBarPanelAutoSize.None);
+  }
 
-	public void setText(String text)
-	{
-		if (text.isEmpty()) text = "  ";
-		jpanel.setText(text);
-	}
+  public StatusBarPanel(StatusBarPanelAutoSize autoSize) {
+    AutoSize = autoSize;
+  }
 
-	public void setWidth(int w)
-	{
-		int h = jpanel.getHeight();
-		jpanel.setSize(w, h);
-	}
+  public void setText(String text) {
+    if(text.isEmpty()) {
+      text = "  ";
+    }
+    jpanel.setText(text);
+  }
 
-	public JStatusBarSection asJStatusBarSection()
-	{
-		return jpanel;
-	}
+  public void setWidth(int w) {
+    int h = jpanel.getHeight();
+    jpanel.setSize(w, h);
+  }
 
-	public void setMinWidth(int width)
-	{
-		int height = jpanel.getPreferredSize().height;
-		jpanel.setPreferredSize(new Dimension(width, height));
-		jpanel.setMinimumSize(new Dimension(width, height));
-	}
+  public JStatusBarSection asJStatusBarSection() {
+    return jpanel;
+  }
 
-	@Override
-	public void BeginInit()
-	{
-	// TODO Auto-generated method stub
+  public void setMinWidth(int width) {
+    int height = jpanel.getPreferredSize().height;
+    jpanel.setPreferredSize(new Dimension(width, height));
+    jpanel.setMinimumSize(new Dimension(width, height));
+  }
 
-	}
+  @Override
+  public void BeginInit() {
+    // TODO Auto-generated method stub
+  }
 
-	@Override
-	public void EndInit()
-	{
-	// TODO Auto-generated method stub
-
-	}
+  @Override
+  public void EndInit() {
+    // TODO Auto-generated method stub
+  }
 }

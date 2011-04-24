@@ -1,28 +1,29 @@
 package org.gts.bst.difficulty;
 import spacetrader.enums.SpaceTraderEnum;
-public enum Difficulty implements SpaceTraderEnum// : int
-{
-	Beginner(1), Easy(1), Normal(0), Hard(-1), Impossible(-1);
 
-	public int CastToInt()
-	{
-		return ordinal();
-	}
 
-	private Difficulty(int skillAdjust)
-	{
-		this.skillAdjust = skillAdjust;
-	}
+public enum Difficulty implements SpaceTraderEnum {
+  Beginner(1),
+  Easy(1),
+  Normal(0),
+  Hard(-1),
+  Impossible(-1);
+  private final int skillAdjust;
 
-	private final int skillAdjust;
+  private Difficulty(int skillAdjust) {
+    this.skillAdjust = skillAdjust;
+  }
 
-	public int adjustSkill(int skill)
-	{
-		return skill + skillAdjust;
-	}
+  @Override
+  public int CastToInt() {
+    return ordinal();
+  }
 
-	public static Difficulty FromInt(int i)
-	{
-		return values()[i];
-	}
+  public int adjustSkill(int skill) {
+    return skill + skillAdjust;
+  }
+
+  public static Difficulty FromInt(int i) {
+    return values()[i];
+  }
 }

@@ -17,23 +17,56 @@
  * You can contact the author at spacetrader@frenchfryz.com
  *
  ******************************************************************************/
-
 package spacetrader.gui;
-
-import org.gts.bst.crew.CrewMemberId;
-import org.gts.bst.events.VeryRareEncounter;
-import org.gts.bst.ship.ShipType;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.Arrays;
 import java.util.Iterator;
-
 import javax.swing.UIManager;
-
-import jwinforms.*;
-
-import spacetrader.*;
-import spacetrader.enums.*;
+import jwinforms.Brush;
+import jwinforms.Button;
+import jwinforms.CancelEventArgs;
+import jwinforms.ContentAlignment;
+import jwinforms.DialogResult;
+import jwinforms.EventArgs;
+import jwinforms.EventHandler;
+import jwinforms.Font;
+import jwinforms.FontStyle;
+import jwinforms.FormStartPosition;
+import jwinforms.GraphicsUnit;
+import jwinforms.Icon;
+import jwinforms.Image;
+import jwinforms.ImageList;
+import jwinforms.Label;
+import jwinforms.MouseButtons;
+import jwinforms.MouseEventArgs;
+import jwinforms.PaintEventArgs;
+import jwinforms.Pen;
+import jwinforms.SizeF;
+import jwinforms.SolidBrush;
+import jwinforms.StatusBarPanelClickEventArgs;
+import org.gts.bst.crew.CrewMemberId;
+import org.gts.bst.events.VeryRareEncounter;
+import org.gts.bst.ship.ShipType;
+import spacetrader.Commander;
+import spacetrader.Consts;
+import spacetrader.CrewMember;
+import spacetrader.Functions;
+import spacetrader.FutureVersionException;
+import spacetrader.Gadget;
+import spacetrader.Game;
+import spacetrader.GameEndException;
+import spacetrader.HighScoreRecord;
+import spacetrader.STSerializableObject;
+import spacetrader.Shield;
+import spacetrader.Ship;
+import spacetrader.SpecialEvent;
+import spacetrader.StarSystem;
+import spacetrader.Strings;
+import spacetrader.Weapon;
+import spacetrader.enums.AlertType;
+import spacetrader.enums.GameEndType;
+import spacetrader.enums.StarSystemId;
 import spacetrader.stub.Directory;
 import spacetrader.stub.RegistryKey;
 import spacetrader.util.Hashtable;
@@ -333,8 +366,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				btnBuyMax7, btnBuyMax8, btnBuyMax9 };
 		// #endregion
 
-		if (loadFileName != null)
-			LoadGame(loadFileName);
+		if (loadFileName != null) {
+      LoadGame(loadFileName);
+    }
 
 		UpdateAll();
 	}
@@ -3224,10 +3258,11 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private void CargoSell(int tradeItem, boolean all)
 	{
-		if (game.PriceCargoSell()[tradeItem] > 0)
-			game.CargoSellSystem(tradeItem, all, this);
-		else
-			game.CargoDump(tradeItem, this);
+		if (game.PriceCargoSell()[tradeItem] > 0) {
+      game.CargoSellSystem(tradeItem, all, this);
+    } else {
+      game.CargoDump(tradeItem, this);
+    }
 		UpdateAll();
 	}
 
@@ -3257,22 +3292,21 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 		FormAlert.Alert(alertType, this);
 
-		FormAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions
-				.FormatNumber(game.Score() % 10));
+		FormAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
 
 		HighScoreRecord candidate = new HighScoreRecord(game.Commander().Name(), game.Score(), game.getEndStatus(),
 				game.Commander().getDays(), game.Commander().Worth(), game.Difficulty());
 		if (candidate.CompareTo(Functions.GetHighScores(this)[0]) > 0)
 		{
-			if (game.getCheatEnabled())
-				FormAlert.Alert(AlertType.GameEndHighScoreCheat, this);
-			else
-			{
+			if (game.getCheatEnabled()) {
+        FormAlert.Alert(AlertType.GameEndHighScoreCheat, this);
+      } else {
 				AddHighScore(candidate);
 				FormAlert.Alert(AlertType.GameEndHighScoreAchieved, this);
 			}
-		} else
-			FormAlert.Alert(AlertType.GameEndHighScoreMissed, this);
+		} else {
+      FormAlert.Alert(AlertType.GameEndHighScoreMissed, this);
+    }
 
 		Game.CurrentGame(null);
 		game = null;
@@ -3286,8 +3320,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		{
 			RegistryKey key = Functions.GetRegistryKey();
 			Object ObjectValue = key.GetValue(settingName);
-			if (ObjectValue != null)
-				settingValue = ObjectValue.toString();
+			if (ObjectValue != null) {
+        settingValue = ObjectValue.toString();
+      }
 			key.Close();
 		} catch (NullPointerException ex)
 		{
@@ -3305,8 +3340,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 		for (String path : paths)
 		{
-			if (!Directory.Exists(path))
-				Directory.CreateDirectory(path);
+			if (!Directory.Exists(path)) {
+        Directory.CreateDirectory(path);
+      }
 		}
 
 		dlgOpen.setInitialDirectory(Consts.SaveDirectory);
@@ -3335,8 +3371,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private void SaveGame(String fileName, boolean saveFileName)
 	{
-		if (Functions.SaveFile(fileName, game.Serialize(), this) && saveFileName)
-			SaveGameFile = fileName;
+		if (Functions.SaveFile(fileName, game.Serialize(), this) && saveFileName) {
+      SaveGameFile = fileName;
+    }
 
 		SaveGameDays = game.Commander().getDays();
 	}
@@ -3416,15 +3453,19 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				btnBuyQty[i].setVisible(buy[i] > 0);
 				btnBuyMax[i].setVisible(buy[i] > 0);
 
-				if (sell[i] * cmdr.getShip().Cargo()[i] > cmdr.PriceCargo()[i])
-					lblSellPrice[i].setFont(lblSystemNameLabel.getFont());
-				else
-					lblSellPrice[i].setFont(lblSell.getFont());
+				if (sell[i] * cmdr.getShip().Cargo()[i] > cmdr.PriceCargo()[i]) {
+          lblSellPrice[i].setFont(lblSystemNameLabel.getFont());
+        }
+				else {
+          lblSellPrice[i].setFont(lblSell.getFont());
+        }
 
-				if (warpSys != null && warpSys.DestOk() && price > 0)
-					lblTargetPrice[i].setText(Functions.FormatMoney(price));
-				else
-					lblTargetPrice[i].setText("-----------");
+				if (warpSys != null && warpSys.DestOk() && price > 0) {
+          lblTargetPrice[i].setText(Functions.FormatMoney(price));
+        }
+				else {
+          lblTargetPrice[i].setText("-----------");
+        }
 
 				if (warpSys != null && warpSys.DestOk() && price > 0 && buy[i] > 0)
 				{
@@ -3488,19 +3529,13 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		} else
 		{
 			Ship ship = game.Commander().getShip();
-
-			lblFuelStatus.setText(Functions.StringVars(Strings.DockFuelStatus, Functions.Multiples(ship.getFuel(),
-					"parsec")));
+			lblFuelStatus.setText(Functions.StringVars(Strings.DockFuelStatus, Functions.Multiples(ship.getFuel(), "parsec")));
 			int tanksEmpty = ship.FuelTanks() - ship.getFuel();
-			lblFuelCost.setText(tanksEmpty > 0 ? Functions.StringVars(Strings.DockFuelCost, Functions
-					.FormatMoney(tanksEmpty * ship.getFuelCost())) : Strings.DockFuelFull);
+			lblFuelCost.setText(tanksEmpty > 0 ? Functions.StringVars(Strings.DockFuelCost, Functions.FormatMoney(tanksEmpty * ship.getFuelCost())) : Strings.DockFuelFull);
 			btnFuel.setVisible(tanksEmpty > 0);
-
-			lblHullStatus.setText(Functions.StringVars(Strings.DockHullStatus, Functions.FormatNumber((int)Math
-					.floor((double)100 * ship.getHull() / ship.HullStrength()))));
+			lblHullStatus.setText(Functions.StringVars(Strings.DockHullStatus, Functions.FormatNumber((int)Math.floor((double)100 * ship.getHull() / ship.HullStrength()))));
 			int hullLoss = ship.HullStrength() - ship.getHull();
-			lblRepairCost.setText(hullLoss > 0 ? Functions.StringVars(Strings.DockHullCost, Functions
-					.FormatMoney(hullLoss * ship.getRepairCost())) : Strings.DockHullFull);
+			lblRepairCost.setText(hullLoss > 0 ? Functions.StringVars(Strings.DockHullCost, Functions.FormatMoney(hullLoss * ship.getRepairCost())) : Strings.DockHullFull);
 			btnRepair.setVisible(hullLoss > 0);
 		}
 	}
@@ -3518,8 +3553,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			btnEquip.setVisible(false);
 		} else
 		{
-			boolean noTech = (game.Commander().CurrentSystem().TechLevel().CastToInt() < Consts.ShipSpecs[ShipType.Flea
-					.CastToInt()].MinimumTechLevel().CastToInt());
+			boolean noTech = (game.Commander().CurrentSystem().TechLevel().CastToInt() < Consts.ShipSpecs[ShipType.Flea.CastToInt()].MinimumTechLevel().CastToInt());
 
 			lblShipsForSale.setText(noTech ? Strings.ShipyardShipNoSale : Strings.ShipyardShipForSale);
 			btnBuyShip.setVisible(true);
@@ -3529,12 +3563,15 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			btnEquip.setVisible(true);
 
 			btnPod.setVisible(false);
-			if (game.Commander().getShip().getEscapePod())
-				lblEscapePod.setText(Strings.ShipyardPodInstalled);
-			else if (noTech)
-				lblEscapePod.setText(Strings.ShipyardPodNoSale);
-			else if (game.Commander().getCash() < 2000)
-				lblEscapePod.setText(Strings.ShipyardPodIF);
+			if (game.Commander().getShip().getEscapePod()) {
+        lblEscapePod.setText(Strings.ShipyardPodInstalled);
+      }
+			else if (noTech) {
+        lblEscapePod.setText(Strings.ShipyardPodNoSale);
+      }
+			else if (game.Commander().getCash() < 2000) {
+        lblEscapePod.setText(Strings.ShipyardPodIF);
+      }
 			else
 			{
 				lblEscapePod.setText(Strings.ShipyardPodCost);
@@ -3595,12 +3632,12 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			btnMerc.setVisible(mercs.length > 0);
 			if (btnMerc.getVisible())
 			{
-				tipMerc.SetToolTip(btnMerc, Functions.StringVars(Strings.MercenariesForHire,
-						mercs.length == 1 ? mercs[0].Name() : mercs.length + Strings.Mercenaries));
+				tipMerc.SetToolTip(btnMerc, Functions.StringVars(Strings.MercenariesForHire, mercs.length == 1 ? mercs[0].Name() : mercs.length + Strings.Mercenaries));
 			}
 			btnSpecial.setVisible(system.ShowSpecialButton());
-			if (btnSpecial.getVisible())
-				tipSpecial.SetToolTip(btnSpecial, system.SpecialEvent().Title());
+			if (btnSpecial.getVisible()) {
+        tipSpecial.SetToolTip(btnSpecial, system.SpecialEvent().Title());
+      }
 		}
 	}
 
@@ -3631,8 +3668,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			lblTargetSize.setText(Strings.Sizes[system.Size().CastToInt()]);
 			lblTargetTech.setText(Strings.TechLevelNames[system.TechLevel().CastToInt()]);
 			lblTargetPolSys.setText(system.PoliticalSystem().Name());
-			lblTargetResource.setText(system.Visited() ? Strings.SpecialResources[system.SpecialResource().CastToInt()]
-					: Strings.Unknown);
+			lblTargetResource.setText(system.Visited() ? Strings.SpecialResources[system.SpecialResource().CastToInt()] : Strings.Unknown);
 			lblTargetPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
 			lblTargetPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
 			lblTargetDistance.setText("" + distance);
@@ -3656,8 +3692,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				SetRegistrySetting("X", Left.toString());
 				SetRegistrySetting("Y", Top.toString());
 			}
-		} else
-			e.Cancel = true;
+		} else {
+      e.Cancel = true;
+    }
 	}
 
 	private void SpaceTrader_Load(Object sender, jwinforms.EventArgs e)
@@ -3674,10 +3711,12 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		boolean all = name.indexOf("Qty") < 0;
 		int index = Integer.parseInt(name.substring(name.length() - 1));
 
-		if (name.indexOf("Buy") < 0)
-			CargoSell(index, all);
-		else
-			CargoBuy(index, all);
+		if (name.indexOf("Buy") < 0) {
+      CargoSell(index, all);
+    }
+		else {
+      CargoBuy(index, all);
+    }
 	}
 
 	private void btnBuyShip_Click(Object sender, jwinforms.EventArgs e)
@@ -3723,8 +3762,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					game.setChanceOfTradeInOrbit(Math.max(0, Math.min(1000, num1)));
 					break;
 				case Cover:
-					if (num1 >= 0 && num1 < ship.Shields().length && num2 >= 0 && num2 < Consts.Shields.length)
-						ship.Shields()[num1] = (Shield)Consts.Shields[num2].Clone();
+					if (num1 >= 0 && num1 < ship.Shields().length && num2 >= 0 && num2 < Consts.Shields.length) {
+          ship.Shields()[num1] = (Shield)Consts.Shields[num2].Clone();
+        }
 					break;
 				case DeLorean:
 					game.Commander().setDays(Math.max(0, num1));
@@ -3736,13 +3776,15 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					game.setCanSuperWarp(!game.getCanSuperWarp());
 					break;
 				case Events:
-					if (second == "Reset")
-						game.ResetVeryRareEncounters();
+					if (second == "Reset") {
+          game.ResetVeryRareEncounters();
+        }
 					else
 					{
 						String text = "";
-						for (Iterator<VeryRareEncounter> list = game.VeryRareEncounters().iterator(); list.hasNext();)
-							text += Strings.VeryRareEncounters[list.next().CastToInt()] + Strings.newline;
+						for (Iterator<VeryRareEncounter> list = game.VeryRareEncounters().iterator(); list.hasNext();) {
+            text += Strings.VeryRareEncounters[list.next().CastToInt()] + Strings.newline;
+          }
 						text = text.trim();
 
 						FormAlert.Alert(AlertType.Alert, this, "Remaining Very Rare Encounters", text);
@@ -3755,13 +3797,15 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					game.setSelectedSystemByName(second);
 					if (game.SelectedSystem().Name().toLowerCase() == second.toLowerCase())
 					{
-						if (game.getAutoSave())
-							SaveGame(SAVE_DEPARTURE, false);
+						if (game.getAutoSave()) {
+            SaveGame(SAVE_DEPARTURE, false);
+          }
 
 						game.WarpDirect();
 
-						if (game.getAutoSave())
-							SaveGame(SAVE_ARRIVAL, false);
+						if (game.getAutoSave()) {
+            SaveGame(SAVE_ARRIVAL, false);
+          }
 					}
 					break;
 				case Ice:
@@ -3787,8 +3831,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					game.Commander().setDebt(Math.max(0, num1));
 					break;
 				case Iron:
-					if (num1 >= 0 && num1 < ship.Weapons().length && num2 >= 0 && num2 < Consts.Weapons.length)
-						ship.Weapons()[num1] = (Weapon)Consts.Weapons[num2].Clone();
+					if (num1 >= 0 && num1 < ship.Weapons().length && num2 >= 0 && num2 < Consts.Weapons.length) {
+          ship.Weapons()[num1] = (Weapon)Consts.Weapons[num2].Clone();
+        }
 					break;
 				case Juice:
 					ship.setFuel(Math.max(0, Math.min(ship.FuelTanks(), num1)));
@@ -3799,9 +3844,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 						String[] skills = third.split(",");
 						for (int i = 0; i < game.Mercenaries()[num1].Skills().length && i < skills.length; i++)
 						{
-							if (Functions.IsInt(skills[i]))
-								game.Mercenaries()[num1].Skills()[i] = Math.max(1, Math.min(Consts.MaxSkill, Integer
-										.parseInt(skills[i])));
+							if (Functions.IsInt(skills[i])) {
+              game.Mercenaries()[num1].Skills()[i] = Math.max(1, Math.min(Consts.MaxSkill, Integer.parseInt(skills[i])));
+            }
 						}
 					}
 					break;
@@ -3823,8 +3868,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					{
 						int skill = ship.Trader();
 						ship.Crew()[num1] = game.Mercenaries()[num2];
-						if (ship.Trader() != skill)
-							game.RecalculateBuyPrices(game.Commander().CurrentSystem());
+						if (ship.Trader() != skill) {
+            game.RecalculateBuyPrices(game.Commander().CurrentSystem());
+          }
 					}
 					break;
 				case RapSheet:
@@ -3902,15 +3948,17 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				}
 					break;
 				case Swag:
-					if (num1 >= 0 && num1 < ship.Cargo().length)
-						ship.Cargo()[num1] = Math.max(0, Math.min(ship.FreeCargoBays() + ship.Cargo()[num1], num2));
+					if (num1 >= 0 && num1 < ship.Cargo().length) {
+          ship.Cargo()[num1] = Math.max(0, Math.min(ship.FreeCargoBays() + ship.Cargo()[num1], num2));
+        }
 					break;
 				case Test:
 					(new FormTest()).ShowDialog(this);
 					break;
 				case Tool:
-					if (num1 >= 0 && num1 < ship.Gadgets().length && num2 >= 0 && num2 < Consts.Gadgets.length)
-						ship.Gadgets()[num1] = (Gadget)Consts.Gadgets[num2].Clone();
+					if (num1 >= 0 && num1 < ship.Gadgets().length && num2 >= 0 && num2 < Consts.Gadgets.length) {
+          ship.Gadgets()[num1] = (Gadget)Consts.Gadgets[num2].Clone();
+        }
 					break;
 				case Varmints:
 					ship.setTribbles(Math.max(0, num1));
@@ -3939,8 +3987,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			if (find)
 			{
 				game.setSelectedSystemByName(form.SystemName());
-				if (form.TrackSystem() && game.SelectedSystem().Name().toLowerCase() == form.SystemName().toLowerCase())
-					game.setTrackedSystemId(game.SelectedSystemId());
+				if (form.TrackSystem() && game.SelectedSystem().Name().toLowerCase() == form.SystemName().toLowerCase()) {
+          game.setTrackedSystemId(game.SelectedSystemId());
+        }
 			}
 
 			UpdateAll();
@@ -3961,22 +4010,26 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 	private void btnJump_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if (game.WarpSystem() == null)
-			FormAlert.Alert(AlertType.ChartJumpNoSystemSelected, this);
-		else if (game.WarpSystem() == game.Commander().CurrentSystem())
-			FormAlert.Alert(AlertType.ChartJumpCurrent, this);
+		if (game.WarpSystem() == null) {
+      FormAlert.Alert(AlertType.ChartJumpNoSystemSelected, this);
+    }
+		else if (game.WarpSystem() == game.Commander().CurrentSystem()) {
+      FormAlert.Alert(AlertType.ChartJumpCurrent, this);
+    }
 		else if (FormAlert.Alert(AlertType.ChartJump, this, game.WarpSystem().Name()) == DialogResult.Yes)
 		{
 			game.setCanSuperWarp(false);
 			try
 			{
-				if (game.getAutoSave())
-					SaveGame(SAVE_DEPARTURE, false);
+				if (game.getAutoSave()) {
+          SaveGame(SAVE_DEPARTURE, false);
+        }
 
 				game.Warp(true);
 
-				if (game.getAutoSave())
-					SaveGame(SAVE_ARRIVAL, false);
+				if (game.getAutoSave()) {
+          SaveGame(SAVE_ARRIVAL, false);
+        }
 			} catch (GameEndException ex)
 			{
 				GameEnd();
@@ -4053,8 +4106,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		FormAlert alert = new FormAlert(specEvent.Title(), specEvent.String(), btn1, res1, btn2, res2, null);
 		if (alert.ShowDialog() != DialogResult.No)
 		{
-			if (game.Commander().CashToSpend() < specEvent.Price())
-				FormAlert.Alert(AlertType.SpecialIF, this);
+			if (game.Commander().CashToSpend() < specEvent.Price()) {
+        FormAlert.Alert(AlertType.SpecialIF, this);
+      }
 			else
 			{
 				try
@@ -4080,13 +4134,15 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	{
 		try
 		{
-			if (game.getAutoSave())
-				SaveGame(SAVE_DEPARTURE, false);
+			if (game.getAutoSave()) {
+        SaveGame(SAVE_DEPARTURE, false);
+      }
 
 			game.Warp(false);
 
-			if (game.getAutoSave())
-				SaveGame(SAVE_ARRIVAL, false);
+			if (game.getAutoSave()) {
+        SaveGame(SAVE_ARRIVAL, false);
+      }
 		} catch (GameEndException ex)
 		{
 			GameEnd();
@@ -4102,46 +4158,45 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private void mnuGameNew_Click(Object sender, jwinforms.EventArgs e)
 	{
 		FormNewCommander form = new FormNewCommander();
-		if ((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(
-				AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
-				&& form.ShowDialog(this) == DialogResult.OK)
-		{
-			game = new Game(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form.Trader(), form
-					.Engineer(), this);
+		if ((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) && form.ShowDialog(this) == DialogResult.OK) {
+			game = new Game(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form.Trader(), form.Engineer(), this);
 			SaveGameFile = null;
 			SaveGameDays = 0;
 
 			SetInGameControlsEnabled(true);
 			UpdateAll();
 
-			if (game.Options().getNewsAutoShow())
-				game.ShowNewspaper();
+			if (game.Options().getNewsAutoShow()) {
+        game.ShowNewspaper();
+      }
 		}
 	}
 
 	private void mnuGameLoad_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if ((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(
-				AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
-				&& dlgOpen.ShowDialog(this) == DialogResult.OK)
-			LoadGame(dlgOpen.getFileName());
+		if ((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) && dlgOpen.ShowDialog(this) == DialogResult.OK) {
+      LoadGame(dlgOpen.getFileName());
+    }
 	}
 
 	private void mnuGameSave_Click(Object sender, jwinforms.EventArgs e)
 	{
 		if (Game.CurrentGame() != null)
 		{
-			if (SaveGameFile != null)
-				SaveGame(SaveGameFile, false);
-			else
-				mnuGameSaveAs_Click(sender, e);
+			if (SaveGameFile != null) {
+        SaveGame(SaveGameFile, false);
+      }
+			else {
+        mnuGameSaveAs_Click(sender, e);
+      }
 		}
 	}
 
 	private void mnuGameSaveAs_Click(Object sender, jwinforms.EventArgs e)
 	{
-		if (Game.CurrentGame() != null && dlgSave.ShowDialog(this) == DialogResult.OK)
-			SaveGame(dlgSave.getFileName(), true);
+		if (Game.CurrentGame() != null && dlgSave.ShowDialog(this) == DialogResult.OK) {
+      SaveGame(dlgSave.getFileName(), true);
+    }
 	}
 
 	private void mnuHelpAbout_Click(Object sender, jwinforms.EventArgs e)
@@ -4229,8 +4284,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				}
 			}
 
-			if (clickedSystem)
-				UpdateAll();
+			if (clickedSystem) {
+        UpdateAll();
+      }
 		}
 	}
 
@@ -4244,24 +4300,23 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			StarSystem curSys = game.Commander().CurrentSystem();
 			int fuel = game.Commander().getShip().getFuel();
 
-			if (fuel > 0)
-				e.Graphics.DrawEllipse(DEFAULT_PEN, curSys.X() + OFF_X - fuel, curSys.Y() + OFF_Y - fuel, fuel * 2,
-						fuel * 2);
+			if (fuel > 0) {
+        e.Graphics.DrawEllipse(DEFAULT_PEN, curSys.X() + OFF_X - fuel, curSys.Y() + OFF_Y - fuel, fuel * 2, fuel * 2);
+      }
 
 			int index = game.SelectedSystemId().CastToInt();
-			if (game.TargetWormhole())
-			{
+			if (game.TargetWormhole()) {
 				int dest = wormholes[(Util.BruteSeek(wormholes, index) + 1) % wormholes.length];
 				StarSystem destSys = universe[dest];
-				e.Graphics.DrawLine(DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X, targetSys.Y() + OFF_Y, destSys.X()
-						+ OFF_X, destSys.Y() + OFF_Y);
+				e.Graphics.DrawLine(DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X, targetSys.Y() + OFF_Y, destSys.X() + OFF_X, destSys.Y() + OFF_Y);
 			}
 
 			for (int i = 0; i < universe.length; i++)
 			{
 				int imageIndex = universe[i].Visited() ? IMG_S_V : IMG_S_N;
-				if (universe[i] == game.WarpSystem())
-					imageIndex++;
+				if (universe[i] == game.WarpSystem()) {
+          imageIndex++;
+        }
 				Image image = ilChartImages.getImages()[imageIndex];
 
 				if (universe[i] == game.TrackedSystem())
@@ -4274,11 +4329,13 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 				ilChartImages.Draw(e.Graphics, universe[i].X(), universe[i].Y(), imageIndex);
 
-				if (Functions.WormholeExists(i, -1))
-					ilChartImages.Draw(e.Graphics, universe[i].X() + OFF_X_WORM, universe[i].Y(), IMG_S_W);
+				if (Functions.WormholeExists(i, -1)) {
+          ilChartImages.Draw(e.Graphics, universe[i].X() + OFF_X_WORM, universe[i].Y(), IMG_S_W);
+        }
 			}
-		} else
-			e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, picGalacticChart.getWidth(), picGalacticChart.getHeight());
+		} else {
+      e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, picGalacticChart.getWidth(), picGalacticChart.getHeight());
+    }
 	}
 
 	private void picShortRangeChart_MouseDown(Object sender, jwinforms.MouseEventArgs e)
@@ -4319,8 +4376,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				}
 			}
 
-			if (clickedSystem)
-				UpdateAll();
+			if (clickedSystem) {
+        UpdateAll();
+      }
 		}
 	}
 
@@ -4340,9 +4398,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 
 			e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY - 1, centerX + 1, centerY + 1);
 			e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY + 1, centerX + 1, centerY - 1);
-			if (fuel > 0)
-				e.Graphics.DrawEllipse(DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2,
-						fuel * delta * 2);
+			if (fuel > 0) {
+        e.Graphics.DrawEllipse(DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
+      }
 
 			if (trackSys != null)
 			{
@@ -4360,10 +4418,11 @@ public class SpaceTrader extends jwinforms.WinformWindow
 							new Point(centerX + dX2, centerY + dY2) });
 				}
 
-				if (game.Options().getShowTrackedRange())
+				if (game.Options().getShowTrackedRange()) {
 					e.Graphics.DrawString(Functions.StringVars(Strings.ChartDistance, Functions.Multiples(dist,
 							Strings.DistanceUnit), trackSys.Name()), getFont(), new SolidBrush(Color.black), 0,
 							picShortRangeChart.getHeight() - 13);
+        }
 			}
 
 			// Two loops: first draw the names and then the systems. The names
@@ -4419,19 +4478,20 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					}
 				}
 			}
-		} else
-			e.Graphics
-					.FillRectangle(DEFAULT_BRUSH, 0, 0, picShortRangeChart.getWidth(), picShortRangeChart.getHeight());
+		} else {
+      e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, picShortRangeChart.getWidth(), picShortRangeChart.getHeight());
+    }
 	}
 
 	private void statusBar_PanelClick(Object sender, jwinforms.StatusBarPanelClickEventArgs e)
 	{
 		if (game != null)
 		{
-			if (e.StatusBarPanel == statusBarPanelCash)
-				mnuViewBank_Click(sender, e);
-			else if (e.StatusBarPanel == statusBarPanelCosts)
-				(new FormCosts()).ShowDialog(this);
+			if (e.StatusBarPanel == statusBarPanelCash) {
+        mnuViewBank_Click(sender, e);
+      } else if (e.StatusBarPanel == statusBarPanelCosts) {
+        (new FormCosts()).ShowDialog(this);
+      }
 		}
 	}
 
@@ -4443,9 +4503,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	{
 		Image[] images = new Image[Consts.ImagesPerShip];
 		int baseIndex = ShipType.Custom.CastToInt() * Consts.ImagesPerShip;
-		for (int index = 0; index < Consts.ImagesPerShip; index++)
-			images[index] = ilShipImages.getImages()[baseIndex + index];
-
+		for (int index = 0; index < Consts.ImagesPerShip; index++) {
+      images[index] = ilShipImages.getImages()[baseIndex + index];
+    }
 		return images;
 	}
 
@@ -4453,8 +4513,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	{
 		Image[] images = value;
 		int baseIndex = ShipType.Custom.CastToInt() * Consts.ImagesPerShip;
-		for (int index = 0; index < Consts.ImagesPerShip; index++)
-			ilShipImages.getImages()[baseIndex + index] = images[index];
+		for (int index = 0; index < Consts.ImagesPerShip; index++) {
+      ilShipImages.getImages()[baseIndex + index] = images[index];
+    }
 	}
 
 	public ImageList DirectionImages()
@@ -4476,8 +4537,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	{
 		Image[] images = new Image[Consts.ImagesPerShip];
 		int baseIndex = ShipType.Custom.CastToInt() * Consts.ImagesPerShip;
-		for (int index = 0; index < Consts.ImagesPerShip; index++)
-			images[index] = ilShipImages.getImages()[baseIndex + index];
+		for (int index = 0; index < Consts.ImagesPerShip; index++) {
+      images[index] = ilShipImages.getImages()[baseIndex + index];
+    }
 
 		return images;
 	}
@@ -4486,8 +4548,9 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	{
 		Image[] images = value;
 		int baseIndex = ShipType.Custom.CastToInt() * Consts.ImagesPerShip;
-		for (int index = 0; index < Consts.ImagesPerShip; index++)
-			ilShipImages.getImages()[baseIndex + index] = images[index];
+		for (int index = 0; index < Consts.ImagesPerShip; index++) {
+      ilShipImages.getImages()[baseIndex + index] = images[index];
+    }
 	}
 	// #endregion
 }

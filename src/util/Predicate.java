@@ -1,6 +1,6 @@
 package util;
 
-public interface Predicate<T>
-{
-	boolean consider(T t);
+
+public interface Predicate<T> {
+  boolean consider(T t);
 }

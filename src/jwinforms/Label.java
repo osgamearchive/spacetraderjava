@@ -1,49 +1,43 @@
 package jwinforms;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Label extends WinformControl
-{
-	private static final String NEWLINE_LITERAL = "\n";
-	private static final String END = "</HTML>";
-	private static final String START = "<HTML>";
-	private static final String NEWLINE = "<br>";
-	public ContentAlignment TextAlign;
-	public ContentAlignment ImageAlign;
-	private boolean convertedToHtml;
 
-	public Label()
-	{
-		super(new JLabel());
-	}
+public class Label extends WinformControl {
+  private static final String NEWLINE_LITERAL = "\n";
+  private static final String END = "</HTML>";
+  private static final String START = "<HTML>";
+  private static final String NEWLINE = "<br>";
+  public ContentAlignment TextAlign;
+  public ContentAlignment ImageAlign;
+  private boolean convertedToHtml;
 
-	public void setText(String text)
-	{
-		if (text.length() > 15)
-		{
-			convertedToHtml = true;
-			text = START + text.replaceAll(NEWLINE_LITERAL+"\\s*", NEWLINE) + END;
-		} else
-			convertedToHtml = false;
-		((JLabel)swingVersion).setText(text);
-	}
+  public Label() {
+    super(new JLabel());
+  }
 
-	public String getText()
-	{
-		String text = ((JLabel)swingVersion).getText();
+  public void setText(String text) {
+    if(text.length() > 15) {
+      convertedToHtml = true;
+      text = START + text.replaceAll(NEWLINE_LITERAL + "\\s*", NEWLINE) + END;
+    } else {
+      convertedToHtml = false;
+    }
+    ((JLabel)swingVersion).setText(text);
+  }
 
-		if (convertedToHtml)
-		{
-			text = text.substring(START.length(), text.length() - END.length());
-			text = text.replaceAll(NEWLINE, NEWLINE_LITERAL);
-		}
+  public String getText() {
+    String text = ((JLabel)swingVersion).getText();
 
-		return text;
-	}
+    if(convertedToHtml) {
+      text = text.substring(START.length(), text.length() - END.length());
+      text = text.replaceAll(NEWLINE, NEWLINE_LITERAL);
+    }
 
-	public void setImage(Image image)
-	{
-		((JLabel)swingVersion).setIcon(new ImageIcon(image.asSwingImage()));
-	}
+    return text;
+  }
+
+  public void setImage(Image image) {
+    ((JLabel)swingVersion).setIcon(new ImageIcon(image.asSwingImage()));
+  }
 }
