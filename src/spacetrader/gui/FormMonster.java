@@ -144,9 +144,9 @@ public class FormMonster extends WinformForm
 		this.pnlQuests.SuspendLayout();
 		this.pnlShipyards.SuspendLayout();
 		this.SuspendLayout();
-		// 
+		//
 		// btnClose
-		// 
+		//
 		this.btnClose.setDialogResult(DialogResult.Cancel);
 		this.btnClose.setLocation(new java.awt.Point(-32, -32));
 		this.btnClose.setName("btnClose");
@@ -154,27 +154,27 @@ public class FormMonster extends WinformForm
 		this.btnClose.setTabIndex(32);
 		this.btnClose.setTabStop(false);
 		this.btnClose.setText("X");
-		// 
+		//
 		// picLine1
-		// 
+		//
 		this.picLine1.setBackColor(java.awt.Color.darkGray);
 		this.picLine1.setLocation(new java.awt.Point(4, 40));
 		this.picLine1.setName("picLine1");
 		this.picLine1.setSize(new jwinforms.Size(609, 1));
 		this.picLine1.setTabIndex(133);
 		this.picLine1.setTabStop(false);
-		// 
+		//
 		// picLine0
-		// 
+		//
 		this.picLine0.setBackColor(java.awt.Color.darkGray);
 		this.picLine0.setLocation(new java.awt.Point(234, 8));
 		this.picLine0.setName("picLine0");
 		this.picLine0.setSize(new jwinforms.Size(1, 347));
 		this.picLine0.setTabIndex(132);
 		this.picLine0.setTabStop(false);
-		// 
+		//
 		// lblQuestsLabel
-		// 
+		//
 		this.lblQuestsLabel.setAutoSize(true);
 		this.lblQuestsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -183,9 +183,9 @@ public class FormMonster extends WinformForm
 		this.lblQuestsLabel.setSize(new jwinforms.Size(50, 19));
 		this.lblQuestsLabel.setTabIndex(134);
 		this.lblQuestsLabel.setText("Quests");
-		// 
+		//
 		// lblMercLabel
-		// 
+		//
 		this.lblMercLabel.setAutoSize(true);
 		this.lblMercLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -194,9 +194,9 @@ public class FormMonster extends WinformForm
 		this.lblMercLabel.setSize(new jwinforms.Size(84, 19));
 		this.lblMercLabel.setTabIndex(141);
 		this.lblMercLabel.setText("Mercenaries");
-		// 
+		//
 		// lblMercSkillLabelPilot
-		// 
+		//
 		this.lblMercSkillLabelPilot.setAutoSize(true);
 		this.lblMercSkillLabelPilot.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -214,9 +214,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercSkillLabelFighter
-		// 
+		//
 		this.lblMercSkillLabelFighter.setAutoSize(true);
 		this.lblMercSkillLabelFighter.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold,
 				GraphicsUnit.Point, ((byte) (0))));
@@ -234,9 +234,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercSkillLabelTrader
-		// 
+		//
 		this.lblMercSkillLabelTrader.setAutoSize(true);
 		this.lblMercSkillLabelTrader.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold,
 				GraphicsUnit.Point, ((byte) (0))));
@@ -254,9 +254,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercSkillLabelEngineer
-		// 
+		//
 		this.lblMercSkillLabelEngineer.setAutoSize(true);
 		this.lblMercSkillLabelEngineer.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold,
 				GraphicsUnit.Point, ((byte) (0))));
@@ -274,9 +274,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercSystemLabel
-		// 
+		//
 		this.lblMercSystemLabel.setAutoSize(true);
 		this.lblMercSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -293,9 +293,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblQuestSystemLabel
-		// 
+		//
 		this.lblQuestSystemLabel.setAutoSize(true);
 		this.lblQuestSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -312,9 +312,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblQuestDescLabel
-		// 
+		//
 		this.lblQuestDescLabel.setAutoSize(true);
 		this.lblQuestDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -331,9 +331,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercIDLabel
-		// 
+		//
 		this.lblMercIDLabel.setAutoSize(true);
 		this.lblMercIDLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -351,9 +351,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercNameLabel
-		// 
+		//
 		this.lblMercNameLabel.setAutoSize(true);
 		this.lblMercNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -370,9 +370,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblShipyardsDescLabel
-		// 
+		//
 		this.lblShipyardsDescLabel.setAutoSize(true);
 		this.lblShipyardsDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -389,9 +389,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblShipyardsSystemLabel
-		// 
+		//
 		this.lblShipyardsSystemLabel.setAutoSize(true);
 		this.lblShipyardsSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold,
 				GraphicsUnit.Point, ((byte) (0))));
@@ -408,9 +408,9 @@ public class FormMonster extends WinformForm
 				SortLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblShipyardsLabel
-		// 
+		//
 		this.lblShipyardsLabel.setAutoSize(true);
 		this.lblShipyardsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point,
 				((byte) (0))));
@@ -419,9 +419,9 @@ public class FormMonster extends WinformForm
 		this.lblShipyardsLabel.setSize(new jwinforms.Size(68, 19));
 		this.lblShipyardsLabel.setTabIndex(155);
 		this.lblShipyardsLabel.setText("Shipyards");
-		// 
+		//
 		// pnlMercs
-		// 
+		//
 		this.pnlMercs.AutoScroll = true;
 		this.pnlMercs.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.pnlMercs.Controls.add(this.lblMercSkillsPilot);
@@ -436,41 +436,41 @@ public class FormMonster extends WinformForm
 		this.pnlMercs.setName("pnlMercs");
 		this.pnlMercs.setSize(new jwinforms.Size(371, 307));
 		this.pnlMercs.setTabIndex(158);
-		// 
+		//
 		// lblMercSkillsPilot
-		// 
+		//
 		this.lblMercSkillsPilot.setLocation(new java.awt.Point(93, 4));
 		this.lblMercSkillsPilot.setName("lblMercSkillsPilot");
 		this.lblMercSkillsPilot.setSize(new jwinforms.Size(20, 563));
 		this.lblMercSkillsPilot.setTabIndex(144);
 		this.lblMercSkillsPilot.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
 		// lblMercSkillsFighter
-		// 
+		//
 		this.lblMercSkillsFighter.setLocation(new java.awt.Point(113, 4));
 		this.lblMercSkillsFighter.setName("lblMercSkillsFighter");
 		this.lblMercSkillsFighter.setSize(new jwinforms.Size(20, 563));
 		this.lblMercSkillsFighter.setTabIndex(145);
 		this.lblMercSkillsFighter.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
 		// lblMercSkillsTrader
-		// 
+		//
 		this.lblMercSkillsTrader.setLocation(new java.awt.Point(133, 4));
 		this.lblMercSkillsTrader.setName("lblMercSkillsTrader");
 		this.lblMercSkillsTrader.setSize(new jwinforms.Size(20, 563));
 		this.lblMercSkillsTrader.setTabIndex(146);
 		this.lblMercSkillsTrader.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
 		// lblMercSkillsEngineer
-		// 
+		//
 		this.lblMercSkillsEngineer.setLocation(new java.awt.Point(153, 4));
 		this.lblMercSkillsEngineer.setName("lblMercSkillsEngineer");
 		this.lblMercSkillsEngineer.setSize(new jwinforms.Size(20, 563));
 		this.lblMercSkillsEngineer.setTabIndex(147);
 		this.lblMercSkillsEngineer.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
 		// lblMercSystems
-		// 
+		//
 		this.lblMercSystems.LinkArea = new jwinforms.LinkArea(0, 0);
 		this.lblMercSystems.setLocation(new java.awt.Point(185, 4));
 		this.lblMercSystems.setName("lblMercSystems");
@@ -483,24 +483,24 @@ public class FormMonster extends WinformForm
 				SystemLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// lblMercIds
-		// 
+		//
 		this.lblMercIds.setLocation(new java.awt.Point(0, 4));
 		this.lblMercIds.setName("lblMercIds");
 		this.lblMercIds.setSize(new jwinforms.Size(23, 563));
 		this.lblMercIds.setTabIndex(142);
 		this.lblMercIds.TextAlign = ContentAlignment.TopRight;
-		// 
+		//
 		// lblMercNames
-		// 
+		//
 		this.lblMercNames.setLocation(new java.awt.Point(28, 4));
 		this.lblMercNames.setName("lblMercNames");
 		this.lblMercNames.setSize(new jwinforms.Size(69, 563));
 		this.lblMercNames.setTabIndex(141);
-		// 
+		//
 		// lblMercSystems2
-		// 
+		//
 		this.lblMercSystems2.LinkArea = new jwinforms.LinkArea(0, 0);
 		this.lblMercSystems2.setLocation(new java.awt.Point(185, 391));
 		this.lblMercSystems2.setName("lblMercSystems2");
@@ -513,9 +513,9 @@ public class FormMonster extends WinformForm
 				SystemLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// pnlQuests
-		// 
+		//
 		this.pnlQuests.AutoScroll = true;
 		this.pnlQuests.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.pnlQuests.Controls.add(this.lblQuests);
@@ -524,16 +524,16 @@ public class FormMonster extends WinformForm
 		this.pnlQuests.setName("pnlQuests");
 		this.pnlQuests.setSize(new jwinforms.Size(222, 182));
 		this.pnlQuests.setTabIndex(159);
-		// 
+		//
 		// lblQuests
-		// 
+		//
 		this.lblQuests.setLocation(new java.awt.Point(76, 4));
 		this.lblQuests.setName("lblQuests");
 		this.lblQuests.setSize(new jwinforms.Size(120, 350));
 		this.lblQuests.setTabIndex(48);
-		// 
+		//
 		// lblQuestSystems
-		// 
+		//
 		this.lblQuestSystems.LinkArea = new jwinforms.LinkArea(0, 0);
 		this.lblQuestSystems.setLocation(new java.awt.Point(4, 4));
 		this.lblQuestSystems.setName("lblQuestSystems");
@@ -546,9 +546,9 @@ public class FormMonster extends WinformForm
 				SystemLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// pnlShipyards
-		// 
+		//
 		this.pnlShipyards.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
 		this.pnlShipyards.Controls.add(this.lblShipyards);
 		this.pnlShipyards.Controls.add(this.lblShipyardSystems);
@@ -556,16 +556,16 @@ public class FormMonster extends WinformForm
 		this.pnlShipyards.setName("pnlShipyards");
 		this.pnlShipyards.setSize(new jwinforms.Size(222, 73));
 		this.pnlShipyards.setTabIndex(160);
-		// 
+		//
 		// lblShipyards
-		// 
+		//
 		this.lblShipyards.setLocation(new java.awt.Point(76, 4));
 		this.lblShipyards.setName("lblShipyards");
 		this.lblShipyards.setSize(new jwinforms.Size(120, 63));
 		this.lblShipyards.setTabIndex(158);
-		// 
+		//
 		// lblShipyardSystems
-		// 
+		//
 		this.lblShipyardSystems.LinkArea = new jwinforms.LinkArea(0, 0);
 		this.lblShipyardSystems.setLocation(new java.awt.Point(4, 4));
 		this.lblShipyardSystems.setName("lblShipyardSystems");
@@ -578,18 +578,18 @@ public class FormMonster extends WinformForm
 				SystemLinkClicked(sender, e);
 			}
 		};
-		// 
+		//
 		// picLine2
-		// 
+		//
 		this.picLine2.setBackColor(java.awt.Color.darkGray);
 		this.picLine2.setLocation(new java.awt.Point(4, 274));
 		this.picLine2.setName("picLine2");
 		this.picLine2.setSize(new jwinforms.Size(222, 1));
 		this.picLine2.setTabIndex(161);
 		this.picLine2.setTabStop(false);
-		// 
+		//
 		// FormMonster
-		// 
+		//
 		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
 		this.setCancelButton(this.btnClose);
 		this.setClientSize(new jwinforms.Size(617, 358));
@@ -646,8 +646,8 @@ public class FormMonster extends WinformForm
 			switch (SomeStringsForSwitch.valueOf(sortBy))
 			{
 			case I: // Id
-				valA = (int) A.Id().CastToInt();
-				valB = (int) B.Id().CastToInt();
+				valA = A.Id().CastToInt();
+				valB = B.Id().CastToInt();
 				break;
 			case N: // Name
 				valA = A.Name();

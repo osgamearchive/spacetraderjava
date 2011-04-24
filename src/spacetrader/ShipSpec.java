@@ -355,7 +355,7 @@ public class ShipSpec extends STSerializableObject
 
 	public int ImageIndex()
 	{
-		return (_imageIndex == Consts.ShipImgUseDefault ? (int)Type().CastToInt() : _imageIndex);
+		return (_imageIndex == Consts.ShipImgUseDefault ? Type().CastToInt() : _imageIndex);
 	}
 
 	public void ImageIndex(int value)
