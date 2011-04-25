@@ -19,6 +19,7 @@
  ******************************************************************************/
 package spacetrader;
 
+import org.gts.bst.ship.equip.EquipmentSubType;
 import org.gts.bst.ship.equip.EquipmentType;
 import jwinforms.Image;
 import spacetrader.util.*;

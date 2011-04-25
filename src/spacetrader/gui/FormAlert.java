@@ -1,29 +1,24 @@
-/*******************************************************************************
- *
- * Space Trader for Windows 2.00
- *
- * Copyright (C) 2005 Jay French, All Rights Reserved
- *
- * Additional coding by David Pierron
- * Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option) any
- * later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * If you'd like a copy of the GNU General Public License, go to
- * http://www.gnu.org/copyleft/gpl.html.
- *
- * You can contact the author at spacetrader@frenchfryz.com
- *
- ******************************************************************************/
 package spacetrader.gui;
-import jwinforms.*;
+import jwinforms.Button;
+import jwinforms.ColorDepth;
+import jwinforms.Container;
+import jwinforms.DialogResult;
+import jwinforms.EventArgs;
+import jwinforms.EventHandler;
+import jwinforms.FlatStyle;
+import jwinforms.FormBorderStyle;
+import jwinforms.FormStartPosition;
+import jwinforms.Graphics;
+import jwinforms.IContainer;
+import jwinforms.ImageList;
+import jwinforms.ImageListStreamer;
+import jwinforms.Label;
+import jwinforms.ResourceManager;
+import jwinforms.Size;
+import jwinforms.SizeF;
+import jwinforms.Timer;
+import jwinforms.WinformForm;
+import jwinforms.WinformPane;
 import spacetrader.Functions;
 import spacetrader.Game;
 import spacetrader.Strings;
@@ -33,19 +28,14 @@ import spacetrader.enums.GameEndType;
 
 public class FormAlert extends WinformForm {
   private static final String _80_CHARS = "01234567890123456789012345678901234567890123456789012345678901234567890123456789";
-  // #region Constants
   private static final int SPLASH_INDEX = 4;
-  // #endregion
-  // #region Control Declarations
-  private jwinforms.Label lblText;
-  private jwinforms.Button btn1;
-  private jwinforms.Button btn2;
-  private jwinforms.ImageList ilImages;
-  private jwinforms.Timer tmrTick;
+  private Button btn1;
+  private Button btn2;
+  private ImageList ilImages;
+  private Label lblText;
+  private Timer tmrTick;
   private IContainer components;
 
-  // #endregion
-  // #region Methods
   private FormAlert() {
     InitializeComponent();
   }
@@ -53,18 +43,14 @@ public class FormAlert extends WinformForm {
   public FormAlert(String title, String text, String button1Text, DialogResult button1Result, String button2Text, DialogResult button2Result, String[] args) {
     this();
     Graphics g = this.CreateGraphics();
-
     // Replace any variables.
     if(args != null) {
       title = Functions.StringVars(title, args);
       text = Functions.StringVars(text, args);
     }
-
     lblText.setWidth(g.MeasureString((text.length() > 80 ? _80_CHARS : text), this.getFont()).width + 25);
-    // lblText.setWidth(300);
     lblText.setText(text);
     lblText.setHeight(30 + 30 * text.length() / 80);
-
     // Size the buttons.
     int btnWidth = 0;
     btn1.setText(button1Text);
@@ -78,18 +64,15 @@ public class FormAlert extends WinformForm {
       btn2.setDialogResult(button2Result);
       btnWidth += btn2.getWidth() + 6;
     }
-
     // Size the form.
     this.setWidth(Math.max(btnWidth, lblText.getWidth()) + 16);
     this.setHeight(lblText.getHeight() + 75);
-
     // Locate the controls.
     lblText.setLeft((this.getWidth() - lblText.getWidth()) / 2);
     btn1.setTop(lblText.getHeight() + 19);
     btn1.setLeft((this.getWidth() - btnWidth) / 2);
     btn2.setTop(btn1.getTop());
     btn2.setLeft(btn1.getLeft() + btn1.getWidth() + 6);
-
     // Set the title.
     this.setText(title);
   }
@@ -99,115 +82,89 @@ public class FormAlert extends WinformForm {
     // Make sure the extra controls are hidden.
     lblText.setVisible(false);
     btn2.setVisible(false);
-
     // Move btn1 off-screen.
     btn1.setLeft(-btn1.getWidth());
     btn1.setTop(-btn1.getHeight());
     setAcceptButton(btn1);
     setCancelButton(btn1);
-
     // Set the background image.
     setBackgroundImage(ilImages.getImages()[imageIndex]);
     setClientSize((new SizeF(getBackgroundImage().getWidth(), getBackgroundImage().getHeight())));
-
     // Set the title.
     this.setText(title);
-
-    // If this is the splash screen, get rid of the title bar and start the
-    // timer.
+    // If this is the splash screen, get rid of the title bar and start the timer.
     if(imageIndex == SPLASH_INDEX) {
-      this.setFormBorderStyle(jwinforms.FormBorderStyle.None);
+      this.setFormBorderStyle(FormBorderStyle.None);
       tmrTick.Start();
     }
   }
 
-  // #region Windows Form Designer generated code
-  // / <summary>
-  // / Required method for Designer support - do not modify
-  // / the contents of this method with the code editor.
-  // / </summary>
+  // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
     this.components = new Container();
     ResourceManager resources = new ResourceManager(FormAlert.class);
-    this.lblText = new jwinforms.Label();
-    this.btn1 = new jwinforms.Button();
-    this.btn2 = new jwinforms.Button();
-    this.ilImages = new jwinforms.ImageList(this.components);
-    this.tmrTick = new jwinforms.Timer(this.components);
+    this.lblText = new Label();
+    this.btn1 = new Button();
+    this.btn2 = new Button();
+    this.ilImages = new ImageList(this.components);
+    this.tmrTick = new Timer(this.components);
     this.SuspendLayout();
-    //
     // lblText
-    //
     this.lblText.setLocation(new java.awt.Point(8, 8));
     this.lblText.setName("lblText");
-    // this.lblText.setSize(new winforms.Size(12, 13));
     this.lblText.setTabIndex(3);
     this.lblText.setText("X");
-    //
     // btn1
-    //
     this.btn1.setDialogResult(DialogResult.OK);
-    this.btn1.setFlatStyle(jwinforms.FlatStyle.Flat);
+    this.btn1.setFlatStyle(FlatStyle.Flat);
     this.btn1.setLocation(new java.awt.Point(115, 32));
     this.btn1.setName("btn1");
-    this.btn1.setSize(new jwinforms.Size(40, 22));
+    this.btn1.setSize(new Size(40, 22));
     this.btn1.setTabIndex(1);
     this.btn1.setText("Ok");
-    //
     // btn2
-    //
     this.btn2.setDialogResult(DialogResult.No);
-    this.btn2.setFlatStyle(jwinforms.FlatStyle.Flat);
+    this.btn2.setFlatStyle(FlatStyle.Flat);
     this.btn2.setLocation(new java.awt.Point(200, 32));
     this.btn2.setName("btn2");
-    this.btn2.setSize(new jwinforms.Size(40, 22));
+    this.btn2.setSize(new Size(40, 22));
     this.btn2.setTabIndex(2);
     this.btn2.setText("No");
     this.btn2.setVisible(false);
-    //
     // ilImages
-    //
-    this.ilImages.ColorDepth = jwinforms.ColorDepth.Depth24Bit;
-    this.ilImages.setImageSize(new jwinforms.Size(160, 160));
-    this.ilImages.setImageStream(((jwinforms.ImageListStreamer)(resources.GetObject("ilImages.ImageStream"))));
+    this.ilImages.ColorDepth = ColorDepth.Depth24Bit;
+    this.ilImages.setImageSize(new Size(160, 160));
+    this.ilImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilImages.ImageStream"))));
     this.ilImages.setTransparentColor(null);
-    //
     // tmrTick
-    //
     this.tmrTick.setInterval(4000);
-    this.tmrTick.Tick = new EventHandler<Object, EventArgs>()
-        {
+    this.tmrTick.Tick = new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         tmrTick_Tick(sender, e);
       }
     };
-    //
     // FormAlert
-    //
-    this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
-    this.setClientSize(new jwinforms.Size(270, 63));
+    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setClientSize(new Size(270, 63));
     this.setControlBox(false);
     this.Controls.add(this.btn2);
     this.Controls.add(this.btn1);
     this.Controls.add(this.lblText);
-    this.setFormBorderStyle(jwinforms.FormBorderStyle.FixedDialog);
+    this.setFormBorderStyle(FormBorderStyle.FixedDialog);
     this.setName("FormAlert");
     this.setShowInTaskbar(false);
     this.setStartPosition(FormStartPosition.CenterParent);
     this.setText("Title");
-    this.setClick(new EventHandler<Object, EventArgs>()
-		  {
+    this.setClick(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         FormAlert_Click(sender, e);
       }
     });
     this.ResumeLayout(false);
-
   }
 
-  // #endregion
   public static DialogResult Alert(AlertType type, WinformPane owner) {
     return Alert(type, owner, new String[] {});
   }
@@ -226,11 +183,9 @@ public class FormAlert extends WinformForm {
 
   public static DialogResult Alert(AlertType type, WinformPane owner, String[] args) {
     DialogResult result = DialogResult.None;
-
     if(args.length == 0) {
       args = null;
     }
-
     switch(type) {
       case Alert:
         result = (new FormAlert("^1", "^2", "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(owner);
@@ -1146,15 +1101,11 @@ public class FormAlert extends WinformForm {
             args)).ShowDialog(owner);
         break;
     }
-
     return result;
   }
 
-  // #endregion
-  // #region Event Handlers
   private void FormAlert_Click(Object sender, EventArgs e) {
-    // If the button is off-screen, this is an image and can be clicked
-    // away.
+    // If the button is off-screen, this is an image and can be clicked away.
     if(btn1.getLeft() < 0) {
       Close();
     }
@@ -1163,5 +1114,4 @@ public class FormAlert extends WinformForm {
   private void tmrTick_Tick(Object sender, EventArgs e) {
     this.Close();
   }
-  // #endregion
 }

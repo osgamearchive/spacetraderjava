@@ -1,4 +1,4 @@
-package spacetrader.util;
+package org.gts.bst.ship.equip;
 
 
 /**

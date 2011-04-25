@@ -8,12 +8,12 @@ public class SerializationException extends Exception {
     super();
   }
 
-  public SerializationException(String message, Throwable cause) {
-    super(message, cause);
-  }
-
   public SerializationException(String message) {
     super(message);
+  }
+
+  public SerializationException(String message, Throwable cause) {
+    super(message, cause);
   }
 
   public SerializationException(Throwable cause) {

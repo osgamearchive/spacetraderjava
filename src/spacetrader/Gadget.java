@@ -29,7 +29,7 @@ package spacetrader;
 import org.gts.bst.ship.equip.GadgetType;
 import spacetrader.enums.SkillType;
 import spacetrader.enums.TechLevel;
-import spacetrader.util.EquipmentSubType;
+import org.gts.bst.ship.equip.EquipmentSubType;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Log;
 

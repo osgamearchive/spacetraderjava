@@ -1,32 +1,3 @@
-/*******************************************************************************
- *
- * Space Trader for Windows 2.00
- *
- * Copyright (C) 2005 Jay French, All Rights Reserved
- *
- * Additional coding by David Pierron
- * Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option) any
- * later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * If you'd like a copy of the GNU General Public License, go to
- * http://www.gnu.org/copyleft/gpl.html.
- *
- * You can contact the author at spacetrader@frenchfryz.com
- *
- ******************************************************************************/
-//using System;
-//using System.Drawing;
-//using System.Collections;
-//using System.ComponentModel;
-//using System.Windows.Forms;
 package spacetrader.gui;
 import java.awt.Point;
 import jwinforms.Button;
@@ -35,6 +6,7 @@ import jwinforms.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
 import jwinforms.FlatStyle;
+import jwinforms.FormBorderStyle;
 import jwinforms.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
@@ -47,11 +19,10 @@ import spacetrader.enums.AlertType;
 
 
 public class FormOptions extends WinformForm {
-  // #region Control Declarations
   private Button btnOk;
   private Button btnCancel;
-  private Label lblEmpty;
-  private Label lblIgnore;
+  private Button btnSave;
+  private Button btnLoad;
   private CheckBox chkFuel;
   private CheckBox chkContinuousAttack;
   private CheckBox chkAttackFleeing;
@@ -67,36 +38,26 @@ public class FormOptions extends WinformForm {
   private CheckBox chkIgnorePirates;
   private CheckBox chkIgnorePolice;
   private CheckBox chkRepair;
+  private Label lblEmpty;
+  private Label lblIgnore;
   private NumericUpDown numEmpty;
-  private Button btnSave;
-  private Button btnLoad;
-  // #endregion
-  // #region Member Declarations
   private Game game = Game.CurrentGame();
   private boolean initializing = true;
   private GameOptions _options = new GameOptions(false);
 
-  // #endregion
-  // #region Methods
   public FormOptions() {
     InitializeComponent();
-
     if(game != null) {
-      Options().CopyValues(game.Options());
+      _options.CopyValues(game.Options());
     } else {
-      Options().LoadFromDefaults(false, this);
+      _options.LoadFromDefaults(false, this);
       btnOk.setEnabled(false);
       FormAlert.Alert(AlertType.OptionsNoGame, this);
     }
-
     UpdateAll();
   }
 
-  // #region Windows Form Designer generated code
-  // / <summary>
-  // / Required method for Designer support - do not modify
-  // / the contents of this method with the code editor.
-  // / </summary>
+  // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
     this.btnOk = new Button();
     this.btnCancel = new Button();
@@ -122,9 +83,7 @@ public class FormOptions extends WinformForm {
     this.chkDisable = new CheckBox();
     ((ISupportInitialize)(this.numEmpty)).BeginInit();
     this.SuspendLayout();
-    //
     // btnOk
-    //
     this.btnOk.setDialogResult(DialogResult.OK);
     this.btnOk.setFlatStyle(FlatStyle.Flat);
     this.btnOk.setLocation(new Point(14, 240));
@@ -132,9 +91,7 @@ public class FormOptions extends WinformForm {
     this.btnOk.setSize(new Size(40, 22));
     this.btnOk.setTabIndex(15);
     this.btnOk.setText("Ok");
-    //
     // btnCancel
-    //
     this.btnCancel.setDialogResult(DialogResult.Cancel);
     this.btnCancel.setFlatStyle(FlatStyle.Flat);
     this.btnCancel.setLocation(new Point(62, 240));
@@ -142,138 +99,110 @@ public class FormOptions extends WinformForm {
     this.btnCancel.setSize(new Size(49, 22));
     this.btnCancel.setTabIndex(16);
     this.btnCancel.setText("Cancel");
-    //
     // lblEmpty
-    //
     this.lblEmpty.setAutoSize(true);
     this.lblEmpty.setLocation(new Point(52, 90));
     this.lblEmpty.setName("lblEmpty");
     this.lblEmpty.setSize(new Size(292, 16));
     this.lblEmpty.setTabIndex(38);
     this.lblEmpty.setText("Cargo Bays to leave empty when buying goods in-system");
-    //
     // chkFuel
-    //
     this.chkFuel.setLocation(new Point(8, 8));
     this.chkFuel.setName("chkFuel");
     this.chkFuel.setSize(new Size(160, 16));
     this.chkFuel.setTabIndex(1);
     this.chkFuel.setText("Get full fuel tanks on arrival");
-    this.chkFuel.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkFuel.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkContinuousAttack
-    //
     this.chkContinuousAttack.setLocation(new Point(8, 176));
     this.chkContinuousAttack.setName("chkContinuousAttack");
     this.chkContinuousAttack.setSize(new Size(163, 16));
     this.chkContinuousAttack.setTabIndex(13);
     this.chkContinuousAttack.setText("Continuous attack and flight");
-    this.chkContinuousAttack.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkContinuousAttack.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkAttackFleeing
-    //
     this.chkAttackFleeing.setLocation(new Point(24, 192));
     this.chkAttackFleeing.setName("chkAttackFleeing");
     this.chkAttackFleeing.setSize(new Size(177, 16));
     this.chkAttackFleeing.setTabIndex(14);
     this.chkAttackFleeing.setText("Continue attacking fleeing ship");
-    this.chkAttackFleeing.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkAttackFleeing.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkNewspaper
-    //
     this.chkNewspaper.setLocation(new Point(8, 40));
     this.chkNewspaper.setName("chkNewspaper");
     this.chkNewspaper.setSize(new Size(155, 16));
     this.chkNewspaper.setTabIndex(3);
     this.chkNewspaper.setText("Always pay for newspaper");
-    this.chkNewspaper.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkNewspaper.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkRange
-    //
     this.chkRange.setLocation(new Point(184, 8));
     this.chkRange.setName("chkRange");
     this.chkRange.setSize(new Size(175, 16));
     this.chkRange.setTabIndex(5);
     this.chkRange.setText("Show range to tracked system");
-    this.chkRange.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkRange.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkStopTracking
-    //
     this.chkStopTracking.setLocation(new Point(184, 24));
     this.chkStopTracking.setName("chkStopTracking");
     this.chkStopTracking.setSize(new Size(139, 16));
     this.chkStopTracking.setTabIndex(6);
     this.chkStopTracking.setText("Stop tracking on arrival");
-    this.chkStopTracking.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkStopTracking.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkLoan
-    //
     this.chkLoan.setLocation(new Point(184, 56));
     this.chkLoan.setName("chkLoan");
     this.chkLoan.setSize(new Size(124, 16));
     this.chkLoan.setTabIndex(4);
     this.chkLoan.setText("Remind about loans");
-    this.chkLoan.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkLoan.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkIgnoreTradersDealing
-    //
     this.chkIgnoreTradersDealing.setLocation(new Point(152, 152));
     this.chkIgnoreTradersDealing.setName("chkIgnoreTradersDealing");
     this.chkIgnoreTradersDealing.setSize(new Size(133, 16));
     this.chkIgnoreTradersDealing.setTabIndex(12);
     this.chkIgnoreTradersDealing.setText("Ignore dealing traders");
-    this.chkIgnoreTradersDealing.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkIgnoreTradersDealing.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkReserveMoney
-    //
     this.chkReserveMoney.setLocation(new Point(184, 40));
     this.chkReserveMoney.setName("chkReserveMoney");
     this.chkReserveMoney.setSize(new Size(176, 16));
@@ -282,160 +211,129 @@ public class FormOptions extends WinformForm {
     this.chkReserveMoney.setCheckedChanged(new EventHandler<Object, EventArgs>()
 		 {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkIgnoreTraders
-    //
     this.chkIgnoreTraders.setLocation(new Point(136, 136));
     this.chkIgnoreTraders.setName("chkIgnoreTraders");
     this.chkIgnoreTraders.setSize(new Size(62, 16));
     this.chkIgnoreTraders.setTabIndex(11);
     this.chkIgnoreTraders.setText("Traders");
-    this.chkIgnoreTraders.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkIgnoreTraders.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkIgnorePirates
-    //
     this.chkIgnorePirates.setLocation(new Point(8, 136));
     this.chkIgnorePirates.setName("chkIgnorePirates");
     this.chkIgnorePirates.setSize(new Size(58, 16));
     this.chkIgnorePirates.setTabIndex(9);
     this.chkIgnorePirates.setText("Pirates");
-    this.chkIgnorePirates.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkIgnorePirates.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkIgnorePolice
-    //
     this.chkIgnorePolice.setLocation(new Point(74, 136));
     this.chkIgnorePolice.setName("chkIgnorePolice");
     this.chkIgnorePolice.setSize(new Size(54, 16));
     this.chkIgnorePolice.setTabIndex(10);
     this.chkIgnorePolice.setText("Police");
-    this.chkIgnorePolice.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkIgnorePolice.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkRepair
-    //
     this.chkRepair.setLocation(new Point(8, 24));
     this.chkRepair.setName("chkRepair");
     this.chkRepair.setSize(new Size(167, 16));
     this.chkRepair.setTabIndex(2);
     this.chkRepair.setText("Get full hull repairs on arrival");
-    this.chkRepair.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkRepair.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // lblIgnore
-    //
     this.lblIgnore.setAutoSize(true);
     this.lblIgnore.setLocation(new Point(8, 120));
     this.lblIgnore.setName("lblIgnore");
     this.lblIgnore.setSize(new Size(152, 16));
     this.lblIgnore.setTabIndex(52);
     this.lblIgnore.setText("Always ignore when it is safe:");
-    //
     // numEmpty
-    //
     this.numEmpty.setLocation(new Point(8, 88));
     this.numEmpty.setMaximum(99);
     this.numEmpty.setName("numEmpty");
     this.numEmpty.setSize(new Size(40, 20));
     this.numEmpty.setTabIndex(8);
     this.numEmpty.setValue(88);
-    this.numEmpty.setValueChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.numEmpty.setValueChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // btnSave
-    //
     this.btnSave.setFlatStyle(FlatStyle.Flat);
     this.btnSave.setLocation(new Point(119, 240));
     this.btnSave.setName("btnSave");
     this.btnSave.setSize(new Size(107, 22));
     this.btnSave.setTabIndex(17);
     this.btnSave.setText("Save As Defaults");
-    this.btnSave.setClick(new EventHandler<Object, EventArgs>()
-		 {
+    this.btnSave.setClick(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         btnSave_Click(sender, e);
       }
     });
-    //
     // btnLoad
-    //
     this.btnLoad.setFlatStyle(FlatStyle.Flat);
     this.btnLoad.setLocation(new Point(234, 240));
     this.btnLoad.setName("btnLoad");
     this.btnLoad.setSize(new Size(114, 22));
     this.btnLoad.setTabIndex(18);
     this.btnLoad.setText("Load from Defaults");
-    this.btnLoad.setClick(new EventHandler<Object, EventArgs>()
-		 {
+    this.btnLoad.setClick(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         btnLoad_Click(sender, e);
       }
     });
-    //
     // chkNewspaperShow
-    //
     this.chkNewspaperShow.setLocation(new Point(24, 56));
     this.chkNewspaperShow.setName("chkNewspaperShow");
     this.chkNewspaperShow.setSize(new Size(160, 16));
     this.chkNewspaperShow.setTabIndex(53);
     this.chkNewspaperShow.setText("Show newspaper on arrival");
-    this.chkNewspaperShow.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkNewspaperShow.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // chkDisable
-    //
     this.chkDisable.setLocation(new Point(8, 208));
     this.chkDisable.setName("chkDisable");
     this.chkDisable.setSize(new Size(244, 16));
     this.chkDisable.setTabIndex(54);
     this.chkDisable.setText("Attempt to disable opponents when possible");
-    this.chkDisable.setCheckedChanged(new EventHandler<Object, EventArgs>()
-		 {
+    this.chkDisable.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.EventArgs e) {
+      public void handle(Object sender, EventArgs e) {
         controlChanged(sender, e);
       }
     });
-    //
     // FormOptions
-    //
     this.setAcceptButton(this.btnOk);
     this.setAutoScaleBaseSize(new Size(5, 13));
     this.setCancelButton(this.btnCancel);
@@ -462,7 +360,7 @@ public class FormOptions extends WinformForm {
     this.Controls.add(this.chkFuel);
     this.Controls.add(this.btnCancel);
     this.Controls.add(this.btnOk);
-    this.setFormBorderStyle(jwinforms.FormBorderStyle.FixedDialog);
+    this.setFormBorderStyle(FormBorderStyle.FixedDialog);
     this.setMaximizeBox(false);
     this.setMinimizeBox(false);
     this.setName("FormOptions");
@@ -471,34 +369,29 @@ public class FormOptions extends WinformForm {
     this.setText("Options");
     ((ISupportInitialize)(this.numEmpty)).EndInit();
     this.ResumeLayout(false);
-
   }
 
-  // #endregion
   private void UpdateAll() {
     initializing = true;
-
-    chkFuel.setChecked(Options().getAutoFuel());
-    chkRepair.setChecked(Options().getAutoRepair());
-    chkNewspaper.setChecked(Options().getNewsAutoPay());
-    chkNewspaperShow.setChecked(Options().getNewsAutoShow());
-    chkLoan.setChecked(Options().getRemindLoans());
-    chkRange.setChecked(Options().getShowTrackedRange());
-    chkStopTracking.setChecked(Options().getTrackAutoOff());
-    chkReserveMoney.setChecked(Options().getReserveMoney());
-    numEmpty.setValue(Options().getLeaveEmpty());
-    chkIgnorePirates.setChecked(Options().getAlwaysIgnorePirates());
-    chkIgnorePolice.setChecked(Options().getAlwaysIgnorePolice());
-    chkIgnoreTraders.setChecked(Options().getAlwaysIgnoreTraders());
-    chkIgnoreTradersDealing.setChecked(Options().getAlwaysIgnoreTradeInOrbit());
-    chkContinuousAttack.setChecked(Options().getContinuousAttack());
-    chkAttackFleeing.setChecked(Options().getContinuousAttackFleeing());
-    chkDisable.setChecked(Options().getDisableOpponents());
-
+    chkFuel.setChecked(_options.getAutoFuel());
+    chkRepair.setChecked(_options.getAutoRepair());
+    chkNewspaper.setChecked(_options.getNewsAutoPay());
+    chkNewspaperShow.setChecked(_options.getNewsAutoShow());
+    chkLoan.setChecked(_options.getRemindLoans());
+    chkRange.setChecked(_options.getShowTrackedRange());
+    chkStopTracking.setChecked(_options.getTrackAutoOff());
+    chkReserveMoney.setChecked(_options.getReserveMoney());
+    numEmpty.setValue(_options.getLeaveEmpty());
+    chkIgnorePirates.setChecked(_options.getAlwaysIgnorePirates());
+    chkIgnorePolice.setChecked(_options.getAlwaysIgnorePolice());
+    chkIgnoreTraders.setChecked(_options.getAlwaysIgnoreTraders());
+    chkIgnoreTradersDealing.setChecked(_options.getAlwaysIgnoreTradeInOrbit());
+    chkContinuousAttack.setChecked(_options.getContinuousAttack());
+    chkAttackFleeing.setChecked(_options.getContinuousAttackFleeing());
+    chkDisable.setChecked(_options.getDisableOpponents());
     UpdateContinueAttackFleeing();
     UpdateIgnoreTradersDealing();
     UpdateNewsAutoShow();
-
     initializing = false;
   }
 
@@ -506,7 +399,6 @@ public class FormOptions extends WinformForm {
     if(!chkContinuousAttack.isChecked()) {
       chkAttackFleeing.setChecked(false);
     }
-
     chkAttackFleeing.setEnabled(chkContinuousAttack.isChecked());
   }
 
@@ -514,7 +406,6 @@ public class FormOptions extends WinformForm {
     if(!chkIgnoreTraders.isChecked()) {
       chkIgnoreTradersDealing.setChecked(false);
     }
-
     chkIgnoreTradersDealing.setEnabled(chkIgnoreTraders.isChecked());
   }
 
@@ -522,19 +413,16 @@ public class FormOptions extends WinformForm {
     if(!chkNewspaper.isChecked()) {
       chkNewspaperShow.setChecked(false);
     }
-
     chkNewspaperShow.setEnabled(chkNewspaper.isChecked());
   }
 
-  // #endregion
-  // #region Event Handlers
   private void btnLoad_Click(Object sender, EventArgs e) {
-    Options().LoadFromDefaults(true, this);
+    _options.LoadFromDefaults(true, this);
     UpdateAll();
   }
 
   private void btnSave_Click(Object sender, EventArgs e) {
-    Options().SaveAsDefaults(this);
+    _options.SaveAsDefaults(this);
   }
 
   private void controlChanged(Object sender, EventArgs e) {
@@ -544,30 +432,26 @@ public class FormOptions extends WinformForm {
       UpdateIgnoreTradersDealing();
       UpdateNewsAutoShow();
       initializing = false;
-
-      Options().setAutoFuel(chkFuel.isChecked());
-      Options().setAutoRepair(chkRepair.isChecked());
-      Options().setNewsAutoPay(chkNewspaper.isChecked());
-      Options().setNewsAutoShow(chkNewspaperShow.isChecked());
-      Options().setRemindLoans(chkLoan.isChecked());
-      Options().setShowTrackedRange(chkRange.isChecked());
-      Options().setTrackAutoOff(chkStopTracking.isChecked());
-      Options().setReserveMoney(chkReserveMoney.isChecked());
-      Options().setLeaveEmpty(numEmpty.getValue());
-      Options().setAlwaysIgnorePirates(chkIgnorePirates.isChecked());
-      Options().setAlwaysIgnorePolice(chkIgnorePolice.isChecked());
-      Options().setAlwaysIgnoreTraders(chkIgnoreTraders.isChecked());
-      Options().setAlwaysIgnoreTradeInOrbit(chkIgnoreTradersDealing.isChecked());
-      Options().setContinuousAttack(chkContinuousAttack.isChecked());
-      Options().setContinuousAttackFleeing(chkAttackFleeing.isChecked());
-      Options().setDisableOpponents(chkDisable.isChecked());
+      _options.setAutoFuel(chkFuel.isChecked());
+      _options.setAutoRepair(chkRepair.isChecked());
+      _options.setNewsAutoPay(chkNewspaper.isChecked());
+      _options.setNewsAutoShow(chkNewspaperShow.isChecked());
+      _options.setRemindLoans(chkLoan.isChecked());
+      _options.setShowTrackedRange(chkRange.isChecked());
+      _options.setTrackAutoOff(chkStopTracking.isChecked());
+      _options.setReserveMoney(chkReserveMoney.isChecked());
+      _options.setLeaveEmpty(numEmpty.getValue());
+      _options.setAlwaysIgnorePirates(chkIgnorePirates.isChecked());
+      _options.setAlwaysIgnorePolice(chkIgnorePolice.isChecked());
+      _options.setAlwaysIgnoreTraders(chkIgnoreTraders.isChecked());
+      _options.setAlwaysIgnoreTradeInOrbit(chkIgnoreTradersDealing.isChecked());
+      _options.setContinuousAttack(chkContinuousAttack.isChecked());
+      _options.setContinuousAttackFleeing(chkAttackFleeing.isChecked());
+      _options.setDisableOpponents(chkDisable.isChecked());
     }
   }
 
-  // #endregion
-  // #region Properties
   public GameOptions Options() {
     return _options;
   }
-  // #endregion
 }

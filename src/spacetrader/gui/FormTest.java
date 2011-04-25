@@ -1,32 +1,3 @@
-/*******************************************************************************
- *
- * Space Trader for Windows 2.00
- *
- * Copyright (C) 2005 Jay French, All Rights Reserved
- *
- * Additional coding by David Pierron
- * Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option) any
- * later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * If you'd like a copy of the GNU General Public License, go to
- * http://www.gnu.org/copyleft/gpl.html.
- *
- * You can contact the author at spacetrader@frenchfryz.com
- *
- ******************************************************************************/
-//using System;
-//using System.Drawing;
-//using System.Collections;
-//using System.ComponentModel;
-//using System.Windows.Forms;
 package spacetrader.gui;
 import java.util.Arrays;
 import jwinforms.Container;
@@ -44,7 +15,6 @@ import spacetrader.enums.AlertType;
 
 
 public class FormTest extends WinformForm {
-  //#region Control Declarations
   private jwinforms.Label lblAlertType;
   private jwinforms.GroupBox boxAlert;
   private jwinforms.Label lblValue2;
@@ -61,8 +31,6 @@ public class FormTest extends WinformForm {
   private jwinforms.Label lblSpecialEvent;
   private Container components = null;
 
-  //#endregion
-  //#region Methods
   public FormTest() {
     InitializeComponent();
 
@@ -81,11 +49,8 @@ public class FormTest extends WinformForm {
     selSpecialEvent.setSelectedIndex(0);
   }
 
-  //#region Windows Form Designer generated code
-  /// <summary>
   /// Required method for Designer support - do not modify
   /// the contents of this method with the code editor.
-  /// </summary>
   private void InitializeComponent() {
     this.lblAlertType = new jwinforms.Label();
     this.boxAlert = new jwinforms.GroupBox();
@@ -272,10 +237,7 @@ public class FormTest extends WinformForm {
     this.groupBox1.ResumeLayout(false);
     this.ResumeLayout(false);
   }
-  //#endregion
 
-  //#endregion
-  //#region Event Handlers
   private void btnTestAlert_Click(Object sender, EventArgs e) {
     FormAlert.Alert(AlertType.Alert, this, "Result", "The result was "
         + FormAlert.Alert((AlertType)selAlertType.getSelectedItem(),
@@ -301,5 +263,4 @@ public class FormTest extends WinformForm {
 
     (new FormAlert(specEvent.Title(), specEvent.String(), btn1, res1, btn2, res2, null)).ShowDialog(this);
   }
-  //#endregion
 }

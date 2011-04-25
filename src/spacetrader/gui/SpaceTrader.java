@@ -1,22 +1,3 @@
-/*******************************************************************************
- *
- * Space Trader for Windows 2.00
- *
- * Copyright (C) 2005 Jay French, All Rights Reserved
- *
- * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- *
- * You can contact the author at spacetrader@frenchfryz.com
- *
- ******************************************************************************/
 package spacetrader.gui;
 import java.awt.Color;
 import java.awt.Point;
@@ -72,10 +53,7 @@ import spacetrader.stub.RegistryKey;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
-public class SpaceTrader extends jwinforms.WinformWindow
-{
-	// #region Control Declarations
-
+public class SpaceTrader extends jwinforms.WinformWindow {
 	private jwinforms.Button btnDesign;
 	private jwinforms.Button btnNews;
 	private jwinforms.Button btnSpecial;
@@ -288,9 +266,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private jwinforms.StatusBarPanel statusBarPanelExtra;
 	private jwinforms.ToolTip tipSpecial;
 	private jwinforms.ToolTip tipMerc;
-
 	private jwinforms.IContainer components;
-
 	private final Label[] lblSellPrice;
 	private final Label[] lblBuyPrice;
 	private final Label[] lblTargetPrice;
@@ -300,14 +276,8 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private final Button[] btnSellAll;
 	private final Button[] btnBuyQty;
 	private final Button[] btnBuyMax;
-
-	// #endregion
-
-	// #region Member Declarations
-
 	private final String SAVE_ARRIVAL = "autosave_arrival.sav";
 	private final String SAVE_DEPARTURE = "autosave_departure.sav";
-
 	private final int OFF_X = 3;
 	private final int OFF_Y = 3;
 	private final int OFF_X_WORM = OFF_X + 1;
@@ -319,57 +289,36 @@ public class SpaceTrader extends jwinforms.WinformWindow
 	private final int IMG_S_V = 5;
 	private final int IMG_S_VS = 6;
 	private final int IMG_S_W = 7;
-
 	private Game game;
-
 	private final Pen DEFAULT_PEN = new Pen(Color.black);
 	private final Brush DEFAULT_BRUSH = new SolidBrush(Color.white);
-
 	private String SaveGameFile = null;
 	private int SaveGameDays = -1;
 
-	// #endregion
-
-	// #region Methods
-
-	public SpaceTrader(String loadFileName)
-	{
+	public SpaceTrader(String loadFileName) {
 		InitializeComponent();
 		InitFileStructure();
-
-		// #region Arrays of Cargo controls
 		lblSellPrice = new Label[] { lblSellPrice0, lblSellPrice1, lblSellPrice2, lblSellPrice3, lblSellPrice4,
 				lblSellPrice5, lblSellPrice6, lblSellPrice7, lblSellPrice8, lblSellPrice9 };
-
 		lblBuyPrice = new Label[] { lblBuyPrice0, lblBuyPrice1, lblBuyPrice2, lblBuyPrice3, lblBuyPrice4, lblBuyPrice5,
 				lblBuyPrice6, lblBuyPrice7, lblBuyPrice8, lblBuyPrice9 };
-
 		lblTargetPrice = new Label[] { lblTargetPrice0, lblTargetPrice1, lblTargetPrice2, lblTargetPrice3,
 				lblTargetPrice4, lblTargetPrice5, lblTargetPrice6, lblTargetPrice7, lblTargetPrice8, lblTargetPrice9 };
-
 		lblTargetDiff = new Label[] { lblTargetDiff0, lblTargetDiff1, lblTargetDiff2, lblTargetDiff3, lblTargetDiff4,
 				lblTargetDiff5, lblTargetDiff6, lblTargetDiff7, lblTargetDiff8, lblTargetDiff9 };
-
 		lblTargetPct = new Label[] { lblTargetPct0, lblTargetPct1, lblTargetPct2, lblTargetPct3, lblTargetPct4,
 				lblTargetPct5, lblTargetPct6, lblTargetPct7, lblTargetPct8, lblTargetPct9 };
-
 		btnSellQty = new Button[] { btnSellQty0, btnSellQty1, btnSellQty2, btnSellQty3, btnSellQty4, btnSellQty5,
 				btnSellQty6, btnSellQty7, btnSellQty8, btnSellQty9 };
-
 		btnSellAll = new Button[] { btnSellAll0, btnSellAll1, btnSellAll2, btnSellAll3, btnSellAll4, btnSellAll5,
 				btnSellAll6, btnSellAll7, btnSellAll8, btnSellAll9 };
-
 		btnBuyQty = new Button[] { btnBuyQty0, btnBuyQty1, btnBuyQty2, btnBuyQty3, btnBuyQty4, btnBuyQty5, btnBuyQty6,
 				btnBuyQty7, btnBuyQty8, btnBuyQty9 };
-
 		btnBuyMax = new Button[] { btnBuyMax0, btnBuyMax1, btnBuyMax2, btnBuyMax3, btnBuyMax4, btnBuyMax5, btnBuyMax6,
 				btnBuyMax7, btnBuyMax8, btnBuyMax9 };
-		// #endregion
-
 		if (loadFileName != null) {
       LoadGame(loadFileName);
     }
-
 		UpdateAll();
 	}
 
@@ -381,11 +330,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		spaceTrader.ShowWindow();
 	}
 
-	// #region Windows Form Designer generated code
-	// / <summary>
-	// / Required method for Designer support - do not modify
-	// / the contents of this method with the code editor.
-	// / </summary>
+	// Required method for Designer support - do not modify the contents of this method with the code editor.
 	private void InitializeComponent()
 	{
 		components = new jwinforms.Container();
@@ -614,20 +559,13 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		boxShipYard.SuspendLayout();
 		boxDock.SuspendLayout();
 		this.SuspendLayout();
-		//
 		// mnuMain
-		//
 		mnuMain.addAll(mnuGame, mnuView, mnuHelp);
-		//
 		// mnuGame
-		//
 		mnuGame.Index = 0;
-		mnuGame.addAll(mnuGameNew, mnuGameLoad, mnuGameSave, mnuGameSaveAs, mnuGameLine1, mnuRetire, mnuGameLine2,
-				mnuGameExit);
+		mnuGame.addAll(mnuGameNew, mnuGameLoad, mnuGameSave, mnuGameSaveAs, mnuGameLine1, mnuRetire, mnuGameLine2, mnuGameExit);
 		mnuGame.setText("&Game");
-		//
 		// mnuGameNew
-		//
 		mnuGameNew.Index = 0;
 		mnuGameNew.setText("&New...");
 		mnuGameNew.setClick(new EventHandler<Object, EventArgs>()
@@ -638,9 +576,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				mnuGameNew_Click(sender, e);
 			}
 		});
-		//
 		// mnuGameLoad
-		//
 		mnuGameLoad.Index = 1;
 		mnuGameLoad.Shortcut = jwinforms.Shortcut.CtrlL;
 		mnuGameLoad.setText("&Load...");
@@ -3798,31 +3734,29 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					if (game.SelectedSystem().Name().toLowerCase() == second.toLowerCase())
 					{
 						if (game.getAutoSave()) {
-            SaveGame(SAVE_DEPARTURE, false);
-          }
-
+              SaveGame(SAVE_DEPARTURE, false);
+            }
 						game.WarpDirect();
-
 						if (game.getAutoSave()) {
-            SaveGame(SAVE_ARRIVAL, false);
-          }
+              SaveGame(SAVE_ARRIVAL, false);
+            }
 					}
 					break;
 				case Ice:
 				{
 					switch (SomeStringsForSwitch.find(second))
 					{
-					case Pirate:
-						game.Commander().setKillsPirate(Math.max(0, num2));
-						break;
-					case Police:
-						game.Commander().setKillsPolice(Math.max(0, num2));
-						break;
-					case Trader:
-						game.Commander().setKillsTrader(Math.max(0, num2));
-						break;
-					}
-				}
+            case Pirate:
+              game.Commander().setKillsPirate(Math.max(0, num2));
+              break;
+            case Police:
+              game.Commander().setKillsPolice(Math.max(0, num2));
+              break;
+            case Trader:
+              game.Commander().setKillsTrader(Math.max(0, num2));
+              break;
+            }
+          }
 					break;
 				case Indemnity:
 					game.Commander().NoClaim(Math.max(0, num1));
@@ -3832,8 +3766,8 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					break;
 				case Iron:
 					if (num1 >= 0 && num1 < ship.Weapons().length && num2 >= 0 && num2 < Consts.Weapons.length) {
-          ship.Weapons()[num1] = (Weapon)Consts.Weapons[num2].Clone();
-        }
+            ship.Weapons()[num1] = (Weapon)Consts.Weapons[num2].Clone();
+          }
 					break;
 				case Juice:
 					ship.setFuel(Math.max(0, Math.min(ship.FuelTanks(), num1)));
@@ -3845,8 +3779,8 @@ public class SpaceTrader extends jwinforms.WinformWindow
 						for (int i = 0; i < game.Mercenaries()[num1].Skills().length && i < skills.length; i++)
 						{
 							if (Functions.IsInt(skills[i])) {
-              game.Mercenaries()[num1].Skills()[i] = Math.max(1, Math.min(Consts.MaxSkill, Integer.parseInt(skills[i])));
-            }
+                game.Mercenaries()[num1].Skills()[i] = Math.max(1, Math.min(Consts.MaxSkill, Integer.parseInt(skills[i])));
+              }
 						}
 					}
 					break;
@@ -3941,16 +3875,15 @@ public class SpaceTrader extends jwinforms.WinformWindow
 								+ game.getQuestStatusSculpture() + Strings.newline + "SpaceMonster: "
 								+ game.getQuestStatusSpaceMonster() + Strings.newline + "Wild: "
 								+ game.getQuestStatusWild();
-
-						FormAlert.Alert(AlertType.Alert, this, "Status of Quests", text);
-						break;
-					}
-				}
+              FormAlert.Alert(AlertType.Alert, this, "Status of Quests", text);
+              break;
+            }
+          }
 					break;
 				case Swag:
 					if (num1 >= 0 && num1 < ship.Cargo().length) {
-          ship.Cargo()[num1] = Math.max(0, Math.min(ship.FreeCargoBays() + ship.Cargo()[num1], num2));
-        }
+            ship.Cargo()[num1] = Math.max(0, Math.min(ship.FreeCargoBays() + ship.Cargo()[num1], num2));
+          }
 					break;
 				case Test:
 					(new FormTest()).ShowDialog(this);
@@ -3983,7 +3916,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					break;
 				}
 			}
-
 			if (find)
 			{
 				game.setSelectedSystemByName(form.SystemName());
@@ -3991,7 +3923,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
           game.setTrackedSystemId(game.SelectedSystemId());
         }
 			}
-
 			UpdateAll();
 		}
 	}
@@ -4024,9 +3955,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				if (game.getAutoSave()) {
           SaveGame(SAVE_DEPARTURE, false);
         }
-
 				game.Warp(true);
-
 				if (game.getAutoSave()) {
           SaveGame(SAVE_ARRIVAL, false);
         }
@@ -4088,7 +4017,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		SpecialEvent specEvent = game.Commander().CurrentSystem().SpecialEvent();
 		String btn1, btn2;
 		DialogResult res1, res2;
-
 		if (specEvent.MessageOnly())
 		{
 			btn1 = "Ok";
@@ -4102,7 +4030,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			res1 = DialogResult.Yes;
 			res2 = DialogResult.No;
 		}
-
 		FormAlert alert = new FormAlert(specEvent.Title(), specEvent.String(), btn1, res1, btn2, res2, null);
 		if (alert.ShowDialog() != DialogResult.No)
 		{
@@ -4120,7 +4047,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				}
 			}
 		}
-
 		UpdateAll();
 	}
 
@@ -4137,9 +4063,7 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			if (game.getAutoSave()) {
         SaveGame(SAVE_DEPARTURE, false);
       }
-
 			game.Warp(false);
-
 			if (game.getAutoSave()) {
         SaveGame(SAVE_ARRIVAL, false);
       }
@@ -4162,10 +4086,8 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			game = new Game(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form.Trader(), form.Engineer(), this);
 			SaveGameFile = null;
 			SaveGameDays = 0;
-
 			SetInGameControlsEnabled(true);
 			UpdateAll();
-
 			if (game.Options().getNewsAutoShow()) {
         game.ShowNewspaper();
       }
@@ -4259,22 +4181,17 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		if (e.Button == MouseButtons.Left && game != null)
 		{
 			StarSystem[] universe = game.Universe();
-
 			boolean clickedSystem = false;
-
 			for (int i = 0; i < universe.length && !clickedSystem; i++)
 			{
 				int x = universe[i].X() + OFF_X;
 				int y = universe[i].Y() + OFF_Y;
-
 				if (e.X >= x - 2 && e.X <= x + 2 && e.Y >= y - 2 && e.Y <= y + 2)
 				{
 					clickedSystem = true;
 					game.SelectedSystemId(StarSystemId.FromInt(i));
-				} else if (Functions.WormholeExists(i, -1))
-				{
+				} else if (Functions.WormholeExists(i, -1)) {
 					int xW = x + OFF_X_WORM;
-
 					if (e.X >= xW - 2 && e.X <= xW + 2 && e.Y >= y - 2 && e.Y <= y + 2)
 					{
 						clickedSystem = true;
@@ -4283,7 +4200,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					}
 				}
 			}
-
 			if (clickedSystem) {
         UpdateAll();
       }
@@ -4299,18 +4215,15 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			StarSystem targetSys = game.SelectedSystem();
 			StarSystem curSys = game.Commander().CurrentSystem();
 			int fuel = game.Commander().getShip().getFuel();
-
 			if (fuel > 0) {
         e.Graphics.DrawEllipse(DEFAULT_PEN, curSys.X() + OFF_X - fuel, curSys.Y() + OFF_Y - fuel, fuel * 2, fuel * 2);
       }
-
 			int index = game.SelectedSystemId().CastToInt();
 			if (game.TargetWormhole()) {
 				int dest = wormholes[(Util.BruteSeek(wormholes, index) + 1) % wormholes.length];
 				StarSystem destSys = universe[dest];
 				e.Graphics.DrawLine(DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X, targetSys.Y() + OFF_Y, destSys.X() + OFF_X, destSys.Y() + OFF_Y);
 			}
-
 			for (int i = 0; i < universe.length; i++)
 			{
 				int imageIndex = universe[i].Visited() ? IMG_S_V : IMG_S_N;
@@ -4318,17 +4231,14 @@ public class SpaceTrader extends jwinforms.WinformWindow
           imageIndex++;
         }
 				Image image = ilChartImages.getImages()[imageIndex];
-
 				if (universe[i] == game.TrackedSystem())
 				{
-					e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y(), universe[i].X()
-							+ image.getWidth() - 1, universe[i].Y() + image.getHeight() - 1);
-					e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y() + image.getHeight() - 1,
-							universe[i].X() + image.getWidth() - 1, universe[i].Y());
+					e.Graphics.DrawLine(
+              DEFAULT_PEN, universe[i].X(), universe[i].Y(), universe[i].X() + image.getWidth() - 1, universe[i].Y() + image.getHeight() - 1);
+					e.Graphics.DrawLine(
+              DEFAULT_PEN, universe[i].X(), universe[i].Y() + image.getHeight() - 1, universe[i].X() + image.getWidth() - 1, universe[i].Y());
 				}
-
 				ilChartImages.Draw(e.Graphics, universe[i].X(), universe[i].Y(), imageIndex);
-
 				if (Functions.WormholeExists(i, -1)) {
           ilChartImages.Draw(e.Graphics, universe[i].X() + OFF_X_WORM, universe[i].Y(), IMG_S_W);
         }
@@ -4344,12 +4254,10 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		{
 			StarSystem[] universe = game.Universe();
 			StarSystem curSys = game.Commander().CurrentSystem();
-
 			boolean clickedSystem = false;
 			int centerX = picShortRangeChart.getWidth() / 2;
 			int centerY = picShortRangeChart.getHeight() / 2;
 			int delta = picShortRangeChart.getHeight() / (Consts.MaxRange * 2);
-
 			for (int i = 0; i < universe.length && !clickedSystem; i++)
 			{
 				if ((Math.abs(universe[i].X() - curSys.X()) * delta <= picShortRangeChart.getWidth() / 2 - 10)
@@ -4357,15 +4265,12 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				{
 					int x = centerX + (universe[i].X() - curSys.X()) * delta;
 					int y = centerY + (universe[i].Y() - curSys.Y()) * delta;
-
 					if (e.X >= x - OFF_X && e.X <= x + OFF_X && e.Y >= y - OFF_Y && e.Y <= y + OFF_Y)
 					{
 						clickedSystem = true;
 						game.SelectedSystemId(StarSystemId.FromInt(i));
-					} else if (Functions.WormholeExists(i, -1))
-					{
+					} else if (Functions.WormholeExists(i, -1)) {
 						int xW = x + 9;
-
 						if (e.X >= xW - OFF_X && e.X <= xW + OFF_X && e.Y >= y - OFF_Y && e.Y <= y + OFF_Y)
 						{
 							clickedSystem = true;
@@ -4375,7 +4280,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					}
 				}
 			}
-
 			if (clickedSystem) {
         UpdateAll();
       }
@@ -4391,17 +4295,14 @@ public class SpaceTrader extends jwinforms.WinformWindow
 			StarSystem trackSys = game.TrackedSystem();
 			StarSystem curSys = game.Commander().CurrentSystem();
 			int fuel = game.Commander().getShip().getFuel();
-
 			int centerX = picShortRangeChart.getWidth() / 2;
 			int centerY = picShortRangeChart.getHeight() / 2;
 			int delta = picShortRangeChart.getHeight() / (Consts.MaxRange * 2);
-
 			e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY - 1, centerX + 1, centerY + 1);
 			e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY + 1, centerX + 1, centerY - 1);
 			if (fuel > 0) {
         e.Graphics.DrawEllipse(DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
       }
-
 			if (trackSys != null)
 			{
 				int dist = Functions.Distance(curSys, trackSys);
@@ -4409,27 +4310,20 @@ public class SpaceTrader extends jwinforms.WinformWindow
 				{
 					int dX = (int)Math.round(25 * (trackSys.X() - curSys.X()) / (double)dist);
 					int dY = (int)Math.round(25 * (trackSys.Y() - curSys.Y()) / (double)dist);
-
 					int dX2 = (int)Math.round(4 * (trackSys.Y() - curSys.Y()) / (double)dist);
 					int dY2 = (int)Math.round(4 * (curSys.X() - trackSys.X()) / (double)dist);
-
 					e.Graphics.FillPolygon(new SolidBrush(new Color(220, 20, 60)), new Point[] {
 							new Point(centerX + dX, centerY + dY), new Point(centerX - dX2, centerY - dY2),
 							new Point(centerX + dX2, centerY + dY2) });
 				}
-
 				if (game.Options().getShowTrackedRange()) {
 					e.Graphics.DrawString(Functions.StringVars(Strings.ChartDistance, Functions.Multiples(dist,
 							Strings.DistanceUnit), trackSys.Name()), getFont(), new SolidBrush(Color.black), 0,
 							picShortRangeChart.getHeight() - 13);
         }
 			}
-
-			// Two loops: first draw the names and then the systems. The names
-			// may
-			// overlap and the systems may be drawn on the names, but at least
-			// every
-			// system is visible.
+			// Two loops: first draw the names and then the systems. The names may overlap and the systems may be drawn on the names,
+			// but at least every system is visible.
 			for (int j = 0; j < 2; j++)
 			{
 				for (int i = 0; i < universe.length; i++)
@@ -4439,7 +4333,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 					{
 						int x = centerX + (universe[i].X() - curSys.X()) * delta;
 						int y = centerY + (universe[i].Y() - curSys.Y()) * delta;
-
 						if (j == 1)
 						{
 							if (universe[i] == game.WarpSystem())
@@ -4447,16 +4340,12 @@ public class SpaceTrader extends jwinforms.WinformWindow
 								e.Graphics.DrawLine(DEFAULT_PEN, x - 6, y, x + 6, y);
 								e.Graphics.DrawLine(DEFAULT_PEN, x, y - 6, x, y + 6);
 							}
-
 							if (universe[i] == game.TrackedSystem())
 							{
 								e.Graphics.DrawLine(DEFAULT_PEN, x - 5, y - 5, x + 5, y + 5);
 								e.Graphics.DrawLine(DEFAULT_PEN, x - 5, y + 5, x + 5, y - 5);
 							}
-
-							ilChartImages.Draw(e.Graphics, x - OFF_X, y - OFF_Y, universe[i].Visited() ? IMG_G_V
-									: IMG_G_N);
-
+							ilChartImages.Draw(e.Graphics, x - OFF_X, y - OFF_Y, universe[i].Visited() ? IMG_G_V : IMG_G_N);
 							if (Functions.WormholeExists(i, -1))
 							{
 								int xW = x + 9;
@@ -4467,12 +4356,10 @@ public class SpaceTrader extends jwinforms.WinformWindow
 								}
 								ilChartImages.Draw(e.Graphics, xW - OFF_X, y - OFF_Y, IMG_G_W);
 							}
-						} else
-						{
+						} else {
 							Font font = new Font(getFont().FontFamily, 7);
 							SizeF size = e.Graphics.MeasureString(universe[i].Name(), getFont());
-							e.Graphics.DrawString(universe[i].Name(), font, new SolidBrush(Color.black), x - size.width
-									/ 2 + OFF_X, y /*- size.Height*/- 5);
+							e.Graphics.DrawString(universe[i].Name(), font, new SolidBrush(Color.black), x - size.width / 2 + OFF_X, y /*- size.Height*/- 5);
 							// implementations differ as to which point we start the string at. --aviv
 						}
 					}
@@ -4494,10 +4381,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
       }
 		}
 	}
-
-	// #endregion
-
-	// #region Properties
 
 	public Image[] CustomShipImages()
 	{
@@ -4540,7 +4423,6 @@ public class SpaceTrader extends jwinforms.WinformWindow
 		for (int index = 0; index < Consts.ImagesPerShip; index++) {
       images[index] = ilShipImages.getImages()[baseIndex + index];
     }
-
 		return images;
 	}
 
@@ -4552,5 +4434,4 @@ public class SpaceTrader extends jwinforms.WinformWindow
       ilShipImages.getImages()[baseIndex + index] = images[index];
     }
 	}
-	// #endregion
 }

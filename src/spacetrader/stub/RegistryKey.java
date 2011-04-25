@@ -55,7 +55,6 @@ public class RegistryKey {
 
   public void SetValue(String settingName, String settingValue) {
     properties.setProperty(settingName, settingValue);
-
   }
 
   public Object GetValue(String settingName) {

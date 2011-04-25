@@ -1,41 +1,26 @@
-/*******************************************************************************
- *
- * Space Trader for Windows 2.00
- *
- * Copyright (C) 2005 Jay French, All Rights Reserved
- *
- * Additional coding by David Pierron Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * If you'd like a copy of the GNU General Public License, go to http://www.gnu.org/copyleft/gpl.html.
- *
- * You can contact the author at spacetrader@frenchfryz.com
- *
- ******************************************************************************/
 package spacetrader.gui;
 import java.awt.Color;
+import java.awt.Point;
 import java.util.Arrays;
-
 import jwinforms.*;
-
-import spacetrader.*;
-import spacetrader.enums.AlertType;
 import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.Size;
+import spacetrader.Consts;
+import spacetrader.Functions;
+import spacetrader.Game;
+import spacetrader.ShipSpec;
+import spacetrader.ShipTemplate;
+import spacetrader.Shipyard;
+import spacetrader.SpecialEvent;
+import spacetrader.Strings;
+import spacetrader.enums.AlertType;
 import spacetrader.stub.ArrayList;
 import spacetrader.stub.Directory;
 import spacetrader.util.Hashtable;
 import util.Path;
 
 
-@SuppressWarnings({"synthetic-access", "unchecked"})
 public class FormShipyard extends WinformForm {
-  //#region Control Declarations
   private IContainer components;
   private jwinforms.Label lblWelcome;
   private jwinforms.TextBox txtName;
@@ -99,8 +84,6 @@ public class FormShipyard extends WinformForm {
   private jwinforms.Label lblUnitsUsed;
   private jwinforms.Label lblDisabledPct;
   private jwinforms.SaveFileDialog dlgSave;
-  //#endregion
-  //#region Member variables
   private final Game game = Game.CurrentGame();
   private final Shipyard shipyard = Game.CurrentGame().Commander().CurrentSystem().Shipyard();
   private boolean loading = false;
@@ -112,8 +95,6 @@ public class FormShipyard extends WinformForm {
     ShipType.Bumblebee, ShipType.Beetle, ShipType.Hornet, ShipType.Grasshopper, ShipType.Termite,
     ShipType.Wasp, ShipType.Custom};
 
-  //#endregion
-  //#region Methods
   public FormShipyard() {
     InitializeComponent();
 
@@ -136,11 +117,7 @@ public class FormShipyard extends WinformForm {
     LoadSelectedTemplate();
   }
 
-  //#region Windows Form Designer generated code
-  /// <summary>
-  /// Required method for Designer support - do not modify
-  /// the contents of this method with the code editor.
-  /// </summary>
+  // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
     components = new Container();
     ResourceManager resources = new ResourceManager(FormShipyard.class);
@@ -225,7 +202,7 @@ public class FormShipyard extends WinformForm {
     boxWelcome.Controls.addAll((new WinformControl[] {lblSkillDescription, lblSkill,
           lblSizeSpecialty, lblSkillLabel, lblSizeSpecialtyLabel, lblWarning, picLogo,
           lblWelcome}));
-    boxWelcome.setLocation(new java.awt.Point(8, 0));
+    boxWelcome.setLocation(new Point(8, 0));
     boxWelcome.setName("boxWelcome");
     boxWelcome.setSize(new jwinforms.Size(270, 204));
     boxWelcome.setTabIndex(1);
@@ -233,7 +210,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblSkillDescription
     //
-    lblSkillDescription.setLocation(new java.awt.Point(8, 98));
+    lblSkillDescription.setLocation(new Point(8, 98));
     lblSkillDescription.setName("lblSkillDescription");
     lblSkillDescription.setSize(new jwinforms.Size(258, 26));
     lblSkillDescription.setTabIndex(27);
@@ -241,7 +218,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblSkill
     //
-    lblSkill.setLocation(new java.awt.Point(180, 79));
+    lblSkill.setLocation(new Point(180, 79));
     lblSkill.setName("lblSkill");
     lblSkill.setSize(new jwinforms.Size(87, 13));
     lblSkill.setTabIndex(26);
@@ -249,7 +226,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblSizeSpecialty
     //
-    lblSizeSpecialty.setLocation(new java.awt.Point(180, 65));
+    lblSizeSpecialty.setLocation(new Point(180, 65));
     lblSizeSpecialty.setName("lblSizeSpecialty");
     lblSizeSpecialty.setSize(new jwinforms.Size(64, 13));
     lblSizeSpecialty.setTabIndex(25);
@@ -260,7 +237,7 @@ public class FormShipyard extends WinformForm {
     lblSkillLabel.setAutoSize(true);
     lblSkillLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
                                    ((byte)(0))));
-    lblSkillLabel.setLocation(new java.awt.Point(92, 79));
+    lblSkillLabel.setLocation(new Point(92, 79));
     lblSkillLabel.setName("lblSkillLabel");
     lblSkillLabel.setSize(new jwinforms.Size(72, 13));
     lblSkillLabel.setTabIndex(24);
@@ -271,7 +248,7 @@ public class FormShipyard extends WinformForm {
     lblSizeSpecialtyLabel.setAutoSize(true);
     lblSizeSpecialtyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
                                            ((byte)(0))));
-    lblSizeSpecialtyLabel.setLocation(new java.awt.Point(92, 65));
+    lblSizeSpecialtyLabel.setLocation(new Point(92, 65));
     lblSizeSpecialtyLabel.setName("lblSizeSpecialtyLabel");
     lblSizeSpecialtyLabel.setSize(new jwinforms.Size(82, 13));
     lblSizeSpecialtyLabel.setTabIndex(23);
@@ -279,7 +256,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblWelcome
     //
-    lblWelcome.setLocation(new java.awt.Point(92, 12));
+    lblWelcome.setLocation(new Point(92, 12));
     lblWelcome.setName("lblWelcome");
     lblWelcome.setSize(new jwinforms.Size(176, 52));
     lblWelcome.setTabIndex(3);
@@ -288,7 +265,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblWarning
     //
-    lblWarning.setLocation(new java.awt.Point(8, 134));
+    lblWarning.setLocation(new Point(8, 134));
     lblWarning.setName("lblWarning");
     lblWarning.setSize(new jwinforms.Size(258, 65));
     lblWarning.setTabIndex(5);
@@ -298,8 +275,8 @@ public class FormShipyard extends WinformForm {
     //
     // picLogo
     //
-    picLogo.setBackColor(java.awt.Color.black);
-    picLogo.setLocation(new java.awt.Point(8, 12));
+    picLogo.setBackColor(Color.black);
+    picLogo.setLocation(new Point(8, 12));
     picLogo.setName("picLogo");
     picLogo.setSize(new jwinforms.Size(80, 80));
     picLogo.SizeMode = jwinforms.PictureBoxSizeMode.StretchImage;
@@ -312,7 +289,7 @@ public class FormShipyard extends WinformForm {
           btnPrevImage, btnNextImage, lblImage, lblImageLabel, selTemplate,
           lblTemplate, selSize, lblSize, btnSetCustomImage, picShip, txtName,
           lblName}));
-    boxInfo.setLocation(new java.awt.Point(8, 208));
+    boxInfo.setLocation(new Point(8, 208));
     boxInfo.setName("boxInfo");
     boxInfo.setSize(new jwinforms.Size(270, 160));
     boxInfo.setTabIndex(2);
@@ -322,7 +299,7 @@ public class FormShipyard extends WinformForm {
     // btnSave
     //
     btnSave.setFlatStyle(jwinforms.FlatStyle.Flat);
-    btnSave.setLocation(new java.awt.Point(216, 40));
+    btnSave.setLocation(new Point(216, 40));
     btnSave.setName("btnSave");
     btnSave.setSize(new jwinforms.Size(44, 20));
     btnSave.setTabIndex(4);
@@ -352,7 +329,7 @@ public class FormShipyard extends WinformForm {
     // btnLoad
     //
     btnLoad.setFlatStyle(jwinforms.FlatStyle.Flat);
-    btnLoad.setLocation(new java.awt.Point(216, 16));
+    btnLoad.setLocation(new Point(216, 16));
     btnLoad.setName("btnLoad");
     btnLoad.setSize(new jwinforms.Size(44, 20));
     btnLoad.setTabIndex(2);
@@ -367,8 +344,8 @@ public class FormShipyard extends WinformForm {
     //
     // picInfoLine
     //
-    picInfoLine.setBackColor(java.awt.Color.darkGray);
-    picInfoLine.setLocation(new java.awt.Point(8, 89));
+    picInfoLine.setBackColor(Color.darkGray);
+    picInfoLine.setLocation(new Point(8, 89));
     picInfoLine.setName("picInfoLine");
     picInfoLine.setSize(new jwinforms.Size(254, 1));
     picInfoLine.setTabIndex(132);
@@ -377,7 +354,7 @@ public class FormShipyard extends WinformForm {
     // btnPrevImage
     //
     btnPrevImage.setFlatStyle(jwinforms.FlatStyle.Flat);
-    btnPrevImage.setLocation(new java.awt.Point(154, 95));
+    btnPrevImage.setLocation(new Point(154, 95));
     btnPrevImage.setName("btnPrevImage");
     btnPrevImage.setSize(new jwinforms.Size(18, 18));
     btnPrevImage.setTabIndex(6);
@@ -393,7 +370,7 @@ public class FormShipyard extends WinformForm {
     // btnNextImage
     //
     btnNextImage.setFlatStyle(jwinforms.FlatStyle.Flat);
-    btnNextImage.setLocation(new java.awt.Point(242, 95));
+    btnNextImage.setLocation(new Point(242, 95));
     btnNextImage.setName("btnNextImage");
     btnNextImage.setSize(new jwinforms.Size(18, 18));
     btnNextImage.setTabIndex(7);
@@ -408,7 +385,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblImage
     //
-    lblImage.setLocation(new java.awt.Point(174, 98));
+    lblImage.setLocation(new Point(174, 98));
     lblImage.setName("lblImage");
     lblImage.setSize(new jwinforms.Size(70, 13));
     lblImage.setTabIndex(61);
@@ -418,7 +395,7 @@ public class FormShipyard extends WinformForm {
     // lblImageLabel
     //
     lblImageLabel.setAutoSize(true);
-    lblImageLabel.setLocation(new java.awt.Point(8, 95));
+    lblImageLabel.setLocation(new Point(8, 95));
     lblImageLabel.setName("lblImageLabel");
     lblImageLabel.setSize(new jwinforms.Size(39, 13));
     lblImageLabel.setTabIndex(22);
@@ -427,7 +404,7 @@ public class FormShipyard extends WinformForm {
     // selTemplate
     //
     selTemplate.DropDownStyle = jwinforms.ComboBoxStyle.DropDownList;
-    selTemplate.setLocation(new java.awt.Point(80, 16));
+    selTemplate.setLocation(new Point(80, 16));
     selTemplate.setName("selTemplate");
     selTemplate.setSize(new jwinforms.Size(132, 21));
     selTemplate.setTabIndex(1);
@@ -435,7 +412,7 @@ public class FormShipyard extends WinformForm {
     // lblTemplate
     //
     lblTemplate.setAutoSize(true);
-    lblTemplate.setLocation(new java.awt.Point(8, 19));
+    lblTemplate.setLocation(new Point(8, 19));
     lblTemplate.setName("lblTemplate");
     lblTemplate.setSize(new jwinforms.Size(55, 13));
     lblTemplate.setTabIndex(20);
@@ -444,7 +421,7 @@ public class FormShipyard extends WinformForm {
     // selSize
     //
     selSize.DropDownStyle = jwinforms.ComboBoxStyle.DropDownList;
-    selSize.setLocation(new java.awt.Point(80, 63));
+    selSize.setLocation(new Point(80, 63));
     selSize.setName("selSize");
     selSize.setSize(new jwinforms.Size(180, 21));
     selSize.setTabIndex(5);
@@ -459,7 +436,7 @@ public class FormShipyard extends WinformForm {
     // lblSize
     //
     lblSize.setAutoSize(true);
-    lblSize.setLocation(new java.awt.Point(8, 66));
+    lblSize.setLocation(new Point(8, 66));
     lblSize.setName("lblSize");
     lblSize.setSize(new jwinforms.Size(29, 13));
     lblSize.setTabIndex(18);
@@ -468,7 +445,7 @@ public class FormShipyard extends WinformForm {
     // btnSetCustomImage
     //
     btnSetCustomImage.setFlatStyle(jwinforms.FlatStyle.Flat);
-    btnSetCustomImage.setLocation(new java.awt.Point(154, 121));
+    btnSetCustomImage.setLocation(new Point(154, 121));
     btnSetCustomImage.setName("btnSetCustomImage");
     btnSetCustomImage.setSize(new jwinforms.Size(106, 22));
     btnSetCustomImage.setTabIndex(8);
@@ -483,9 +460,9 @@ public class FormShipyard extends WinformForm {
     //
     // picShip
     //
-    picShip.setBackColor(java.awt.Color.white);
+    picShip.setBackColor(Color.white);
     picShip.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
-    picShip.setLocation(new java.awt.Point(80, 95));
+    picShip.setLocation(new Point(80, 95));
     picShip.setName("picShip");
     picShip.setSize(new jwinforms.Size(66, 54));
     picShip.setTabIndex(14);
@@ -493,7 +470,7 @@ public class FormShipyard extends WinformForm {
     //
     // txtName
     //
-    txtName.setLocation(new java.awt.Point(80, 40));
+    txtName.setLocation(new Point(80, 40));
     txtName.setName("txtName");
     txtName.setSize(new jwinforms.Size(132, 20));
     txtName.setTabIndex(3);
@@ -509,7 +486,7 @@ public class FormShipyard extends WinformForm {
     // lblName
     //
     lblName.setAutoSize(true);
-    lblName.setLocation(new java.awt.Point(8, 44));
+    lblName.setLocation(new Point(8, 44));
     lblName.setName("lblName");
     lblName.setSize(new jwinforms.Size(63, 13));
     lblName.setTabIndex(5);
@@ -517,7 +494,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblUnitsUsed
     //
-    lblUnitsUsed.setLocation(new java.awt.Point(110, 186));
+    lblUnitsUsed.setLocation(new Point(110, 186));
     lblUnitsUsed.setName("lblUnitsUsed");
     lblUnitsUsed.setSize(new jwinforms.Size(23, 13));
     lblUnitsUsed.setTabIndex(17);
@@ -527,7 +504,7 @@ public class FormShipyard extends WinformForm {
     // lblUnitsUsedLabel
     //
     lblUnitsUsedLabel.setAutoSize(true);
-    lblUnitsUsedLabel.setLocation(new java.awt.Point(8, 186));
+    lblUnitsUsedLabel.setLocation(new Point(8, 186));
     lblUnitsUsedLabel.setName("lblUnitsUsedLabel");
     lblUnitsUsedLabel.setSize(new jwinforms.Size(63, 13));
     lblUnitsUsedLabel.setTabIndex(16);
@@ -538,7 +515,7 @@ public class FormShipyard extends WinformForm {
     boxCosts.Controls.addAll((new WinformControl[] {lblTradeIn, lblTradeInLabel, picCostsLine,
           lblPenalty, lblPenaltyLabel, lblShipCost, lblTotalCost, lblTotalCostLabel,
           lblShipCostLabel, lblDesignFee, lblDesignFeeLabel}));
-    boxCosts.setLocation(new java.awt.Point(286, 230));
+    boxCosts.setLocation(new Point(286, 230));
     boxCosts.setName("boxCosts");
     boxCosts.setSize(new jwinforms.Size(184, 106));
     boxCosts.setTabIndex(4);
@@ -547,7 +524,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblTradeIn
     //
-    lblTradeIn.setLocation(new java.awt.Point(106, 64));
+    lblTradeIn.setLocation(new Point(106, 64));
     lblTradeIn.setName("lblTradeIn");
     lblTradeIn.setSize(new jwinforms.Size(75, 16));
     lblTradeIn.setTabIndex(135);
@@ -557,7 +534,7 @@ public class FormShipyard extends WinformForm {
     // lblTradeInLabel
     //
     lblTradeInLabel.setAutoSize(true);
-    lblTradeInLabel.setLocation(new java.awt.Point(8, 64));
+    lblTradeInLabel.setLocation(new Point(8, 64));
     lblTradeInLabel.setName("lblTradeInLabel");
     lblTradeInLabel.setSize(new jwinforms.Size(77, 13));
     lblTradeInLabel.setTabIndex(134);
@@ -565,8 +542,8 @@ public class FormShipyard extends WinformForm {
     //
     // picCostsLine
     //
-    picCostsLine.setBackColor(java.awt.Color.darkGray);
-    picCostsLine.setLocation(new java.awt.Point(8, 80));
+    picCostsLine.setBackColor(Color.darkGray);
+    picCostsLine.setLocation(new Point(8, 80));
     picCostsLine.setName("picCostsLine");
     picCostsLine.setSize(new jwinforms.Size(168, 1));
     picCostsLine.setTabIndex(133);
@@ -574,7 +551,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblPenalty
     //
-    lblPenalty.setLocation(new java.awt.Point(106, 32));
+    lblPenalty.setLocation(new Point(106, 32));
     lblPenalty.setName("lblPenalty");
     lblPenalty.setSize(new jwinforms.Size(74, 16));
     lblPenalty.setTabIndex(21);
@@ -584,7 +561,7 @@ public class FormShipyard extends WinformForm {
     // lblPenaltyLabel
     //
     lblPenaltyLabel.setAutoSize(true);
-    lblPenaltyLabel.setLocation(new java.awt.Point(8, 32));
+    lblPenaltyLabel.setLocation(new Point(8, 32));
     lblPenaltyLabel.setName("lblPenaltyLabel");
     lblPenaltyLabel.setSize(new jwinforms.Size(96, 13));
     lblPenaltyLabel.setTabIndex(20);
@@ -592,7 +569,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblShipCost
     //
-    lblShipCost.setLocation(new java.awt.Point(106, 16));
+    lblShipCost.setLocation(new Point(106, 16));
     lblShipCost.setName("lblShipCost");
     lblShipCost.setSize(new jwinforms.Size(74, 16));
     lblShipCost.setTabIndex(19);
@@ -601,7 +578,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblTotalCost
     //
-    lblTotalCost.setLocation(new java.awt.Point(106, 84));
+    lblTotalCost.setLocation(new Point(106, 84));
     lblTotalCost.setName("lblTotalCost");
     lblTotalCost.setSize(new jwinforms.Size(74, 16));
     lblTotalCost.setTabIndex(18);
@@ -611,7 +588,7 @@ public class FormShipyard extends WinformForm {
     // lblTotalCostLabel
     //
     lblTotalCostLabel.setAutoSize(true);
-    lblTotalCostLabel.setLocation(new java.awt.Point(8, 84));
+    lblTotalCostLabel.setLocation(new Point(8, 84));
     lblTotalCostLabel.setName("lblTotalCostLabel");
     lblTotalCostLabel.setSize(new jwinforms.Size(59, 13));
     lblTotalCostLabel.setTabIndex(17);
@@ -620,7 +597,7 @@ public class FormShipyard extends WinformForm {
     // lblShipCostLabel
     //
     lblShipCostLabel.setAutoSize(true);
-    lblShipCostLabel.setLocation(new java.awt.Point(8, 16));
+    lblShipCostLabel.setLocation(new Point(8, 16));
     lblShipCostLabel.setName("lblShipCostLabel");
     lblShipCostLabel.setSize(new jwinforms.Size(56, 13));
     lblShipCostLabel.setTabIndex(16);
@@ -628,7 +605,7 @@ public class FormShipyard extends WinformForm {
     //
     // lblDesignFee
     //
-    lblDesignFee.setLocation(new java.awt.Point(106, 48));
+    lblDesignFee.setLocation(new Point(106, 48));
     lblDesignFee.setName("lblDesignFee");
     lblDesignFee.setSize(new jwinforms.Size(74, 16));
     lblDesignFee.setTabIndex(15);
@@ -638,7 +615,7 @@ public class FormShipyard extends WinformForm {
     // lblDesignFeeLabel
     //
     lblDesignFeeLabel.setAutoSize(true);
-    lblDesignFeeLabel.setLocation(new java.awt.Point(8, 48));
+    lblDesignFeeLabel.setLocation(new Point(8, 48));
     lblDesignFeeLabel.setName("lblDesignFeeLabel");
     lblDesignFeeLabel.setSize(new jwinforms.Size(65, 13));
     lblDesignFeeLabel.setTabIndex(14);
@@ -648,7 +625,7 @@ public class FormShipyard extends WinformForm {
     //
     btnConstruct.setFlatStyle(jwinforms.FlatStyle.Flat);
     btnConstruct.setForeColor(SystemColors.ControlText);
-    btnConstruct.setLocation(new java.awt.Point(382, 344));
+    btnConstruct.setLocation(new Point(382, 344));
     btnConstruct.setName("btnConstruct");
     btnConstruct.setSize(new jwinforms.Size(88, 22));
     btnConstruct.setTabIndex(6);
@@ -679,7 +656,7 @@ public class FormShipyard extends WinformForm {
     //
     btnCancel.setDialogResult(DialogResult.Cancel);
     btnCancel.setFlatStyle(jwinforms.FlatStyle.Flat);
-    btnCancel.setLocation(new java.awt.Point(286, 344));
+    btnCancel.setLocation(new Point(286, 344));
     btnCancel.setName("btnCancel");
     btnCancel.setSize(new jwinforms.Size(88, 22));
     btnCancel.setTabIndex(5);
@@ -692,7 +669,7 @@ public class FormShipyard extends WinformForm {
           numShieldSlots, numGadgetSlots, numWeaponSlots, lblCargoBays, lblFuelTanks,
           lblCrewQuarters, lblShieldSlots, lblGadgetSlots, lblWeaponsSlots,
           lblUnitsUsedLabel, lblUnitsUsed}));
-    boxAllocation.setLocation(new java.awt.Point(286, 0));
+    boxAllocation.setLocation(new Point(286, 0));
     boxAllocation.setName("boxAllocation");
     boxAllocation.setSize(new jwinforms.Size(184, 226));
     boxAllocation.setTabIndex(3);
@@ -702,8 +679,8 @@ public class FormShipyard extends WinformForm {
     // lblPct
     //
     lblPct.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-    lblPct.setForeColor(java.awt.Color.red);
-    lblPct.setLocation(new java.awt.Point(110, 204));
+    lblPct.setForeColor(Color.red);
+    lblPct.setLocation(new Point(110, 204));
     lblPct.setName("lblPct");
     lblPct.setSize(new jwinforms.Size(34, 13));
     lblPct.setTabIndex(19);
@@ -713,7 +690,7 @@ public class FormShipyard extends WinformForm {
     // lblPctLabel
     //
     lblPctLabel.setAutoSize(true);
-    lblPctLabel.setLocation(new java.awt.Point(8, 204));
+    lblPctLabel.setLocation(new Point(8, 204));
     lblPctLabel.setName("lblPctLabel");
     lblPctLabel.setSize(new jwinforms.Size(54, 13));
     lblPctLabel.setTabIndex(18);
@@ -721,8 +698,8 @@ public class FormShipyard extends WinformForm {
     //
     // numHullStrength
     //
-    numHullStrength.setBackColor(java.awt.Color.white);
-    numHullStrength.setLocation(new java.awt.Point(110, 64));
+    numHullStrength.setBackColor(Color.white);
+    numHullStrength.setLocation(new Point(110, 64));
     numHullStrength.setMaximum(9999);
     numHullStrength.setName("numHullStrength");
     numHullStrength.setReadOnly(true);
@@ -747,7 +724,7 @@ public class FormShipyard extends WinformForm {
     // lblHullStrenghLabel
     //
     lblHullStrenghLabel.setAutoSize(true);
-    lblHullStrenghLabel.setLocation(new java.awt.Point(8, 66));
+    lblHullStrenghLabel.setLocation(new Point(8, 66));
     lblHullStrenghLabel.setName("lblHullStrenghLabel");
     lblHullStrenghLabel.setSize(new jwinforms.Size(70, 13));
     lblHullStrenghLabel.setTabIndex(13);
@@ -755,8 +732,8 @@ public class FormShipyard extends WinformForm {
     //
     // numCargoBays
     //
-    numCargoBays.setBackColor(java.awt.Color.white);
-    numCargoBays.setLocation(new java.awt.Point(110, 16));
+    numCargoBays.setBackColor(Color.white);
+    numCargoBays.setLocation(new Point(110, 16));
     numCargoBays.setMaximum(999);
     numCargoBays.setName("numCargoBays");
     numCargoBays.setReadOnly(true);
@@ -780,8 +757,8 @@ public class FormShipyard extends WinformForm {
     //
     // numCrewQuarters
     //
-    numCrewQuarters.setBackColor(java.awt.Color.white);
-    numCrewQuarters.setLocation(new java.awt.Point(110, 160));
+    numCrewQuarters.setBackColor(Color.white);
+    numCrewQuarters.setLocation(new Point(110, 160));
     numCrewQuarters.setMinimum(1);
     numCrewQuarters.setName("numCrewQuarters");
     numCrewQuarters.setReadOnly(true);
@@ -806,8 +783,8 @@ public class FormShipyard extends WinformForm {
     //
     // numFuelTanks
     //
-    numFuelTanks.setBackColor(java.awt.Color.white);
-    numFuelTanks.setLocation(new java.awt.Point(110, 40));
+    numFuelTanks.setBackColor(Color.white);
+    numFuelTanks.setLocation(new Point(110, 40));
     numFuelTanks.setName("numFuelTanks");
     numFuelTanks.setReadOnly(true);
     numFuelTanks.setSize(new jwinforms.Size(64, 20));
@@ -830,8 +807,8 @@ public class FormShipyard extends WinformForm {
     //
     // numShieldSlots
     //
-    numShieldSlots.setBackColor(java.awt.Color.white);
-    numShieldSlots.setLocation(new java.awt.Point(110, 112));
+    numShieldSlots.setBackColor(Color.white);
+    numShieldSlots.setLocation(new Point(110, 112));
     numShieldSlots.setName("numShieldSlots");
     numShieldSlots.setReadOnly(true);
     numShieldSlots.setSize(new jwinforms.Size(64, 20));
@@ -854,8 +831,8 @@ public class FormShipyard extends WinformForm {
     //
     // numGadgetSlots
     //
-    numGadgetSlots.setBackColor(java.awt.Color.white);
-    numGadgetSlots.setLocation(new java.awt.Point(110, 136));
+    numGadgetSlots.setBackColor(Color.white);
+    numGadgetSlots.setLocation(new Point(110, 136));
     numGadgetSlots.setName("numGadgetSlots");
     numGadgetSlots.setReadOnly(true);
     numGadgetSlots.setSize(new jwinforms.Size(64, 20));
@@ -878,8 +855,8 @@ public class FormShipyard extends WinformForm {
     //
     // numWeaponSlots
     //
-    numWeaponSlots.setBackColor(java.awt.Color.white);
-    numWeaponSlots.setLocation(new java.awt.Point(110, 88));
+    numWeaponSlots.setBackColor(Color.white);
+    numWeaponSlots.setLocation(new Point(110, 88));
     numWeaponSlots.setName("numWeaponSlots");
     numWeaponSlots.setReadOnly(true);
     numWeaponSlots.setSize(new jwinforms.Size(64, 20));
@@ -903,7 +880,7 @@ public class FormShipyard extends WinformForm {
     // lblCargoBays
     //
     lblCargoBays.setAutoSize(true);
-    lblCargoBays.setLocation(new java.awt.Point(8, 18));
+    lblCargoBays.setLocation(new Point(8, 18));
     lblCargoBays.setName("lblCargoBays");
     lblCargoBays.setSize(new jwinforms.Size(66, 13));
     lblCargoBays.setTabIndex(5);
@@ -912,7 +889,7 @@ public class FormShipyard extends WinformForm {
     // lblFuelTanks
     //
     lblFuelTanks.setAutoSize(true);
-    lblFuelTanks.setLocation(new java.awt.Point(8, 42));
+    lblFuelTanks.setLocation(new Point(8, 42));
     lblFuelTanks.setName("lblFuelTanks");
     lblFuelTanks.setSize(new jwinforms.Size(41, 13));
     lblFuelTanks.setTabIndex(4);
@@ -921,7 +898,7 @@ public class FormShipyard extends WinformForm {
     // lblCrewQuarters
     //
     lblCrewQuarters.setAutoSize(true);
-    lblCrewQuarters.setLocation(new java.awt.Point(8, 162));
+    lblCrewQuarters.setLocation(new Point(8, 162));
     lblCrewQuarters.setName("lblCrewQuarters");
     lblCrewQuarters.setSize(new jwinforms.Size(81, 13));
     lblCrewQuarters.setTabIndex(3);
@@ -930,7 +907,7 @@ public class FormShipyard extends WinformForm {
     // lblShieldSlots
     //
     lblShieldSlots.setAutoSize(true);
-    lblShieldSlots.setLocation(new java.awt.Point(8, 114));
+    lblShieldSlots.setLocation(new Point(8, 114));
     lblShieldSlots.setName("lblShieldSlots");
     lblShieldSlots.setSize(new jwinforms.Size(67, 13));
     lblShieldSlots.setTabIndex(2);
@@ -939,7 +916,7 @@ public class FormShipyard extends WinformForm {
     // lblGadgetSlots
     //
     lblGadgetSlots.setAutoSize(true);
-    lblGadgetSlots.setLocation(new java.awt.Point(8, 138));
+    lblGadgetSlots.setLocation(new Point(8, 138));
     lblGadgetSlots.setName("lblGadgetSlots");
     lblGadgetSlots.setSize(new jwinforms.Size(73, 13));
     lblGadgetSlots.setTabIndex(1);
@@ -948,7 +925,7 @@ public class FormShipyard extends WinformForm {
     // lblWeaponsSlots
     //
     lblWeaponsSlots.setAutoSize(true);
-    lblWeaponsSlots.setLocation(new java.awt.Point(8, 90));
+    lblWeaponsSlots.setLocation(new Point(8, 90));
     lblWeaponsSlots.setName("lblWeaponsSlots");
     lblWeaponsSlots.setSize(new jwinforms.Size(78, 13));
     lblWeaponsSlots.setTabIndex(0);
@@ -959,7 +936,7 @@ public class FormShipyard extends WinformForm {
     ilShipyardLogos.ColorDepth = jwinforms.ColorDepth.Depth24Bit;
     ilShipyardLogos.setImageSize(new jwinforms.Size(80, 80));
     ilShipyardLogos.setImageStream(((jwinforms.ImageListStreamer)(resources.GetObject("ilShipyardLogos.ImageStream"))));
-    ilShipyardLogos.setTransparentColor(java.awt.Color.black);
+    ilShipyardLogos.setTransparentColor(Color.black);
     //
     // dlgOpen
     //
@@ -971,7 +948,7 @@ public class FormShipyard extends WinformForm {
     lblDisabledPct.setBackColor(SystemColors.Info);
     lblDisabledPct.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
     lblDisabledPct.ImageAlign = ContentAlignment.MiddleRight;
-    lblDisabledPct.setLocation(new java.awt.Point(154, 182));
+    lblDisabledPct.setLocation(new Point(154, 182));
     lblDisabledPct.setName("lblDisabledPct");
     lblDisabledPct.setSize(new jwinforms.Size(276, 20));
     lblDisabledPct.setTabIndex(8);
@@ -991,7 +968,7 @@ public class FormShipyard extends WinformForm {
     lblDisabledName.setBackColor(SystemColors.Info);
     lblDisabledName.setBorderStyle(jwinforms.BorderStyle.FixedSingle);
     lblDisabledName.ImageAlign = ContentAlignment.MiddleLeft;
-    lblDisabledName.setLocation(new java.awt.Point(96, 222));
+    lblDisabledName.setLocation(new Point(96, 222));
     lblDisabledName.setName("lblDisabledName");
     lblDisabledName.setSize(new jwinforms.Size(170, 20));
     lblDisabledName.setTabIndex(7);
@@ -1028,7 +1005,6 @@ public class FormShipyard extends WinformForm {
 
   }
 
-  //#endregion
   private boolean ConstructButtonEnabled() {
     return (shipyard.PercentOfMaxUnits() <= 100 && txtName.getText().length() > 0);
   }
@@ -1238,8 +1214,6 @@ public class FormShipyard extends WinformForm {
         : Consts.ShipSpecs[imgTypes[imgIndex].CastToInt()].Name()));
   }
 
-  //#endregion
-  //#region Event Handlers
   private void btnConstruct_Click(Object sender, EventArgs e) {
     if(ConstructButtonEnabled()) {
       if(game.Commander().TradeShip(shipyard.ShipSpec(), shipyard.TotalCost(), txtName.getText(), this)) {
@@ -1357,5 +1331,4 @@ public class FormShipyard extends WinformForm {
     SetTemplateModified();
     UpdateButtonEnabledState();
   }
-  //#endregion
 }
