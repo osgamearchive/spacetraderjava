@@ -69,12 +69,6 @@ public class GameOptions extends STSerializableObject {
    */
   private int _leaveEmpty = 0;
 
-  public GameOptions(boolean loadFromDefaults) {
-    if(loadFromDefaults) {
-      LoadFromDefaults(false);
-    }
-  }
-
   public GameOptions(Hashtable hash) {
     super(hash);
     _alwaysIgnorePirates = GetValueFromHash(hash, "_alwaysIgnorePirates", _alwaysIgnorePirates);
@@ -94,45 +88,11 @@ public class GameOptions extends STSerializableObject {
     _trackAutoOff = GetValueFromHash(hash, "_trackAutoOff", _trackAutoOff);
     _leaveEmpty = GetValueFromHash(hash, "_leaveEmpty", _leaveEmpty);
   }
-
-  public void CopyValues(GameOptions source) {
-    setAlwaysIgnorePirates(source.getAlwaysIgnorePirates());
-    setAlwaysIgnorePolice(source.getAlwaysIgnorePolice());
-    setAlwaysIgnoreTradeInOrbit(source.getAlwaysIgnoreTradeInOrbit());
-    setAlwaysIgnoreTraders(source.getAlwaysIgnoreTraders());
-    setAutoFuel(source.getAutoFuel());
-    setAutoRepair(source.getAutoRepair());
-    setContinuousAttack(source.getContinuousAttack());
-    setContinuousAttackFleeing(source.getContinuousAttackFleeing());
-    setDisableOpponents(source.getDisableOpponents());
-    setNewsAutoPay(source.getNewsAutoPay());
-    setNewsAutoShow(source.getNewsAutoShow());
-    setRemindLoans(source.getRemindLoans());
-    setReserveMoney(source.getReserveMoney());
-    setShowTrackedRange(source.getShowTrackedRange());
-    setTrackAutoOff(source.getTrackAutoOff());
-    setLeaveEmpty(source.getLeaveEmpty());
-  }
-
-  public void LoadFromDefaults(boolean errorIfFileNotFound) {
-    LoadFromDefaults(errorIfFileNotFound, null);
-  }
-
-  public void LoadFromDefaults(boolean errorIfFileNotFound, WinformPane owner) {
-    GameOptions defaults = null;
-    Object obj = Functions.LoadFile(Consts.DefaultSettingsFile, !errorIfFileNotFound, owner);
-    if(obj == null) {
-      defaults = new GameOptions(false);
-    } else {
-      defaults = new GameOptions((Hashtable)obj);
+  public GameOptions(boolean loadFromDefaults) {
+    if(loadFromDefaults) {
+      LoadFromDefaults(false);
     }
-    CopyValues(defaults);
   }
-
-  public void SaveAsDefaults(WinformPane owner) {
-    Functions.SaveFile(Consts.DefaultSettingsFile, Serialize(), owner);
-  }
-
   @Override
   public Hashtable Serialize() {
     Hashtable hash = super.Serialize();
@@ -155,130 +115,133 @@ public class GameOptions extends STSerializableObject {
     return hash;
   }
 
+  public void CopyValues(GameOptions source) {
+    setAlwaysIgnorePirates(source.getAlwaysIgnorePirates());
+    setAlwaysIgnorePolice(source.getAlwaysIgnorePolice());
+    setAlwaysIgnoreTradeInOrbit(source.getAlwaysIgnoreTradeInOrbit());
+    setAlwaysIgnoreTraders(source.getAlwaysIgnoreTraders());
+    setAutoFuel(source.getAutoFuel());
+    setAutoRepair(source.getAutoRepair());
+    setContinuousAttack(source.getContinuousAttack());
+    setContinuousAttackFleeing(source.getContinuousAttackFleeing());
+    setDisableOpponents(source.getDisableOpponents());
+    setNewsAutoPay(source.getNewsAutoPay());
+    setNewsAutoShow(source.getNewsAutoShow());
+    setRemindLoans(source.getRemindLoans());
+    setReserveMoney(source.getReserveMoney());
+    setShowTrackedRange(source.getShowTrackedRange());
+    setTrackAutoOff(source.getTrackAutoOff());
+    setLeaveEmpty(source.getLeaveEmpty());
+  }
+  public void LoadFromDefaults(boolean errorIfFileNotFound) {
+    LoadFromDefaults(errorIfFileNotFound, null);
+  }
+  public void LoadFromDefaults(boolean errorIfFileNotFound, WinformPane owner) {
+    GameOptions defaults = null;
+    Object obj = Functions.LoadFile(Consts.DefaultSettingsFile, !errorIfFileNotFound, owner);
+    if(obj == null) {
+      defaults = new GameOptions(false);
+    } else {
+      defaults = new GameOptions((Hashtable)obj);
+    }
+    CopyValues(defaults);
+  }
+  public void SaveAsDefaults(WinformPane owner) {
+    Functions.SaveFile(Consts.DefaultSettingsFile, Serialize(), owner);
+  }
   public boolean getAlwaysIgnorePirates() {
     return _alwaysIgnorePirates;
   }
-
   public void setAlwaysIgnorePirates(boolean value) {
     _alwaysIgnorePirates = value;
   }
-
   public boolean getAlwaysIgnorePolice() {
     return _alwaysIgnorePolice;
   }
-
   public void setAlwaysIgnorePolice(boolean value) {
     _alwaysIgnorePolice = value;
   }
-
   public boolean getAlwaysIgnoreTradeInOrbit() {
     return _alwaysIgnoreTradeInOrbit;
   }
-
   public void setAlwaysIgnoreTradeInOrbit(boolean value) {
     _alwaysIgnoreTradeInOrbit = value;
   }
-
   public boolean getAlwaysIgnoreTraders() {
     return _alwaysIgnoreTraders;
   }
-
   public void setAlwaysIgnoreTraders(boolean value) {
     _alwaysIgnoreTraders = value;
   }
-
   public boolean getAutoFuel() {
     return _autoFuel;
   }
-
   public void setAutoFuel(boolean value) {
     _autoFuel = value;
   }
-
   public boolean getAutoRepair() {
     return _autoRepair;
   }
-
   public void setAutoRepair(boolean value) {
     _autoRepair = value;
   }
-
   public boolean getContinuousAttack() {
     return _continuousAttack;
   }
-
   public void setContinuousAttack(boolean value) {
     _continuousAttack = value;
   }
-
   public boolean getContinuousAttackFleeing() {
     return _continuousAttackFleeing;
   }
-
   public void setContinuousAttackFleeing(boolean value) {
     _continuousAttackFleeing = value;
   }
-
   public boolean getDisableOpponents() {
     return _disableOpponents;
   }
-
   public void setDisableOpponents(boolean value) {
     _disableOpponents = value;
   }
-
   public int getLeaveEmpty() {
     return _leaveEmpty;
   }
-
   public void setLeaveEmpty(int value) {
     _leaveEmpty = value;
   }
-
   public boolean getNewsAutoPay() {
     return _newsAutoPay;
   }
-
   public void setNewsAutoPay(boolean value) {
     _newsAutoPay = value;
   }
-
   public boolean getNewsAutoShow() {
     return _newsAutoShow;
   }
-
   public void setNewsAutoShow(boolean value) {
     _newsAutoShow = value;
   }
-
   public boolean getRemindLoans() {
     return _remindLoans;
   }
-
   public void setRemindLoans(boolean value) {
     _remindLoans = value;
   }
-
   public boolean getReserveMoney() {
     return _reserveMoney;
   }
-
   public void setReserveMoney(boolean value) {
     _reserveMoney = value;
   }
-
   public boolean getShowTrackedRange() {
     return _showTrackedRange;
   }
-
   public void setShowTrackedRange(boolean value) {
     _showTrackedRange = value;
   }
-
   public boolean getTrackAutoOff() {
     return _trackAutoOff;
   }
-
   public void setTrackAutoOff(boolean value) {
     _trackAutoOff = value;
   }

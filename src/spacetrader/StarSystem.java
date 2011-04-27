@@ -8,7 +8,7 @@ import spacetrader.enums.SpecialResource;
 import spacetrader.enums.StarSystemId;
 import spacetrader.enums.SystemPressure;
 import spacetrader.enums.TechLevel;
-import spacetrader.enums.TradeItemType;
+import org.gts.bst.cargo.TradeItemType;
 import spacetrader.util.Hashtable;
 
 

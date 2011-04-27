@@ -2,7 +2,7 @@ package spacetrader;
 import spacetrader.enums.SpecialResource;
 import spacetrader.enums.SystemPressure;
 import spacetrader.enums.TechLevel;
-import spacetrader.enums.TradeItemType;
+import org.gts.bst.cargo.TradeItemType;
 
 
 public class TradeItem implements Comparable<TradeItem> {

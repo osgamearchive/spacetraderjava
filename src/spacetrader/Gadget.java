@@ -1,121 +1,69 @@
-/*******************************************************************************
- *
- * Space Trader for Windows 2.00
- *
- * Copyright (C) 2005 Jay French, All Rights Reserved
- *
- * Additional coding by David Pierron
- * Original coding by Pieter Spronck, Sam Anderson, Samuel Goldstein, Matt Lee
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option) any
- * later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * If you'd like a copy of the GNU General Public License, go to
- * http://www.gnu.org/copyleft/gpl.html.
- *
- * You can contact the author at spacetrader@frenchfryz.com
- *
- ******************************************************************************/
-//using System;
-//using System.Collections;
 package spacetrader;
-
+import org.gts.bst.ship.equip.EquipmentSubType;
 import org.gts.bst.ship.equip.GadgetType;
 import spacetrader.enums.SkillType;
 import spacetrader.enums.TechLevel;
-import org.gts.bst.ship.equip.EquipmentSubType;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Log;
 
-public class Gadget extends Equipment
-{
-	// #region Member Declarations
 
-	private GadgetType _type;
-	private SkillType _skillBonus;
+public class Gadget extends Equipment {
+  private GadgetType _type;
+  private SkillType _skillBonus;
 
-	// #endregion
+  public Gadget(GadgetType type, SkillType skillBonus, int price, TechLevel minTechLevel, int chance) {
+    super(org.gts.bst.ship.equip.EquipmentType.Gadget, price, minTechLevel, chance);
+    _type = type;
+    _skillBonus = skillBonus;
+  }
 
-	// #region Methods
+  public Gadget(Hashtable hash) {
+    super(hash);
+    _type = GadgetType.FromInt(GetValueFromHash(hash, "_type", Integer.class));
+    _skillBonus = (GetValueFromHash(hash, "_skillBonus", SkillType.NA, SkillType.class));
+  }
 
-	public Gadget(GadgetType type, SkillType skillBonus, int price, TechLevel minTechLevel, int chance)
-	{
-		super(org.gts.bst.ship.equip.EquipmentType.Gadget, price, minTechLevel, chance);
-		_type = type;
-		_skillBonus = skillBonus;
-	}
+  @Override
+  public Equipment Clone() {
+    return new Gadget(_type, _skillBonus, _price, _minTech, _chance);
+  }
 
-	public Gadget(Hashtable hash)
-	{
-		super(hash);
-		_type = GadgetType.FromInt(GetValueFromHash(hash, "_type", Integer.class));
-		_skillBonus = ( GetValueFromHash(hash, "_skillBonus", SkillType.NA,SkillType.class));
-	}
+  @Override
+  public EquipmentSubType SubType() {
+    return Type();
+  }
 
-	public @Override
-	Equipment Clone()
-	{
-		return new Gadget(_type, _skillBonus, _price, _minTech, _chance);
-	}
+  @Override
+  public Hashtable Serialize() {
+    Hashtable hash = super.Serialize();
+    hash.add("_type", _type.CastToInt());
+    hash.add("_skillBonus", _skillBonus.CastToInt());
+    return hash;
+  }
 
-	public @Override
-	Hashtable Serialize()
-	{
-		Hashtable hash = super.Serialize();
+  @Override
+  public String Name() {
+    return Strings.GadgetNames[_type.CastToInt()];
+  }
 
-		hash.add("_type", _type.CastToInt());
-		hash.add("_skillBonus", _skillBonus.CastToInt());
+  @Override
+  public boolean TypeEquals(Object type) {
+    boolean equal = false;
+    try {
+      if(Type() == (GadgetType)type) {
+        equal = true;
+      }
+    } catch(Exception e) {
+      Log.write("Ignored Exception " + e);
+    }
+    return equal;
+  }
 
-		return hash;
-	}
+  public GadgetType Type() {
+    return _type;
+  }
 
-	public @Override
-	boolean TypeEquals(Object type)
-	{
-		boolean equal = false;
-
-		try
-		{
-			if (Type() == (GadgetType) type)
-				equal = true;
-		} catch (Exception e)
-		{
-			Log.write("Ignored Exception " + e);
-		}
-
-		return equal;
-	}
-
-	// #endregion
-
-	// #region Properties
-	@Override
-	public String Name()
-	{
-		return Strings.GadgetNames[_type.CastToInt()];
-	}
-
-	@Override
-	public EquipmentSubType SubType()
-	{
-		return Type();
-	}
-
-	public GadgetType Type()
-	{
-		return _type;
-	}
-
-	public SkillType SkillBonus()
-	{
-		return _skillBonus;
-	}
-
-	// #endregion
+  public SkillType SkillBonus() {
+    return _skillBonus;
+  }
 }

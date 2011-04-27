@@ -5,7 +5,7 @@ import spacetrader.enums.Activity;
 import spacetrader.enums.OpponentType;
 import spacetrader.enums.PoliticalSystemType;
 import spacetrader.enums.TechLevel;
-import spacetrader.enums.TradeItemType;
+import org.gts.bst.cargo.TradeItemType;
 
 
 public class PoliticalSystem {
