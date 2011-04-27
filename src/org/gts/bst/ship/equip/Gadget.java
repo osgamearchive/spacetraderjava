@@ -1,6 +1,7 @@
-package spacetrader;
+package org.gts.bst.ship.equip;
 import org.gts.bst.ship.equip.EquipmentSubType;
 import org.gts.bst.ship.equip.GadgetType;
+import spacetrader.Strings;
 import spacetrader.enums.SkillType;
 import spacetrader.enums.TechLevel;
 import spacetrader.util.Hashtable;

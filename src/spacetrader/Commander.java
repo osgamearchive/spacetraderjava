@@ -1,4 +1,5 @@
 package spacetrader;
+import org.gts.bst.ship.equip.Equipment;
 import jwinforms.DialogResult;
 import jwinforms.WinformPane;
 import org.gts.bst.crew.CrewMemberId;

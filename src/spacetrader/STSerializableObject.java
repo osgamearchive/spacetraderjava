@@ -1,4 +1,7 @@
 package spacetrader;
+import org.gts.bst.ship.equip.Gadget;
+import org.gts.bst.ship.equip.Shield;
+import org.gts.bst.ship.equip.Weapon;
 import spacetrader.enums.SpaceTraderEnum;
 import spacetrader.stub.ArrayList;
 import spacetrader.util.DWIM;

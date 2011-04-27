@@ -20,14 +20,14 @@ import org.gts.bst.ship.equip.EquipmentType;
 import org.gts.bst.ship.equip.GadgetType;
 import spacetrader.Commander;
 import spacetrader.Consts;
-import spacetrader.Equipment;
+import org.gts.bst.ship.equip.Equipment;
 import spacetrader.Functions;
-import spacetrader.Gadget;
+import org.gts.bst.ship.equip.Gadget;
 import spacetrader.Game;
-import spacetrader.Shield;
+import org.gts.bst.ship.equip.Shield;
 import spacetrader.Ship;
 import spacetrader.Strings;
-import spacetrader.Weapon;
+import org.gts.bst.ship.equip.Weapon;
 import spacetrader.enums.AlertType;
 
 
