@@ -2215,7 +2215,7 @@ public class Game extends STSerializableObject {
         // Place the first systems somewhere in the center.
         x = ((Consts.GalaxyWidth * (1 + 2 * (i % 3))) / 6) - Functions.GetRandom(-Consts.CloseDistance + 1, Consts.CloseDistance);
         y = ((Consts.GalaxyHeight * (i < 3 ? 1 : 3)) / 4) - Functions.GetRandom(-Consts.CloseDistance + 1, Consts.CloseDistance);
-        Wormholes()[i] = i;
+        _wormholes[i] = i;
       } else {
         boolean ok = false;
         while(!ok) {
@@ -2251,18 +2251,18 @@ public class Game extends STSerializableObject {
         Universe()[i].Y(Universe()[j].Y());
         Universe()[j].X(x);
         Universe()[j].Y(y);
-        int w = Util.BruteSeek(Wormholes(), i);
+        int w = Util.BruteSeek(_wormholes, i);
         if(w >= 0) {
-          Wormholes()[w] = j;
+          _wormholes[w] = j;
         }
       }
     }
     // Randomize wormhole order
     for(i = 0; i < _wormholes.length; i++) {
       j = Functions.GetRandom(_wormholes.length);
-      int w = Wormholes()[i];
-      Wormholes()[i] = Wormholes()[j];
-      Wormholes()[j] = w;
+      int w = _wormholes[i];
+      _wormholes[i] = _wormholes[j];
+      _wormholes[j] = w;
     }
   }
 
@@ -2853,10 +2853,10 @@ public class Game extends STSerializableObject {
     Universe()[StarSystemId.Inthara.CastToInt()].SpecialEventType(SpecialEventType.PrincessInthara);
     Universe()[StarSystemId.Qonos.CastToInt()].SpecialEventType(SpecialEventType.PrincessQonos);
     // Assign a wormhole location endpoint for the Scarab.
-    for(system = 0; system < _wormholes.length && Universe()[Wormholes()[system]].SpecialEventType() != SpecialEventType.NA; system++) {
+    for(system = 0; system < _wormholes.length && Universe()[_wormholes[system]].SpecialEventType() != SpecialEventType.NA; system++) {
     }
     if(system < _wormholes.length) {
-      Universe()[Wormholes()[system]].SpecialEventType(SpecialEventType.ScarabDestroyed);
+      Universe()[_wormholes[system]].SpecialEventType(SpecialEventType.ScarabDestroyed);
     } else {
       goodUniverse = false;
     }
@@ -3612,8 +3612,8 @@ public class Game extends STSerializableObject {
   public void TargetWormhole(boolean value) {
     _targetWormhole = value;
     if(_targetWormhole) {
-      int wormIndex = Util.BruteSeek(Wormholes(), SelectedSystemId().CastToInt());
-      _warpSystemId = StarSystemId.FromInt(Wormholes()[(wormIndex + 1) % _wormholes.length]);
+      int wormIndex = Util.BruteSeek(_wormholes, SelectedSystemId().CastToInt());
+      _warpSystemId = StarSystemId.FromInt(_wormholes[(wormIndex + 1) % _wormholes.length]);
     }
   }
 
