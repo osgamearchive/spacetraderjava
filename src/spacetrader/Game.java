@@ -2211,7 +2211,7 @@ public class Game extends STSerializableObject {
       int x = 0;
       int y = 0;
 
-      if(i < Wormholes().length) {
+      if(i < _wormholes.length) {
         // Place the first systems somewhere in the center.
         x = ((Consts.GalaxyWidth * (1 + 2 * (i % 3))) / 6) - Functions.GetRandom(-Consts.CloseDistance + 1, Consts.CloseDistance);
         y = ((Consts.GalaxyHeight * (i < 3 ? 1 : 3)) / 4) - Functions.GetRandom(-Consts.CloseDistance + 1, Consts.CloseDistance);
@@ -2258,8 +2258,8 @@ public class Game extends STSerializableObject {
       }
     }
     // Randomize wormhole order
-    for(i = 0; i < Wormholes().length; i++) {
-      j = Functions.GetRandom(Wormholes().length);
+    for(i = 0; i < _wormholes.length; i++) {
+      j = Functions.GetRandom(_wormholes.length);
       int w = Wormholes()[i];
       Wormholes()[i] = Wormholes()[j];
       Wormholes()[j] = w;
@@ -2853,9 +2853,9 @@ public class Game extends STSerializableObject {
     Universe()[StarSystemId.Inthara.CastToInt()].SpecialEventType(SpecialEventType.PrincessInthara);
     Universe()[StarSystemId.Qonos.CastToInt()].SpecialEventType(SpecialEventType.PrincessQonos);
     // Assign a wormhole location endpoint for the Scarab.
-    for(system = 0; system < Wormholes().length && Universe()[Wormholes()[system]].SpecialEventType() != SpecialEventType.NA; system++) {
+    for(system = 0; system < _wormholes.length && Universe()[Wormholes()[system]].SpecialEventType() != SpecialEventType.NA; system++) {
     }
-    if(system < Wormholes().length) {
+    if(system < _wormholes.length) {
       Universe()[Wormholes()[system]].SpecialEventType(SpecialEventType.ScarabDestroyed);
     } else {
       goodUniverse = false;
@@ -3613,7 +3613,7 @@ public class Game extends STSerializableObject {
     _targetWormhole = value;
     if(_targetWormhole) {
       int wormIndex = Util.BruteSeek(Wormholes(), SelectedSystemId().CastToInt());
-      _warpSystemId = StarSystemId.FromInt(Wormholes()[(wormIndex + 1) % Wormholes().length]);
+      _warpSystemId = StarSystemId.FromInt(Wormholes()[(wormIndex + 1) % _wormholes.length]);
     }
   }
 
