@@ -468,23 +468,23 @@ public class Game extends STSerializableObject {
   }
 
   private void ArrivalUpdatePressuresAndQuantities() {
-    for(int i = 0; i < Universe().length; i++) {
+    for(int i = 0; i < _universe.length; i++) {
       if(Functions.GetRandom(100) < 15) {
-        Universe()[i].SystemPressure((SystemPressure.FromInt(Universe()[i].SystemPressure() == SystemPressure.None
+        _universe[i].SystemPressure((SystemPressure.FromInt(_universe[i].SystemPressure() == SystemPressure.None
             ? Functions.GetRandom(SystemPressure.War.CastToInt(), SystemPressure.Employment.CastToInt() + 1) : SystemPressure.None.CastToInt())));
       }
 
-      if(Universe()[i].CountDown() > 0) {
-        Universe()[i].CountDown(Universe()[i].CountDown() - 1);
+      if(_universe[i].CountDown() > 0) {
+        _universe[i].CountDown(_universe[i].CountDown() - 1);
 
-        if(Universe()[i].CountDown() > CountDownStart()) {
-          Universe()[i].CountDown(CountDownStart());
-        } else if(Universe()[i].CountDown() <= 0) {
-          Universe()[i].InitializeTradeItems();
+        if(_universe[i].CountDown() > CountDownStart()) {
+          _universe[i].CountDown(CountDownStart());
+        } else if(_universe[i].CountDown() <= 0) {
+          _universe[i].InitializeTradeItems();
         } else {
           for(int j = 0; j < Consts.TradeItems.length; j++) {
             if(WarpSystem().ItemTraded(Consts.TradeItems[j])) {
-              Universe()[i].TradeItems()[j] = Math.max(0, Universe()[i].TradeItems()[j] + Functions.GetRandom(-4, 5));
+              _universe[i].TradeItems()[j] = Math.max(0, _universe[i].TradeItems()[j] + Functions.GetRandom(-4, 5));
             }
           }
         }
@@ -1194,7 +1194,7 @@ public class Game extends STSerializableObject {
       showEncounter = DeterminePirateEncounter(mantis);
     } else if(trader) {
       showEncounter = DetermineTraderEncounter();
-    } else if(_commander.getDays() > 10 && Functions.GetRandom(1000) < getChanceOfVeryRareEncounter() && VeryRareEncounters().size() > 0) {
+    } else if(_commander.getDays() > 10 && Functions.GetRandom(1000) < getChanceOfVeryRareEncounter() && _veryRareEncounters.size() > 0) {
       showEncounter = DetermineVeryRareEncounter();
     }
     return showEncounter;
@@ -1241,13 +1241,13 @@ public class Game extends STSerializableObject {
     // 4. Captain Huie will trade your Military Laser for points in Trading.
     // 5. Encounter an out-of-date bottle of Captain Marmoset's Skill Tonic. This will affect skills depending on game difficulty level.
     // 6. Encounter a good bottle of Captain Marmoset's Skill Tonic, which will invoke IncreaseRandomSkill one or two times, depending on game difficulty.
-    switch(VeryRareEncounters().get(Functions.GetRandom(VeryRareEncounters().size()))) {
+    switch(_veryRareEncounters.get(Functions.GetRandom(_veryRareEncounters.size()))) {
       case MarieCeleste:
         // Marie Celeste cannot be at Acamar, Qonos, or Zalkon as it may cause problems with the Space Monster, Scorpion, or Dragonfly
         if(getClicks() > 1 && _commander.getCurrentSystemId() != StarSystemId.Acamar
             && _commander.getCurrentSystemId() != StarSystemId.Zalkon
             && _commander.getCurrentSystemId() != StarSystemId.Qonos) {
-          VeryRareEncounters().remove(VeryRareEncounter.MarieCeleste);
+          _veryRareEncounters.remove(VeryRareEncounter.MarieCeleste);
           setEncounterType(EncounterType.MarieCeleste);
           GenerateOpponent(OpponentType.Trader);
           for(int i = 0; i < getOpponent().Cargo().length; i++) {
@@ -1261,7 +1261,7 @@ public class Game extends STSerializableObject {
       case CaptainAhab:
         if(_commander.getShip().HasShield(ShieldType.Reflective) && _commander.Pilot() < 10
             && _commander.getPoliceRecordScore() > Consts.PoliceRecordScoreCriminal) {
-          VeryRareEncounters().remove(VeryRareEncounter.CaptainAhab);
+          _veryRareEncounters.remove(VeryRareEncounter.CaptainAhab);
           getEncounterType();
           setEncounterType(EncounterType.CaptainAhab);
           GenerateOpponent(OpponentType.FamousCaptain);
@@ -1272,7 +1272,7 @@ public class Game extends STSerializableObject {
       case CaptainConrad:
         if(_commander.getShip().HasWeapon(WeaponType.MilitaryLaser, true) && _commander.Engineer() < 10
             && _commander.getPoliceRecordScore() > Consts.PoliceRecordScoreCriminal) {
-          VeryRareEncounters().remove(VeryRareEncounter.CaptainConrad);
+          _veryRareEncounters.remove(VeryRareEncounter.CaptainConrad);
           getEncounterType();
           setEncounterType(EncounterType.CaptainConrad);
           GenerateOpponent(OpponentType.FamousCaptain);
@@ -1283,7 +1283,7 @@ public class Game extends STSerializableObject {
       case CaptainHuie:
         if(_commander.getShip().HasWeapon(WeaponType.MilitaryLaser, true) && _commander.Trader() < 10
             && _commander.getPoliceRecordScore() > Consts.PoliceRecordScoreCriminal) {
-          VeryRareEncounters().remove(VeryRareEncounter.CaptainHuie);
+          _veryRareEncounters.remove(VeryRareEncounter.CaptainHuie);
           getEncounterType();
           setEncounterType(EncounterType.CaptainHuie);
           GenerateOpponent(OpponentType.FamousCaptain);
@@ -1291,13 +1291,13 @@ public class Game extends STSerializableObject {
         }
         break;
       case BottleOld:
-        VeryRareEncounters().remove(VeryRareEncounter.BottleOld);
+        _veryRareEncounters.remove(VeryRareEncounter.BottleOld);
         setEncounterType(EncounterType.BottleOld);
         GenerateOpponent(OpponentType.Bottle);
         showEncounter = true;
         break;
       case BottleGood:
-        VeryRareEncounters().remove(VeryRareEncounter.BottleGood);
+        _veryRareEncounters.remove(VeryRareEncounter.BottleGood);
         setEncounterType(EncounterType.BottleGood);
         GenerateOpponent(OpponentType.Bottle);
         showEncounter = true;
@@ -2083,9 +2083,9 @@ public class Game extends STSerializableObject {
 
     if(getQuestStatusJapori() == SpecialEvent.StatusJaporiInTransit) {
       int system;
-      for(system = 0; system < Universe().length && Universe()[system].SpecialEventType() != SpecialEventType.Japori; system++) {
+      for(system = 0; system < _universe.length && _universe[system].SpecialEventType() != SpecialEventType.Japori; system++) {
       }
-      FormAlert.Alert(AlertType.AntidoteDestroyed, getParentWindow(), Universe()[system].Name());
+      FormAlert.Alert(AlertType.AntidoteDestroyed, getParentWindow(), _universe[system].Name());
       setQuestStatusJapori(SpecialEvent.StatusJaporiNotStarted);
     }
 
@@ -2130,21 +2130,21 @@ public class Game extends STSerializableObject {
   private boolean FindDistantSystem(StarSystemId baseSystem, SpecialEventType specEvent) {
     int bestDistance = 999;
     int system = -1;
-    for(int i = 0; i < Universe().length; i++) {
-      int distance = Functions.Distance(Universe()[baseSystem.CastToInt()], Universe()[i]);
-      if(distance >= 70 && distance < bestDistance && Universe()[i].SpecialEventType() == SpecialEventType.NA) {
+    for(int i = 0; i < _universe.length; i++) {
+      int distance = Functions.Distance(_universe[baseSystem.CastToInt()], _universe[i]);
+      if(distance >= 70 && distance < bestDistance && _universe[i].SpecialEventType() == SpecialEventType.NA) {
         system = i;
         bestDistance = distance;
       }
     }
     if(system >= 0) {
-      Universe()[system].SpecialEventType(specEvent);
+      _universe[system].SpecialEventType(specEvent);
     }
     return (system >= 0);
   }
 
   private void GenerateCrewMemberList() {
-    int[] used = new int[Universe().length];
+    int[] used = new int[_universe.length];
     int d = Difficulty().CastToInt();
     // Zeethibal may be on Kravat
     used[StarSystemId.Kravat.CastToInt()] = 1;
@@ -2170,7 +2170,7 @@ public class Game extends STSerializableObject {
         StarSystemId id;
         boolean ok = false;
         do {
-          id = StarSystemId.FromInt(Functions.GetRandom(Universe().length));
+          id = StarSystemId.FromInt(Functions.GetRandom(_universe.length));
           if(used[id.CastToInt()] < 3) {
             used[id.CastToInt()]++;
             ok = true;
@@ -2189,7 +2189,7 @@ public class Game extends STSerializableObject {
     _universe = new StarSystem[Strings.SystemNames.length];
     // _universe = new StarSystem[10];
     int i, j;
-    for(i = 0; i < Universe().length; i++) {
+    for(i = 0; i < _universe.length; i++) {
       StarSystemId id = (StarSystemId.FromInt(i));
       SystemPressure pressure = SystemPressure.None;
       SpecialResource specRes = SpecialResource.Nothing;
@@ -2226,11 +2226,11 @@ public class Game extends STSerializableObject {
           boolean tooClose = false;
           for(j = 0; j < i && !tooClose; j++) {
             // Minimum distance between any two systems not to be accepted.
-            if(Functions.Distance(Universe()[j], x, y) < Consts.MinDistance) {
+            if(Functions.Distance(_universe[j], x, y) < Consts.MinDistance) {
               tooClose = true;
             }
             // There should be at least one system which is close enough.
-            if(Functions.Distance(Universe()[j], x, y) < Consts.CloseDistance) {
+            if(Functions.Distance(_universe[j], x, y) < Consts.CloseDistance) {
               closeFound = true;
             }
           }
@@ -2238,19 +2238,19 @@ public class Game extends STSerializableObject {
         }
       }
 
-      Universe()[i] = new StarSystem(id, x, y, size, tech, polSys.Type(), pressure, specRes);
+      _universe[i] = new StarSystem(id, x, y, size, tech, polSys.Type(), pressure, specRes);
     }
 
     // Randomize the system locations a bit more, otherwise the systems with the first names in the alphabet are all in the center.
-    for(i = 0; i < Universe().length; i++) {
-      j = Functions.GetRandom(Universe().length);
+    for(i = 0; i < _universe.length; i++) {
+      j = Functions.GetRandom(_universe.length);
       if(!Functions.WormholeExists(j, -1)) {
-        int x = Universe()[i].X();
-        int y = Universe()[i].Y();
-        Universe()[i].X(Universe()[j].X());
-        Universe()[i].Y(Universe()[j].Y());
-        Universe()[j].X(x);
-        Universe()[j].Y(y);
+        int x = _universe[i].X();
+        int y = _universe[i].Y();
+        _universe[i].X(_universe[j].X());
+        _universe[i].Y(_universe[j].Y());
+        _universe[j].X(x);
+        _universe[j].Y(y);
         int w = Util.BruteSeek(_wormholes, i);
         if(w >= 0) {
           _wormholes[w] = j;
@@ -2520,7 +2520,7 @@ public class Game extends STSerializableObject {
         // Zeethibal has a 10 in player's lowest score, an 8
         // in the next lowest score, and 5 elsewhere.
         CrewMember zeethibal = Mercenaries()[CrewMemberId.Zeethibal.CastToInt()];
-        zeethibal.CurrentSystem(Universe()[StarSystemId.Kravat.CastToInt()]);
+        zeethibal.CurrentSystem(_universe[StarSystemId.Kravat.CastToInt()]);
         int lowest1 = _commander.NthLowestSkill(1);
         int lowest2 = _commander.NthLowestSkill(2);
         for(int i = 0; i < zeethibal.Skills().length; i++) {
@@ -2566,7 +2566,7 @@ public class Game extends STSerializableObject {
     if(getQuestStatusGemulon() > SpecialEvent.StatusGemulonNotStarted && getQuestStatusGemulon() < SpecialEvent.StatusGemulonTooLate) {
       setQuestStatusGemulon(Math.min(getQuestStatusGemulon() + num, SpecialEvent.StatusGemulonTooLate));
       if(getQuestStatusGemulon() == SpecialEvent.StatusGemulonTooLate) {
-        StarSystem gemulon = Universe()[StarSystemId.Gemulon.CastToInt()];
+        StarSystem gemulon = _universe[StarSystemId.Gemulon.CastToInt()];
         gemulon.SpecialEventType(SpecialEventType.GemulonInvaded);
         gemulon.TechLevel(TechLevel.PreAgricultural);
         gemulon.PoliticalSystemType(PoliticalSystemType.Anarchy);
@@ -2581,7 +2581,7 @@ public class Game extends STSerializableObject {
       setQuestStatusExperiment(Math.min(getQuestStatusExperiment() + num, SpecialEvent.StatusExperimentPerformed));
       if(getQuestStatusExperiment() == SpecialEvent.StatusExperimentPerformed) {
         setFabricRipProbability(Consts.FabricRipInitialProbability);
-        Universe()[StarSystemId.Daled.CastToInt()].SpecialEventType(SpecialEventType.ExperimentFailed);
+        _universe[StarSystemId.Daled.CastToInt()].SpecialEventType(SpecialEventType.ExperimentFailed);
         FormAlert.Alert(AlertType.SpecialExperimentPerformed, owner);
         NewsAddEvent(NewsEvent.ExperimentPerformed);
       }
@@ -2643,14 +2643,14 @@ public class Game extends STSerializableObject {
     Mercenaries()[CrewMemberId.Commander.CastToInt()] = Commander();
     Strings.CrewMemberNames[CrewMemberId.Commander.CastToInt()] = name;
     while(_commander.CurrentSystem() == null) {
-      StarSystem system = Universe()[Functions.GetRandom(Universe().length)];
+      StarSystem system = _universe[Functions.GetRandom(_universe.length)];
       if(system.SpecialEventType() == SpecialEventType.NA
           && system.TechLevel().CastToInt() > TechLevel.PreAgricultural.CastToInt()
           && system.TechLevel().CastToInt() < TechLevel.HiTech.CastToInt()) {
         // Make sure at least three other systems can be reached
         int close = 0;
-        for(int i = 0; i < Universe().length && close < 3; i++) {
-          if(i != system.Id().CastToInt() && Functions.Distance(Universe()[i], system) <= _commander.getShip().FuelTanks()) {
+        for(int i = 0; i < _universe.length && close < 3; i++) {
+          if(i != system.Id().CastToInt() && Functions.Distance(_universe[i], system) <= _commander.getShip().FuelTanks()) {
             close++;
           }
         }
@@ -2816,8 +2816,8 @@ public class Game extends STSerializableObject {
   private boolean PlaceShipyards() {
     boolean goodUniverse = true;
     ArrayList<Integer> systemIdList = new ArrayList<Integer>();
-    for(int system = 0; system < Universe().length; system++) {
-      if(Universe()[system].TechLevel() == TechLevel.HiTech) {
+    for(int system = 0; system < _universe.length; system++) {
+      if(_universe[system].TechLevel() == TechLevel.HiTech) {
         systemIdList.add(system);
       }
     }
@@ -2826,7 +2826,7 @@ public class Game extends STSerializableObject {
     } else {
       // Assign the shipyards to High-Tech systems.
       for(int shipyard = 0; shipyard < Consts.Shipyards.length; shipyard++) {
-        Universe()[systemIdList.get(Functions.GetRandom(systemIdList.size()))].ShipyardId(ShipyardId.FromInt(shipyard));
+        _universe[systemIdList.get(Functions.GetRandom(systemIdList.size()))].ShipyardId(ShipyardId.FromInt(shipyard));
       }
     }
     return goodUniverse;
@@ -2835,37 +2835,37 @@ public class Game extends STSerializableObject {
   private boolean PlaceSpecialEvents() {
     boolean goodUniverse = true;
     int system;
-    Universe()[StarSystemId.Baratas.CastToInt()].SpecialEventType(SpecialEventType.DragonflyBaratas);
-    Universe()[StarSystemId.Melina.CastToInt()].SpecialEventType(SpecialEventType.DragonflyMelina);
-    Universe()[StarSystemId.Regulas.CastToInt()].SpecialEventType(SpecialEventType.DragonflyRegulas);
-    Universe()[StarSystemId.Zalkon.CastToInt()].SpecialEventType(SpecialEventType.DragonflyDestroyed);
-    Universe()[StarSystemId.Daled.CastToInt()].SpecialEventType(SpecialEventType.ExperimentStopped);
-    Universe()[StarSystemId.Gemulon.CastToInt()].SpecialEventType(SpecialEventType.GemulonRescued);
-    Universe()[StarSystemId.Japori.CastToInt()].SpecialEventType(SpecialEventType.JaporiDelivery);
-    Universe()[StarSystemId.Devidia.CastToInt()].SpecialEventType(SpecialEventType.JarekGetsOut);
-    Universe()[StarSystemId.Utopia.CastToInt()].SpecialEventType(SpecialEventType.MoonRetirement);
-    Universe()[StarSystemId.Nix.CastToInt()].SpecialEventType(SpecialEventType.ReactorDelivered);
-    Universe()[StarSystemId.Acamar.CastToInt()].SpecialEventType(SpecialEventType.SpaceMonsterKilled);
-    Universe()[StarSystemId.Kravat.CastToInt()].SpecialEventType(SpecialEventType.WildGetsOut);
-    Universe()[StarSystemId.Endor.CastToInt()].SpecialEventType(SpecialEventType.SculptureDelivered);
-    Universe()[StarSystemId.Galvon.CastToInt()].SpecialEventType(SpecialEventType.Princess);
-    Universe()[StarSystemId.Centauri.CastToInt()].SpecialEventType(SpecialEventType.PrincessCentauri);
-    Universe()[StarSystemId.Inthara.CastToInt()].SpecialEventType(SpecialEventType.PrincessInthara);
-    Universe()[StarSystemId.Qonos.CastToInt()].SpecialEventType(SpecialEventType.PrincessQonos);
+    _universe[StarSystemId.Baratas.CastToInt()].SpecialEventType(SpecialEventType.DragonflyBaratas);
+    _universe[StarSystemId.Melina.CastToInt()].SpecialEventType(SpecialEventType.DragonflyMelina);
+    _universe[StarSystemId.Regulas.CastToInt()].SpecialEventType(SpecialEventType.DragonflyRegulas);
+    _universe[StarSystemId.Zalkon.CastToInt()].SpecialEventType(SpecialEventType.DragonflyDestroyed);
+    _universe[StarSystemId.Daled.CastToInt()].SpecialEventType(SpecialEventType.ExperimentStopped);
+    _universe[StarSystemId.Gemulon.CastToInt()].SpecialEventType(SpecialEventType.GemulonRescued);
+    _universe[StarSystemId.Japori.CastToInt()].SpecialEventType(SpecialEventType.JaporiDelivery);
+    _universe[StarSystemId.Devidia.CastToInt()].SpecialEventType(SpecialEventType.JarekGetsOut);
+    _universe[StarSystemId.Utopia.CastToInt()].SpecialEventType(SpecialEventType.MoonRetirement);
+    _universe[StarSystemId.Nix.CastToInt()].SpecialEventType(SpecialEventType.ReactorDelivered);
+    _universe[StarSystemId.Acamar.CastToInt()].SpecialEventType(SpecialEventType.SpaceMonsterKilled);
+    _universe[StarSystemId.Kravat.CastToInt()].SpecialEventType(SpecialEventType.WildGetsOut);
+    _universe[StarSystemId.Endor.CastToInt()].SpecialEventType(SpecialEventType.SculptureDelivered);
+    _universe[StarSystemId.Galvon.CastToInt()].SpecialEventType(SpecialEventType.Princess);
+    _universe[StarSystemId.Centauri.CastToInt()].SpecialEventType(SpecialEventType.PrincessCentauri);
+    _universe[StarSystemId.Inthara.CastToInt()].SpecialEventType(SpecialEventType.PrincessInthara);
+    _universe[StarSystemId.Qonos.CastToInt()].SpecialEventType(SpecialEventType.PrincessQonos);
     // Assign a wormhole location endpoint for the Scarab.
-    for(system = 0; system < _wormholes.length && Universe()[_wormholes[system]].SpecialEventType() != SpecialEventType.NA; system++) {
+    for(system = 0; system < _wormholes.length && _universe[_wormholes[system]].SpecialEventType() != SpecialEventType.NA; system++) {
     }
     if(system < _wormholes.length) {
-      Universe()[_wormholes[system]].SpecialEventType(SpecialEventType.ScarabDestroyed);
+      _universe[_wormholes[system]].SpecialEventType(SpecialEventType.ScarabDestroyed);
     } else {
       goodUniverse = false;
     }
     // Find a Hi-Tech system without a special event.
     if(goodUniverse) {
-      for(system = 0; system < Universe().length && !(Universe()[system].SpecialEventType() == SpecialEventType.NA && Universe()[system].TechLevel() == TechLevel.HiTech); system++) {
+      for(system = 0; system < _universe.length && !(_universe[system].SpecialEventType() == SpecialEventType.NA && _universe[system].TechLevel() == TechLevel.HiTech); system++) {
       }
-      if(system < Universe().length) {
-        Universe()[system].SpecialEventType(SpecialEventType.ArtifactDelivery);
+      if(system < _universe.length) {
+        _universe[system].SpecialEventType(SpecialEventType.ArtifactDelivery);
       } else {
         goodUniverse = false;
       }
@@ -2891,9 +2891,9 @@ public class Game extends STSerializableObject {
       for(int i = 0; i < Consts.SpecialEvents.length; i++) {
         for(int j = 0; j < Consts.SpecialEvents[i].Occurrence(); j++) {
           do {
-            system = Functions.GetRandom(Universe().length);
-          } while(Universe()[system].SpecialEventType() != SpecialEventType.NA);
-          Universe()[system].SpecialEventType(Consts.SpecialEvents[i].Type());
+            system = Functions.GetRandom(_universe.length);
+          } while(_universe[system].SpecialEventType() != SpecialEventType.NA);
+          _universe[system].SpecialEventType(Consts.SpecialEvents[i].Type());
         }
       }
     }
@@ -2927,20 +2927,20 @@ public class Game extends STSerializableObject {
   }
 
   public void ResetVeryRareEncounters() {
-    VeryRareEncounters().clear();
-    VeryRareEncounters().add(VeryRareEncounter.MarieCeleste);
-    VeryRareEncounters().add(VeryRareEncounter.CaptainAhab);
-    VeryRareEncounters().add(VeryRareEncounter.CaptainConrad);
-    VeryRareEncounters().add(VeryRareEncounter.CaptainHuie);
-    VeryRareEncounters().add(VeryRareEncounter.BottleOld);
-    VeryRareEncounters().add(VeryRareEncounter.BottleGood);
+    _veryRareEncounters.clear();
+    _veryRareEncounters.add(VeryRareEncounter.MarieCeleste);
+    _veryRareEncounters.add(VeryRareEncounter.CaptainAhab);
+    _veryRareEncounters.add(VeryRareEncounter.CaptainConrad);
+    _veryRareEncounters.add(VeryRareEncounter.CaptainHuie);
+    _veryRareEncounters.add(VeryRareEncounter.BottleOld);
+    _veryRareEncounters.add(VeryRareEncounter.BottleGood);
   }
 
   public void SelectNextSystemWithinRange(boolean forward) {
     int[] dest = Destinations();
 
     if(dest.length > 0) {
-      int index = spacetrader.util.Util.BruteSeek(dest, WarpSystemId().CastToInt());
+      int index = Util.BruteSeek(dest, _warpSystemId.CastToInt());
 
       if(index < 0) {
         index = forward ? 0 : dest.length - 1;
@@ -2948,7 +2948,7 @@ public class Game extends STSerializableObject {
         index = (dest.length + index + (forward ? 1 : -1)) % dest.length;
       }
 
-      if(Functions.WormholeExists(_commander.CurrentSystem(), Universe()[dest[index]])) {
+      if(Functions.WormholeExists(_commander.CurrentSystem(), _universe[dest[index]])) {
         SelectedSystemId(_commander.getCurrentSystemId());
         TargetWormhole(true);
       } else {
@@ -3036,7 +3036,7 @@ public class Game extends STSerializableObject {
     if(getQuestStatusExperiment() == SpecialEvent.StatusExperimentPerformed && getFabricRipProbability() > 0
         && (getFabricRipProbability() == Consts.FabricRipInitialProbability || Functions.GetRandom(100) < getFabricRipProbability())) {
       FormAlert.Alert(AlertType.SpecialTimespaceFabricRip, getParentWindow());
-      SelectedSystemId(StarSystemId.FromInt(Functions.GetRandom(Universe().length)));
+      SelectedSystemId(StarSystemId.FromInt(Functions.GetRandom(_universe.length)));
     }
 
     boolean uneventful = true;
@@ -3147,8 +3147,8 @@ public class Game extends STSerializableObject {
 
   public int[] Destinations() {
     ArrayList<Integer> list = new ArrayList<Integer>();
-    for(int i = 0; i < Universe().length; i++) {
-      if(Universe()[i].DestOk()) {
+    for(int i = 0; i < _universe.length; i++) {
+      if(_universe[i].DestOk()) {
         list.add(i);
       }
     }
@@ -3493,26 +3493,26 @@ public class Game extends STSerializableObject {
     // This is then modified by adding 10% for every level of play less than Impossible
     boolean realNews = false;
     int minProbability = Consts.StoryProbability * curSys.TechLevel().CastToInt() + 10 * (5 - Difficulty().CastToInt());
-    for(int i = 0; i < Universe().length; i++) {
-      if(Universe()[i].DestOk() && Universe()[i] != curSys) {
+    for(int i = 0; i < _universe.length; i++) {
+      if(_universe[i].DestOk() && _universe[i] != curSys) {
         // Special stories that always get shown: moon, millionaire, shipyard
-        if(Universe()[i].SpecialEventType() != SpecialEventType.NA) {
-          if(Universe()[i].SpecialEventType() == SpecialEventType.Moon) {
-            items.add(Functions.StringVars(Strings.NewsMoonForSale, Universe()[i].Name()));
-          } else if(Universe()[i].SpecialEventType() == SpecialEventType.TribbleBuyer) {
-            items.add(Functions.StringVars(Strings.NewsTribbleBuyer, Universe()[i].Name()));
+        if(_universe[i].SpecialEventType() != SpecialEventType.NA) {
+          if(_universe[i].SpecialEventType() == SpecialEventType.Moon) {
+            items.add(Functions.StringVars(Strings.NewsMoonForSale, _universe[i].Name()));
+          } else if(_universe[i].SpecialEventType() == SpecialEventType.TribbleBuyer) {
+            items.add(Functions.StringVars(Strings.NewsTribbleBuyer, _universe[i].Name()));
           }
         }
-        if(Universe()[i].ShipyardId() != ShipyardId.NA) {
-          items.add(Functions.StringVars(Strings.NewsShipyard, Universe()[i].Name()));
+        if(_universe[i].ShipyardId() != ShipyardId.NA) {
+          items.add(Functions.StringVars(Strings.NewsShipyard, _universe[i].Name()));
         }
         // And not-always-shown stories
-        if(Universe()[i].SystemPressure() != SystemPressure.None
+        if(_universe[i].SystemPressure() != SystemPressure.None
             && Functions.GetRandom2(100) <= Consts.StoryProbability * curSys.TechLevel().CastToInt() + 10 * (5 - Difficulty().CastToInt())) {
           int index = Functions.GetRandom2(Strings.NewsPressureExternal.length);
           String baseStr = Strings.NewsPressureExternal[index];
-          String pressure = Strings.NewsPressureExternalPressures[Universe()[i].SystemPressure().CastToInt()];
-          items.add(Functions.StringVars(baseStr, pressure, Universe()[i].Name()));
+          String pressure = Strings.NewsPressureExternalPressures[_universe[i].SystemPressure().CastToInt()];
+          items.add(Functions.StringVars(baseStr, pressure, _universe[i].Name()));
           realNews = true;
         }
       }
@@ -3576,7 +3576,7 @@ public class Game extends STSerializableObject {
   }
 
   public StarSystem SelectedSystem() {
-    return (_selectedSystemId == StarSystemId.NA ? null : Universe()[_selectedSystemId.CastToInt()]);
+    return (_selectedSystemId == StarSystemId.NA ? null : _universe[_selectedSystemId.CastToInt()]);
   }
 
   public StarSystemId SelectedSystemId() {
@@ -3592,8 +3592,8 @@ public class Game extends STSerializableObject {
   public void setSelectedSystemByName(String value) {
     String nameToFind = value;
     boolean found = false;
-    for(int i = 0; i < Universe().length && !found; i++) {
-      String name = Universe()[i].Name();
+    for(int i = 0; i < _universe.length && !found; i++) {
+      String name = _universe[i].Name();
       if(name.toLowerCase().indexOf(nameToFind.toLowerCase()) >= 0) {
         SelectedSystemId(StarSystemId.FromInt(i));
         found = true;
@@ -3609,8 +3609,8 @@ public class Game extends STSerializableObject {
     return _targetWormhole;
   }
 
-  public void TargetWormhole(boolean value) {
-    _targetWormhole = value;
+  public void TargetWormhole(boolean b) {
+    _targetWormhole = b;
     if(_targetWormhole) {
       int wormIndex = Util.BruteSeek(_wormholes, SelectedSystemId().CastToInt());
       _warpSystemId = StarSystemId.FromInt(_wormholes[(wormIndex + 1) % _wormholes.length]);
@@ -3618,7 +3618,7 @@ public class Game extends STSerializableObject {
   }
 
   public StarSystem TrackedSystem() {
-    return (_trackedSystemId == StarSystemId.NA ? null : Universe()[_trackedSystemId.CastToInt()]);
+    return _trackedSystemId == StarSystemId.NA ? null : _universe[_trackedSystemId.CastToInt()];
   }
 
   public StarSystem[] Universe() {
@@ -3630,7 +3630,7 @@ public class Game extends STSerializableObject {
   }
 
   public StarSystem WarpSystem() {
-    return (_warpSystemId == StarSystemId.NA ? null : Universe()[_warpSystemId.CastToInt()]);
+    return _warpSystemId == StarSystemId.NA ? null : _universe[_warpSystemId.CastToInt()];
   }
 
   public StarSystemId WarpSystemId() {
