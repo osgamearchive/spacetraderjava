@@ -20,4 +20,9 @@ public enum ShieldType implements SpaceTraderEnum, EquipmentSubType {
   public static ShieldType fromId(int i) {
     return values()[i];
   }
+
+  @Override
+  public int CastToInt() {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
 }

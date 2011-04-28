@@ -13,8 +13,8 @@ import org.gts.bst.events.EncounterType;
 import org.gts.bst.events.NewsEvent;
 import org.gts.bst.events.SpecialEventType;
 import org.gts.bst.events.VeryRareEncounter;
-import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.ShipSize;
+import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.equip.EquipmentType;
 import org.gts.bst.ship.equip.GadgetType;
 import org.gts.bst.ship.equip.ShieldType;
@@ -120,11 +120,10 @@ public class Game extends STSerializableObject {
     CreateShips();
     CalculatePrices(_commander.CurrentSystem());
     ResetVeryRareEncounters();
-    Difficulty();
-    if(Difficulty().CastToInt() < Difficulty.Normal.CastToInt()) {
+    if(_difficulty.CastToInt() < Difficulty.Normal.CastToInt()) {
       _commander.CurrentSystem().SpecialEventType(SpecialEventType.Lottery);
     }
-    //TODO: The following code block is run if the commander name is left blank - you get $1M, easy encounters, cheat mode enabled, can super-warp...
+    //TODO: The following code block is run if the commander name is left blank - you get $1M, cheat mode on, easy encounters, can super-warp...
     {
       // TODO: JAF - DEBUG
       _commander.setCash(1000000);
@@ -910,7 +909,7 @@ public class Game extends STSerializableObject {
         int unitCost = 0;
         int maxAmount = (op == CargoSellOp.SellTrader) ? Math.min(qtyInHand, getOpponent().FreeCargoBays()) : qtyInHand;
         if(op == CargoSellOp.Dump) {
-          unitCost = 5 * (Difficulty().CastToInt() + 1);
+          unitCost = 5 * (_difficulty.CastToInt() + 1);
           maxAmount = Math.min(maxAmount, _commander.CashToSpend() / unitCost);
         }
         int price = unitPrice > 0 ? unitPrice : -unitCost;
@@ -929,7 +928,7 @@ public class Game extends STSerializableObject {
           _commander.PriceCargo()[tradeItem] = (_commander.PriceCargo()[tradeItem] * (qtyInHand - qty)) / qtyInHand;
           _commander.setCash(_commander.getCash() + totalPrice);
           if(op == CargoSellOp.Jettison) {
-            if(Functions.GetRandom(10) < Difficulty().CastToInt() + 1) {
+            if(Functions.GetRandom(10) < _difficulty.CastToInt() + 1) {
               if(_commander.getPoliceRecordScore() > Consts.PoliceRecordScoreDubious) {
                 _commander.setPoliceRecordScore(Consts.PoliceRecordScoreDubious);
               } else {
@@ -1078,7 +1077,7 @@ public class Game extends STSerializableObject {
         }
       } else if(!getInspected()
           && (_commander.getPoliceRecordScore() < Consts.PoliceRecordScoreClean
-          || (_commander.getPoliceRecordScore() < Consts.PoliceRecordScoreLawful && Functions.GetRandom(12 - Difficulty().CastToInt()) < 1)
+          || (_commander.getPoliceRecordScore() < Consts.PoliceRecordScoreLawful && Functions.GetRandom(12 - _difficulty.CastToInt()) < 1)
           || (_commander.getPoliceRecordScore() >= Consts.PoliceRecordScoreLawful && Functions.GetRandom(40) == 0))) {
         // If you're reputation is dubious, the police will inspect you
         // If your record is clean, the police will inspect you with a chance of 10% on Normal
@@ -1108,7 +1107,7 @@ public class Game extends STSerializableObject {
       }
     } else {
       // Check if it is time for an encounter
-      int encounter = Functions.GetRandom(44 - (2 * Difficulty().CastToInt()));
+      int encounter = Functions.GetRandom(44 - (2 * _difficulty.CastToInt()));
       int policeModifier = Math.max(1, 3 - PoliceRecord.GetPoliceRecordFromScore(_commander.getPoliceRecordScore()).Type().CastToInt());
       // encounters are half as likely if you're in a flea.
       if(_commander.getShip().Type() == ShipType.Flea) {
@@ -1126,7 +1125,7 @@ public class Game extends STSerializableObject {
         trader = true;
       } else if(_commander.getShip().WildOnBoard() && WarpSystem().Id() == StarSystemId.Kravat) {
         // if you're coming in to Kravat & you have Wild onboard, there'll be swarms o' cops.
-        police = Functions.GetRandom(100) < 100 / Math.max(2, Math.min(4, 5 - Difficulty().CastToInt()));
+        police = Functions.GetRandom(100) < 100 / Math.max(2, Math.min(4, 5 - _difficulty.CastToInt()));
       } else if(_commander.getShip().ArtifactOnBoard() && Functions.GetRandom(20) <= 3) {
         mantis = true;
       }
@@ -1272,7 +1271,7 @@ public class Game extends STSerializableObject {
       if(getEncounterType() == EncounterType.BottleGood) {
         // two points if you're on beginner-normal, one otherwise
         _commander.IncreaseRandomSkill();
-        if(Difficulty().CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt()) {
+        if(_difficulty.CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt()) {
           _commander.IncreaseRandomSkill();
         }
         FormAlert.Alert(AlertType.EncounterTonicConsumedGood, owner);
@@ -1354,8 +1353,8 @@ public class Game extends STSerializableObject {
       boolean escaped = false;
       // Determine whether someone gets away.
       if(getEncounterCmdrFleeing()
-          && (Difficulty() == Difficulty.Beginner || (Functions.GetRandom(7) + _commander.getShip().Pilot() / 3) * 2 >= Functions.GetRandom(getOpponent().Pilot())
-          * (2 + Difficulty().CastToInt()))) {
+          && (_difficulty == Difficulty.Beginner || (Functions.GetRandom(7) + _commander.getShip().Pilot() / 3) * 2 >= Functions.GetRandom(getOpponent().Pilot())
+          * (2 + _difficulty.CastToInt()))) {
         FormAlert.Alert(getEncounterCmdrHit() ? AlertType.EncounterEscapedHit : AlertType.EncounterEscaped, owner);
         escaped = true;
       } else if(getEncounterOppFleeing() && Functions.GetRandom(_commander.getShip().Pilot()) * 4 <= Functions.GetRandom(7 + getOpponent().Pilot() / 3) * 2) {
@@ -1403,7 +1402,7 @@ public class Game extends STSerializableObject {
     // Otherwise, Fighterskill attacker is pitted against pilotskill defender;
     // if defender is fleeing the attacker has a free shot, but the chance to hit is smaller
     // JAF - if the opponent is disabled and attacker has targeting system, they WILL be hit.
-    if(!(Difficulty() == Difficulty.Beginner && defender.CommandersShip() && fleeing) && (attacker.CommandersShip() && getOpponentDisabled()
+    if(!(_difficulty == Difficulty.Beginner && defender.CommandersShip() && fleeing) && (attacker.CommandersShip() && getOpponentDisabled()
         && attacker.HasGadget(GadgetType.TargetingSystem) || Functions.GetRandom(attacker.Fighter() + defender.getSize().CastToInt()) >= (fleeing ? 2 : 1)
         * Functions.GetRandom(5 + defender.Pilot() / 2))) {
       // If the defender is disabled, it only takes one shot to destroy it completely.
@@ -1428,7 +1427,7 @@ public class Game extends STSerializableObject {
             hit = true;
             // Reactor on board -- damage is boosted!
             if(defender.ReactorOnBoard()) {
-              damage *= (int)(1 + (Difficulty().CastToInt() + 1) * (Difficulty().CastToInt() < org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 0.25 : 0.33));
+              damage *= (int)(1 + (_difficulty.CastToInt() + 1) * (_difficulty.CastToInt() < org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 0.25 : 0.33));
             }
             // First, shields are depleted
             for(int i = 0; i < defender.Shields().length && defender.Shields()[i] != null && damage > 0; i++) {
@@ -1446,7 +1445,7 @@ public class Game extends STSerializableObject {
               // At least 2 shots on Normal level are needed to destroy the hull
               // (3 on Easy, 4 on Beginner, 1 on Hard or Impossible). For opponents, it is always 2.
               damage = Math.min(damage, defender.HullStrength() / (defender.CommandersShip() ? Math.max(1, Difficulty.Impossible.CastToInt()
-                  - Difficulty().CastToInt()) : 2));
+                  - _difficulty.CastToInt()) : 2));
               // If the hull is hardened, damage is halved.
               if(getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
                 damage /= 2;
@@ -1502,7 +1501,7 @@ public class Game extends STSerializableObject {
       // Remove the equipment we're trading.
       _commander.getShip().RemoveEquipment(equipType, equipSubType);
       // Add points to the appropriate skill - two points if beginner-normal, one otherwise.
-      _commander.Skills()[skill] = Math.min(Consts.MaxSkill, _commander.Skills()[skill] + (Difficulty().CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 2 : 1));
+      _commander.Skills()[skill] = Math.min(Consts.MaxSkill, _commander.Skills()[skill] + (_difficulty.CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 2 : 1));
       FormAlert.Alert(AlertType.SpecialTrainingCompleted, owner);
     }
   }
@@ -1530,7 +1529,7 @@ public class Game extends STSerializableObject {
 
   private void EncounterScoop(WinformPane owner) {
     // Chance 50% to pick something up on Normal level, 33% on Hard level, 25% on Impossible level, and 100% on Easy or Beginner.
-    if((Difficulty().CastToInt() < Difficulty.Normal.CastToInt() || Functions.GetRandom(Difficulty().CastToInt()) == 0)
+    if((_difficulty.CastToInt() < Difficulty.Normal.CastToInt() || Functions.GetRandom(_difficulty.CastToInt()) == 0)
         && getOpponent().FilledCargoBays() > 0) {
       // Changed this to actually pick a good that was in the opponent's cargo hold - JAF.
       int index = Functions.GetRandom(getOpponent().FilledCargoBays());
@@ -1753,8 +1752,8 @@ public class Game extends STSerializableObject {
       FormAlert.Alert(AlertType.EncounterPoliceBribeCant, owner);
     } else if(_commander.getShip().DetectableIllegalCargoOrPassengers() || FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes) {
       // Bribe depends on how easy it is to bribe the police and commander's current worth
-      int diffMod = 10 + 5 * (org.gts.bst.difficulty.Difficulty.Impossible.CastToInt() - Difficulty().CastToInt());
-      int passMod = _commander.getShip().IllegalSpecialCargo() ? (Difficulty().CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 2 : 3) : 1;
+      int diffMod = 10 + 5 * (org.gts.bst.difficulty.Difficulty.Impossible.CastToInt() - _difficulty.CastToInt());
+      int passMod = _commander.getShip().IllegalSpecialCargo() ? (_difficulty.CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 2 : 3) : 1;
       int bribe = Math.max(100, Math.min(10000, (int)Math.ceil((double)_commander.Worth() / WarpSystem().PoliticalSystem().BribeLevel() / diffMod / 100) * 100 * passMod));
       if(FormAlert.Alert(AlertType.EncounterPoliceBribe, owner, Functions.Multiples(bribe, Strings.MoneyUnit)) == DialogResult.Yes) {
         if(_commander.getCash() >= bribe) {
@@ -1778,7 +1777,7 @@ public class Game extends STSerializableObject {
       } else if(getEncounterType() == EncounterType.PoliceInspect || getEncounterType() == EncounterType.MarieCelestePolice) {
         int scoreMod = getEncounterType() == EncounterType.PoliceInspect ? Consts.ScoreFleePolice : Consts.ScoreAttackPolice;
         int scoreMin = getEncounterType() == EncounterType.PoliceInspect
-            ? Consts.PoliceRecordScoreDubious - (Difficulty().CastToInt() < org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 0 : 1) : Consts.PoliceRecordScoreCriminal;
+            ? Consts.PoliceRecordScoreDubious - (_difficulty.CastToInt() < org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 0 : 1) : Consts.PoliceRecordScoreCriminal;
         setEncounterType(EncounterType.PoliceAttack);
         _commander.setPoliceRecordScore(Math.min(_commander.getPoliceRecordScore() + scoreMod, scoreMin));
       }
@@ -1797,7 +1796,7 @@ public class Game extends STSerializableObject {
         if(_commander.getShip().DetectableIllegalCargo()) {
           _commander.getShip().RemoveIllegalGoods();
           int fine = (int)Math.max(100, Math.min(10000,
-              Math.ceil((double)_commander.Worth() / ((org.gts.bst.difficulty.Difficulty.Impossible.CastToInt() - Difficulty().CastToInt() + 2) * 10) / 50) * 50));
+              Math.ceil((double)_commander.Worth() / ((org.gts.bst.difficulty.Difficulty.Impossible.CastToInt() - _difficulty.CastToInt() + 2) * 10) / 50) * 50));
           int cashPayment = Math.min(_commander.getCash(), fine);
           _commander.setDebt(_commander.getDebt() + (fine - cashPayment));
           _commander.setCash(_commander.getCash() - cashPayment);
@@ -2040,7 +2039,7 @@ public class Game extends STSerializableObject {
 
   private void GenerateCrewMemberList() {
     int[] used = new int[_universe.length];
-    int d = Difficulty().CastToInt();
+    int d = _difficulty.CastToInt();
     // Zeethibal may be on Kravat
     used[StarSystemId.Kravat.CastToInt()] = 1;
     // special individuals:
@@ -2438,7 +2437,7 @@ public class Game extends STSerializableObject {
       _commander.setPoliceRecordScore(Math.max(Consts.PoliceRecordScoreClean, _commander.getPoliceRecordScore() - num / 3));
     } else if(_commander.getPoliceRecordScore() < Consts.PoliceRecordScoreDubious) {
       _commander.setPoliceRecordScore(Math.min(Consts.PoliceRecordScoreDubious, _commander.getPoliceRecordScore()
-          + num / (Difficulty().CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 1 : Difficulty().CastToInt())));
+          + num / (_difficulty.CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 1 : _difficulty.CastToInt())));
     }
     // The Space Monster's strength increases 5% per day until it is back to full strength.
     if(_spaceMonster.getHull() < _spaceMonster.HullStrength()) {
@@ -2828,7 +2827,7 @@ public class Game extends STSerializableObject {
 
   public void ShowNewspaper() {
     if(!getPaidForNewspaper()) {
-      int cost = Difficulty().CastToInt() + 1;
+      int cost = _difficulty.CastToInt() + 1;
       if(_commander.getCash() < cost) {
         FormAlert.Alert(AlertType.ArrivalIFNewspaper, getParentWindow(), Functions.Multiples(cost, "credit"));
       } else if(_options.getNewsAutoPay()
@@ -3001,7 +3000,7 @@ public class Game extends STSerializableObject {
   }
 
   public int CountDownStart() {
-    return Difficulty().CastToInt() + 3;
+    return _difficulty.CastToInt() + 3;
   }
 
   public int CurrentCosts() {
@@ -3325,6 +3324,7 @@ public class Game extends STSerializableObject {
     String head = heads[_commander.CurrentSystem().Id().CastToInt() % heads.length];
     return Functions.StringVars(head, _commander.CurrentSystem().Name());
   }
+
   public String NewspaperText() {
     StarSystem curSys = _commander.CurrentSystem();
     ArrayList<String> items = new ArrayList<String>();
@@ -3347,7 +3347,7 @@ public class Game extends STSerializableObject {
     // and now, finally, useful news (if any); base probability of a story showing up is (50 / MAXTECHLEVEL) * Current Tech Level
     // This is then modified by adding 10% for every level of play less than Impossible
     boolean realNews = false;
-    int minProbability = Consts.StoryProbability * curSys.TechLevel().CastToInt() + 10 * (5 - Difficulty().CastToInt());
+    int minProbability = Consts.StoryProbability * curSys.TechLevel().CastToInt() + 10 * (5 - _difficulty.CastToInt());
     for(int i = 0; i < _universe.length; i++) {
       if(_universe[i].DestOk() && _universe[i] != curSys) {
         // Special stories that always get shown: moon, millionaire, shipyard
@@ -3363,7 +3363,7 @@ public class Game extends STSerializableObject {
         }
         // And not-always-shown stories
         if(_universe[i].SystemPressure() != SystemPressure.None
-            && Functions.GetRandom2(100) <= Consts.StoryProbability * curSys.TechLevel().CastToInt() + 10 * (5 - Difficulty().CastToInt())) {
+            && Functions.GetRandom2(100) <= Consts.StoryProbability * curSys.TechLevel().CastToInt() + 10 * (5 - _difficulty.CastToInt())) {
           int index = Functions.GetRandom2(Strings.NewsPressureExternal.length);
           String baseStr = Strings.NewsPressureExternal[index];
           String pressure = Strings.NewsPressureExternalPressures[_universe[i].SystemPressure().CastToInt()];
@@ -3387,18 +3387,23 @@ public class Game extends STSerializableObject {
     }
     return Util.StringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(items));
   }
+
   public GameOptions Options() {
     return _options;
   }
+
   public int[] PriceCargoBuy() {
     return _priceCargoBuy;
   }
+
   public int[] PriceCargoSell() {
     return _priceCargoSell;
   }
+
   public Ship Scarab() {
     return _scarab;
   }
+
   public int Score() {
     int worth = _commander.Worth() < 1000000 ? _commander.Worth() : 1000000 + ((_commander.Worth() - 1000000) / 10);
     int daysMoon = 0;
@@ -3411,26 +3416,31 @@ public class Game extends STSerializableObject {
         modifier = 95;
         break;
       case BoughtMoon:
-        daysMoon = Math.max(0, (Difficulty().CastToInt() + 1) * 100 - _commander.getDays());
+        daysMoon = Math.max(0, (_difficulty.CastToInt() + 1) * 100 - _commander.getDays());
         modifier = 100;
         break;
     }
-    return (Difficulty().CastToInt() + 1) * modifier * (daysMoon * 1000 + worth) / 250000;
+    return (_difficulty.CastToInt() + 1) * modifier * (daysMoon * 1000 + worth) / 250000;
   }
+
   public Ship Scorpion() {
     return _scorpion;
   }
+
   public StarSystem SelectedSystem() {
     return (_selectedSystemId == StarSystemId.NA ? null : _universe[_selectedSystemId.CastToInt()]);
   }
+
   public StarSystemId SelectedSystemId() {
     return _selectedSystemId;
   }
+
   public void SelectedSystemId(StarSystemId value) {
     _selectedSystemId = value;
     _warpSystemId = value;
     _targetWormhole = false;
   }
+
   public void setSelectedSystemByName(String value) {
     String nameToFind = value;
     boolean found = false;
@@ -3442,12 +3452,15 @@ public class Game extends STSerializableObject {
       }
     }
   }
+
   public Ship SpaceMonster() {
     return _spaceMonster;
   }
+
   public boolean TargetWormhole() {
     return _targetWormhole;
   }
+
   public void TargetWormhole(boolean b) {
     _targetWormhole = b;
     if(_targetWormhole) {
@@ -3455,24 +3468,31 @@ public class Game extends STSerializableObject {
       _warpSystemId = StarSystemId.FromInt(_wormholes[(wormIndex + 1) % _wormholes.length]);
     }
   }
+
   public StarSystem TrackedSystem() {
     return _trackedSystemId == StarSystemId.NA ? null : _universe[_trackedSystemId.CastToInt()];
   }
+
   public StarSystem[] Universe() {
     return _universe;
   }
+
   public ArrayList<VeryRareEncounter> VeryRareEncounters() {
     return _veryRareEncounters;
   }
+
   public StarSystem WarpSystem() {
     return _warpSystemId == StarSystemId.NA ? null : _universe[_warpSystemId.CastToInt()];
   }
+
   public StarSystemId WarpSystemId() {
     return _warpSystemId;
   }
+
   public int WormholeCosts() {
     return Functions.WormholeExists(_commander.CurrentSystem(), WarpSystem()) ? Consts.WormDist * _commander.getShip().getFuelCost() : 0;
   }
+
   public int[] Wormholes() {
     return _wormholes;
   }

@@ -1,8 +1,9 @@
 package org.gts.bst.ship.equip;
+import spacetrader.enums.SpaceTraderEnum;
 import spacetrader.enums.TechLevel;
 
 
-public enum WeaponType {
+public enum WeaponType implements SpaceTraderEnum, EquipmentSubType {
   PulseLaser(TechLevel.Industrial, false, 50, 15, 2000),
   BeamLaser(TechLevel.PostIndustrial, false, 35, 25, 12500),
   MilitaryLaser(TechLevel.HiTech, false, 15, 35, 35000),
@@ -27,5 +28,15 @@ public enum WeaponType {
 
   public static WeaponType fromId(int i) {
     return values()[i];
+  }
+
+  @Override
+  public int CastToInt() {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
+
+  @Override
+  public int asInteger() {
+    throw new UnsupportedOperationException("Not supported yet.");
   }
 }
