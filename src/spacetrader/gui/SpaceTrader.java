@@ -37,7 +37,7 @@ import jwinforms.PictureBox;
 import jwinforms.ResourceManager;
 import jwinforms.SaveFileDialog;
 import jwinforms.Shortcut;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.SizeF;
 import jwinforms.SolidBrush;
 import jwinforms.StatusBar;
@@ -821,7 +821,7 @@ public class SpaceTrader extends WinformWindow {
 		picGalacticChart.setBackColor(Color.white);
 		picGalacticChart.setLocation(new Point(8, 16));
 		picGalacticChart.setName("picGalacticChart");
-		picGalacticChart.setSize(new Size(160, 116));
+		picGalacticChart.setSize(new FormSize(160, 116));
 		picGalacticChart.setTabIndex(0);
 		picGalacticChart.setTabStop(false);
 		picGalacticChart.setPaint(new EventHandler<Object, PaintEventArgs>()
@@ -846,7 +846,7 @@ public class SpaceTrader extends WinformWindow {
 		picShortRangeChart.setBackColor(Color.white);
 		picShortRangeChart.setLocation(new Point(8, 16));
 		picShortRangeChart.setName("picShortRangeChart");
-		picShortRangeChart.setSize(new Size(160, 145));
+		picShortRangeChart.setSize(new FormSize(160, 145));
 		picShortRangeChart.setTabIndex(1);
 		picShortRangeChart.setTabStop(false);
 		picShortRangeChart.setPaint(new EventHandler<Object, PaintEventArgs>()
@@ -872,7 +872,7 @@ public class SpaceTrader extends WinformWindow {
 		statusBar.setName("statusBar");
 		statusBar.Panels.addAll(Arrays.asList(new StatusBarPanel[] { statusBarPanelCash, statusBarPanelBays, statusBarPanelCosts, statusBarPanelExtra }));
 		statusBar.ShowPanels = true;
-		statusBar.setSize(new Size(768, 24));
+		statusBar.setSize(new FormSize(768, 24));
 		statusBar.SizingGrip = false;
 		statusBar.setTabIndex(2);
 		statusBar.PanelClick = new EventHandler<Object, StatusBarPanelClickEventArgs>()
@@ -916,7 +916,7 @@ public class SpaceTrader extends WinformWindow {
 		boxShortRangeChart.Controls.add(picShortRangeChart);
 		boxShortRangeChart.setLocation(new Point(364, 306));
 		boxShortRangeChart.setName("boxShortRangeChart");
-		boxShortRangeChart.setSize(new Size(176, 168));
+		boxShortRangeChart.setSize(new FormSize(176, 168));
 		boxShortRangeChart.setTabIndex(6);
 		boxShortRangeChart.setTabStop(false);
 		boxShortRangeChart.setText("Short-Range Chart");
@@ -932,7 +932,7 @@ public class SpaceTrader extends WinformWindow {
 		boxGalacticChart.Controls.add(picGalacticChart);
 		boxGalacticChart.setLocation(new Point(180, 306));
 		boxGalacticChart.setName("boxGalacticChart");
-		boxGalacticChart.setSize(new Size(176, 168));
+		boxGalacticChart.setSize(new FormSize(176, 168));
 		boxGalacticChart.setTabIndex(5);
 		boxGalacticChart.setTabStop(false);
 		boxGalacticChart.setText("Galactic Chart");
@@ -941,7 +941,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblWormhole.setLocation(new Point(8, 148));
 		lblWormhole.setName("lblWormhole");
-		lblWormhole.setSize(new Size(72, 13));
+		lblWormhole.setSize(new FormSize(72, 13));
 		lblWormhole.setTabIndex(29);
 		lblWormhole.setText("Tarchannen");
 		//
@@ -949,7 +949,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblWormholeLabel.setLocation(new Point(8, 135));
 		lblWormholeLabel.setName("lblWormholeLabel");
-		lblWormholeLabel.setSize(new Size(72, 13));
+		lblWormholeLabel.setSize(new FormSize(72, 13));
 		lblWormholeLabel.setTabIndex(28);
 		lblWormholeLabel.setText("Wormhole to");
 		//
@@ -958,7 +958,7 @@ public class SpaceTrader extends WinformWindow {
 		btnJump.setFlatStyle(FlatStyle.Flat);
 		btnJump.setLocation(new Point(81, 138));
 		btnJump.setName("btnJump");
-		btnJump.setSize(new Size(42, 22));
+		btnJump.setSize(new FormSize(42, 22));
 		btnJump.setTabIndex(55);
 		btnJump.setText("Jump");
 		btnJump.setClick(new EventHandler<Object, EventArgs>()
@@ -975,7 +975,7 @@ public class SpaceTrader extends WinformWindow {
 		btnFind.setFlatStyle(FlatStyle.Flat);
 		btnFind.setLocation(new Point(132, 138));
 		btnFind.setName("btnFind");
-		btnFind.setSize(new Size(36, 22));
+		btnFind.setSize(new FormSize(36, 22));
 		btnFind.setTabIndex(56);
 		btnFind.setText("Find");
 		btnFind.setClick(new EventHandler<Object, EventArgs>()
@@ -1013,7 +1013,7 @@ public class SpaceTrader extends WinformWindow {
 		boxTargetSystem.Controls.add(lblTargetNameLabel);
 		boxTargetSystem.setLocation(new Point(548, 306));
 		boxTargetSystem.setName("boxTargetSystem");
-		boxTargetSystem.setSize(new Size(216, 168));
+		boxTargetSystem.setSize(new FormSize(216, 168));
 		boxTargetSystem.setTabIndex(7);
 		boxTargetSystem.setTabStop(false);
 		boxTargetSystem.setText("Target System");
@@ -1023,7 +1023,7 @@ public class SpaceTrader extends WinformWindow {
 		btnTrack.setFlatStyle(FlatStyle.Flat);
 		btnTrack.setLocation(new Point(160, 140));
 		btnTrack.setName("btnTrack");
-		btnTrack.setSize(new Size(44, 22));
+		btnTrack.setSize(new FormSize(44, 22));
 		btnTrack.setTabIndex(60);
 		btnTrack.setText("Track");
 		btnTrack.setVisible(false);
@@ -1041,7 +1041,7 @@ public class SpaceTrader extends WinformWindow {
 		btnNextSystem.setFlatStyle(FlatStyle.Flat);
 		btnNextSystem.setLocation(new Point(186, 16));
 		btnNextSystem.setName("btnNextSystem");
-		btnNextSystem.setSize(new Size(18, 18));
+		btnNextSystem.setSize(new FormSize(18, 18));
 		btnNextSystem.setTabIndex(58);
 		btnNextSystem.setText(">");
 		btnNextSystem.setClick(new EventHandler<Object, EventArgs>()
@@ -1058,7 +1058,7 @@ public class SpaceTrader extends WinformWindow {
 		btnPrevSystem.setFlatStyle(FlatStyle.Flat);
 		btnPrevSystem.setLocation(new Point(160, 16));
 		btnPrevSystem.setName("btnPrevSystem");
-		btnPrevSystem.setSize(new Size(18, 18));
+		btnPrevSystem.setSize(new FormSize(18, 18));
 		btnPrevSystem.setTabIndex(57);
 		btnPrevSystem.setText("<");
 		btnPrevSystem.setClick(new EventHandler<Object, EventArgs>()
@@ -1074,7 +1074,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetOutOfRange.setLocation(new Point(8, 144));
 		lblTargetOutOfRange.setName("lblTargetOutOfRange");
-		lblTargetOutOfRange.setSize(new Size(144, 13));
+		lblTargetOutOfRange.setSize(new FormSize(144, 13));
 		lblTargetOutOfRange.setTabIndex(17);
 		lblTargetOutOfRange.setText("This system is out of range.");
 		//
@@ -1083,7 +1083,7 @@ public class SpaceTrader extends WinformWindow {
 		btnWarp.setFlatStyle(FlatStyle.Flat);
 		btnWarp.setLocation(new Point(160, 98));
 		btnWarp.setName("btnWarp");
-		btnWarp.setSize(new Size(44, 44));
+		btnWarp.setSize(new FormSize(44, 44));
 		btnWarp.setTabIndex(59);
 		btnWarp.setText("Warp");
 		btnWarp.setClick(new EventHandler<Object, EventArgs>()
@@ -1099,7 +1099,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPolSys.setLocation(new Point(88, 64));
 		lblTargetPolSys.setName("lblTargetPolSys");
-		lblTargetPolSys.setSize(new Size(91, 13));
+		lblTargetPolSys.setSize(new FormSize(91, 13));
 		lblTargetPolSys.setTabIndex(15);
 		lblTargetPolSys.setText("Communist State");
 		//
@@ -1107,7 +1107,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetSize.setLocation(new Point(88, 32));
 		lblTargetSize.setName("lblTargetSize");
-		lblTargetSize.setSize(new Size(45, 13));
+		lblTargetSize.setSize(new FormSize(45, 13));
 		lblTargetSize.setTabIndex(14);
 		lblTargetSize.setText("Medium");
 		//
@@ -1115,7 +1115,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetTech.setLocation(new Point(88, 48));
 		lblTargetTech.setName("lblTargetTech");
-		lblTargetTech.setSize(new Size(82, 13));
+		lblTargetTech.setSize(new FormSize(82, 13));
 		lblTargetTech.setTabIndex(13);
 		lblTargetTech.setText("Pre-Agricultural");
 		//
@@ -1123,7 +1123,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDistance.setLocation(new Point(88, 128));
 		lblTargetDistance.setName("lblTargetDistance");
-		lblTargetDistance.setSize(new Size(66, 13));
+		lblTargetDistance.setSize(new FormSize(66, 13));
 		lblTargetDistance.setTabIndex(12);
 		lblTargetDistance.setText("888 parsecs");
 		//
@@ -1131,7 +1131,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPirates.setLocation(new Point(88, 112));
 		lblTargetPirates.setName("lblTargetPirates");
-		lblTargetPirates.setSize(new Size(53, 13));
+		lblTargetPirates.setSize(new FormSize(53, 13));
 		lblTargetPirates.setTabIndex(11);
 		lblTargetPirates.setText("Abundant");
 		//
@@ -1139,7 +1139,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPolice.setLocation(new Point(88, 96));
 		lblTargetPolice.setName("lblTargetPolice");
-		lblTargetPolice.setSize(new Size(53, 13));
+		lblTargetPolice.setSize(new FormSize(53, 13));
 		lblTargetPolice.setTabIndex(10);
 		lblTargetPolice.setText("Abundant");
 		//
@@ -1147,7 +1147,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetResource.setLocation(new Point(88, 80));
 		lblTargetResource.setName("lblTargetResource");
-		lblTargetResource.setSize(new Size(105, 13));
+		lblTargetResource.setSize(new FormSize(105, 13));
 		lblTargetResource.setTabIndex(9);
 		lblTargetResource.setText("Sweetwater Oceans");
 		//
@@ -1157,7 +1157,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetDistanceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetDistanceLabel.setLocation(new Point(8, 128));
 		lblTargetDistanceLabel.setName("lblTargetDistanceLabel");
-		lblTargetDistanceLabel.setSize(new Size(53, 16));
+		lblTargetDistanceLabel.setSize(new FormSize(53, 16));
 		lblTargetDistanceLabel.setTabIndex(8);
 		lblTargetDistanceLabel.setText("Distance:");
 		//
@@ -1167,7 +1167,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetPiratesLabel.setLocation(new Point(8, 112));
 		lblTargetPiratesLabel.setName("lblTargetPiratesLabel");
-		lblTargetPiratesLabel.setSize(new Size(44, 16));
+		lblTargetPiratesLabel.setSize(new FormSize(44, 16));
 		lblTargetPiratesLabel.setTabIndex(7);
 		lblTargetPiratesLabel.setText("Pirates:");
 		//
@@ -1177,7 +1177,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetPoliceLabel.setLocation(new Point(8, 96));
 		lblTargetPoliceLabel.setName("lblTargetPoliceLabel");
-		lblTargetPoliceLabel.setSize(new Size(40, 16));
+		lblTargetPoliceLabel.setSize(new FormSize(40, 16));
 		lblTargetPoliceLabel.setTabIndex(6);
 		lblTargetPoliceLabel.setText("Police:");
 		//
@@ -1187,7 +1187,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetResourceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetResourceLabel.setLocation(new Point(8, 80));
 		lblTargetResourceLabel.setName("lblTargetResourceLabel");
-		lblTargetResourceLabel.setSize(new Size(58, 16));
+		lblTargetResourceLabel.setSize(new FormSize(58, 16));
 		lblTargetResourceLabel.setTabIndex(5);
 		lblTargetResourceLabel.setText("Resource:");
 		//
@@ -1197,7 +1197,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetGovtLabel.setLocation(new Point(8, 64));
 		lblTargetGovtLabel.setName("lblTargetGovtLabel");
-		lblTargetGovtLabel.setSize(new Size(72, 16));
+		lblTargetGovtLabel.setSize(new FormSize(72, 16));
 		lblTargetGovtLabel.setTabIndex(4);
 		lblTargetGovtLabel.setText("Government:");
 		//
@@ -1207,7 +1207,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetTechLabel.setLocation(new Point(8, 48));
 		lblTargetTechLabel.setName("lblTargetTechLabel");
-		lblTargetTechLabel.setSize(new Size(65, 16));
+		lblTargetTechLabel.setSize(new FormSize(65, 16));
 		lblTargetTechLabel.setTabIndex(3);
 		lblTargetTechLabel.setText("Tech Level:");
 		//
@@ -1217,7 +1217,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetSizeLabel.setLocation(new Point(8, 32));
 		lblTargetSizeLabel.setName("lblTargetSizeLabel");
-		lblTargetSizeLabel.setSize(new Size(31, 16));
+		lblTargetSizeLabel.setSize(new FormSize(31, 16));
 		lblTargetSizeLabel.setTabIndex(2);
 		lblTargetSizeLabel.setText("Size:");
 		//
@@ -1225,7 +1225,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetName.setLocation(new Point(88, 16));
 		lblTargetName.setName("lblTargetName");
-		lblTargetName.setSize(new Size(65, 13));
+		lblTargetName.setSize(new FormSize(65, 13));
 		lblTargetName.setTabIndex(1);
 		lblTargetName.setText("Tarchannen");
 		//
@@ -1235,7 +1235,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetNameLabel.setLocation(new Point(8, 16));
 		lblTargetNameLabel.setName("lblTargetNameLabel");
-		lblTargetNameLabel.setSize(new Size(39, 16));
+		lblTargetNameLabel.setSize(new FormSize(39, 16));
 		lblTargetNameLabel.setTabIndex(0);
 		lblTargetNameLabel.setText("Name:");
 		//
@@ -1354,7 +1354,7 @@ public class SpaceTrader extends WinformWindow {
 		boxCargo.Controls.add(lblTradeCmdty7);
 		boxCargo.setLocation(new Point(252, 2));
 		boxCargo.setName("boxCargo");
-		boxCargo.setSize(new Size(512, 300));
+		boxCargo.setSize(new FormSize(512, 300));
 		boxCargo.setTabIndex(8);
 		boxCargo.setTabStop(false);
 		boxCargo.setText("Cargo");
@@ -1364,7 +1364,7 @@ public class SpaceTrader extends WinformWindow {
 		picCargoLine3.setBackColor(Color.darkGray);
 		picCargoLine3.setLocation(new Point(8, 52));
 		picCargoLine3.setName("picCargoLine3");
-		picCargoLine3.setSize(new Size(496, 1));
+		picCargoLine3.setSize(new FormSize(496, 1));
 		picCargoLine3.setTabIndex(131);
 		picCargoLine3.setTabStop(false);
 		//
@@ -1373,7 +1373,7 @@ public class SpaceTrader extends WinformWindow {
 		picCargoLine2.setBackColor(Color.darkGray);
 		picCargoLine2.setLocation(new Point(352, 32));
 		picCargoLine2.setName("picCargoLine2");
-		picCargoLine2.setSize(new Size(1, 262));
+		picCargoLine2.setSize(new FormSize(1, 262));
 		picCargoLine2.setTabIndex(130);
 		picCargoLine2.setTabStop(false);
 		//
@@ -1382,7 +1382,7 @@ public class SpaceTrader extends WinformWindow {
 		picCargoLine0.setBackColor(Color.darkGray);
 		picCargoLine0.setLocation(new Point(71, 32));
 		picCargoLine0.setName("picCargoLine0");
-		picCargoLine0.setSize(new Size(1, 262));
+		picCargoLine0.setSize(new FormSize(1, 262));
 		picCargoLine0.setTabIndex(129);
 		picCargoLine0.setTabStop(false);
 		//
@@ -1391,7 +1391,7 @@ public class SpaceTrader extends WinformWindow {
 		picCargoLine1.setBackColor(Color.darkGray);
 		picCargoLine1.setLocation(new Point(218, 32));
 		picCargoLine1.setName("picCargoLine1");
-		picCargoLine1.setSize(new Size(1, 262));
+		picCargoLine1.setSize(new FormSize(1, 262));
 		picCargoLine1.setTabIndex(128);
 		picCargoLine1.setTabStop(false);
 		//
@@ -1399,7 +1399,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct9.setLocation(new Point(466, 276));
 		lblTargetPct9.setName("lblTargetPct9");
-		lblTargetPct9.setSize(new Size(37, 13));
+		lblTargetPct9.setSize(new FormSize(37, 13));
 		lblTargetPct9.setTabIndex(127);
 		lblTargetPct9.setText("--------");
 		lblTargetPct9.TextAlign = ContentAlignment.TopRight;
@@ -1408,7 +1408,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDiff9.setLocation(new Point(410, 276));
 		lblTargetDiff9.setName("lblTargetDiff9");
-		lblTargetDiff9.setSize(new Size(52, 13));
+		lblTargetDiff9.setSize(new FormSize(52, 13));
 		lblTargetDiff9.setTabIndex(126);
 		lblTargetDiff9.setText("------------");
 		lblTargetDiff9.TextAlign = ContentAlignment.TopRight;
@@ -1417,7 +1417,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice9.setLocation(new Point(358, 276));
 		lblTargetPrice9.setName("lblTargetPrice9");
-		lblTargetPrice9.setSize(new Size(48, 13));
+		lblTargetPrice9.setSize(new FormSize(48, 13));
 		lblTargetPrice9.setTabIndex(125);
 		lblTargetPrice9.setText("-----------");
 		lblTargetPrice9.TextAlign = ContentAlignment.TopRight;
@@ -1427,7 +1427,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax9.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax9.setLocation(new Point(262, 272));
 		btnBuyMax9.setName("btnBuyMax9");
-		btnBuyMax9.setSize(new Size(36, 22));
+		btnBuyMax9.setSize(new FormSize(36, 22));
 		btnBuyMax9.setTabIndex(51);
 		btnBuyMax9.setText("Max");
 		btnBuyMax9.setClick(new EventHandler<Object, EventArgs>()
@@ -1445,7 +1445,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty9.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty9.setLocation(new Point(227, 272));
 		btnBuyQty9.setName("btnBuyQty9");
-		btnBuyQty9.setSize(new Size(28, 22));
+		btnBuyQty9.setSize(new FormSize(28, 22));
 		btnBuyQty9.setTabIndex(50);
 		btnBuyQty9.setText("88");
 		btnBuyQty9.setClick(new EventHandler<Object, EventArgs>()
@@ -1461,7 +1461,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice9.setLocation(new Point(302, 276));
 		lblBuyPrice9.setName("lblBuyPrice9");
-		lblBuyPrice9.setSize(new Size(48, 13));
+		lblBuyPrice9.setSize(new FormSize(48, 13));
 		lblBuyPrice9.setTabIndex(122);
 		lblBuyPrice9.setText("not sold");
 		lblBuyPrice9.TextAlign = ContentAlignment.TopRight;
@@ -1471,7 +1471,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll9.setFlatStyle(FlatStyle.Flat);
 		btnSellAll9.setLocation(new Point(115, 272));
 		btnSellAll9.setName("btnSellAll9");
-		btnSellAll9.setSize(new Size(44, 22));
+		btnSellAll9.setSize(new FormSize(44, 22));
 		btnSellAll9.setTabIndex(49);
 		btnSellAll9.setText("Dump");
 		btnSellAll9.setClick(new EventHandler<Object, EventArgs>()
@@ -1488,7 +1488,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty9.setFlatStyle(FlatStyle.Flat);
 		btnSellQty9.setLocation(new Point(80, 272));
 		btnSellQty9.setName("btnSellQty9");
-		btnSellQty9.setSize(new Size(28, 22));
+		btnSellQty9.setSize(new FormSize(28, 22));
 		btnSellQty9.setTabIndex(48);
 		btnSellQty9.setText("88");
 		btnSellQty9.setClick(new EventHandler<Object, EventArgs>()
@@ -1504,7 +1504,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice9.setLocation(new Point(163, 276));
 		lblSellPrice9.setName("lblSellPrice9");
-		lblSellPrice9.setSize(new Size(48, 13));
+		lblSellPrice9.setSize(new FormSize(48, 13));
 		lblSellPrice9.setTabIndex(119);
 		lblSellPrice9.setText("no trade");
 		lblSellPrice9.TextAlign = ContentAlignment.TopRight;
@@ -1513,7 +1513,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct8.setLocation(new Point(466, 252));
 		lblTargetPct8.setName("lblTargetPct8");
-		lblTargetPct8.setSize(new Size(37, 13));
+		lblTargetPct8.setSize(new FormSize(37, 13));
 		lblTargetPct8.setTabIndex(118);
 		lblTargetPct8.setText("-888%");
 		lblTargetPct8.TextAlign = ContentAlignment.TopRight;
@@ -1522,7 +1522,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDiff8.setLocation(new Point(410, 252));
 		lblTargetDiff8.setName("lblTargetDiff8");
-		lblTargetDiff8.setSize(new Size(52, 13));
+		lblTargetDiff8.setSize(new FormSize(52, 13));
 		lblTargetDiff8.setTabIndex(117);
 		lblTargetDiff8.setText("-8,888 cr.");
 		lblTargetDiff8.TextAlign = ContentAlignment.TopRight;
@@ -1531,7 +1531,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice8.setLocation(new Point(358, 252));
 		lblTargetPrice8.setName("lblTargetPrice8");
-		lblTargetPrice8.setSize(new Size(48, 13));
+		lblTargetPrice8.setSize(new FormSize(48, 13));
 		lblTargetPrice8.setTabIndex(116);
 		lblTargetPrice8.setText("8,888 cr.");
 		lblTargetPrice8.TextAlign = ContentAlignment.TopRight;
@@ -1541,7 +1541,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax8.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax8.setLocation(new Point(262, 248));
 		btnBuyMax8.setName("btnBuyMax8");
-		btnBuyMax8.setSize(new Size(36, 22));
+		btnBuyMax8.setSize(new FormSize(36, 22));
 		btnBuyMax8.setTabIndex(47);
 		btnBuyMax8.setText("Max");
 		btnBuyMax8.setClick(new EventHandler<Object, EventArgs>()
@@ -1558,7 +1558,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty8.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty8.setLocation(new Point(227, 248));
 		btnBuyQty8.setName("btnBuyQty8");
-		btnBuyQty8.setSize(new Size(28, 22));
+		btnBuyQty8.setSize(new FormSize(28, 22));
 		btnBuyQty8.setTabIndex(46);
 		btnBuyQty8.setText("88");
 		btnBuyQty8.setClick(new EventHandler<Object, EventArgs>()
@@ -1574,7 +1574,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice8.setLocation(new Point(302, 252));
 		lblBuyPrice8.setName("lblBuyPrice8");
-		lblBuyPrice8.setSize(new Size(48, 13));
+		lblBuyPrice8.setSize(new FormSize(48, 13));
 		lblBuyPrice8.setTabIndex(113);
 		lblBuyPrice8.setText("8,888 cr.");
 		lblBuyPrice8.TextAlign = ContentAlignment.TopRight;
@@ -1584,7 +1584,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll8.setFlatStyle(FlatStyle.Flat);
 		btnSellAll8.setLocation(new Point(115, 248));
 		btnSellAll8.setName("btnSellAll8");
-		btnSellAll8.setSize(new Size(44, 22));
+		btnSellAll8.setSize(new FormSize(44, 22));
 		btnSellAll8.setTabIndex(45);
 		btnSellAll8.setText("All");
 		btnSellAll8.setClick(new EventHandler<Object, EventArgs>()
@@ -1601,7 +1601,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty8.setFlatStyle(FlatStyle.Flat);
 		btnSellQty8.setLocation(new Point(80, 248));
 		btnSellQty8.setName("btnSellQty8");
-		btnSellQty8.setSize(new Size(28, 22));
+		btnSellQty8.setSize(new FormSize(28, 22));
 		btnSellQty8.setTabIndex(44);
 		btnSellQty8.setText("88");
 		btnSellQty8.setClick(new EventHandler<Object, EventArgs>()
@@ -1617,7 +1617,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice8.setLocation(new Point(163, 252));
 		lblSellPrice8.setName("lblSellPrice8");
-		lblSellPrice8.setSize(new Size(48, 13));
+		lblSellPrice8.setSize(new FormSize(48, 13));
 		lblSellPrice8.setTabIndex(110);
 		lblSellPrice8.setText("8,888 cr.");
 		lblSellPrice8.TextAlign = ContentAlignment.TopRight;
@@ -1626,7 +1626,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct7.setLocation(new Point(466, 228));
 		lblTargetPct7.setName("lblTargetPct7");
-		lblTargetPct7.setSize(new Size(37, 13));
+		lblTargetPct7.setSize(new FormSize(37, 13));
 		lblTargetPct7.setTabIndex(109);
 		lblTargetPct7.setText("-888%");
 		lblTargetPct7.TextAlign = ContentAlignment.TopRight;
@@ -1636,7 +1636,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetDiff7.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetDiff7.setLocation(new Point(410, 228));
 		lblTargetDiff7.setName("lblTargetDiff7");
-		lblTargetDiff7.setSize(new Size(52, 13));
+		lblTargetDiff7.setSize(new FormSize(52, 13));
 		lblTargetDiff7.setTabIndex(108);
 		lblTargetDiff7.setText("-8,888 cr.");
 		lblTargetDiff7.TextAlign = ContentAlignment.TopRight;
@@ -1645,7 +1645,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice7.setLocation(new Point(358, 228));
 		lblTargetPrice7.setName("lblTargetPrice7");
-		lblTargetPrice7.setSize(new Size(48, 13));
+		lblTargetPrice7.setSize(new FormSize(48, 13));
 		lblTargetPrice7.setTabIndex(107);
 		lblTargetPrice7.setText("8,888 cr.");
 		lblTargetPrice7.TextAlign = ContentAlignment.TopRight;
@@ -1655,7 +1655,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax7.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax7.setLocation(new Point(262, 224));
 		btnBuyMax7.setName("btnBuyMax7");
-		btnBuyMax7.setSize(new Size(36, 22));
+		btnBuyMax7.setSize(new FormSize(36, 22));
 		btnBuyMax7.setTabIndex(43);
 		btnBuyMax7.setText("Max");
 		btnBuyMax7.setClick(new EventHandler<Object, EventArgs>()
@@ -1672,7 +1672,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty7.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty7.setLocation(new Point(227, 224));
 		btnBuyQty7.setName("btnBuyQty7");
-		btnBuyQty7.setSize(new Size(28, 22));
+		btnBuyQty7.setSize(new FormSize(28, 22));
 		btnBuyQty7.setTabIndex(42);
 		btnBuyQty7.setText("88");
 		btnBuyQty7.setClick(new EventHandler<Object, EventArgs>()
@@ -1688,7 +1688,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice7.setLocation(new Point(302, 228));
 		lblBuyPrice7.setName("lblBuyPrice7");
-		lblBuyPrice7.setSize(new Size(48, 13));
+		lblBuyPrice7.setSize(new FormSize(48, 13));
 		lblBuyPrice7.setTabIndex(104);
 		lblBuyPrice7.setText("8,888 cr.");
 		lblBuyPrice7.TextAlign = ContentAlignment.TopRight;
@@ -1698,7 +1698,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll7.setFlatStyle(FlatStyle.Flat);
 		btnSellAll7.setLocation(new Point(115, 224));
 		btnSellAll7.setName("btnSellAll7");
-		btnSellAll7.setSize(new Size(44, 22));
+		btnSellAll7.setSize(new FormSize(44, 22));
 		btnSellAll7.setTabIndex(41);
 		btnSellAll7.setText("All");
 		btnSellAll7.setClick(new EventHandler<Object, EventArgs>()
@@ -1715,7 +1715,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty7.setFlatStyle(FlatStyle.Flat);
 		btnSellQty7.setLocation(new Point(80, 224));
 		btnSellQty7.setName("btnSellQty7");
-		btnSellQty7.setSize(new Size(28, 22));
+		btnSellQty7.setSize(new FormSize(28, 22));
 		btnSellQty7.setTabIndex(40);
 		btnSellQty7.setText("88");
 		btnSellQty7.setClick(new EventHandler<Object, EventArgs>()
@@ -1731,7 +1731,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice7.setLocation(new Point(163, 228));
 		lblSellPrice7.setName("lblSellPrice7");
-		lblSellPrice7.setSize(new Size(48, 13));
+		lblSellPrice7.setSize(new FormSize(48, 13));
 		lblSellPrice7.setTabIndex(101);
 		lblSellPrice7.setText("8,888 cr.");
 		lblSellPrice7.TextAlign = ContentAlignment.TopRight;
@@ -1740,7 +1740,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct6.setLocation(new Point(466, 204));
 		lblTargetPct6.setName("lblTargetPct6");
-		lblTargetPct6.setSize(new Size(37, 13));
+		lblTargetPct6.setSize(new FormSize(37, 13));
 		lblTargetPct6.setTabIndex(100);
 		lblTargetPct6.setText("-888%");
 		lblTargetPct6.TextAlign = ContentAlignment.TopRight;
@@ -1749,7 +1749,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDiff6.setLocation(new Point(410, 204));
 		lblTargetDiff6.setName("lblTargetDiff6");
-		lblTargetDiff6.setSize(new Size(52, 13));
+		lblTargetDiff6.setSize(new FormSize(52, 13));
 		lblTargetDiff6.setTabIndex(99);
 		lblTargetDiff6.setText("-8,888 cr.");
 		lblTargetDiff6.TextAlign = ContentAlignment.TopRight;
@@ -1758,7 +1758,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice6.setLocation(new Point(358, 204));
 		lblTargetPrice6.setName("lblTargetPrice6");
-		lblTargetPrice6.setSize(new Size(48, 13));
+		lblTargetPrice6.setSize(new FormSize(48, 13));
 		lblTargetPrice6.setTabIndex(98);
 		lblTargetPrice6.setText("8,888 cr.");
 		lblTargetPrice6.TextAlign = ContentAlignment.TopRight;
@@ -1768,7 +1768,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax6.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax6.setLocation(new Point(262, 200));
 		btnBuyMax6.setName("btnBuyMax6");
-		btnBuyMax6.setSize(new Size(36, 22));
+		btnBuyMax6.setSize(new FormSize(36, 22));
 		btnBuyMax6.setTabIndex(39);
 		btnBuyMax6.setText("Max");
 		btnBuyMax6.setClick(new EventHandler<Object, EventArgs>()
@@ -1785,7 +1785,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty6.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty6.setLocation(new Point(227, 200));
 		btnBuyQty6.setName("btnBuyQty6");
-		btnBuyQty6.setSize(new Size(28, 22));
+		btnBuyQty6.setSize(new FormSize(28, 22));
 		btnBuyQty6.setTabIndex(38);
 		btnBuyQty6.setText("88");
 		btnBuyQty6.setClick(new EventHandler<Object, EventArgs>()
@@ -1801,7 +1801,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice6.setLocation(new Point(302, 204));
 		lblBuyPrice6.setName("lblBuyPrice6");
-		lblBuyPrice6.setSize(new Size(48, 13));
+		lblBuyPrice6.setSize(new FormSize(48, 13));
 		lblBuyPrice6.setTabIndex(95);
 		lblBuyPrice6.setText("8,888 cr.");
 		lblBuyPrice6.TextAlign = ContentAlignment.TopRight;
@@ -1811,7 +1811,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll6.setFlatStyle(FlatStyle.Flat);
 		btnSellAll6.setLocation(new Point(115, 200));
 		btnSellAll6.setName("btnSellAll6");
-		btnSellAll6.setSize(new Size(44, 22));
+		btnSellAll6.setSize(new FormSize(44, 22));
 		btnSellAll6.setTabIndex(37);
 		btnSellAll6.setText("All");
 		btnSellAll6.setClick(new EventHandler<Object, EventArgs>()
@@ -1828,7 +1828,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty6.setFlatStyle(FlatStyle.Flat);
 		btnSellQty6.setLocation(new Point(80, 200));
 		btnSellQty6.setName("btnSellQty6");
-		btnSellQty6.setSize(new Size(28, 22));
+		btnSellQty6.setSize(new FormSize(28, 22));
 		btnSellQty6.setTabIndex(36);
 		btnSellQty6.setText("88");
 		btnSellQty6.setClick(new EventHandler<Object, EventArgs>()
@@ -1844,7 +1844,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice6.setLocation(new Point(163, 204));
 		lblSellPrice6.setName("lblSellPrice6");
-		lblSellPrice6.setSize(new Size(48, 13));
+		lblSellPrice6.setSize(new FormSize(48, 13));
 		lblSellPrice6.setTabIndex(92);
 		lblSellPrice6.setText("8,888 cr.");
 		lblSellPrice6.TextAlign = ContentAlignment.TopRight;
@@ -1853,7 +1853,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct5.setLocation(new Point(466, 180));
 		lblTargetPct5.setName("lblTargetPct5");
-		lblTargetPct5.setSize(new Size(37, 13));
+		lblTargetPct5.setSize(new FormSize(37, 13));
 		lblTargetPct5.setTabIndex(91);
 		lblTargetPct5.setText("-888%");
 		lblTargetPct5.TextAlign = ContentAlignment.TopRight;
@@ -1862,7 +1862,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDiff5.setLocation(new Point(410, 180));
 		lblTargetDiff5.setName("lblTargetDiff5");
-		lblTargetDiff5.setSize(new Size(52, 13));
+		lblTargetDiff5.setSize(new FormSize(52, 13));
 		lblTargetDiff5.setTabIndex(90);
 		lblTargetDiff5.setText("-8,888 cr.");
 		lblTargetDiff5.TextAlign = ContentAlignment.TopRight;
@@ -1871,7 +1871,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice5.setLocation(new Point(358, 180));
 		lblTargetPrice5.setName("lblTargetPrice5");
-		lblTargetPrice5.setSize(new Size(48, 13));
+		lblTargetPrice5.setSize(new FormSize(48, 13));
 		lblTargetPrice5.setTabIndex(89);
 		lblTargetPrice5.setText("8,888 cr.");
 		lblTargetPrice5.TextAlign = ContentAlignment.TopRight;
@@ -1881,7 +1881,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax5.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax5.setLocation(new Point(262, 176));
 		btnBuyMax5.setName("btnBuyMax5");
-		btnBuyMax5.setSize(new Size(36, 22));
+		btnBuyMax5.setSize(new FormSize(36, 22));
 		btnBuyMax5.setTabIndex(35);
 		btnBuyMax5.setText("Max");
 		btnBuyMax5.setClick(new EventHandler<Object, EventArgs>()
@@ -1898,7 +1898,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty5.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty5.setLocation(new Point(227, 176));
 		btnBuyQty5.setName("btnBuyQty5");
-		btnBuyQty5.setSize(new Size(28, 22));
+		btnBuyQty5.setSize(new FormSize(28, 22));
 		btnBuyQty5.setTabIndex(34);
 		btnBuyQty5.setText("88");
 		btnBuyQty5.setClick(new EventHandler<Object, EventArgs>()
@@ -1914,7 +1914,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice5.setLocation(new Point(302, 180));
 		lblBuyPrice5.setName("lblBuyPrice5");
-		lblBuyPrice5.setSize(new Size(48, 13));
+		lblBuyPrice5.setSize(new FormSize(48, 13));
 		lblBuyPrice5.setTabIndex(86);
 		lblBuyPrice5.setText("8,888 cr.");
 		lblBuyPrice5.TextAlign = ContentAlignment.TopRight;
@@ -1924,7 +1924,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll5.setFlatStyle(FlatStyle.Flat);
 		btnSellAll5.setLocation(new Point(115, 176));
 		btnSellAll5.setName("btnSellAll5");
-		btnSellAll5.setSize(new Size(44, 22));
+		btnSellAll5.setSize(new FormSize(44, 22));
 		btnSellAll5.setTabIndex(33);
 		btnSellAll5.setText("All");
 		btnSellAll5.setClick(new EventHandler<Object, EventArgs>()
@@ -1941,7 +1941,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty5.setFlatStyle(FlatStyle.Flat);
 		btnSellQty5.setLocation(new Point(80, 176));
 		btnSellQty5.setName("btnSellQty5");
-		btnSellQty5.setSize(new Size(28, 22));
+		btnSellQty5.setSize(new FormSize(28, 22));
 		btnSellQty5.setTabIndex(32);
 		btnSellQty5.setText("88");
 		btnSellQty5.setClick(new EventHandler<Object, EventArgs>()
@@ -1957,7 +1957,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice5.setLocation(new Point(163, 180));
 		lblSellPrice5.setName("lblSellPrice5");
-		lblSellPrice5.setSize(new Size(48, 13));
+		lblSellPrice5.setSize(new FormSize(48, 13));
 		lblSellPrice5.setTabIndex(83);
 		lblSellPrice5.setText("8,888 cr.");
 		lblSellPrice5.TextAlign = ContentAlignment.TopRight;
@@ -1966,7 +1966,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct4.setLocation(new Point(466, 156));
 		lblTargetPct4.setName("lblTargetPct4");
-		lblTargetPct4.setSize(new Size(37, 13));
+		lblTargetPct4.setSize(new FormSize(37, 13));
 		lblTargetPct4.setTabIndex(82);
 		lblTargetPct4.setText("-888%");
 		lblTargetPct4.TextAlign = ContentAlignment.TopRight;
@@ -1975,7 +1975,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDiff4.setLocation(new Point(410, 156));
 		lblTargetDiff4.setName("lblTargetDiff4");
-		lblTargetDiff4.setSize(new Size(52, 13));
+		lblTargetDiff4.setSize(new FormSize(52, 13));
 		lblTargetDiff4.setTabIndex(81);
 		lblTargetDiff4.setText("-8,888 cr.");
 		lblTargetDiff4.TextAlign = ContentAlignment.TopRight;
@@ -1984,7 +1984,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice4.setLocation(new Point(358, 156));
 		lblTargetPrice4.setName("lblTargetPrice4");
-		lblTargetPrice4.setSize(new Size(48, 13));
+		lblTargetPrice4.setSize(new FormSize(48, 13));
 		lblTargetPrice4.setTabIndex(80);
 		lblTargetPrice4.setText("8,888 cr.");
 		lblTargetPrice4.TextAlign = ContentAlignment.TopRight;
@@ -1994,7 +1994,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax4.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax4.setLocation(new Point(262, 152));
 		btnBuyMax4.setName("btnBuyMax4");
-		btnBuyMax4.setSize(new Size(36, 22));
+		btnBuyMax4.setSize(new FormSize(36, 22));
 		btnBuyMax4.setTabIndex(31);
 		btnBuyMax4.setText("Max");
 		btnBuyMax4.setClick(new EventHandler<Object, EventArgs>()
@@ -2011,7 +2011,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty4.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty4.setLocation(new Point(227, 152));
 		btnBuyQty4.setName("btnBuyQty4");
-		btnBuyQty4.setSize(new Size(28, 22));
+		btnBuyQty4.setSize(new FormSize(28, 22));
 		btnBuyQty4.setTabIndex(30);
 		btnBuyQty4.setText("88");
 		btnBuyQty4.setClick(new EventHandler<Object, EventArgs>()
@@ -2027,7 +2027,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice4.setLocation(new Point(302, 156));
 		lblBuyPrice4.setName("lblBuyPrice4");
-		lblBuyPrice4.setSize(new Size(48, 13));
+		lblBuyPrice4.setSize(new FormSize(48, 13));
 		lblBuyPrice4.setTabIndex(77);
 		lblBuyPrice4.setText("8,888 cr.");
 		lblBuyPrice4.TextAlign = ContentAlignment.TopRight;
@@ -2037,7 +2037,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll4.setFlatStyle(FlatStyle.Flat);
 		btnSellAll4.setLocation(new Point(115, 152));
 		btnSellAll4.setName("btnSellAll4");
-		btnSellAll4.setSize(new Size(44, 22));
+		btnSellAll4.setSize(new FormSize(44, 22));
 		btnSellAll4.setTabIndex(29);
 		btnSellAll4.setText("All");
 		btnSellAll4.setClick(new EventHandler<Object, EventArgs>()
@@ -2054,7 +2054,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty4.setFlatStyle(FlatStyle.Flat);
 		btnSellQty4.setLocation(new Point(80, 152));
 		btnSellQty4.setName("btnSellQty4");
-		btnSellQty4.setSize(new Size(28, 22));
+		btnSellQty4.setSize(new FormSize(28, 22));
 		btnSellQty4.setTabIndex(28);
 		btnSellQty4.setText("88");
 		btnSellQty4.setClick(new EventHandler<Object, EventArgs>()
@@ -2070,7 +2070,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice4.setLocation(new Point(163, 156));
 		lblSellPrice4.setName("lblSellPrice4");
-		lblSellPrice4.setSize(new Size(48, 13));
+		lblSellPrice4.setSize(new FormSize(48, 13));
 		lblSellPrice4.setTabIndex(74);
 		lblSellPrice4.setText("8,888 cr.");
 		lblSellPrice4.TextAlign = ContentAlignment.TopRight;
@@ -2079,7 +2079,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct3.setLocation(new Point(466, 132));
 		lblTargetPct3.setName("lblTargetPct3");
-		lblTargetPct3.setSize(new Size(37, 13));
+		lblTargetPct3.setSize(new FormSize(37, 13));
 		lblTargetPct3.setTabIndex(73);
 		lblTargetPct3.setText("-888%");
 		lblTargetPct3.TextAlign = ContentAlignment.TopRight;
@@ -2088,7 +2088,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDiff3.setLocation(new Point(410, 132));
 		lblTargetDiff3.setName("lblTargetDiff3");
-		lblTargetDiff3.setSize(new Size(52, 13));
+		lblTargetDiff3.setSize(new FormSize(52, 13));
 		lblTargetDiff3.setTabIndex(72);
 		lblTargetDiff3.setText("-8,888 cr.");
 		lblTargetDiff3.TextAlign = ContentAlignment.TopRight;
@@ -2097,7 +2097,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice3.setLocation(new Point(358, 132));
 		lblTargetPrice3.setName("lblTargetPrice3");
-		lblTargetPrice3.setSize(new Size(48, 13));
+		lblTargetPrice3.setSize(new FormSize(48, 13));
 		lblTargetPrice3.setTabIndex(71);
 		lblTargetPrice3.setText("8,888 cr.");
 		lblTargetPrice3.TextAlign = ContentAlignment.TopRight;
@@ -2107,7 +2107,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax3.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax3.setLocation(new Point(262, 128));
 		btnBuyMax3.setName("btnBuyMax3");
-		btnBuyMax3.setSize(new Size(36, 22));
+		btnBuyMax3.setSize(new FormSize(36, 22));
 		btnBuyMax3.setTabIndex(27);
 		btnBuyMax3.setText("Max");
 		btnBuyMax3.setClick(new EventHandler<Object, EventArgs>()
@@ -2124,7 +2124,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty3.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty3.setLocation(new Point(227, 128));
 		btnBuyQty3.setName("btnBuyQty3");
-		btnBuyQty3.setSize(new Size(28, 22));
+		btnBuyQty3.setSize(new FormSize(28, 22));
 		btnBuyQty3.setTabIndex(26);
 		btnBuyQty3.setText("88");
 		btnBuyQty3.setClick(new EventHandler<Object, EventArgs>()
@@ -2140,7 +2140,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice3.setLocation(new Point(302, 132));
 		lblBuyPrice3.setName("lblBuyPrice3");
-		lblBuyPrice3.setSize(new Size(48, 13));
+		lblBuyPrice3.setSize(new FormSize(48, 13));
 		lblBuyPrice3.setTabIndex(68);
 		lblBuyPrice3.setText("8,888 cr.");
 		lblBuyPrice3.TextAlign = ContentAlignment.TopRight;
@@ -2150,7 +2150,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll3.setFlatStyle(FlatStyle.Flat);
 		btnSellAll3.setLocation(new Point(115, 128));
 		btnSellAll3.setName("btnSellAll3");
-		btnSellAll3.setSize(new Size(44, 22));
+		btnSellAll3.setSize(new FormSize(44, 22));
 		btnSellAll3.setTabIndex(25);
 		btnSellAll3.setText("All");
 		btnSellAll3.setClick(new EventHandler<Object, EventArgs>()
@@ -2167,7 +2167,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty3.setFlatStyle(FlatStyle.Flat);
 		btnSellQty3.setLocation(new Point(80, 128));
 		btnSellQty3.setName("btnSellQty3");
-		btnSellQty3.setSize(new Size(28, 22));
+		btnSellQty3.setSize(new FormSize(28, 22));
 		btnSellQty3.setTabIndex(24);
 		btnSellQty3.setText("88");
 		btnSellQty3.setClick(new EventHandler<Object, EventArgs>()
@@ -2183,7 +2183,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice3.setLocation(new Point(163, 132));
 		lblSellPrice3.setName("lblSellPrice3");
-		lblSellPrice3.setSize(new Size(48, 13));
+		lblSellPrice3.setSize(new FormSize(48, 13));
 		lblSellPrice3.setTabIndex(65);
 		lblSellPrice3.setText("8,888 cr.");
 		lblSellPrice3.TextAlign = ContentAlignment.TopRight;
@@ -2192,7 +2192,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct2.setLocation(new Point(466, 108));
 		lblTargetPct2.setName("lblTargetPct2");
-		lblTargetPct2.setSize(new Size(37, 13));
+		lblTargetPct2.setSize(new FormSize(37, 13));
 		lblTargetPct2.setTabIndex(64);
 		lblTargetPct2.setText("-888%");
 		lblTargetPct2.TextAlign = ContentAlignment.TopRight;
@@ -2201,7 +2201,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDiff2.setLocation(new Point(410, 108));
 		lblTargetDiff2.setName("lblTargetDiff2");
-		lblTargetDiff2.setSize(new Size(52, 13));
+		lblTargetDiff2.setSize(new FormSize(52, 13));
 		lblTargetDiff2.setTabIndex(63);
 		lblTargetDiff2.setText("-8,888 cr.");
 		lblTargetDiff2.TextAlign = ContentAlignment.TopRight;
@@ -2210,7 +2210,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice2.setLocation(new Point(358, 108));
 		lblTargetPrice2.setName("lblTargetPrice2");
-		lblTargetPrice2.setSize(new Size(48, 13));
+		lblTargetPrice2.setSize(new FormSize(48, 13));
 		lblTargetPrice2.setTabIndex(62);
 		lblTargetPrice2.setText("8,888 cr.");
 		lblTargetPrice2.TextAlign = ContentAlignment.TopRight;
@@ -2220,7 +2220,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax2.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax2.setLocation(new Point(262, 104));
 		btnBuyMax2.setName("btnBuyMax2");
-		btnBuyMax2.setSize(new Size(36, 22));
+		btnBuyMax2.setSize(new FormSize(36, 22));
 		btnBuyMax2.setTabIndex(23);
 		btnBuyMax2.setText("Max");
 		btnBuyMax2.setClick(new EventHandler<Object, EventArgs>()
@@ -2237,7 +2237,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty2.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty2.setLocation(new Point(227, 104));
 		btnBuyQty2.setName("btnBuyQty2");
-		btnBuyQty2.setSize(new Size(28, 22));
+		btnBuyQty2.setSize(new FormSize(28, 22));
 		btnBuyQty2.setTabIndex(22);
 		btnBuyQty2.setText("88");
 		btnBuyQty2.setClick(new EventHandler<Object, EventArgs>()
@@ -2253,7 +2253,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice2.setLocation(new Point(302, 108));
 		lblBuyPrice2.setName("lblBuyPrice2");
-		lblBuyPrice2.setSize(new Size(48, 13));
+		lblBuyPrice2.setSize(new FormSize(48, 13));
 		lblBuyPrice2.setTabIndex(59);
 		lblBuyPrice2.setText("8,888 cr.");
 		lblBuyPrice2.TextAlign = ContentAlignment.TopRight;
@@ -2263,7 +2263,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll2.setFlatStyle(FlatStyle.Flat);
 		btnSellAll2.setLocation(new Point(115, 104));
 		btnSellAll2.setName("btnSellAll2");
-		btnSellAll2.setSize(new Size(44, 22));
+		btnSellAll2.setSize(new FormSize(44, 22));
 		btnSellAll2.setTabIndex(21);
 		btnSellAll2.setText("All");
 		btnSellAll2.setClick(new EventHandler<Object, EventArgs>()
@@ -2280,7 +2280,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty2.setFlatStyle(FlatStyle.Flat);
 		btnSellQty2.setLocation(new Point(80, 104));
 		btnSellQty2.setName("btnSellQty2");
-		btnSellQty2.setSize(new Size(28, 22));
+		btnSellQty2.setSize(new FormSize(28, 22));
 		btnSellQty2.setTabIndex(20);
 		btnSellQty2.setText("88");
 		btnSellQty2.setClick(new EventHandler<Object, EventArgs>()
@@ -2296,7 +2296,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice2.setLocation(new Point(163, 108));
 		lblSellPrice2.setName("lblSellPrice2");
-		lblSellPrice2.setSize(new Size(48, 13));
+		lblSellPrice2.setSize(new FormSize(48, 13));
 		lblSellPrice2.setTabIndex(56);
 		lblSellPrice2.setText("8,888 cr.");
 		lblSellPrice2.TextAlign = ContentAlignment.TopRight;
@@ -2305,7 +2305,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct1.setLocation(new Point(466, 84));
 		lblTargetPct1.setName("lblTargetPct1");
-		lblTargetPct1.setSize(new Size(37, 13));
+		lblTargetPct1.setSize(new FormSize(37, 13));
 		lblTargetPct1.setTabIndex(55);
 		lblTargetPct1.setText("-888%");
 		lblTargetPct1.TextAlign = ContentAlignment.TopRight;
@@ -2314,7 +2314,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDiff1.setLocation(new Point(410, 84));
 		lblTargetDiff1.setName("lblTargetDiff1");
-		lblTargetDiff1.setSize(new Size(52, 13));
+		lblTargetDiff1.setSize(new FormSize(52, 13));
 		lblTargetDiff1.setTabIndex(54);
 		lblTargetDiff1.setText("-8,888 cr.");
 		lblTargetDiff1.TextAlign = ContentAlignment.TopRight;
@@ -2323,7 +2323,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice1.setLocation(new Point(358, 84));
 		lblTargetPrice1.setName("lblTargetPrice1");
-		lblTargetPrice1.setSize(new Size(48, 13));
+		lblTargetPrice1.setSize(new FormSize(48, 13));
 		lblTargetPrice1.setTabIndex(53);
 		lblTargetPrice1.setText("8,888 cr.");
 		lblTargetPrice1.TextAlign = ContentAlignment.TopRight;
@@ -2333,7 +2333,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax1.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax1.setLocation(new Point(262, 80));
 		btnBuyMax1.setName("btnBuyMax1");
-		btnBuyMax1.setSize(new Size(36, 22));
+		btnBuyMax1.setSize(new FormSize(36, 22));
 		btnBuyMax1.setTabIndex(19);
 		btnBuyMax1.setText("Max");
 		btnBuyMax1.setClick(new EventHandler<Object, EventArgs>()
@@ -2350,7 +2350,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty1.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty1.setLocation(new Point(227, 80));
 		btnBuyQty1.setName("btnBuyQty1");
-		btnBuyQty1.setSize(new Size(28, 22));
+		btnBuyQty1.setSize(new FormSize(28, 22));
 		btnBuyQty1.setTabIndex(18);
 		btnBuyQty1.setText("88");
 		btnBuyQty1.setClick(new EventHandler<Object, EventArgs>()
@@ -2366,7 +2366,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice1.setLocation(new Point(302, 84));
 		lblBuyPrice1.setName("lblBuyPrice1");
-		lblBuyPrice1.setSize(new Size(48, 13));
+		lblBuyPrice1.setSize(new FormSize(48, 13));
 		lblBuyPrice1.setTabIndex(50);
 		lblBuyPrice1.setText("8,888 cr.");
 		lblBuyPrice1.TextAlign = ContentAlignment.TopRight;
@@ -2376,7 +2376,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetPctLabel.setAutoSize(true);
 		lblTargetPctLabel.setLocation(new Point(476, 34));
 		lblTargetPctLabel.setName("lblTargetPctLabel");
-		lblTargetPctLabel.setSize(new Size(14, 16));
+		lblTargetPctLabel.setSize(new FormSize(14, 16));
 		lblTargetPctLabel.setTabIndex(49);
 		lblTargetPctLabel.setText("%");
 		//
@@ -2385,7 +2385,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetDiffLabel.setAutoSize(true);
 		lblTargetDiffLabel.setLocation(new Point(424, 34));
 		lblTargetDiffLabel.setName("lblTargetDiffLabel");
-		lblTargetDiffLabel.setSize(new Size(18, 16));
+		lblTargetDiffLabel.setSize(new FormSize(18, 16));
 		lblTargetDiffLabel.setTabIndex(48);
 		lblTargetDiffLabel.setText("+/-");
 		//
@@ -2394,7 +2394,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTargetPriceLabel.setAutoSize(true);
 		lblTargetPriceLabel.setLocation(new Point(360, 34));
 		lblTargetPriceLabel.setName("lblTargetPriceLabel");
-		lblTargetPriceLabel.setSize(new Size(30, 16));
+		lblTargetPriceLabel.setSize(new FormSize(30, 16));
 		lblTargetPriceLabel.setTabIndex(47);
 		lblTargetPriceLabel.setText("Price");
 		//
@@ -2402,7 +2402,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPct0.setLocation(new Point(466, 60));
 		lblTargetPct0.setName("lblTargetPct0");
-		lblTargetPct0.setSize(new Size(37, 13));
+		lblTargetPct0.setSize(new FormSize(37, 13));
 		lblTargetPct0.setTabIndex(46);
 		lblTargetPct0.setText("-888%");
 		lblTargetPct0.TextAlign = ContentAlignment.TopRight;
@@ -2411,7 +2411,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetDiff0.setLocation(new Point(410, 60));
 		lblTargetDiff0.setName("lblTargetDiff0");
-		lblTargetDiff0.setSize(new Size(52, 13));
+		lblTargetDiff0.setSize(new FormSize(52, 13));
 		lblTargetDiff0.setTabIndex(45);
 		lblTargetDiff0.setText("-8,888 cr.");
 		lblTargetDiff0.TextAlign = ContentAlignment.TopRight;
@@ -2420,7 +2420,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblTargetPrice0.setLocation(new Point(358, 60));
 		lblTargetPrice0.setName("lblTargetPrice0");
-		lblTargetPrice0.setSize(new Size(48, 13));
+		lblTargetPrice0.setSize(new FormSize(48, 13));
 		lblTargetPrice0.setTabIndex(44);
 		lblTargetPrice0.setText("8,888 cr.");
 		lblTargetPrice0.TextAlign = ContentAlignment.TopRight;
@@ -2430,7 +2430,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyMax0.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax0.setLocation(new Point(262, 56));
 		btnBuyMax0.setName("btnBuyMax0");
-		btnBuyMax0.setSize(new Size(36, 22));
+		btnBuyMax0.setSize(new FormSize(36, 22));
 		btnBuyMax0.setTabIndex(15);
 		btnBuyMax0.setText("Max");
 		btnBuyMax0.setClick(new EventHandler<Object, EventArgs>()
@@ -2447,7 +2447,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyQty0.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty0.setLocation(new Point(227, 56));
 		btnBuyQty0.setName("btnBuyQty0");
-		btnBuyQty0.setSize(new Size(28, 22));
+		btnBuyQty0.setSize(new FormSize(28, 22));
 		btnBuyQty0.setTabIndex(14);
 		btnBuyQty0.setText("88");
 		btnBuyQty0.setClick(new EventHandler<Object, EventArgs>()
@@ -2463,7 +2463,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblBuyPrice0.setLocation(new Point(302, 60));
 		lblBuyPrice0.setName("lblBuyPrice0");
-		lblBuyPrice0.setSize(new Size(48, 13));
+		lblBuyPrice0.setSize(new FormSize(48, 13));
 		lblBuyPrice0.setTabIndex(41);
 		lblBuyPrice0.setText("8,888 cr.");
 		lblBuyPrice0.TextAlign = ContentAlignment.TopRight;
@@ -2473,7 +2473,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll1.setFlatStyle(FlatStyle.Flat);
 		btnSellAll1.setLocation(new Point(115, 80));
 		btnSellAll1.setName("btnSellAll1");
-		btnSellAll1.setSize(new Size(44, 22));
+		btnSellAll1.setSize(new FormSize(44, 22));
 		btnSellAll1.setTabIndex(17);
 		btnSellAll1.setText("All");
 		btnSellAll1.setClick(new EventHandler<Object, EventArgs>()
@@ -2490,7 +2490,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty1.setFlatStyle(FlatStyle.Flat);
 		btnSellQty1.setLocation(new Point(80, 80));
 		btnSellQty1.setName("btnSellQty1");
-		btnSellQty1.setSize(new Size(28, 22));
+		btnSellQty1.setSize(new FormSize(28, 22));
 		btnSellQty1.setTabIndex(16);
 		btnSellQty1.setText("88");
 		btnSellQty1.setClick(new EventHandler<Object, EventArgs>()
@@ -2506,7 +2506,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice1.setLocation(new Point(163, 84));
 		lblSellPrice1.setName("lblSellPrice1");
-		lblSellPrice1.setSize(new Size(48, 13));
+		lblSellPrice1.setSize(new FormSize(48, 13));
 		lblSellPrice1.setTabIndex(38);
 		lblSellPrice1.setText("8,888 cr.");
 		lblSellPrice1.TextAlign = ContentAlignment.TopRight;
@@ -2516,7 +2516,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellAll0.setFlatStyle(FlatStyle.Flat);
 		btnSellAll0.setLocation(new Point(115, 56));
 		btnSellAll0.setName("btnSellAll0");
-		btnSellAll0.setSize(new Size(44, 22));
+		btnSellAll0.setSize(new FormSize(44, 22));
 		btnSellAll0.setTabIndex(13);
 		btnSellAll0.setText("All");
 		btnSellAll0.setClick(new EventHandler<Object, EventArgs>()
@@ -2533,7 +2533,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSellQty0.setFlatStyle(FlatStyle.Flat);
 		btnSellQty0.setLocation(new Point(80, 56));
 		btnSellQty0.setName("btnSellQty0");
-		btnSellQty0.setSize(new Size(28, 22));
+		btnSellQty0.setSize(new FormSize(28, 22));
 		btnSellQty0.setTabIndex(12);
 		btnSellQty0.setText("88");
 		btnSellQty0.setClick(new EventHandler<Object, EventArgs>()
@@ -2549,7 +2549,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSellPrice0.setLocation(new Point(163, 60));
 		lblSellPrice0.setName("lblSellPrice0");
-		lblSellPrice0.setSize(new Size(48, 13));
+		lblSellPrice0.setSize(new FormSize(48, 13));
 		lblSellPrice0.setTabIndex(35);
 		lblSellPrice0.setText("8,888 cr.");
 		lblSellPrice0.TextAlign = ContentAlignment.TopRight;
@@ -2559,7 +2559,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeTarget.setAutoSize(true);
 		lblTradeTarget.setLocation(new Point(391, 16));
 		lblTradeTarget.setName("lblTradeTarget");
-		lblTradeTarget.setSize(new Size(78, 16));
+		lblTradeTarget.setSize(new FormSize(78, 16));
 		lblTradeTarget.setTabIndex(28);
 		lblTradeTarget.setText("Target System");
 		//
@@ -2568,7 +2568,7 @@ public class SpaceTrader extends WinformWindow {
 		lblBuy.setAutoSize(true);
 		lblBuy.setLocation(new Point(273, 34));
 		lblBuy.setName("lblBuy");
-		lblBuy.setSize(new Size(24, 16));
+		lblBuy.setSize(new FormSize(24, 16));
 		lblBuy.setTabIndex(27);
 		lblBuy.setText("Buy");
 		//
@@ -2578,7 +2578,7 @@ public class SpaceTrader extends WinformWindow {
 		lblSell.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
 		lblSell.setLocation(new Point(132, 34));
 		lblSell.setName("lblSell");
-		lblSell.setSize(new Size(23, 16));
+		lblSell.setSize(new FormSize(23, 16));
 		lblSell.setTabIndex(26);
 		lblSell.setText("Sell");
 		//
@@ -2587,7 +2587,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty9.setAutoSize(true);
 		lblTradeCmdty9.setLocation(new Point(8, 276));
 		lblTradeCmdty9.setName("lblTradeCmdty9");
-		lblTradeCmdty9.setSize(new Size(40, 16));
+		lblTradeCmdty9.setSize(new FormSize(40, 16));
 		lblTradeCmdty9.setTabIndex(25);
 		lblTradeCmdty9.setText("Robots");
 		//
@@ -2596,7 +2596,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty8.setAutoSize(true);
 		lblTradeCmdty8.setLocation(new Point(8, 252));
 		lblTradeCmdty8.setName("lblTradeCmdty8");
-		lblTradeCmdty8.setSize(new Size(51, 16));
+		lblTradeCmdty8.setSize(new FormSize(51, 16));
 		lblTradeCmdty8.setTabIndex(24);
 		lblTradeCmdty8.setText("Narcotics");
 		//
@@ -2605,7 +2605,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty2.setAutoSize(true);
 		lblTradeCmdty2.setLocation(new Point(8, 108));
 		lblTradeCmdty2.setName("lblTradeCmdty2");
-		lblTradeCmdty2.setSize(new Size(30, 16));
+		lblTradeCmdty2.setSize(new FormSize(30, 16));
 		lblTradeCmdty2.setTabIndex(23);
 		lblTradeCmdty2.setText("Food");
 		//
@@ -2614,7 +2614,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty0.setAutoSize(true);
 		lblTradeCmdty0.setLocation(new Point(8, 60));
 		lblTradeCmdty0.setName("lblTradeCmdty0");
-		lblTradeCmdty0.setSize(new Size(34, 16));
+		lblTradeCmdty0.setSize(new FormSize(34, 16));
 		lblTradeCmdty0.setTabIndex(22);
 		lblTradeCmdty0.setText("Water");
 		//
@@ -2623,7 +2623,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty1.setAutoSize(true);
 		lblTradeCmdty1.setLocation(new Point(8, 84));
 		lblTradeCmdty1.setName("lblTradeCmdty1");
-		lblTradeCmdty1.setSize(new Size(27, 16));
+		lblTradeCmdty1.setSize(new FormSize(27, 16));
 		lblTradeCmdty1.setTabIndex(21);
 		lblTradeCmdty1.setText("Furs");
 		//
@@ -2632,7 +2632,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty6.setAutoSize(true);
 		lblTradeCmdty6.setLocation(new Point(8, 204));
 		lblTradeCmdty6.setName("lblTradeCmdty6");
-		lblTradeCmdty6.setSize(new Size(50, 16));
+		lblTradeCmdty6.setSize(new FormSize(50, 16));
 		lblTradeCmdty6.setTabIndex(20);
 		lblTradeCmdty6.setText("Medicine");
 		//
@@ -2641,7 +2641,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty5.setAutoSize(true);
 		lblTradeCmdty5.setLocation(new Point(8, 180));
 		lblTradeCmdty5.setName("lblTradeCmdty5");
-		lblTradeCmdty5.setSize(new Size(49, 16));
+		lblTradeCmdty5.setSize(new FormSize(49, 16));
 		lblTradeCmdty5.setTabIndex(19);
 		lblTradeCmdty5.setText("Firearms");
 		//
@@ -2650,7 +2650,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty4.setAutoSize(true);
 		lblTradeCmdty4.setLocation(new Point(8, 156));
 		lblTradeCmdty4.setName("lblTradeCmdty4");
-		lblTradeCmdty4.setSize(new Size(41, 16));
+		lblTradeCmdty4.setSize(new FormSize(41, 16));
 		lblTradeCmdty4.setTabIndex(18);
 		lblTradeCmdty4.setText("Games");
 		//
@@ -2659,7 +2659,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty3.setAutoSize(true);
 		lblTradeCmdty3.setLocation(new Point(8, 132));
 		lblTradeCmdty3.setName("lblTradeCmdty3");
-		lblTradeCmdty3.setSize(new Size(23, 16));
+		lblTradeCmdty3.setSize(new FormSize(23, 16));
 		lblTradeCmdty3.setTabIndex(17);
 		lblTradeCmdty3.setText("Ore");
 		//
@@ -2668,7 +2668,7 @@ public class SpaceTrader extends WinformWindow {
 		lblTradeCmdty7.setAutoSize(true);
 		lblTradeCmdty7.setLocation(new Point(8, 228));
 		lblTradeCmdty7.setName("lblTradeCmdty7");
-		lblTradeCmdty7.setSize(new Size(53, 16));
+		lblTradeCmdty7.setSize(new FormSize(53, 16));
 		lblTradeCmdty7.setTabIndex(16);
 		lblTradeCmdty7.setText("Machines");
 		//
@@ -2695,7 +2695,7 @@ public class SpaceTrader extends WinformWindow {
 		boxSystem.Controls.add(lblSystemNameLabel);
 		boxSystem.setLocation(new Point(4, 2));
 		boxSystem.setName("boxSystem");
-		boxSystem.setSize(new Size(240, 206));
+		boxSystem.setSize(new FormSize(240, 206));
 		boxSystem.setTabIndex(1);
 		boxSystem.setTabStop(false);
 		boxSystem.setText("System Info");
@@ -2705,7 +2705,7 @@ public class SpaceTrader extends WinformWindow {
 		btnMerc.setFlatStyle(FlatStyle.Flat);
 		btnMerc.setLocation(new Point(118, 174));
 		btnMerc.setName("btnMerc");
-		btnMerc.setSize(new Size(112, 22));
+		btnMerc.setSize(new FormSize(112, 22));
 		btnMerc.setTabIndex(3);
 		btnMerc.setText("Mercenary For Hire");
 		btnMerc.setClick(new EventHandler<Object, EventArgs>()
@@ -2723,7 +2723,7 @@ public class SpaceTrader extends WinformWindow {
 		btnSpecial.setFlatStyle(FlatStyle.Flat);
 		btnSpecial.setLocation(new Point(58, 174));
 		btnSpecial.setName("btnSpecial");
-		btnSpecial.setSize(new Size(52, 22));
+		btnSpecial.setSize(new FormSize(52, 22));
 		btnSpecial.setTabIndex(2);
 		btnSpecial.setText("Special");
 		btnSpecial.setClick(new EventHandler<Object, EventArgs>()
@@ -2740,7 +2740,7 @@ public class SpaceTrader extends WinformWindow {
 		btnNews.setFlatStyle(FlatStyle.Flat);
 		btnNews.setLocation(new Point(8, 174));
 		btnNews.setName("btnNews");
-		btnNews.setSize(new Size(42, 22));
+		btnNews.setSize(new FormSize(42, 22));
 		btnNews.setTabIndex(1);
 		btnNews.setText("News");
 		btnNews.setClick(new EventHandler<Object, EventArgs>()
@@ -2756,7 +2756,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSystemPressure.setLocation(new Point(8, 147));
 		lblSystemPressure.setName("lblSystemPressure");
-		lblSystemPressure.setSize(new Size(168, 16));
+		lblSystemPressure.setSize(new FormSize(168, 16));
 		lblSystemPressure.setTabIndex(18);
 		lblSystemPressure.setText("suffering from extreme bordom.");
 		//
@@ -2765,7 +2765,7 @@ public class SpaceTrader extends WinformWindow {
 		lblSystemPressurePre.setAutoSize(true);
 		lblSystemPressurePre.setLocation(new Point(8, 134));
 		lblSystemPressurePre.setName("lblSystemPressurePre");
-		lblSystemPressurePre.setSize(new Size(122, 16));
+		lblSystemPressurePre.setSize(new FormSize(122, 16));
 		lblSystemPressurePre.setTabIndex(17);
 		lblSystemPressurePre.setText("This system is currently");
 		//
@@ -2773,7 +2773,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSystemPolSys.setLocation(new Point(88, 64));
 		lblSystemPolSys.setName("lblSystemPolSys");
-		lblSystemPolSys.setSize(new Size(91, 13));
+		lblSystemPolSys.setSize(new FormSize(91, 13));
 		lblSystemPolSys.setTabIndex(15);
 		lblSystemPolSys.setText("Cybernetic State");
 		//
@@ -2781,7 +2781,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSystemSize.setLocation(new Point(88, 32));
 		lblSystemSize.setName("lblSystemSize");
-		lblSystemSize.setSize(new Size(45, 13));
+		lblSystemSize.setSize(new FormSize(45, 13));
 		lblSystemSize.setTabIndex(14);
 		lblSystemSize.setText("Medium");
 		//
@@ -2789,7 +2789,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSystemTech.setLocation(new Point(88, 48));
 		lblSystemTech.setName("lblSystemTech");
-		lblSystemTech.setSize(new Size(82, 13));
+		lblSystemTech.setSize(new FormSize(82, 13));
 		lblSystemTech.setTabIndex(13);
 		lblSystemTech.setText("Pre-Agricultural");
 		//
@@ -2797,7 +2797,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSystemPirates.setLocation(new Point(88, 112));
 		lblSystemPirates.setName("lblSystemPirates");
-		lblSystemPirates.setSize(new Size(53, 13));
+		lblSystemPirates.setSize(new FormSize(53, 13));
 		lblSystemPirates.setTabIndex(11);
 		lblSystemPirates.setText("Abundant");
 		//
@@ -2805,7 +2805,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSystemPolice.setLocation(new Point(88, 96));
 		lblSystemPolice.setName("lblSystemPolice");
-		lblSystemPolice.setSize(new Size(53, 13));
+		lblSystemPolice.setSize(new FormSize(53, 13));
 		lblSystemPolice.setTabIndex(10);
 		lblSystemPolice.setText("Moderate");
 		//
@@ -2813,7 +2813,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSystemResource.setLocation(new Point(88, 80));
 		lblSystemResource.setName("lblSystemResource");
-		lblSystemResource.setSize(new Size(105, 13));
+		lblSystemResource.setSize(new FormSize(105, 13));
 		lblSystemResource.setTabIndex(9);
 		lblSystemResource.setText("Sweetwater Oceans");
 		//
@@ -2823,7 +2823,7 @@ public class SpaceTrader extends WinformWindow {
 		lblSystemPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemPiratesLabel.setLocation(new Point(8, 112));
 		lblSystemPiratesLabel.setName("lblSystemPiratesLabel");
-		lblSystemPiratesLabel.setSize(new Size(44, 16));
+		lblSystemPiratesLabel.setSize(new FormSize(44, 16));
 		lblSystemPiratesLabel.setTabIndex(7);
 		lblSystemPiratesLabel.setText("Pirates:");
 		//
@@ -2833,7 +2833,7 @@ public class SpaceTrader extends WinformWindow {
 		lblSystemPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemPoliceLabel.setLocation(new Point(8, 96));
 		lblSystemPoliceLabel.setName("lblSystemPoliceLabel");
-		lblSystemPoliceLabel.setSize(new Size(40, 16));
+		lblSystemPoliceLabel.setSize(new FormSize(40, 16));
 		lblSystemPoliceLabel.setTabIndex(6);
 		lblSystemPoliceLabel.setText("Police:");
 		//
@@ -2843,7 +2843,7 @@ public class SpaceTrader extends WinformWindow {
 		lblSystemResourseLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemResourseLabel.setLocation(new Point(8, 80));
 		lblSystemResourseLabel.setName("lblSystemResourseLabel");
-		lblSystemResourseLabel.setSize(new Size(58, 16));
+		lblSystemResourseLabel.setSize(new FormSize(58, 16));
 		lblSystemResourseLabel.setTabIndex(5);
 		lblSystemResourseLabel.setText("Resource:");
 		//
@@ -2853,7 +2853,7 @@ public class SpaceTrader extends WinformWindow {
 		lblSystemGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemGovtLabel.setLocation(new Point(8, 64));
 		lblSystemGovtLabel.setName("lblSystemGovtLabel");
-		lblSystemGovtLabel.setSize(new Size(72, 16));
+		lblSystemGovtLabel.setSize(new FormSize(72, 16));
 		lblSystemGovtLabel.setTabIndex(4);
 		lblSystemGovtLabel.setText("Government:");
 		//
@@ -2863,7 +2863,7 @@ public class SpaceTrader extends WinformWindow {
 		lblSystemTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemTechLabel.setLocation(new Point(8, 48));
 		lblSystemTechLabel.setName("lblSystemTechLabel");
-		lblSystemTechLabel.setSize(new Size(65, 16));
+		lblSystemTechLabel.setSize(new FormSize(65, 16));
 		lblSystemTechLabel.setTabIndex(3);
 		lblSystemTechLabel.setText("Tech Level:");
 		//
@@ -2873,7 +2873,7 @@ public class SpaceTrader extends WinformWindow {
 		lblSystemSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemSizeLabel.setLocation(new Point(8, 32));
 		lblSystemSizeLabel.setName("lblSystemSizeLabel");
-		lblSystemSizeLabel.setSize(new Size(31, 16));
+		lblSystemSizeLabel.setSize(new FormSize(31, 16));
 		lblSystemSizeLabel.setTabIndex(2);
 		lblSystemSizeLabel.setText("Size:");
 		//
@@ -2881,7 +2881,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblSystemName.setLocation(new Point(88, 16));
 		lblSystemName.setName("lblSystemName");
-		lblSystemName.setSize(new Size(65, 13));
+		lblSystemName.setSize(new FormSize(65, 13));
 		lblSystemName.setTabIndex(1);
 		lblSystemName.setText("Tarchannen");
 		//
@@ -2891,7 +2891,7 @@ public class SpaceTrader extends WinformWindow {
 		lblSystemNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemNameLabel.setLocation(new Point(8, 16));
 		lblSystemNameLabel.setName("lblSystemNameLabel");
-		lblSystemNameLabel.setSize(new Size(39, 16));
+		lblSystemNameLabel.setSize(new FormSize(39, 16));
 		lblSystemNameLabel.setTabIndex(0);
 		lblSystemNameLabel.setText("Name:");
 		//
@@ -2906,7 +2906,7 @@ public class SpaceTrader extends WinformWindow {
 		boxShipYard.Controls.add(lblShipsForSale);
 		boxShipYard.setLocation(new Point(4, 306));
 		boxShipYard.setName("boxShipYard");
-		boxShipYard.setSize(new Size(168, 168));
+		boxShipYard.setSize(new FormSize(168, 168));
 		boxShipYard.setTabIndex(4);
 		boxShipYard.setTabStop(false);
 		boxShipYard.setText("Shipyard");
@@ -2916,7 +2916,7 @@ public class SpaceTrader extends WinformWindow {
 		btnDesign.setFlatStyle(FlatStyle.Flat);
 		btnDesign.setLocation(new Point(8, 32));
 		btnDesign.setName("btnDesign");
-		btnDesign.setSize(new Size(54, 22));
+		btnDesign.setSize(new FormSize(54, 22));
 		btnDesign.setTabIndex(55);
 		btnDesign.setText("Design");
 		btnDesign.setClick(new EventHandler<Object, EventArgs>()
@@ -2933,7 +2933,7 @@ public class SpaceTrader extends WinformWindow {
 		btnPod.setFlatStyle(FlatStyle.Flat);
 		btnPod.setLocation(new Point(98, 138));
 		btnPod.setName("btnPod");
-		btnPod.setSize(new Size(58, 22));
+		btnPod.setSize(new FormSize(58, 22));
 		btnPod.setTabIndex(54);
 		btnPod.setText("Buy Pod");
 		btnPod.setClick(new EventHandler<Object, EventArgs>()
@@ -2949,7 +2949,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblEscapePod.setLocation(new Point(8, 122));
 		lblEscapePod.setName("lblEscapePod");
-		lblEscapePod.setSize(new Size(152, 26));
+		lblEscapePod.setSize(new FormSize(152, 26));
 		lblEscapePod.setTabIndex(27);
 		lblEscapePod.setText("You can buy an escape pod for  2,000 cr.");
 		//
@@ -2958,7 +2958,7 @@ public class SpaceTrader extends WinformWindow {
 		btnEquip.setFlatStyle(FlatStyle.Flat);
 		btnEquip.setLocation(new Point(43, 85));
 		btnEquip.setName("btnEquip");
-		btnEquip.setSize(new Size(113, 22));
+		btnEquip.setSize(new FormSize(113, 22));
 		btnEquip.setTabIndex(53);
 		btnEquip.setText("Buy/Sell Equipment");
 		btnEquip.setClick(new EventHandler<Object, EventArgs>()
@@ -2975,7 +2975,7 @@ public class SpaceTrader extends WinformWindow {
 		btnBuyShip.setFlatStyle(FlatStyle.Flat);
 		btnBuyShip.setLocation(new Point(70, 32));
 		btnBuyShip.setName("btnBuyShip");
-		btnBuyShip.setSize(new Size(86, 22));
+		btnBuyShip.setSize(new FormSize(86, 22));
 		btnBuyShip.setTabIndex(52);
 		btnBuyShip.setText("View Ship Info");
 		btnBuyShip.setClick(new EventHandler<Object, EventArgs>()
@@ -2991,7 +2991,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblEquipForSale.setLocation(new Point(8, 69));
 		lblEquipForSale.setName("lblEquipForSale");
-		lblEquipForSale.setSize(new Size(152, 13));
+		lblEquipForSale.setSize(new FormSize(152, 13));
 		lblEquipForSale.setTabIndex(21);
 		lblEquipForSale.setText("There is equipment for sale.");
 		//
@@ -2999,7 +2999,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblShipsForSale.setLocation(new Point(8, 16));
 		lblShipsForSale.setName("lblShipsForSale");
-		lblShipsForSale.setSize(new Size(152, 13));
+		lblShipsForSale.setSize(new FormSize(152, 13));
 		lblShipsForSale.setTabIndex(20);
 		lblShipsForSale.setText("There are new ships for sale.");
 		//
@@ -3013,7 +3013,7 @@ public class SpaceTrader extends WinformWindow {
 		boxDock.Controls.add(lblRepairCost);
 		boxDock.setLocation(new Point(4, 212));
 		boxDock.setName("boxDock");
-		boxDock.setSize(new Size(240, 90));
+		boxDock.setSize(new FormSize(240, 90));
 		boxDock.setTabIndex(2);
 		boxDock.setTabStop(false);
 		boxDock.setText("Dock");
@@ -3023,7 +3023,7 @@ public class SpaceTrader extends WinformWindow {
 		btnRepair.setFlatStyle(FlatStyle.Flat);
 		btnRepair.setLocation(new Point(180, 56));
 		btnRepair.setName("btnRepair");
-		btnRepair.setSize(new Size(48, 22));
+		btnRepair.setSize(new FormSize(48, 22));
 		btnRepair.setTabIndex(5);
 		btnRepair.setText("Repair");
 		btnRepair.setClick(new EventHandler<Object, EventArgs>()
@@ -3040,7 +3040,7 @@ public class SpaceTrader extends WinformWindow {
 		btnFuel.setFlatStyle(FlatStyle.Flat);
 		btnFuel.setLocation(new Point(192, 18));
 		btnFuel.setName("btnFuel");
-		btnFuel.setSize(new Size(36, 22));
+		btnFuel.setSize(new FormSize(36, 22));
 		btnFuel.setTabIndex(4);
 		btnFuel.setText("Fuel");
 		btnFuel.setClick(new EventHandler<Object, EventArgs>()
@@ -3056,7 +3056,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblFuelStatus.setLocation(new Point(8, 16));
 		lblFuelStatus.setName("lblFuelStatus");
-		lblFuelStatus.setSize(new Size(162, 13));
+		lblFuelStatus.setSize(new FormSize(162, 13));
 		lblFuelStatus.setTabIndex(20);
 		lblFuelStatus.setText("You have fuel to fly 88 parsecs.");
 		//
@@ -3064,7 +3064,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblFuelCost.setLocation(new Point(8, 31));
 		lblFuelCost.setName("lblFuelCost");
-		lblFuelCost.setSize(new Size(121, 13));
+		lblFuelCost.setSize(new FormSize(121, 13));
 		lblFuelCost.setTabIndex(19);
 		lblFuelCost.setText("A full tank costs 888 cr.");
 		//
@@ -3072,7 +3072,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblHullStatus.setLocation(new Point(8, 52));
 		lblHullStatus.setName("lblHullStatus");
-		lblHullStatus.setSize(new Size(152, 13));
+		lblHullStatus.setSize(new FormSize(152, 13));
 		lblHullStatus.setTabIndex(18);
 		lblHullStatus.setText("Your hull strength is at 888%.");
 		//
@@ -3080,7 +3080,7 @@ public class SpaceTrader extends WinformWindow {
 		//
 		lblRepairCost.setLocation(new Point(8, 67));
 		lblRepairCost.setName("lblRepairCost");
-		lblRepairCost.setSize(new Size(150, 13));
+		lblRepairCost.setSize(new FormSize(150, 13));
 		lblRepairCost.setTabIndex(19);
 		lblRepairCost.setText("Full repairs will cost 8,888 cr.");
 		//
@@ -3089,7 +3089,7 @@ public class SpaceTrader extends WinformWindow {
 		picLine.setBackColor(Color.darkGray);
 		picLine.setLocation(new Point(0, 0));
 		picLine.setName("picLine");
-		picLine.setSize(new Size(770, 1));
+		picLine.setSize(new FormSize(770, 1));
 		picLine.setTabIndex(132);
 		picLine.setTabStop(false);
 		//
@@ -3104,33 +3104,33 @@ public class SpaceTrader extends WinformWindow {
 		//
 		// ilChartImages
 		//
-		ilChartImages.setImageSize(new Size(7, 7));
+		ilChartImages.setImageSize(new FormSize(7, 7));
 		ilChartImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilChartImages.ImageStream"))));
 		ilChartImages.setTransparentColor(Color.white);
 		//
 		// ilShipImages
 		//
-		ilShipImages.setImageSize(new Size(64, 52));
+		ilShipImages.setImageSize(new FormSize(64, 52));
 		ilShipImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilShipImages.ImageStream"))));
 		ilShipImages.setTransparentColor(Color.white);
 		//
 		// ilDirectionImages
 		//
-		ilDirectionImages.setImageSize(new Size(13, 13));
+		ilDirectionImages.setImageSize(new FormSize(13, 13));
 		ilDirectionImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilDirectionImages.ImageStream"))));
 		ilDirectionImages.setTransparentColor(Color.white);
 		//
 		// ilEquipmentImages
 		//
-		ilEquipmentImages.setImageSize(new Size(64, 52));
+		ilEquipmentImages.setImageSize(new FormSize(64, 52));
 		ilEquipmentImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilEquipmentImages.ImageStream"))));
 		ilEquipmentImages.setTransparentColor(Color.white);
 
 		//
 		// SpaceTrader
 		//
-		this.setAutoScaleBaseSize(new Size(5, 13));
-		this.setClientSize(new Size(768, 505));
+		this.setAutoScaleBaseSize(new FormSize(5, 13));
+		this.setClientSize(new FormSize(768, 505));
 		Controls.add(picLine);
 		Controls.add(boxDock);
 		Controls.add(boxCargo);

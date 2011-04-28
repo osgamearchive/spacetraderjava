@@ -10,7 +10,7 @@ import jwinforms.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.Label;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformControl;
 import jwinforms.WinformForm;
 import org.gts.bst.ship.equip.GadgetType;
@@ -61,20 +61,20 @@ public class FormViewShip extends WinformForm {
     this.lblTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblTypeLabel.setLocation(new java.awt.Point(8, 8));
     this.lblTypeLabel.setName("lblTypeLabel");
-    this.lblTypeLabel.setSize(new Size(34, 13));
+    this.lblTypeLabel.setSize(new FormSize(34, 13));
     this.lblTypeLabel.setTabIndex(2);
     this.lblTypeLabel.setText("Type:");
     // lblType
     this.lblType.setLocation(new java.awt.Point(80, 8));
     this.lblType.setName("lblType");
-    this.lblType.setSize(new Size(100, 13));
+    this.lblType.setSize(new FormSize(100, 13));
     this.lblType.setTabIndex(4);
     this.lblType.setText("Grasshopper");
     // btnClose
     this.btnClose.setDialogResult(DialogResult.Cancel);
     this.btnClose.setLocation(new java.awt.Point(-32, -32));
     this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new Size(32, 32));
+    this.btnClose.setSize(new FormSize(32, 32));
     this.btnClose.setTabIndex(32);
     this.btnClose.setTabStop(false);
     this.btnClose.setText("X");
@@ -82,13 +82,13 @@ public class FormViewShip extends WinformForm {
     this.lblEquipLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblEquipLabel.setLocation(new java.awt.Point(8, 34));
     this.lblEquipLabel.setName("lblEquipLabel");
-    this.lblEquipLabel.setSize(new Size(64, 176));
+    this.lblEquipLabel.setSize(new FormSize(64, 176));
     this.lblEquipLabel.setTabIndex(43);
     this.lblEquipLabel.setText("Hull:\r\n\r\nEquipment:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnfilled:");
     // lblEquip
     this.lblEquip.setLocation(new java.awt.Point(80, 34));
     this.lblEquip.setName("lblEquip");
-    this.lblEquip.setSize(new Size(120, 176));
+    this.lblEquip.setSize(new FormSize(120, 176));
     this.lblEquip.setTabIndex(44);
     this.lblEquip.setText("Hardened\r\n\r\n1 Military Laser\r\n1 Morgan\'s Laser\r\n1 Energy Shield\r\n1 Reflective Shi"
         + "eld\r\n1 Lightning Shield\r\nNavigating System\r\nAuto-Repair System\r\n10 Extra Cargo Bays\r\nAn Escape Pod\r\n"
@@ -97,20 +97,20 @@ public class FormViewShip extends WinformForm {
     this.boxSpecialCargo.Controls.addAll((new WinformControl[] {this.lblSpecialCargo}));
     this.boxSpecialCargo.setLocation(new java.awt.Point(192, 8));
     this.boxSpecialCargo.setName("boxSpecialCargo");
-    this.boxSpecialCargo.setSize(new Size(200, 204));
+    this.boxSpecialCargo.setSize(new FormSize(200, 204));
     this.boxSpecialCargo.setTabIndex(64);
     this.boxSpecialCargo.setTabStop(false);
     this.boxSpecialCargo.setText("Special Cargo");
     // lblSpecialCargo
     this.lblSpecialCargo.setLocation(new java.awt.Point(8, 16));
     this.lblSpecialCargo.setName("lblSpecialCargo");
-    this.lblSpecialCargo.setSize(new Size(190, 176));
+    this.lblSpecialCargo.setSize(new FormSize(190, 176));
     this.lblSpecialCargo.setTabIndex(0);
     this.lblSpecialCargo.setText("No special items.");
     // FormViewShip
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnClose);
-    this.setClientSize(new Size(402, 219));
+    this.setClientSize(new FormSize(402, 219));
     this.Controls.addAll(Arrays.asList(this.boxSpecialCargo, this.lblEquip, this.lblEquipLabel, this.btnClose, this.lblTypeLabel, this.lblType));
     this.setFormBorderStyle(FormBorderStyle.FixedDialog);
     this.setMaximizeBox(false);
@@ -164,7 +164,7 @@ public class FormViewShip extends WinformForm {
       }
       if(count > 0) {
         lblEquipLabel.setText(lblEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
-        if(i == GadgetType.ExtraCargoBays.CastToInt() || i == GadgetType.HiddenCargoBays.CastToInt()) {
+        if(i == GadgetType.ExtraCargoBays.asInteger() || i == GadgetType.HiddenCargoBays.asInteger()) {
           count *= 5;
           lblEquip.setText(lblEquip.getText() + (Functions.FormatNumber(count) + Consts.Gadgets[i].Name().substring(1) + Strings.newline));
         } else {

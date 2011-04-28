@@ -1,6 +1,4 @@
 package org.gts.bst.ship.equip;
-import org.gts.bst.ship.equip.EquipmentSubType;
-import org.gts.bst.ship.equip.ShieldType;
 import spacetrader.Strings;
 import spacetrader.enums.TechLevel;
 import spacetrader.util.Hashtable;
@@ -15,7 +13,7 @@ public class Shield extends Equipment {
 
   public Shield(Hashtable hash) {
     super(hash);
-    _type = ShieldType.FromInt(GetValueFromHash(hash, "_type", Integer.class));
+    _type = ShieldType.fromId(GetValueFromHash(hash, "_type", Integer.class));
     _power = GetValueFromHash(hash, "_power", Integer.class);
     _charge = GetValueFromHash(hash, "_charge", Integer.class);
   }
@@ -50,7 +48,7 @@ public class Shield extends Equipment {
 
   @Override
   public String Name() {
-    return Strings.ShieldNames[_type.CastToInt()];
+    return Strings.ShieldNames[_type.id];
   }
 
   @Override

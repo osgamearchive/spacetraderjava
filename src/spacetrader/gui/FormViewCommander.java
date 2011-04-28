@@ -10,7 +10,7 @@ import jwinforms.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.Label;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformControl;
 import jwinforms.WinformForm;
 import spacetrader.Commander;
@@ -105,26 +105,26 @@ public class FormViewCommander extends WinformForm {
     this.lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblNameLabel.setLocation(new java.awt.Point(8, 8));
     this.lblNameLabel.setName("lblNameLabel");
-    this.lblNameLabel.setSize(new Size(39, 16));
+    this.lblNameLabel.setSize(new FormSize(39, 16));
     this.lblNameLabel.setTabIndex(2);
     this.lblNameLabel.setText("Name:");
     // lblName
     this.lblName.setLocation(new java.awt.Point(69, 8));
     this.lblName.setName("lblName");
-    this.lblName.setSize(new Size(155, 13));
+    this.lblName.setSize(new FormSize(155, 13));
     this.lblName.setTabIndex(4);
     this.lblName.setText("XXXXXXXXXXXXXXXXXX");
     // lblDifficulty
     this.lblDifficulty.setLocation(new java.awt.Point(69, 24));
     this.lblDifficulty.setName("lblDifficulty");
-    this.lblDifficulty.setSize(new Size(58, 13));
+    this.lblDifficulty.setSize(new FormSize(58, 13));
     this.lblDifficulty.setTabIndex(5);
     this.lblDifficulty.setText("Impossible");
     // btnClose
     this.btnClose.setDialogResult(DialogResult.Cancel);
     this.btnClose.setLocation(new java.awt.Point(-32, -32));
     this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new Size(26, 27));
+    this.btnClose.setSize(new FormSize(26, 27));
     this.btnClose.setTabIndex(32);
     this.btnClose.setTabStop(false);
     this.btnClose.setText("X");
@@ -133,7 +133,7 @@ public class FormViewCommander extends WinformForm {
     this.lblTimeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblTimeLabel.setLocation(new java.awt.Point(8, 40));
     this.lblTimeLabel.setName("lblTimeLabel");
-    this.lblTimeLabel.setSize(new Size(34, 16));
+    this.lblTimeLabel.setSize(new FormSize(34, 16));
     this.lblTimeLabel.setTabIndex(37);
     this.lblTimeLabel.setText("Time:");
     // lblCashLabel
@@ -141,7 +141,7 @@ public class FormViewCommander extends WinformForm {
     this.lblCashLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblCashLabel.setLocation(new java.awt.Point(8, 16));
     this.lblCashLabel.setName("lblCashLabel");
-    this.lblCashLabel.setSize(new Size(35, 16));
+    this.lblCashLabel.setSize(new FormSize(35, 16));
     this.lblCashLabel.setTabIndex(38);
     this.lblCashLabel.setText("Cash:");
     // lblDebtLabel
@@ -149,7 +149,7 @@ public class FormViewCommander extends WinformForm {
     this.lblDebtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblDebtLabel.setLocation(new java.awt.Point(8, 32));
     this.lblDebtLabel.setName("lblDebtLabel");
-    this.lblDebtLabel.setSize(new Size(32, 16));
+    this.lblDebtLabel.setSize(new FormSize(32, 16));
     this.lblDebtLabel.setTabIndex(39);
     this.lblDebtLabel.setText("Debt:");
     // lblNetWorthLabel
@@ -157,7 +157,7 @@ public class FormViewCommander extends WinformForm {
     this.lblNetWorthLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblNetWorthLabel.setLocation(new java.awt.Point(8, 48));
     this.lblNetWorthLabel.setName("lblNetWorthLabel");
-    this.lblNetWorthLabel.setSize(new Size(60, 16));
+    this.lblNetWorthLabel.setSize(new FormSize(60, 16));
     this.lblNetWorthLabel.setTabIndex(40);
     this.lblNetWorthLabel.setText("Net Worth:");
     // lblDifficultyLabel
@@ -165,13 +165,13 @@ public class FormViewCommander extends WinformForm {
     this.lblDifficultyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblDifficultyLabel.setLocation(new java.awt.Point(8, 24));
     this.lblDifficultyLabel.setName("lblDifficultyLabel");
-    this.lblDifficultyLabel.setSize(new Size(53, 16));
+    this.lblDifficultyLabel.setSize(new FormSize(53, 16));
     this.lblDifficultyLabel.setTabIndex(43);
     this.lblDifficultyLabel.setText("Difficulty:");
     // lblTime
     this.lblTime.setLocation(new java.awt.Point(69, 40));
     this.lblTime.setName("lblTime");
-    this.lblTime.setSize(new Size(66, 13));
+    this.lblTime.setSize(new FormSize(66, 13));
     this.lblTime.setTabIndex(44);
     this.lblTime.setText("88,888 days");
     // boxSkills
@@ -179,32 +179,32 @@ public class FormViewCommander extends WinformForm {
           this.lblPilot, this.lblEngineerLabel, this.lblTraderLabel, this.lblFighterLabel, this.lblPilotLabel}));
     this.boxSkills.setLocation(new java.awt.Point(8, 64));
     this.boxSkills.setName("boxSkills");
-    this.boxSkills.setSize(new Size(216, 56));
+    this.boxSkills.setSize(new FormSize(216, 56));
     this.boxSkills.setTabIndex(49);
     this.boxSkills.setTabStop(false);
     this.boxSkills.setText("Skills");
     // lblEngineer
     this.lblEngineer.setLocation(new java.awt.Point(167, 32));
     this.lblEngineer.setName("lblEngineer");
-    this.lblEngineer.setSize(new Size(40, 13));
+    this.lblEngineer.setSize(new FormSize(40, 13));
     this.lblEngineer.setTabIndex(56);
     this.lblEngineer.setText("88 (88)");
     // lblTrader
     this.lblTrader.setLocation(new java.awt.Point(58, 32));
     this.lblTrader.setName("lblTrader");
-    this.lblTrader.setSize(new Size(40, 13));
+    this.lblTrader.setSize(new FormSize(40, 13));
     this.lblTrader.setTabIndex(55);
     this.lblTrader.setText("88 (88)");
     // lblFighter
     this.lblFighter.setLocation(new java.awt.Point(167, 16));
     this.lblFighter.setName("lblFighter");
-    this.lblFighter.setSize(new Size(40, 13));
+    this.lblFighter.setSize(new FormSize(40, 13));
     this.lblFighter.setTabIndex(54);
     this.lblFighter.setText("88 (88)");
     // lblPilot
     this.lblPilot.setLocation(new java.awt.Point(58, 16));
     this.lblPilot.setName("lblPilot");
-    this.lblPilot.setSize(new Size(40, 13));
+    this.lblPilot.setSize(new FormSize(40, 13));
     this.lblPilot.setTabIndex(53);
     this.lblPilot.setText("88 (88)");
     // lblEngineerLabel
@@ -212,7 +212,7 @@ public class FormViewCommander extends WinformForm {
     this.lblEngineerLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblEngineerLabel.setLocation(new java.awt.Point(104, 32));
     this.lblEngineerLabel.setName("lblEngineerLabel");
-    this.lblEngineerLabel.setSize(new Size(55, 16));
+    this.lblEngineerLabel.setSize(new FormSize(55, 16));
     this.lblEngineerLabel.setTabIndex(52);
     this.lblEngineerLabel.setText("Engineer:");
     // lblTraderLabel
@@ -220,7 +220,7 @@ public class FormViewCommander extends WinformForm {
     this.lblTraderLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblTraderLabel.setLocation(new java.awt.Point(8, 32));
     this.lblTraderLabel.setName("lblTraderLabel");
-    this.lblTraderLabel.setSize(new Size(42, 16));
+    this.lblTraderLabel.setSize(new FormSize(42, 16));
     this.lblTraderLabel.setTabIndex(51);
     this.lblTraderLabel.setText("Trader:");
     // lblFighterLabel
@@ -228,7 +228,7 @@ public class FormViewCommander extends WinformForm {
     this.lblFighterLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblFighterLabel.setLocation(new java.awt.Point(104, 16));
     this.lblFighterLabel.setName("lblFighterLabel");
-    this.lblFighterLabel.setSize(new Size(44, 16));
+    this.lblFighterLabel.setSize(new FormSize(44, 16));
     this.lblFighterLabel.setTabIndex(50);
     this.lblFighterLabel.setText("Fighter:");
     // lblPilotLabel
@@ -236,35 +236,35 @@ public class FormViewCommander extends WinformForm {
     this.lblPilotLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblPilotLabel.setLocation(new java.awt.Point(8, 16));
     this.lblPilotLabel.setName("lblPilotLabel");
-    this.lblPilotLabel.setSize(new Size(31, 16));
+    this.lblPilotLabel.setSize(new FormSize(31, 16));
     this.lblPilotLabel.setTabIndex(49);
     this.lblPilotLabel.setText("Pilot:");
     // boxFinances
     this.boxFinances.Controls.addAll(this.lblCash, this.lblDebt, this.lblNetWorth, this.lblNetWorthLabel, this.lblCashLabel, this.lblDebtLabel);
     this.boxFinances.setLocation(new java.awt.Point(8, 128));
     this.boxFinances.setName("boxFinances");
-    this.boxFinances.setSize(new Size(216, 72));
+    this.boxFinances.setSize(new FormSize(216, 72));
     this.boxFinances.setTabIndex(50);
     this.boxFinances.setTabStop(false);
     this.boxFinances.setText("Finances");
     // lblCash
     this.lblCash.setLocation(new java.awt.Point(104, 16));
     this.lblCash.setName("lblCash");
-    this.lblCash.setSize(new Size(70, 13));
+    this.lblCash.setSize(new FormSize(70, 13));
     this.lblCash.setTabIndex(43);
     this.lblCash.setText("8,888,888 cr.");
     this.lblCash.TextAlign = ContentAlignment.TopRight;
     // lblDebt
     this.lblDebt.setLocation(new java.awt.Point(104, 32));
     this.lblDebt.setName("lblDebt");
-    this.lblDebt.setSize(new Size(70, 13));
+    this.lblDebt.setSize(new FormSize(70, 13));
     this.lblDebt.setTabIndex(42);
     this.lblDebt.setText("8,888,888 cr.");
     this.lblDebt.TextAlign = ContentAlignment.TopRight;
     // lblNetWorth
     this.lblNetWorth.setLocation(new java.awt.Point(104, 48));
     this.lblNetWorth.setName("lblNetWorth");
-    this.lblNetWorth.setSize(new Size(70, 13));
+    this.lblNetWorth.setSize(new FormSize(70, 13));
     this.lblNetWorth.setTabIndex(41);
     this.lblNetWorth.setText("8,888,888 cr.");
     this.lblNetWorth.TextAlign = ContentAlignment.TopRight;
@@ -274,7 +274,7 @@ public class FormViewCommander extends WinformForm {
           this.lblRecord}));
     this.boxNotoriety.setLocation(new java.awt.Point(8, 208));
     this.boxNotoriety.setName("boxNotoriety");
-    this.boxNotoriety.setSize(new Size(216, 88));
+    this.boxNotoriety.setSize(new FormSize(216, 88));
     this.boxNotoriety.setTabIndex(51);
     this.boxNotoriety.setTabStop(false);
     this.boxNotoriety.setText("Notoriety");
@@ -283,7 +283,7 @@ public class FormViewCommander extends WinformForm {
     this.lblPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblPoliceLabel.setLocation(new java.awt.Point(8, 48));
     this.lblPoliceLabel.setName("lblPoliceLabel");
-    this.lblPoliceLabel.setSize(new Size(81, 16));
+    this.lblPoliceLabel.setSize(new FormSize(81, 16));
     this.lblPoliceLabel.setTabIndex(46);
     this.lblPoliceLabel.setText("Police Record:");
     // lblReputationLabel
@@ -291,7 +291,7 @@ public class FormViewCommander extends WinformForm {
     this.lblReputationLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblReputationLabel.setLocation(new java.awt.Point(8, 32));
     this.lblReputationLabel.setName("lblReputationLabel");
-    this.lblReputationLabel.setSize(new Size(65, 16));
+    this.lblReputationLabel.setSize(new FormSize(65, 16));
     this.lblReputationLabel.setTabIndex(45);
     this.lblReputationLabel.setText("Reputation:");
     // lblKillsLabel
@@ -299,25 +299,25 @@ public class FormViewCommander extends WinformForm {
     this.lblKillsLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblKillsLabel.setLocation(new java.awt.Point(8, 16));
     this.lblKillsLabel.setName("lblKillsLabel");
-    this.lblKillsLabel.setSize(new Size(30, 16));
+    this.lblKillsLabel.setSize(new FormSize(30, 16));
     this.lblKillsLabel.setTabIndex(44);
     this.lblKillsLabel.setText("Kills:");
     // lblKills
     this.lblKills.setLocation(new java.awt.Point(104, 16));
     this.lblKills.setName("lblKills");
-    this.lblKills.setSize(new Size(33, 13));
+    this.lblKills.setSize(new FormSize(33, 13));
     this.lblKills.setTabIndex(43);
     this.lblKills.setText("8,888");
     // lblReputation
     this.lblReputation.setLocation(new java.awt.Point(104, 32));
     this.lblReputation.setName("lblReputation");
-    this.lblReputation.setSize(new Size(88, 13));
+    this.lblReputation.setSize(new FormSize(88, 13));
     this.lblReputation.setTabIndex(42);
     this.lblReputation.setText("Mostly Harmless");
     // lblRecord
     this.lblRecord.setLocation(new java.awt.Point(104, 48));
     this.lblRecord.setName("lblRecord");
-    this.lblRecord.setSize(new Size(63, 13));
+    this.lblRecord.setSize(new FormSize(63, 13));
     this.lblRecord.setTabIndex(41);
     this.lblRecord.setText("Psychopath");
     // lblBountyLabel
@@ -325,21 +325,21 @@ public class FormViewCommander extends WinformForm {
     this.lblBountyLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblBountyLabel.setLocation(new java.awt.Point(8, 64));
     this.lblBountyLabel.setName("lblBountyLabel");
-    this.lblBountyLabel.setSize(new Size(84, 16));
+    this.lblBountyLabel.setSize(new FormSize(84, 16));
     this.lblBountyLabel.setTabIndex(48);
     this.lblBountyLabel.setText("Bounty offered:");
     this.lblBountyLabel.setVisible(false);
     // lblBounty
     this.lblBounty.setLocation(new java.awt.Point(104, 64));
     this.lblBounty.setName("lblBounty");
-    this.lblBounty.setSize(new Size(72, 13));
+    this.lblBounty.setSize(new FormSize(72, 13));
     this.lblBounty.setTabIndex(47);
     this.lblBounty.setText("8,888,888 cr.");
     this.lblBounty.setVisible(false);
     // FormViewCommander
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnClose);
-    this.setClientSize(new Size(232, 304));
+    this.setClientSize(new FormSize(232, 304));
     this.Controls.addAll(Arrays.asList(this.boxNotoriety, this.boxFinances, this.boxSkills, this.lblTime,
                                        this.lblDifficultyLabel, this.lblTimeLabel, this.lblNameLabel, this.btnClose, this.lblDifficulty,
                                        this.lblName));

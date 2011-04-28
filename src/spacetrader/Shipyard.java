@@ -1,7 +1,7 @@
 package spacetrader;
 import java.util.ArrayList;
 import org.gts.bst.ship.ShipType;
-import org.gts.bst.ship.Size;
+import org.gts.bst.ship.ShipSize;
 import spacetrader.enums.ShipyardId;
 import spacetrader.enums.ShipyardSkill;
 
@@ -40,7 +40,7 @@ public class Shipyard {
   public static final int PENALTY_SECOND_PCT = 90;
   public static final int PENALTY_SECOND_FEE = 75;
   private ShipyardId _id;
-  private Size _specialtySize;
+  private ShipSize _specialtySize;
   private ShipyardSkill _skill;
   // Internal Variables
   private int modCrew = 0;
@@ -49,7 +49,7 @@ public class Shipyard {
   private int modShield = 0;
   private int modWeapon = 0;
 
-  public Shipyard(ShipyardId id, Size specialtySize, ShipyardSkill skill) {
+  public Shipyard(ShipyardId id, ShipSize specialtySize, ShipyardSkill skill) {
     _id = id;
     _specialtySize = specialtySize;
     _skill = skill;
@@ -91,12 +91,12 @@ public class Shipyard {
     return BasePrice() * CostAdjustment() / ADJUST_SIZE_DEFAULT;
   }
 
-  public ArrayList<Size> AvailableSizes() {
-    ArrayList<Size> list = new ArrayList<Size>(6);
-    int begin = Math.max(Size.Tiny.CastToInt(), SpecialtySize().CastToInt() - 2);
-    int end = Math.min(Size.Gargantuan.CastToInt(), SpecialtySize().CastToInt() + 2);
+  public ArrayList<ShipSize> AvailableSizes() {
+    ArrayList<ShipSize> list = new ArrayList<ShipSize>(6);
+    int begin = Math.max(ShipSize.Tiny.CastToInt(), SpecialtySize().CastToInt() - 2);
+    int end = Math.min(ShipSize.Gargantuan.CastToInt(), SpecialtySize().CastToInt() + 2);
     for(int index = begin; index <= end; index++) {
-      list.add(Size.values()[index]);
+      list.add(ShipSize.values()[index]);
     }
     return list;
   }
@@ -187,7 +187,7 @@ public class Shipyard {
     return _skill;
   }
 
-  public Size SpecialtySize() {
+  public ShipSize SpecialtySize() {
     return _specialtySize;
   }
 

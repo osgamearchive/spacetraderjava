@@ -41,7 +41,7 @@ public class FormViewQuests extends WinformForm {
     this.btnClose.setDialogResult(DialogResult.Cancel);
     this.btnClose.setLocation(new java.awt.Point(-32, -32));
     this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new jwinforms.Size(32, 32));
+    this.btnClose.setSize(new jwinforms.FormSize(32, 32));
     this.btnClose.setTabIndex(32);
     this.btnClose.setTabStop(false);
     this.btnClose.setText("X");
@@ -51,7 +51,7 @@ public class FormViewQuests extends WinformForm {
     this.lblQuests.LinkArea = new jwinforms.LinkArea(0, 0);
     this.lblQuests.setLocation(new java.awt.Point(8, 8));
     this.lblQuests.setName("lblQuests");
-    this.lblQuests.setSize(new jwinforms.Size(368, 312));
+    this.lblQuests.setSize(new jwinforms.FormSize(368, 312));
     this.lblQuests.setTabIndex(44);
     this.lblQuests.setText("Kill the space monster at Acamar."
         + "\n\n"
@@ -84,9 +84,9 @@ public class FormViewQuests extends WinformForm {
     //
     // FormViewQuests
     //
-    this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
+    this.setAutoScaleBaseSize(new jwinforms.FormSize(5, 13));
     this.setCancelButton(this.btnClose);
-    this.setClientSize(new jwinforms.Size(378, 325));
+    this.setClientSize(new jwinforms.FormSize(378, 325));
     this.Controls.addAll(Arrays.asList(this.btnClose, this.lblQuests));
     this.setFormBorderStyle(FormBorderStyle.FixedDialog);
     this.setMaximizeBox(false);

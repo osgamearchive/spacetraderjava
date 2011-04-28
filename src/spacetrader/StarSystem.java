@@ -1,7 +1,7 @@
 package spacetrader;
 import java.util.ArrayList;
 import org.gts.bst.events.SpecialEventType;
-import org.gts.bst.ship.Size;
+import org.gts.bst.ship.ShipSize;
 import spacetrader.enums.PoliticalSystemType;
 import spacetrader.enums.ShipyardId;
 import spacetrader.enums.SpecialResource;
@@ -15,7 +15,7 @@ import spacetrader.util.Hashtable;
 public class StarSystem extends STSerializableObject {
   private PoliticalSystemType _politicalSystemType;
   private ShipyardId _shipyardId = spacetrader.enums.ShipyardId.NA;
-  private Size _size;
+  private ShipSize _size;
   private SpecialEventType _specialEventType = org.gts.bst.events.SpecialEventType.NA;
   private SpecialResource _specialResource;
   private StarSystemId _id;
@@ -27,7 +27,7 @@ public class StarSystem extends STSerializableObject {
   private int _y;
   private int[] _tradeItems = new int[10];
 
-  public StarSystem(StarSystemId id, int x, int y, Size size, TechLevel techLevel,
+  public StarSystem(StarSystemId id, int x, int y, ShipSize size, TechLevel techLevel,
                     PoliticalSystemType politicalSystemType, SystemPressure systemPressure, SpecialResource specialResource) {
     _id = id;
     _x = x;
@@ -45,7 +45,7 @@ public class StarSystem extends STSerializableObject {
     _id = StarSystemId.FromInt(GetValueFromHash(hash, "_id", _id, Integer.class));
     _x = GetValueFromHash(hash, "_x", _x);
     _y = GetValueFromHash(hash, "_y", _y);
-    _size = Size.FromInt(GetValueFromHash(hash, "_size", _size, Integer.class));
+    _size = ShipSize.FromInt(GetValueFromHash(hash, "_size", _size, Integer.class));
     _techLevel = TechLevel.FromInt(GetValueFromHash(hash, "_techLevel", _techLevel, Integer.class));
     _politicalSystemType = PoliticalSystemType.FromInt(GetValueFromHash(hash, "_politicalSystemType", _politicalSystemType, Integer.class));
     _systemPressure = SystemPressure.FromInt(GetValueFromHash(hash, "_systemPressure", _systemPressure, Integer.class));
@@ -308,7 +308,7 @@ public class StarSystem extends STSerializableObject {
     _shipyardId = value;
   }
 
-  public Size Size() {
+  public ShipSize Size() {
     return _size;
   }
 

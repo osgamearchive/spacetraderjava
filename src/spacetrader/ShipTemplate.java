@@ -1,13 +1,13 @@
 package spacetrader;
 import jwinforms.Image;
 import org.gts.bst.ship.ShipType;
-import org.gts.bst.ship.Size;
+import org.gts.bst.ship.ShipSize;
 import spacetrader.util.Hashtable;
 
 
 public class ShipTemplate extends STSerializableObject implements Comparable<ShipTemplate> {
   private Image[] _images = null;
-  private Size _size = org.gts.bst.ship.Size.Tiny;
+  private ShipSize _size = org.gts.bst.ship.ShipSize.Tiny;
   private String _name = null;
   private int _imageIndex = ShipType.Custom.CastToInt();
   private int _cargoBays = 0;
@@ -18,7 +18,7 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
   private int _fuelTanks = 0;
   private int _hullStrength = 0;
 
-  public ShipTemplate(Size size, String name) {
+  public ShipTemplate(ShipSize size, String name) {
     _name = name;
     _size = size;
     _images = Game.CurrentGame().getParentWindow().CustomShipImages();
@@ -159,11 +159,11 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
     _shieldSlots = value;
   }
 
-  public Size Size() {
+  public ShipSize Size() {
     return _size;
   }
 
-  public void Size(Size value) {
+  public void Size(ShipSize value) {
     _size = value;
   }
 

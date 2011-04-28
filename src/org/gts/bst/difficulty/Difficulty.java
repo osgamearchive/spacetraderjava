@@ -3,11 +3,11 @@ import spacetrader.enums.SpaceTraderEnum;
 
 
 public enum Difficulty implements SpaceTraderEnum {
-  Beginner(1),
+  Beginner(2),
   Easy(1),
   Normal(0),
   Hard(-1),
-  Impossible(-1);
+  Impossible(-2);
   private final int skillAdjust;
 
   private Difficulty(int skillAdjust) {

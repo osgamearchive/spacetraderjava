@@ -31,6 +31,10 @@ public class RegistryKey {
     }
   }
 
+  public Object GetValue(String settingName) {
+    return properties.getProperty(settingName);
+  }
+
   public void Close() {
     FileOutputStream stream;
     try {
@@ -55,9 +59,5 @@ public class RegistryKey {
 
   public void SetValue(String settingName, String settingValue) {
     properties.setProperty(settingName, settingValue);
-  }
-
-  public Object GetValue(String settingName) {
-    return properties.getProperty(settingName);
   }
 }

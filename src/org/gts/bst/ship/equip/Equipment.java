@@ -71,7 +71,7 @@ abstract public class Equipment extends STSerializableObject implements Cloneabl
   }
 
   public Image Image() {
-    return Game.CurrentGame().getParentWindow().EquipmentImages().getImages()[BaseImageIndex() + SubType().CastToInt()];
+    return Game.CurrentGame().getParentWindow().EquipmentImages().getImages()[BaseImageIndex() + SubType().asInteger()];
   }
 
   public String Name() {

@@ -7,7 +7,7 @@ import jwinforms.DialogResult;
 import jwinforms.FormBorderStyle;
 import jwinforms.FormStartPosition;
 import jwinforms.Label;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformForm;
 import spacetrader.Functions;
 import spacetrader.HighScoreRecord;
@@ -73,7 +73,7 @@ public class FormViewHighScores extends WinformForm {
     this.btnClose.setDialogResult(DialogResult.Cancel);
     this.btnClose.setLocation(new java.awt.Point(-32, -32));
     this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new Size(32, 32));
+    this.btnClose.setSize(new FormSize(32, 32));
     this.btnClose.setTabIndex(32);
     this.btnClose.setTabStop(false);
     this.btnClose.setText("X");
@@ -83,7 +83,7 @@ public class FormViewHighScores extends WinformForm {
     this.lblRank0.setAutoSize(true);
     this.lblRank0.setLocation(new java.awt.Point(8, 8));
     this.lblRank0.setName("lblRank0");
-    this.lblRank0.setSize(new Size(14, 13));
+    this.lblRank0.setSize(new FormSize(14, 13));
     this.lblRank0.setTabIndex(33);
     this.lblRank0.setText("1.");
     this.lblRank0.TextAlign = ContentAlignment.TopRight;
@@ -93,7 +93,7 @@ public class FormViewHighScores extends WinformForm {
     this.lblRank2.setAutoSize(true);
     this.lblRank2.setLocation(new java.awt.Point(8, 136));
     this.lblRank2.setName("lblRank2");
-    this.lblRank2.setSize(new Size(14, 13));
+    this.lblRank2.setSize(new FormSize(14, 13));
     this.lblRank2.setTabIndex(34);
     this.lblRank2.setText("3.");
     this.lblRank2.TextAlign = ContentAlignment.TopRight;
@@ -103,7 +103,7 @@ public class FormViewHighScores extends WinformForm {
     this.lblRank1.setAutoSize(true);
     this.lblRank1.setLocation(new java.awt.Point(8, 72));
     this.lblRank1.setName("lblRank1");
-    this.lblRank1.setSize(new Size(14, 13));
+    this.lblRank1.setSize(new FormSize(14, 13));
     this.lblRank1.setTabIndex(35);
     this.lblRank1.setText("2.");
     this.lblRank1.TextAlign = ContentAlignment.TopRight;
@@ -112,7 +112,7 @@ public class FormViewHighScores extends WinformForm {
     //
     this.lblScore0.setLocation(new java.awt.Point(168, 8));
     this.lblScore0.setName("lblScore0");
-    this.lblScore0.setSize(new Size(43, 13));
+    this.lblScore0.setSize(new FormSize(43, 13));
     this.lblScore0.setTabIndex(36);
     this.lblScore0.setText("888.8%");
     this.lblScore0.TextAlign = ContentAlignment.TopRight;
@@ -122,7 +122,7 @@ public class FormViewHighScores extends WinformForm {
     //
     this.lblScore1.setLocation(new java.awt.Point(168, 72));
     this.lblScore1.setName("lblScore1");
-    this.lblScore1.setSize(new Size(43, 13));
+    this.lblScore1.setSize(new FormSize(43, 13));
     this.lblScore1.setTabIndex(37);
     this.lblScore1.setText("888.8%");
     this.lblScore1.TextAlign = ContentAlignment.TopRight;
@@ -132,7 +132,7 @@ public class FormViewHighScores extends WinformForm {
     //
     this.lblScore2.setLocation(new java.awt.Point(168, 136));
     this.lblScore2.setName("lblScore2");
-    this.lblScore2.setSize(new Size(43, 13));
+    this.lblScore2.setSize(new FormSize(43, 13));
     this.lblScore2.setTabIndex(38);
     this.lblScore2.setText("888.8%");
     this.lblScore2.TextAlign = ContentAlignment.TopRight;
@@ -142,7 +142,7 @@ public class FormViewHighScores extends WinformForm {
     //
     this.lblName0.setLocation(new java.awt.Point(24, 8));
     this.lblName0.setName("lblName0");
-    this.lblName0.setSize(new Size(144, 13));
+    this.lblName0.setSize(new FormSize(144, 13));
     this.lblName0.setTabIndex(39);
     this.lblName0.setText("Empty");
     //
@@ -150,7 +150,7 @@ public class FormViewHighScores extends WinformForm {
     //
     this.lblName1.setLocation(new java.awt.Point(24, 72));
     this.lblName1.setName("lblName1");
-    this.lblName1.setSize(new Size(144, 13));
+    this.lblName1.setSize(new FormSize(144, 13));
     this.lblName1.setTabIndex(40);
     this.lblName1.setText("Empty");
     //
@@ -158,7 +158,7 @@ public class FormViewHighScores extends WinformForm {
     //
     this.lblName2.setLocation(new java.awt.Point(24, 136));
     this.lblName2.setName("lblName2");
-    this.lblName2.setSize(new Size(144, 13));
+    this.lblName2.setSize(new FormSize(144, 13));
     this.lblName2.setTabIndex(41);
     this.lblName2.setText("Empty");
     //
@@ -166,7 +166,7 @@ public class FormViewHighScores extends WinformForm {
     //
     this.lblStatus0.setLocation(new java.awt.Point(24, 24));
     this.lblStatus0.setName("lblStatus0");
-    this.lblStatus0.setSize(new Size(200, 26));
+    this.lblStatus0.setSize(new FormSize(200, 26));
     this.lblStatus0.setTabIndex(42);
     this.lblStatus0.setText("Claimed moon in 888,888 days, worth 8,888,888 credits on impossible level.");
     this.lblStatus0.setVisible(false);
@@ -175,7 +175,7 @@ public class FormViewHighScores extends WinformForm {
     //
     this.lblStatus1.setLocation(new java.awt.Point(24, 88));
     this.lblStatus1.setName("lblStatus1");
-    this.lblStatus1.setSize(new Size(200, 26));
+    this.lblStatus1.setSize(new FormSize(200, 26));
     this.lblStatus1.setTabIndex(43);
     this.lblStatus1.setText("Claimed moon in 888,888 days, worth 8,888,888 credits on impossible level.");
     this.lblStatus1.setVisible(false);
@@ -184,16 +184,16 @@ public class FormViewHighScores extends WinformForm {
     //
     this.lblStatus2.setLocation(new java.awt.Point(24, 152));
     this.lblStatus2.setName("lblStatus2");
-    this.lblStatus2.setSize(new Size(200, 26));
+    this.lblStatus2.setSize(new FormSize(200, 26));
     this.lblStatus2.setTabIndex(44);
     this.lblStatus2.setText("Claimed moon in 888,888 days, worth 8,888,888 credits on impossible level.");
     this.lblStatus2.setVisible(false);
     //
     // FormViewHighScores
     //
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnClose);
-    this.setClientSize(new Size(218, 191));
+    this.setClientSize(new FormSize(218, 191));
     this.Controls.addAll(Arrays.asList(
         this.lblStatus2,
         this.lblStatus1,

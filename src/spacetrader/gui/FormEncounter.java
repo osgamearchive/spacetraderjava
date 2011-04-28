@@ -18,7 +18,7 @@ import jwinforms.Label;
 import jwinforms.PaintEventArgs;
 import jwinforms.PictureBox;
 import jwinforms.ResourceManager;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.SystemColors;
 import jwinforms.Timer;
 import jwinforms.WinformForm;
@@ -218,7 +218,7 @@ public class FormEncounter extends WinformForm {
     // lblEncounter
     this.lblEncounter.setLocation(new java.awt.Point(8, 152));
     this.lblEncounter.setName("lblEncounter");
-    this.lblEncounter.setSize(new Size(232, 26));
+    this.lblEncounter.setSize(new FormSize(232, 26));
     this.lblEncounter.setTabIndex(0);
     this.lblEncounter.setText("At 20 clicks from Tarchannen, you encounter the famous Captain Ahab.");
     // picShipYou
@@ -226,7 +226,7 @@ public class FormEncounter extends WinformForm {
     this.picShipYou.setBorderStyle(BorderStyle.FixedSingle);
     this.picShipYou.setLocation(new java.awt.Point(26, 24));
     this.picShipYou.setName("picShipYou");
-    this.picShipYou.setSize(new Size(70, 58));
+    this.picShipYou.setSize(new FormSize(70, 58));
     this.picShipYou.setTabIndex(13);
     this.picShipYou.setTabStop(false);
     this.picShipYou.setPaint(new EventHandler<Object, PaintEventArgs>() {
@@ -240,7 +240,7 @@ public class FormEncounter extends WinformForm {
     this.picShipOpponent.setBorderStyle(BorderStyle.FixedSingle);
     this.picShipOpponent.setLocation(new java.awt.Point(138, 24));
     this.picShipOpponent.setName("picShipOpponent");
-    this.picShipOpponent.setSize(new Size(70, 58));
+    this.picShipOpponent.setSize(new FormSize(70, 58));
     this.picShipOpponent.setTabIndex(14);
     this.picShipOpponent.setTabStop(false);
     this.picShipOpponent.setPaint(new EventHandler<Object, PaintEventArgs>()
@@ -253,7 +253,7 @@ public class FormEncounter extends WinformForm {
     // lblAction
     this.lblAction.setLocation(new java.awt.Point(8, 192));
     this.lblAction.setName("lblAction");
-    this.lblAction.setSize(new Size(232, 39));
+    this.lblAction.setSize(new FormSize(232, 39));
     this.lblAction.setTabIndex(15);
     this.lblAction.setText("\"We know you removed illegal goods from the Marie Celeste. You must give them up at once!\"");
     // lblOpponentLabel
@@ -261,7 +261,7 @@ public class FormEncounter extends WinformForm {
     this.lblOpponentLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblOpponentLabel.setLocation(new java.awt.Point(141, 8));
     this.lblOpponentLabel.setName("lblOpponentLabel");
-    this.lblOpponentLabel.setSize(new Size(59, 16));
+    this.lblOpponentLabel.setSize(new FormSize(59, 16));
     this.lblOpponentLabel.setTabIndex(16);
     this.lblOpponentLabel.setText("Opponent:");
     // lblYouLabel
@@ -269,50 +269,50 @@ public class FormEncounter extends WinformForm {
     this.lblYouLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblYouLabel.setLocation(new java.awt.Point(45, 8));
     this.lblYouLabel.setName("lblYouLabel");
-    this.lblYouLabel.setSize(new Size(28, 16));
+    this.lblYouLabel.setSize(new FormSize(28, 16));
     this.lblYouLabel.setTabIndex(17);
     this.lblYouLabel.setText("You:");
     // lblOpponentShip
     this.lblOpponentShip.setLocation(new java.awt.Point(138, 88));
     this.lblOpponentShip.setName("lblOpponentShip");
-    this.lblOpponentShip.setSize(new Size(80, 13));
+    this.lblOpponentShip.setSize(new FormSize(80, 13));
     this.lblOpponentShip.setTabIndex(18);
     this.lblOpponentShip.setText("Space Monster");
     // lblYouShip
     this.lblYouShip.setLocation(new java.awt.Point(26, 88));
     this.lblYouShip.setName("lblYouShip");
-    this.lblYouShip.setSize(new Size(100, 13));
+    this.lblYouShip.setSize(new FormSize(100, 13));
     this.lblYouShip.setTabIndex(19);
     this.lblYouShip.setText("Grasshopper");
     // lblYouHull
     this.lblYouHull.setLocation(new java.awt.Point(26, 104));
     this.lblYouHull.setName("lblYouHull");
-    this.lblYouHull.setSize(new Size(68, 13));
+    this.lblYouHull.setSize(new FormSize(68, 13));
     this.lblYouHull.setTabIndex(20);
     this.lblYouHull.setText("Hull at 100%");
     // lblYouShields
     this.lblYouShields.setLocation(new java.awt.Point(26, 120));
     this.lblYouShields.setName("lblYouShields");
-    this.lblYouShields.setSize(new Size(86, 13));
+    this.lblYouShields.setSize(new FormSize(86, 13));
     this.lblYouShields.setTabIndex(21);
     this.lblYouShields.setText("Shields at 100%");
     // lblOpponentShields
     this.lblOpponentShields.setLocation(new java.awt.Point(138, 120));
     this.lblOpponentShields.setName("lblOpponentShields");
-    this.lblOpponentShields.setSize(new Size(86, 13));
+    this.lblOpponentShields.setSize(new FormSize(86, 13));
     this.lblOpponentShields.setTabIndex(23);
     this.lblOpponentShields.setText("Shields at 100%");
     // lblOpponentHull
     this.lblOpponentHull.setLocation(new java.awt.Point(138, 104));
     this.lblOpponentHull.setName("lblOpponentHull");
-    this.lblOpponentHull.setSize(new Size(68, 13));
+    this.lblOpponentHull.setSize(new FormSize(68, 13));
     this.lblOpponentHull.setTabIndex(22);
     this.lblOpponentHull.setText("Hull at 100%");
     // btnAttack
     this.btnAttack.setFlatStyle(FlatStyle.Flat);
     this.btnAttack.setLocation(new java.awt.Point(8, 240));
     this.btnAttack.setName("btnAttack");
-    this.btnAttack.setSize(new Size(46, 22));
+    this.btnAttack.setSize(new FormSize(46, 22));
     this.btnAttack.setTabIndex(24);
     this.btnAttack.setText("Attack");
     this.btnAttack.setVisible(false);
@@ -327,7 +327,7 @@ public class FormEncounter extends WinformForm {
     this.btnFlee.setFlatStyle(FlatStyle.Flat);
     this.btnFlee.setLocation(new java.awt.Point(62, 240));
     this.btnFlee.setName("btnFlee");
-    this.btnFlee.setSize(new Size(36, 22));
+    this.btnFlee.setSize(new FormSize(36, 22));
     this.btnFlee.setTabIndex(25);
     this.btnFlee.setText("Flee");
     this.btnFlee.setVisible(false);
@@ -341,7 +341,7 @@ public class FormEncounter extends WinformForm {
     this.btnSubmit.setFlatStyle(FlatStyle.Flat);
     this.btnSubmit.setLocation(new java.awt.Point(106, 240));
     this.btnSubmit.setName("btnSubmit");
-    this.btnSubmit.setSize(new Size(49, 22));
+    this.btnSubmit.setSize(new FormSize(49, 22));
     this.btnSubmit.setTabIndex(26);
     this.btnSubmit.setText("Submit");
     this.btnSubmit.setVisible(false);
@@ -355,7 +355,7 @@ public class FormEncounter extends WinformForm {
     this.btnBribe.setFlatStyle(FlatStyle.Flat);
     this.btnBribe.setLocation(new java.awt.Point(163, 240));
     this.btnBribe.setName("btnBribe");
-    this.btnBribe.setSize(new Size(41, 22));
+    this.btnBribe.setSize(new FormSize(41, 22));
     this.btnBribe.setTabIndex(27);
     this.btnBribe.setText("Bribe");
     this.btnBribe.setVisible(false);
@@ -369,7 +369,7 @@ public class FormEncounter extends WinformForm {
     this.btnSurrender.setFlatStyle(FlatStyle.Flat);
     this.btnSurrender.setLocation(new java.awt.Point(106, 240));
     this.btnSurrender.setName("btnSurrender");
-    this.btnSurrender.setSize(new Size(65, 22));
+    this.btnSurrender.setSize(new FormSize(65, 22));
     this.btnSurrender.setTabIndex(28);
     this.btnSurrender.setText("Surrender");
     this.btnSurrender.setVisible(false);
@@ -383,7 +383,7 @@ public class FormEncounter extends WinformForm {
     this.btnIgnore.setFlatStyle(FlatStyle.Flat);
     this.btnIgnore.setLocation(new java.awt.Point(62, 240));
     this.btnIgnore.setName("btnIgnore");
-    this.btnIgnore.setSize(new Size(46, 22));
+    this.btnIgnore.setSize(new FormSize(46, 22));
     this.btnIgnore.setTabIndex(29);
     this.btnIgnore.setText("Ignore");
     this.btnIgnore.setVisible(false);
@@ -397,7 +397,7 @@ public class FormEncounter extends WinformForm {
     this.btnTrade.setFlatStyle(FlatStyle.Flat);
     this.btnTrade.setLocation(new java.awt.Point(116, 240));
     this.btnTrade.setName("btnTrade");
-    this.btnTrade.setSize(new Size(44, 22));
+    this.btnTrade.setSize(new FormSize(44, 22));
     this.btnTrade.setTabIndex(30);
     this.btnTrade.setText("Trade");
     this.btnTrade.setVisible(false);
@@ -411,7 +411,7 @@ public class FormEncounter extends WinformForm {
     this.btnPlunder.setFlatStyle(FlatStyle.Flat);
     this.btnPlunder.setLocation(new java.awt.Point(62, 240));
     this.btnPlunder.setName("btnPlunder");
-    this.btnPlunder.setSize(new Size(53, 22));
+    this.btnPlunder.setSize(new FormSize(53, 22));
     this.btnPlunder.setTabIndex(31);
     this.btnPlunder.setText("Plunder");
     this.btnPlunder.setVisible(false);
@@ -425,7 +425,7 @@ public class FormEncounter extends WinformForm {
     this.btnBoard.setFlatStyle(FlatStyle.Flat);
     this.btnBoard.setLocation(new java.awt.Point(8, 240));
     this.btnBoard.setName("btnBoard");
-    this.btnBoard.setSize(new Size(44, 22));
+    this.btnBoard.setSize(new FormSize(44, 22));
     this.btnBoard.setTabIndex(32);
     this.btnBoard.setText("Board");
     this.btnBoard.setVisible(false);
@@ -439,7 +439,7 @@ public class FormEncounter extends WinformForm {
     this.btnMeet.setFlatStyle(FlatStyle.Flat);
     this.btnMeet.setLocation(new java.awt.Point(116, 240));
     this.btnMeet.setName("btnMeet");
-    this.btnMeet.setSize(new Size(39, 22));
+    this.btnMeet.setSize(new FormSize(39, 22));
     this.btnMeet.setTabIndex(34);
     this.btnMeet.setText("Meet");
     this.btnMeet.setVisible(false);
@@ -453,7 +453,7 @@ public class FormEncounter extends WinformForm {
     this.btnDrink.setFlatStyle(FlatStyle.Flat);
     this.btnDrink.setLocation(new java.awt.Point(8, 240));
     this.btnDrink.setName("btnDrink");
-    this.btnDrink.setSize(new Size(41, 22));
+    this.btnDrink.setSize(new FormSize(41, 22));
     this.btnDrink.setTabIndex(35);
     this.btnDrink.setText("Drink");
     this.btnDrink.setVisible(false);
@@ -467,7 +467,7 @@ public class FormEncounter extends WinformForm {
     this.btnInt.setFlatStyle(FlatStyle.Flat);
     this.btnInt.setLocation(new java.awt.Point(179, 240));
     this.btnInt.setName("btnInt");
-    this.btnInt.setSize(new Size(30, 22));
+    this.btnInt.setSize(new FormSize(30, 22));
     this.btnInt.setTabIndex(36);
     this.btnInt.setText("Int.");
     this.btnInt.setVisible(false);
@@ -481,7 +481,7 @@ public class FormEncounter extends WinformForm {
     this.btnYield.setFlatStyle(FlatStyle.Flat);
     this.btnYield.setLocation(new java.awt.Point(106, 240));
     this.btnYield.setName("btnYield");
-    this.btnYield.setSize(new Size(39, 22));
+    this.btnYield.setSize(new FormSize(39, 22));
     this.btnYield.setTabIndex(37);
     this.btnYield.setText("Yield");
     this.btnYield.setVisible(false);
@@ -494,29 +494,29 @@ public class FormEncounter extends WinformForm {
     // picContinuous
     this.picContinuous.setLocation(new java.awt.Point(214, 247));
     this.picContinuous.setName("picContinuous");
-    this.picContinuous.setSize(new Size(9, 9));
+    this.picContinuous.setSize(new FormSize(9, 9));
     this.picContinuous.setTabIndex(38);
     this.picContinuous.setTabStop(false);
     this.picContinuous.setVisible(false);
     // ilContinuous
-    this.ilContinuous.setImageSize(new Size(9, 9));
+    this.ilContinuous.setImageSize(new FormSize(9, 9));
     this.ilContinuous.setImageStream(((ImageListStreamer)(resources.GetObject("ilContinuous.ImageStream"))));
     this.ilContinuous.setTransparentColor(java.awt.Color.white);
     // picEncounterType
     this.picEncounterType.setLocation(new java.awt.Point(220, 2));
     this.picEncounterType.setName("picEncounterType");
-    this.picEncounterType.setSize(new Size(12, 12));
+    this.picEncounterType.setSize(new FormSize(12, 12));
     this.picEncounterType.setTabIndex(39);
     this.picEncounterType.setTabStop(false);
     // ilEncounterType
-    this.ilEncounterType.setImageSize(new Size(12, 12));
+    this.ilEncounterType.setImageSize(new FormSize(12, 12));
     this.ilEncounterType.setImageStream(((ImageListStreamer)(resources.GetObject("ilEncounterType.ImageStream"))));
     this.ilEncounterType.setTransparentColor(Color.white);
     // picTrib00
     this.picTrib00.setBackColor(SystemColors.Control);
     this.picTrib00.setLocation(new java.awt.Point(16, 16));
     this.picTrib00.setName("picTrib00");
-    this.picTrib00.setSize(new Size(12, 12));
+    this.picTrib00.setSize(new FormSize(12, 12));
     this.picTrib00.setTabIndex(41);
     this.picTrib00.setTabStop(false);
     this.picTrib00.setVisible(false);
@@ -527,14 +527,14 @@ public class FormEncounter extends WinformForm {
       }
     });
     // ilTribbles
-    this.ilTribbles.setImageSize(new Size(12, 12));
+    this.ilTribbles.setImageSize(new FormSize(12, 12));
     this.ilTribbles.setImageStream(((ImageListStreamer)(resources.GetObject("ilTribbles.ImageStream"))));
     this.ilTribbles.setTransparentColor(java.awt.Color.white);
     // picTrib50
     this.picTrib50.setBackColor(SystemColors.Control);
     this.picTrib50.setLocation(new java.awt.Point(16, 224));
     this.picTrib50.setName("picTrib50");
-    this.picTrib50.setSize(new Size(12, 12));
+    this.picTrib50.setSize(new FormSize(12, 12));
     this.picTrib50.setTabIndex(42);
     this.picTrib50.setTabStop(false);
     this.picTrib50.setVisible(false);
@@ -548,7 +548,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib10.setBackColor(SystemColors.Control);
     this.picTrib10.setLocation(new java.awt.Point(8, 56));
     this.picTrib10.setName("picTrib10");
-    this.picTrib10.setSize(new Size(12, 12));
+    this.picTrib10.setSize(new FormSize(12, 12));
     this.picTrib10.setTabIndex(43);
     this.picTrib10.setTabStop(false);
     this.picTrib10.setVisible(false);
@@ -562,7 +562,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib40.setBackColor(SystemColors.Control);
     this.picTrib40.setLocation(new java.awt.Point(8, 184));
     this.picTrib40.setName("picTrib40");
-    this.picTrib40.setSize(new Size(12, 12));
+    this.picTrib40.setSize(new FormSize(12, 12));
     this.picTrib40.setTabIndex(44);
     this.picTrib40.setTabStop(false);
     this.picTrib40.setVisible(false);
@@ -576,7 +576,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib20.setBackColor(SystemColors.Control);
     this.picTrib20.setLocation(new java.awt.Point(8, 96));
     this.picTrib20.setName("picTrib20");
-    this.picTrib20.setSize(new Size(12, 12));
+    this.picTrib20.setSize(new FormSize(12, 12));
     this.picTrib20.setTabIndex(45);
     this.picTrib20.setTabStop(false);
     this.picTrib20.setVisible(false);
@@ -590,7 +590,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib30.setBackColor(SystemColors.Control);
     this.picTrib30.setLocation(new java.awt.Point(16, 136));
     this.picTrib30.setName("picTrib30");
-    this.picTrib30.setSize(new Size(12, 12));
+    this.picTrib30.setSize(new FormSize(12, 12));
     this.picTrib30.setTabIndex(46);
     this.picTrib30.setTabStop(false);
     this.picTrib30.setVisible(false);
@@ -604,7 +604,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib04.setBackColor(SystemColors.Control);
     this.picTrib04.setLocation(new java.awt.Point(176, 8));
     this.picTrib04.setName("picTrib04");
-    this.picTrib04.setSize(new Size(12, 12));
+    this.picTrib04.setSize(new FormSize(12, 12));
     this.picTrib04.setTabIndex(47);
     this.picTrib04.setTabStop(false);
     this.picTrib04.setVisible(false);
@@ -618,7 +618,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib03.setBackColor(SystemColors.Control);
     this.picTrib03.setLocation(new java.awt.Point(128, 8));
     this.picTrib03.setName("picTrib03");
-    this.picTrib03.setSize(new Size(12, 12));
+    this.picTrib03.setSize(new FormSize(12, 12));
     this.picTrib03.setTabIndex(48);
     this.picTrib03.setTabStop(false);
     this.picTrib03.setVisible(false);
@@ -632,7 +632,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib02.setBackColor(SystemColors.Control);
     this.picTrib02.setLocation(new java.awt.Point(96, 16));
     this.picTrib02.setName("picTrib02");
-    this.picTrib02.setSize(new Size(12, 12));
+    this.picTrib02.setSize(new FormSize(12, 12));
     this.picTrib02.setTabIndex(49);
     this.picTrib02.setTabStop(false);
     this.picTrib02.setVisible(false);
@@ -646,7 +646,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib01.setBackColor(SystemColors.Control);
     this.picTrib01.setLocation(new java.awt.Point(56, 8));
     this.picTrib01.setName("picTrib01");
-    this.picTrib01.setSize(new Size(12, 12));
+    this.picTrib01.setSize(new FormSize(12, 12));
     this.picTrib01.setTabIndex(50);
     this.picTrib01.setTabStop(false);
     this.picTrib01.setVisible(false);
@@ -660,7 +660,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib05.setBackColor(SystemColors.Control);
     this.picTrib05.setLocation(new java.awt.Point(208, 16));
     this.picTrib05.setName("picTrib05");
-    this.picTrib05.setSize(new Size(12, 12));
+    this.picTrib05.setSize(new FormSize(12, 12));
     this.picTrib05.setTabIndex(51);
     this.picTrib05.setTabStop(false);
     this.picTrib05.setVisible(false);
@@ -674,7 +674,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib11.setBackColor(SystemColors.Control);
     this.picTrib11.setLocation(new java.awt.Point(32, 80));
     this.picTrib11.setName("picTrib11");
-    this.picTrib11.setSize(new Size(12, 12));
+    this.picTrib11.setSize(new FormSize(12, 12));
     this.picTrib11.setTabIndex(52);
     this.picTrib11.setTabStop(false);
     this.picTrib11.setVisible(false);
@@ -688,7 +688,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib12.setBackColor(SystemColors.Control);
     this.picTrib12.setLocation(new java.awt.Point(88, 56));
     this.picTrib12.setName("picTrib12");
-    this.picTrib12.setSize(new Size(12, 12));
+    this.picTrib12.setSize(new FormSize(12, 12));
     this.picTrib12.setTabIndex(53);
     this.picTrib12.setTabStop(false);
     this.picTrib12.setVisible(false);
@@ -702,7 +702,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib13.setBackColor(SystemColors.Control);
     this.picTrib13.setLocation(new java.awt.Point(128, 40));
     this.picTrib13.setName("picTrib13");
-    this.picTrib13.setSize(new Size(12, 12));
+    this.picTrib13.setSize(new FormSize(12, 12));
     this.picTrib13.setTabIndex(54);
     this.picTrib13.setTabStop(false);
     this.picTrib13.setVisible(false);
@@ -716,7 +716,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib14.setBackColor(SystemColors.Control);
     this.picTrib14.setLocation(new java.awt.Point(192, 72));
     this.picTrib14.setName("picTrib14");
-    this.picTrib14.setSize(new Size(12, 12));
+    this.picTrib14.setSize(new FormSize(12, 12));
     this.picTrib14.setTabIndex(55);
     this.picTrib14.setTabStop(false);
     this.picTrib14.setVisible(false);
@@ -730,7 +730,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib15.setBackColor(SystemColors.Control);
     this.picTrib15.setLocation(new java.awt.Point(216, 48));
     this.picTrib15.setName("picTrib15");
-    this.picTrib15.setSize(new Size(12, 12));
+    this.picTrib15.setSize(new FormSize(12, 12));
     this.picTrib15.setTabIndex(56);
     this.picTrib15.setTabStop(false);
     this.picTrib15.setVisible(false);
@@ -744,7 +744,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib21.setBackColor(SystemColors.Control);
     this.picTrib21.setLocation(new java.awt.Point(56, 96));
     this.picTrib21.setName("picTrib21");
-    this.picTrib21.setSize(new Size(12, 12));
+    this.picTrib21.setSize(new FormSize(12, 12));
     this.picTrib21.setTabIndex(57);
     this.picTrib21.setTabStop(false);
     this.picTrib21.setVisible(false);
@@ -758,7 +758,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib22.setBackColor(SystemColors.Control);
     this.picTrib22.setLocation(new java.awt.Point(96, 80));
     this.picTrib22.setName("picTrib22");
-    this.picTrib22.setSize(new Size(12, 12));
+    this.picTrib22.setSize(new FormSize(12, 12));
     this.picTrib22.setTabIndex(58);
     this.picTrib22.setTabStop(false);
     this.picTrib22.setVisible(false);
@@ -772,7 +772,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib23.setBackColor(SystemColors.Control);
     this.picTrib23.setLocation(new java.awt.Point(136, 88));
     this.picTrib23.setName("picTrib23");
-    this.picTrib23.setSize(new Size(12, 12));
+    this.picTrib23.setSize(new FormSize(12, 12));
     this.picTrib23.setTabIndex(59);
     this.picTrib23.setTabStop(false);
     this.picTrib23.setVisible(false);
@@ -786,7 +786,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib24.setBackColor(SystemColors.Control);
     this.picTrib24.setLocation(new java.awt.Point(176, 104));
     this.picTrib24.setName("picTrib24");
-    this.picTrib24.setSize(new Size(12, 12));
+    this.picTrib24.setSize(new FormSize(12, 12));
     this.picTrib24.setTabIndex(60);
     this.picTrib24.setTabStop(false);
     this.picTrib24.setVisible(false);
@@ -800,7 +800,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib25.setBackColor(SystemColors.Control);
     this.picTrib25.setLocation(new java.awt.Point(216, 96));
     this.picTrib25.setName("picTrib25");
-    this.picTrib25.setSize(new Size(12, 12));
+    this.picTrib25.setSize(new FormSize(12, 12));
     this.picTrib25.setTabIndex(61);
     this.picTrib25.setTabStop(false);
     this.picTrib25.setVisible(false);
@@ -814,7 +814,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib31.setBackColor(SystemColors.Control);
     this.picTrib31.setLocation(new java.awt.Point(56, 128));
     this.picTrib31.setName("picTrib31");
-    this.picTrib31.setSize(new Size(12, 12));
+    this.picTrib31.setSize(new FormSize(12, 12));
     this.picTrib31.setTabIndex(62);
     this.picTrib31.setTabStop(false);
     this.picTrib31.setVisible(false);
@@ -828,7 +828,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib32.setBackColor(SystemColors.Control);
     this.picTrib32.setLocation(new java.awt.Point(96, 120));
     this.picTrib32.setName("picTrib32");
-    this.picTrib32.setSize(new Size(12, 12));
+    this.picTrib32.setSize(new FormSize(12, 12));
     this.picTrib32.setTabIndex(63);
     this.picTrib32.setTabStop(false);
     this.picTrib32.setVisible(false);
@@ -842,7 +842,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib33.setBackColor(SystemColors.Control);
     this.picTrib33.setLocation(new java.awt.Point(128, 128));
     this.picTrib33.setName("picTrib33");
-    this.picTrib33.setSize(new Size(12, 12));
+    this.picTrib33.setSize(new FormSize(12, 12));
     this.picTrib33.setTabIndex(64);
     this.picTrib33.setTabStop(false);
     this.picTrib33.setVisible(false);
@@ -856,7 +856,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib34.setBackColor(SystemColors.Control);
     this.picTrib34.setLocation(new java.awt.Point(168, 144));
     this.picTrib34.setName("picTrib34");
-    this.picTrib34.setSize(new Size(12, 12));
+    this.picTrib34.setSize(new FormSize(12, 12));
     this.picTrib34.setTabIndex(65);
     this.picTrib34.setTabStop(false);
     this.picTrib34.setVisible(false);
@@ -870,7 +870,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib35.setBackColor(SystemColors.Control);
     this.picTrib35.setLocation(new java.awt.Point(208, 128));
     this.picTrib35.setName("picTrib35");
-    this.picTrib35.setSize(new Size(12, 12));
+    this.picTrib35.setSize(new FormSize(12, 12));
     this.picTrib35.setTabIndex(66);
     this.picTrib35.setTabStop(false);
     this.picTrib35.setVisible(false);
@@ -884,7 +884,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib41.setBackColor(SystemColors.Control);
     this.picTrib41.setLocation(new java.awt.Point(48, 176));
     this.picTrib41.setName("picTrib41");
-    this.picTrib41.setSize(new Size(12, 12));
+    this.picTrib41.setSize(new FormSize(12, 12));
     this.picTrib41.setTabIndex(67);
     this.picTrib41.setTabStop(false);
     this.picTrib41.setVisible(false);
@@ -898,7 +898,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib51.setBackColor(SystemColors.Control);
     this.picTrib51.setLocation(new java.awt.Point(64, 216));
     this.picTrib51.setName("picTrib51");
-    this.picTrib51.setSize(new Size(12, 12));
+    this.picTrib51.setSize(new FormSize(12, 12));
     this.picTrib51.setTabIndex(68);
     this.picTrib51.setTabStop(false);
     this.picTrib51.setVisible(false);
@@ -912,7 +912,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib42.setBackColor(SystemColors.Control);
     this.picTrib42.setLocation(new java.awt.Point(88, 168));
     this.picTrib42.setName("picTrib42");
-    this.picTrib42.setSize(new Size(12, 12));
+    this.picTrib42.setSize(new FormSize(12, 12));
     this.picTrib42.setTabIndex(69);
     this.picTrib42.setTabStop(false);
     this.picTrib42.setVisible(false);
@@ -926,7 +926,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib52.setBackColor(SystemColors.Control);
     this.picTrib52.setLocation(new java.awt.Point(96, 224));
     this.picTrib52.setName("picTrib52");
-    this.picTrib52.setSize(new Size(12, 12));
+    this.picTrib52.setSize(new FormSize(12, 12));
     this.picTrib52.setTabIndex(70);
     this.picTrib52.setTabStop(false);
     this.picTrib52.setVisible(false);
@@ -940,7 +940,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib43.setBackColor(SystemColors.Control);
     this.picTrib43.setLocation(new java.awt.Point(136, 176));
     this.picTrib43.setName("picTrib43");
-    this.picTrib43.setSize(new Size(12, 12));
+    this.picTrib43.setSize(new FormSize(12, 12));
     this.picTrib43.setTabIndex(71);
     this.picTrib43.setTabStop(false);
     this.picTrib43.setVisible(false);
@@ -954,7 +954,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib53.setBackColor(SystemColors.Control);
     this.picTrib53.setLocation(new java.awt.Point(144, 216));
     this.picTrib53.setName("picTrib53");
-    this.picTrib53.setSize(new Size(12, 12));
+    this.picTrib53.setSize(new FormSize(12, 12));
     this.picTrib53.setTabIndex(72);
     this.picTrib53.setTabStop(false);
     this.picTrib53.setVisible(false);
@@ -968,7 +968,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib44.setBackColor(SystemColors.Control);
     this.picTrib44.setLocation(new java.awt.Point(184, 184));
     this.picTrib44.setName("picTrib44");
-    this.picTrib44.setSize(new Size(12, 12));
+    this.picTrib44.setSize(new FormSize(12, 12));
     this.picTrib44.setTabIndex(73);
     this.picTrib44.setTabStop(false);
     this.picTrib44.setVisible(false);
@@ -982,7 +982,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib45.setBackColor(SystemColors.Control);
     this.picTrib45.setLocation(new java.awt.Point(216, 176));
     this.picTrib45.setName("picTrib45");
-    this.picTrib45.setSize(new Size(12, 12));
+    this.picTrib45.setSize(new FormSize(12, 12));
     this.picTrib45.setTabIndex(74);
     this.picTrib45.setTabStop(false);
     this.picTrib45.setVisible(false);
@@ -996,7 +996,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib54.setBackColor(SystemColors.Control);
     this.picTrib54.setLocation(new java.awt.Point(176, 224));
     this.picTrib54.setName("picTrib54");
-    this.picTrib54.setSize(new Size(12, 12));
+    this.picTrib54.setSize(new FormSize(12, 12));
     this.picTrib54.setTabIndex(75);
     this.picTrib54.setTabStop(false);
     this.picTrib54.setVisible(false);
@@ -1010,7 +1010,7 @@ public class FormEncounter extends WinformForm {
     this.picTrib55.setBackColor(SystemColors.Control);
     this.picTrib55.setLocation(new java.awt.Point(208, 216));
     this.picTrib55.setName("picTrib55");
-    this.picTrib55.setSize(new Size(12, 12));
+    this.picTrib55.setSize(new FormSize(12, 12));
     this.picTrib55.setTabIndex(76);
     this.picTrib55.setTabStop(false);
     this.picTrib55.setVisible(false);
@@ -1029,8 +1029,8 @@ public class FormEncounter extends WinformForm {
       }
     };
     // FormEncounter
-    this.setAutoScaleBaseSize(new Size(5, 13));
-    this.setClientSize(new Size(234, 271));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
+    this.setClientSize(new FormSize(234, 271));
     this.setControlBox(false);
     this.Controls.add(this.picTrib55);
     this.Controls.add(this.picTrib54);

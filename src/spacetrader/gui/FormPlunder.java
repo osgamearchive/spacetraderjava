@@ -8,7 +8,7 @@ import jwinforms.FlatStyle;
 import jwinforms.FormBorderStyle;
 import jwinforms.FormStartPosition;
 import jwinforms.Label;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformForm;
 import spacetrader.Game;
 import spacetrader.Ship;
@@ -124,7 +124,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll9.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll9.setLocation(new java.awt.Point(100, 220));
     this.btnPlunderAll9.setName("btnPlunderAll9");
-    this.btnPlunderAll9.setSize(new Size(32, 22));
+    this.btnPlunderAll9.setSize(new FormSize(32, 22));
     this.btnPlunderAll9.setTabIndex(141);
     this.btnPlunderAll9.setText("All");
     this.btnPlunderAll9.setClick(new EventHandler<Object, EventArgs>() {
@@ -137,7 +137,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty9.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty9.setLocation(new java.awt.Point(68, 220));
     this.btnPlunderQty9.setName("btnPlunderQty9");
-    this.btnPlunderQty9.setSize(new Size(28, 22));
+    this.btnPlunderQty9.setSize(new FormSize(28, 22));
     this.btnPlunderQty9.setTabIndex(140);
     this.btnPlunderQty9.setText("88");
     this.btnPlunderQty9.setClick(new EventHandler<Object, EventArgs>() {
@@ -150,7 +150,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll8.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll8.setLocation(new java.awt.Point(100, 196));
     this.btnPlunderAll8.setName("btnPlunderAll8");
-    this.btnPlunderAll8.setSize(new Size(32, 22));
+    this.btnPlunderAll8.setSize(new FormSize(32, 22));
     this.btnPlunderAll8.setTabIndex(139);
     this.btnPlunderAll8.setText("All");
     this.btnPlunderAll8.setClick(new EventHandler<Object, EventArgs>() {
@@ -163,7 +163,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty8.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty8.setLocation(new java.awt.Point(68, 196));
     this.btnPlunderQty8.setName("btnPlunderQty8");
-    this.btnPlunderQty8.setSize(new Size(28, 22));
+    this.btnPlunderQty8.setSize(new FormSize(28, 22));
     this.btnPlunderQty8.setTabIndex(138);
     this.btnPlunderQty8.setText("88");
     this.btnPlunderQty8.setClick(new EventHandler<Object, EventArgs>() {
@@ -176,7 +176,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll7.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll7.setLocation(new java.awt.Point(100, 172));
     this.btnPlunderAll7.setName("btnPlunderAll7");
-    this.btnPlunderAll7.setSize(new Size(32, 22));
+    this.btnPlunderAll7.setSize(new FormSize(32, 22));
     this.btnPlunderAll7.setTabIndex(137);
     this.btnPlunderAll7.setText("All");
     this.btnPlunderAll7.setClick(new EventHandler<Object, EventArgs>() {
@@ -189,7 +189,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty7.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty7.setLocation(new java.awt.Point(68, 172));
     this.btnPlunderQty7.setName("btnPlunderQty7");
-    this.btnPlunderQty7.setSize(new Size(28, 22));
+    this.btnPlunderQty7.setSize(new FormSize(28, 22));
     this.btnPlunderQty7.setTabIndex(136);
     this.btnPlunderQty7.setText("88");
     this.btnPlunderQty7.setClick(new EventHandler<Object, EventArgs>() {
@@ -202,7 +202,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll6.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll6.setLocation(new java.awt.Point(100, 148));
     this.btnPlunderAll6.setName("btnPlunderAll6");
-    this.btnPlunderAll6.setSize(new Size(32, 22));
+    this.btnPlunderAll6.setSize(new FormSize(32, 22));
     this.btnPlunderAll6.setTabIndex(135);
     this.btnPlunderAll6.setText("All");
     this.btnPlunderAll6.setClick(new EventHandler<Object, EventArgs>() {
@@ -215,7 +215,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty6.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty6.setLocation(new java.awt.Point(68, 148));
     this.btnPlunderQty6.setName("btnPlunderQty6");
-    this.btnPlunderQty6.setSize(new Size(28, 22));
+    this.btnPlunderQty6.setSize(new FormSize(28, 22));
     this.btnPlunderQty6.setTabIndex(134);
     this.btnPlunderQty6.setText("88");
     this.btnPlunderQty6.setClick(new EventHandler<Object, EventArgs>() {
@@ -228,7 +228,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll5.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll5.setLocation(new java.awt.Point(100, 124));
     this.btnPlunderAll5.setName("btnPlunderAll5");
-    this.btnPlunderAll5.setSize(new Size(32, 22));
+    this.btnPlunderAll5.setSize(new FormSize(32, 22));
     this.btnPlunderAll5.setTabIndex(133);
     this.btnPlunderAll5.setText("All");
     this.btnPlunderAll5.setClick(new EventHandler<Object, EventArgs>() {
@@ -241,7 +241,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty5.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty5.setLocation(new java.awt.Point(68, 124));
     this.btnPlunderQty5.setName("btnPlunderQty5");
-    this.btnPlunderQty5.setSize(new Size(28, 22));
+    this.btnPlunderQty5.setSize(new FormSize(28, 22));
     this.btnPlunderQty5.setTabIndex(132);
     this.btnPlunderQty5.setText("88");
     this.btnPlunderQty5.setClick(new EventHandler<Object, EventArgs>() {
@@ -254,7 +254,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll4.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll4.setLocation(new java.awt.Point(100, 100));
     this.btnPlunderAll4.setName("btnPlunderAll4");
-    this.btnPlunderAll4.setSize(new Size(32, 22));
+    this.btnPlunderAll4.setSize(new FormSize(32, 22));
     this.btnPlunderAll4.setTabIndex(131);
     this.btnPlunderAll4.setText("All");
     this.btnPlunderAll4.setClick(new EventHandler<Object, EventArgs>() {
@@ -267,7 +267,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty4.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty4.setLocation(new java.awt.Point(68, 100));
     this.btnPlunderQty4.setName("btnPlunderQty4");
-    this.btnPlunderQty4.setSize(new Size(28, 22));
+    this.btnPlunderQty4.setSize(new FormSize(28, 22));
     this.btnPlunderQty4.setTabIndex(130);
     this.btnPlunderQty4.setText("88");
     this.btnPlunderQty4.setClick(new EventHandler<Object, EventArgs>() {
@@ -280,7 +280,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll3.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll3.setLocation(new java.awt.Point(100, 76));
     this.btnPlunderAll3.setName("btnPlunderAll3");
-    this.btnPlunderAll3.setSize(new Size(32, 22));
+    this.btnPlunderAll3.setSize(new FormSize(32, 22));
     this.btnPlunderAll3.setTabIndex(129);
     this.btnPlunderAll3.setText("All");
     this.btnPlunderAll3.setClick(new EventHandler<Object, EventArgs>() {
@@ -293,7 +293,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty3.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty3.setLocation(new java.awt.Point(68, 76));
     this.btnPlunderQty3.setName("btnPlunderQty3");
-    this.btnPlunderQty3.setSize(new Size(28, 22));
+    this.btnPlunderQty3.setSize(new FormSize(28, 22));
     this.btnPlunderQty3.setTabIndex(128);
     this.btnPlunderQty3.setText("88");
     this.btnPlunderQty3.setClick(new EventHandler<Object, EventArgs>() {
@@ -306,7 +306,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll2.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll2.setLocation(new java.awt.Point(100, 52));
     this.btnPlunderAll2.setName("btnPlunderAll2");
-    this.btnPlunderAll2.setSize(new Size(32, 22));
+    this.btnPlunderAll2.setSize(new FormSize(32, 22));
     this.btnPlunderAll2.setTabIndex(127);
     this.btnPlunderAll2.setText("All");
     this.btnPlunderAll2.setClick(new EventHandler<Object, EventArgs>() {
@@ -319,7 +319,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty2.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty2.setLocation(new java.awt.Point(68, 52));
     this.btnPlunderQty2.setName("btnPlunderQty2");
-    this.btnPlunderQty2.setSize(new Size(28, 22));
+    this.btnPlunderQty2.setSize(new FormSize(28, 22));
     this.btnPlunderQty2.setTabIndex(126);
     this.btnPlunderQty2.setText("88");
     this.btnPlunderQty2.setClick(new EventHandler<Object, EventArgs>() {
@@ -332,7 +332,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll1.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll1.setLocation(new java.awt.Point(100, 28));
     this.btnPlunderAll1.setName("btnPlunderAll1");
-    this.btnPlunderAll1.setSize(new Size(32, 22));
+    this.btnPlunderAll1.setSize(new FormSize(32, 22));
     this.btnPlunderAll1.setTabIndex(125);
     this.btnPlunderAll1.setText("All");
     this.btnPlunderAll1.setClick(new EventHandler<Object, EventArgs>() {
@@ -345,7 +345,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty1.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty1.setLocation(new java.awt.Point(68, 28));
     this.btnPlunderQty1.setName("btnPlunderQty1");
-    this.btnPlunderQty1.setSize(new Size(28, 22));
+    this.btnPlunderQty1.setSize(new FormSize(28, 22));
     this.btnPlunderQty1.setTabIndex(124);
     this.btnPlunderQty1.setText("88");
     this.btnPlunderQty1.setClick(new EventHandler<Object, EventArgs>() {
@@ -358,7 +358,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderAll0.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderAll0.setLocation(new java.awt.Point(100, 4));
     this.btnPlunderAll0.setName("btnPlunderAll0");
-    this.btnPlunderAll0.setSize(new Size(32, 22));
+    this.btnPlunderAll0.setSize(new FormSize(32, 22));
     this.btnPlunderAll0.setTabIndex(123);
     this.btnPlunderAll0.setText("All");
     this.btnPlunderAll0.setClick(new EventHandler<Object, EventArgs>() {
@@ -371,7 +371,7 @@ public class FormPlunder extends WinformForm {
     this.btnPlunderQty0.setFlatStyle(FlatStyle.Flat);
     this.btnPlunderQty0.setLocation(new java.awt.Point(68, 4));
     this.btnPlunderQty0.setName("btnPlunderQty0");
-    this.btnPlunderQty0.setSize(new Size(28, 22));
+    this.btnPlunderQty0.setSize(new FormSize(28, 22));
     this.btnPlunderQty0.setTabIndex(122);
     this.btnPlunderQty0.setText("88");
     this.btnPlunderQty0.setClick(new EventHandler<Object, EventArgs>() {
@@ -384,83 +384,83 @@ public class FormPlunder extends WinformForm {
     this.lblTradeCmdty9.setAutoSize(true);
     this.lblTradeCmdty9.setLocation(new java.awt.Point(8, 224));
     this.lblTradeCmdty9.setName("lblTradeCmdty9");
-    this.lblTradeCmdty9.setSize(new Size(41, 13));
+    this.lblTradeCmdty9.setSize(new FormSize(41, 13));
     this.lblTradeCmdty9.setTabIndex(151);
     this.lblTradeCmdty9.setText("Robots");
     // lblTradeCmdty8
     this.lblTradeCmdty8.setAutoSize(true);
     this.lblTradeCmdty8.setLocation(new java.awt.Point(8, 200));
     this.lblTradeCmdty8.setName("lblTradeCmdty8");
-    this.lblTradeCmdty8.setSize(new Size(52, 13));
+    this.lblTradeCmdty8.setSize(new FormSize(52, 13));
     this.lblTradeCmdty8.setTabIndex(150);
     this.lblTradeCmdty8.setText("Narcotics");
     // lblTradeCmdty2
     this.lblTradeCmdty2.setAutoSize(true);
     this.lblTradeCmdty2.setLocation(new java.awt.Point(8, 56));
     this.lblTradeCmdty2.setName("lblTradeCmdty2");
-    this.lblTradeCmdty2.setSize(new Size(31, 13));
+    this.lblTradeCmdty2.setSize(new FormSize(31, 13));
     this.lblTradeCmdty2.setTabIndex(149);
     this.lblTradeCmdty2.setText("Food");
     // lblTradeCmdty0
     this.lblTradeCmdty0.setAutoSize(true);
     this.lblTradeCmdty0.setLocation(new java.awt.Point(8, 8));
     this.lblTradeCmdty0.setName("lblTradeCmdty0");
-    this.lblTradeCmdty0.setSize(new Size(36, 13));
+    this.lblTradeCmdty0.setSize(new FormSize(36, 13));
     this.lblTradeCmdty0.setTabIndex(148);
     this.lblTradeCmdty0.setText("Water");
     // lblTradeCmdty1
     this.lblTradeCmdty1.setAutoSize(true);
     this.lblTradeCmdty1.setLocation(new java.awt.Point(8, 32));
     this.lblTradeCmdty1.setName("lblTradeCmdty1");
-    this.lblTradeCmdty1.setSize(new Size(27, 13));
+    this.lblTradeCmdty1.setSize(new FormSize(27, 13));
     this.lblTradeCmdty1.setTabIndex(147);
     this.lblTradeCmdty1.setText("Furs");
     // lblTradeCmdty6
     this.lblTradeCmdty6.setAutoSize(true);
     this.lblTradeCmdty6.setLocation(new java.awt.Point(8, 152));
     this.lblTradeCmdty6.setName("lblTradeCmdty6");
-    this.lblTradeCmdty6.setSize(new Size(50, 13));
+    this.lblTradeCmdty6.setSize(new FormSize(50, 13));
     this.lblTradeCmdty6.setTabIndex(146);
     this.lblTradeCmdty6.setText("Medicine");
     // lblTradeCmdty5
     this.lblTradeCmdty5.setAutoSize(true);
     this.lblTradeCmdty5.setLocation(new java.awt.Point(8, 128));
     this.lblTradeCmdty5.setName("lblTradeCmdty5");
-    this.lblTradeCmdty5.setSize(new Size(46, 13));
+    this.lblTradeCmdty5.setSize(new FormSize(46, 13));
     this.lblTradeCmdty5.setTabIndex(145);
     this.lblTradeCmdty5.setText("Firearms");
     // lblTradeCmdty4
     this.lblTradeCmdty4.setAutoSize(true);
     this.lblTradeCmdty4.setLocation(new java.awt.Point(8, 104));
     this.lblTradeCmdty4.setName("lblTradeCmdty4");
-    this.lblTradeCmdty4.setSize(new Size(40, 13));
+    this.lblTradeCmdty4.setSize(new FormSize(40, 13));
     this.lblTradeCmdty4.setTabIndex(144);
     this.lblTradeCmdty4.setText("Games");
     // lblTradeCmdty3
     this.lblTradeCmdty3.setAutoSize(true);
     this.lblTradeCmdty3.setLocation(new java.awt.Point(8, 80));
     this.lblTradeCmdty3.setName("lblTradeCmdty3");
-    this.lblTradeCmdty3.setSize(new Size(24, 13));
+    this.lblTradeCmdty3.setSize(new FormSize(24, 13));
     this.lblTradeCmdty3.setTabIndex(143);
     this.lblTradeCmdty3.setText("Ore");
     // lblTradeCmdty7
     this.lblTradeCmdty7.setAutoSize(true);
     this.lblTradeCmdty7.setLocation(new java.awt.Point(8, 176));
     this.lblTradeCmdty7.setName("lblTradeCmdty7");
-    this.lblTradeCmdty7.setSize(new Size(53, 13));
+    this.lblTradeCmdty7.setSize(new FormSize(53, 13));
     this.lblTradeCmdty7.setTabIndex(142);
     this.lblTradeCmdty7.setText("Machines");
     // lblBaysLabel
     this.lblBaysLabel.setAutoSize(true);
     this.lblBaysLabel.setLocation(new java.awt.Point(144, 8));
     this.lblBaysLabel.setName("lblBaysLabel");
-    this.lblBaysLabel.setSize(new Size(33, 13));
+    this.lblBaysLabel.setSize(new FormSize(33, 13));
     this.lblBaysLabel.setTabIndex(152);
     this.lblBaysLabel.setText("Bays:");
     // lblBays
     this.lblBays.setLocation(new java.awt.Point(176, 8));
     this.lblBays.setName("lblBays");
-    this.lblBays.setSize(new Size(48, 13));
+    this.lblBays.setSize(new FormSize(48, 13));
     this.lblBays.setTabIndex(153);
     this.lblBays.setText("888/888");
     // btnDone
@@ -468,14 +468,14 @@ public class FormPlunder extends WinformForm {
     this.btnDone.setFlatStyle(FlatStyle.Flat);
     this.btnDone.setLocation(new java.awt.Point(87, 252));
     this.btnDone.setName("btnDone");
-    this.btnDone.setSize(new Size(44, 22));
+    this.btnDone.setSize(new FormSize(44, 22));
     this.btnDone.setTabIndex(154);
     this.btnDone.setText("Done");
     // btnJettison
     this.btnJettison.setFlatStyle(FlatStyle.Flat);
     this.btnJettison.setLocation(new java.awt.Point(150, 24));
     this.btnJettison.setName("btnJettison");
-    this.btnJettison.setSize(new Size(53, 22));
+    this.btnJettison.setSize(new FormSize(53, 22));
     this.btnJettison.setTabIndex(155);
     this.btnJettison.setText("Jettison");
     this.btnJettison.setClick(new EventHandler<Object, EventArgs>() {
@@ -486,9 +486,9 @@ public class FormPlunder extends WinformForm {
     });
     // FormPlunder
     this.setAcceptButton(this.btnDone);
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnDone);
-    this.setClientSize(new Size(230, 283));
+    this.setClientSize(new FormSize(230, 283));
     this.Controls.add(this.btnJettison);
     this.Controls.add(this.btnDone);
     this.Controls.add(this.lblBays);

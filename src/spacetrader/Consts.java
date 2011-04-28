@@ -1,16 +1,17 @@
 package spacetrader;
-import org.gts.bst.ship.equip.Equipment;
-import org.gts.bst.ship.equip.Gadget;
-import org.gts.bst.ship.equip.Shield;
-import org.gts.bst.ship.equip.Weapon;
 import jwinforms.Rectangle;
+import org.gts.bst.cargo.TradeItemType;
 import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.events.SpecialEventType;
 import org.gts.bst.ship.ShipType;
-import org.gts.bst.ship.Size;
-import org.gts.bst.ship.equip.WeaponType;
+import org.gts.bst.ship.ShipSize;
+import org.gts.bst.ship.equip.Equipment;
+import org.gts.bst.ship.equip.Gadget;
 import org.gts.bst.ship.equip.GadgetType;
+import org.gts.bst.ship.equip.Shield;
 import org.gts.bst.ship.equip.ShieldType;
+import org.gts.bst.ship.equip.Weapon;
+import org.gts.bst.ship.equip.WeaponType;
 import spacetrader.enums.Activity;
 import spacetrader.enums.PoliceRecordType;
 import spacetrader.enums.PoliticalSystemType;
@@ -21,7 +22,6 @@ import spacetrader.enums.SkillType;
 import spacetrader.enums.SpecialResource;
 import spacetrader.enums.SystemPressure;
 import spacetrader.enums.TechLevel;
-import org.gts.bst.cargo.TradeItemType;
 import spacetrader.util.Environment;
 import util.Path;
 
@@ -176,8 +176,6 @@ public class Consts {
                         Activity.Abundant, Activity.Minimal, Activity.Moderate,
                         TechLevel.PreAgricultural, TechLevel.EarlyIndustrial, 0,
                         true, true, TradeItemType.Narcotics)};
-  // #endregion
-  // #region Reputations
   public static Reputation[] Reputations = new Reputation[] {
     new Reputation(ReputationType.Harmless, ReputationScoreHarmless),
     new Reputation(ReputationType.MostlyHarmless, ReputationScoreMostlyHarmless),
@@ -215,31 +213,31 @@ public class Consts {
     new Rectangle(2, 0, 60, 0) // Scorpion
   };
   public static ShipSpec[] ShipSpecs = new ShipSpec[] {
-    // Type Size Bays W S G Cr F FC Hull RC Price % Police Pirates Traders MinTechLevel
-    new ShipSpec(ShipType.Flea, Size.Tiny, 10, 0, 0, 0, 1, 20, 1, 25, 1, 2000, 2, Activity.NA, Activity.NA, Activity.Absent, TechLevel.EarlyIndustrial),
-    new ShipSpec(ShipType.Gnat, Size.Small, 15, 1, 0, 1, 1, 14, 1, 100, 2, 10000, 28, Activity.Absent, Activity.Absent, Activity.Absent, TechLevel.Industrial),
-    new ShipSpec(ShipType.Firefly, Size.Small, 20, 1, 1, 1, 1, 17, 1, 100, 3, 25000, 20, Activity.Absent, Activity.Absent, Activity.Absent, TechLevel.Industrial),
-    new ShipSpec(ShipType.Mosquito, Size.Small, 15, 2, 1, 1, 1, 13, 1, 100, 5, 30000, 20, Activity.Absent, Activity.Minimal, Activity.Absent, TechLevel.Industrial),
-    new ShipSpec(ShipType.Bumblebee, Size.Medium, 25, 1, 2, 2, 2, 15, 1, 100, 7, 60000, 15, Activity.Minimal, Activity.Minimal, Activity.Absent, TechLevel.Industrial),
-    new ShipSpec(ShipType.Beetle, Size.Medium, 50, 0, 1, 1, 3, 14, 1, 50, 10, 80000, 3, Activity.NA, Activity.NA, Activity.Absent, TechLevel.Industrial),
-    new ShipSpec(ShipType.Hornet, Size.Large, 20, 3, 2, 1, 2, 16, 2, 150, 15, 100000, 6, Activity.Few, Activity.Some, Activity.Minimal, TechLevel.PostIndustrial),
-    new ShipSpec(ShipType.Grasshopper, Size.Large, 30, 2, 2, 3, 3, 15, 3, 150, 15, 150000, 2, Activity.Some, Activity.Moderate, Activity.Few, TechLevel.PostIndustrial),
-    new ShipSpec(ShipType.Termite, Size.Huge, 60, 1, 3, 2, 3, 13, 4, 200, 20, 225000, 2, Activity.Moderate, Activity.Many, Activity.Some, TechLevel.HiTech),
-    new ShipSpec(ShipType.Wasp, Size.Huge, 35, 3, 2, 2, 3, 14, 5, 200, 20, 300000, 2, Activity.Many, Activity.Abundant, Activity.Moderate, TechLevel.HiTech),
+    // Type ShipSize Bays W S G Cr F FC Hull RC Price % Police Pirates Traders MinTechLevel
+    new ShipSpec(ShipType.Flea, ShipSize.Tiny, 10, 0, 0, 0, 1, 20, 1, 25, 1, 2000, 2, Activity.NA, Activity.NA, Activity.Absent, TechLevel.EarlyIndustrial),
+    new ShipSpec(ShipType.Gnat, ShipSize.Small, 15, 1, 0, 1, 1, 14, 1, 100, 2, 10000, 28, Activity.Absent, Activity.Absent, Activity.Absent, TechLevel.Industrial),
+    new ShipSpec(ShipType.Firefly, ShipSize.Small, 20, 1, 1, 1, 1, 17, 1, 100, 3, 25000, 20, Activity.Absent, Activity.Absent, Activity.Absent, TechLevel.Industrial),
+    new ShipSpec(ShipType.Mosquito, ShipSize.Small, 15, 2, 1, 1, 1, 13, 1, 100, 5, 30000, 20, Activity.Absent, Activity.Minimal, Activity.Absent, TechLevel.Industrial),
+    new ShipSpec(ShipType.Bumblebee, ShipSize.Medium, 25, 1, 2, 2, 2, 15, 1, 100, 7, 60000, 15, Activity.Minimal, Activity.Minimal, Activity.Absent, TechLevel.Industrial),
+    new ShipSpec(ShipType.Beetle, ShipSize.Medium, 50, 0, 1, 1, 3, 14, 1, 50, 10, 80000, 3, Activity.NA, Activity.NA, Activity.Absent, TechLevel.Industrial),
+    new ShipSpec(ShipType.Hornet, ShipSize.Large, 20, 3, 2, 1, 2, 16, 2, 150, 15, 100000, 6, Activity.Few, Activity.Some, Activity.Minimal, TechLevel.PostIndustrial),
+    new ShipSpec(ShipType.Grasshopper, ShipSize.Large, 30, 2, 2, 3, 3, 15, 3, 150, 15, 150000, 2, Activity.Some, Activity.Moderate, Activity.Few, TechLevel.PostIndustrial),
+    new ShipSpec(ShipType.Termite, ShipSize.Huge, 60, 1, 3, 2, 3, 13, 4, 200, 20, 225000, 2, Activity.Moderate, Activity.Many, Activity.Some, TechLevel.HiTech),
+    new ShipSpec(ShipType.Wasp, ShipSize.Huge, 35, 3, 2, 2, 3, 14, 5, 200, 20, 300000, 2, Activity.Many, Activity.Abundant, Activity.Moderate, TechLevel.HiTech),
     // The ships below can't be bought (mostly)
-    new ShipSpec(ShipType.SpaceMonster, Size.Huge, 0, 3, 0, 0, 1, 1, 1, 500, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
-    new ShipSpec(ShipType.Dragonfly, Size.Small, 0, 2, 3, 2, 1, 1, 1, 10, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
-    new ShipSpec(ShipType.Mantis, Size.Medium, 0, 3, 1, 3, 3, 1, 1, 300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
-    new ShipSpec(ShipType.Scarab, Size.Large, 20, 2, 0, 0, 2, 1, 1, 400, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
-    new ShipSpec(ShipType.Bottle, Size.Small, 0, 0, 0, 0, 0, 1, 1, 10, 1, 100, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
-    new ShipSpec(ShipType.Custom, Size.Huge, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
-    new ShipSpec(ShipType.Scorpion, Size.Huge, 30, 2, 2, 2, 2, 1, 1, 300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable)};
+    new ShipSpec(ShipType.SpaceMonster, ShipSize.Huge, 0, 3, 0, 0, 1, 1, 1, 500, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
+    new ShipSpec(ShipType.Dragonfly, ShipSize.Small, 0, 2, 3, 2, 1, 1, 1, 10, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
+    new ShipSpec(ShipType.Mantis, ShipSize.Medium, 0, 3, 1, 3, 3, 1, 1, 300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
+    new ShipSpec(ShipType.Scarab, ShipSize.Large, 20, 2, 0, 0, 2, 1, 1, 400, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
+    new ShipSpec(ShipType.Bottle, ShipSize.Small, 0, 0, 0, 0, 0, 1, 1, 10, 1, 100, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
+    new ShipSpec(ShipType.Custom, ShipSize.Huge, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable),
+    new ShipSpec(ShipType.Scorpion, ShipSize.Huge, 30, 2, 2, 2, 2, 1, 1, 300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.Unavailable)};
   public static Shipyard[] Shipyards = new Shipyard[] {
-    new Shipyard(ShipyardId.Corellian, Size.Large, ShipyardSkill.CrewQuarters),
-    new Shipyard(ShipyardId.Incom, Size.Medium, ShipyardSkill.ShieldSlotUnits),
-    new Shipyard(ShipyardId.Kuat, Size.Huge, ShipyardSkill.HullPerUnit),
-    new Shipyard(ShipyardId.Sienar, Size.Tiny, ShipyardSkill.WeaponSlotUnits),
-    new Shipyard(ShipyardId.Sorosuub, Size.Small, ShipyardSkill.FuelBase)
+    new Shipyard(ShipyardId.Corellian, ShipSize.Large, ShipyardSkill.CrewQuarters),
+    new Shipyard(ShipyardId.Incom, ShipSize.Medium, ShipyardSkill.ShieldSlotUnits),
+    new Shipyard(ShipyardId.Kuat, ShipSize.Huge, ShipyardSkill.HullPerUnit),
+    new Shipyard(ShipyardId.Sienar, ShipSize.Tiny, ShipyardSkill.WeaponSlotUnits),
+    new Shipyard(ShipyardId.Sorosuub, ShipSize.Small, ShipyardSkill.FuelBase)
   };
   public static CrewMemberId[] SpecialCrewMemberIds = new CrewMemberId[] {
     CrewMemberId.Commander, CrewMemberId.Dragonfly, CrewMemberId.FamousCaptain, CrewMemberId.Jarek, CrewMemberId.Opponent,
@@ -350,12 +348,12 @@ public class Consts {
     Weapons[WeaponType.BeamLaser.id],
     Weapons[WeaponType.MilitaryLaser.id],
     Weapons[WeaponType.PhotonDisruptor.id],
-    Shields[ShieldType.Energy.CastToInt()],
-    Shields[ShieldType.Reflective.CastToInt()],
-    Gadgets[GadgetType.ExtraCargoBays.CastToInt()],
-    Gadgets[GadgetType.AutoRepairSystem.CastToInt()],
-    Gadgets[GadgetType.NavigatingSystem.CastToInt()],
-    Gadgets[GadgetType.TargetingSystem.CastToInt()],
-    Gadgets[GadgetType.CloakingDevice.CastToInt()]
+    Shields[ShieldType.Energy.id],
+    Shields[ShieldType.Reflective.id],
+    Gadgets[GadgetType.ExtraCargoBays.asInteger()],
+    Gadgets[GadgetType.AutoRepairSystem.asInteger()],
+    Gadgets[GadgetType.NavigatingSystem.asInteger()],
+    Gadgets[GadgetType.TargetingSystem.asInteger()],
+    Gadgets[GadgetType.CloakingDevice.asInteger()]
   };
 }

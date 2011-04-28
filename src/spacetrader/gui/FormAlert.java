@@ -14,7 +14,7 @@ import jwinforms.ImageList;
 import jwinforms.ImageListStreamer;
 import jwinforms.Label;
 import jwinforms.ResourceManager;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.SizeF;
 import jwinforms.Timer;
 import jwinforms.WinformForm;
@@ -119,7 +119,7 @@ public class FormAlert extends WinformForm {
     this.btn1.setFlatStyle(FlatStyle.Flat);
     this.btn1.setLocation(new java.awt.Point(115, 32));
     this.btn1.setName("btn1");
-    this.btn1.setSize(new Size(40, 22));
+    this.btn1.setSize(new FormSize(40, 22));
     this.btn1.setTabIndex(1);
     this.btn1.setText("Ok");
     // btn2
@@ -127,13 +127,13 @@ public class FormAlert extends WinformForm {
     this.btn2.setFlatStyle(FlatStyle.Flat);
     this.btn2.setLocation(new java.awt.Point(200, 32));
     this.btn2.setName("btn2");
-    this.btn2.setSize(new Size(40, 22));
+    this.btn2.setSize(new FormSize(40, 22));
     this.btn2.setTabIndex(2);
     this.btn2.setText("No");
     this.btn2.setVisible(false);
     // ilImages
     this.ilImages.ColorDepth = ColorDepth.Depth24Bit;
-    this.ilImages.setImageSize(new Size(160, 160));
+    this.ilImages.setImageSize(new FormSize(160, 160));
     this.ilImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilImages.ImageStream"))));
     this.ilImages.setTransparentColor(null);
     // tmrTick
@@ -145,8 +145,8 @@ public class FormAlert extends WinformForm {
       }
     };
     // FormAlert
-    this.setAutoScaleBaseSize(new Size(5, 13));
-    this.setClientSize(new Size(270, 63));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
+    this.setClientSize(new FormSize(270, 63));
     this.setControlBox(false);
     this.Controls.add(this.btn2);
     this.Controls.add(this.btn1);

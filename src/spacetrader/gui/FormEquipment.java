@@ -14,7 +14,7 @@ import jwinforms.GroupBox;
 import jwinforms.Label;
 import jwinforms.ListBox;
 import jwinforms.PictureBox;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformForm;
 import org.gts.bst.ship.equip.EquipmentType;
 import org.gts.bst.ship.equip.GadgetType;
@@ -130,7 +130,7 @@ public class FormEquipment extends WinformForm {
     this.btnClose.setDialogResult(DialogResult.Cancel);
     this.btnClose.setLocation(new java.awt.Point(-32, -32));
     this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new Size(32, 32));
+    this.btnClose.setSize(new FormSize(32, 32));
     this.btnClose.setTabIndex(32);
     this.btnClose.setTabStop(false);
     this.btnClose.setText("X");
@@ -146,28 +146,28 @@ public class FormEquipment extends WinformForm {
     this.boxSell.Controls.add(this.lstSellWeapon);
     this.boxSell.setLocation(new java.awt.Point(4, 2));
     this.boxSell.setName("boxSell");
-    this.boxSell.setSize(new Size(144, 304));
+    this.boxSell.setSize(new FormSize(144, 304));
     this.boxSell.setTabIndex(1);
     this.boxSell.setTabStop(false);
     this.boxSell.setText("Current Inventory");
     // lblSellGadgetNoSlots
     this.lblSellGadgetNoSlots.setLocation(new java.awt.Point(24, 228));
     this.lblSellGadgetNoSlots.setName("lblSellGadgetNoSlots");
-    this.lblSellGadgetNoSlots.setSize(new Size(104, 16));
+    this.lblSellGadgetNoSlots.setSize(new FormSize(104, 16));
     this.lblSellGadgetNoSlots.setTabIndex(149);
     this.lblSellGadgetNoSlots.setText("No slots");
     this.lblSellGadgetNoSlots.setVisible(false);
     // lblSellShieldNoSlots
     this.lblSellShieldNoSlots.setLocation(new java.awt.Point(24, 132));
     this.lblSellShieldNoSlots.setName("lblSellShieldNoSlots");
-    this.lblSellShieldNoSlots.setSize(new Size(104, 16));
+    this.lblSellShieldNoSlots.setSize(new FormSize(104, 16));
     this.lblSellShieldNoSlots.setTabIndex(148);
     this.lblSellShieldNoSlots.setText("No slots");
     this.lblSellShieldNoSlots.setVisible(false);
     // lblSellWeaponNoSlots
     this.lblSellWeaponNoSlots.setLocation(new java.awt.Point(24, 36));
     this.lblSellWeaponNoSlots.setName("lblSellWeaponNoSlots");
-    this.lblSellWeaponNoSlots.setSize(new Size(104, 16));
+    this.lblSellWeaponNoSlots.setSize(new FormSize(104, 16));
     this.lblSellWeaponNoSlots.setTabIndex(147);
     this.lblSellWeaponNoSlots.setText("No slots");
     this.lblSellWeaponNoSlots.setVisible(false);
@@ -175,28 +175,28 @@ public class FormEquipment extends WinformForm {
     this.lblSellGadgets.setAutoSize(true);
     this.lblSellGadgets.setLocation(new java.awt.Point(8, 212));
     this.lblSellGadgets.setName("lblSellGadgets");
-    this.lblSellGadgets.setSize(new Size(47, 16));
+    this.lblSellGadgets.setSize(new FormSize(47, 16));
     this.lblSellGadgets.setTabIndex(146);
     this.lblSellGadgets.setText("Gadgets");
     // lblSellShields
     this.lblSellShields.setAutoSize(true);
     this.lblSellShields.setLocation(new java.awt.Point(8, 116));
     this.lblSellShields.setName("lblSellShields");
-    this.lblSellShields.setSize(new Size(41, 16));
+    this.lblSellShields.setSize(new FormSize(41, 16));
     this.lblSellShields.setTabIndex(145);
     this.lblSellShields.setText("Shields");
     // lblSellWeapons
     this.lblSellWeapons.setAutoSize(true);
     this.lblSellWeapons.setLocation(new java.awt.Point(8, 20));
     this.lblSellWeapons.setName("lblSellWeapons");
-    this.lblSellWeapons.setSize(new Size(52, 16));
+    this.lblSellWeapons.setSize(new FormSize(52, 16));
     this.lblSellWeapons.setTabIndex(144);
     this.lblSellWeapons.setText("Weapons");
     // lstSellGadget
     this.lstSellGadget.setBorderStyle(BorderStyle.FixedSingle);
     this.lstSellGadget.setLocation(new java.awt.Point(8, 228));
     this.lstSellGadget.setName("lstSellGadget");
-    this.lstSellGadget.setSize(new Size(128, 67));
+    this.lstSellGadget.setSize(new FormSize(128, 67));
     this.lstSellGadget.setTabIndex(3);
     this.lstSellGadget.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
@@ -214,7 +214,7 @@ public class FormEquipment extends WinformForm {
     this.lstSellShield.setBorderStyle(BorderStyle.FixedSingle);
     this.lstSellShield.setLocation(new java.awt.Point(8, 132));
     this.lstSellShield.setName("lstSellShield");
-    this.lstSellShield.setSize(new Size(128, 67));
+    this.lstSellShield.setSize(new FormSize(128, 67));
     this.lstSellShield.setTabIndex(2);
     this.lstSellShield.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
@@ -232,7 +232,7 @@ public class FormEquipment extends WinformForm {
     this.lstSellWeapon.setBorderStyle(BorderStyle.FixedSingle);
     this.lstSellWeapon.setLocation(new java.awt.Point(8, 36));
     this.lstSellWeapon.setName("lstSellWeapon");
-    this.lstSellWeapon.setSize(new Size(128, 67));
+    this.lstSellWeapon.setSize(new FormSize(128, 67));
     this.lstSellWeapon.setTabIndex(1);
     this.lstSellWeapon.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
@@ -258,28 +258,28 @@ public class FormEquipment extends WinformForm {
     this.boxBuy.Controls.add(this.lstBuyWeapon);
     this.boxBuy.setLocation(new java.awt.Point(156, 2));
     this.boxBuy.setName("boxBuy");
-    this.boxBuy.setSize(new Size(144, 304));
+    this.boxBuy.setSize(new FormSize(144, 304));
     this.boxBuy.setTabIndex(2);
     this.boxBuy.setTabStop(false);
     this.boxBuy.setText("Equipment For Sale");
     // lblBuyGadgetNone
     this.lblBuyGadgetNone.setLocation(new java.awt.Point(24, 228));
     this.lblBuyGadgetNone.setName("lblBuyGadgetNone");
-    this.lblBuyGadgetNone.setSize(new Size(104, 16));
+    this.lblBuyGadgetNone.setSize(new FormSize(104, 16));
     this.lblBuyGadgetNone.setTabIndex(150);
     this.lblBuyGadgetNone.setText("None for sale");
     this.lblBuyGadgetNone.setVisible(false);
     // lblBuyShieldNone
     this.lblBuyShieldNone.setLocation(new java.awt.Point(24, 132));
     this.lblBuyShieldNone.setName("lblBuyShieldNone");
-    this.lblBuyShieldNone.setSize(new Size(104, 16));
+    this.lblBuyShieldNone.setSize(new FormSize(104, 16));
     this.lblBuyShieldNone.setTabIndex(149);
     this.lblBuyShieldNone.setText("None for sale");
     this.lblBuyShieldNone.setVisible(false);
     // lblBuyWeaponNone
     this.lblBuyWeaponNone.setLocation(new java.awt.Point(24, 36));
     this.lblBuyWeaponNone.setName("lblBuyWeaponNone");
-    this.lblBuyWeaponNone.setSize(new Size(104, 16));
+    this.lblBuyWeaponNone.setSize(new FormSize(104, 16));
     this.lblBuyWeaponNone.setTabIndex(148);
     this.lblBuyWeaponNone.setText("None for sale");
     this.lblBuyWeaponNone.setVisible(false);
@@ -287,28 +287,28 @@ public class FormEquipment extends WinformForm {
     this.lblBuyGadgets.setAutoSize(true);
     this.lblBuyGadgets.setLocation(new java.awt.Point(8, 212));
     this.lblBuyGadgets.setName("lblBuyGadgets");
-    this.lblBuyGadgets.setSize(new Size(47, 16));
+    this.lblBuyGadgets.setSize(new FormSize(47, 16));
     this.lblBuyGadgets.setTabIndex(143);
     this.lblBuyGadgets.setText("Gadgets");
     // lblBuyShields
     this.lblBuyShields.setAutoSize(true);
     this.lblBuyShields.setLocation(new java.awt.Point(8, 116));
     this.lblBuyShields.setName("lblBuyShields");
-    this.lblBuyShields.setSize(new Size(41, 16));
+    this.lblBuyShields.setSize(new FormSize(41, 16));
     this.lblBuyShields.setTabIndex(142);
     this.lblBuyShields.setText("Shields");
     // lblBuyWeapons
     this.lblBuyWeapons.setAutoSize(true);
     this.lblBuyWeapons.setLocation(new java.awt.Point(8, 20));
     this.lblBuyWeapons.setName("lblBuyWeapons");
-    this.lblBuyWeapons.setSize(new Size(52, 16));
+    this.lblBuyWeapons.setSize(new FormSize(52, 16));
     this.lblBuyWeapons.setTabIndex(141);
     this.lblBuyWeapons.setText("Weapons");
     // lstBuyGadget
     this.lstBuyGadget.setBorderStyle(BorderStyle.FixedSingle);
     this.lstBuyGadget.setLocation(new java.awt.Point(8, 228));
     this.lstBuyGadget.setName("lstBuyGadget");
-    this.lstBuyGadget.setSize(new Size(128, 67));
+    this.lstBuyGadget.setSize(new FormSize(128, 67));
     this.lstBuyGadget.setTabIndex(6);
     this.lstBuyGadget.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
@@ -326,7 +326,7 @@ public class FormEquipment extends WinformForm {
     this.lstBuyShield.setBorderStyle(BorderStyle.FixedSingle);
     this.lstBuyShield.setLocation(new java.awt.Point(8, 132));
     this.lstBuyShield.setName("lstBuyShield");
-    this.lstBuyShield.setSize(new Size(128, 67));
+    this.lstBuyShield.setSize(new FormSize(128, 67));
     this.lstBuyShield.setTabIndex(5);
     this.lstBuyShield.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
@@ -344,7 +344,7 @@ public class FormEquipment extends WinformForm {
     this.lstBuyWeapon.setBorderStyle(BorderStyle.FixedSingle);
     this.lstBuyWeapon.setLocation(new java.awt.Point(8, 36));
     this.lstBuyWeapon.setName("lstBuyWeapon");
-    this.lstBuyWeapon.setSize(new Size(128, 67));
+    this.lstBuyWeapon.setSize(new FormSize(128, 67));
     this.lstBuyWeapon.setTabIndex(4);
     this.lstBuyWeapon.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
@@ -377,20 +377,20 @@ public class FormEquipment extends WinformForm {
     this.boxShipInfo.Controls.add(this.lblDescription);
     this.boxShipInfo.setLocation(new java.awt.Point(308, 2));
     this.boxShipInfo.setName("boxShipInfo");
-    this.boxShipInfo.setSize(new Size(208, 304));
+    this.boxShipInfo.setSize(new FormSize(208, 304));
     this.boxShipInfo.setTabIndex(3);
     this.boxShipInfo.setTabStop(false);
     this.boxShipInfo.setText("Equipment Information");
     // lblCharge
     this.lblCharge.setLocation(new java.awt.Point(80, 164));
     this.lblCharge.setName("lblCharge");
-    this.lblCharge.setSize(new Size(116, 16));
+    this.lblCharge.setSize(new FormSize(116, 16));
     this.lblCharge.setTabIndex(67);
     this.lblCharge.setText("888");
     // lblPower
     this.lblPower.setLocation(new java.awt.Point(80, 148));
     this.lblPower.setName("lblPower");
-    this.lblPower.setSize(new Size(116, 16));
+    this.lblPower.setSize(new FormSize(116, 16));
     this.lblPower.setTabIndex(66);
     this.lblPower.setText("888");
     // lblChargeLabel
@@ -398,7 +398,7 @@ public class FormEquipment extends WinformForm {
     this.lblChargeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblChargeLabel.setLocation(new java.awt.Point(8, 164));
     this.lblChargeLabel.setName("lblChargeLabel");
-    this.lblChargeLabel.setSize(new Size(46, 16));
+    this.lblChargeLabel.setSize(new FormSize(46, 16));
     this.lblChargeLabel.setTabIndex(65);
     this.lblChargeLabel.setText("Charge:");
     // lblPowerLabel
@@ -406,13 +406,13 @@ public class FormEquipment extends WinformForm {
     this.lblPowerLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblPowerLabel.setLocation(new java.awt.Point(8, 148));
     this.lblPowerLabel.setName("lblPowerLabel");
-    this.lblPowerLabel.setSize(new Size(41, 16));
+    this.lblPowerLabel.setSize(new FormSize(41, 16));
     this.lblPowerLabel.setTabIndex(64);
     this.lblPowerLabel.setText("Power:");
     // lblType
     this.lblType.setLocation(new java.awt.Point(80, 100));
     this.lblType.setName("lblType");
-    this.lblType.setSize(new Size(116, 16));
+    this.lblType.setSize(new FormSize(116, 16));
     this.lblType.setTabIndex(63);
     this.lblType.setText("Weapon");
     // lblTypeLabel
@@ -420,7 +420,7 @@ public class FormEquipment extends WinformForm {
     this.lblTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblTypeLabel.setLocation(new java.awt.Point(8, 100));
     this.lblTypeLabel.setName("lblTypeLabel");
-    this.lblTypeLabel.setSize(new Size(34, 16));
+    this.lblTypeLabel.setSize(new FormSize(34, 16));
     this.lblTypeLabel.setTabIndex(62);
     this.lblTypeLabel.setText("Type:");
     // lblNameLabel
@@ -428,14 +428,14 @@ public class FormEquipment extends WinformForm {
     this.lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblNameLabel.setLocation(new java.awt.Point(8, 84));
     this.lblNameLabel.setName("lblNameLabel");
-    this.lblNameLabel.setSize(new Size(39, 16));
+    this.lblNameLabel.setSize(new FormSize(39, 16));
     this.lblNameLabel.setTabIndex(61);
     this.lblNameLabel.setText("Name:");
     // btnSell
     this.btnSell.setFlatStyle(FlatStyle.Flat);
     this.btnSell.setLocation(new java.awt.Point(103, 272));
     this.btnSell.setName("btnSell");
-    this.btnSell.setSize(new Size(58, 22));
+    this.btnSell.setSize(new FormSize(58, 22));
     this.btnSell.setTabIndex(8);
     this.btnSell.setText("Sell");
     this.btnSell.setClick(new EventHandler<Object, EventArgs>() {
@@ -448,7 +448,7 @@ public class FormEquipment extends WinformForm {
     this.btnBuy.setFlatStyle(FlatStyle.Flat);
     this.btnBuy.setLocation(new java.awt.Point(31, 272));
     this.btnBuy.setName("btnBuy");
-    this.btnBuy.setSize(new Size(58, 22));
+    this.btnBuy.setSize(new FormSize(58, 22));
     this.btnBuy.setTabIndex(7);
     this.btnBuy.setText("Buy");
     this.btnBuy.setClick(new EventHandler<Object, EventArgs>() {
@@ -462,13 +462,13 @@ public class FormEquipment extends WinformForm {
     this.lblBuyPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblBuyPriceLabel.setLocation(new java.awt.Point(8, 116));
     this.lblBuyPriceLabel.setName("lblBuyPriceLabel");
-    this.lblBuyPriceLabel.setSize(new Size(58, 16));
+    this.lblBuyPriceLabel.setSize(new FormSize(58, 16));
     this.lblBuyPriceLabel.setTabIndex(57);
     this.lblBuyPriceLabel.setText("Buy Price:");
     // lblBuyPrice
     this.lblBuyPrice.setLocation(new java.awt.Point(80, 116));
     this.lblBuyPrice.setName("lblBuyPrice");
-    this.lblBuyPrice.setSize(new Size(116, 16));
+    this.lblBuyPrice.setSize(new FormSize(116, 16));
     this.lblBuyPrice.setTabIndex(56);
     this.lblBuyPrice.setText("888,888 cr.");
     // lblSellPriceLabel
@@ -476,7 +476,7 @@ public class FormEquipment extends WinformForm {
     this.lblSellPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblSellPriceLabel.setLocation(new java.awt.Point(8, 132));
     this.lblSellPriceLabel.setName("lblSellPriceLabel");
-    this.lblSellPriceLabel.setSize(new Size(58, 16));
+    this.lblSellPriceLabel.setSize(new FormSize(58, 16));
     this.lblSellPriceLabel.setTabIndex(55);
     this.lblSellPriceLabel.setText("Sell Price:");
     // picEquipment
@@ -484,31 +484,31 @@ public class FormEquipment extends WinformForm {
     this.picEquipment.setBorderStyle(BorderStyle.FixedSingle);
     this.picEquipment.setLocation(new java.awt.Point(71, 20));
     this.picEquipment.setName("picEquipment");
-    this.picEquipment.setSize(new Size(66, 54));
+    this.picEquipment.setSize(new FormSize(66, 54));
     this.picEquipment.setTabIndex(54);
     this.picEquipment.setTabStop(false);
     this.picEquipment.setVisible(false);
     // lblSellPrice
     this.lblSellPrice.setLocation(new java.awt.Point(80, 132));
     this.lblSellPrice.setName("lblSellPrice");
-    this.lblSellPrice.setSize(new Size(116, 16));
+    this.lblSellPrice.setSize(new FormSize(116, 16));
     this.lblSellPrice.setTabIndex(52);
     this.lblSellPrice.setText("888,888 cr.");
     // lblDescription
     this.lblDescription.setLocation(new java.awt.Point(8, 188));
     this.lblDescription.setName("lblDescription");
-    this.lblDescription.setSize(new Size(196, 75));
+    this.lblDescription.setSize(new FormSize(196, 75));
     this.lblDescription.setTabIndex(47);
     // lblName
     this.lblName.setLocation(new java.awt.Point(80, 84));
     this.lblName.setName("lblName");
-    this.lblName.setSize(new Size(116, 16));
+    this.lblName.setSize(new FormSize(116, 16));
     this.lblName.setTabIndex(35);
     this.lblName.setText("Auto-Repair System");
     // FormEquipment
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnClose);
-    this.setClientSize(new Size(522, 311));
+    this.setClientSize(new FormSize(522, 311));
     this.Controls.add(this.boxShipInfo);
     this.Controls.add(this.boxBuy);
     this.Controls.add(this.boxSell);
@@ -644,7 +644,7 @@ public class FormEquipment extends WinformForm {
       }
       lblName.setText(selectedEquipment.Name());
       lblType.setText(Strings.EquipmentTypes[selectedEquipment.EquipmentType().CastToInt()]);
-      lblDescription.setText(Strings.EquipmentDescriptions[selectedEquipment.EquipmentType().CastToInt()][selectedEquipment.SubType().CastToInt()]);
+      lblDescription.setText(Strings.EquipmentDescriptions[selectedEquipment.EquipmentType().CastToInt()][selectedEquipment.SubType().asInteger()]);
       lblBuyPrice.setText(Functions.FormatMoney(selectedEquipment.Price()));
       lblSellPrice.setText(Functions.FormatMoney(selectedEquipment.SellPrice()));
       lblPower.setText(power);

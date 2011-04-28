@@ -9,7 +9,7 @@ import jwinforms.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformForm;
 import org.gts.bst.cargo.CargoBuyOp;
 import spacetrader.Commander;
@@ -92,13 +92,13 @@ public class FormCargoBuy extends WinformForm {
     this.lblQuestion.setAutoSize(true);
     this.lblQuestion.setLocation(new java.awt.Point(8, 24));
     this.lblQuestion.setName("lblQuestion");
-    this.lblQuestion.setSize(new Size(161, 16));
+    this.lblQuestion.setSize(new FormSize(161, 16));
     this.lblQuestion.setTabIndex(1);
     this.lblQuestion.setText("How many do you want to buy?");
     // lblStatement
     this.lblStatement.setLocation(new java.awt.Point(8, 8));
     this.lblStatement.setName("lblStatement");
-    this.lblStatement.setSize(new Size(326, 13));
+    this.lblStatement.setSize(new FormSize(326, 13));
     this.lblStatement.setTabIndex(3);
     this.lblStatement.setText("The trader wants to sell Machines for the price of 8,888 cr. each.");
     // numAmount
@@ -106,7 +106,7 @@ public class FormCargoBuy extends WinformForm {
     this.numAmount.setMaximum(999);
     this.numAmount.setMinimum(1);
     this.numAmount.setName("numAmount");
-    this.numAmount.setSize(new Size(44, 20));
+    this.numAmount.setSize(new FormSize(44, 20));
     this.numAmount.setTabIndex(1);
     this.numAmount.setValue(1);
     // btnOk
@@ -114,7 +114,7 @@ public class FormCargoBuy extends WinformForm {
     this.btnOk.setFlatStyle(FlatStyle.Flat);
     this.btnOk.setLocation(new java.awt.Point(95, 48));
     this.btnOk.setName("btnOk");
-    this.btnOk.setSize(new Size(41, 22));
+    this.btnOk.setSize(new FormSize(41, 22));
     this.btnOk.setTabIndex(2);
     this.btnOk.setText("Ok");
     // btnAll
@@ -122,7 +122,7 @@ public class FormCargoBuy extends WinformForm {
     this.btnAll.setFlatStyle(FlatStyle.Flat);
     this.btnAll.setLocation(new java.awt.Point(143, 48));
     this.btnAll.setName("btnAll");
-    this.btnAll.setSize(new Size(41, 22));
+    this.btnAll.setSize(new FormSize(41, 22));
     this.btnAll.setTabIndex(3);
     this.btnAll.setText("All");
     this.btnAll.setClick(new EventHandler<Object, EventArgs>() {
@@ -136,28 +136,28 @@ public class FormCargoBuy extends WinformForm {
     this.btnNone.setFlatStyle(FlatStyle.Flat);
     this.btnNone.setLocation(new java.awt.Point(191, 48));
     this.btnNone.setName("btnNone");
-    this.btnNone.setSize(new Size(41, 22));
+    this.btnNone.setSize(new FormSize(41, 22));
     this.btnNone.setTabIndex(4);
     this.btnNone.setText("None");
     // lblAvailable
     this.lblAvailable.setLocation(new java.awt.Point(8, 21));
     this.lblAvailable.setName("lblAvailable");
-    this.lblAvailable.setSize(new Size(163, 13));
+    this.lblAvailable.setSize(new FormSize(163, 13));
     this.lblAvailable.setTabIndex(5);
     this.lblAvailable.setText("The trader has 88 units for sale.");
     this.lblAvailable.setVisible(false);
     // lblAfford
     this.lblAfford.setLocation(new java.awt.Point(8, 34));
     this.lblAfford.setName("lblAfford");
-    this.lblAfford.setSize(new Size(157, 13));
+    this.lblAfford.setSize(new FormSize(157, 13));
     this.lblAfford.setTabIndex(6);
     this.lblAfford.setText("You can afford to buy 88 units.");
     this.lblAfford.setVisible(false);
     // FormCargoBuy
     this.setAcceptButton(this.btnOk);
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnNone);
-    this.setClientSize(new Size(326, 105));
+    this.setClientSize(new FormSize(326, 105));
     this.setControlBox(false);
     this.Controls.add(this.btnNone);
     this.Controls.add(this.btnAll);

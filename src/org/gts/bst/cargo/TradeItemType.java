@@ -1,6 +1,7 @@
 package org.gts.bst.cargo;
 import spacetrader.enums.SpaceTraderEnum;
 
+
 public enum TradeItemType implements SpaceTraderEnum {
   NA,//					= -1,
   Water,//			= 0,

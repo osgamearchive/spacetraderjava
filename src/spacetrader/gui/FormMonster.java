@@ -15,7 +15,7 @@ import jwinforms.LinkLabel;
 import jwinforms.LinkLabelLinkClickedEventArgs;
 import jwinforms.Panel;
 import jwinforms.PictureBox;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformForm;
 import spacetrader.Consts;
 import spacetrader.CrewMember;
@@ -76,6 +76,7 @@ public class FormMonster extends WinformForm {
   }
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.
+  @SuppressWarnings("deprecation")
   private void InitializeComponent() {
     this.btnClose = new Button();
     this.picLine1 = new PictureBox();
@@ -118,7 +119,7 @@ public class FormMonster extends WinformForm {
     this.btnClose.setDialogResult(DialogResult.Cancel);
     this.btnClose.setLocation(new java.awt.Point(-32, -32));
     this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new Size(32, 32));
+    this.btnClose.setSize(new FormSize(32, 32));
     this.btnClose.setTabIndex(32);
     this.btnClose.setTabStop(false);
     this.btnClose.setText("X");
@@ -126,14 +127,14 @@ public class FormMonster extends WinformForm {
     this.picLine1.setBackColor(java.awt.Color.darkGray);
     this.picLine1.setLocation(new java.awt.Point(4, 40));
     this.picLine1.setName("picLine1");
-    this.picLine1.setSize(new Size(609, 1));
+    this.picLine1.setSize(new FormSize(609, 1));
     this.picLine1.setTabIndex(133);
     this.picLine1.setTabStop(false);
     // picLine0
     this.picLine0.setBackColor(java.awt.Color.darkGray);
     this.picLine0.setLocation(new java.awt.Point(234, 8));
     this.picLine0.setName("picLine0");
-    this.picLine0.setSize(new Size(1, 347));
+    this.picLine0.setSize(new FormSize(1, 347));
     this.picLine0.setTabIndex(132);
     this.picLine0.setTabStop(false);
     // lblQuestsLabel
@@ -141,7 +142,7 @@ public class FormMonster extends WinformForm {
     this.lblQuestsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblQuestsLabel.setLocation(new java.awt.Point(88, 4));
     this.lblQuestsLabel.setName("lblQuestsLabel");
-    this.lblQuestsLabel.setSize(new Size(50, 19));
+    this.lblQuestsLabel.setSize(new FormSize(50, 19));
     this.lblQuestsLabel.setTabIndex(134);
     this.lblQuestsLabel.setText("Quests");
     // lblMercLabel
@@ -149,7 +150,7 @@ public class FormMonster extends WinformForm {
     this.lblMercLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblMercLabel.setLocation(new java.awt.Point(348, 4));
     this.lblMercLabel.setName("lblMercLabel");
-    this.lblMercLabel.setSize(new Size(84, 19));
+    this.lblMercLabel.setSize(new FormSize(84, 19));
     this.lblMercLabel.setTabIndex(141);
     this.lblMercLabel.setText("Mercenaries");
     // lblMercSkillLabelPilot
@@ -157,7 +158,7 @@ public class FormMonster extends WinformForm {
     this.lblMercSkillLabelPilot.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblMercSkillLabelPilot.setLocation(new java.awt.Point(341, 24));
     this.lblMercSkillLabelPilot.setName("lblMercSkillLabelPilot");
-    this.lblMercSkillLabelPilot.setSize(new Size(12, 16));
+    this.lblMercSkillLabelPilot.setSize(new FormSize(12, 16));
     this.lblMercSkillLabelPilot.setTabIndex(7);
     this.lblMercSkillLabelPilot.setTabStop(true);
     this.lblMercSkillLabelPilot.setText("P");
@@ -173,7 +174,7 @@ public class FormMonster extends WinformForm {
     this.lblMercSkillLabelFighter.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblMercSkillLabelFighter.setLocation(new java.awt.Point(362, 24));
     this.lblMercSkillLabelFighter.setName("lblMercSkillLabelFighter");
-    this.lblMercSkillLabelFighter.setSize(new Size(11, 16));
+    this.lblMercSkillLabelFighter.setSize(new FormSize(11, 16));
     this.lblMercSkillLabelFighter.setTabIndex(8);
     this.lblMercSkillLabelFighter.setTabStop(true);
     this.lblMercSkillLabelFighter.setText("F");
@@ -189,7 +190,7 @@ public class FormMonster extends WinformForm {
     this.lblMercSkillLabelTrader.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblMercSkillLabelTrader.setLocation(new java.awt.Point(382, 24));
     this.lblMercSkillLabelTrader.setName("lblMercSkillLabelTrader");
-    this.lblMercSkillLabelTrader.setSize(new Size(11, 16));
+    this.lblMercSkillLabelTrader.setSize(new FormSize(11, 16));
     this.lblMercSkillLabelTrader.setTabIndex(9);
     this.lblMercSkillLabelTrader.setTabStop(true);
     this.lblMercSkillLabelTrader.setText("T");
@@ -205,7 +206,7 @@ public class FormMonster extends WinformForm {
     this.lblMercSkillLabelEngineer.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblMercSkillLabelEngineer.setLocation(new java.awt.Point(401, 24));
     this.lblMercSkillLabelEngineer.setName("lblMercSkillLabelEngineer");
-    this.lblMercSkillLabelEngineer.setSize(new Size(12, 16));
+    this.lblMercSkillLabelEngineer.setSize(new FormSize(12, 16));
     this.lblMercSkillLabelEngineer.setTabIndex(10);
     this.lblMercSkillLabelEngineer.setTabStop(true);
     this.lblMercSkillLabelEngineer.setText("E");
@@ -221,7 +222,7 @@ public class FormMonster extends WinformForm {
     this.lblMercSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblMercSystemLabel.setLocation(new java.awt.Point(425, 24));
     this.lblMercSystemLabel.setName("lblMercSystemLabel");
-    this.lblMercSystemLabel.setSize(new Size(43, 16));
+    this.lblMercSystemLabel.setSize(new FormSize(43, 16));
     this.lblMercSystemLabel.setTabIndex(11);
     this.lblMercSystemLabel.setTabStop(true);
     this.lblMercSystemLabel.setText("System");
@@ -236,7 +237,7 @@ public class FormMonster extends WinformForm {
     this.lblQuestSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblQuestSystemLabel.setLocation(new java.awt.Point(13, 24));
     this.lblQuestSystemLabel.setName("lblQuestSystemLabel");
-    this.lblQuestSystemLabel.setSize(new Size(43, 16));
+    this.lblQuestSystemLabel.setSize(new FormSize(43, 16));
     this.lblQuestSystemLabel.setTabIndex(1);
     this.lblQuestSystemLabel.setTabStop(true);
     this.lblQuestSystemLabel.setText("System");
@@ -251,7 +252,7 @@ public class FormMonster extends WinformForm {
     this.lblQuestDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblQuestDescLabel.setLocation(new java.awt.Point(85, 24));
     this.lblQuestDescLabel.setName("lblQuestDescLabel");
-    this.lblQuestDescLabel.setSize(new Size(63, 16));
+    this.lblQuestDescLabel.setSize(new FormSize(63, 16));
     this.lblQuestDescLabel.setTabIndex(2);
     this.lblQuestDescLabel.setTabStop(true);
     this.lblQuestDescLabel.setText("Description");
@@ -266,7 +267,7 @@ public class FormMonster extends WinformForm {
     this.lblMercIDLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblMercIDLabel.setLocation(new java.awt.Point(247, 24));
     this.lblMercIDLabel.setName("lblMercIDLabel");
-    this.lblMercIDLabel.setSize(new Size(16, 16));
+    this.lblMercIDLabel.setSize(new FormSize(16, 16));
     this.lblMercIDLabel.setTabIndex(5);
     this.lblMercIDLabel.setTabStop(true);
     this.lblMercIDLabel.setText("ID");
@@ -282,7 +283,7 @@ public class FormMonster extends WinformForm {
     this.lblMercNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblMercNameLabel.setLocation(new java.awt.Point(268, 24));
     this.lblMercNameLabel.setName("lblMercNameLabel");
-    this.lblMercNameLabel.setSize(new Size(35, 16));
+    this.lblMercNameLabel.setSize(new FormSize(35, 16));
     this.lblMercNameLabel.setTabIndex(6);
     this.lblMercNameLabel.setTabStop(true);
     this.lblMercNameLabel.setText("Name");
@@ -297,7 +298,7 @@ public class FormMonster extends WinformForm {
     this.lblShipyardsDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblShipyardsDescLabel.setLocation(new java.awt.Point(85, 258));
     this.lblShipyardsDescLabel.setName("lblShipyardsDescLabel");
-    this.lblShipyardsDescLabel.setSize(new Size(63, 16));
+    this.lblShipyardsDescLabel.setSize(new FormSize(63, 16));
     this.lblShipyardsDescLabel.setTabIndex(4);
     this.lblShipyardsDescLabel.setTabStop(true);
     this.lblShipyardsDescLabel.setText("Description");
@@ -312,7 +313,7 @@ public class FormMonster extends WinformForm {
     this.lblShipyardsSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblShipyardsSystemLabel.setLocation(new java.awt.Point(13, 258));
     this.lblShipyardsSystemLabel.setName("lblShipyardsSystemLabel");
-    this.lblShipyardsSystemLabel.setSize(new Size(43, 16));
+    this.lblShipyardsSystemLabel.setSize(new FormSize(43, 16));
     this.lblShipyardsSystemLabel.setTabIndex(3);
     this.lblShipyardsSystemLabel.setTabStop(true);
     this.lblShipyardsSystemLabel.setText("System");
@@ -327,7 +328,7 @@ public class FormMonster extends WinformForm {
     this.lblShipyardsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblShipyardsLabel.setLocation(new java.awt.Point(79, 238));
     this.lblShipyardsLabel.setName("lblShipyardsLabel");
-    this.lblShipyardsLabel.setSize(new Size(68, 19));
+    this.lblShipyardsLabel.setSize(new FormSize(68, 19));
     this.lblShipyardsLabel.setTabIndex(155);
     this.lblShipyardsLabel.setText("Shipyards");
     // pnlMercs
@@ -343,37 +344,37 @@ public class FormMonster extends WinformForm {
     this.pnlMercs.Controls.add(this.lblMercSystems2);
     this.pnlMercs.setLocation(new java.awt.Point(239, 44));
     this.pnlMercs.setName("pnlMercs");
-    this.pnlMercs.setSize(new Size(371, 307));
+    this.pnlMercs.setSize(new FormSize(371, 307));
     this.pnlMercs.setTabIndex(158);
     // lblMercSkillsPilot
     this.lblMercSkillsPilot.setLocation(new java.awt.Point(93, 4));
     this.lblMercSkillsPilot.setName("lblMercSkillsPilot");
-    this.lblMercSkillsPilot.setSize(new Size(20, 563));
+    this.lblMercSkillsPilot.setSize(new FormSize(20, 563));
     this.lblMercSkillsPilot.setTabIndex(144);
     this.lblMercSkillsPilot.TextAlign = ContentAlignment.TopRight;
     // lblMercSkillsFighter
     this.lblMercSkillsFighter.setLocation(new java.awt.Point(113, 4));
     this.lblMercSkillsFighter.setName("lblMercSkillsFighter");
-    this.lblMercSkillsFighter.setSize(new Size(20, 563));
+    this.lblMercSkillsFighter.setSize(new FormSize(20, 563));
     this.lblMercSkillsFighter.setTabIndex(145);
     this.lblMercSkillsFighter.TextAlign = ContentAlignment.TopRight;
     // lblMercSkillsTrader
     this.lblMercSkillsTrader.setLocation(new java.awt.Point(133, 4));
     this.lblMercSkillsTrader.setName("lblMercSkillsTrader");
-    this.lblMercSkillsTrader.setSize(new Size(20, 563));
+    this.lblMercSkillsTrader.setSize(new FormSize(20, 563));
     this.lblMercSkillsTrader.setTabIndex(146);
     this.lblMercSkillsTrader.TextAlign = ContentAlignment.TopRight;
     // lblMercSkillsEngineer
     this.lblMercSkillsEngineer.setLocation(new java.awt.Point(153, 4));
     this.lblMercSkillsEngineer.setName("lblMercSkillsEngineer");
-    this.lblMercSkillsEngineer.setSize(new Size(20, 563));
+    this.lblMercSkillsEngineer.setSize(new FormSize(20, 563));
     this.lblMercSkillsEngineer.setTabIndex(147);
     this.lblMercSkillsEngineer.TextAlign = ContentAlignment.TopRight;
     // lblMercSystems
     this.lblMercSystems.LinkArea = new LinkArea(0, 0);
     this.lblMercSystems.setLocation(new java.awt.Point(185, 4));
     this.lblMercSystems.setName("lblMercSystems");
-    this.lblMercSystems.setSize(new Size(160, 387));
+    this.lblMercSystems.setSize(new FormSize(160, 387));
     this.lblMercSystems.setTabIndex(14);
     this.lblMercSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
       @Override
@@ -384,19 +385,19 @@ public class FormMonster extends WinformForm {
     // lblMercIds
     this.lblMercIds.setLocation(new java.awt.Point(0, 4));
     this.lblMercIds.setName("lblMercIds");
-    this.lblMercIds.setSize(new Size(23, 563));
+    this.lblMercIds.setSize(new FormSize(23, 563));
     this.lblMercIds.setTabIndex(142);
     this.lblMercIds.TextAlign = ContentAlignment.TopRight;
     // lblMercNames
     this.lblMercNames.setLocation(new java.awt.Point(28, 4));
     this.lblMercNames.setName("lblMercNames");
-    this.lblMercNames.setSize(new Size(69, 563));
+    this.lblMercNames.setSize(new FormSize(69, 563));
     this.lblMercNames.setTabIndex(141);
     // lblMercSystems2
     this.lblMercSystems2.LinkArea = new LinkArea(0, 0);
     this.lblMercSystems2.setLocation(new java.awt.Point(185, 391));
     this.lblMercSystems2.setName("lblMercSystems2");
-    this.lblMercSystems2.setSize(new Size(160, 175));
+    this.lblMercSystems2.setSize(new FormSize(160, 175));
     this.lblMercSystems2.setTabIndex(148);
     this.lblMercSystems2.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
       @Override
@@ -411,18 +412,18 @@ public class FormMonster extends WinformForm {
     this.pnlQuests.Controls.add(this.lblQuestSystems);
     this.pnlQuests.setLocation(new java.awt.Point(8, 44));
     this.pnlQuests.setName("pnlQuests");
-    this.pnlQuests.setSize(new Size(222, 182));
+    this.pnlQuests.setSize(new FormSize(222, 182));
     this.pnlQuests.setTabIndex(159);
     // lblQuests
     this.lblQuests.setLocation(new java.awt.Point(76, 4));
     this.lblQuests.setName("lblQuests");
-    this.lblQuests.setSize(new Size(120, 350));
+    this.lblQuests.setSize(new FormSize(120, 350));
     this.lblQuests.setTabIndex(48);
     // lblQuestSystems
     this.lblQuestSystems.LinkArea = new LinkArea(0, 0);
     this.lblQuestSystems.setLocation(new java.awt.Point(4, 4));
     this.lblQuestSystems.setName("lblQuestSystems");
-    this.lblQuestSystems.setSize(new Size(68, 350));
+    this.lblQuestSystems.setSize(new FormSize(68, 350));
     this.lblQuestSystems.setTabIndex(12);
     this.lblQuestSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
       @Override
@@ -436,18 +437,18 @@ public class FormMonster extends WinformForm {
     this.pnlShipyards.Controls.add(this.lblShipyardSystems);
     this.pnlShipyards.setLocation(new java.awt.Point(8, 278));
     this.pnlShipyards.setName("pnlShipyards");
-    this.pnlShipyards.setSize(new Size(222, 73));
+    this.pnlShipyards.setSize(new FormSize(222, 73));
     this.pnlShipyards.setTabIndex(160);
     // lblShipyards
     this.lblShipyards.setLocation(new java.awt.Point(76, 4));
     this.lblShipyards.setName("lblShipyards");
-    this.lblShipyards.setSize(new Size(120, 63));
+    this.lblShipyards.setSize(new FormSize(120, 63));
     this.lblShipyards.setTabIndex(158);
     // lblShipyardSystems
     this.lblShipyardSystems.LinkArea = new LinkArea(0, 0);
     this.lblShipyardSystems.setLocation(new java.awt.Point(4, 4));
     this.lblShipyardSystems.setName("lblShipyardSystems");
-    this.lblShipyardSystems.setSize(new Size(68, 63));
+    this.lblShipyardSystems.setSize(new FormSize(68, 63));
     this.lblShipyardSystems.setTabIndex(13);
     this.lblShipyardSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
       @Override
@@ -459,13 +460,13 @@ public class FormMonster extends WinformForm {
     this.picLine2.setBackColor(java.awt.Color.darkGray);
     this.picLine2.setLocation(new java.awt.Point(4, 274));
     this.picLine2.setName("picLine2");
-    this.picLine2.setSize(new Size(222, 1));
+    this.picLine2.setSize(new FormSize(222, 1));
     this.picLine2.setTabIndex(161);
     this.picLine2.setTabStop(false);
     // FormMonster
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnClose);
-    this.setClientSize(new Size(617, 358));
+    this.setClientSize(new FormSize(617, 358));
     this.Controls.add(this.picLine2);
     this.Controls.add(this.pnlShipyards);
     this.Controls.add(this.pnlQuests);

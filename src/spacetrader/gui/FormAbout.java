@@ -13,7 +13,7 @@ import jwinforms.ISupportInitialize;
 import jwinforms.Image;
 import jwinforms.Label;
 import jwinforms.PictureBox;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformForm;
 
 
@@ -40,7 +40,7 @@ public class FormAbout extends WinformForm {
     this.btnClose.setDialogResult(DialogResult.Cancel);
     this.btnClose.setLocation(new Point(-32, -32));
     this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new Size(32, 32));
+    this.btnClose.setSize(new FormSize(32, 32));
     this.btnClose.setTabIndex(32);
     this.btnClose.setTabStop(false);
     this.btnClose.setText("X");
@@ -49,26 +49,26 @@ public class FormAbout extends WinformForm {
     this.lblTitle.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     this.lblTitle.setLocation(new Point(172, 8));
     this.lblTitle.setName("lblTitle");
-    this.lblTitle.setSize(new Size(187, 13));
+    this.lblTitle.setSize(new FormSize(187, 13));
     this.lblTitle.setTabIndex(33);
     this.lblTitle.setText("Space Trader for Windows 2.01");
     // lblAbout
     this.lblAbout.setLocation(new Point(172, 32));
     this.lblAbout.setName("lblAbout");
-    this.lblAbout.setSize(new Size(272, 160));
+    this.lblAbout.setSize(new FormSize(272, 160));
     this.lblAbout.setTabIndex(34);
     this.lblAbout.setText(resources.GetString("lblAbout.Text"));
     // picLogo
     this.picLogo.setImage(((Image)(resources.GetObject("picLogo.Image"))));
     this.picLogo.setLocation(new Point(8, 8));
     this.picLogo.setName("picLogo");
-    this.picLogo.setSize(new Size(160, 160));
+    this.picLogo.setSize(new FormSize(160, 160));
     this.picLogo.setTabIndex(35);
     this.picLogo.setTabStop(false);
     // FormAbout
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnClose);
-    this.setClientSize(new Size(446, 191));
+    this.setClientSize(new FormSize(446, 191));
     this.Controls.add(this.picLogo);
     this.Controls.add(this.lblAbout);
     this.Controls.add(this.lblTitle);

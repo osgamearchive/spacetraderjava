@@ -12,7 +12,7 @@ public enum GadgetType implements EquipmentSubType, SpaceTraderEnum {
   HiddenCargoBays;// = 6
 
   @Override
-  public int CastToInt() {
+  public int asInteger() {
     return ordinal();
   }
 

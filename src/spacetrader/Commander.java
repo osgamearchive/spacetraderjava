@@ -1,9 +1,9 @@
 package spacetrader;
-import org.gts.bst.ship.equip.Equipment;
 import jwinforms.DialogResult;
 import jwinforms.WinformPane;
 import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.ship.ShipType;
+import org.gts.bst.ship.equip.Equipment;
 import org.gts.bst.ship.equip.GadgetType;
 import org.gts.bst.ship.equip.ShieldType;
 import org.gts.bst.ship.equip.WeaponType;
@@ -106,9 +106,9 @@ public class Commander extends CrewMember {
       Equipment[] special = new Equipment[] {
         Consts.Weapons[WeaponType.MorgansLaser.id],
         Consts.Weapons[WeaponType.QuantumDistruptor.id],
-        Consts.Shields[ShieldType.Lightning.CastToInt()],
-        Consts.Gadgets[GadgetType.FuelCompactor.CastToInt()],
-        Consts.Gadgets[GadgetType.HiddenCargoBays.CastToInt()]
+        Consts.Shields[ShieldType.Lightning.id],
+        Consts.Gadgets[GadgetType.FuelCompactor.asInteger()],
+        Consts.Gadgets[GadgetType.HiddenCargoBays.asInteger()]
       };
       boolean[] add = new boolean[special.length];
       boolean addPod = false;
@@ -157,9 +157,7 @@ public class Commander extends CrewMember {
         CrewMember[] oldCrew = getShip().Crew();
         setShip(new Ship(specToBuy.Type()));
         setCash(getCash() - (netPrice + extraCost));
-        for(int i = 0; i < Math.min(oldCrew.length, getShip().Crew().length); i++) {
-          getShip().Crew()[i] = oldCrew[i];
-        }
+        System.arraycopy(oldCrew, 0, getShip().Crew(), 0, Math.min(oldCrew.length, getShip().Crew().length));
         for(int i = 0; i < special.length; i++) {
           if(add[i]) {
             getShip().AddEquipment(special[i]);

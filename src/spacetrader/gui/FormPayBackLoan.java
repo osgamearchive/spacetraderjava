@@ -9,7 +9,7 @@ import jwinforms.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformForm;
 import spacetrader.Commander;
 import spacetrader.Functions;
@@ -49,7 +49,7 @@ public class FormPayBackLoan extends WinformForm {
     this.lblQuestion.setAutoSize(true);
     this.lblQuestion.setLocation(new java.awt.Point(8, 24));
     this.lblQuestion.setName("lblQuestion");
-    this.lblQuestion.setSize(new Size(188, 13));
+    this.lblQuestion.setSize(new FormSize(188, 13));
     this.lblQuestion.setTabIndex(3);
     this.lblQuestion.setText("How much do you want to pay back?");
     // numAmount
@@ -57,7 +57,7 @@ public class FormPayBackLoan extends WinformForm {
     this.numAmount.setMaximum(999999);
     this.numAmount.setMinimum(1);
     this.numAmount.setName("numAmount");
-    this.numAmount.setSize(new Size(58, 20));
+    this.numAmount.setSize(new FormSize(58, 20));
     this.numAmount.setTabIndex(1);
     this.numAmount.ThousandsSeparator = true;
     this.numAmount.setValue(88888);
@@ -66,7 +66,7 @@ public class FormPayBackLoan extends WinformForm {
     this.btnOk.setFlatStyle(FlatStyle.Flat);
     this.btnOk.setLocation(new java.awt.Point(58, 48));
     this.btnOk.setName("btnOk");
-    this.btnOk.setSize(new Size(41, 22));
+    this.btnOk.setSize(new FormSize(41, 22));
     this.btnOk.setTabIndex(2);
     this.btnOk.setText("Ok");
     // btnMax
@@ -74,7 +74,7 @@ public class FormPayBackLoan extends WinformForm {
     this.btnMax.setFlatStyle(FlatStyle.Flat);
     this.btnMax.setLocation(new java.awt.Point(106, 48));
     this.btnMax.setName("btnMax");
-    this.btnMax.setSize(new Size(41, 22));
+    this.btnMax.setSize(new FormSize(41, 22));
     this.btnMax.setTabIndex(3);
     this.btnMax.setText("Max");
     this.btnMax.setClick(new EventHandler<Object, EventArgs>() {
@@ -88,20 +88,20 @@ public class FormPayBackLoan extends WinformForm {
     this.btnNothing.setFlatStyle(FlatStyle.Flat);
     this.btnNothing.setLocation(new java.awt.Point(154, 48));
     this.btnNothing.setName("btnNothing");
-    this.btnNothing.setSize(new Size(53, 22));
+    this.btnNothing.setSize(new FormSize(53, 22));
     this.btnNothing.setTabIndex(4);
     this.btnNothing.setText("Nothing");
     // lblStatement
     this.lblStatement.setLocation(new java.awt.Point(8, 8));
     this.lblStatement.setName("lblStatement");
-    this.lblStatement.setSize(new Size(176, 13));
+    this.lblStatement.setSize(new FormSize(176, 13));
     this.lblStatement.setTabIndex(5);
     this.lblStatement.setText("You have a debt of 88,888 credits.");
     // FormPayBackLoan
     this.setAcceptButton(this.btnOk);
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnNothing);
-    this.setClientSize(new Size(264, 79));
+    this.setClientSize(new FormSize(264, 79));
     this.setControlBox(false);
     this.Controls.addAll(this.lblStatement, this.btnNothing, this.btnMax, this.btnOk, this.numAmount, this.lblQuestion);
     this.setFormBorderStyle(FormBorderStyle.FixedDialog);

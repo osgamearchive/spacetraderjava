@@ -40,19 +40,20 @@ public class Ship extends ShipSpec {
     if(oppType == OpponentType.FamousCaptain) {
       SetValues(Consts.ShipSpecs[Consts.MaxShip].Type());
       for(int i = 0; i < Shields().length; i++) {
-        AddEquipment(Consts.Shields[ShieldType.Reflective.CastToInt()]);
+        AddEquipment(Consts.Shields[ShieldType.Reflective.id]);
       }
       for(int i = 0; i < Weapons().length; i++) {
         AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
       }
-      AddEquipment(Consts.Gadgets[GadgetType.NavigatingSystem.CastToInt()]);
-      AddEquipment(Consts.Gadgets[GadgetType.TargetingSystem.CastToInt()]);
+      AddEquipment(Consts.Gadgets[GadgetType.NavigatingSystem.asInteger()]);
+      AddEquipment(Consts.Gadgets[GadgetType.TargetingSystem.asInteger()]);
       Crew()[0] = Game.CurrentGame().Mercenaries()[CrewMemberId.FamousCaptain.CastToInt()];
     } else if(oppType == OpponentType.Bottle) {
       SetValues(ShipType.Bottle);
     } else {
-      int tries = oppType == OpponentType.Mantis ? Game.CurrentGame().Difficulty().CastToInt() + 1 : Math.max(1, Game.CurrentGame().Commander().Worth() / 150000
-          + Game.CurrentGame().Difficulty().CastToInt() - Difficulty.Normal.CastToInt());
+      int tries = oppType == OpponentType.Mantis
+          ? Game.CurrentGame().Difficulty().CastToInt() + 1
+          : Math.max(1, Game.CurrentGame().Commander().Worth() / 150000 + Game.CurrentGame().Difficulty().CastToInt() - Difficulty.Normal.CastToInt());
       GenerateOpponentShip(oppType);
       GenerateOpponentAddCrew();
       GenerateOpponentAddGadgets(tries);

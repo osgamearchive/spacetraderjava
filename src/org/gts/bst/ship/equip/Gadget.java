@@ -1,6 +1,4 @@
 package org.gts.bst.ship.equip;
-import org.gts.bst.ship.equip.EquipmentSubType;
-import org.gts.bst.ship.equip.GadgetType;
 import spacetrader.Strings;
 import spacetrader.enums.SkillType;
 import spacetrader.enums.TechLevel;
@@ -37,14 +35,14 @@ public class Gadget extends Equipment {
   @Override
   public Hashtable Serialize() {
     Hashtable hash = super.Serialize();
-    hash.add("_type", _type.CastToInt());
+    hash.add("_type", _type.asInteger());
     hash.add("_skillBonus", _skillBonus.CastToInt());
     return hash;
   }
 
   @Override
   public String Name() {
-    return Strings.GadgetNames[_type.CastToInt()];
+    return Strings.GadgetNames[_type.asInteger()];
   }
 
   @Override

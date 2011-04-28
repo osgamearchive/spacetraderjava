@@ -12,8 +12,8 @@ import jwinforms.GraphicsUnit;
 import jwinforms.Image;
 import jwinforms.Rectangle;
 import jwinforms.WinformPane;
-import spacetrader.enums.AlertType;
 import org.gts.bst.difficulty.Difficulty;
+import spacetrader.enums.AlertType;
 import spacetrader.gui.FormAlert;
 import spacetrader.stub.ArrayList;
 import spacetrader.stub.BinaryFormatter;
@@ -38,7 +38,7 @@ public class Functions {
     return skill;
   }
 
-  public static String[] ArrayListtoStringArray(spacetrader.stub.ArrayList<?> list) {
+  public static String[] ArrayListtoStringArray(ArrayList<?> list) {
     String[] items = new String[list.size()];
     for(int i = 0; i < items.length; i++) {
       items[i] = (String)list.get(i);
@@ -59,7 +59,6 @@ public class Functions {
   }
 
   public static String FormatNumber(int num) {
-    //return String.format("{0:n0}", num);
     return String.format("%,d", num);
   }
 
@@ -68,12 +67,10 @@ public class Functions {
   }
 
   public static String FormatMoney(int num) {
-    //return String.format("{0:n0} cr.", num);
     return String.format("%,d cr.", num);
   }
 
   public static String FormatPercent(int num) {
-    //return String.format("{0:n0}%", num);
     return String.format("%,d%%", num);
   }
 
@@ -106,13 +103,10 @@ public class Functions {
   }
 
   public static int GetRandom(int min, int max) {
-    //return rand.Next(min, max);
     return rand.nextInt(max - min) + min;
   }
 
-  // *************************************************************************
   // Pieter's new random functions, tweaked a bit by SjG
-  // *************************************************************************
   public static int GetRandom2(int max) {
     return (int)(Rand() % max);
   }
@@ -120,7 +114,6 @@ public class Functions {
   public static RegistryKey GetRegistryKey() {
     File regfile = new File("registryKey.properties");
     return new RegistryKey(regfile);
-    //return Registry.CurrentUser.OpenSubKey("Software", true).CreateSubKey("FrenchFryz").CreateSubKey("SpaceTrader");
   }
 
   public static boolean IsInt(String toParse) {
@@ -220,14 +213,12 @@ public class Functions {
       (new BinaryFormatter()).Serialize(outStream, toSerialize);
       saveOk = true;
     } catch(IOException ex) {
-      ex.printStackTrace();
       FormAlert.Alert(AlertType.FileErrorSave, owner, fileName, ex.getMessage());
     } finally {
       if(outStream != null) {
         try {
           outStream.close();
         } catch(IOException e) {
-          e.printStackTrace();
         }
       }
     }
@@ -251,28 +242,23 @@ public class Functions {
     return StringVars(toParse, new String[] {var1, var2});
   }
 
-  // *************************************************************************
   // Returns true if there exists a wormhole from a to b.
   // If b < 0, then return true if there exists a wormhole at all from a.
-  // *************************************************************************
   public static boolean WormholeExists(int a, int b) {
     int[] wormholes = Game.CurrentGame().Wormholes();
     int i = Util.BruteSeek(wormholes, a);
-    //int i = Array.IndexOf(wormholes, a);
     return (i >= 0 && (b < 0 || wormholes[(i + 1) % wormholes.length] == b));
   }
 
   public static boolean WormholeExists(StarSystem a, StarSystem b) {
     StarSystem[] universe = Game.CurrentGame().Universe();
     int[] wormholes = Game.CurrentGame().Wormholes();
-    //int i = Array.IndexOf(wormholes, (int) a.Id);
     int i = Util.BruteSeek(wormholes, a.Id().CastToInt());
     return (i >= 0 && (universe[wormholes[(i + 1) % wormholes.length]] == b));
   }
 
   public static StarSystem WormholeTarget(int a) {
     int[] wormholes = Game.CurrentGame().Wormholes();
-    //int i = Array.IndexOf(wormholes, a);
     int i = Util.BruteSeek(wormholes, a);
     return (i >= 0 ? (Game.CurrentGame().Universe()[wormholes[(i + 1) % wormholes.length]]) : null);
   }

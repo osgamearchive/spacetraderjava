@@ -11,7 +11,7 @@ import jwinforms.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.WinformControl;
 import jwinforms.WinformForm;
 import spacetrader.Commander;
@@ -48,7 +48,7 @@ public class FormBuyRepairs extends WinformForm {
     this.lblQuestion.setAutoSize(true);
     this.lblQuestion.setLocation(new Point(8, 8));
     this.lblQuestion.setName("lblQuestion");
-    this.lblQuestion.setSize(new Size(227, 13));
+    this.lblQuestion.setSize(new FormSize(227, 13));
     this.lblQuestion.setTabIndex(3);
     this.lblQuestion.setText("How much do you want to spend on repairs?");
     // numAmount
@@ -56,7 +56,7 @@ public class FormBuyRepairs extends WinformForm {
     this.numAmount.setMaximum(999);
     this.numAmount.setMinimum(1);
     this.numAmount.setName("numAmount");
-    this.numAmount.setSize(new Size(44, 20));
+    this.numAmount.setSize(new FormSize(44, 20));
     this.numAmount.setTabIndex(1);
     this.numAmount.setValue(888);
     // btnOk
@@ -64,7 +64,7 @@ public class FormBuyRepairs extends WinformForm {
     this.btnOk.setFlatStyle(FlatStyle.Flat);
     this.btnOk.setLocation(new Point(69, 32));
     this.btnOk.setName("btnOk");
-    this.btnOk.setSize(new Size(41, 22));
+    this.btnOk.setSize(new FormSize(41, 22));
     this.btnOk.setTabIndex(2);
     this.btnOk.setText("Ok");
     // btnMax
@@ -72,7 +72,7 @@ public class FormBuyRepairs extends WinformForm {
     this.btnMax.setFlatStyle(FlatStyle.Flat);
     this.btnMax.setLocation(new Point(117, 32));
     this.btnMax.setName("btnMax");
-    this.btnMax.setSize(new Size(41, 22));
+    this.btnMax.setSize(new FormSize(41, 22));
     this.btnMax.setTabIndex(3);
     this.btnMax.setText("Max");
     // btnNothing
@@ -80,14 +80,14 @@ public class FormBuyRepairs extends WinformForm {
     this.btnNothing.setFlatStyle(FlatStyle.Flat);
     this.btnNothing.setLocation(new Point(165, 32));
     this.btnNothing.setName("btnNothing");
-    this.btnNothing.setSize(new Size(53, 22));
+    this.btnNothing.setSize(new FormSize(53, 22));
     this.btnNothing.setTabIndex(4);
     this.btnNothing.setText("Nothing");
     // FormBuyRepairs
     this.setAcceptButton(this.btnOk);
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnNothing);
-    this.setClientSize(new Size(286, 63));
+    this.setClientSize(new FormSize(286, 63));
     this.setControlBox(false);
     this.Controls.addAll(Arrays.asList(new WinformControl[] {this.btnNothing, this.btnMax, this.btnOk, this.numAmount, this.lblQuestion}));
     this.setFormBorderStyle(FormBorderStyle.FixedDialog);

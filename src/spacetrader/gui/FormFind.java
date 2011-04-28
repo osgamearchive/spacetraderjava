@@ -8,7 +8,7 @@ import jwinforms.FlatStyle;
 import jwinforms.FormBorderStyle;
 import jwinforms.FormStartPosition;
 import jwinforms.Label;
-import jwinforms.Size;
+import jwinforms.FormSize;
 import jwinforms.TextBox;
 import jwinforms.WinformForm;
 
@@ -40,7 +40,7 @@ public class FormFind extends WinformForm {
     this.lblText.setAutoSize(true);
     this.lblText.setLocation(new java.awt.Point(8, 8));
     this.lblText.setName("lblText");
-    this.lblText.setSize(new Size(177, 13));
+    this.lblText.setSize(new FormSize(177, 13));
     this.lblText.setTabIndex(3);
     this.lblText.setText("Which system are you looking for?");
     // btnOk
@@ -48,7 +48,7 @@ public class FormFind extends WinformForm {
     this.btnOk.setFlatStyle(FlatStyle.Flat);
     this.btnOk.setLocation(new java.awt.Point(43, 68));
     this.btnOk.setName("btnOk");
-    this.btnOk.setSize(new Size(40, 22));
+    this.btnOk.setSize(new FormSize(40, 22));
     this.btnOk.setTabIndex(3);
     this.btnOk.setText("Ok");
     // btnCancel
@@ -56,26 +56,26 @@ public class FormFind extends WinformForm {
     this.btnCancel.setFlatStyle(FlatStyle.Flat);
     this.btnCancel.setLocation(new java.awt.Point(91, 68));
     this.btnCancel.setName("btnCancel");
-    this.btnCancel.setSize(new Size(50, 22));
+    this.btnCancel.setSize(new FormSize(50, 22));
     this.btnCancel.setTabIndex(4);
     this.btnCancel.setText("Cancel");
     // txtSystem
     this.txtSystem.setLocation(new java.awt.Point(8, 24));
     this.txtSystem.setName("txtSystem");
-    this.txtSystem.setSize(new Size(168, 20));
+    this.txtSystem.setSize(new FormSize(168, 20));
     this.txtSystem.setTabIndex(1);
     this.txtSystem.setText("");
     // chkTrack
     this.chkTrack.setLocation(new java.awt.Point(8, 48));
     this.chkTrack.setName("chkTrack");
-    this.chkTrack.setSize(new Size(112, 16));
+    this.chkTrack.setSize(new FormSize(112, 16));
     this.chkTrack.setTabIndex(2);
     this.chkTrack.setText("Track this system");
     // FormFind
     this.setAcceptButton(this.btnOk);
-    this.setAutoScaleBaseSize(new Size(5, 13));
+    this.setAutoScaleBaseSize(new FormSize(5, 13));
     this.setCancelButton(this.btnCancel);
-    this.setClientSize(new Size(184, 97));
+    this.setClientSize(new FormSize(184, 97));
     this.setControlBox(false);
     this.Controls.addAll(this.chkTrack, this.txtSystem, this.btnCancel, this.btnOk, this.lblText);
     this.setFormBorderStyle(FormBorderStyle.FixedDialog);

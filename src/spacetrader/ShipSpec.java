@@ -1,7 +1,7 @@
 package spacetrader;
 import jwinforms.Image;
 import org.gts.bst.ship.ShipType;
-import org.gts.bst.ship.Size;
+import org.gts.bst.ship.ShipSize;
 import org.gts.bst.ship.equip.EquipmentType;
 import spacetrader.enums.Activity;
 import spacetrader.enums.TechLevel;
@@ -10,7 +10,7 @@ import spacetrader.util.Hashtable;
 
 public class ShipSpec extends STSerializableObject {
   private ShipType _type = ShipType.Custom;
-  private Size _size = Size.Tiny;
+  private ShipSize _size = ShipSize.Tiny;
   private int _cargoBays = 0;
   private int _weaponSlots = 0;
   private int _shieldSlots = 0;
@@ -32,7 +32,7 @@ public class ShipSpec extends STSerializableObject {
   public ShipSpec() {
   }
 
-  public ShipSpec(ShipType type, Size size, int cargoBays, int weaponSlots, int shieldSlots, int gadgetSlots,
+  public ShipSpec(ShipType type, ShipSize size, int cargoBays, int weaponSlots, int shieldSlots, int gadgetSlots,
                   int crewQuarters, int fuelTanks, int fuelCost, int hullStrength, int repairCost, int price, int occurrence,
                   Activity police, Activity pirates, Activity traders, TechLevel minTechLevel) {
     _type = type;
@@ -57,7 +57,7 @@ public class ShipSpec extends STSerializableObject {
   public ShipSpec(Hashtable hash) {
     super(hash);
     _type = ShipType.FromInt(GetValueFromHash(hash, "_type", _type, Integer.class));
-    _size = Size.FromInt(GetValueFromHash(hash, "_size", _size, Integer.class));
+    _size = ShipSize.FromInt(GetValueFromHash(hash, "_size", _size, Integer.class));
     _cargoBays = GetValueFromHash(hash, "_cargoBays", _cargoBays);
     _weaponSlots = GetValueFromHash(hash, "_weaponSlots", _weaponSlots);
     _shieldSlots = GetValueFromHash(hash, "_shieldSlots", _shieldSlots);
@@ -199,11 +199,11 @@ public class ShipSpec extends STSerializableObject {
     return _weaponSlots;
   }
 
-  public void setSize(Size size) {
+  public void setSize(ShipSize size) {
     _size = size;
   }
 
-  public Size getSize() {
+  public ShipSize getSize() {
     return _size;
   }
 

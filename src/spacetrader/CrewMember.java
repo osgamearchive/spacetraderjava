@@ -64,9 +64,8 @@ public class CrewMember extends STSerializableObject {
   }
 
   // *************************************************************************
-  // NthLowest Skill. Returns skill with the nth lowest score
-  // (i.e., 2 is the second worst skill). If there is a tie, it will return
-  // in the order of Pilot, Fighter, Trader, Engineer.
+  // NthLowest Skill. Returns skill with the nth lowest score (i.e., 2 is the second worst skill).
+  // If there is a tie, it will return in the order of Pilot, Fighter, Trader, Engineer.
   // JAF - rewrote this to be more efficient.
   // *************************************************************************
   public int NthLowestSkill(int n) {
@@ -165,7 +164,8 @@ public class CrewMember extends STSerializableObject {
   }
 
   public int Rate() {
-    return Util.ArrayContains(Consts.SpecialCrewMemberIds, Id()) || Id() == CrewMemberId.Zeethibal ? 0 : (Pilot() + Fighter() + Trader() + Engineer()) * 3;
+    return Util.ArrayContains(Consts.SpecialCrewMemberIds, Id()) || Id() == CrewMemberId.Zeethibal
+        ? 0 : (Pilot() + Fighter() + Trader() + Engineer()) * 3;
   }
 
   public int[] Skills() {
