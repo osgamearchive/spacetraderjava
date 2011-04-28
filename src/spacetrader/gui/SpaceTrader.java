@@ -4,47 +4,69 @@ import java.awt.Point;
 import java.util.Arrays;
 import java.util.Iterator;
 import javax.swing.UIManager;
+import jwinforms.AnchorStyles;
 import jwinforms.Brush;
 import jwinforms.Button;
 import jwinforms.CancelEventArgs;
+import jwinforms.Container;
 import jwinforms.ContentAlignment;
 import jwinforms.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
+import jwinforms.FlatStyle;
 import jwinforms.Font;
 import jwinforms.FontStyle;
 import jwinforms.FormStartPosition;
 import jwinforms.GraphicsUnit;
+import jwinforms.GroupBox;
+import jwinforms.IContainer;
+import jwinforms.ISupportInitialize;
 import jwinforms.Icon;
 import jwinforms.Image;
 import jwinforms.ImageList;
+import jwinforms.ImageListStreamer;
 import jwinforms.Label;
+import jwinforms.MainMenu;
+import jwinforms.MenuItem;
 import jwinforms.MouseButtons;
 import jwinforms.MouseEventArgs;
+import jwinforms.OpenFileDialog;
 import jwinforms.PaintEventArgs;
 import jwinforms.Pen;
+import jwinforms.PictureBox;
+import jwinforms.ResourceManager;
+import jwinforms.SaveFileDialog;
+import jwinforms.Shortcut;
+import jwinforms.Size;
 import jwinforms.SizeF;
 import jwinforms.SolidBrush;
+import jwinforms.StatusBar;
+import jwinforms.StatusBarPanel;
+import jwinforms.StatusBarPanelAutoSize;
 import jwinforms.StatusBarPanelClickEventArgs;
+import jwinforms.SubMenu;
+import jwinforms.SystemColors;
+import jwinforms.ToolTip;
+import jwinforms.WinformWindow;
 import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.events.VeryRareEncounter;
 import org.gts.bst.ship.ShipType;
+import org.gts.bst.ship.equip.Gadget;
+import org.gts.bst.ship.equip.Shield;
+import org.gts.bst.ship.equip.Weapon;
 import spacetrader.Commander;
 import spacetrader.Consts;
 import spacetrader.CrewMember;
 import spacetrader.Functions;
 import spacetrader.FutureVersionException;
-import org.gts.bst.ship.equip.Gadget;
 import spacetrader.Game;
 import spacetrader.GameEndException;
 import spacetrader.HighScoreRecord;
 import spacetrader.STSerializableObject;
-import org.gts.bst.ship.equip.Shield;
 import spacetrader.Ship;
 import spacetrader.SpecialEvent;
 import spacetrader.StarSystem;
 import spacetrader.Strings;
-import org.gts.bst.ship.equip.Weapon;
 import spacetrader.enums.AlertType;
 import spacetrader.enums.GameEndType;
 import spacetrader.enums.StarSystemId;
@@ -53,220 +75,220 @@ import spacetrader.stub.RegistryKey;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
-public class SpaceTrader extends jwinforms.WinformWindow {
-	private jwinforms.Button btnDesign;
-	private jwinforms.Button btnNews;
-	private jwinforms.Button btnSpecial;
-	private jwinforms.Button btnMerc;
-	private jwinforms.Button btnFuel;
-	private jwinforms.Button btnRepair;
-	private jwinforms.Button btnBuyShip;
-	private jwinforms.Button btnEquip;
-	private jwinforms.Button btnPod;
-	private jwinforms.Button btnBuyMax0;
-	private jwinforms.Button btnBuyQty0;
-	private jwinforms.Button btnSellQty0;
-	private jwinforms.Button btnSellAll0;
-	private jwinforms.Button btnBuyMax1;
-	private jwinforms.Button btnBuyQty1;
-	private jwinforms.Button btnSellQty1;
-	private jwinforms.Button btnSellAll1;
-	private jwinforms.Button btnSellQty2;
-	private jwinforms.Button btnSellAll2;
-	private jwinforms.Button btnBuyQty2;
-	private jwinforms.Button btnBuyMax2;
-	private jwinforms.Button btnSellQty3;
-	private jwinforms.Button btnSellAll3;
-	private jwinforms.Button btnBuyQty3;
-	private jwinforms.Button btnBuyMax3;
-	private jwinforms.Button btnSellQty4;
-	private jwinforms.Button btnSellAll4;
-	private jwinforms.Button btnBuyQty4;
-	private jwinforms.Button btnBuyMax4;
-	private jwinforms.Button btnSellQty5;
-	private jwinforms.Button btnSellAll5;
-	private jwinforms.Button btnBuyQty5;
-	private jwinforms.Button btnBuyMax5;
-	private jwinforms.Button btnSellQty6;
-	private jwinforms.Button btnSellAll6;
-	private jwinforms.Button btnBuyQty6;
-	private jwinforms.Button btnBuyMax6;
-	private jwinforms.Button btnSellQty7;
-	private jwinforms.Button btnSellAll7;
-	private jwinforms.Button btnBuyQty7;
-	private jwinforms.Button btnBuyMax7;
-	private jwinforms.Button btnSellQty8;
-	private jwinforms.Button btnSellAll8;
-	private jwinforms.Button btnBuyQty8;
-	private jwinforms.Button btnBuyMax8;
-	private jwinforms.Button btnSellQty9;
-	private jwinforms.Button btnSellAll9;
-	private jwinforms.Button btnBuyQty9;
-	private jwinforms.Button btnBuyMax9;
-	private jwinforms.Button btnJump;
-	private jwinforms.Button btnFind;
-	private jwinforms.Button btnPrevSystem;
-	private jwinforms.Button btnNextSystem;
-	private jwinforms.Button btnTrack;
-	private jwinforms.Button btnWarp;
-	private jwinforms.ImageList ilChartImages;
-	private jwinforms.ImageList ilDirectionImages;
-	private jwinforms.ImageList ilEquipmentImages;
-	private jwinforms.ImageList ilShipImages;
-	private jwinforms.Label lblBuy;
-	private jwinforms.Label lblBuyPrice0;
-	private jwinforms.Label lblBuyPrice1;
-	private jwinforms.Label lblBuyPrice2;
-	private jwinforms.Label lblBuyPrice3;
-	private jwinforms.Label lblBuyPrice4;
-	private jwinforms.Label lblBuyPrice5;
-	private jwinforms.Label lblBuyPrice6;
-	private jwinforms.Label lblBuyPrice7;
-	private jwinforms.Label lblBuyPrice8;
-	private jwinforms.Label lblBuyPrice9;
-	private jwinforms.Label lblEquipForSale;
-	private jwinforms.Label lblEscapePod;
-	private jwinforms.Label lblFuelCost;
-	private jwinforms.Label lblFuelStatus;
-	private jwinforms.Label lblHullStatus;
-	private jwinforms.Label lblRepairCost;
-	private jwinforms.Label lblSell;
-	private jwinforms.Label lblSellPrice0;
-	private jwinforms.Label lblSellPrice1;
-	private jwinforms.Label lblSellPrice2;
-	private jwinforms.Label lblSellPrice3;
-	private jwinforms.Label lblSellPrice4;
-	private jwinforms.Label lblSellPrice5;
-	private jwinforms.Label lblSellPrice6;
-	private jwinforms.Label lblSellPrice7;
-	private jwinforms.Label lblSellPrice8;
-	private jwinforms.Label lblSellPrice9;
-	private jwinforms.Label lblShipsForSale;
-	private jwinforms.Label lblSystemGovtLabel;
-	private jwinforms.Label lblSystemName;
-	private jwinforms.Label lblSystemNameLabel;
-	private jwinforms.Label lblSystemPirates;
-	private jwinforms.Label lblSystemPiratesLabel;
-	private jwinforms.Label lblSystemPolice;
-	private jwinforms.Label lblSystemPoliceLabel;
-	private jwinforms.Label lblSystemPolSys;
-	private jwinforms.Label lblSystemPressure;
-	private jwinforms.Label lblSystemPressurePre;
-	private jwinforms.Label lblSystemResource;
-	private jwinforms.Label lblSystemResourseLabel;
-	private jwinforms.Label lblSystemSize;
-	private jwinforms.Label lblSystemSizeLabel;
-	private jwinforms.Label lblSystemTech;
-	private jwinforms.Label lblSystemTechLabel;
-	private jwinforms.Label lblTargetDiff0;
-	private jwinforms.Label lblTargetDiff1;
-	private jwinforms.Label lblTargetDiff2;
-	private jwinforms.Label lblTargetDiff3;
-	private jwinforms.Label lblTargetDiff4;
-	private jwinforms.Label lblTargetDiff5;
-	private jwinforms.Label lblTargetDiff6;
-	private jwinforms.Label lblTargetDiff7;
-	private jwinforms.Label lblTargetDiff8;
-	private jwinforms.Label lblTargetDiff9;
-	private jwinforms.Label lblTargetDiffLabel;
-	private jwinforms.Label lblTargetDistance;
-	private jwinforms.Label lblTargetDistanceLabel;
-	private jwinforms.Label lblTargetGovtLabel;
-	private jwinforms.Label lblTargetName;
-	private jwinforms.Label lblTargetNameLabel;
-	private jwinforms.Label lblTargetOutOfRange;
-	private jwinforms.Label lblTargetPct0;
-	private jwinforms.Label lblTargetPct1;
-	private jwinforms.Label lblTargetPct2;
-	private jwinforms.Label lblTargetPct3;
-	private jwinforms.Label lblTargetPct4;
-	private jwinforms.Label lblTargetPct5;
-	private jwinforms.Label lblTargetPct6;
-	private jwinforms.Label lblTargetPct7;
-	private jwinforms.Label lblTargetPct8;
-	private jwinforms.Label lblTargetPct9;
-	private jwinforms.Label lblTargetPctLabel;
-	private jwinforms.Label lblTargetPirates;
-	private jwinforms.Label lblTargetPiratesLabel;
-	private jwinforms.Label lblTargetPolice;
-	private jwinforms.Label lblTargetPoliceLabel;
-	private jwinforms.Label lblTargetPolSys;
-	private jwinforms.Label lblTargetPrice0;
-	private jwinforms.Label lblTargetPrice1;
-	private jwinforms.Label lblTargetPrice2;
-	private jwinforms.Label lblTargetPrice3;
-	private jwinforms.Label lblTargetPrice4;
-	private jwinforms.Label lblTargetPrice5;
-	private jwinforms.Label lblTargetPrice6;
-	private jwinforms.Label lblTargetPrice7;
-	private jwinforms.Label lblTargetPrice8;
-	private jwinforms.Label lblTargetPrice9;
-	private jwinforms.Label lblTargetPriceLabel;
-	private jwinforms.Label lblTargetResource;
-	private jwinforms.Label lblTargetResourceLabel;
-	private jwinforms.Label lblTargetSize;
-	private jwinforms.Label lblTargetTech;
-	private jwinforms.Label lblTargetTechLabel;
-	private jwinforms.Label lblTargetSizeLabel;
-	private jwinforms.Label lblTradeCmdty0;
-	private jwinforms.Label lblTradeCmdty1;
-	private jwinforms.Label lblTradeCmdty2;
-	private jwinforms.Label lblTradeCmdty3;
-	private jwinforms.Label lblTradeCmdty4;
-	private jwinforms.Label lblTradeCmdty5;
-	private jwinforms.Label lblTradeCmdty6;
-	private jwinforms.Label lblTradeCmdty7;
-	private jwinforms.Label lblTradeCmdty8;
-	private jwinforms.Label lblTradeCmdty9;
-	private jwinforms.Label lblTradeTarget;
-	private jwinforms.Label lblWormhole;
-	private jwinforms.Label lblWormholeLabel;
-	private jwinforms.GroupBox boxCargo;
-	private jwinforms.GroupBox boxDock;
-	private jwinforms.GroupBox boxGalacticChart;
-	private jwinforms.GroupBox boxShipYard;
-	private jwinforms.GroupBox boxShortRangeChart;
-	private jwinforms.GroupBox boxSystem;
-	private jwinforms.GroupBox boxTargetSystem;
-	private jwinforms.MainMenu mnuMain;
-	private jwinforms.SubMenu mnuGame;
-	private jwinforms.MenuItem mnuGameExit;
-	private jwinforms.MenuItem mnuGameLine1;
-	private jwinforms.MenuItem mnuGameLine2;
-	private jwinforms.MenuItem mnuGameLoad;
-	private jwinforms.MenuItem mnuGameNew;
-	private jwinforms.MenuItem mnuGameSave;
-	private jwinforms.MenuItem mnuGameSaveAs;
-	private jwinforms.SubMenu mnuHelp;
-	private jwinforms.MenuItem mnuHelpAbout;
-	private jwinforms.MenuItem mnuHighScores;
-	private jwinforms.MenuItem mnuOptions;
-	private jwinforms.MenuItem mnuRetire;
-	private jwinforms.SubMenu mnuView;
-	private jwinforms.MenuItem mnuViewBank;
-	private jwinforms.MenuItem mnuViewCommander;
-	private jwinforms.MenuItem mnuViewLine1;
-	private jwinforms.MenuItem mnuViewLine2;
-	private jwinforms.MenuItem mnuViewPersonnel;
-	private jwinforms.MenuItem mnuViewQuests;
-	private jwinforms.MenuItem mnuViewShip;
-	private jwinforms.OpenFileDialog dlgOpen;
-	private jwinforms.PictureBox picCargoLine0;
-	private jwinforms.PictureBox picCargoLine1;
-	private jwinforms.PictureBox picCargoLine2;
-	private jwinforms.PictureBox picCargoLine3;
-	private jwinforms.PictureBox picGalacticChart;
-	private jwinforms.PictureBox picLine;
-	private jwinforms.PictureBox picShortRangeChart;
-	private jwinforms.SaveFileDialog dlgSave;
-	private jwinforms.StatusBar statusBar;
-	private jwinforms.StatusBarPanel statusBarPanelBays;
-	private jwinforms.StatusBarPanel statusBarPanelCash;
-	private jwinforms.StatusBarPanel statusBarPanelCosts;
-	private jwinforms.StatusBarPanel statusBarPanelExtra;
-	private jwinforms.ToolTip tipSpecial;
-	private jwinforms.ToolTip tipMerc;
-	private jwinforms.IContainer components;
+public class SpaceTrader extends WinformWindow {
+	private Button btnDesign;
+	private Button btnNews;
+	private Button btnSpecial;
+	private Button btnMerc;
+	private Button btnFuel;
+	private Button btnRepair;
+	private Button btnBuyShip;
+	private Button btnEquip;
+	private Button btnPod;
+	private Button btnBuyMax0;
+	private Button btnBuyQty0;
+	private Button btnSellQty0;
+	private Button btnSellAll0;
+	private Button btnBuyMax1;
+	private Button btnBuyQty1;
+	private Button btnSellQty1;
+	private Button btnSellAll1;
+	private Button btnSellQty2;
+	private Button btnSellAll2;
+	private Button btnBuyQty2;
+	private Button btnBuyMax2;
+	private Button btnSellQty3;
+	private Button btnSellAll3;
+	private Button btnBuyQty3;
+	private Button btnBuyMax3;
+	private Button btnSellQty4;
+	private Button btnSellAll4;
+	private Button btnBuyQty4;
+	private Button btnBuyMax4;
+	private Button btnSellQty5;
+	private Button btnSellAll5;
+	private Button btnBuyQty5;
+	private Button btnBuyMax5;
+	private Button btnSellQty6;
+	private Button btnSellAll6;
+	private Button btnBuyQty6;
+	private Button btnBuyMax6;
+	private Button btnSellQty7;
+	private Button btnSellAll7;
+	private Button btnBuyQty7;
+	private Button btnBuyMax7;
+	private Button btnSellQty8;
+	private Button btnSellAll8;
+	private Button btnBuyQty8;
+	private Button btnBuyMax8;
+	private Button btnSellQty9;
+	private Button btnSellAll9;
+	private Button btnBuyQty9;
+	private Button btnBuyMax9;
+	private Button btnJump;
+	private Button btnFind;
+	private Button btnPrevSystem;
+	private Button btnNextSystem;
+	private Button btnTrack;
+	private Button btnWarp;
+	private ImageList ilChartImages;
+	private ImageList ilDirectionImages;
+	private ImageList ilEquipmentImages;
+	private ImageList ilShipImages;
+	private Label lblBuy;
+	private Label lblBuyPrice0;
+	private Label lblBuyPrice1;
+	private Label lblBuyPrice2;
+	private Label lblBuyPrice3;
+	private Label lblBuyPrice4;
+	private Label lblBuyPrice5;
+	private Label lblBuyPrice6;
+	private Label lblBuyPrice7;
+	private Label lblBuyPrice8;
+	private Label lblBuyPrice9;
+	private Label lblEquipForSale;
+	private Label lblEscapePod;
+	private Label lblFuelCost;
+	private Label lblFuelStatus;
+	private Label lblHullStatus;
+	private Label lblRepairCost;
+	private Label lblSell;
+	private Label lblSellPrice0;
+	private Label lblSellPrice1;
+	private Label lblSellPrice2;
+	private Label lblSellPrice3;
+	private Label lblSellPrice4;
+	private Label lblSellPrice5;
+	private Label lblSellPrice6;
+	private Label lblSellPrice7;
+	private Label lblSellPrice8;
+	private Label lblSellPrice9;
+	private Label lblShipsForSale;
+	private Label lblSystemGovtLabel;
+	private Label lblSystemName;
+	private Label lblSystemNameLabel;
+	private Label lblSystemPirates;
+	private Label lblSystemPiratesLabel;
+	private Label lblSystemPolice;
+	private Label lblSystemPoliceLabel;
+	private Label lblSystemPolSys;
+	private Label lblSystemPressure;
+	private Label lblSystemPressurePre;
+	private Label lblSystemResource;
+	private Label lblSystemResourseLabel;
+	private Label lblSystemSize;
+	private Label lblSystemSizeLabel;
+	private Label lblSystemTech;
+	private Label lblSystemTechLabel;
+	private Label lblTargetDiff0;
+	private Label lblTargetDiff1;
+	private Label lblTargetDiff2;
+	private Label lblTargetDiff3;
+	private Label lblTargetDiff4;
+	private Label lblTargetDiff5;
+	private Label lblTargetDiff6;
+	private Label lblTargetDiff7;
+	private Label lblTargetDiff8;
+	private Label lblTargetDiff9;
+	private Label lblTargetDiffLabel;
+	private Label lblTargetDistance;
+	private Label lblTargetDistanceLabel;
+	private Label lblTargetGovtLabel;
+	private Label lblTargetName;
+	private Label lblTargetNameLabel;
+	private Label lblTargetOutOfRange;
+	private Label lblTargetPct0;
+	private Label lblTargetPct1;
+	private Label lblTargetPct2;
+	private Label lblTargetPct3;
+	private Label lblTargetPct4;
+	private Label lblTargetPct5;
+	private Label lblTargetPct6;
+	private Label lblTargetPct7;
+	private Label lblTargetPct8;
+	private Label lblTargetPct9;
+	private Label lblTargetPctLabel;
+	private Label lblTargetPirates;
+	private Label lblTargetPiratesLabel;
+	private Label lblTargetPolice;
+	private Label lblTargetPoliceLabel;
+	private Label lblTargetPolSys;
+	private Label lblTargetPrice0;
+	private Label lblTargetPrice1;
+	private Label lblTargetPrice2;
+	private Label lblTargetPrice3;
+	private Label lblTargetPrice4;
+	private Label lblTargetPrice5;
+	private Label lblTargetPrice6;
+	private Label lblTargetPrice7;
+	private Label lblTargetPrice8;
+	private Label lblTargetPrice9;
+	private Label lblTargetPriceLabel;
+	private Label lblTargetResource;
+	private Label lblTargetResourceLabel;
+	private Label lblTargetSize;
+	private Label lblTargetTech;
+	private Label lblTargetTechLabel;
+	private Label lblTargetSizeLabel;
+	private Label lblTradeCmdty0;
+	private Label lblTradeCmdty1;
+	private Label lblTradeCmdty2;
+	private Label lblTradeCmdty3;
+	private Label lblTradeCmdty4;
+	private Label lblTradeCmdty5;
+	private Label lblTradeCmdty6;
+	private Label lblTradeCmdty7;
+	private Label lblTradeCmdty8;
+	private Label lblTradeCmdty9;
+	private Label lblTradeTarget;
+	private Label lblWormhole;
+	private Label lblWormholeLabel;
+	private GroupBox boxCargo;
+	private GroupBox boxDock;
+	private GroupBox boxGalacticChart;
+	private GroupBox boxShipYard;
+	private GroupBox boxShortRangeChart;
+	private GroupBox boxSystem;
+	private GroupBox boxTargetSystem;
+	private MainMenu mnuMain;
+	private SubMenu mnuGame;
+	private MenuItem mnuGameExit;
+	private MenuItem mnuGameLine1;
+	private MenuItem mnuGameLine2;
+	private MenuItem mnuGameLoad;
+	private MenuItem mnuGameNew;
+	private MenuItem mnuGameSave;
+	private MenuItem mnuGameSaveAs;
+	private SubMenu mnuHelp;
+	private MenuItem mnuHelpAbout;
+	private MenuItem mnuHighScores;
+	private MenuItem mnuOptions;
+	private MenuItem mnuRetire;
+	private SubMenu mnuView;
+	private MenuItem mnuViewBank;
+	private MenuItem mnuViewCommander;
+	private MenuItem mnuViewLine1;
+	private MenuItem mnuViewLine2;
+	private MenuItem mnuViewPersonnel;
+	private MenuItem mnuViewQuests;
+	private MenuItem mnuViewShip;
+	private OpenFileDialog dlgOpen;
+	private PictureBox picCargoLine0;
+	private PictureBox picCargoLine1;
+	private PictureBox picCargoLine2;
+	private PictureBox picCargoLine3;
+	private PictureBox picGalacticChart;
+	private PictureBox picLine;
+	private PictureBox picShortRangeChart;
+	private SaveFileDialog dlgSave;
+	private StatusBar statusBar;
+	private StatusBarPanel statusBarPanelBays;
+	private StatusBarPanel statusBarPanelCash;
+	private StatusBarPanel statusBarPanelCosts;
+	private StatusBarPanel statusBarPanelExtra;
+	private ToolTip tipSpecial;
+	private ToolTip tipMerc;
+	private IContainer components;
 	private final Label[] lblSellPrice;
 	private final Label[] lblBuyPrice;
 	private final Label[] lblTargetPrice;
@@ -298,259 +320,267 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 	public SpaceTrader(String loadFileName) {
 		InitializeComponent();
 		InitFileStructure();
-		lblSellPrice = new Label[] { lblSellPrice0, lblSellPrice1, lblSellPrice2, lblSellPrice3, lblSellPrice4,
-				lblSellPrice5, lblSellPrice6, lblSellPrice7, lblSellPrice8, lblSellPrice9 };
-		lblBuyPrice = new Label[] { lblBuyPrice0, lblBuyPrice1, lblBuyPrice2, lblBuyPrice3, lblBuyPrice4, lblBuyPrice5,
-				lblBuyPrice6, lblBuyPrice7, lblBuyPrice8, lblBuyPrice9 };
-		lblTargetPrice = new Label[] { lblTargetPrice0, lblTargetPrice1, lblTargetPrice2, lblTargetPrice3,
-				lblTargetPrice4, lblTargetPrice5, lblTargetPrice6, lblTargetPrice7, lblTargetPrice8, lblTargetPrice9 };
-		lblTargetDiff = new Label[] { lblTargetDiff0, lblTargetDiff1, lblTargetDiff2, lblTargetDiff3, lblTargetDiff4,
-				lblTargetDiff5, lblTargetDiff6, lblTargetDiff7, lblTargetDiff8, lblTargetDiff9 };
-		lblTargetPct = new Label[] { lblTargetPct0, lblTargetPct1, lblTargetPct2, lblTargetPct3, lblTargetPct4,
-				lblTargetPct5, lblTargetPct6, lblTargetPct7, lblTargetPct8, lblTargetPct9 };
-		btnSellQty = new Button[] { btnSellQty0, btnSellQty1, btnSellQty2, btnSellQty3, btnSellQty4, btnSellQty5,
-				btnSellQty6, btnSellQty7, btnSellQty8, btnSellQty9 };
-		btnSellAll = new Button[] { btnSellAll0, btnSellAll1, btnSellAll2, btnSellAll3, btnSellAll4, btnSellAll5,
-				btnSellAll6, btnSellAll7, btnSellAll8, btnSellAll9 };
-		btnBuyQty = new Button[] { btnBuyQty0, btnBuyQty1, btnBuyQty2, btnBuyQty3, btnBuyQty4, btnBuyQty5, btnBuyQty6,
-				btnBuyQty7, btnBuyQty8, btnBuyQty9 };
-		btnBuyMax = new Button[] { btnBuyMax0, btnBuyMax1, btnBuyMax2, btnBuyMax3, btnBuyMax4, btnBuyMax5, btnBuyMax6,
-				btnBuyMax7, btnBuyMax8, btnBuyMax9 };
+		lblSellPrice = new Label[] {
+      lblSellPrice0, lblSellPrice1, lblSellPrice2, lblSellPrice3, lblSellPrice4, lblSellPrice5, lblSellPrice6, lblSellPrice7, lblSellPrice8, lblSellPrice9
+    };
+		lblBuyPrice = new Label[] {
+      lblBuyPrice0, lblBuyPrice1, lblBuyPrice2, lblBuyPrice3, lblBuyPrice4, lblBuyPrice5, lblBuyPrice6, lblBuyPrice7, lblBuyPrice8, lblBuyPrice9
+    };
+		lblTargetPrice = new Label[] {
+      lblTargetPrice0, lblTargetPrice1, lblTargetPrice2, lblTargetPrice3, lblTargetPrice4, lblTargetPrice5, lblTargetPrice6, lblTargetPrice7, lblTargetPrice8, lblTargetPrice9
+    };
+		lblTargetDiff = new Label[] {
+      lblTargetDiff0, lblTargetDiff1, lblTargetDiff2, lblTargetDiff3, lblTargetDiff4, lblTargetDiff5, lblTargetDiff6, lblTargetDiff7, lblTargetDiff8, lblTargetDiff9
+    };
+		lblTargetPct = new Label[] {
+      lblTargetPct0, lblTargetPct1, lblTargetPct2, lblTargetPct3, lblTargetPct4, lblTargetPct5, lblTargetPct6, lblTargetPct7, lblTargetPct8, lblTargetPct9
+    };
+		btnSellQty = new Button[] {
+      btnSellQty0, btnSellQty1, btnSellQty2, btnSellQty3, btnSellQty4, btnSellQty5, btnSellQty6, btnSellQty7, btnSellQty8, btnSellQty9
+    };
+		btnSellAll = new Button[] {
+      btnSellAll0, btnSellAll1, btnSellAll2, btnSellAll3, btnSellAll4, btnSellAll5, btnSellAll6, btnSellAll7, btnSellAll8, btnSellAll9
+    };
+		btnBuyQty = new Button[] {
+      btnBuyQty0, btnBuyQty1, btnBuyQty2, btnBuyQty3, btnBuyQty4, btnBuyQty5, btnBuyQty6, btnBuyQty7, btnBuyQty8, btnBuyQty9
+    };
+		btnBuyMax = new Button[] {
+      btnBuyMax0, btnBuyMax1, btnBuyMax2, btnBuyMax3, btnBuyMax4, btnBuyMax5, btnBuyMax6, btnBuyMax7, btnBuyMax8, btnBuyMax9
+    };
 		if (loadFileName != null) {
       LoadGame(loadFileName);
     }
 		UpdateAll();
 	}
 
-	public static void main(String[] args) throws Exception
-	{
+	public static void main(String[] args) throws Exception {
 		UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		UIManager.put("swing.boldMetal", Boolean.FALSE);
-		SpaceTrader spaceTrader = new SpaceTrader(args.length > 0 ? args[0] : null);
-		spaceTrader.ShowWindow();
+		SpaceTrader st = new SpaceTrader(args.length > 0 ? args[0] : null);
+		st.ShowWindow();
 	}
 
 	// Required method for Designer support - do not modify the contents of this method with the code editor.
-	private void InitializeComponent()
-	{
-		components = new jwinforms.Container();
-		jwinforms.ResourceManager resources = new jwinforms.ResourceManager(SpaceTrader.class);
-		mnuMain = new jwinforms.MainMenu();
-		mnuGame = new jwinforms.SubMenu();
-		mnuGameNew = new jwinforms.MenuItem();
-		mnuGameLoad = new jwinforms.MenuItem();
-		mnuGameSave = new jwinforms.MenuItem();
-		mnuGameSaveAs = new jwinforms.MenuItem();
-		mnuGameLine1 = new jwinforms.MenuItem();
-		mnuRetire = new jwinforms.MenuItem();
-		mnuGameLine2 = new jwinforms.MenuItem();
-		mnuGameExit = new jwinforms.MenuItem();
-		mnuView = new jwinforms.SubMenu();
-		mnuViewCommander = new jwinforms.MenuItem();
-		mnuViewShip = new jwinforms.MenuItem();
-		mnuViewPersonnel = new jwinforms.MenuItem();
-		mnuViewQuests = new jwinforms.MenuItem();
-		mnuViewBank = new jwinforms.MenuItem();
-		mnuViewLine1 = new jwinforms.MenuItem();
-		mnuHighScores = new jwinforms.MenuItem();
-		mnuViewLine2 = new jwinforms.MenuItem();
-		mnuOptions = new jwinforms.MenuItem();
-		mnuHelp = new jwinforms.SubMenu();
-		mnuHelpAbout = new jwinforms.MenuItem();
-		picGalacticChart = new jwinforms.PictureBox();
-		picShortRangeChart = new jwinforms.PictureBox();
-		statusBar = new jwinforms.StatusBar();
-		statusBarPanelCash = new jwinforms.StatusBarPanel();
-		statusBarPanelBays = new jwinforms.StatusBarPanel();
-		statusBarPanelCosts = new jwinforms.StatusBarPanel();
-		statusBarPanelExtra = new jwinforms.StatusBarPanel(jwinforms.StatusBarPanelAutoSize.Spring);
-		boxShortRangeChart = new jwinforms.GroupBox();
-		boxGalacticChart = new jwinforms.GroupBox();
-		lblWormhole = new jwinforms.Label();
-		lblWormholeLabel = new jwinforms.Label();
-		btnJump = new jwinforms.Button();
-		btnFind = new jwinforms.Button();
-		boxTargetSystem = new jwinforms.GroupBox();
-		btnTrack = new jwinforms.Button();
-		btnNextSystem = new jwinforms.Button();
-		btnPrevSystem = new jwinforms.Button();
-		lblTargetOutOfRange = new jwinforms.Label();
-		btnWarp = new jwinforms.Button();
-		lblTargetPolSys = new jwinforms.Label();
-		lblTargetSize = new jwinforms.Label();
-		lblTargetTech = new jwinforms.Label();
-		lblTargetDistance = new jwinforms.Label();
-		lblTargetPirates = new jwinforms.Label();
-		lblTargetPolice = new jwinforms.Label();
-		lblTargetResource = new jwinforms.Label();
-		lblTargetDistanceLabel = new jwinforms.Label();
-		lblTargetPiratesLabel = new jwinforms.Label();
-		lblTargetPoliceLabel = new jwinforms.Label();
-		lblTargetResourceLabel = new jwinforms.Label();
-		lblTargetGovtLabel = new jwinforms.Label();
-		lblTargetTechLabel = new jwinforms.Label();
-		lblTargetSizeLabel = new jwinforms.Label();
-		lblTargetName = new jwinforms.Label();
-		lblTargetNameLabel = new jwinforms.Label();
-		boxCargo = new jwinforms.GroupBox();
-		picCargoLine3 = new jwinforms.PictureBox();
-		picCargoLine2 = new jwinforms.PictureBox();
-		picCargoLine0 = new jwinforms.PictureBox();
-		picCargoLine1 = new jwinforms.PictureBox();
-		lblTargetPct9 = new jwinforms.Label();
-		lblTargetDiff9 = new jwinforms.Label();
-		lblTargetPrice9 = new jwinforms.Label();
-		btnBuyMax9 = new jwinforms.Button();
-		btnBuyQty9 = new jwinforms.Button();
-		lblBuyPrice9 = new jwinforms.Label();
-		btnSellAll9 = new jwinforms.Button();
-		btnSellQty9 = new jwinforms.Button();
-		lblSellPrice9 = new jwinforms.Label();
-		lblTargetPct8 = new jwinforms.Label();
-		lblTargetDiff8 = new jwinforms.Label();
-		lblTargetPrice8 = new jwinforms.Label();
-		btnBuyMax8 = new jwinforms.Button();
-		btnBuyQty8 = new jwinforms.Button();
-		lblBuyPrice8 = new jwinforms.Label();
-		btnSellAll8 = new jwinforms.Button();
-		btnSellQty8 = new jwinforms.Button();
-		lblSellPrice8 = new jwinforms.Label();
-		lblTargetPct7 = new jwinforms.Label();
-		lblTargetDiff7 = new jwinforms.Label();
-		lblTargetPrice7 = new jwinforms.Label();
-		btnBuyMax7 = new jwinforms.Button();
-		btnBuyQty7 = new jwinforms.Button();
-		lblBuyPrice7 = new jwinforms.Label();
-		btnSellAll7 = new jwinforms.Button();
-		btnSellQty7 = new jwinforms.Button();
-		lblSellPrice7 = new jwinforms.Label();
-		lblTargetPct6 = new jwinforms.Label();
-		lblTargetDiff6 = new jwinforms.Label();
-		lblTargetPrice6 = new jwinforms.Label();
-		btnBuyMax6 = new jwinforms.Button();
-		btnBuyQty6 = new jwinforms.Button();
-		lblBuyPrice6 = new jwinforms.Label();
-		btnSellAll6 = new jwinforms.Button();
-		btnSellQty6 = new jwinforms.Button();
-		lblSellPrice6 = new jwinforms.Label();
-		lblTargetPct5 = new jwinforms.Label();
-		lblTargetDiff5 = new jwinforms.Label();
-		lblTargetPrice5 = new jwinforms.Label();
-		btnBuyMax5 = new jwinforms.Button();
-		btnBuyQty5 = new jwinforms.Button();
-		lblBuyPrice5 = new jwinforms.Label();
-		btnSellAll5 = new jwinforms.Button();
-		btnSellQty5 = new jwinforms.Button();
-		lblSellPrice5 = new jwinforms.Label();
-		lblTargetPct4 = new jwinforms.Label();
-		lblTargetDiff4 = new jwinforms.Label();
-		lblTargetPrice4 = new jwinforms.Label();
-		btnBuyMax4 = new jwinforms.Button();
-		btnBuyQty4 = new jwinforms.Button();
-		lblBuyPrice4 = new jwinforms.Label();
-		btnSellAll4 = new jwinforms.Button();
-		btnSellQty4 = new jwinforms.Button();
-		lblSellPrice4 = new jwinforms.Label();
-		lblTargetPct3 = new jwinforms.Label();
-		lblTargetDiff3 = new jwinforms.Label();
-		lblTargetPrice3 = new jwinforms.Label();
-		btnBuyMax3 = new jwinforms.Button();
-		btnBuyQty3 = new jwinforms.Button();
-		lblBuyPrice3 = new jwinforms.Label();
-		btnSellAll3 = new jwinforms.Button();
-		btnSellQty3 = new jwinforms.Button();
-		lblSellPrice3 = new jwinforms.Label();
-		lblTargetPct2 = new jwinforms.Label();
-		lblTargetDiff2 = new jwinforms.Label();
-		lblTargetPrice2 = new jwinforms.Label();
-		btnBuyMax2 = new jwinforms.Button();
-		btnBuyQty2 = new jwinforms.Button();
-		lblBuyPrice2 = new jwinforms.Label();
-		btnSellAll2 = new jwinforms.Button();
-		btnSellQty2 = new jwinforms.Button();
-		lblSellPrice2 = new jwinforms.Label();
-		lblTargetPct1 = new jwinforms.Label();
-		lblTargetDiff1 = new jwinforms.Label();
-		lblTargetPrice1 = new jwinforms.Label();
-		btnBuyMax1 = new jwinforms.Button();
-		btnBuyQty1 = new jwinforms.Button();
-		lblBuyPrice1 = new jwinforms.Label();
-		lblTargetPctLabel = new jwinforms.Label();
-		lblTargetDiffLabel = new jwinforms.Label();
-		lblTargetPriceLabel = new jwinforms.Label();
-		lblTargetPct0 = new jwinforms.Label();
-		lblTargetDiff0 = new jwinforms.Label();
-		lblTargetPrice0 = new jwinforms.Label();
-		btnBuyMax0 = new jwinforms.Button();
-		btnBuyQty0 = new jwinforms.Button();
-		lblBuyPrice0 = new jwinforms.Label();
-		btnSellAll1 = new jwinforms.Button();
-		btnSellQty1 = new jwinforms.Button();
-		lblSellPrice1 = new jwinforms.Label();
-		btnSellAll0 = new jwinforms.Button();
-		btnSellQty0 = new jwinforms.Button();
-		lblSellPrice0 = new jwinforms.Label();
-		lblTradeTarget = new jwinforms.Label();
-		lblBuy = new jwinforms.Label();
-		lblSell = new jwinforms.Label();
-		lblTradeCmdty9 = new jwinforms.Label();
-		lblTradeCmdty8 = new jwinforms.Label();
-		lblTradeCmdty2 = new jwinforms.Label();
-		lblTradeCmdty0 = new jwinforms.Label();
-		lblTradeCmdty1 = new jwinforms.Label();
-		lblTradeCmdty6 = new jwinforms.Label();
-		lblTradeCmdty5 = new jwinforms.Label();
-		lblTradeCmdty4 = new jwinforms.Label();
-		lblTradeCmdty3 = new jwinforms.Label();
-		lblTradeCmdty7 = new jwinforms.Label();
-		boxSystem = new jwinforms.GroupBox();
-		btnMerc = new jwinforms.Button();
-		btnSpecial = new jwinforms.Button();
-		btnNews = new jwinforms.Button();
-		lblSystemPressure = new jwinforms.Label();
-		lblSystemPressurePre = new jwinforms.Label();
-		lblSystemPolSys = new jwinforms.Label();
-		lblSystemSize = new jwinforms.Label();
-		lblSystemTech = new jwinforms.Label();
-		lblSystemPirates = new jwinforms.Label();
-		lblSystemPolice = new jwinforms.Label();
-		lblSystemResource = new jwinforms.Label();
-		lblSystemPiratesLabel = new jwinforms.Label();
-		lblSystemPoliceLabel = new jwinforms.Label();
-		lblSystemResourseLabel = new jwinforms.Label();
-		lblSystemGovtLabel = new jwinforms.Label();
-		lblSystemTechLabel = new jwinforms.Label();
-		lblSystemSizeLabel = new jwinforms.Label();
-		lblSystemName = new jwinforms.Label();
-		lblSystemNameLabel = new jwinforms.Label();
-		boxShipYard = new jwinforms.GroupBox();
-		btnDesign = new jwinforms.Button();
-		btnPod = new jwinforms.Button();
-		lblEscapePod = new jwinforms.Label();
-		btnEquip = new jwinforms.Button();
-		btnBuyShip = new jwinforms.Button();
-		lblEquipForSale = new jwinforms.Label();
-		lblShipsForSale = new jwinforms.Label();
-		boxDock = new jwinforms.GroupBox();
-		btnRepair = new jwinforms.Button();
-		btnFuel = new jwinforms.Button();
-		lblFuelStatus = new jwinforms.Label();
-		lblFuelCost = new jwinforms.Label();
-		lblHullStatus = new jwinforms.Label();
-		lblRepairCost = new jwinforms.Label();
-		picLine = new jwinforms.PictureBox();
-		dlgOpen = new jwinforms.OpenFileDialog();
-		dlgSave = new jwinforms.SaveFileDialog();
-		ilChartImages = new jwinforms.ImageList(components);
-		ilShipImages = new jwinforms.ImageList(components);
-		ilDirectionImages = new jwinforms.ImageList(components);
-		tipSpecial = new jwinforms.ToolTip(components);
-		tipMerc = new jwinforms.ToolTip(components);
-		ilEquipmentImages = new jwinforms.ImageList(components);
-		((jwinforms.ISupportInitialize)(statusBarPanelCash)).BeginInit();
-		((jwinforms.ISupportInitialize)(statusBarPanelBays)).BeginInit();
-		((jwinforms.ISupportInitialize)(statusBarPanelCosts)).BeginInit();
-		((jwinforms.ISupportInitialize)(statusBarPanelExtra)).BeginInit();
+  @SuppressWarnings("deprecation")
+	private void InitializeComponent() {
+		components = new Container();
+		ResourceManager resources = new ResourceManager(SpaceTrader.class);
+		mnuMain = new MainMenu();
+		mnuGame = new SubMenu();
+		mnuGameNew = new MenuItem();
+		mnuGameLoad = new MenuItem();
+		mnuGameSave = new MenuItem();
+		mnuGameSaveAs = new MenuItem();
+		mnuGameLine1 = new MenuItem();
+		mnuRetire = new MenuItem();
+		mnuGameLine2 = new MenuItem();
+		mnuGameExit = new MenuItem();
+		mnuView = new SubMenu();
+		mnuViewCommander = new MenuItem();
+		mnuViewShip = new MenuItem();
+		mnuViewPersonnel = new MenuItem();
+		mnuViewQuests = new MenuItem();
+		mnuViewBank = new MenuItem();
+		mnuViewLine1 = new MenuItem();
+		mnuHighScores = new MenuItem();
+		mnuViewLine2 = new MenuItem();
+		mnuOptions = new MenuItem();
+		mnuHelp = new SubMenu();
+		mnuHelpAbout = new MenuItem();
+		picGalacticChart = new PictureBox();
+		picShortRangeChart = new PictureBox();
+		statusBar = new StatusBar();
+		statusBarPanelCash = new StatusBarPanel();
+		statusBarPanelBays = new StatusBarPanel();
+		statusBarPanelCosts = new StatusBarPanel();
+		statusBarPanelExtra = new StatusBarPanel(StatusBarPanelAutoSize.Spring);
+		boxShortRangeChart = new GroupBox();
+		boxGalacticChart = new GroupBox();
+		lblWormhole = new Label();
+		lblWormholeLabel = new Label();
+		btnJump = new Button();
+		btnFind = new Button();
+		boxTargetSystem = new GroupBox();
+		btnTrack = new Button();
+		btnNextSystem = new Button();
+		btnPrevSystem = new Button();
+		lblTargetOutOfRange = new Label();
+		btnWarp = new Button();
+		lblTargetPolSys = new Label();
+		lblTargetSize = new Label();
+		lblTargetTech = new Label();
+		lblTargetDistance = new Label();
+		lblTargetPirates = new Label();
+		lblTargetPolice = new Label();
+		lblTargetResource = new Label();
+		lblTargetDistanceLabel = new Label();
+		lblTargetPiratesLabel = new Label();
+		lblTargetPoliceLabel = new Label();
+		lblTargetResourceLabel = new Label();
+		lblTargetGovtLabel = new Label();
+		lblTargetTechLabel = new Label();
+		lblTargetSizeLabel = new Label();
+		lblTargetName = new Label();
+		lblTargetNameLabel = new Label();
+		boxCargo = new GroupBox();
+		picCargoLine3 = new PictureBox();
+		picCargoLine2 = new PictureBox();
+		picCargoLine0 = new PictureBox();
+		picCargoLine1 = new PictureBox();
+		lblTargetPct9 = new Label();
+		lblTargetDiff9 = new Label();
+		lblTargetPrice9 = new Label();
+		btnBuyMax9 = new Button();
+		btnBuyQty9 = new Button();
+		lblBuyPrice9 = new Label();
+		btnSellAll9 = new Button();
+		btnSellQty9 = new Button();
+		lblSellPrice9 = new Label();
+		lblTargetPct8 = new Label();
+		lblTargetDiff8 = new Label();
+		lblTargetPrice8 = new Label();
+		btnBuyMax8 = new Button();
+		btnBuyQty8 = new Button();
+		lblBuyPrice8 = new Label();
+		btnSellAll8 = new Button();
+		btnSellQty8 = new Button();
+		lblSellPrice8 = new Label();
+		lblTargetPct7 = new Label();
+		lblTargetDiff7 = new Label();
+		lblTargetPrice7 = new Label();
+		btnBuyMax7 = new Button();
+		btnBuyQty7 = new Button();
+		lblBuyPrice7 = new Label();
+		btnSellAll7 = new Button();
+		btnSellQty7 = new Button();
+		lblSellPrice7 = new Label();
+		lblTargetPct6 = new Label();
+		lblTargetDiff6 = new Label();
+		lblTargetPrice6 = new Label();
+		btnBuyMax6 = new Button();
+		btnBuyQty6 = new Button();
+		lblBuyPrice6 = new Label();
+		btnSellAll6 = new Button();
+		btnSellQty6 = new Button();
+		lblSellPrice6 = new Label();
+		lblTargetPct5 = new Label();
+		lblTargetDiff5 = new Label();
+		lblTargetPrice5 = new Label();
+		btnBuyMax5 = new Button();
+		btnBuyQty5 = new Button();
+		lblBuyPrice5 = new Label();
+		btnSellAll5 = new Button();
+		btnSellQty5 = new Button();
+		lblSellPrice5 = new Label();
+		lblTargetPct4 = new Label();
+		lblTargetDiff4 = new Label();
+		lblTargetPrice4 = new Label();
+		btnBuyMax4 = new Button();
+		btnBuyQty4 = new Button();
+		lblBuyPrice4 = new Label();
+		btnSellAll4 = new Button();
+		btnSellQty4 = new Button();
+		lblSellPrice4 = new Label();
+		lblTargetPct3 = new Label();
+		lblTargetDiff3 = new Label();
+		lblTargetPrice3 = new Label();
+		btnBuyMax3 = new Button();
+		btnBuyQty3 = new Button();
+		lblBuyPrice3 = new Label();
+		btnSellAll3 = new Button();
+		btnSellQty3 = new Button();
+		lblSellPrice3 = new Label();
+		lblTargetPct2 = new Label();
+		lblTargetDiff2 = new Label();
+		lblTargetPrice2 = new Label();
+		btnBuyMax2 = new Button();
+		btnBuyQty2 = new Button();
+		lblBuyPrice2 = new Label();
+		btnSellAll2 = new Button();
+		btnSellQty2 = new Button();
+		lblSellPrice2 = new Label();
+		lblTargetPct1 = new Label();
+		lblTargetDiff1 = new Label();
+		lblTargetPrice1 = new Label();
+		btnBuyMax1 = new Button();
+		btnBuyQty1 = new Button();
+		lblBuyPrice1 = new Label();
+		lblTargetPctLabel = new Label();
+		lblTargetDiffLabel = new Label();
+		lblTargetPriceLabel = new Label();
+		lblTargetPct0 = new Label();
+		lblTargetDiff0 = new Label();
+		lblTargetPrice0 = new Label();
+		btnBuyMax0 = new Button();
+		btnBuyQty0 = new Button();
+		lblBuyPrice0 = new Label();
+		btnSellAll1 = new Button();
+		btnSellQty1 = new Button();
+		lblSellPrice1 = new Label();
+		btnSellAll0 = new Button();
+		btnSellQty0 = new Button();
+		lblSellPrice0 = new Label();
+		lblTradeTarget = new Label();
+		lblBuy = new Label();
+		lblSell = new Label();
+		lblTradeCmdty9 = new Label();
+		lblTradeCmdty8 = new Label();
+		lblTradeCmdty2 = new Label();
+		lblTradeCmdty0 = new Label();
+		lblTradeCmdty1 = new Label();
+		lblTradeCmdty6 = new Label();
+		lblTradeCmdty5 = new Label();
+		lblTradeCmdty4 = new Label();
+		lblTradeCmdty3 = new Label();
+		lblTradeCmdty7 = new Label();
+		boxSystem = new GroupBox();
+		btnMerc = new Button();
+		btnSpecial = new Button();
+		btnNews = new Button();
+		lblSystemPressure = new Label();
+		lblSystemPressurePre = new Label();
+		lblSystemPolSys = new Label();
+		lblSystemSize = new Label();
+		lblSystemTech = new Label();
+		lblSystemPirates = new Label();
+		lblSystemPolice = new Label();
+		lblSystemResource = new Label();
+		lblSystemPiratesLabel = new Label();
+		lblSystemPoliceLabel = new Label();
+		lblSystemResourseLabel = new Label();
+		lblSystemGovtLabel = new Label();
+		lblSystemTechLabel = new Label();
+		lblSystemSizeLabel = new Label();
+		lblSystemName = new Label();
+		lblSystemNameLabel = new Label();
+		boxShipYard = new GroupBox();
+		btnDesign = new Button();
+		btnPod = new Button();
+		lblEscapePod = new Label();
+		btnEquip = new Button();
+		btnBuyShip = new Button();
+		lblEquipForSale = new Label();
+		lblShipsForSale = new Label();
+		boxDock = new GroupBox();
+		btnRepair = new Button();
+		btnFuel = new Button();
+		lblFuelStatus = new Label();
+		lblFuelCost = new Label();
+		lblHullStatus = new Label();
+		lblRepairCost = new Label();
+		picLine = new PictureBox();
+		dlgOpen = new OpenFileDialog();
+		dlgSave = new SaveFileDialog();
+		ilChartImages = new ImageList(components);
+		ilShipImages = new ImageList(components);
+		ilDirectionImages = new ImageList(components);
+		tipSpecial = new ToolTip(components);
+		tipMerc = new ToolTip(components);
+		ilEquipmentImages = new ImageList(components);
+		((ISupportInitialize)(statusBarPanelCash)).BeginInit();
+		((ISupportInitialize)(statusBarPanelBays)).BeginInit();
+		((ISupportInitialize)(statusBarPanelCosts)).BeginInit();
+		((ISupportInitialize)(statusBarPanelExtra)).BeginInit();
 		boxShortRangeChart.SuspendLayout();
 		boxGalacticChart.SuspendLayout();
 		boxTargetSystem.SuspendLayout();
@@ -568,23 +598,19 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		// mnuGameNew
 		mnuGameNew.Index = 0;
 		mnuGameNew.setText("&New...");
-		mnuGameNew.setClick(new EventHandler<Object, EventArgs>()
-		{
+		mnuGameNew.setClick(new EventHandler<Object, EventArgs>() {
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
-			{
+			public void handle(Object sender, EventArgs e) {
 				mnuGameNew_Click(sender, e);
 			}
 		});
 		// mnuGameLoad
 		mnuGameLoad.Index = 1;
-		mnuGameLoad.Shortcut = jwinforms.Shortcut.CtrlL;
+		mnuGameLoad.Shortcut = Shortcut.CtrlL;
 		mnuGameLoad.setText("&Load...");
-		mnuGameLoad.setClick(new EventHandler<Object, EventArgs>()
-		{
+		mnuGameLoad.setClick(new EventHandler<Object, EventArgs>() {
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
-			{
+			public void handle(Object sender, EventArgs e) {
 				mnuGameLoad_Click(sender, e);
 			}
 		});
@@ -593,13 +619,11 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		mnuGameSave.setEnabled(false);
 		mnuGameSave.Index = 2;
-		mnuGameSave.Shortcut = jwinforms.Shortcut.CtrlS;
+		mnuGameSave.Shortcut = Shortcut.CtrlS;
 		mnuGameSave.setText("&Save");
-		mnuGameSave.setClick(new EventHandler<Object, EventArgs>()
-		{
+		mnuGameSave.setClick(new EventHandler<Object, EventArgs>() {
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
-			{
+			public void handle(Object sender, EventArgs e) {
 				mnuGameSave_Click(sender, e);
 			}
 		});
@@ -608,12 +632,12 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		mnuGameSaveAs.setEnabled(false);
 		mnuGameSaveAs.Index = 3;
-		mnuGameSaveAs.Shortcut = jwinforms.Shortcut.CtrlA;
+		mnuGameSaveAs.Shortcut = Shortcut.CtrlA;
 		mnuGameSaveAs.setText("Save &As...");
 		mnuGameSaveAs.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuGameSaveAs_Click(sender, e);
 			}
@@ -632,7 +656,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		mnuRetire.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuRetire_Click(sender, e);
 			}
@@ -650,7 +674,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		mnuGameExit.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuGameExit_Click(sender, e);
 			}
@@ -659,20 +683,19 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		// mnuView
 		//
 		mnuView.Index = 1;
-		mnuView.addAll(mnuViewCommander, mnuViewShip, mnuViewPersonnel, mnuViewQuests, mnuViewBank, mnuViewLine1,
-				mnuHighScores, mnuViewLine2, mnuOptions);
+		mnuView.addAll(mnuViewCommander, mnuViewShip, mnuViewPersonnel, mnuViewQuests, mnuViewBank, mnuViewLine1, mnuHighScores, mnuViewLine2, mnuOptions);
 		mnuView.setText("&View");
 		//
 		// mnuViewCommander
 		//
 		mnuViewCommander.setEnabled(false);
 		mnuViewCommander.Index = 0;
-		mnuViewCommander.Shortcut = jwinforms.Shortcut.CtrlC;
+		mnuViewCommander.Shortcut = Shortcut.CtrlC;
 		mnuViewCommander.setText("&Commander Status");
 		mnuViewCommander.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuViewCommander_Click(sender, e);
 			}
@@ -682,12 +705,12 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		mnuViewShip.setEnabled(false);
 		mnuViewShip.Index = 1;
-		mnuViewShip.Shortcut = jwinforms.Shortcut.CtrlH;
+		mnuViewShip.Shortcut = Shortcut.CtrlH;
 		mnuViewShip.setText("&Ship");
 		mnuViewShip.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuViewShip_Click(sender, e);
 			}
@@ -697,12 +720,12 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		mnuViewPersonnel.setEnabled(false);
 		mnuViewPersonnel.Index = 2;
-		mnuViewPersonnel.Shortcut = jwinforms.Shortcut.CtrlP;
+		mnuViewPersonnel.Shortcut = Shortcut.CtrlP;
 		mnuViewPersonnel.setText("&Personnel");
 		mnuViewPersonnel.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuViewPersonnel_Click(sender, e);
 			}
@@ -712,12 +735,12 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		mnuViewQuests.setEnabled(false);
 		mnuViewQuests.Index = 3;
-		mnuViewQuests.Shortcut = jwinforms.Shortcut.CtrlQ;
+		mnuViewQuests.Shortcut = Shortcut.CtrlQ;
 		mnuViewQuests.setText("&Quests");
 		mnuViewQuests.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuViewQuests_Click(sender, e);
 			}
@@ -727,12 +750,12 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		mnuViewBank.setEnabled(false);
 		mnuViewBank.Index = 4;
-		mnuViewBank.Shortcut = jwinforms.Shortcut.CtrlB;
+		mnuViewBank.Shortcut = Shortcut.CtrlB;
 		mnuViewBank.setText("&Bank");
 		mnuViewBank.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuViewBank_Click(sender, e);
 			}
@@ -750,7 +773,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		mnuHighScores.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuHighScores_Click(sender, e);
 			}
@@ -768,7 +791,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		mnuOptions.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuOptions_Click(sender, e);
 			}
@@ -787,7 +810,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		mnuHelpAbout.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				mnuHelpAbout_Click(sender, e);
 			}
@@ -798,10 +821,10 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		picGalacticChart.setBackColor(Color.white);
 		picGalacticChart.setLocation(new Point(8, 16));
 		picGalacticChart.setName("picGalacticChart");
-		picGalacticChart.setSize(new jwinforms.Size(160, 116));
+		picGalacticChart.setSize(new Size(160, 116));
 		picGalacticChart.setTabIndex(0);
 		picGalacticChart.setTabStop(false);
-		picGalacticChart.setPaint(new jwinforms.EventHandler<Object, PaintEventArgs>()
+		picGalacticChart.setPaint(new EventHandler<Object, PaintEventArgs>()
 		{
 			@Override
 			public void handle(Object sender, PaintEventArgs e)
@@ -809,7 +832,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 				picGalacticChart_Paint(sender, e);
 			}
 		});
-		picGalacticChart.setMouseDown(new jwinforms.EventHandler<Object, MouseEventArgs>()
+		picGalacticChart.setMouseDown(new EventHandler<Object, MouseEventArgs>()
 		{
 			@Override
 			public void handle(Object sender, MouseEventArgs e)
@@ -823,10 +846,10 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		picShortRangeChart.setBackColor(Color.white);
 		picShortRangeChart.setLocation(new Point(8, 16));
 		picShortRangeChart.setName("picShortRangeChart");
-		picShortRangeChart.setSize(new jwinforms.Size(160, 145));
+		picShortRangeChart.setSize(new Size(160, 145));
 		picShortRangeChart.setTabIndex(1);
 		picShortRangeChart.setTabStop(false);
-		picShortRangeChart.setPaint(new jwinforms.EventHandler<Object, PaintEventArgs>()
+		picShortRangeChart.setPaint(new EventHandler<Object, PaintEventArgs>()
 		{
 			@Override
 			public void handle(Object sender, PaintEventArgs e)
@@ -834,7 +857,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 				picShortRangeChart_Paint(sender, e);
 			}
 		});
-		picShortRangeChart.setMouseDown(new jwinforms.EventHandler<Object, MouseEventArgs>()
+		picShortRangeChart.setMouseDown(new EventHandler<Object, MouseEventArgs>()
 		{
 			@Override
 			public void handle(Object sender, MouseEventArgs e)
@@ -847,13 +870,12 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		statusBar.setLocation(new Point(0, 481));
 		statusBar.setName("statusBar");
-		statusBar.Panels.addAll(Arrays.asList(new jwinforms.StatusBarPanel[] { statusBarPanelCash, statusBarPanelBays,
-				statusBarPanelCosts, statusBarPanelExtra }));
+		statusBar.Panels.addAll(Arrays.asList(new StatusBarPanel[] { statusBarPanelCash, statusBarPanelBays, statusBarPanelCosts, statusBarPanelExtra }));
 		statusBar.ShowPanels = true;
-		statusBar.setSize(new jwinforms.Size(768, 24));
+		statusBar.setSize(new Size(768, 24));
 		statusBar.SizingGrip = false;
 		statusBar.setTabIndex(2);
-		statusBar.PanelClick = new jwinforms.EventHandler<Object, StatusBarPanelClickEventArgs>()
+		statusBar.PanelClick = new EventHandler<Object, StatusBarPanelClickEventArgs>()
 		{
 			@Override
 			public void handle(Object sender, StatusBarPanelClickEventArgs e)
@@ -890,19 +912,19 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// boxShortRangeChart
 		//
-		boxShortRangeChart.Anchor = (((jwinforms.AnchorStyles.Top_Right)));
+		boxShortRangeChart.Anchor = (((AnchorStyles.Top_Right)));
 		boxShortRangeChart.Controls.add(picShortRangeChart);
 		boxShortRangeChart.setLocation(new Point(364, 306));
 		boxShortRangeChart.setName("boxShortRangeChart");
-		boxShortRangeChart.setSize(new jwinforms.Size(176, 168));
+		boxShortRangeChart.setSize(new Size(176, 168));
 		boxShortRangeChart.setTabIndex(6);
 		boxShortRangeChart.setTabStop(false);
 		boxShortRangeChart.setText("Short-Range Chart");
 		//
 		// boxGalacticChart
 		//
-		boxGalacticChart.Anchor = (((jwinforms.AnchorStyles.Top_Right)));
-		boxGalacticChart.setBackColor(jwinforms.SystemColors.Control);
+		boxGalacticChart.Anchor = (((AnchorStyles.Top_Right)));
+		boxGalacticChart.setBackColor(SystemColors.Control);
 		boxGalacticChart.Controls.add(lblWormhole);
 		boxGalacticChart.Controls.add(lblWormholeLabel);
 		boxGalacticChart.Controls.add(btnJump);
@@ -910,7 +932,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		boxGalacticChart.Controls.add(picGalacticChart);
 		boxGalacticChart.setLocation(new Point(180, 306));
 		boxGalacticChart.setName("boxGalacticChart");
-		boxGalacticChart.setSize(new jwinforms.Size(176, 168));
+		boxGalacticChart.setSize(new Size(176, 168));
 		boxGalacticChart.setTabIndex(5);
 		boxGalacticChart.setTabStop(false);
 		boxGalacticChart.setText("Galactic Chart");
@@ -919,7 +941,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblWormhole.setLocation(new Point(8, 148));
 		lblWormhole.setName("lblWormhole");
-		lblWormhole.setSize(new jwinforms.Size(72, 13));
+		lblWormhole.setSize(new Size(72, 13));
 		lblWormhole.setTabIndex(29);
 		lblWormhole.setText("Tarchannen");
 		//
@@ -927,22 +949,22 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblWormholeLabel.setLocation(new Point(8, 135));
 		lblWormholeLabel.setName("lblWormholeLabel");
-		lblWormholeLabel.setSize(new jwinforms.Size(72, 13));
+		lblWormholeLabel.setSize(new Size(72, 13));
 		lblWormholeLabel.setTabIndex(28);
 		lblWormholeLabel.setText("Wormhole to");
 		//
 		// btnJump
 		//
-		btnJump.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnJump.setFlatStyle(FlatStyle.Flat);
 		btnJump.setLocation(new Point(81, 138));
 		btnJump.setName("btnJump");
-		btnJump.setSize(new jwinforms.Size(42, 22));
+		btnJump.setSize(new Size(42, 22));
 		btnJump.setTabIndex(55);
 		btnJump.setText("Jump");
 		btnJump.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnJump_Click(sender, e);
 			}
@@ -950,16 +972,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnFind
 		//
-		btnFind.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnFind.setFlatStyle(FlatStyle.Flat);
 		btnFind.setLocation(new Point(132, 138));
 		btnFind.setName("btnFind");
-		btnFind.setSize(new jwinforms.Size(36, 22));
+		btnFind.setSize(new Size(36, 22));
 		btnFind.setTabIndex(56);
 		btnFind.setText("Find");
 		btnFind.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnFind_Click(sender, e);
 			}
@@ -967,7 +989,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// boxTargetSystem
 		//
-		boxTargetSystem.Anchor = (((jwinforms.AnchorStyles.Top_Right)));
+		boxTargetSystem.Anchor = (((AnchorStyles.Top_Right)));
 		boxTargetSystem.Controls.add(btnTrack);
 		boxTargetSystem.Controls.add(btnNextSystem);
 		boxTargetSystem.Controls.add(btnPrevSystem);
@@ -991,24 +1013,24 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		boxTargetSystem.Controls.add(lblTargetNameLabel);
 		boxTargetSystem.setLocation(new Point(548, 306));
 		boxTargetSystem.setName("boxTargetSystem");
-		boxTargetSystem.setSize(new jwinforms.Size(216, 168));
+		boxTargetSystem.setSize(new Size(216, 168));
 		boxTargetSystem.setTabIndex(7);
 		boxTargetSystem.setTabStop(false);
 		boxTargetSystem.setText("Target System");
 		//
 		// btnTrack
 		//
-		btnTrack.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnTrack.setFlatStyle(FlatStyle.Flat);
 		btnTrack.setLocation(new Point(160, 140));
 		btnTrack.setName("btnTrack");
-		btnTrack.setSize(new jwinforms.Size(44, 22));
+		btnTrack.setSize(new Size(44, 22));
 		btnTrack.setTabIndex(60);
 		btnTrack.setText("Track");
 		btnTrack.setVisible(false);
 		btnTrack.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnTrack_Click(sender, e);
 			}
@@ -1016,16 +1038,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnNextSystem
 		//
-		btnNextSystem.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnNextSystem.setFlatStyle(FlatStyle.Flat);
 		btnNextSystem.setLocation(new Point(186, 16));
 		btnNextSystem.setName("btnNextSystem");
-		btnNextSystem.setSize(new jwinforms.Size(18, 18));
+		btnNextSystem.setSize(new Size(18, 18));
 		btnNextSystem.setTabIndex(58);
 		btnNextSystem.setText(">");
 		btnNextSystem.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnNextSystem_Click(sender, e);
 			}
@@ -1033,16 +1055,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnPrevSystem
 		//
-		btnPrevSystem.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnPrevSystem.setFlatStyle(FlatStyle.Flat);
 		btnPrevSystem.setLocation(new Point(160, 16));
 		btnPrevSystem.setName("btnPrevSystem");
-		btnPrevSystem.setSize(new jwinforms.Size(18, 18));
+		btnPrevSystem.setSize(new Size(18, 18));
 		btnPrevSystem.setTabIndex(57);
 		btnPrevSystem.setText("<");
 		btnPrevSystem.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnPrevSystem_Click(sender, e);
 			}
@@ -1052,22 +1074,22 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetOutOfRange.setLocation(new Point(8, 144));
 		lblTargetOutOfRange.setName("lblTargetOutOfRange");
-		lblTargetOutOfRange.setSize(new jwinforms.Size(144, 13));
+		lblTargetOutOfRange.setSize(new Size(144, 13));
 		lblTargetOutOfRange.setTabIndex(17);
 		lblTargetOutOfRange.setText("This system is out of range.");
 		//
 		// btnWarp
 		//
-		btnWarp.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnWarp.setFlatStyle(FlatStyle.Flat);
 		btnWarp.setLocation(new Point(160, 98));
 		btnWarp.setName("btnWarp");
-		btnWarp.setSize(new jwinforms.Size(44, 44));
+		btnWarp.setSize(new Size(44, 44));
 		btnWarp.setTabIndex(59);
 		btnWarp.setText("Warp");
 		btnWarp.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnWarp_Click(sender, e);
 			}
@@ -1077,7 +1099,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPolSys.setLocation(new Point(88, 64));
 		lblTargetPolSys.setName("lblTargetPolSys");
-		lblTargetPolSys.setSize(new jwinforms.Size(91, 13));
+		lblTargetPolSys.setSize(new Size(91, 13));
 		lblTargetPolSys.setTabIndex(15);
 		lblTargetPolSys.setText("Communist State");
 		//
@@ -1085,7 +1107,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetSize.setLocation(new Point(88, 32));
 		lblTargetSize.setName("lblTargetSize");
-		lblTargetSize.setSize(new jwinforms.Size(45, 13));
+		lblTargetSize.setSize(new Size(45, 13));
 		lblTargetSize.setTabIndex(14);
 		lblTargetSize.setText("Medium");
 		//
@@ -1093,7 +1115,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetTech.setLocation(new Point(88, 48));
 		lblTargetTech.setName("lblTargetTech");
-		lblTargetTech.setSize(new jwinforms.Size(82, 13));
+		lblTargetTech.setSize(new Size(82, 13));
 		lblTargetTech.setTabIndex(13);
 		lblTargetTech.setText("Pre-Agricultural");
 		//
@@ -1101,7 +1123,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDistance.setLocation(new Point(88, 128));
 		lblTargetDistance.setName("lblTargetDistance");
-		lblTargetDistance.setSize(new jwinforms.Size(66, 13));
+		lblTargetDistance.setSize(new Size(66, 13));
 		lblTargetDistance.setTabIndex(12);
 		lblTargetDistance.setText("888 parsecs");
 		//
@@ -1109,7 +1131,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPirates.setLocation(new Point(88, 112));
 		lblTargetPirates.setName("lblTargetPirates");
-		lblTargetPirates.setSize(new jwinforms.Size(53, 13));
+		lblTargetPirates.setSize(new Size(53, 13));
 		lblTargetPirates.setTabIndex(11);
 		lblTargetPirates.setText("Abundant");
 		//
@@ -1117,7 +1139,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPolice.setLocation(new Point(88, 96));
 		lblTargetPolice.setName("lblTargetPolice");
-		lblTargetPolice.setSize(new jwinforms.Size(53, 13));
+		lblTargetPolice.setSize(new Size(53, 13));
 		lblTargetPolice.setTabIndex(10);
 		lblTargetPolice.setText("Abundant");
 		//
@@ -1125,84 +1147,77 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetResource.setLocation(new Point(88, 80));
 		lblTargetResource.setName("lblTargetResource");
-		lblTargetResource.setSize(new jwinforms.Size(105, 13));
+		lblTargetResource.setSize(new Size(105, 13));
 		lblTargetResource.setTabIndex(9);
 		lblTargetResource.setText("Sweetwater Oceans");
 		//
 		// lblTargetDistanceLabel
 		//
 		lblTargetDistanceLabel.setAutoSize(true);
-		lblTargetDistanceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetDistanceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetDistanceLabel.setLocation(new Point(8, 128));
 		lblTargetDistanceLabel.setName("lblTargetDistanceLabel");
-		lblTargetDistanceLabel.setSize(new jwinforms.Size(53, 16));
+		lblTargetDistanceLabel.setSize(new Size(53, 16));
 		lblTargetDistanceLabel.setTabIndex(8);
 		lblTargetDistanceLabel.setText("Distance:");
 		//
 		// lblTargetPiratesLabel
 		//
 		lblTargetPiratesLabel.setAutoSize(true);
-		lblTargetPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetPiratesLabel.setLocation(new Point(8, 112));
 		lblTargetPiratesLabel.setName("lblTargetPiratesLabel");
-		lblTargetPiratesLabel.setSize(new jwinforms.Size(44, 16));
+		lblTargetPiratesLabel.setSize(new Size(44, 16));
 		lblTargetPiratesLabel.setTabIndex(7);
 		lblTargetPiratesLabel.setText("Pirates:");
 		//
 		// lblTargetPoliceLabel
 		//
 		lblTargetPoliceLabel.setAutoSize(true);
-		lblTargetPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetPoliceLabel.setLocation(new Point(8, 96));
 		lblTargetPoliceLabel.setName("lblTargetPoliceLabel");
-		lblTargetPoliceLabel.setSize(new jwinforms.Size(40, 16));
+		lblTargetPoliceLabel.setSize(new Size(40, 16));
 		lblTargetPoliceLabel.setTabIndex(6);
 		lblTargetPoliceLabel.setText("Police:");
 		//
 		// lblTargetResourceLabel
 		//
 		lblTargetResourceLabel.setAutoSize(true);
-		lblTargetResourceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetResourceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetResourceLabel.setLocation(new Point(8, 80));
 		lblTargetResourceLabel.setName("lblTargetResourceLabel");
-		lblTargetResourceLabel.setSize(new jwinforms.Size(58, 16));
+		lblTargetResourceLabel.setSize(new Size(58, 16));
 		lblTargetResourceLabel.setTabIndex(5);
 		lblTargetResourceLabel.setText("Resource:");
 		//
 		// lblTargetGovtLabel
 		//
 		lblTargetGovtLabel.setAutoSize(true);
-		lblTargetGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetGovtLabel.setLocation(new Point(8, 64));
 		lblTargetGovtLabel.setName("lblTargetGovtLabel");
-		lblTargetGovtLabel.setSize(new jwinforms.Size(72, 16));
+		lblTargetGovtLabel.setSize(new Size(72, 16));
 		lblTargetGovtLabel.setTabIndex(4);
 		lblTargetGovtLabel.setText("Government:");
 		//
 		// lblTargetTechLabel
 		//
 		lblTargetTechLabel.setAutoSize(true);
-		lblTargetTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetTechLabel.setLocation(new Point(8, 48));
 		lblTargetTechLabel.setName("lblTargetTechLabel");
-		lblTargetTechLabel.setSize(new jwinforms.Size(65, 16));
+		lblTargetTechLabel.setSize(new Size(65, 16));
 		lblTargetTechLabel.setTabIndex(3);
 		lblTargetTechLabel.setText("Tech Level:");
 		//
 		// lblTargetSizeLabel
 		//
 		lblTargetSizeLabel.setAutoSize(true);
-		lblTargetSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetSizeLabel.setLocation(new Point(8, 32));
 		lblTargetSizeLabel.setName("lblTargetSizeLabel");
-		lblTargetSizeLabel.setSize(new jwinforms.Size(31, 16));
+		lblTargetSizeLabel.setSize(new Size(31, 16));
 		lblTargetSizeLabel.setTabIndex(2);
 		lblTargetSizeLabel.setText("Size:");
 		//
@@ -1210,24 +1225,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetName.setLocation(new Point(88, 16));
 		lblTargetName.setName("lblTargetName");
-		lblTargetName.setSize(new jwinforms.Size(65, 13));
+		lblTargetName.setSize(new Size(65, 13));
 		lblTargetName.setTabIndex(1);
 		lblTargetName.setText("Tarchannen");
 		//
 		// lblTargetNameLabel
 		//
 		lblTargetNameLabel.setAutoSize(true);
-		lblTargetNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetNameLabel.setLocation(new Point(8, 16));
 		lblTargetNameLabel.setName("lblTargetNameLabel");
-		lblTargetNameLabel.setSize(new jwinforms.Size(39, 16));
+		lblTargetNameLabel.setSize(new Size(39, 16));
 		lblTargetNameLabel.setTabIndex(0);
 		lblTargetNameLabel.setText("Name:");
 		//
 		// boxCargo
 		//
-		boxCargo.Anchor = (((jwinforms.AnchorStyles.Top_Right)));
+		boxCargo.Anchor = (((AnchorStyles.Top_Right)));
 		boxCargo.Controls.add(picCargoLine3);
 		boxCargo.Controls.add(picCargoLine2);
 		boxCargo.Controls.add(picCargoLine0);
@@ -1340,7 +1354,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		boxCargo.Controls.add(lblTradeCmdty7);
 		boxCargo.setLocation(new Point(252, 2));
 		boxCargo.setName("boxCargo");
-		boxCargo.setSize(new jwinforms.Size(512, 300));
+		boxCargo.setSize(new Size(512, 300));
 		boxCargo.setTabIndex(8);
 		boxCargo.setTabStop(false);
 		boxCargo.setText("Cargo");
@@ -1350,7 +1364,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		picCargoLine3.setBackColor(Color.darkGray);
 		picCargoLine3.setLocation(new Point(8, 52));
 		picCargoLine3.setName("picCargoLine3");
-		picCargoLine3.setSize(new jwinforms.Size(496, 1));
+		picCargoLine3.setSize(new Size(496, 1));
 		picCargoLine3.setTabIndex(131);
 		picCargoLine3.setTabStop(false);
 		//
@@ -1359,7 +1373,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		picCargoLine2.setBackColor(Color.darkGray);
 		picCargoLine2.setLocation(new Point(352, 32));
 		picCargoLine2.setName("picCargoLine2");
-		picCargoLine2.setSize(new jwinforms.Size(1, 262));
+		picCargoLine2.setSize(new Size(1, 262));
 		picCargoLine2.setTabIndex(130);
 		picCargoLine2.setTabStop(false);
 		//
@@ -1368,7 +1382,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		picCargoLine0.setBackColor(Color.darkGray);
 		picCargoLine0.setLocation(new Point(71, 32));
 		picCargoLine0.setName("picCargoLine0");
-		picCargoLine0.setSize(new jwinforms.Size(1, 262));
+		picCargoLine0.setSize(new Size(1, 262));
 		picCargoLine0.setTabIndex(129);
 		picCargoLine0.setTabStop(false);
 		//
@@ -1377,7 +1391,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		picCargoLine1.setBackColor(Color.darkGray);
 		picCargoLine1.setLocation(new Point(218, 32));
 		picCargoLine1.setName("picCargoLine1");
-		picCargoLine1.setSize(new jwinforms.Size(1, 262));
+		picCargoLine1.setSize(new Size(1, 262));
 		picCargoLine1.setTabIndex(128);
 		picCargoLine1.setTabStop(false);
 		//
@@ -1385,7 +1399,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct9.setLocation(new Point(466, 276));
 		lblTargetPct9.setName("lblTargetPct9");
-		lblTargetPct9.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct9.setSize(new Size(37, 13));
 		lblTargetPct9.setTabIndex(127);
 		lblTargetPct9.setText("--------");
 		lblTargetPct9.TextAlign = ContentAlignment.TopRight;
@@ -1394,7 +1408,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDiff9.setLocation(new Point(410, 276));
 		lblTargetDiff9.setName("lblTargetDiff9");
-		lblTargetDiff9.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff9.setSize(new Size(52, 13));
 		lblTargetDiff9.setTabIndex(126);
 		lblTargetDiff9.setText("------------");
 		lblTargetDiff9.TextAlign = ContentAlignment.TopRight;
@@ -1403,23 +1417,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice9.setLocation(new Point(358, 276));
 		lblTargetPrice9.setName("lblTargetPrice9");
-		lblTargetPrice9.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice9.setSize(new Size(48, 13));
 		lblTargetPrice9.setTabIndex(125);
 		lblTargetPrice9.setText("-----------");
 		lblTargetPrice9.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax9
 		//
-		btnBuyMax9.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax9.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax9.setLocation(new Point(262, 272));
 		btnBuyMax9.setName("btnBuyMax9");
-		btnBuyMax9.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax9.setSize(new Size(36, 22));
 		btnBuyMax9.setTabIndex(51);
 		btnBuyMax9.setText("Max");
 		btnBuyMax9.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1428,16 +1442,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty9
 		//
-		btnBuyQty9.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty9.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty9.setLocation(new Point(227, 272));
 		btnBuyQty9.setName("btnBuyQty9");
-		btnBuyQty9.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty9.setSize(new Size(28, 22));
 		btnBuyQty9.setTabIndex(50);
 		btnBuyQty9.setText("88");
 		btnBuyQty9.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1447,23 +1461,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice9.setLocation(new Point(302, 276));
 		lblBuyPrice9.setName("lblBuyPrice9");
-		lblBuyPrice9.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice9.setSize(new Size(48, 13));
 		lblBuyPrice9.setTabIndex(122);
 		lblBuyPrice9.setText("not sold");
 		lblBuyPrice9.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll9
 		//
-		btnSellAll9.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll9.setFlatStyle(FlatStyle.Flat);
 		btnSellAll9.setLocation(new Point(115, 272));
 		btnSellAll9.setName("btnSellAll9");
-		btnSellAll9.setSize(new jwinforms.Size(44, 22));
+		btnSellAll9.setSize(new Size(44, 22));
 		btnSellAll9.setTabIndex(49);
 		btnSellAll9.setText("Dump");
 		btnSellAll9.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1471,16 +1485,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty9
 		//
-		btnSellQty9.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty9.setFlatStyle(FlatStyle.Flat);
 		btnSellQty9.setLocation(new Point(80, 272));
 		btnSellQty9.setName("btnSellQty9");
-		btnSellQty9.setSize(new jwinforms.Size(28, 22));
+		btnSellQty9.setSize(new Size(28, 22));
 		btnSellQty9.setTabIndex(48);
 		btnSellQty9.setText("88");
 		btnSellQty9.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1490,7 +1504,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice9.setLocation(new Point(163, 276));
 		lblSellPrice9.setName("lblSellPrice9");
-		lblSellPrice9.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice9.setSize(new Size(48, 13));
 		lblSellPrice9.setTabIndex(119);
 		lblSellPrice9.setText("no trade");
 		lblSellPrice9.TextAlign = ContentAlignment.TopRight;
@@ -1499,7 +1513,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct8.setLocation(new Point(466, 252));
 		lblTargetPct8.setName("lblTargetPct8");
-		lblTargetPct8.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct8.setSize(new Size(37, 13));
 		lblTargetPct8.setTabIndex(118);
 		lblTargetPct8.setText("-888%");
 		lblTargetPct8.TextAlign = ContentAlignment.TopRight;
@@ -1508,7 +1522,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDiff8.setLocation(new Point(410, 252));
 		lblTargetDiff8.setName("lblTargetDiff8");
-		lblTargetDiff8.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff8.setSize(new Size(52, 13));
 		lblTargetDiff8.setTabIndex(117);
 		lblTargetDiff8.setText("-8,888 cr.");
 		lblTargetDiff8.TextAlign = ContentAlignment.TopRight;
@@ -1517,23 +1531,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice8.setLocation(new Point(358, 252));
 		lblTargetPrice8.setName("lblTargetPrice8");
-		lblTargetPrice8.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice8.setSize(new Size(48, 13));
 		lblTargetPrice8.setTabIndex(116);
 		lblTargetPrice8.setText("8,888 cr.");
 		lblTargetPrice8.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax8
 		//
-		btnBuyMax8.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax8.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax8.setLocation(new Point(262, 248));
 		btnBuyMax8.setName("btnBuyMax8");
-		btnBuyMax8.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax8.setSize(new Size(36, 22));
 		btnBuyMax8.setTabIndex(47);
 		btnBuyMax8.setText("Max");
 		btnBuyMax8.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1541,16 +1555,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty8
 		//
-		btnBuyQty8.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty8.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty8.setLocation(new Point(227, 248));
 		btnBuyQty8.setName("btnBuyQty8");
-		btnBuyQty8.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty8.setSize(new Size(28, 22));
 		btnBuyQty8.setTabIndex(46);
 		btnBuyQty8.setText("88");
 		btnBuyQty8.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1560,23 +1574,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice8.setLocation(new Point(302, 252));
 		lblBuyPrice8.setName("lblBuyPrice8");
-		lblBuyPrice8.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice8.setSize(new Size(48, 13));
 		lblBuyPrice8.setTabIndex(113);
 		lblBuyPrice8.setText("8,888 cr.");
 		lblBuyPrice8.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll8
 		//
-		btnSellAll8.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll8.setFlatStyle(FlatStyle.Flat);
 		btnSellAll8.setLocation(new Point(115, 248));
 		btnSellAll8.setName("btnSellAll8");
-		btnSellAll8.setSize(new jwinforms.Size(44, 22));
+		btnSellAll8.setSize(new Size(44, 22));
 		btnSellAll8.setTabIndex(45);
 		btnSellAll8.setText("All");
 		btnSellAll8.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1584,16 +1598,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty8
 		//
-		btnSellQty8.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty8.setFlatStyle(FlatStyle.Flat);
 		btnSellQty8.setLocation(new Point(80, 248));
 		btnSellQty8.setName("btnSellQty8");
-		btnSellQty8.setSize(new jwinforms.Size(28, 22));
+		btnSellQty8.setSize(new Size(28, 22));
 		btnSellQty8.setTabIndex(44);
 		btnSellQty8.setText("88");
 		btnSellQty8.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1603,7 +1617,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice8.setLocation(new Point(163, 252));
 		lblSellPrice8.setName("lblSellPrice8");
-		lblSellPrice8.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice8.setSize(new Size(48, 13));
 		lblSellPrice8.setTabIndex(110);
 		lblSellPrice8.setText("8,888 cr.");
 		lblSellPrice8.TextAlign = ContentAlignment.TopRight;
@@ -1612,18 +1626,17 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct7.setLocation(new Point(466, 228));
 		lblTargetPct7.setName("lblTargetPct7");
-		lblTargetPct7.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct7.setSize(new Size(37, 13));
 		lblTargetPct7.setTabIndex(109);
 		lblTargetPct7.setText("-888%");
 		lblTargetPct7.TextAlign = ContentAlignment.TopRight;
 		//
 		// lblTargetDiff7
 		//
-		lblTargetDiff7.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point,
-				((byte)(0))));
+		lblTargetDiff7.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
 		lblTargetDiff7.setLocation(new Point(410, 228));
 		lblTargetDiff7.setName("lblTargetDiff7");
-		lblTargetDiff7.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff7.setSize(new Size(52, 13));
 		lblTargetDiff7.setTabIndex(108);
 		lblTargetDiff7.setText("-8,888 cr.");
 		lblTargetDiff7.TextAlign = ContentAlignment.TopRight;
@@ -1632,23 +1645,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice7.setLocation(new Point(358, 228));
 		lblTargetPrice7.setName("lblTargetPrice7");
-		lblTargetPrice7.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice7.setSize(new Size(48, 13));
 		lblTargetPrice7.setTabIndex(107);
 		lblTargetPrice7.setText("8,888 cr.");
 		lblTargetPrice7.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax7
 		//
-		btnBuyMax7.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax7.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax7.setLocation(new Point(262, 224));
 		btnBuyMax7.setName("btnBuyMax7");
-		btnBuyMax7.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax7.setSize(new Size(36, 22));
 		btnBuyMax7.setTabIndex(43);
 		btnBuyMax7.setText("Max");
 		btnBuyMax7.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1656,16 +1669,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty7
 		//
-		btnBuyQty7.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty7.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty7.setLocation(new Point(227, 224));
 		btnBuyQty7.setName("btnBuyQty7");
-		btnBuyQty7.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty7.setSize(new Size(28, 22));
 		btnBuyQty7.setTabIndex(42);
 		btnBuyQty7.setText("88");
 		btnBuyQty7.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1675,23 +1688,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice7.setLocation(new Point(302, 228));
 		lblBuyPrice7.setName("lblBuyPrice7");
-		lblBuyPrice7.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice7.setSize(new Size(48, 13));
 		lblBuyPrice7.setTabIndex(104);
 		lblBuyPrice7.setText("8,888 cr.");
 		lblBuyPrice7.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll7
 		//
-		btnSellAll7.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll7.setFlatStyle(FlatStyle.Flat);
 		btnSellAll7.setLocation(new Point(115, 224));
 		btnSellAll7.setName("btnSellAll7");
-		btnSellAll7.setSize(new jwinforms.Size(44, 22));
+		btnSellAll7.setSize(new Size(44, 22));
 		btnSellAll7.setTabIndex(41);
 		btnSellAll7.setText("All");
 		btnSellAll7.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1699,16 +1712,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty7
 		//
-		btnSellQty7.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty7.setFlatStyle(FlatStyle.Flat);
 		btnSellQty7.setLocation(new Point(80, 224));
 		btnSellQty7.setName("btnSellQty7");
-		btnSellQty7.setSize(new jwinforms.Size(28, 22));
+		btnSellQty7.setSize(new Size(28, 22));
 		btnSellQty7.setTabIndex(40);
 		btnSellQty7.setText("88");
 		btnSellQty7.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1718,7 +1731,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice7.setLocation(new Point(163, 228));
 		lblSellPrice7.setName("lblSellPrice7");
-		lblSellPrice7.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice7.setSize(new Size(48, 13));
 		lblSellPrice7.setTabIndex(101);
 		lblSellPrice7.setText("8,888 cr.");
 		lblSellPrice7.TextAlign = ContentAlignment.TopRight;
@@ -1727,7 +1740,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct6.setLocation(new Point(466, 204));
 		lblTargetPct6.setName("lblTargetPct6");
-		lblTargetPct6.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct6.setSize(new Size(37, 13));
 		lblTargetPct6.setTabIndex(100);
 		lblTargetPct6.setText("-888%");
 		lblTargetPct6.TextAlign = ContentAlignment.TopRight;
@@ -1736,7 +1749,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDiff6.setLocation(new Point(410, 204));
 		lblTargetDiff6.setName("lblTargetDiff6");
-		lblTargetDiff6.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff6.setSize(new Size(52, 13));
 		lblTargetDiff6.setTabIndex(99);
 		lblTargetDiff6.setText("-8,888 cr.");
 		lblTargetDiff6.TextAlign = ContentAlignment.TopRight;
@@ -1745,23 +1758,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice6.setLocation(new Point(358, 204));
 		lblTargetPrice6.setName("lblTargetPrice6");
-		lblTargetPrice6.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice6.setSize(new Size(48, 13));
 		lblTargetPrice6.setTabIndex(98);
 		lblTargetPrice6.setText("8,888 cr.");
 		lblTargetPrice6.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax6
 		//
-		btnBuyMax6.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax6.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax6.setLocation(new Point(262, 200));
 		btnBuyMax6.setName("btnBuyMax6");
-		btnBuyMax6.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax6.setSize(new Size(36, 22));
 		btnBuyMax6.setTabIndex(39);
 		btnBuyMax6.setText("Max");
 		btnBuyMax6.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1769,16 +1782,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty6
 		//
-		btnBuyQty6.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty6.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty6.setLocation(new Point(227, 200));
 		btnBuyQty6.setName("btnBuyQty6");
-		btnBuyQty6.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty6.setSize(new Size(28, 22));
 		btnBuyQty6.setTabIndex(38);
 		btnBuyQty6.setText("88");
 		btnBuyQty6.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1788,23 +1801,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice6.setLocation(new Point(302, 204));
 		lblBuyPrice6.setName("lblBuyPrice6");
-		lblBuyPrice6.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice6.setSize(new Size(48, 13));
 		lblBuyPrice6.setTabIndex(95);
 		lblBuyPrice6.setText("8,888 cr.");
 		lblBuyPrice6.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll6
 		//
-		btnSellAll6.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll6.setFlatStyle(FlatStyle.Flat);
 		btnSellAll6.setLocation(new Point(115, 200));
 		btnSellAll6.setName("btnSellAll6");
-		btnSellAll6.setSize(new jwinforms.Size(44, 22));
+		btnSellAll6.setSize(new Size(44, 22));
 		btnSellAll6.setTabIndex(37);
 		btnSellAll6.setText("All");
 		btnSellAll6.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1812,16 +1825,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty6
 		//
-		btnSellQty6.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty6.setFlatStyle(FlatStyle.Flat);
 		btnSellQty6.setLocation(new Point(80, 200));
 		btnSellQty6.setName("btnSellQty6");
-		btnSellQty6.setSize(new jwinforms.Size(28, 22));
+		btnSellQty6.setSize(new Size(28, 22));
 		btnSellQty6.setTabIndex(36);
 		btnSellQty6.setText("88");
 		btnSellQty6.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1831,7 +1844,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice6.setLocation(new Point(163, 204));
 		lblSellPrice6.setName("lblSellPrice6");
-		lblSellPrice6.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice6.setSize(new Size(48, 13));
 		lblSellPrice6.setTabIndex(92);
 		lblSellPrice6.setText("8,888 cr.");
 		lblSellPrice6.TextAlign = ContentAlignment.TopRight;
@@ -1840,7 +1853,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct5.setLocation(new Point(466, 180));
 		lblTargetPct5.setName("lblTargetPct5");
-		lblTargetPct5.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct5.setSize(new Size(37, 13));
 		lblTargetPct5.setTabIndex(91);
 		lblTargetPct5.setText("-888%");
 		lblTargetPct5.TextAlign = ContentAlignment.TopRight;
@@ -1849,7 +1862,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDiff5.setLocation(new Point(410, 180));
 		lblTargetDiff5.setName("lblTargetDiff5");
-		lblTargetDiff5.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff5.setSize(new Size(52, 13));
 		lblTargetDiff5.setTabIndex(90);
 		lblTargetDiff5.setText("-8,888 cr.");
 		lblTargetDiff5.TextAlign = ContentAlignment.TopRight;
@@ -1858,23 +1871,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice5.setLocation(new Point(358, 180));
 		lblTargetPrice5.setName("lblTargetPrice5");
-		lblTargetPrice5.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice5.setSize(new Size(48, 13));
 		lblTargetPrice5.setTabIndex(89);
 		lblTargetPrice5.setText("8,888 cr.");
 		lblTargetPrice5.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax5
 		//
-		btnBuyMax5.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax5.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax5.setLocation(new Point(262, 176));
 		btnBuyMax5.setName("btnBuyMax5");
-		btnBuyMax5.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax5.setSize(new Size(36, 22));
 		btnBuyMax5.setTabIndex(35);
 		btnBuyMax5.setText("Max");
 		btnBuyMax5.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1882,16 +1895,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty5
 		//
-		btnBuyQty5.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty5.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty5.setLocation(new Point(227, 176));
 		btnBuyQty5.setName("btnBuyQty5");
-		btnBuyQty5.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty5.setSize(new Size(28, 22));
 		btnBuyQty5.setTabIndex(34);
 		btnBuyQty5.setText("88");
 		btnBuyQty5.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1901,23 +1914,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice5.setLocation(new Point(302, 180));
 		lblBuyPrice5.setName("lblBuyPrice5");
-		lblBuyPrice5.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice5.setSize(new Size(48, 13));
 		lblBuyPrice5.setTabIndex(86);
 		lblBuyPrice5.setText("8,888 cr.");
 		lblBuyPrice5.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll5
 		//
-		btnSellAll5.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll5.setFlatStyle(FlatStyle.Flat);
 		btnSellAll5.setLocation(new Point(115, 176));
 		btnSellAll5.setName("btnSellAll5");
-		btnSellAll5.setSize(new jwinforms.Size(44, 22));
+		btnSellAll5.setSize(new Size(44, 22));
 		btnSellAll5.setTabIndex(33);
 		btnSellAll5.setText("All");
 		btnSellAll5.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1925,16 +1938,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty5
 		//
-		btnSellQty5.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty5.setFlatStyle(FlatStyle.Flat);
 		btnSellQty5.setLocation(new Point(80, 176));
 		btnSellQty5.setName("btnSellQty5");
-		btnSellQty5.setSize(new jwinforms.Size(28, 22));
+		btnSellQty5.setSize(new Size(28, 22));
 		btnSellQty5.setTabIndex(32);
 		btnSellQty5.setText("88");
 		btnSellQty5.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1944,7 +1957,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice5.setLocation(new Point(163, 180));
 		lblSellPrice5.setName("lblSellPrice5");
-		lblSellPrice5.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice5.setSize(new Size(48, 13));
 		lblSellPrice5.setTabIndex(83);
 		lblSellPrice5.setText("8,888 cr.");
 		lblSellPrice5.TextAlign = ContentAlignment.TopRight;
@@ -1953,7 +1966,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct4.setLocation(new Point(466, 156));
 		lblTargetPct4.setName("lblTargetPct4");
-		lblTargetPct4.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct4.setSize(new Size(37, 13));
 		lblTargetPct4.setTabIndex(82);
 		lblTargetPct4.setText("-888%");
 		lblTargetPct4.TextAlign = ContentAlignment.TopRight;
@@ -1962,7 +1975,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDiff4.setLocation(new Point(410, 156));
 		lblTargetDiff4.setName("lblTargetDiff4");
-		lblTargetDiff4.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff4.setSize(new Size(52, 13));
 		lblTargetDiff4.setTabIndex(81);
 		lblTargetDiff4.setText("-8,888 cr.");
 		lblTargetDiff4.TextAlign = ContentAlignment.TopRight;
@@ -1971,23 +1984,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice4.setLocation(new Point(358, 156));
 		lblTargetPrice4.setName("lblTargetPrice4");
-		lblTargetPrice4.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice4.setSize(new Size(48, 13));
 		lblTargetPrice4.setTabIndex(80);
 		lblTargetPrice4.setText("8,888 cr.");
 		lblTargetPrice4.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax4
 		//
-		btnBuyMax4.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax4.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax4.setLocation(new Point(262, 152));
 		btnBuyMax4.setName("btnBuyMax4");
-		btnBuyMax4.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax4.setSize(new Size(36, 22));
 		btnBuyMax4.setTabIndex(31);
 		btnBuyMax4.setText("Max");
 		btnBuyMax4.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -1995,16 +2008,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty4
 		//
-		btnBuyQty4.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty4.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty4.setLocation(new Point(227, 152));
 		btnBuyQty4.setName("btnBuyQty4");
-		btnBuyQty4.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty4.setSize(new Size(28, 22));
 		btnBuyQty4.setTabIndex(30);
 		btnBuyQty4.setText("88");
 		btnBuyQty4.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2014,23 +2027,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice4.setLocation(new Point(302, 156));
 		lblBuyPrice4.setName("lblBuyPrice4");
-		lblBuyPrice4.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice4.setSize(new Size(48, 13));
 		lblBuyPrice4.setTabIndex(77);
 		lblBuyPrice4.setText("8,888 cr.");
 		lblBuyPrice4.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll4
 		//
-		btnSellAll4.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll4.setFlatStyle(FlatStyle.Flat);
 		btnSellAll4.setLocation(new Point(115, 152));
 		btnSellAll4.setName("btnSellAll4");
-		btnSellAll4.setSize(new jwinforms.Size(44, 22));
+		btnSellAll4.setSize(new Size(44, 22));
 		btnSellAll4.setTabIndex(29);
 		btnSellAll4.setText("All");
 		btnSellAll4.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2038,16 +2051,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty4
 		//
-		btnSellQty4.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty4.setFlatStyle(FlatStyle.Flat);
 		btnSellQty4.setLocation(new Point(80, 152));
 		btnSellQty4.setName("btnSellQty4");
-		btnSellQty4.setSize(new jwinforms.Size(28, 22));
+		btnSellQty4.setSize(new Size(28, 22));
 		btnSellQty4.setTabIndex(28);
 		btnSellQty4.setText("88");
 		btnSellQty4.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2057,7 +2070,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice4.setLocation(new Point(163, 156));
 		lblSellPrice4.setName("lblSellPrice4");
-		lblSellPrice4.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice4.setSize(new Size(48, 13));
 		lblSellPrice4.setTabIndex(74);
 		lblSellPrice4.setText("8,888 cr.");
 		lblSellPrice4.TextAlign = ContentAlignment.TopRight;
@@ -2066,7 +2079,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct3.setLocation(new Point(466, 132));
 		lblTargetPct3.setName("lblTargetPct3");
-		lblTargetPct3.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct3.setSize(new Size(37, 13));
 		lblTargetPct3.setTabIndex(73);
 		lblTargetPct3.setText("-888%");
 		lblTargetPct3.TextAlign = ContentAlignment.TopRight;
@@ -2075,7 +2088,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDiff3.setLocation(new Point(410, 132));
 		lblTargetDiff3.setName("lblTargetDiff3");
-		lblTargetDiff3.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff3.setSize(new Size(52, 13));
 		lblTargetDiff3.setTabIndex(72);
 		lblTargetDiff3.setText("-8,888 cr.");
 		lblTargetDiff3.TextAlign = ContentAlignment.TopRight;
@@ -2084,23 +2097,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice3.setLocation(new Point(358, 132));
 		lblTargetPrice3.setName("lblTargetPrice3");
-		lblTargetPrice3.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice3.setSize(new Size(48, 13));
 		lblTargetPrice3.setTabIndex(71);
 		lblTargetPrice3.setText("8,888 cr.");
 		lblTargetPrice3.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax3
 		//
-		btnBuyMax3.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax3.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax3.setLocation(new Point(262, 128));
 		btnBuyMax3.setName("btnBuyMax3");
-		btnBuyMax3.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax3.setSize(new Size(36, 22));
 		btnBuyMax3.setTabIndex(27);
 		btnBuyMax3.setText("Max");
 		btnBuyMax3.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2108,16 +2121,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty3
 		//
-		btnBuyQty3.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty3.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty3.setLocation(new Point(227, 128));
 		btnBuyQty3.setName("btnBuyQty3");
-		btnBuyQty3.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty3.setSize(new Size(28, 22));
 		btnBuyQty3.setTabIndex(26);
 		btnBuyQty3.setText("88");
 		btnBuyQty3.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2127,23 +2140,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice3.setLocation(new Point(302, 132));
 		lblBuyPrice3.setName("lblBuyPrice3");
-		lblBuyPrice3.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice3.setSize(new Size(48, 13));
 		lblBuyPrice3.setTabIndex(68);
 		lblBuyPrice3.setText("8,888 cr.");
 		lblBuyPrice3.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll3
 		//
-		btnSellAll3.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll3.setFlatStyle(FlatStyle.Flat);
 		btnSellAll3.setLocation(new Point(115, 128));
 		btnSellAll3.setName("btnSellAll3");
-		btnSellAll3.setSize(new jwinforms.Size(44, 22));
+		btnSellAll3.setSize(new Size(44, 22));
 		btnSellAll3.setTabIndex(25);
 		btnSellAll3.setText("All");
 		btnSellAll3.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2151,16 +2164,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty3
 		//
-		btnSellQty3.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty3.setFlatStyle(FlatStyle.Flat);
 		btnSellQty3.setLocation(new Point(80, 128));
 		btnSellQty3.setName("btnSellQty3");
-		btnSellQty3.setSize(new jwinforms.Size(28, 22));
+		btnSellQty3.setSize(new Size(28, 22));
 		btnSellQty3.setTabIndex(24);
 		btnSellQty3.setText("88");
 		btnSellQty3.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2170,7 +2183,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice3.setLocation(new Point(163, 132));
 		lblSellPrice3.setName("lblSellPrice3");
-		lblSellPrice3.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice3.setSize(new Size(48, 13));
 		lblSellPrice3.setTabIndex(65);
 		lblSellPrice3.setText("8,888 cr.");
 		lblSellPrice3.TextAlign = ContentAlignment.TopRight;
@@ -2179,7 +2192,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct2.setLocation(new Point(466, 108));
 		lblTargetPct2.setName("lblTargetPct2");
-		lblTargetPct2.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct2.setSize(new Size(37, 13));
 		lblTargetPct2.setTabIndex(64);
 		lblTargetPct2.setText("-888%");
 		lblTargetPct2.TextAlign = ContentAlignment.TopRight;
@@ -2188,7 +2201,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDiff2.setLocation(new Point(410, 108));
 		lblTargetDiff2.setName("lblTargetDiff2");
-		lblTargetDiff2.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff2.setSize(new Size(52, 13));
 		lblTargetDiff2.setTabIndex(63);
 		lblTargetDiff2.setText("-8,888 cr.");
 		lblTargetDiff2.TextAlign = ContentAlignment.TopRight;
@@ -2197,23 +2210,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice2.setLocation(new Point(358, 108));
 		lblTargetPrice2.setName("lblTargetPrice2");
-		lblTargetPrice2.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice2.setSize(new Size(48, 13));
 		lblTargetPrice2.setTabIndex(62);
 		lblTargetPrice2.setText("8,888 cr.");
 		lblTargetPrice2.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax2
 		//
-		btnBuyMax2.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax2.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax2.setLocation(new Point(262, 104));
 		btnBuyMax2.setName("btnBuyMax2");
-		btnBuyMax2.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax2.setSize(new Size(36, 22));
 		btnBuyMax2.setTabIndex(23);
 		btnBuyMax2.setText("Max");
 		btnBuyMax2.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2221,16 +2234,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty2
 		//
-		btnBuyQty2.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty2.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty2.setLocation(new Point(227, 104));
 		btnBuyQty2.setName("btnBuyQty2");
-		btnBuyQty2.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty2.setSize(new Size(28, 22));
 		btnBuyQty2.setTabIndex(22);
 		btnBuyQty2.setText("88");
 		btnBuyQty2.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2240,23 +2253,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice2.setLocation(new Point(302, 108));
 		lblBuyPrice2.setName("lblBuyPrice2");
-		lblBuyPrice2.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice2.setSize(new Size(48, 13));
 		lblBuyPrice2.setTabIndex(59);
 		lblBuyPrice2.setText("8,888 cr.");
 		lblBuyPrice2.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll2
 		//
-		btnSellAll2.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll2.setFlatStyle(FlatStyle.Flat);
 		btnSellAll2.setLocation(new Point(115, 104));
 		btnSellAll2.setName("btnSellAll2");
-		btnSellAll2.setSize(new jwinforms.Size(44, 22));
+		btnSellAll2.setSize(new Size(44, 22));
 		btnSellAll2.setTabIndex(21);
 		btnSellAll2.setText("All");
 		btnSellAll2.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2264,16 +2277,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty2
 		//
-		btnSellQty2.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty2.setFlatStyle(FlatStyle.Flat);
 		btnSellQty2.setLocation(new Point(80, 104));
 		btnSellQty2.setName("btnSellQty2");
-		btnSellQty2.setSize(new jwinforms.Size(28, 22));
+		btnSellQty2.setSize(new Size(28, 22));
 		btnSellQty2.setTabIndex(20);
 		btnSellQty2.setText("88");
 		btnSellQty2.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2283,7 +2296,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice2.setLocation(new Point(163, 108));
 		lblSellPrice2.setName("lblSellPrice2");
-		lblSellPrice2.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice2.setSize(new Size(48, 13));
 		lblSellPrice2.setTabIndex(56);
 		lblSellPrice2.setText("8,888 cr.");
 		lblSellPrice2.TextAlign = ContentAlignment.TopRight;
@@ -2292,7 +2305,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct1.setLocation(new Point(466, 84));
 		lblTargetPct1.setName("lblTargetPct1");
-		lblTargetPct1.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct1.setSize(new Size(37, 13));
 		lblTargetPct1.setTabIndex(55);
 		lblTargetPct1.setText("-888%");
 		lblTargetPct1.TextAlign = ContentAlignment.TopRight;
@@ -2301,7 +2314,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDiff1.setLocation(new Point(410, 84));
 		lblTargetDiff1.setName("lblTargetDiff1");
-		lblTargetDiff1.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff1.setSize(new Size(52, 13));
 		lblTargetDiff1.setTabIndex(54);
 		lblTargetDiff1.setText("-8,888 cr.");
 		lblTargetDiff1.TextAlign = ContentAlignment.TopRight;
@@ -2310,23 +2323,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice1.setLocation(new Point(358, 84));
 		lblTargetPrice1.setName("lblTargetPrice1");
-		lblTargetPrice1.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice1.setSize(new Size(48, 13));
 		lblTargetPrice1.setTabIndex(53);
 		lblTargetPrice1.setText("8,888 cr.");
 		lblTargetPrice1.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax1
 		//
-		btnBuyMax1.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax1.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax1.setLocation(new Point(262, 80));
 		btnBuyMax1.setName("btnBuyMax1");
-		btnBuyMax1.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax1.setSize(new Size(36, 22));
 		btnBuyMax1.setTabIndex(19);
 		btnBuyMax1.setText("Max");
 		btnBuyMax1.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2334,16 +2347,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty1
 		//
-		btnBuyQty1.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty1.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty1.setLocation(new Point(227, 80));
 		btnBuyQty1.setName("btnBuyQty1");
-		btnBuyQty1.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty1.setSize(new Size(28, 22));
 		btnBuyQty1.setTabIndex(18);
 		btnBuyQty1.setText("88");
 		btnBuyQty1.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2353,7 +2366,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice1.setLocation(new Point(302, 84));
 		lblBuyPrice1.setName("lblBuyPrice1");
-		lblBuyPrice1.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice1.setSize(new Size(48, 13));
 		lblBuyPrice1.setTabIndex(50);
 		lblBuyPrice1.setText("8,888 cr.");
 		lblBuyPrice1.TextAlign = ContentAlignment.TopRight;
@@ -2363,7 +2376,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTargetPctLabel.setAutoSize(true);
 		lblTargetPctLabel.setLocation(new Point(476, 34));
 		lblTargetPctLabel.setName("lblTargetPctLabel");
-		lblTargetPctLabel.setSize(new jwinforms.Size(14, 16));
+		lblTargetPctLabel.setSize(new Size(14, 16));
 		lblTargetPctLabel.setTabIndex(49);
 		lblTargetPctLabel.setText("%");
 		//
@@ -2372,7 +2385,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTargetDiffLabel.setAutoSize(true);
 		lblTargetDiffLabel.setLocation(new Point(424, 34));
 		lblTargetDiffLabel.setName("lblTargetDiffLabel");
-		lblTargetDiffLabel.setSize(new jwinforms.Size(18, 16));
+		lblTargetDiffLabel.setSize(new Size(18, 16));
 		lblTargetDiffLabel.setTabIndex(48);
 		lblTargetDiffLabel.setText("+/-");
 		//
@@ -2381,7 +2394,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTargetPriceLabel.setAutoSize(true);
 		lblTargetPriceLabel.setLocation(new Point(360, 34));
 		lblTargetPriceLabel.setName("lblTargetPriceLabel");
-		lblTargetPriceLabel.setSize(new jwinforms.Size(30, 16));
+		lblTargetPriceLabel.setSize(new Size(30, 16));
 		lblTargetPriceLabel.setTabIndex(47);
 		lblTargetPriceLabel.setText("Price");
 		//
@@ -2389,7 +2402,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPct0.setLocation(new Point(466, 60));
 		lblTargetPct0.setName("lblTargetPct0");
-		lblTargetPct0.setSize(new jwinforms.Size(37, 13));
+		lblTargetPct0.setSize(new Size(37, 13));
 		lblTargetPct0.setTabIndex(46);
 		lblTargetPct0.setText("-888%");
 		lblTargetPct0.TextAlign = ContentAlignment.TopRight;
@@ -2398,7 +2411,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetDiff0.setLocation(new Point(410, 60));
 		lblTargetDiff0.setName("lblTargetDiff0");
-		lblTargetDiff0.setSize(new jwinforms.Size(52, 13));
+		lblTargetDiff0.setSize(new Size(52, 13));
 		lblTargetDiff0.setTabIndex(45);
 		lblTargetDiff0.setText("-8,888 cr.");
 		lblTargetDiff0.TextAlign = ContentAlignment.TopRight;
@@ -2407,23 +2420,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblTargetPrice0.setLocation(new Point(358, 60));
 		lblTargetPrice0.setName("lblTargetPrice0");
-		lblTargetPrice0.setSize(new jwinforms.Size(48, 13));
+		lblTargetPrice0.setSize(new Size(48, 13));
 		lblTargetPrice0.setTabIndex(44);
 		lblTargetPrice0.setText("8,888 cr.");
 		lblTargetPrice0.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnBuyMax0
 		//
-		btnBuyMax0.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyMax0.setFlatStyle(FlatStyle.Flat);
 		btnBuyMax0.setLocation(new Point(262, 56));
 		btnBuyMax0.setName("btnBuyMax0");
-		btnBuyMax0.setSize(new jwinforms.Size(36, 22));
+		btnBuyMax0.setSize(new Size(36, 22));
 		btnBuyMax0.setTabIndex(15);
 		btnBuyMax0.setText("Max");
 		btnBuyMax0.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2431,16 +2444,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyQty0
 		//
-		btnBuyQty0.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyQty0.setFlatStyle(FlatStyle.Flat);
 		btnBuyQty0.setLocation(new Point(227, 56));
 		btnBuyQty0.setName("btnBuyQty0");
-		btnBuyQty0.setSize(new jwinforms.Size(28, 22));
+		btnBuyQty0.setSize(new Size(28, 22));
 		btnBuyQty0.setTabIndex(14);
 		btnBuyQty0.setText("88");
 		btnBuyQty0.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2450,23 +2463,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblBuyPrice0.setLocation(new Point(302, 60));
 		lblBuyPrice0.setName("lblBuyPrice0");
-		lblBuyPrice0.setSize(new jwinforms.Size(48, 13));
+		lblBuyPrice0.setSize(new Size(48, 13));
 		lblBuyPrice0.setTabIndex(41);
 		lblBuyPrice0.setText("8,888 cr.");
 		lblBuyPrice0.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll1
 		//
-		btnSellAll1.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll1.setFlatStyle(FlatStyle.Flat);
 		btnSellAll1.setLocation(new Point(115, 80));
 		btnSellAll1.setName("btnSellAll1");
-		btnSellAll1.setSize(new jwinforms.Size(44, 22));
+		btnSellAll1.setSize(new Size(44, 22));
 		btnSellAll1.setTabIndex(17);
 		btnSellAll1.setText("All");
 		btnSellAll1.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2474,16 +2487,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty1
 		//
-		btnSellQty1.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty1.setFlatStyle(FlatStyle.Flat);
 		btnSellQty1.setLocation(new Point(80, 80));
 		btnSellQty1.setName("btnSellQty1");
-		btnSellQty1.setSize(new jwinforms.Size(28, 22));
+		btnSellQty1.setSize(new Size(28, 22));
 		btnSellQty1.setTabIndex(16);
 		btnSellQty1.setText("88");
 		btnSellQty1.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2493,23 +2506,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice1.setLocation(new Point(163, 84));
 		lblSellPrice1.setName("lblSellPrice1");
-		lblSellPrice1.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice1.setSize(new Size(48, 13));
 		lblSellPrice1.setTabIndex(38);
 		lblSellPrice1.setText("8,888 cr.");
 		lblSellPrice1.TextAlign = ContentAlignment.TopRight;
 		//
 		// btnSellAll0
 		//
-		btnSellAll0.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellAll0.setFlatStyle(FlatStyle.Flat);
 		btnSellAll0.setLocation(new Point(115, 56));
 		btnSellAll0.setName("btnSellAll0");
-		btnSellAll0.setSize(new jwinforms.Size(44, 22));
+		btnSellAll0.setSize(new Size(44, 22));
 		btnSellAll0.setTabIndex(13);
 		btnSellAll0.setText("All");
 		btnSellAll0.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2517,16 +2530,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnSellQty0
 		//
-		btnSellQty0.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSellQty0.setFlatStyle(FlatStyle.Flat);
 		btnSellQty0.setLocation(new Point(80, 56));
 		btnSellQty0.setName("btnSellQty0");
-		btnSellQty0.setSize(new jwinforms.Size(28, 22));
+		btnSellQty0.setSize(new Size(28, 22));
 		btnSellQty0.setTabIndex(12);
 		btnSellQty0.setText("88");
 		btnSellQty0.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuySell_Click(sender, e);
 			}
@@ -2536,7 +2549,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSellPrice0.setLocation(new Point(163, 60));
 		lblSellPrice0.setName("lblSellPrice0");
-		lblSellPrice0.setSize(new jwinforms.Size(48, 13));
+		lblSellPrice0.setSize(new Size(48, 13));
 		lblSellPrice0.setTabIndex(35);
 		lblSellPrice0.setText("8,888 cr.");
 		lblSellPrice0.TextAlign = ContentAlignment.TopRight;
@@ -2546,7 +2559,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeTarget.setAutoSize(true);
 		lblTradeTarget.setLocation(new Point(391, 16));
 		lblTradeTarget.setName("lblTradeTarget");
-		lblTradeTarget.setSize(new jwinforms.Size(78, 16));
+		lblTradeTarget.setSize(new Size(78, 16));
 		lblTradeTarget.setTabIndex(28);
 		lblTradeTarget.setText("Target System");
 		//
@@ -2555,7 +2568,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblBuy.setAutoSize(true);
 		lblBuy.setLocation(new Point(273, 34));
 		lblBuy.setName("lblBuy");
-		lblBuy.setSize(new jwinforms.Size(24, 16));
+		lblBuy.setSize(new Size(24, 16));
 		lblBuy.setTabIndex(27);
 		lblBuy.setText("Buy");
 		//
@@ -2565,7 +2578,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblSell.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
 		lblSell.setLocation(new Point(132, 34));
 		lblSell.setName("lblSell");
-		lblSell.setSize(new jwinforms.Size(23, 16));
+		lblSell.setSize(new Size(23, 16));
 		lblSell.setTabIndex(26);
 		lblSell.setText("Sell");
 		//
@@ -2574,7 +2587,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty9.setAutoSize(true);
 		lblTradeCmdty9.setLocation(new Point(8, 276));
 		lblTradeCmdty9.setName("lblTradeCmdty9");
-		lblTradeCmdty9.setSize(new jwinforms.Size(40, 16));
+		lblTradeCmdty9.setSize(new Size(40, 16));
 		lblTradeCmdty9.setTabIndex(25);
 		lblTradeCmdty9.setText("Robots");
 		//
@@ -2583,7 +2596,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty8.setAutoSize(true);
 		lblTradeCmdty8.setLocation(new Point(8, 252));
 		lblTradeCmdty8.setName("lblTradeCmdty8");
-		lblTradeCmdty8.setSize(new jwinforms.Size(51, 16));
+		lblTradeCmdty8.setSize(new Size(51, 16));
 		lblTradeCmdty8.setTabIndex(24);
 		lblTradeCmdty8.setText("Narcotics");
 		//
@@ -2592,7 +2605,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty2.setAutoSize(true);
 		lblTradeCmdty2.setLocation(new Point(8, 108));
 		lblTradeCmdty2.setName("lblTradeCmdty2");
-		lblTradeCmdty2.setSize(new jwinforms.Size(30, 16));
+		lblTradeCmdty2.setSize(new Size(30, 16));
 		lblTradeCmdty2.setTabIndex(23);
 		lblTradeCmdty2.setText("Food");
 		//
@@ -2601,7 +2614,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty0.setAutoSize(true);
 		lblTradeCmdty0.setLocation(new Point(8, 60));
 		lblTradeCmdty0.setName("lblTradeCmdty0");
-		lblTradeCmdty0.setSize(new jwinforms.Size(34, 16));
+		lblTradeCmdty0.setSize(new Size(34, 16));
 		lblTradeCmdty0.setTabIndex(22);
 		lblTradeCmdty0.setText("Water");
 		//
@@ -2610,7 +2623,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty1.setAutoSize(true);
 		lblTradeCmdty1.setLocation(new Point(8, 84));
 		lblTradeCmdty1.setName("lblTradeCmdty1");
-		lblTradeCmdty1.setSize(new jwinforms.Size(27, 16));
+		lblTradeCmdty1.setSize(new Size(27, 16));
 		lblTradeCmdty1.setTabIndex(21);
 		lblTradeCmdty1.setText("Furs");
 		//
@@ -2619,7 +2632,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty6.setAutoSize(true);
 		lblTradeCmdty6.setLocation(new Point(8, 204));
 		lblTradeCmdty6.setName("lblTradeCmdty6");
-		lblTradeCmdty6.setSize(new jwinforms.Size(50, 16));
+		lblTradeCmdty6.setSize(new Size(50, 16));
 		lblTradeCmdty6.setTabIndex(20);
 		lblTradeCmdty6.setText("Medicine");
 		//
@@ -2628,7 +2641,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty5.setAutoSize(true);
 		lblTradeCmdty5.setLocation(new Point(8, 180));
 		lblTradeCmdty5.setName("lblTradeCmdty5");
-		lblTradeCmdty5.setSize(new jwinforms.Size(49, 16));
+		lblTradeCmdty5.setSize(new Size(49, 16));
 		lblTradeCmdty5.setTabIndex(19);
 		lblTradeCmdty5.setText("Firearms");
 		//
@@ -2637,7 +2650,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty4.setAutoSize(true);
 		lblTradeCmdty4.setLocation(new Point(8, 156));
 		lblTradeCmdty4.setName("lblTradeCmdty4");
-		lblTradeCmdty4.setSize(new jwinforms.Size(41, 16));
+		lblTradeCmdty4.setSize(new Size(41, 16));
 		lblTradeCmdty4.setTabIndex(18);
 		lblTradeCmdty4.setText("Games");
 		//
@@ -2646,7 +2659,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty3.setAutoSize(true);
 		lblTradeCmdty3.setLocation(new Point(8, 132));
 		lblTradeCmdty3.setName("lblTradeCmdty3");
-		lblTradeCmdty3.setSize(new jwinforms.Size(23, 16));
+		lblTradeCmdty3.setSize(new Size(23, 16));
 		lblTradeCmdty3.setTabIndex(17);
 		lblTradeCmdty3.setText("Ore");
 		//
@@ -2655,7 +2668,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblTradeCmdty7.setAutoSize(true);
 		lblTradeCmdty7.setLocation(new Point(8, 228));
 		lblTradeCmdty7.setName("lblTradeCmdty7");
-		lblTradeCmdty7.setSize(new jwinforms.Size(53, 16));
+		lblTradeCmdty7.setSize(new Size(53, 16));
 		lblTradeCmdty7.setTabIndex(16);
 		lblTradeCmdty7.setText("Machines");
 		//
@@ -2682,23 +2695,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		boxSystem.Controls.add(lblSystemNameLabel);
 		boxSystem.setLocation(new Point(4, 2));
 		boxSystem.setName("boxSystem");
-		boxSystem.setSize(new jwinforms.Size(240, 206));
+		boxSystem.setSize(new Size(240, 206));
 		boxSystem.setTabIndex(1);
 		boxSystem.setTabStop(false);
 		boxSystem.setText("System Info");
 		//
 		// btnMerc
 		//
-		btnMerc.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnMerc.setFlatStyle(FlatStyle.Flat);
 		btnMerc.setLocation(new Point(118, 174));
 		btnMerc.setName("btnMerc");
-		btnMerc.setSize(new jwinforms.Size(112, 22));
+		btnMerc.setSize(new Size(112, 22));
 		btnMerc.setTabIndex(3);
 		btnMerc.setText("Mercenary For Hire");
 		btnMerc.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnMerc_Click(sender, e);
 			}
@@ -2707,16 +2720,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		// btnSpecial
 		//
 		btnSpecial.setBackColor(new Color(255, 255, 128));
-		btnSpecial.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnSpecial.setFlatStyle(FlatStyle.Flat);
 		btnSpecial.setLocation(new Point(58, 174));
 		btnSpecial.setName("btnSpecial");
-		btnSpecial.setSize(new jwinforms.Size(52, 22));
+		btnSpecial.setSize(new Size(52, 22));
 		btnSpecial.setTabIndex(2);
 		btnSpecial.setText("Special");
 		btnSpecial.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnSpecial_Click(sender, e);
 			}
@@ -2724,16 +2737,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnNews
 		//
-		btnNews.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnNews.setFlatStyle(FlatStyle.Flat);
 		btnNews.setLocation(new Point(8, 174));
 		btnNews.setName("btnNews");
-		btnNews.setSize(new jwinforms.Size(42, 22));
+		btnNews.setSize(new Size(42, 22));
 		btnNews.setTabIndex(1);
 		btnNews.setText("News");
 		btnNews.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnNews_Click(sender, e);
 			}
@@ -2743,7 +2756,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSystemPressure.setLocation(new Point(8, 147));
 		lblSystemPressure.setName("lblSystemPressure");
-		lblSystemPressure.setSize(new jwinforms.Size(168, 16));
+		lblSystemPressure.setSize(new Size(168, 16));
 		lblSystemPressure.setTabIndex(18);
 		lblSystemPressure.setText("suffering from extreme bordom.");
 		//
@@ -2752,7 +2765,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		lblSystemPressurePre.setAutoSize(true);
 		lblSystemPressurePre.setLocation(new Point(8, 134));
 		lblSystemPressurePre.setName("lblSystemPressurePre");
-		lblSystemPressurePre.setSize(new jwinforms.Size(122, 16));
+		lblSystemPressurePre.setSize(new Size(122, 16));
 		lblSystemPressurePre.setTabIndex(17);
 		lblSystemPressurePre.setText("This system is currently");
 		//
@@ -2760,7 +2773,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSystemPolSys.setLocation(new Point(88, 64));
 		lblSystemPolSys.setName("lblSystemPolSys");
-		lblSystemPolSys.setSize(new jwinforms.Size(91, 13));
+		lblSystemPolSys.setSize(new Size(91, 13));
 		lblSystemPolSys.setTabIndex(15);
 		lblSystemPolSys.setText("Cybernetic State");
 		//
@@ -2768,7 +2781,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSystemSize.setLocation(new Point(88, 32));
 		lblSystemSize.setName("lblSystemSize");
-		lblSystemSize.setSize(new jwinforms.Size(45, 13));
+		lblSystemSize.setSize(new Size(45, 13));
 		lblSystemSize.setTabIndex(14);
 		lblSystemSize.setText("Medium");
 		//
@@ -2776,7 +2789,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSystemTech.setLocation(new Point(88, 48));
 		lblSystemTech.setName("lblSystemTech");
-		lblSystemTech.setSize(new jwinforms.Size(82, 13));
+		lblSystemTech.setSize(new Size(82, 13));
 		lblSystemTech.setTabIndex(13);
 		lblSystemTech.setText("Pre-Agricultural");
 		//
@@ -2784,7 +2797,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSystemPirates.setLocation(new Point(88, 112));
 		lblSystemPirates.setName("lblSystemPirates");
-		lblSystemPirates.setSize(new jwinforms.Size(53, 13));
+		lblSystemPirates.setSize(new Size(53, 13));
 		lblSystemPirates.setTabIndex(11);
 		lblSystemPirates.setText("Abundant");
 		//
@@ -2792,7 +2805,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSystemPolice.setLocation(new Point(88, 96));
 		lblSystemPolice.setName("lblSystemPolice");
-		lblSystemPolice.setSize(new jwinforms.Size(53, 13));
+		lblSystemPolice.setSize(new Size(53, 13));
 		lblSystemPolice.setTabIndex(10);
 		lblSystemPolice.setText("Moderate");
 		//
@@ -2800,73 +2813,67 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSystemResource.setLocation(new Point(88, 80));
 		lblSystemResource.setName("lblSystemResource");
-		lblSystemResource.setSize(new jwinforms.Size(105, 13));
+		lblSystemResource.setSize(new Size(105, 13));
 		lblSystemResource.setTabIndex(9);
 		lblSystemResource.setText("Sweetwater Oceans");
 		//
 		// lblSystemPiratesLabel
 		//
 		lblSystemPiratesLabel.setAutoSize(true);
-		lblSystemPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemPiratesLabel.setLocation(new Point(8, 112));
 		lblSystemPiratesLabel.setName("lblSystemPiratesLabel");
-		lblSystemPiratesLabel.setSize(new jwinforms.Size(44, 16));
+		lblSystemPiratesLabel.setSize(new Size(44, 16));
 		lblSystemPiratesLabel.setTabIndex(7);
 		lblSystemPiratesLabel.setText("Pirates:");
 		//
 		// lblSystemPoliceLabel
 		//
 		lblSystemPoliceLabel.setAutoSize(true);
-		lblSystemPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemPoliceLabel.setLocation(new Point(8, 96));
 		lblSystemPoliceLabel.setName("lblSystemPoliceLabel");
-		lblSystemPoliceLabel.setSize(new jwinforms.Size(40, 16));
+		lblSystemPoliceLabel.setSize(new Size(40, 16));
 		lblSystemPoliceLabel.setTabIndex(6);
 		lblSystemPoliceLabel.setText("Police:");
 		//
 		// lblSystemResourseLabel
 		//
 		lblSystemResourseLabel.setAutoSize(true);
-		lblSystemResourseLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemResourseLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemResourseLabel.setLocation(new Point(8, 80));
 		lblSystemResourseLabel.setName("lblSystemResourseLabel");
-		lblSystemResourseLabel.setSize(new jwinforms.Size(58, 16));
+		lblSystemResourseLabel.setSize(new Size(58, 16));
 		lblSystemResourseLabel.setTabIndex(5);
 		lblSystemResourseLabel.setText("Resource:");
 		//
 		// lblSystemGovtLabel
 		//
 		lblSystemGovtLabel.setAutoSize(true);
-		lblSystemGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemGovtLabel.setLocation(new Point(8, 64));
 		lblSystemGovtLabel.setName("lblSystemGovtLabel");
-		lblSystemGovtLabel.setSize(new jwinforms.Size(72, 16));
+		lblSystemGovtLabel.setSize(new Size(72, 16));
 		lblSystemGovtLabel.setTabIndex(4);
 		lblSystemGovtLabel.setText("Government:");
 		//
 		// lblSystemTechLabel
 		//
 		lblSystemTechLabel.setAutoSize(true);
-		lblSystemTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemTechLabel.setLocation(new Point(8, 48));
 		lblSystemTechLabel.setName("lblSystemTechLabel");
-		lblSystemTechLabel.setSize(new jwinforms.Size(65, 16));
+		lblSystemTechLabel.setSize(new Size(65, 16));
 		lblSystemTechLabel.setTabIndex(3);
 		lblSystemTechLabel.setText("Tech Level:");
 		//
 		// lblSystemSizeLabel
 		//
 		lblSystemSizeLabel.setAutoSize(true);
-		lblSystemSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemSizeLabel.setLocation(new Point(8, 32));
 		lblSystemSizeLabel.setName("lblSystemSizeLabel");
-		lblSystemSizeLabel.setSize(new jwinforms.Size(31, 16));
+		lblSystemSizeLabel.setSize(new Size(31, 16));
 		lblSystemSizeLabel.setTabIndex(2);
 		lblSystemSizeLabel.setText("Size:");
 		//
@@ -2874,18 +2881,17 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblSystemName.setLocation(new Point(88, 16));
 		lblSystemName.setName("lblSystemName");
-		lblSystemName.setSize(new jwinforms.Size(65, 13));
+		lblSystemName.setSize(new Size(65, 13));
 		lblSystemName.setTabIndex(1);
 		lblSystemName.setText("Tarchannen");
 		//
 		// lblSystemNameLabel
 		//
 		lblSystemNameLabel.setAutoSize(true);
-		lblSystemNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point,
-				((byte)(0))));
+		lblSystemNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
 		lblSystemNameLabel.setLocation(new Point(8, 16));
 		lblSystemNameLabel.setName("lblSystemNameLabel");
-		lblSystemNameLabel.setSize(new jwinforms.Size(39, 16));
+		lblSystemNameLabel.setSize(new Size(39, 16));
 		lblSystemNameLabel.setTabIndex(0);
 		lblSystemNameLabel.setText("Name:");
 		//
@@ -2900,23 +2906,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		boxShipYard.Controls.add(lblShipsForSale);
 		boxShipYard.setLocation(new Point(4, 306));
 		boxShipYard.setName("boxShipYard");
-		boxShipYard.setSize(new jwinforms.Size(168, 168));
+		boxShipYard.setSize(new Size(168, 168));
 		boxShipYard.setTabIndex(4);
 		boxShipYard.setTabStop(false);
 		boxShipYard.setText("Shipyard");
 		//
 		// btnDesign
 		//
-		btnDesign.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnDesign.setFlatStyle(FlatStyle.Flat);
 		btnDesign.setLocation(new Point(8, 32));
 		btnDesign.setName("btnDesign");
-		btnDesign.setSize(new jwinforms.Size(54, 22));
+		btnDesign.setSize(new Size(54, 22));
 		btnDesign.setTabIndex(55);
 		btnDesign.setText("Design");
 		btnDesign.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnDesign_Click(sender, e);
 			}
@@ -2924,16 +2930,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnPod
 		//
-		btnPod.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnPod.setFlatStyle(FlatStyle.Flat);
 		btnPod.setLocation(new Point(98, 138));
 		btnPod.setName("btnPod");
-		btnPod.setSize(new jwinforms.Size(58, 22));
+		btnPod.setSize(new Size(58, 22));
 		btnPod.setTabIndex(54);
 		btnPod.setText("Buy Pod");
 		btnPod.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnPod_Click(sender, e);
 			}
@@ -2943,22 +2949,22 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblEscapePod.setLocation(new Point(8, 122));
 		lblEscapePod.setName("lblEscapePod");
-		lblEscapePod.setSize(new jwinforms.Size(152, 26));
+		lblEscapePod.setSize(new Size(152, 26));
 		lblEscapePod.setTabIndex(27);
 		lblEscapePod.setText("You can buy an escape pod for  2,000 cr.");
 		//
 		// btnEquip
 		//
-		btnEquip.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnEquip.setFlatStyle(FlatStyle.Flat);
 		btnEquip.setLocation(new Point(43, 85));
 		btnEquip.setName("btnEquip");
-		btnEquip.setSize(new jwinforms.Size(113, 22));
+		btnEquip.setSize(new Size(113, 22));
 		btnEquip.setTabIndex(53);
 		btnEquip.setText("Buy/Sell Equipment");
 		btnEquip.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnEquip_Click(sender, e);
 			}
@@ -2966,16 +2972,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnBuyShip
 		//
-		btnBuyShip.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnBuyShip.setFlatStyle(FlatStyle.Flat);
 		btnBuyShip.setLocation(new Point(70, 32));
 		btnBuyShip.setName("btnBuyShip");
-		btnBuyShip.setSize(new jwinforms.Size(86, 22));
+		btnBuyShip.setSize(new Size(86, 22));
 		btnBuyShip.setTabIndex(52);
 		btnBuyShip.setText("View Ship Info");
 		btnBuyShip.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnBuyShip_Click(sender, e);
 			}
@@ -2985,7 +2991,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblEquipForSale.setLocation(new Point(8, 69));
 		lblEquipForSale.setName("lblEquipForSale");
-		lblEquipForSale.setSize(new jwinforms.Size(152, 13));
+		lblEquipForSale.setSize(new Size(152, 13));
 		lblEquipForSale.setTabIndex(21);
 		lblEquipForSale.setText("There is equipment for sale.");
 		//
@@ -2993,7 +2999,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblShipsForSale.setLocation(new Point(8, 16));
 		lblShipsForSale.setName("lblShipsForSale");
-		lblShipsForSale.setSize(new jwinforms.Size(152, 13));
+		lblShipsForSale.setSize(new Size(152, 13));
 		lblShipsForSale.setTabIndex(20);
 		lblShipsForSale.setText("There are new ships for sale.");
 		//
@@ -3007,23 +3013,23 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		boxDock.Controls.add(lblRepairCost);
 		boxDock.setLocation(new Point(4, 212));
 		boxDock.setName("boxDock");
-		boxDock.setSize(new jwinforms.Size(240, 90));
+		boxDock.setSize(new Size(240, 90));
 		boxDock.setTabIndex(2);
 		boxDock.setTabStop(false);
 		boxDock.setText("Dock");
 		//
 		// btnRepair
 		//
-		btnRepair.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnRepair.setFlatStyle(FlatStyle.Flat);
 		btnRepair.setLocation(new Point(180, 56));
 		btnRepair.setName("btnRepair");
-		btnRepair.setSize(new jwinforms.Size(48, 22));
+		btnRepair.setSize(new Size(48, 22));
 		btnRepair.setTabIndex(5);
 		btnRepair.setText("Repair");
 		btnRepair.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnRepair_Click(sender, e);
 			}
@@ -3031,16 +3037,16 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// btnFuel
 		//
-		btnFuel.setFlatStyle(jwinforms.FlatStyle.Flat);
+		btnFuel.setFlatStyle(FlatStyle.Flat);
 		btnFuel.setLocation(new Point(192, 18));
 		btnFuel.setName("btnFuel");
-		btnFuel.setSize(new jwinforms.Size(36, 22));
+		btnFuel.setSize(new Size(36, 22));
 		btnFuel.setTabIndex(4);
 		btnFuel.setText("Fuel");
 		btnFuel.setClick(new EventHandler<Object, EventArgs>()
 		{
 			@Override
-			public void handle(Object sender, jwinforms.EventArgs e)
+			public void handle(Object sender, EventArgs e)
 			{
 				btnFuel_Click(sender, e);
 			}
@@ -3050,7 +3056,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblFuelStatus.setLocation(new Point(8, 16));
 		lblFuelStatus.setName("lblFuelStatus");
-		lblFuelStatus.setSize(new jwinforms.Size(162, 13));
+		lblFuelStatus.setSize(new Size(162, 13));
 		lblFuelStatus.setTabIndex(20);
 		lblFuelStatus.setText("You have fuel to fly 88 parsecs.");
 		//
@@ -3058,7 +3064,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblFuelCost.setLocation(new Point(8, 31));
 		lblFuelCost.setName("lblFuelCost");
-		lblFuelCost.setSize(new jwinforms.Size(121, 13));
+		lblFuelCost.setSize(new Size(121, 13));
 		lblFuelCost.setTabIndex(19);
 		lblFuelCost.setText("A full tank costs 888 cr.");
 		//
@@ -3066,7 +3072,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblHullStatus.setLocation(new Point(8, 52));
 		lblHullStatus.setName("lblHullStatus");
-		lblHullStatus.setSize(new jwinforms.Size(152, 13));
+		lblHullStatus.setSize(new Size(152, 13));
 		lblHullStatus.setTabIndex(18);
 		lblHullStatus.setText("Your hull strength is at 888%.");
 		//
@@ -3074,7 +3080,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		lblRepairCost.setLocation(new Point(8, 67));
 		lblRepairCost.setName("lblRepairCost");
-		lblRepairCost.setSize(new jwinforms.Size(150, 13));
+		lblRepairCost.setSize(new Size(150, 13));
 		lblRepairCost.setTabIndex(19);
 		lblRepairCost.setText("Full repairs will cost 8,888 cr.");
 		//
@@ -3083,7 +3089,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		picLine.setBackColor(Color.darkGray);
 		picLine.setLocation(new Point(0, 0));
 		picLine.setName("picLine");
-		picLine.setSize(new jwinforms.Size(770, 1));
+		picLine.setSize(new Size(770, 1));
 		picLine.setTabIndex(132);
 		picLine.setTabStop(false);
 		//
@@ -3098,35 +3104,33 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		//
 		// ilChartImages
 		//
-		ilChartImages.setImageSize(new jwinforms.Size(7, 7));
-		ilChartImages.setImageStream(((jwinforms.ImageListStreamer)(resources.GetObject("ilChartImages.ImageStream"))));
+		ilChartImages.setImageSize(new Size(7, 7));
+		ilChartImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilChartImages.ImageStream"))));
 		ilChartImages.setTransparentColor(Color.white);
 		//
 		// ilShipImages
 		//
-		ilShipImages.setImageSize(new jwinforms.Size(64, 52));
-		ilShipImages.setImageStream(((jwinforms.ImageListStreamer)(resources.GetObject("ilShipImages.ImageStream"))));
+		ilShipImages.setImageSize(new Size(64, 52));
+		ilShipImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilShipImages.ImageStream"))));
 		ilShipImages.setTransparentColor(Color.white);
 		//
 		// ilDirectionImages
 		//
-		ilDirectionImages.setImageSize(new jwinforms.Size(13, 13));
-		ilDirectionImages.setImageStream(((jwinforms.ImageListStreamer)(resources
-				.GetObject("ilDirectionImages.ImageStream"))));
+		ilDirectionImages.setImageSize(new Size(13, 13));
+		ilDirectionImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilDirectionImages.ImageStream"))));
 		ilDirectionImages.setTransparentColor(Color.white);
 		//
 		// ilEquipmentImages
 		//
-		ilEquipmentImages.setImageSize(new jwinforms.Size(64, 52));
-		ilEquipmentImages.setImageStream(((jwinforms.ImageListStreamer)(resources
-				.GetObject("ilEquipmentImages.ImageStream"))));
+		ilEquipmentImages.setImageSize(new Size(64, 52));
+		ilEquipmentImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilEquipmentImages.ImageStream"))));
 		ilEquipmentImages.setTransparentColor(Color.white);
 
 		//
 		// SpaceTrader
 		//
-		this.setAutoScaleBaseSize(new jwinforms.Size(5, 13));
-		this.setClientSize(new jwinforms.Size(768, 505));
+		this.setAutoScaleBaseSize(new Size(5, 13));
+		this.setClientSize(new Size(768, 505));
 		Controls.add(picLine);
 		Controls.add(boxDock);
 		Controls.add(boxCargo);
@@ -3136,6 +3140,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		setStatusBar(statusBar);
 		Controls.add(boxSystem);
 		Controls.add(boxShipYard);
+    //TODO: next line is FQN because of field name is identical. GAC
 		this.setFormBorderStyle(jwinforms.FormBorderStyle.FixedSingle);
 		this.setIcon(((Icon)(resources.GetObject("$this.Icon"))));
 		this.setMaximizeBox(false);
@@ -3143,7 +3148,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		this.setName("SpaceTrader");
 		this.setStartPosition(FormStartPosition.Manual);
 		this.setText("Space Trader");
-		this.setClosing(new jwinforms.EventHandler<Object, CancelEventArgs>()
+		this.setClosing(new EventHandler<Object, CancelEventArgs>()
 		{
 			@Override
 			public void handle(Object sender, CancelEventArgs e)
@@ -3160,10 +3165,10 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 				SpaceTrader_Load(sender, e);
 			}
 		});
-		((jwinforms.ISupportInitialize)(statusBarPanelCash)).EndInit();
-		((jwinforms.ISupportInitialize)(statusBarPanelBays)).EndInit();
-		((jwinforms.ISupportInitialize)(statusBarPanelCosts)).EndInit();
-		((jwinforms.ISupportInitialize)(statusBarPanelExtra)).EndInit();
+		((ISupportInitialize)(statusBarPanelCash)).EndInit();
+		((ISupportInitialize)(statusBarPanelBays)).EndInit();
+		((ISupportInitialize)(statusBarPanelCosts)).EndInit();
+		((ISupportInitialize)(statusBarPanelExtra)).EndInit();
 		boxShortRangeChart.ResumeLayout(false);
 		boxGalacticChart.ResumeLayout(false);
 		boxTargetSystem.ResumeLayout(false);
@@ -3172,17 +3177,13 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		boxShipYard.ResumeLayout(false);
 		boxDock.ResumeLayout(false);
 		this.ResumeLayout(false);
-
 	}
-
-	// #endregion
 
 	private void AddHighScore(HighScoreRecord highScore)
 	{
 		HighScoreRecord[] highScores = Functions.GetHighScores(this);
 		highScores[0] = highScore;
 		Arrays.sort(highScores);
-
 		Functions.SaveFile(Consts.HighScoreFile, STSerializableObject.ArrayToArrayList(highScores), this);
 	}
 
@@ -3211,25 +3212,21 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 	private void GameEnd()
 	{
 		SetInGameControlsEnabled(false);
-
 		AlertType alertType = AlertType.Alert;
 		switch (game.getEndStatus())
 		{
-		case Killed:
-			alertType = AlertType.GameEndKilled;
-			break;
-		case Retired:
-			alertType = AlertType.GameEndRetired;
-			break;
-		case BoughtMoon:
-			alertType = AlertType.GameEndBoughtMoon;
-			break;
+      case Killed:
+        alertType = AlertType.GameEndKilled;
+        break;
+      case Retired:
+        alertType = AlertType.GameEndRetired;
+        break;
+      case BoughtMoon:
+        alertType = AlertType.GameEndBoughtMoon;
+        break;
 		}
-
 		FormAlert.Alert(alertType, this);
-
 		FormAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
-
 		HighScoreRecord candidate = new HighScoreRecord(game.Commander().Name(), game.Score(), game.getEndStatus(),
 				game.Commander().getDays(), game.Commander().Worth(), game.Difficulty());
 		if (candidate.CompareTo(Functions.GetHighScores(this)[0]) > 0)
@@ -3251,7 +3248,6 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 	private String GetRegistrySetting(String settingName, String defaultValue)
 	{
 		String settingValue = defaultValue;
-
 		try
 		{
 			RegistryKey key = Functions.GetRegistryKey();
@@ -3260,27 +3256,24 @@ public class SpaceTrader extends jwinforms.WinformWindow {
         settingValue = ObjectValue.toString();
       }
 			key.Close();
-		} catch (NullPointerException ex)
-		{
+		} catch (NullPointerException ex) {
 			FormAlert.Alert(AlertType.RegistryError, this, ex.getMessage());
 		}
-
 		return settingValue;
 	}
 
 	// Make sure all directories exists.
 	private void InitFileStructure()
 	{
-		String[] paths = new String[] { Consts.CustomDirectory, Consts.CustomImagesDirectory,
-				Consts.CustomTemplatesDirectory, Consts.DataDirectory, Consts.SaveDirectory };
-
+		String[] paths = new String[] {
+      Consts.CustomDirectory, Consts.CustomImagesDirectory, Consts.CustomTemplatesDirectory, Consts.DataDirectory, Consts.SaveDirectory
+    };
 		for (String path : paths)
 		{
 			if (!Directory.Exists(path)) {
         Directory.CreateDirectory(path);
       }
 		}
-
 		dlgOpen.setInitialDirectory(Consts.SaveDirectory);
 		dlgSave.setInitialDirectory(Consts.SaveDirectory);
 	}
@@ -3295,7 +3288,6 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 				game = new Game((Hashtable)obj, this);
 				SaveGameFile = fileName;
 				SaveGameDays = game.Commander().getDays();
-
 				SetInGameControlsEnabled(true);
 				UpdateAll();
 			}
@@ -3310,7 +3302,6 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		if (Functions.SaveFile(fileName, game.Serialize(), this) && saveFileName) {
       SaveGameFile = fileName;
     }
-
 		SaveGameDays = game.Commander().getDays();
 	}
 
@@ -3353,7 +3344,6 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 	private void UpdateCargo()
 	{
 		int i;
-
 		if (game == null || game.Commander().CurrentSystem() == null)
 		{
 			for (i = 0; i < lblSellPrice.length; i++)
@@ -3374,11 +3364,9 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 			int[] sell = game.PriceCargoSell();
 			Commander cmdr = game.Commander();
 			StarSystem warpSys = game.WarpSystem();
-
 			for (i = 0; i < lblSellPrice.length; i++)
 			{
 				int price = warpSys == null ? 0 : Consts.TradeItems[i].StandardPrice(warpSys);
-
 				lblSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : Strings.CargoSellNA);
 				btnSellQty[i].setText("" + cmdr.getShip().Cargo()[i]);
 				btnSellQty[i].setVisible(true);
@@ -3388,35 +3376,30 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 				btnBuyQty[i].setText("" + cmdr.CurrentSystem().TradeItems()[i]);
 				btnBuyQty[i].setVisible(buy[i] > 0);
 				btnBuyMax[i].setVisible(buy[i] > 0);
-
 				if (sell[i] * cmdr.getShip().Cargo()[i] > cmdr.PriceCargo()[i]) {
           lblSellPrice[i].setFont(lblSystemNameLabel.getFont());
         }
 				else {
           lblSellPrice[i].setFont(lblSell.getFont());
         }
-
 				if (warpSys != null && warpSys.DestOk() && price > 0) {
           lblTargetPrice[i].setText(Functions.FormatMoney(price));
         }
 				else {
           lblTargetPrice[i].setText("-----------");
         }
-
 				if (warpSys != null && warpSys.DestOk() && price > 0 && buy[i] > 0)
 				{
 					int diff = price - buy[i];
 					lblTargetDiff[i].setText((diff > 0 ? "+" : "") + Functions.FormatMoney(diff));
 					lblTargetPct[i].setText((diff > 0 ? "+" : "") + Functions.FormatNumber(100 * diff / buy[i]) + "%");
-					lblBuyPrice[i].setFont((diff > 0 && cmdr.CurrentSystem().TradeItems()[i] > 0) ? lblSystemNameLabel
-							.getFont() : lblBuy.getFont());
+					lblBuyPrice[i].setFont((diff > 0 && cmdr.CurrentSystem().TradeItems()[i] > 0) ? lblSystemNameLabel.getFont() : lblBuy.getFont());
 				} else
 				{
 					lblTargetDiff[i].setText("------------");
 					lblTargetPct[i].setText("--------");
 					lblBuyPrice[i].setFont(lblBuy.getFont());
 				}
-
 				lblTargetPrice[i].setFont(lblBuyPrice[i].getFont());
 				lblTargetDiff[i].setFont(lblBuyPrice[i].getFont());
 				lblTargetPct[i].setFont(lblBuyPrice[i].getFont());
@@ -3428,7 +3411,6 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 	{
 		picGalacticChart.Refresh();
 		picShortRangeChart.Refresh();
-
 		if (game == null)
 		{
 			lblWormholeLabel.setVisible(false);
@@ -3527,8 +3509,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		} else
 		{
 			statusBarPanelCash.setText("Cash: " + Functions.FormatMoney(game.Commander().getCash()));
-			statusBarPanelBays.setText("Bays: " + game.Commander().getShip().FilledCargoBays() + "/"
-					+ game.Commander().getShip().CargoBays());
+			statusBarPanelBays.setText("Bays: " + game.Commander().getShip().FilledCargoBays() + "/" + game.Commander().getShip().CargoBays());
 			statusBarPanelCosts.setText("Current Costs: " + Functions.FormatMoney(game.CurrentCosts()));
 			statusBarPanelExtra.setText("");
 		}
@@ -3554,7 +3535,6 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		{
 			StarSystem system = game.Commander().CurrentSystem();
 			CrewMember[] mercs = system.MercenariesForHire();
-
 			lblSystemName.setText(system.Name());
 			lblSystemSize.setText(Strings.Sizes[system.Size().CastToInt()]);
 			lblSystemTech.setText(Strings.TechLevelNames[system.TechLevel().CastToInt()]);
@@ -3581,7 +3561,6 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 	{
 		btnNextSystem.setVisible(game != null);
 		btnPrevSystem.setVisible(game != null);
-
 		if (game == null || game.WarpSystem() == null)
 		{
 			lblTargetName.setText("");
@@ -3599,7 +3578,6 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		{
 			StarSystem system = game.WarpSystem();
 			int distance = Functions.Distance(game.Commander().CurrentSystem(), system);
-
 			lblTargetName.setText(system.Name());
 			lblTargetSize.setText(Strings.Sizes[system.Size().CastToInt()]);
 			lblTargetTech.setText(Strings.TechLevelNames[system.TechLevel().CastToInt()]);
@@ -3614,14 +3592,9 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	// #endregion
-
-	// #region Event Handlers
-
-	private void SpaceTrader_Closing(Object sender, jwinforms.CancelEventArgs e)
+	private void SpaceTrader_Closing(Object sender, CancelEventArgs e)
 	{
-		if (game == null || game.Commander().getDays() == SaveGameDays
-				|| FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
+		if (game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
 		{
 			if (WindowState == FormWindowState.Normal)
 			{
@@ -3633,20 +3606,18 @@ public class SpaceTrader extends jwinforms.WinformWindow {
     }
 	}
 
-	private void SpaceTrader_Load(Object sender, jwinforms.EventArgs e)
+	private void SpaceTrader_Load(Object sender, EventArgs e)
 	{
 		Left = Integer.parseInt(GetRegistrySetting("X", "0"));
 		Top = Integer.parseInt(GetRegistrySetting("Y", "0"));
-
 		FormAlert.Alert(AlertType.AppStart, this);
 	}
 
-	private void btnBuySell_Click(Object sender, jwinforms.EventArgs e)
+	private void btnBuySell_Click(Object sender, EventArgs e)
 	{
 		String name = ((Button)sender).getName();
 		boolean all = name.indexOf("Qty") < 0;
 		int index = Integer.parseInt(name.substring(name.length() - 1));
-
 		if (name.indexOf("Buy") < 0) {
       CargoSell(index, all);
     }
@@ -3655,41 +3626,37 @@ public class SpaceTrader extends jwinforms.WinformWindow {
     }
 	}
 
-	private void btnBuyShip_Click(Object sender, jwinforms.EventArgs e)
+	private void btnBuyShip_Click(Object sender, EventArgs e)
 	{
 		(new FormShipList()).ShowDialog(this);
 		UpdateAll();
 	}
 
-	private void btnDesign_Click(Object sender, jwinforms.EventArgs e)
+	private void btnDesign_Click(Object sender, EventArgs e)
 	{
 		(new FormShipyard()).ShowDialog(this);
 		UpdateAll();
 	}
 
-	private void btnEquip_Click(Object sender, jwinforms.EventArgs e)
+	private void btnEquip_Click(Object sender, EventArgs e)
 	{
 		(new FormEquipment()).ShowDialog(this);
 		UpdateAll();
 	}
 
-	private void btnFind_Click(Object sender, jwinforms.EventArgs e)
+	private void btnFind_Click(Object sender, EventArgs e)
 	{
 		FormFind form = new FormFind();
 		if (form.ShowDialog(this) == DialogResult.OK)
 		{
 			Ship ship = game.Commander().getShip();
-
 			String[] words = form.SystemName().split(" ");
-
 			String first = words.length > 0 ? words[0] : "";
 			String second = words.length > 1 ? words[1] : "";
 			String third = words.length > 2 ? words[2] : "";
 			int num1 = Functions.IsInt(second) ? Integer.parseInt(second) : 0;
 			int num2 = Functions.IsInt(third) ? Integer.parseInt(third) : 0;
-
 			boolean find = false;
-
 			if (game.getCheatEnabled())
 			{
 				switch (SomeStringsForSwitch.find(first))
@@ -3699,8 +3666,8 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 					break;
 				case Cover:
 					if (num1 >= 0 && num1 < ship.Shields().length && num2 >= 0 && num2 < Consts.Shields.length) {
-          ship.Shields()[num1] = (Shield)Consts.Shields[num2].Clone();
-        }
+            ship.Shields()[num1] = (Shield)Consts.Shields[num2].Clone();
+          }
 					break;
 				case DeLorean:
 					game.Commander().setDays(Math.max(0, num1));
@@ -3713,16 +3680,13 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 					break;
 				case Events:
 					if (second == "Reset") {
-          game.ResetVeryRareEncounters();
-        }
-					else
-					{
+            game.ResetVeryRareEncounters();
+          } else {
 						String text = "";
 						for (Iterator<VeryRareEncounter> list = game.VeryRareEncounters().iterator(); list.hasNext();) {
-            text += Strings.VeryRareEncounters[list.next().CastToInt()] + Strings.newline;
-          }
+              text += Strings.VeryRareEncounters[list.next().CastToInt()] + Strings.newline;
+            }
 						text = text.trim();
-
 						FormAlert.Alert(AlertType.Alert, this, "Remaining Very Rare Encounters", text);
 					}
 					break;
@@ -3803,8 +3767,8 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 						int skill = ship.Trader();
 						ship.Crew()[num1] = game.Mercenaries()[num2];
 						if (ship.Trader() != skill) {
-            game.RecalculateBuyPrices(game.Commander().CurrentSystem());
-          }
+              game.RecalculateBuyPrices(game.Commander().CurrentSystem());
+            }
 					}
 					break;
 				case RapSheet:
@@ -3890,8 +3854,8 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 					break;
 				case Tool:
 					if (num1 >= 0 && num1 < ship.Gadgets().length && num2 >= 0 && num2 < Consts.Gadgets.length) {
-          ship.Gadgets()[num1] = (Gadget)Consts.Gadgets[num2].Clone();
-        }
+            ship.Gadgets()[num1] = (Gadget)Consts.Gadgets[num2].Clone();
+          }
 					break;
 				case Varmints:
 					ship.setTribbles(Math.max(0, num1));
@@ -3927,7 +3891,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void btnFuel_Click(Object sender, jwinforms.EventArgs e)
+	private void btnFuel_Click(Object sender, EventArgs e)
 	{
 		FormBuyFuel form = new FormBuyFuel();
 		if (form.ShowDialog(this) == DialogResult.OK)
@@ -3939,7 +3903,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void btnJump_Click(Object sender, jwinforms.EventArgs e)
+	private void btnJump_Click(Object sender, EventArgs e)
 	{
 		if (game.WarpSystem() == null) {
       FormAlert.Alert(AlertType.ChartJumpNoSystemSelected, this);
@@ -3967,24 +3931,24 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void btnMerc_Click(Object sender, jwinforms.EventArgs e)
+	private void btnMerc_Click(Object sender, EventArgs e)
 	{
 		(new FormViewPersonnel()).ShowDialog(this);
 		UpdateAll();
 	}
 
-	private void btnNews_Click(Object sender, jwinforms.EventArgs e)
+	private void btnNews_Click(Object sender, EventArgs e)
 	{
 		game.ShowNewspaper();
 	}
 
-	private void btnNextSystem_Click(Object sender, jwinforms.EventArgs e)
+	private void btnNextSystem_Click(Object sender, EventArgs e)
 	{
 		game.SelectNextSystemWithinRange(true);
 		UpdateAll();
 	}
 
-	private void btnPod_Click(Object sender, jwinforms.EventArgs e)
+	private void btnPod_Click(Object sender, EventArgs e)
 	{
 		if (FormAlert.Alert(AlertType.EquipmentEscapePod, this) == DialogResult.Yes)
 		{
@@ -3994,13 +3958,13 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void btnPrevSystem_Click(Object sender, jwinforms.EventArgs e)
+	private void btnPrevSystem_Click(Object sender, EventArgs e)
 	{
 		game.SelectNextSystemWithinRange(false);
 		UpdateAll();
 	}
 
-	private void btnRepair_Click(Object sender, jwinforms.EventArgs e)
+	private void btnRepair_Click(Object sender, EventArgs e)
 	{
 		FormBuyRepairs form = new FormBuyRepairs();
 		if (form.ShowDialog(this) == DialogResult.OK)
@@ -4012,7 +3976,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void btnSpecial_Click(Object sender, jwinforms.EventArgs e)
+	private void btnSpecial_Click(Object sender, EventArgs e)
 	{
 		SpecialEvent specEvent = game.Commander().CurrentSystem().SpecialEvent();
 		String btn1, btn2;
@@ -4050,13 +4014,13 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		UpdateAll();
 	}
 
-	private void btnTrack_Click(Object sender, jwinforms.EventArgs e)
+	private void btnTrack_Click(Object sender, EventArgs e)
 	{
 		game.setTrackedSystemId(game.SelectedSystemId());
 		UpdateAll();
 	}
 
-	private void btnWarp_Click(Object sender, jwinforms.EventArgs e)
+	private void btnWarp_Click(Object sender, EventArgs e)
 	{
 		try
 		{
@@ -4074,12 +4038,12 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		UpdateAll();
 	}
 
-	private void mnuGameExit_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuGameExit_Click(Object sender, EventArgs e)
 	{
 		Close();
 	}
 
-	private void mnuGameNew_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuGameNew_Click(Object sender, EventArgs e)
 	{
 		FormNewCommander form = new FormNewCommander();
 		if ((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) && form.ShowDialog(this) == DialogResult.OK) {
@@ -4094,14 +4058,14 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void mnuGameLoad_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuGameLoad_Click(Object sender, EventArgs e)
 	{
 		if ((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) && dlgOpen.ShowDialog(this) == DialogResult.OK) {
       LoadGame(dlgOpen.getFileName());
     }
 	}
 
-	private void mnuGameSave_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuGameSave_Click(Object sender, EventArgs e)
 	{
 		if (Game.CurrentGame() != null)
 		{
@@ -4114,24 +4078,24 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void mnuGameSaveAs_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuGameSaveAs_Click(Object sender, EventArgs e)
 	{
 		if (Game.CurrentGame() != null && dlgSave.ShowDialog(this) == DialogResult.OK) {
       SaveGame(dlgSave.getFileName(), true);
     }
 	}
 
-	private void mnuHelpAbout_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuHelpAbout_Click(Object sender, EventArgs e)
 	{
 		(new FormAbout()).ShowDialog(this);
 	}
 
-	private void mnuHighScores_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuHighScores_Click(Object sender, EventArgs e)
 	{
 		(new FormViewHighScores()).ShowDialog(this);
 	}
 
-	private void mnuOptions_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuOptions_Click(Object sender, EventArgs e)
 	{
 		FormOptions form = new FormOptions();
 		if (form.ShowDialog(this) == DialogResult.OK)
@@ -4141,7 +4105,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void mnuRetire_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuRetire_Click(Object sender, EventArgs e)
 	{
 		if (FormAlert.Alert(AlertType.GameRetire, this) == DialogResult.Yes)
 		{
@@ -4151,32 +4115,32 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void mnuViewBank_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuViewBank_Click(Object sender, EventArgs e)
 	{
 		(new FormViewBank()).ShowDialog(this);
 	}
 
-	private void mnuViewCommander_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuViewCommander_Click(Object sender, EventArgs e)
 	{
 		(new FormViewCommander()).ShowDialog(this);
 	}
 
-	private void mnuViewPersonnel_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuViewPersonnel_Click(Object sender, EventArgs e)
 	{
 		(new FormViewPersonnel()).ShowDialog(this);
 	}
 
-	private void mnuViewQuests_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuViewQuests_Click(Object sender, EventArgs e)
 	{
 		(new FormViewQuests()).ShowDialog(this);
 	}
 
-	private void mnuViewShip_Click(Object sender, jwinforms.EventArgs e)
+	private void mnuViewShip_Click(Object sender, EventArgs e)
 	{
 		(new FormViewShip()).ShowDialog(this);
 	}
 
-	private void picGalacticChart_MouseDown(Object sender, jwinforms.MouseEventArgs e)
+	private void picGalacticChart_MouseDown(Object sender, MouseEventArgs e)
 	{
 		if (e.Button == MouseButtons.Left && game != null)
 		{
@@ -4206,7 +4170,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void picGalacticChart_Paint(Object sender, jwinforms.PaintEventArgs e)
+	private void picGalacticChart_Paint(Object sender, PaintEventArgs e)
 	{
 		if (game != null)
 		{
@@ -4233,10 +4197,8 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 				Image image = ilChartImages.getImages()[imageIndex];
 				if (universe[i] == game.TrackedSystem())
 				{
-					e.Graphics.DrawLine(
-              DEFAULT_PEN, universe[i].X(), universe[i].Y(), universe[i].X() + image.getWidth() - 1, universe[i].Y() + image.getHeight() - 1);
-					e.Graphics.DrawLine(
-              DEFAULT_PEN, universe[i].X(), universe[i].Y() + image.getHeight() - 1, universe[i].X() + image.getWidth() - 1, universe[i].Y());
+					e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y(), universe[i].X() + image.getWidth() - 1, universe[i].Y() + image.getHeight() - 1);
+					e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y() + image.getHeight() - 1, universe[i].X() + image.getWidth() - 1, universe[i].Y());
 				}
 				ilChartImages.Draw(e.Graphics, universe[i].X(), universe[i].Y(), imageIndex);
 				if (Functions.WormholeExists(i, -1)) {
@@ -4248,7 +4210,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
     }
 	}
 
-	private void picShortRangeChart_MouseDown(Object sender, jwinforms.MouseEventArgs e)
+	private void picShortRangeChart_MouseDown(Object sender, MouseEventArgs e)
 	{
 		if (e.Button == MouseButtons.Left && game != null)
 		{
@@ -4286,7 +4248,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
 		}
 	}
 
-	private void picShortRangeChart_Paint(Object sender, jwinforms.PaintEventArgs e)
+	private void picShortRangeChart_Paint(Object sender, PaintEventArgs e)
 	{
 		if (game != null)
 		{
@@ -4370,7 +4332,7 @@ public class SpaceTrader extends jwinforms.WinformWindow {
     }
 	}
 
-	private void statusBar_PanelClick(Object sender, jwinforms.StatusBarPanelClickEventArgs e)
+	private void statusBar_PanelClick(Object sender, StatusBarPanelClickEventArgs e)
 	{
 		if (game != null)
 		{

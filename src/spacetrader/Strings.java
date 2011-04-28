@@ -227,9 +227,9 @@ public class Strings {
   public static final String[][] EquipmentDescriptions = new String[][] {
     new String[] {
       "The Pulse Laser is the weakest weapon available. It's small size allows only enough energy to build up to emit pulses of light.",
-      "The Beam Laser is larger than the Pulse Laser, so can build up enough charge to power what are essentially two Pulse Lasers. The resulting effect appears more like a finalant beam.",
+      "The Beam Laser is larger than the Pulse Laser, so can build up enough charge to power what are essentially two Pulse Lasers. The resulting effect appears more like a constant beam.",
       "The Military Laser is the largest commecially available weapon. It can build up enough charge to power three Pulse Lasers in series, resulting in a more dense and concentrated beam.",
-      "Morgan's Laser has been finalructed from a Beam Laser, which has been attached to an Ion Reactor that builds up an immense charge, resulting in the strongest weapon known to exist.",
+      "Morgan's Laser has been constructed from a Beam Laser, which has been attached to an Ion Reactor that builds up an immense charge, resulting in the strongest weapon known to exist.",
       "The Photon Disruptor is a relatively weak weapon, but has the ability to disable an opponent's electrical systems, rendering them helpless.",
       "The Quantum Disruptor is a very powerful disabling weapon. Once an opponent's sheilds are down it will usually require only a single shot with the Quantum Disruptor to disable them."},
     new String[] {
@@ -431,11 +431,11 @@ public class Strings {
     "Corellian Engineering", "Incom Corporation", "Kuat Drive Yards",
     "Sienar Fleet Systems", "Sorosuub Engineering"};
   public static final String[] ShipyardSkillDescriptions = new String[] {
-    "All ships finalructed at this shipyard use 2 fewer units per crew quarter.",
-    "All ships finalructed at this shipyard have 2 extra base fuel tanks.",
-    "All ships finalructed at this shipyard have the hull points increment by 5 more than usual.",
-    "All ships finalructed at this shipyard get shield slots for 2 fewer units.",
-    "All ships finalructed at this shipyard get weapon slots for 2 fewer units."};
+    "All ships constructed at this shipyard use 2 fewer units per crew quarter.",
+    "All ships constructed at this shipyard have 2 extra base fuel tanks.",
+    "All ships constructed at this shipyard have the hull points increment by 5 more than usual.",
+    "All ships constructed at this shipyard get shield slots for 2 fewer units.",
+    "All ships constructed at this shipyard get weapon slots for 2 fewer units."};
   public static final String[] ShipyardSkills = new String[] {"Crew Quartering",
     "Fuel Efficienty", "Hull Strength", "Shielding", "Weaponry"};
   public static final String[] Sizes = new String[] {"Tiny", "Small", "Medium",

@@ -95,7 +95,3 @@ public class HighScoreRecord extends STSerializableObject implements Comparable<
     return _worth;
   }
 }
-/*
-public static boolean operator > (HighScoreRecord a, HighScoreRecord b) {return a.CompareTo(b) > 0;}
-public static boolean operator < (HighScoreRecord a, HighScoreRecord b) {return a.CompareTo(b) < 0;}
- */

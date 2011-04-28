@@ -43,7 +43,7 @@ public class Ship extends ShipSpec {
         AddEquipment(Consts.Shields[ShieldType.Reflective.CastToInt()]);
       }
       for(int i = 0; i < Weapons().length; i++) {
-        AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.CastToInt()]);
+        AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
       }
       AddEquipment(Consts.Gadgets[GadgetType.NavigatingSystem.CastToInt()]);
       AddEquipment(Consts.Gadgets[GadgetType.TargetingSystem.CastToInt()]);
@@ -362,7 +362,7 @@ public class Ship extends ShipSpec {
             weaponType++;
             sum += Consts.Weapons[weaponType].Chance();
           }
-          if(!HasWeapon(WeaponType.FromInt(weaponType), true) && weaponType > bestWeaponType) {
+          if(!HasWeapon(WeaponType.fromId(weaponType), true) && weaponType > bestWeaponType) {
             bestWeaponType = weaponType;
           }
         }
@@ -524,7 +524,7 @@ public class Ship extends ShipSpec {
   public boolean HasWeapon(WeaponType weaponType, boolean exactCompare) {
     boolean found = false;
     for(int i = 0; i < Weapons().length && !found; i++) {
-      if(Weapons()[i] != null && (Weapons()[i].Type() == weaponType || !exactCompare && Weapons()[i].Type().CastToInt() > weaponType.CastToInt())) {
+      if(Weapons()[i] != null && (Weapons()[i].Type() == weaponType || !exactCompare && Weapons()[i].Type().id > weaponType.id)) {
         found = true;
       }
     }
@@ -673,7 +673,7 @@ public class Ship extends ShipSpec {
   public int WeaponStrength(WeaponType min, WeaponType max) {
     int total = 0;
     for(int i = 0; i < Weapons().length; i++) {
-      if(Weapons()[i] != null && Weapons()[i].Type().CastToInt() >= min.CastToInt() && Weapons()[i].Type().CastToInt() <= max.CastToInt()) {
+      if(Weapons()[i] != null && Weapons()[i].Type().id >= min.id && Weapons()[i].Type().id <= max.id) {
         total += Weapons()[i].Power();
       }
     }

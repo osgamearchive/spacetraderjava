@@ -1,6 +1,4 @@
 package org.gts.bst.ship.equip;
-import org.gts.bst.ship.equip.EquipmentSubType;
-import org.gts.bst.ship.equip.WeaponType;
 import spacetrader.Strings;
 import spacetrader.enums.TechLevel;
 import spacetrader.util.Hashtable;
@@ -11,17 +9,20 @@ public class Weapon extends Equipment {
   private WeaponType _type;
   private boolean _disabling;
   private int _power;
+  private static final String ss[] = {
+    "_type", "_power", "_disabling"
+  };
 
-  public Weapon(Hashtable hash) {
-    super(hash);
-    _type = WeaponType.FromInt(GetValueFromHash(hash, "_type", Integer.class));
-    _power = GetValueFromHash(hash, "_power", Integer.class);
-    _disabling = GetValueFromHash(hash, "_disabling", false);
+  public Weapon(Hashtable ht) {
+    super(ht);
+    _type = WeaponType.fromId(GetValueFromHash(ht, ss[0], Integer.class));
+    _power = GetValueFromHash(ht, ss[1], Integer.class);
+    _disabling = GetValueFromHash(ht, ss[2], false);
   }
 
-  public Weapon(WeaponType type, int power, boolean disabling, int price, TechLevel minTechLevel, int chance) {
-    super(org.gts.bst.ship.equip.EquipmentType.Weapon, price, minTechLevel, chance);
-    _type = type;
+  public Weapon(WeaponType w, int power, boolean disabling, int price, TechLevel t, int chance) {
+    super(EquipmentType.Weapon, price, t, chance);
+    _type = w;
     _power = power;
     _disabling = disabling;
   }
@@ -32,46 +33,47 @@ public class Weapon extends Equipment {
   }
 
   @Override
+  public EquipmentSubType SubType() {
+    //TODO: Is this supposed to be irrelevant? GAC
+    return _type;
+  }
+
+  @Override
   public Hashtable Serialize() {
-    Hashtable hash = super.Serialize();
-    hash.add("_type", _type.CastToInt());
-    hash.add("_power", _power);
-    hash.add("_disabling", _disabling);
-    return hash;
+    Hashtable ht = super.Serialize();
+    ht.add(ss[0], _type.id);
+    ht.add(ss[1], _power);
+    ht.add(ss[2], _disabling);
+    return ht;
+  }
+
+  @Override
+  public String Name() {
+    return Strings.WeaponNames[_type.id];
   }
 
   @Override
   public boolean TypeEquals(Object type) {
     boolean equal = false;
     try {
-      if(Type() == (WeaponType)type) {
+      if(_type == (WeaponType)type) {
         equal = true;
       }
     } catch(Exception e) {
-      Log.write("Ignored exeption " + e);
+      Log.write("Ignored exception " + e);
     }
     return equal;
+  }
+
+  public WeaponType Type() {
+    return _type;
   }
 
   public boolean Disabling() {
     return _disabling;
   }
 
-  @Override
-  public String Name() {
-    return Strings.WeaponNames[_type.CastToInt()];
-  }
-
   public int Power() {
     return _power;
-  }
-
-  @Override
-  public EquipmentSubType SubType() {
-    return Type();
-  }
-
-  public WeaponType Type() {
-    return _type;
   }
 }

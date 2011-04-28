@@ -214,7 +214,7 @@ public class FormShipyard extends WinformForm {
     lblSkillDescription.setName("lblSkillDescription");
     lblSkillDescription.setSize(new jwinforms.Size(258, 26));
     lblSkillDescription.setTabIndex(27);
-    lblSkillDescription.setText("All ships finalructed at this shipyard use 2 fewer units per crew quarter.");
+    lblSkillDescription.setText("All ships constructed at this shipyard use 2 fewer units per crew quarter.");
     //
     // lblSkill
     //

@@ -26,11 +26,11 @@ public class Commander extends CrewMember {
   private int _noclaim = 0;
   private int[] _priceCargo = new int[10]; // Total price paid for trade goods
 
-  public Commander(CrewMember baseCrewMember) {
-    super(baseCrewMember);
+  public Commander(CrewMember cm) {
+    super(cm);
     // Start off with a crew of only the commander and a Pulse Laser.
-    getShip().Crew()[0] = this;
-    getShip().AddEquipment(Consts.Weapons[WeaponType.PulseLaser.CastToInt()]);
+    _ship.Crew()[0] = this;
+    _ship.AddEquipment(Consts.Weapons[WeaponType.PulseLaser.id]);
   }
 
   public Commander(Hashtable hash) {
@@ -104,8 +104,8 @@ public class Commander extends CrewMember {
       FormAlert.Alert(AlertType.ShipBuyReactor, owner);
     } else {
       Equipment[] special = new Equipment[] {
-        Consts.Weapons[WeaponType.MorgansLaser.CastToInt()],
-        Consts.Weapons[WeaponType.QuantumDistruptor.CastToInt()],
+        Consts.Weapons[WeaponType.MorgansLaser.id],
+        Consts.Weapons[WeaponType.QuantumDistruptor.id],
         Consts.Shields[ShieldType.Lightning.CastToInt()],
         Consts.Gadgets[GadgetType.FuelCompactor.CastToInt()],
         Consts.Gadgets[GadgetType.HiddenCargoBays.CastToInt()]

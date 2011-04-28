@@ -342,13 +342,14 @@ public class Consts {
     new Weapon(WeaponType.MilitaryLaser, 35, false, 35000, TechLevel.HiTech, 15),
     new Weapon(WeaponType.MorgansLaser, 85, false, 50000, TechLevel.Unavailable, 0),
     new Weapon(WeaponType.PhotonDisruptor, 20, true, 15000, TechLevel.PostIndustrial, 0),
-    new Weapon(WeaponType.QuantumDistruptor, 60, true, 50000, TechLevel.Unavailable, 0)};
+    new Weapon(WeaponType.QuantumDistruptor, 60, true, 50000, TechLevel.Unavailable, 0)
+  };
   // This comes at the end because it depends on other Constant Arrays
   public static Equipment[] EquipmentForSale = new Equipment[] {
-    Weapons[WeaponType.PulseLaser.CastToInt()],
-    Weapons[WeaponType.BeamLaser.CastToInt()],
-    Weapons[WeaponType.MilitaryLaser.CastToInt()],
-    Weapons[WeaponType.PhotonDisruptor.CastToInt()],
+    Weapons[WeaponType.PulseLaser.id],
+    Weapons[WeaponType.BeamLaser.id],
+    Weapons[WeaponType.MilitaryLaser.id],
+    Weapons[WeaponType.PhotonDisruptor.id],
     Shields[ShieldType.Energy.CastToInt()],
     Shields[ShieldType.Reflective.CastToInt()],
     Gadgets[GadgetType.ExtraCargoBays.CastToInt()],
