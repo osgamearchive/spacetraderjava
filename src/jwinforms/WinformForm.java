@@ -10,7 +10,7 @@ public class WinformForm extends WinformControl implements WinformPane {
   protected final WinformJPanel Controls;
   DialogResult result;
   // Must encapsulate most of these.
-  private Size AutoScaleBaseSize;
+  private FormSize AutoScaleBaseSize;
   private boolean ShowInTaskbar;
   private boolean MinimizeBox;
   private boolean MaximizeBox;
@@ -82,11 +82,11 @@ public class WinformForm extends WinformControl implements WinformPane {
   public void PerformLayout() {
   }
 
-  public void setAutoScaleBaseSize(Size autoScaleBaseSize) {
+  public void setAutoScaleBaseSize(FormSize autoScaleBaseSize) {
     AutoScaleBaseSize = autoScaleBaseSize;
   }
 
-  public Size getAutoScaleBaseSize() {
+  public FormSize getAutoScaleBaseSize() {
     return AutoScaleBaseSize;
   }
 

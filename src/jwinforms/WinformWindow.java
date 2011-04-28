@@ -13,7 +13,7 @@ public class WinformWindow extends WinformControl implements WinformPane {
   protected Integer Left, Top;
   protected FormWindowState WindowState;
   // Must encapsulate most of these.
-  private Size AutoScaleBaseSize;
+  private FormSize AutoScaleBaseSize;
   private FormBorderStyle FormBorderStyle;
   private Icon Icon;
   private boolean ControlBox;
@@ -65,11 +65,11 @@ public class WinformWindow extends WinformControl implements WinformPane {
   public void ResumeLayout(boolean foo) {
   }
 
-  public void setAutoScaleBaseSize(Size autoScaleBaseSize) {
+  public void setAutoScaleBaseSize(FormSize autoScaleBaseSize) {
     AutoScaleBaseSize = autoScaleBaseSize;
   }
 
-  public Size getAutoScaleBaseSize() {
+  public FormSize getAutoScaleBaseSize() {
     return AutoScaleBaseSize;
   }
 

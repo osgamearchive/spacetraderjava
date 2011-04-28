@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ImageList {
   private Image[] images;
-  private Size size;
+  private FormSize size;
   public Object ColorDepth;
 
   public ImageList(IContainer components) {
@@ -35,7 +35,7 @@ public class ImageList {
     }
   }
 
-  public void setImageSize(Size imageSize) {
+  public void setImageSize(FormSize imageSize) {
     size = imageSize;
   }
 }
