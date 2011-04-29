@@ -540,7 +540,7 @@ public class Game extends STSerializableObject {
             hit = true;
             // Reactor on board -- damage is boosted!
             if(defender.ReactorOnBoard()) {
-              damage *= (int)(1 + (_difficulty.CastToInt() + 1) * (_difficulty.CastToInt() < org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 0.25 : 0.33));
+              damage *= (int)(1 + (_difficulty.CastToInt() + 1) * (_difficulty.CastToInt() < Difficulty.Normal.CastToInt() ? 0.25 : 0.33));
             }
             // First, shields are depleted
             for(int i = 0; i < defender.Shields().length && defender.Shields()[i] != null && damage > 0; i++) {
@@ -2040,8 +2040,8 @@ public class Game extends STSerializableObject {
       FormAlert.Alert(AlertType.EncounterPoliceBribeCant, owner);
     } else if(_commander.getShip().DetectableIllegalCargoOrPassengers() || FormAlert.Alert(AlertType.EncounterPoliceNothingIllegal, owner) == DialogResult.Yes) {
       // Bribe depends on how easy it is to bribe the police and commander's current worth
-      int diffMod = 10 + 5 * (org.gts.bst.difficulty.Difficulty.Impossible.CastToInt() - _difficulty.CastToInt());
-      int passMod = _commander.getShip().IllegalSpecialCargo() ? (_difficulty.CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 2 : 3) : 1;
+      int diffMod = 10 + 5 * (Difficulty.Impossible.CastToInt() - _difficulty.CastToInt());
+      int passMod = _commander.getShip().IllegalSpecialCargo() ? (_difficulty.CastToInt() <= Difficulty.Normal.CastToInt() ? 2 : 3) : 1;
       int bribe = Math.max(100, Math.min(10000, (int)Math.ceil((double)_commander.Worth() / WarpSystem().PoliticalSystem().BribeLevel() / diffMod / 100) * 100 * passMod));
       if(FormAlert.Alert(AlertType.EncounterPoliceBribe, owner, Functions.Multiples(bribe, Strings.MoneyUnit)) == DialogResult.Yes) {
         if(_commander.getCash() >= bribe) {
@@ -2065,7 +2065,7 @@ public class Game extends STSerializableObject {
       } else if(getEncounterType() == EncounterType.PoliceInspect || getEncounterType() == EncounterType.MarieCelestePolice) {
         int scoreMod = getEncounterType() == EncounterType.PoliceInspect ? Consts.ScoreFleePolice : Consts.ScoreAttackPolice;
         int scoreMin = getEncounterType() == EncounterType.PoliceInspect
-            ? Consts.PoliceRecordScoreDubious - (_difficulty.CastToInt() < org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 0 : 1) : Consts.PoliceRecordScoreCriminal;
+            ? Consts.PoliceRecordScoreDubious - (_difficulty.CastToInt() < Difficulty.Normal.CastToInt() ? 0 : 1) : Consts.PoliceRecordScoreCriminal;
         setEncounterType(EncounterType.PoliceAttack);
         _commander.setPoliceRecordScore(Math.min(_commander.getPoliceRecordScore() + scoreMod, scoreMin));
       }
@@ -2084,7 +2084,7 @@ public class Game extends STSerializableObject {
         if(_commander.getShip().DetectableIllegalCargo()) {
           _commander.getShip().RemoveIllegalGoods();
           int fine = (int)Math.max(100, Math.min(10000,
-              Math.ceil((double)_commander.Worth() / ((org.gts.bst.difficulty.Difficulty.Impossible.CastToInt() - _difficulty.CastToInt() + 2) * 10) / 50) * 50));
+              Math.ceil((double)_commander.Worth() / ((Difficulty.Impossible.CastToInt() - _difficulty.CastToInt() + 2) * 10) / 50) * 50));
           int cashPayment = Math.min(_commander.getCash(), fine);
           _commander.setDebt(_commander.getDebt() + (fine - cashPayment));
           _commander.setCash(_commander.getCash() - cashPayment);
@@ -2554,7 +2554,7 @@ public class Game extends STSerializableObject {
       if(getEncounterType() == EncounterType.BottleGood) {
         // two points if you're on beginner-normal, one otherwise
         _commander.IncreaseRandomSkill();
-        if(_difficulty.CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt()) {
+        if(_difficulty.CastToInt() <= Difficulty.Normal.CastToInt()) {
           _commander.IncreaseRandomSkill();
         }
         FormAlert.Alert(AlertType.EncounterTonicConsumedGood, owner);
@@ -2598,7 +2598,7 @@ public class Game extends STSerializableObject {
       // Remove the equipment we're trading.
       _commander.getShip().RemoveEquipment(equipType, equipSubType);
       // Add points to the appropriate skill - two points if beginner-normal, one otherwise.
-      _commander.Skills()[skill] = Math.min(Consts.MaxSkill, _commander.Skills()[skill] + (_difficulty.CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 2 : 1));
+      _commander.Skills()[skill] = Math.min(Consts.MaxSkill, _commander.Skills()[skill] + (_difficulty.CastToInt() <= Difficulty.Normal.CastToInt() ? 2 : 1));
       FormAlert.Alert(AlertType.SpecialTrainingCompleted, owner);
     }
   }
@@ -2973,7 +2973,7 @@ public class Game extends STSerializableObject {
       _commander.setPoliceRecordScore(Math.max(Consts.PoliceRecordScoreClean, _commander.getPoliceRecordScore() - num / 3));
     } else if(_commander.getPoliceRecordScore() < Consts.PoliceRecordScoreDubious) {
       _commander.setPoliceRecordScore(Math.min(Consts.PoliceRecordScoreDubious, _commander.getPoliceRecordScore()
-          + num / (_difficulty.CastToInt() <= org.gts.bst.difficulty.Difficulty.Normal.CastToInt() ? 1 : _difficulty.CastToInt())));
+          + num / (_difficulty.CastToInt() <= Difficulty.Normal.CastToInt() ? 1 : _difficulty.CastToInt())));
     }
     // The Space Monster's strength increases 5% per day until it is back to full strength.
     if(_spaceMonster.getHull() < _spaceMonster.HullStrength()) {

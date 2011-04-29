@@ -278,7 +278,7 @@ public class FormAlert extends WinformForm {
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case Cheater:
-        dr = (new FormAlert("Cheater!", "Cheaters never prosper!  (Well, not with that command, anyway.)",
+        dr = (new FormAlert("Cheater!", "Cheaters never prosper! (Well, not with that command, anyway.)",
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case CrewFireMercenary:
@@ -298,7 +298,7 @@ public class FormAlert extends WinformForm {
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case DebtReminder:
-        dr = (new FormAlert("Loan Notification", "The Bank's  Loan Officer reminds you that your debt continues to accrue interest. You currently owe ^1.",
+        dr = (new FormAlert("Loan Notification", "The Bank's Loan Officer reminds you that your debt continues to accrue interest. You currently owe ^1.",
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case DebtTooLargeGrounded:
@@ -383,7 +383,7 @@ public class FormAlert extends WinformForm {
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EncounterEscapePodActivated:
-        dr = (new FormAlert("Escape Pod Activated", "Just before the final demise of your ship, your escape pod gets activated and ejects you. After a few days, the Space Corps picks you up and drops you off at a nearby space port.",
+        dr = (new FormAlert("Escape Pod Activated", "Just before the final demise of your ship, your escape pod activates and ejects you. After a few days, Space Corps picks you up and drops you off at a nearby space port.",
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EncounterLooting:
@@ -391,11 +391,11 @@ public class FormAlert extends WinformForm {
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EncounterMarieCeleste:
-        dr = (new FormAlert("Engage Marie Celeste", "The ship is empty: there is nothing in the ship's log, but the crew has vanished, leaving food on the tables and cargo in the holds. Do you wish to offload the cargo to your own holds? ",
+        dr = (new FormAlert("Engage Marie Celeste", "The ship is empty: there is nothing in the ship's log, but the crew has vanished, leaving food on the tables and cargo in the holds. Do you wish to offload the cargo to your own hold?",
             "Yes, Take Cargo", DialogResult.Yes, "No", DialogResult.No, args)).ShowDialog(wp);
         break;
       case EncounterMarieCelesteNoBribe:
-        dr = (new FormAlert("No Bribe", "We'd love to take your money, but Space Command already knows you've got illegal goods onboard.",
+        dr = (new FormAlert("No Bribe", "We would love to take your money, but Space Command already knows you've got illegal goods onboard.",
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EncounterOpponentEscaped:
@@ -407,7 +407,7 @@ public class FormAlert extends WinformForm {
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EncounterPiratesExamineReactor:
-        dr = (new FormAlert("Pirates Examine Reactor", "The pirates poke around the Ion Reactor while trying to figure out if it's valuable. They finally conclude that the Reactor is worthless, not to mention dangerous, and leave it on your ship.",
+        dr = (new FormAlert("Pirates Examine Reactor", "The pirates poke around the Ion Reactor while trying to figure out if it is valuable. They finally conclude that the Reactor is worthless, not to mention dangerous, and leave it on your ship.",
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EncounterPiratesFindNoCargo:
@@ -435,8 +435,7 @@ public class FormAlert extends WinformForm {
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EncounterPoliceFine:
-        dr = (new FormAlert(
-            "Caught", "The police discovers illegal goods in your cargo holds. These goods impounded and you are fined ^1 credits.",
+        dr = (new FormAlert("Caught", "The police discovers illegal goods in your cargo holds. These goods impounded and you are fined ^1 credits.",
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EncounterPoliceNothingFound:
@@ -520,8 +519,7 @@ public class FormAlert extends WinformForm {
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EquipmentHiddenCompartments:
-        dr = (new FormAlert(
-            "Hidden Compartments", "You now have hidden compartments equivalent to 5 extra cargo bays installed in your ship. Police won't find illegal cargo hidden in these compartments.",
+        dr = (new FormAlert("Hidden Compartments", "You now have hidden compartments equivalent to 5 extra cargo bays installed in your ship. Police won't find illegal cargo hidden in these compartments.",
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case EquipmentIF:
@@ -621,7 +619,7 @@ public class FormAlert extends WinformForm {
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case JailHiddenCargoBaysRemoved:
-        dr = (new FormAlert("Hidden Compartments Removed", "When your ship is impounded, the police go over it with a fine-toothed comb. Your hidden compartments are found and removed.",
+        dr = (new FormAlert("Hidden Compartments Removed", "When your ship is impounded, the police go over it with a fine-tooth comb. Your hidden compartments are found and removed.",
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case JailIllegalGoodsImpounded:
@@ -785,7 +783,7 @@ public class FormAlert extends WinformForm {
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case SpecialExperimentPerformed:
-        dr = (new FormAlert("Experiment Performed", "The galaxy is abuzz with news of a terrible malfunction in Dr. Fehler's laboratory. Evidently, he was not warned in time and he performed his experiment... with disastrous results!",
+        dr = (new FormAlert("Experiment Performed", "The galaxy is abuzz with news of a terrible malfunction in Dr. Fehler's laboratory. Evidently, he was not warned in time and he performed his experiment ... with disastrous results!",
             "Ok", DialogResult.OK, null, DialogResult.None, args)).ShowDialog(wp);
         break;
       case SpecialIF:
