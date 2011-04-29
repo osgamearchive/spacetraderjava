@@ -127,9 +127,9 @@ public class Game extends STSerializableObject {
     {
       // TODO: JAF - DEBUG
       _commander.setCash(1000000);
-      setCheatEnabled(true);
-      setEasyEncounters(true);
-      setCanSuperWarp(true);
+      _cheatEnabled = true;
+      _easyEncounters = true;
+      _canSuperWarp = true;
     }
   }
 
@@ -188,7 +188,9 @@ public class Game extends STSerializableObject {
     _justLootedMarie = GetValueFromHash(hash, "_justLootedMarie", _justLootedMarie);
     _canSuperWarp = GetValueFromHash(hash, "_canSuperWarp", _canSuperWarp);
     _chanceOfVeryRareEncounter = GetValueFromHash(hash, "_chanceOfVeryRareEncounter", _chanceOfVeryRareEncounter);
-    _veryRareEncounters = new ArrayList(Arrays.asList(GetValueFromHash(hash, "_veryRareEncounters", _veryRareEncounters.ToArray(new Integer[0]))));
+    _veryRareEncounters = new
+        ArrayList
+        (Arrays.asList(GetValueFromHash(hash, "_veryRareEncounters", _veryRareEncounters.ToArray(new Integer[0]))));
     _options = new GameOptions(GetValueFromHash(hash, "_options", _options.Serialize(), Hashtable.class));
   }
 
@@ -1628,6 +1630,7 @@ public class Game extends STSerializableObject {
     }
   }
 
+  @SuppressWarnings("fallthrough")
   public boolean EncounterVerifyAttack(WinformPane owner) {
     boolean attack = true;
     if(_commander.getShip().WeaponStrength() == 0) {
@@ -1926,7 +1929,7 @@ public class Game extends STSerializableObject {
           _commander.setReputationScore(_commander.getReputationScore() + Consts.ScoreKillCaptain);
         }
         // bump news flag from attacked to ship destroyed
-        NewsReplaceEvent(NewsLatestEvent(), NewsEvent.FromInt(NewsLatestEvent().CastToInt() + 1));
+        NewsReplaceEvent(NewsLatestEvent().CastToInt(), NewsEvent.FromInt(NewsLatestEvent().CastToInt() + 1).CastToInt());
         break;
       case DragonflyAttack:
         EncounterDefeatDragonfly();
@@ -2534,8 +2537,8 @@ public class Game extends STSerializableObject {
     _commander.CurrentSystem().Visited(true);
   }
 
-  public void NewsAddEvent(NewsEvent newEvent) {
-    _newsEvents.add(newEvent);
+  public void NewsAddEvent(NewsEvent ne) {
+    _newsEvents.add(ne);
   }
 
   public void NewsAddEventsOnArrival() {
