@@ -11,22 +11,15 @@ public class Path {
     return GetExtension(filename) == null ? filename + extension : filename;
   }
 
-  public static String RemoveExtension(String filename) {
-    int sep = filename.lastIndexOf(File.separatorChar);
-    int dot = filename.lastIndexOf('.');
-    if(dot <= sep) {
-      return filename;
-    } else {
-      return filename.substring(0, dot);
-    }
+  public static String RemoveExtension(String s) {
+    int sep = s.lastIndexOf(File.separatorChar);
+    int dot = s.lastIndexOf('.');
+    return (dot <= sep) ? s : s.substring(0, dot);
   }
 
-  public static String GetExtension(String filename) {
-    int sep = filename.lastIndexOf(File.separatorChar);
-    int dot = filename.lastIndexOf('.');
-    if(dot <= sep) {
-      return null;
-    }
-    return filename.substring(dot);
+  public static String GetExtension(String s) {
+    int sep = s.lastIndexOf(File.separatorChar);
+    int dot = s.lastIndexOf('.');
+    return (dot <= sep) ? null : s.substring(dot);
   }
 }

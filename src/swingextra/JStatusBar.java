@@ -29,10 +29,8 @@ public class JStatusBar extends JPanel {
   public static void main(String[] args) {
     JFrame frame = new JFrame();
     JStatusBar panel = new JStatusBar();
-
     Container pane = frame.getContentPane();
     pane.add(panel, BorderLayout.SOUTH);
-
     panel.addSection(new JStatusBarSection("eastest!"), false);
     panel.addSection(new JStatusBarSection("Foo bar!"), false);
     panel.addSection(new JStatusBarSection("--fill--"), true);
