@@ -3,7 +3,6 @@ import org.gts.bst.events.SpecialEventType;
 
 
 public class SpecialEvent {
-  // #region Constants
   public final static int MoonCost = 500000;
   public final static int StatusArtifactNotStarted = 0;
   public final static int StatusArtifactOnBoard = 1;

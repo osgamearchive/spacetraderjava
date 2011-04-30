@@ -9,12 +9,12 @@ import jwinforms.EventArgs;
 import jwinforms.EventHandler;
 import jwinforms.FlatStyle;
 import jwinforms.FormBorderStyle;
+import jwinforms.FormSize;
 import jwinforms.FormStartPosition;
 import jwinforms.HorizontalAlignment;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
-import jwinforms.FormSize;
 import jwinforms.TextBox;
 import jwinforms.WinformForm;
 import org.gts.bst.difficulty.Difficulty;
@@ -46,271 +46,256 @@ public class FormNewCommander extends WinformForm {
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
-    this.lblName = new Label();
-    this.txtName = new TextBox();
-    this.btnClose = new Button();
-    this.lblDifficulty = new Label();
-    this.lblSkillPoints = new Label();
-    this.lblPilot = new Label();
-    this.lblFighter = new Label();
-    this.lblTrader = new Label();
-    this.lblEngineer = new Label();
-    this.selDifficulty = new ComboBox();
-    this.numPilot = new NumericUpDown();
-    this.numFighter = new NumericUpDown();
-    this.numTrader = new NumericUpDown();
-    this.numEngineer = new NumericUpDown();
-    this.btnOk = new Button();
-    this.lblPointsRemaining = new Label();
-    this.lblPoints = new Label();
-    ((ISupportInitialize)(this.numPilot)).BeginInit();
-    ((ISupportInitialize)(this.numFighter)).BeginInit();
-    ((ISupportInitialize)(this.numTrader)).BeginInit();
-    ((ISupportInitialize)(this.numEngineer)).BeginInit();
-    this.SuspendLayout();
+    lblName = new Label();
+    txtName = new TextBox();
+    btnClose = new Button();
+    lblDifficulty = new Label();
+    lblSkillPoints = new Label();
+    lblPilot = new Label();
+    lblFighter = new Label();
+    lblTrader = new Label();
+    lblEngineer = new Label();
+    selDifficulty = new ComboBox();
+    numPilot = new NumericUpDown();
+    numFighter = new NumericUpDown();
+    numTrader = new NumericUpDown();
+    numEngineer = new NumericUpDown();
+    btnOk = new Button();
+    lblPointsRemaining = new Label();
+    lblPoints = new Label();
+    ((ISupportInitialize)(numPilot)).BeginInit();
+    ((ISupportInitialize)(numFighter)).BeginInit();
+    ((ISupportInitialize)(numTrader)).BeginInit();
+    ((ISupportInitialize)(numEngineer)).BeginInit();
+    SuspendLayout();
     // lblName
-    this.lblName.setAutoSize(true);
-    this.lblName.setLocation(new java.awt.Point(8, 8));
-    this.lblName.setName("lblName");
-    this.lblName.setSize(new FormSize(38, 13));
-    this.lblName.setTabIndex(0);
-    this.lblName.setText("Name:");
+    lblName.setAutoSize(true);
+    lblName.setLocation(new java.awt.Point(8, 8));
+    lblName.setName("lblName");
+    lblName.setSize(new FormSize(38, 13));
+    lblName.setTabIndex(0);
+    lblName.setText("Name:");
     // txtName
-    this.txtName.setLocation(new java.awt.Point(72, 5));
-    this.txtName.setName("txtName");
-    this.txtName.setSize(new FormSize(120, 20));
-    this.txtName.setTabIndex(1);
-    this.txtName.setText("");
-    this.txtName.setTextChanged(new EventHandler<Object, EventArgs>()
-		  {
+    txtName.setLocation(new java.awt.Point(72, 5));
+    txtName.setName("txtName");
+    txtName.setSize(new FormSize(120, 20));
+    txtName.setTabIndex(1);
+    txtName.setText("");
+    txtName.setTextChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         txtName_TextChanged(sender, e);
       }
     });
     // btnClose
-    this.btnClose.setDialogResult(DialogResult.Cancel);
-    this.btnClose.setLocation(new java.awt.Point(-32, -32));
-    this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new FormSize(30, 31));
-    this.btnClose.setTabIndex(33);
-    this.btnClose.setTabStop(false);
-    this.btnClose.setText("X");
+    btnClose.setDialogResult(DialogResult.Cancel);
+    btnClose.setLocation(new java.awt.Point(-32, -32));
+    btnClose.setName("btnClose");
+    btnClose.setSize(new FormSize(30, 31));
+    btnClose.setTabIndex(33);
+    btnClose.setTabStop(false);
+    btnClose.setText("X");
     // lblDifficulty
-    this.lblDifficulty.setAutoSize(true);
-    this.lblDifficulty.setLocation(new java.awt.Point(8, 40));
-    this.lblDifficulty.setName("lblDifficulty");
-    this.lblDifficulty.setSize(new FormSize(50, 13));
-    this.lblDifficulty.setTabIndex(34);
-    this.lblDifficulty.setText("Difficulty:");
+    lblDifficulty.setAutoSize(true);
+    lblDifficulty.setLocation(new java.awt.Point(8, 40));
+    lblDifficulty.setName("lblDifficulty");
+    lblDifficulty.setSize(new FormSize(50, 13));
+    lblDifficulty.setTabIndex(34);
+    lblDifficulty.setText("Difficulty:");
     // lblSkillPoints
-    this.lblSkillPoints.setAutoSize(true);
-    this.lblSkillPoints.setLocation(new java.awt.Point(8, 72));
-    this.lblSkillPoints.setName("lblSkillPoints");
-    this.lblSkillPoints.setSize(new FormSize(63, 13));
-    this.lblSkillPoints.setTabIndex(35);
-    this.lblSkillPoints.setText("Skill Points:");
+    lblSkillPoints.setAutoSize(true);
+    lblSkillPoints.setLocation(new java.awt.Point(8, 72));
+    lblSkillPoints.setName("lblSkillPoints");
+    lblSkillPoints.setSize(new FormSize(63, 13));
+    lblSkillPoints.setTabIndex(35);
+    lblSkillPoints.setText("Skill Points:");
     // lblPilot
-    this.lblPilot.setAutoSize(true);
-    this.lblPilot.setLocation(new java.awt.Point(16, 96));
-    this.lblPilot.setName("lblPilot");
-    this.lblPilot.setSize(new FormSize(29, 13));
-    this.lblPilot.setTabIndex(36);
-    this.lblPilot.setText("Pilot:");
+    lblPilot.setAutoSize(true);
+    lblPilot.setLocation(new java.awt.Point(16, 96));
+    lblPilot.setName("lblPilot");
+    lblPilot.setSize(new FormSize(29, 13));
+    lblPilot.setTabIndex(36);
+    lblPilot.setText("Pilot:");
     // lblFighter
-    this.lblFighter.setAutoSize(true);
-    this.lblFighter.setLocation(new java.awt.Point(16, 120));
-    this.lblFighter.setName("lblFighter");
-    this.lblFighter.setSize(new FormSize(43, 13));
-    this.lblFighter.setTabIndex(37);
-    this.lblFighter.setText("Fighter:");
+    lblFighter.setAutoSize(true);
+    lblFighter.setLocation(new java.awt.Point(16, 120));
+    lblFighter.setName("lblFighter");
+    lblFighter.setSize(new FormSize(43, 13));
+    lblFighter.setTabIndex(37);
+    lblFighter.setText("Fighter:");
     // lblTrader
-    this.lblTrader.setAutoSize(true);
-    this.lblTrader.setLocation(new java.awt.Point(16, 144));
-    this.lblTrader.setName("lblTrader");
-    this.lblTrader.setSize(new FormSize(41, 13));
-    this.lblTrader.setTabIndex(38);
-    this.lblTrader.setText("Trader:");
+    lblTrader.setAutoSize(true);
+    lblTrader.setLocation(new java.awt.Point(16, 144));
+    lblTrader.setName("lblTrader");
+    lblTrader.setSize(new FormSize(41, 13));
+    lblTrader.setTabIndex(38);
+    lblTrader.setText("Trader:");
     // lblEngineer
-    this.lblEngineer.setAutoSize(true);
-    this.lblEngineer.setLocation(new java.awt.Point(16, 168));
-    this.lblEngineer.setName("lblEngineer");
-    this.lblEngineer.setSize(new FormSize(53, 13));
-    this.lblEngineer.setTabIndex(39);
-    this.lblEngineer.setText("Engineer:");
+    lblEngineer.setAutoSize(true);
+    lblEngineer.setLocation(new java.awt.Point(16, 168));
+    lblEngineer.setName("lblEngineer");
+    lblEngineer.setSize(new FormSize(53, 13));
+    lblEngineer.setTabIndex(39);
+    lblEngineer.setText("Engineer:");
     // selDifficulty
-    this.selDifficulty.DropDownStyle = ComboBoxStyle.DropDownList;
-    this.selDifficulty.Items.AddRange(new Object[] {"Beginner", "Easy", "Normal", "Hard", "Impossible"});
-    this.selDifficulty.setLocation(new java.awt.Point(72, 37));
-    this.selDifficulty.setName("selDifficulty");
-    this.selDifficulty.setSize(new FormSize(120, 21));
-    this.selDifficulty.setTabIndex(2);
+    selDifficulty.DropDownStyle = ComboBoxStyle.DropDownList;
+    selDifficulty.Items.AddRange(new Object[]{"Beginner", "Easy", "Normal", "Hard", "Impossible"});
+    selDifficulty.setLocation(new java.awt.Point(72, 37));
+    selDifficulty.setName("selDifficulty");
+    selDifficulty.setSize(new FormSize(120, 21));
+    selDifficulty.setTabIndex(2);
     // numPilot
-    this.numPilot.setLocation(new java.awt.Point(72, 94));
-    this.numPilot.setMaximum(10);
-    this.numPilot.setMinimum(1);
-    this.numPilot.setName("numPilot");
-    this.numPilot.setSize(new FormSize(36, 20));
-    this.numPilot.setTabIndex(3);
-    this.numPilot.TextAlign = HorizontalAlignment.Center;
-    this.numPilot.setValue(1);
-    this.numPilot.setEnter(new EventHandler<Object, EventArgs>()
-		  {
+    numPilot.setLocation(new java.awt.Point(72, 94));
+    numPilot.setMaximum(10);
+    numPilot.setMinimum(1);
+    numPilot.setName("numPilot");
+    numPilot.setSize(new FormSize(36, 20));
+    numPilot.setTabIndex(3);
+    numPilot.TextAlign = HorizontalAlignment.Center;
+    numPilot.setValue(1);
+    numPilot.setEnter(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueEnter(sender, e);
       }
     });
-    this.numPilot.setValueChanged(new EventHandler<Object, EventArgs>()
-		  {
+    numPilot.setValueChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueChanged(sender, e);
       }
     });
-    this.numPilot.setLeave(new EventHandler<Object, EventArgs>()
-		  {
+    numPilot.setLeave(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueChanged(sender, e);
       }
     });
     // numFighter
-    this.numFighter.setLocation(new java.awt.Point(72, 118));
-    this.numFighter.setMaximum(10);
-    this.numFighter.setMinimum(1);
-    this.numFighter.setName("numFighter");
-    this.numFighter.setSize(new FormSize(36, 20));
-    this.numFighter.setTabIndex(4);
-    this.numFighter.TextAlign = HorizontalAlignment.Center;
-    this.numFighter.setValue(1);
-    this.numFighter.setEnter(new EventHandler<Object, EventArgs>()
-		  {
+    numFighter.setLocation(new java.awt.Point(72, 118));
+    numFighter.setMaximum(10);
+    numFighter.setMinimum(1);
+    numFighter.setName("numFighter");
+    numFighter.setSize(new FormSize(36, 20));
+    numFighter.setTabIndex(4);
+    numFighter.TextAlign = HorizontalAlignment.Center;
+    numFighter.setValue(1);
+    numFighter.setEnter(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueEnter(sender, e);
       }
     });
-    this.numFighter.setValueChanged(new EventHandler<Object, EventArgs>()
-		  {
+    numFighter.setValueChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueChanged(sender, e);
       }
     });
-    this.numFighter.setLeave(new EventHandler<Object, EventArgs>()
-		  {
+    numFighter.setLeave(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueChanged(sender, e);
       }
     });
     // numTrader
-    this.numTrader.setLocation(new java.awt.Point(72, 142));
-    this.numTrader.setMaximum(10);
-    this.numTrader.setMinimum(1);
-    this.numTrader.setName("numTrader");
-    this.numTrader.setSize(new FormSize(36, 20));
-    this.numTrader.setTabIndex(5);
-    this.numTrader.TextAlign = HorizontalAlignment.Center;
-    this.numTrader.setValue(1);
-    this.numTrader.setEnter(new EventHandler<Object, EventArgs>()
-		  {
+    numTrader.setLocation(new java.awt.Point(72, 142));
+    numTrader.setMaximum(10);
+    numTrader.setMinimum(1);
+    numTrader.setName("numTrader");
+    numTrader.setSize(new FormSize(36, 20));
+    numTrader.setTabIndex(5);
+    numTrader.TextAlign = HorizontalAlignment.Center;
+    numTrader.setValue(1);
+    numTrader.setEnter(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueEnter(sender, e);
       }
     });
-    this.numTrader.setValueChanged(new EventHandler<Object, EventArgs>()
-		  {
+    numTrader.setValueChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueChanged(sender, e);
       }
     });
-    this.numTrader.setLeave(new EventHandler<Object, EventArgs>()
-		  {
+    numTrader.setLeave(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueChanged(sender, e);
       }
     });
     // numEngineer
-    this.numEngineer.setLocation(new java.awt.Point(72, 166));
-    this.numEngineer.setMaximum(10);
-    this.numEngineer.setMinimum(1);
-    this.numEngineer.setName("numEngineer");
-    this.numEngineer.setSize(new FormSize(36, 20));
-    this.numEngineer.setTabIndex(6);
-    this.numEngineer.TextAlign = HorizontalAlignment.Center;
-    this.numEngineer.setValue(1);
-    this.numEngineer.setEnter(new EventHandler<Object, EventArgs>()
-		  {
+    numEngineer.setLocation(new java.awt.Point(72, 166));
+    numEngineer.setMaximum(10);
+    numEngineer.setMinimum(1);
+    numEngineer.setName("numEngineer");
+    numEngineer.setSize(new FormSize(36, 20));
+    numEngineer.setTabIndex(6);
+    numEngineer.TextAlign = HorizontalAlignment.Center;
+    numEngineer.setValue(1);
+    numEngineer.setEnter(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueEnter(sender, e);
       }
     });
-    this.numEngineer.setValueChanged(new EventHandler<Object, EventArgs>()
-		  {
+    numEngineer.setValueChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueChanged(sender, e);
       }
     });
-    this.numEngineer.setLeave(new EventHandler<Object, EventArgs>()
-		  {
+    numEngineer.setLeave(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         num_ValueChanged(sender, e);
       }
     });
     // btnOk
-    this.btnOk.setDialogResult(DialogResult.OK);
-    this.btnOk.setEnabled(false);
-    this.btnOk.setFlatStyle(FlatStyle.Flat);
-    this.btnOk.setLocation(new java.awt.Point(83, 200));
-    this.btnOk.setName("btnOk");
-    this.btnOk.setSize(new FormSize(36, 22));
-    this.btnOk.setTabIndex(7);
-    this.btnOk.setText("Ok");
-    this.btnOk.setEnabled(false);
+    btnOk.setDialogResult(DialogResult.OK);
+    btnOk.setEnabled(false);
+    btnOk.setFlatStyle(FlatStyle.Flat);
+    btnOk.setLocation(new java.awt.Point(83, 200));
+    btnOk.setName("btnOk");
+    btnOk.setSize(new FormSize(36, 22));
+    btnOk.setTabIndex(7);
+    btnOk.setText("Ok");
+    btnOk.setEnabled(false);
     // lblPointsRemaining
-    this.lblPointsRemaining.setAutoSize(true);
-    this.lblPointsRemaining.setLocation(new java.awt.Point(91, 72));
-    this.lblPointsRemaining.setName("lblPointsRemaining");
-    this.lblPointsRemaining.setSize(new FormSize(90, 13));
-    this.lblPointsRemaining.setTabIndex(40);
-    this.lblPointsRemaining.setText("points remaining.");
+    lblPointsRemaining.setAutoSize(true);
+    lblPointsRemaining.setLocation(new java.awt.Point(91, 72));
+    lblPointsRemaining.setName("lblPointsRemaining");
+    lblPointsRemaining.setSize(new FormSize(90, 13));
+    lblPointsRemaining.setTabIndex(40);
+    lblPointsRemaining.setText("points remaining.");
     // lblPoints
-    this.lblPoints.setLocation(new java.awt.Point(73, 72));
-    this.lblPoints.setName("lblPoints");
-    this.lblPoints.setSize(new FormSize(17, 13));
-    this.lblPoints.setTabIndex(41);
-    this.lblPoints.setText("16");
-    this.lblPoints.TextAlign = ContentAlignment.TopRight;
+    lblPoints.setLocation(new java.awt.Point(73, 72));
+    lblPoints.setName("lblPoints");
+    lblPoints.setSize(new FormSize(17, 13));
+    lblPoints.setTabIndex(41);
+    lblPoints.setText("16");
+    lblPoints.TextAlign = ContentAlignment.TopRight;
     // FormNewCommander
-    this.setAcceptButton(this.btnOk);
-    this.setAutoScaleBaseSize(new FormSize(5, 13));
-    this.setCancelButton(this.btnClose);
-    this.setClientSize(new FormSize(202, 231));
-    this.Controls.addAll(Arrays.asList(
-        this.lblPoints, this.lblPointsRemaining, this.lblEngineer, this.lblTrader,
-        this.lblFighter, this.lblPilot, this.lblSkillPoints, this.lblDifficulty, this.lblName, this.btnOk,
-        this.numEngineer, this.numTrader, this.numFighter, this.numPilot, this.selDifficulty, this.btnClose,
-        this.txtName));
-    this.setFormBorderStyle(FormBorderStyle.FixedDialog);
-    this.setMaximizeBox(false);
-    this.setMinimizeBox(false);
-    this.setName("FormNewCommander");
-    this.setShowInTaskbar(false);
-    this.setStartPosition(FormStartPosition.CenterParent);
-    this.setText("New Commander");
-    ((ISupportInitialize)(this.numPilot)).EndInit();
-    ((ISupportInitialize)(this.numFighter)).EndInit();
-    ((ISupportInitialize)(this.numTrader)).EndInit();
-    ((ISupportInitialize)(this.numEngineer)).EndInit();
-    this.ResumeLayout(false);
+    setAcceptButton(btnOk);
+    setAutoScaleBaseSize(new FormSize(5, 13));
+    setCancelButton(btnClose);
+    setClientSize(new FormSize(202, 231));
+    Controls.addAll(Arrays.asList(
+        lblPoints, lblPointsRemaining, lblEngineer, lblTrader, lblFighter, lblPilot, lblSkillPoints, lblDifficulty,
+        lblName, btnOk, numEngineer, numTrader, numFighter, numPilot, selDifficulty, btnClose, txtName));
+    setFormBorderStyle(FormBorderStyle.FixedDialog);
+    setMaximizeBox(false);
+    setMinimizeBox(false);
+    setName("FormNewCommander");
+    setShowInTaskbar(false);
+    setStartPosition(FormStartPosition.CenterParent);
+    setText("New Commander");
+    ((ISupportInitialize)(numPilot)).EndInit();
+    ((ISupportInitialize)(numFighter)).EndInit();
+    ((ISupportInitialize)(numTrader)).EndInit();
+    ((ISupportInitialize)(numEngineer)).EndInit();
+    ResumeLayout(false);
   }
 
   private void UpdateOkEnabled() {

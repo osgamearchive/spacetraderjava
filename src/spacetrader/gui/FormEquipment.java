@@ -1,4 +1,6 @@
 package spacetrader.gui;
+import java.awt.Color;
+import java.awt.Point;
 import jwinforms.BorderStyle;
 import jwinforms.Button;
 import jwinforms.DialogResult;
@@ -8,26 +10,26 @@ import jwinforms.FlatStyle;
 import jwinforms.Font;
 import jwinforms.FontStyle;
 import jwinforms.FormBorderStyle;
+import jwinforms.FormSize;
 import jwinforms.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.Label;
 import jwinforms.ListBox;
 import jwinforms.PictureBox;
-import jwinforms.FormSize;
 import jwinforms.WinformForm;
+import org.gts.bst.ship.equip.Equipment;
 import org.gts.bst.ship.equip.EquipmentType;
+import org.gts.bst.ship.equip.Gadget;
 import org.gts.bst.ship.equip.GadgetType;
+import org.gts.bst.ship.equip.Shield;
+import org.gts.bst.ship.equip.Weapon;
 import spacetrader.Commander;
 import spacetrader.Consts;
-import org.gts.bst.ship.equip.Equipment;
 import spacetrader.Functions;
-import org.gts.bst.ship.equip.Gadget;
 import spacetrader.Game;
-import org.gts.bst.ship.equip.Shield;
 import spacetrader.Ship;
 import spacetrader.Strings;
-import org.gts.bst.ship.equip.Weapon;
 import spacetrader.enums.AlertType;
 
 
@@ -71,8 +73,8 @@ public class FormEquipment extends WinformForm {
   private ListBox lstBuyWeapon;
   private PictureBox picEquipment;
   private Game game = Game.CurrentGame();
-  private Equipment[] equipBuy = Consts.EquipmentForSale;
   private Equipment selectedEquipment = null;
+  private Equipment[] equipBuy = Consts.EquipmentForSale;
   private boolean sellSideSelected = false;
   private boolean handlingSelect = false;
 
@@ -84,453 +86,454 @@ public class FormEquipment extends WinformForm {
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
-    this.btnClose = new Button();
-    this.boxSell = new GroupBox();
-    this.lblSellGadgetNoSlots = new Label();
-    this.lblSellShieldNoSlots = new Label();
-    this.lblSellWeaponNoSlots = new Label();
-    this.lblSellGadgets = new Label();
-    this.lblSellShields = new Label();
-    this.lblSellWeapons = new Label();
-    this.lstSellGadget = new ListBox();
-    this.lstSellShield = new ListBox();
-    this.lstSellWeapon = new ListBox();
-    this.boxBuy = new GroupBox();
-    this.lblBuyGadgetNone = new Label();
-    this.lblBuyShieldNone = new Label();
-    this.lblBuyWeaponNone = new Label();
-    this.lblBuyGadgets = new Label();
-    this.lblBuyShields = new Label();
-    this.lblBuyWeapons = new Label();
-    this.lstBuyGadget = new ListBox();
-    this.lstBuyShield = new ListBox();
-    this.lstBuyWeapon = new ListBox();
-    this.boxShipInfo = new GroupBox();
-    this.lblCharge = new Label();
-    this.lblPower = new Label();
-    this.lblChargeLabel = new Label();
-    this.lblPowerLabel = new Label();
-    this.lblType = new Label();
-    this.lblTypeLabel = new Label();
-    this.lblNameLabel = new Label();
-    this.btnSell = new Button();
-    this.btnBuy = new Button();
-    this.lblBuyPriceLabel = new Label();
-    this.lblBuyPrice = new Label();
-    this.lblSellPriceLabel = new Label();
-    this.picEquipment = new PictureBox();
-    this.lblSellPrice = new Label();
-    this.lblDescription = new Label();
-    this.lblName = new Label();
-    this.boxSell.SuspendLayout();
-    this.boxBuy.SuspendLayout();
-    this.boxShipInfo.SuspendLayout();
-    this.SuspendLayout();
+    btnClose = new Button();
+    boxSell = new GroupBox();
+    lblSellGadgetNoSlots = new Label();
+    lblSellShieldNoSlots = new Label();
+    lblSellWeaponNoSlots = new Label();
+    lblSellGadgets = new Label();
+    lblSellShields = new Label();
+    lblSellWeapons = new Label();
+    lstSellGadget = new ListBox();
+    lstSellShield = new ListBox();
+    lstSellWeapon = new ListBox();
+    boxBuy = new GroupBox();
+    lblBuyGadgetNone = new Label();
+    lblBuyShieldNone = new Label();
+    lblBuyWeaponNone = new Label();
+    lblBuyGadgets = new Label();
+    lblBuyShields = new Label();
+    lblBuyWeapons = new Label();
+    lstBuyGadget = new ListBox();
+    lstBuyShield = new ListBox();
+    lstBuyWeapon = new ListBox();
+    boxShipInfo = new GroupBox();
+    lblCharge = new Label();
+    lblPower = new Label();
+    lblChargeLabel = new Label();
+    lblPowerLabel = new Label();
+    lblType = new Label();
+    lblTypeLabel = new Label();
+    lblNameLabel = new Label();
+    btnSell = new Button();
+    btnBuy = new Button();
+    lblBuyPriceLabel = new Label();
+    lblBuyPrice = new Label();
+    lblSellPriceLabel = new Label();
+    picEquipment = new PictureBox();
+    lblSellPrice = new Label();
+    lblDescription = new Label();
+    lblName = new Label();
+    boxSell.SuspendLayout();
+    boxBuy.SuspendLayout();
+    boxShipInfo.SuspendLayout();
+    SuspendLayout();
     // btnClose
-    this.btnClose.setDialogResult(DialogResult.Cancel);
-    this.btnClose.setLocation(new java.awt.Point(-32, -32));
-    this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new FormSize(32, 32));
-    this.btnClose.setTabIndex(32);
-    this.btnClose.setTabStop(false);
-    this.btnClose.setText("X");
+    btnClose.setDialogResult(DialogResult.Cancel);
+    btnClose.setLocation(new Point(-32, -32));
+    btnClose.setName("btnClose");
+    btnClose.setSize(new FormSize(32, 32));
+    btnClose.setTabIndex(32);
+    btnClose.setTabStop(false);
+    btnClose.setText("X");
     // boxSell
-    this.boxSell.Controls.add(this.lblSellGadgetNoSlots);
-    this.boxSell.Controls.add(this.lblSellShieldNoSlots);
-    this.boxSell.Controls.add(this.lblSellWeaponNoSlots);
-    this.boxSell.Controls.add(this.lblSellGadgets);
-    this.boxSell.Controls.add(this.lblSellShields);
-    this.boxSell.Controls.add(this.lblSellWeapons);
-    this.boxSell.Controls.add(this.lstSellGadget);
-    this.boxSell.Controls.add(this.lstSellShield);
-    this.boxSell.Controls.add(this.lstSellWeapon);
-    this.boxSell.setLocation(new java.awt.Point(4, 2));
-    this.boxSell.setName("boxSell");
-    this.boxSell.setSize(new FormSize(144, 304));
-    this.boxSell.setTabIndex(1);
-    this.boxSell.setTabStop(false);
-    this.boxSell.setText("Current Inventory");
+    boxSell.Controls.add(lblSellGadgetNoSlots);
+    boxSell.Controls.add(lblSellShieldNoSlots);
+    boxSell.Controls.add(lblSellWeaponNoSlots);
+    boxSell.Controls.add(lblSellGadgets);
+    boxSell.Controls.add(lblSellShields);
+    boxSell.Controls.add(lblSellWeapons);
+    boxSell.Controls.add(lstSellGadget);
+    boxSell.Controls.add(lstSellShield);
+    boxSell.Controls.add(lstSellWeapon);
+    boxSell.setLocation(new Point(4, 2));
+    boxSell.setName("boxSell");
+    boxSell.setSize(new FormSize(144, 304));
+    boxSell.setTabIndex(1);
+    boxSell.setTabStop(false);
+    boxSell.setText("Current Inventory");
     // lblSellGadgetNoSlots
-    this.lblSellGadgetNoSlots.setLocation(new java.awt.Point(24, 228));
-    this.lblSellGadgetNoSlots.setName("lblSellGadgetNoSlots");
-    this.lblSellGadgetNoSlots.setSize(new FormSize(104, 16));
-    this.lblSellGadgetNoSlots.setTabIndex(149);
-    this.lblSellGadgetNoSlots.setText("No slots");
-    this.lblSellGadgetNoSlots.setVisible(false);
+    lblSellGadgetNoSlots.setLocation(new Point(24, 228));
+    lblSellGadgetNoSlots.setName("lblSellGadgetNoSlots");
+    lblSellGadgetNoSlots.setSize(new FormSize(104, 16));
+    lblSellGadgetNoSlots.setTabIndex(149);
+    lblSellGadgetNoSlots.setText("No slots");
+    lblSellGadgetNoSlots.setVisible(false);
     // lblSellShieldNoSlots
-    this.lblSellShieldNoSlots.setLocation(new java.awt.Point(24, 132));
-    this.lblSellShieldNoSlots.setName("lblSellShieldNoSlots");
-    this.lblSellShieldNoSlots.setSize(new FormSize(104, 16));
-    this.lblSellShieldNoSlots.setTabIndex(148);
-    this.lblSellShieldNoSlots.setText("No slots");
-    this.lblSellShieldNoSlots.setVisible(false);
+    lblSellShieldNoSlots.setLocation(new Point(24, 132));
+    lblSellShieldNoSlots.setName("lblSellShieldNoSlots");
+    lblSellShieldNoSlots.setSize(new FormSize(104, 16));
+    lblSellShieldNoSlots.setTabIndex(148);
+    lblSellShieldNoSlots.setText("No slots");
+    lblSellShieldNoSlots.setVisible(false);
     // lblSellWeaponNoSlots
-    this.lblSellWeaponNoSlots.setLocation(new java.awt.Point(24, 36));
-    this.lblSellWeaponNoSlots.setName("lblSellWeaponNoSlots");
-    this.lblSellWeaponNoSlots.setSize(new FormSize(104, 16));
-    this.lblSellWeaponNoSlots.setTabIndex(147);
-    this.lblSellWeaponNoSlots.setText("No slots");
-    this.lblSellWeaponNoSlots.setVisible(false);
+    lblSellWeaponNoSlots.setLocation(new Point(24, 36));
+    lblSellWeaponNoSlots.setName("lblSellWeaponNoSlots");
+    lblSellWeaponNoSlots.setSize(new FormSize(104, 16));
+    lblSellWeaponNoSlots.setTabIndex(147);
+    lblSellWeaponNoSlots.setText("No slots");
+    lblSellWeaponNoSlots.setVisible(false);
     // lblSellGadgets
-    this.lblSellGadgets.setAutoSize(true);
-    this.lblSellGadgets.setLocation(new java.awt.Point(8, 212));
-    this.lblSellGadgets.setName("lblSellGadgets");
-    this.lblSellGadgets.setSize(new FormSize(47, 16));
-    this.lblSellGadgets.setTabIndex(146);
-    this.lblSellGadgets.setText("Gadgets");
+    lblSellGadgets.setAutoSize(true);
+    lblSellGadgets.setLocation(new Point(8, 212));
+    lblSellGadgets.setName("lblSellGadgets");
+    lblSellGadgets.setSize(new FormSize(47, 16));
+    lblSellGadgets.setTabIndex(146);
+    lblSellGadgets.setText("Gadgets");
     // lblSellShields
-    this.lblSellShields.setAutoSize(true);
-    this.lblSellShields.setLocation(new java.awt.Point(8, 116));
-    this.lblSellShields.setName("lblSellShields");
-    this.lblSellShields.setSize(new FormSize(41, 16));
-    this.lblSellShields.setTabIndex(145);
-    this.lblSellShields.setText("Shields");
+    lblSellShields.setAutoSize(true);
+    lblSellShields.setLocation(new Point(8, 116));
+    lblSellShields.setName("lblSellShields");
+    lblSellShields.setSize(new FormSize(41, 16));
+    lblSellShields.setTabIndex(145);
+    lblSellShields.setText("Shields");
     // lblSellWeapons
-    this.lblSellWeapons.setAutoSize(true);
-    this.lblSellWeapons.setLocation(new java.awt.Point(8, 20));
-    this.lblSellWeapons.setName("lblSellWeapons");
-    this.lblSellWeapons.setSize(new FormSize(52, 16));
-    this.lblSellWeapons.setTabIndex(144);
-    this.lblSellWeapons.setText("Weapons");
+    lblSellWeapons.setAutoSize(true);
+    lblSellWeapons.setLocation(new Point(8, 20));
+    lblSellWeapons.setName("lblSellWeapons");
+    lblSellWeapons.setSize(new FormSize(52, 16));
+    lblSellWeapons.setTabIndex(144);
+    lblSellWeapons.setText("Weapons");
     // lstSellGadget
-    this.lstSellGadget.setBorderStyle(BorderStyle.FixedSingle);
-    this.lstSellGadget.setLocation(new java.awt.Point(8, 228));
-    this.lstSellGadget.setName("lstSellGadget");
-    this.lstSellGadget.setSize(new FormSize(128, 67));
-    this.lstSellGadget.setTabIndex(3);
-    this.lstSellGadget.setDoubleClick(new EventHandler<Object, EventArgs>() {
+    lstSellGadget.setBorderStyle(BorderStyle.FixedSingle);
+    lstSellGadget.setLocation(new Point(8, 228));
+    lstSellGadget.setName("lstSellGadget");
+    lstSellGadget.setSize(new FormSize(128, 67));
+    lstSellGadget.setTabIndex(3);
+    lstSellGadget.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SellClick(sender, e);
       }
     });
-    this.lstSellGadget.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+    lstSellGadget.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SelectedIndexChanged(sender, e);
       }
     });
     // lstSellShield
-    this.lstSellShield.setBorderStyle(BorderStyle.FixedSingle);
-    this.lstSellShield.setLocation(new java.awt.Point(8, 132));
-    this.lstSellShield.setName("lstSellShield");
-    this.lstSellShield.setSize(new FormSize(128, 67));
-    this.lstSellShield.setTabIndex(2);
-    this.lstSellShield.setDoubleClick(new EventHandler<Object, EventArgs>() {
+    lstSellShield.setBorderStyle(BorderStyle.FixedSingle);
+    lstSellShield.setLocation(new Point(8, 132));
+    lstSellShield.setName("lstSellShield");
+    lstSellShield.setSize(new FormSize(128, 67));
+    lstSellShield.setTabIndex(2);
+    lstSellShield.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SellClick(sender, e);
       }
     });
-    this.lstSellShield.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+    lstSellShield.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SelectedIndexChanged(sender, e);
       }
     });
     // lstSellWeapon
-    this.lstSellWeapon.setBorderStyle(BorderStyle.FixedSingle);
-    this.lstSellWeapon.setLocation(new java.awt.Point(8, 36));
-    this.lstSellWeapon.setName("lstSellWeapon");
-    this.lstSellWeapon.setSize(new FormSize(128, 67));
-    this.lstSellWeapon.setTabIndex(1);
-    this.lstSellWeapon.setDoubleClick(new EventHandler<Object, EventArgs>() {
+    lstSellWeapon.setBorderStyle(BorderStyle.FixedSingle);
+    lstSellWeapon.setLocation(new Point(8, 36));
+    lstSellWeapon.setName("lstSellWeapon");
+    lstSellWeapon.setSize(new FormSize(128, 67));
+    lstSellWeapon.setTabIndex(1);
+    lstSellWeapon.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SellClick(sender, e);
       }
     });
-    this.lstSellWeapon.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+    lstSellWeapon.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SelectedIndexChanged(sender, e);
       }
     });
     // boxBuy
-    this.boxBuy.Controls.add(this.lblBuyGadgetNone);
-    this.boxBuy.Controls.add(this.lblBuyShieldNone);
-    this.boxBuy.Controls.add(this.lblBuyWeaponNone);
-    this.boxBuy.Controls.add(this.lblBuyGadgets);
-    this.boxBuy.Controls.add(this.lblBuyShields);
-    this.boxBuy.Controls.add(this.lblBuyWeapons);
-    this.boxBuy.Controls.add(this.lstBuyGadget);
-    this.boxBuy.Controls.add(this.lstBuyShield);
-    this.boxBuy.Controls.add(this.lstBuyWeapon);
-    this.boxBuy.setLocation(new java.awt.Point(156, 2));
-    this.boxBuy.setName("boxBuy");
-    this.boxBuy.setSize(new FormSize(144, 304));
-    this.boxBuy.setTabIndex(2);
-    this.boxBuy.setTabStop(false);
-    this.boxBuy.setText("Equipment For Sale");
+    boxBuy.Controls.add(lblBuyGadgetNone);
+    boxBuy.Controls.add(lblBuyShieldNone);
+    boxBuy.Controls.add(lblBuyWeaponNone);
+    boxBuy.Controls.add(lblBuyGadgets);
+    boxBuy.Controls.add(lblBuyShields);
+    boxBuy.Controls.add(lblBuyWeapons);
+    boxBuy.Controls.add(lstBuyGadget);
+    boxBuy.Controls.add(lstBuyShield);
+    boxBuy.Controls.add(lstBuyWeapon);
+    boxBuy.setLocation(new Point(156, 2));
+    boxBuy.setName("boxBuy");
+    boxBuy.setSize(new FormSize(144, 304));
+    boxBuy.setTabIndex(2);
+    boxBuy.setTabStop(false);
+    boxBuy.setText("Equipment For Sale");
     // lblBuyGadgetNone
-    this.lblBuyGadgetNone.setLocation(new java.awt.Point(24, 228));
-    this.lblBuyGadgetNone.setName("lblBuyGadgetNone");
-    this.lblBuyGadgetNone.setSize(new FormSize(104, 16));
-    this.lblBuyGadgetNone.setTabIndex(150);
-    this.lblBuyGadgetNone.setText("None for sale");
-    this.lblBuyGadgetNone.setVisible(false);
+    lblBuyGadgetNone.setLocation(new Point(24, 228));
+    lblBuyGadgetNone.setName("lblBuyGadgetNone");
+    lblBuyGadgetNone.setSize(new FormSize(104, 16));
+    lblBuyGadgetNone.setTabIndex(150);
+    lblBuyGadgetNone.setText("None for sale");
+    lblBuyGadgetNone.setVisible(false);
     // lblBuyShieldNone
-    this.lblBuyShieldNone.setLocation(new java.awt.Point(24, 132));
-    this.lblBuyShieldNone.setName("lblBuyShieldNone");
-    this.lblBuyShieldNone.setSize(new FormSize(104, 16));
-    this.lblBuyShieldNone.setTabIndex(149);
-    this.lblBuyShieldNone.setText("None for sale");
-    this.lblBuyShieldNone.setVisible(false);
+    lblBuyShieldNone.setLocation(new Point(24, 132));
+    lblBuyShieldNone.setName("lblBuyShieldNone");
+    lblBuyShieldNone.setSize(new FormSize(104, 16));
+    lblBuyShieldNone.setTabIndex(149);
+    lblBuyShieldNone.setText("None for sale");
+    lblBuyShieldNone.setVisible(false);
     // lblBuyWeaponNone
-    this.lblBuyWeaponNone.setLocation(new java.awt.Point(24, 36));
-    this.lblBuyWeaponNone.setName("lblBuyWeaponNone");
-    this.lblBuyWeaponNone.setSize(new FormSize(104, 16));
-    this.lblBuyWeaponNone.setTabIndex(148);
-    this.lblBuyWeaponNone.setText("None for sale");
-    this.lblBuyWeaponNone.setVisible(false);
+    lblBuyWeaponNone.setLocation(new Point(24, 36));
+    lblBuyWeaponNone.setName("lblBuyWeaponNone");
+    lblBuyWeaponNone.setSize(new FormSize(104, 16));
+    lblBuyWeaponNone.setTabIndex(148);
+    lblBuyWeaponNone.setText("None for sale");
+    lblBuyWeaponNone.setVisible(false);
     // lblBuyGadgets
-    this.lblBuyGadgets.setAutoSize(true);
-    this.lblBuyGadgets.setLocation(new java.awt.Point(8, 212));
-    this.lblBuyGadgets.setName("lblBuyGadgets");
-    this.lblBuyGadgets.setSize(new FormSize(47, 16));
-    this.lblBuyGadgets.setTabIndex(143);
-    this.lblBuyGadgets.setText("Gadgets");
+    lblBuyGadgets.setAutoSize(true);
+    lblBuyGadgets.setLocation(new Point(8, 212));
+    lblBuyGadgets.setName("lblBuyGadgets");
+    lblBuyGadgets.setSize(new FormSize(47, 16));
+    lblBuyGadgets.setTabIndex(143);
+    lblBuyGadgets.setText("Gadgets");
     // lblBuyShields
-    this.lblBuyShields.setAutoSize(true);
-    this.lblBuyShields.setLocation(new java.awt.Point(8, 116));
-    this.lblBuyShields.setName("lblBuyShields");
-    this.lblBuyShields.setSize(new FormSize(41, 16));
-    this.lblBuyShields.setTabIndex(142);
-    this.lblBuyShields.setText("Shields");
+    lblBuyShields.setAutoSize(true);
+    lblBuyShields.setLocation(new Point(8, 116));
+    lblBuyShields.setName("lblBuyShields");
+    lblBuyShields.setSize(new FormSize(41, 16));
+    lblBuyShields.setTabIndex(142);
+    lblBuyShields.setText("Shields");
     // lblBuyWeapons
-    this.lblBuyWeapons.setAutoSize(true);
-    this.lblBuyWeapons.setLocation(new java.awt.Point(8, 20));
-    this.lblBuyWeapons.setName("lblBuyWeapons");
-    this.lblBuyWeapons.setSize(new FormSize(52, 16));
-    this.lblBuyWeapons.setTabIndex(141);
-    this.lblBuyWeapons.setText("Weapons");
+    lblBuyWeapons.setAutoSize(true);
+    lblBuyWeapons.setLocation(new Point(8, 20));
+    lblBuyWeapons.setName("lblBuyWeapons");
+    lblBuyWeapons.setSize(new FormSize(52, 16));
+    lblBuyWeapons.setTabIndex(141);
+    lblBuyWeapons.setText("Weapons");
     // lstBuyGadget
-    this.lstBuyGadget.setBorderStyle(BorderStyle.FixedSingle);
-    this.lstBuyGadget.setLocation(new java.awt.Point(8, 228));
-    this.lstBuyGadget.setName("lstBuyGadget");
-    this.lstBuyGadget.setSize(new FormSize(128, 67));
-    this.lstBuyGadget.setTabIndex(6);
-    this.lstBuyGadget.setDoubleClick(new EventHandler<Object, EventArgs>() {
+    lstBuyGadget.setBorderStyle(BorderStyle.FixedSingle);
+    lstBuyGadget.setLocation(new Point(8, 228));
+    lstBuyGadget.setName("lstBuyGadget");
+    lstBuyGadget.setSize(new FormSize(128, 67));
+    lstBuyGadget.setTabIndex(6);
+    lstBuyGadget.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         BuyClick(sender, e);
       }
     });
-    this.lstBuyGadget.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+    lstBuyGadget.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SelectedIndexChanged(sender, e);
       }
     });
     // lstBuyShield
-    this.lstBuyShield.setBorderStyle(BorderStyle.FixedSingle);
-    this.lstBuyShield.setLocation(new java.awt.Point(8, 132));
-    this.lstBuyShield.setName("lstBuyShield");
-    this.lstBuyShield.setSize(new FormSize(128, 67));
-    this.lstBuyShield.setTabIndex(5);
-    this.lstBuyShield.setDoubleClick(new EventHandler<Object, EventArgs>() {
+    lstBuyShield.setBorderStyle(BorderStyle.FixedSingle);
+    lstBuyShield.setLocation(new Point(8, 132));
+    lstBuyShield.setName("lstBuyShield");
+    lstBuyShield.setSize(new FormSize(128, 67));
+    lstBuyShield.setTabIndex(5);
+    lstBuyShield.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         BuyClick(sender, e);
       }
     });
-    this.lstBuyShield.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+    lstBuyShield.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SelectedIndexChanged(sender, e);
       }
     });
     // lstBuyWeapon
-    this.lstBuyWeapon.setBorderStyle(BorderStyle.FixedSingle);
-    this.lstBuyWeapon.setLocation(new java.awt.Point(8, 36));
-    this.lstBuyWeapon.setName("lstBuyWeapon");
-    this.lstBuyWeapon.setSize(new FormSize(128, 67));
-    this.lstBuyWeapon.setTabIndex(4);
-    this.lstBuyWeapon.setDoubleClick(new EventHandler<Object, EventArgs>() {
+    lstBuyWeapon.setBorderStyle(BorderStyle.FixedSingle);
+    lstBuyWeapon.setLocation(new Point(8, 36));
+    lstBuyWeapon.setName("lstBuyWeapon");
+    lstBuyWeapon.setSize(new FormSize(128, 67));
+    lstBuyWeapon.setTabIndex(4);
+    lstBuyWeapon.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         BuyClick(sender, e);
       }
     });
-    this.lstBuyWeapon.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
+    lstBuyWeapon.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SelectedIndexChanged(sender, e);
       }
     });
     // boxShipInfo
-    this.boxShipInfo.Controls.add(this.lblCharge);
-    this.boxShipInfo.Controls.add(this.lblPower);
-    this.boxShipInfo.Controls.add(this.lblChargeLabel);
-    this.boxShipInfo.Controls.add(this.lblPowerLabel);
-    this.boxShipInfo.Controls.add(this.lblType);
-    this.boxShipInfo.Controls.add(this.lblTypeLabel);
-    this.boxShipInfo.Controls.add(this.lblNameLabel);
-    this.boxShipInfo.Controls.add(this.btnSell);
-    this.boxShipInfo.Controls.add(this.btnBuy);
-    this.boxShipInfo.Controls.add(this.lblBuyPriceLabel);
-    this.boxShipInfo.Controls.add(this.lblBuyPrice);
-    this.boxShipInfo.Controls.add(this.lblSellPriceLabel);
-    this.boxShipInfo.Controls.add(this.picEquipment);
-    this.boxShipInfo.Controls.add(this.lblSellPrice);
-    this.boxShipInfo.Controls.add(this.lblName);
-    this.boxShipInfo.Controls.add(this.lblDescription);
-    this.boxShipInfo.setLocation(new java.awt.Point(308, 2));
-    this.boxShipInfo.setName("boxShipInfo");
-    this.boxShipInfo.setSize(new FormSize(208, 304));
-    this.boxShipInfo.setTabIndex(3);
-    this.boxShipInfo.setTabStop(false);
-    this.boxShipInfo.setText("Equipment Information");
+    boxShipInfo.Controls.add(lblCharge);
+    boxShipInfo.Controls.add(lblPower);
+    boxShipInfo.Controls.add(lblChargeLabel);
+    boxShipInfo.Controls.add(lblPowerLabel);
+    boxShipInfo.Controls.add(lblType);
+    boxShipInfo.Controls.add(lblTypeLabel);
+    boxShipInfo.Controls.add(lblNameLabel);
+    boxShipInfo.Controls.add(btnSell);
+    boxShipInfo.Controls.add(btnBuy);
+    boxShipInfo.Controls.add(lblBuyPriceLabel);
+    boxShipInfo.Controls.add(lblBuyPrice);
+    boxShipInfo.Controls.add(lblSellPriceLabel);
+    boxShipInfo.Controls.add(picEquipment);
+    boxShipInfo.Controls.add(lblSellPrice);
+    boxShipInfo.Controls.add(lblName);
+    boxShipInfo.Controls.add(lblDescription);
+    boxShipInfo.setLocation(new Point(308, 2));
+    boxShipInfo.setName("boxShipInfo");
+    boxShipInfo.setSize(new FormSize(208, 304));
+    boxShipInfo.setTabIndex(3);
+    boxShipInfo.setTabStop(false);
+    boxShipInfo.setText("Equipment Information");
     // lblCharge
-    this.lblCharge.setLocation(new java.awt.Point(80, 164));
-    this.lblCharge.setName("lblCharge");
-    this.lblCharge.setSize(new FormSize(116, 16));
-    this.lblCharge.setTabIndex(67);
-    this.lblCharge.setText("888");
+    lblCharge.setLocation(new Point(80, 164));
+    lblCharge.setName("lblCharge");
+    lblCharge.setSize(new FormSize(116, 16));
+    lblCharge.setTabIndex(67);
+    lblCharge.setText("888");
     // lblPower
-    this.lblPower.setLocation(new java.awt.Point(80, 148));
-    this.lblPower.setName("lblPower");
-    this.lblPower.setSize(new FormSize(116, 16));
-    this.lblPower.setTabIndex(66);
-    this.lblPower.setText("888");
+    lblPower.setLocation(new Point(80, 148));
+    lblPower.setName("lblPower");
+    lblPower.setSize(new FormSize(116, 16));
+    lblPower.setTabIndex(66);
+    lblPower.setText("888");
     // lblChargeLabel
-    this.lblChargeLabel.setAutoSize(true);
-    this.lblChargeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-    this.lblChargeLabel.setLocation(new java.awt.Point(8, 164));
-    this.lblChargeLabel.setName("lblChargeLabel");
-    this.lblChargeLabel.setSize(new FormSize(46, 16));
-    this.lblChargeLabel.setTabIndex(65);
-    this.lblChargeLabel.setText("Charge:");
+    lblChargeLabel.setAutoSize(true);
+    lblChargeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblChargeLabel.setLocation(new Point(8, 164));
+    lblChargeLabel.setName("lblChargeLabel");
+    lblChargeLabel.setSize(new FormSize(46, 16));
+    lblChargeLabel.setTabIndex(65);
+    lblChargeLabel.setText("Charge:");
     // lblPowerLabel
-    this.lblPowerLabel.setAutoSize(true);
-    this.lblPowerLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-    this.lblPowerLabel.setLocation(new java.awt.Point(8, 148));
-    this.lblPowerLabel.setName("lblPowerLabel");
-    this.lblPowerLabel.setSize(new FormSize(41, 16));
-    this.lblPowerLabel.setTabIndex(64);
-    this.lblPowerLabel.setText("Power:");
+    lblPowerLabel.setAutoSize(true);
+    lblPowerLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblPowerLabel.setLocation(new Point(8, 148));
+    lblPowerLabel.setName("lblPowerLabel");
+    lblPowerLabel.setSize(new FormSize(41, 16));
+    lblPowerLabel.setTabIndex(64);
+    lblPowerLabel.setText("Power:");
     // lblType
-    this.lblType.setLocation(new java.awt.Point(80, 100));
-    this.lblType.setName("lblType");
-    this.lblType.setSize(new FormSize(116, 16));
-    this.lblType.setTabIndex(63);
-    this.lblType.setText("Weapon");
+    lblType.setLocation(new Point(80, 100));
+    lblType.setName("lblType");
+    lblType.setSize(new FormSize(116, 16));
+    lblType.setTabIndex(63);
+    lblType.setText("Weapon");
     // lblTypeLabel
-    this.lblTypeLabel.setAutoSize(true);
-    this.lblTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-    this.lblTypeLabel.setLocation(new java.awt.Point(8, 100));
-    this.lblTypeLabel.setName("lblTypeLabel");
-    this.lblTypeLabel.setSize(new FormSize(34, 16));
-    this.lblTypeLabel.setTabIndex(62);
-    this.lblTypeLabel.setText("Type:");
+    lblTypeLabel.setAutoSize(true);
+    lblTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblTypeLabel.setLocation(new Point(8, 100));
+    lblTypeLabel.setName("lblTypeLabel");
+    lblTypeLabel.setSize(new FormSize(34, 16));
+    lblTypeLabel.setTabIndex(62);
+    lblTypeLabel.setText("Type:");
     // lblNameLabel
-    this.lblNameLabel.setAutoSize(true);
-    this.lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-    this.lblNameLabel.setLocation(new java.awt.Point(8, 84));
-    this.lblNameLabel.setName("lblNameLabel");
-    this.lblNameLabel.setSize(new FormSize(39, 16));
-    this.lblNameLabel.setTabIndex(61);
-    this.lblNameLabel.setText("Name:");
+    lblNameLabel.setAutoSize(true);
+    lblNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblNameLabel.setLocation(new Point(8, 84));
+    lblNameLabel.setName("lblNameLabel");
+    lblNameLabel.setSize(new FormSize(39, 16));
+    lblNameLabel.setTabIndex(61);
+    lblNameLabel.setText("Name:");
     // btnSell
-    this.btnSell.setFlatStyle(FlatStyle.Flat);
-    this.btnSell.setLocation(new java.awt.Point(103, 272));
-    this.btnSell.setName("btnSell");
-    this.btnSell.setSize(new FormSize(58, 22));
-    this.btnSell.setTabIndex(8);
-    this.btnSell.setText("Sell");
-    this.btnSell.setClick(new EventHandler<Object, EventArgs>() {
+    btnSell.setFlatStyle(FlatStyle.Flat);
+    btnSell.setLocation(new Point(103, 272));
+    btnSell.setName("btnSell");
+    btnSell.setSize(new FormSize(58, 22));
+    btnSell.setTabIndex(8);
+    btnSell.setText("Sell");
+    btnSell.setClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SellClick(sender, e);
       }
     });
     // btnBuy
-    this.btnBuy.setFlatStyle(FlatStyle.Flat);
-    this.btnBuy.setLocation(new java.awt.Point(31, 272));
-    this.btnBuy.setName("btnBuy");
-    this.btnBuy.setSize(new FormSize(58, 22));
-    this.btnBuy.setTabIndex(7);
-    this.btnBuy.setText("Buy");
-    this.btnBuy.setClick(new EventHandler<Object, EventArgs>() {
+    btnBuy.setFlatStyle(FlatStyle.Flat);
+    btnBuy.setLocation(new Point(31, 272));
+    btnBuy.setName("btnBuy");
+    btnBuy.setSize(new FormSize(58, 22));
+    btnBuy.setTabIndex(7);
+    btnBuy.setText("Buy");
+    btnBuy.setClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         BuyClick(sender, e);
       }
     });
     // lblBuyPriceLabel
-    this.lblBuyPriceLabel.setAutoSize(true);
-    this.lblBuyPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-    this.lblBuyPriceLabel.setLocation(new java.awt.Point(8, 116));
-    this.lblBuyPriceLabel.setName("lblBuyPriceLabel");
-    this.lblBuyPriceLabel.setSize(new FormSize(58, 16));
-    this.lblBuyPriceLabel.setTabIndex(57);
-    this.lblBuyPriceLabel.setText("Buy Price:");
+    lblBuyPriceLabel.setAutoSize(true);
+    lblBuyPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblBuyPriceLabel.setLocation(new Point(8, 116));
+    lblBuyPriceLabel.setName("lblBuyPriceLabel");
+    lblBuyPriceLabel.setSize(new FormSize(58, 16));
+    lblBuyPriceLabel.setTabIndex(57);
+    lblBuyPriceLabel.setText("Buy Price:");
     // lblBuyPrice
-    this.lblBuyPrice.setLocation(new java.awt.Point(80, 116));
-    this.lblBuyPrice.setName("lblBuyPrice");
-    this.lblBuyPrice.setSize(new FormSize(116, 16));
-    this.lblBuyPrice.setTabIndex(56);
-    this.lblBuyPrice.setText("888,888 cr.");
+    lblBuyPrice.setLocation(new Point(80, 116));
+    lblBuyPrice.setName("lblBuyPrice");
+    lblBuyPrice.setSize(new FormSize(116, 16));
+    lblBuyPrice.setTabIndex(56);
+    lblBuyPrice.setText("888,888 cr.");
     // lblSellPriceLabel
-    this.lblSellPriceLabel.setAutoSize(true);
-    this.lblSellPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-    this.lblSellPriceLabel.setLocation(new java.awt.Point(8, 132));
-    this.lblSellPriceLabel.setName("lblSellPriceLabel");
-    this.lblSellPriceLabel.setSize(new FormSize(58, 16));
-    this.lblSellPriceLabel.setTabIndex(55);
-    this.lblSellPriceLabel.setText("Sell Price:");
+    lblSellPriceLabel.setAutoSize(true);
+    lblSellPriceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblSellPriceLabel.setLocation(new Point(8, 132));
+    lblSellPriceLabel.setName("lblSellPriceLabel");
+    lblSellPriceLabel.setSize(new FormSize(58, 16));
+    lblSellPriceLabel.setTabIndex(55);
+    lblSellPriceLabel.setText("Sell Price:");
     // picEquipment
-    this.picEquipment.setBackColor(java.awt.Color.white);
-    this.picEquipment.setBorderStyle(BorderStyle.FixedSingle);
-    this.picEquipment.setLocation(new java.awt.Point(71, 20));
-    this.picEquipment.setName("picEquipment");
-    this.picEquipment.setSize(new FormSize(66, 54));
-    this.picEquipment.setTabIndex(54);
-    this.picEquipment.setTabStop(false);
-    this.picEquipment.setVisible(false);
+    picEquipment.setBackColor(Color.white);
+    picEquipment.setBorderStyle(BorderStyle.FixedSingle);
+    picEquipment.setLocation(new Point(71, 20));
+    picEquipment.setName("picEquipment");
+    picEquipment.setSize(new FormSize(66, 54));
+    picEquipment.setTabIndex(54);
+    picEquipment.setTabStop(false);
+    picEquipment.setVisible(false);
     // lblSellPrice
-    this.lblSellPrice.setLocation(new java.awt.Point(80, 132));
-    this.lblSellPrice.setName("lblSellPrice");
-    this.lblSellPrice.setSize(new FormSize(116, 16));
-    this.lblSellPrice.setTabIndex(52);
-    this.lblSellPrice.setText("888,888 cr.");
+    lblSellPrice.setLocation(new Point(80, 132));
+    lblSellPrice.setName("lblSellPrice");
+    lblSellPrice.setSize(new FormSize(116, 16));
+    lblSellPrice.setTabIndex(52);
+    lblSellPrice.setText("888,888 cr.");
     // lblDescription
-    this.lblDescription.setLocation(new java.awt.Point(8, 188));
-    this.lblDescription.setName("lblDescription");
-    this.lblDescription.setSize(new FormSize(196, 75));
-    this.lblDescription.setTabIndex(47);
+    lblDescription.setLocation(new Point(8, 188));
+    lblDescription.setName("lblDescription");
+    lblDescription.setSize(new FormSize(196, 75));
+    lblDescription.setTabIndex(47);
     // lblName
-    this.lblName.setLocation(new java.awt.Point(80, 84));
-    this.lblName.setName("lblName");
-    this.lblName.setSize(new FormSize(116, 16));
-    this.lblName.setTabIndex(35);
-    this.lblName.setText("Auto-Repair System");
+    lblName.setLocation(new Point(80, 84));
+    lblName.setName("lblName");
+    lblName.setSize(new FormSize(116, 16));
+    lblName.setTabIndex(35);
+    lblName.setText("Auto-Repair System");
     // FormEquipment
-    this.setAutoScaleBaseSize(new FormSize(5, 13));
-    this.setCancelButton(this.btnClose);
-    this.setClientSize(new FormSize(522, 311));
-    this.Controls.add(this.boxShipInfo);
-    this.Controls.add(this.boxBuy);
-    this.Controls.add(this.boxSell);
-    this.Controls.add(this.btnClose);
-    this.setFormBorderStyle(FormBorderStyle.FixedDialog);
-    this.setMaximizeBox(false);
-    this.setMinimizeBox(false);
-    this.setName("FormEquipment");
-    this.setShowInTaskbar(false);
-    this.setStartPosition(FormStartPosition.CenterParent);
-    this.setText("Buy/Sell Equipment");
-    this.boxSell.ResumeLayout(false);
-    this.boxBuy.ResumeLayout(false);
-    this.boxShipInfo.ResumeLayout(false);
-    this.ResumeLayout(false);
+    setAutoScaleBaseSize(new FormSize(5, 13));
+    setCancelButton(btnClose);
+    setClientSize(new FormSize(522, 311));
+    Controls.add(boxShipInfo);
+    Controls.add(boxBuy);
+    Controls.add(boxSell);
+    Controls.add(btnClose);
+    setFormBorderStyle(FormBorderStyle.FixedDialog);
+    setMaximizeBox(false);
+    setMinimizeBox(false);
+    setName("FormEquipment");
+    setShowInTaskbar(false);
+    setStartPosition(FormStartPosition.CenterParent);
+    setText("Buy/Sell Equipment");
+    boxSell.ResumeLayout(false);
+    boxBuy.ResumeLayout(false);
+    boxShipInfo.ResumeLayout(false);
+    ResumeLayout(false);
   }
 
   private void Buy() {
     if(selectedEquipment != null && !sellSideSelected) {
       Commander cmdr = game.Commander();
       EquipmentType baseType = selectedEquipment.EquipmentType();
-      if(baseType == EquipmentType.Gadget && cmdr.getShip().HasGadget(((Gadget)selectedEquipment).Type()) && ((Gadget)selectedEquipment).Type() != GadgetType.ExtraCargoBays) {
+      if(baseType == EquipmentType.Gadget && cmdr.getShip().HasGadget(((Gadget)selectedEquipment).Type())
+          && ((Gadget)selectedEquipment).Type() != GadgetType.ExtraCargoBays) {
         FormAlert.Alert(AlertType.EquipmentAlreadyOwn, this);
       } else if(cmdr.getDebt() > 0) {
         FormAlert.Alert(AlertType.DebtNoBuy, this);

@@ -1,13 +1,14 @@
 package spacetrader.gui;
+import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
 import jwinforms.Container;
 import jwinforms.ContentAlignment;
 import jwinforms.DialogResult;
 import jwinforms.FormBorderStyle;
+import jwinforms.FormSize;
 import jwinforms.FormStartPosition;
 import jwinforms.Label;
-import jwinforms.FormSize;
 import jwinforms.WinformForm;
 import spacetrader.Functions;
 import spacetrader.HighScoreRecord;
@@ -45,7 +46,6 @@ public class FormViewHighScores extends WinformForm {
             Functions.Multiples(highScores[i].Worth(), Strings.MoneyUnit),
             Strings.DifficultyLevels[highScores[i].Difficulty().CastToInt()].toLowerCase()
           }));
-
       lblScore[2 - i].setVisible(true);
       lblStatus[2 - i].setVisible(true);
     }
@@ -53,168 +53,127 @@ public class FormViewHighScores extends WinformForm {
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
-    this.btnClose = new Button();
-    this.lblRank0 = new Label();
-    this.lblRank2 = new Label();
-    this.lblRank1 = new Label();
-    this.lblScore0 = new Label();
-    this.lblScore1 = new Label();
-    this.lblScore2 = new Label();
-    this.lblName0 = new Label();
-    this.lblName1 = new Label();
-    this.lblName2 = new Label();
-    this.lblStatus0 = new Label();
-    this.lblStatus1 = new Label();
-    this.lblStatus2 = new Label();
-    this.SuspendLayout();
-    //
+    btnClose = new Button();
+    lblRank0 = new Label();
+    lblRank2 = new Label();
+    lblRank1 = new Label();
+    lblScore0 = new Label();
+    lblScore1 = new Label();
+    lblScore2 = new Label();
+    lblName0 = new Label();
+    lblName1 = new Label();
+    lblName2 = new Label();
+    lblStatus0 = new Label();
+    lblStatus1 = new Label();
+    lblStatus2 = new Label();
+    SuspendLayout();
     // btnClose
-    //
-    this.btnClose.setDialogResult(DialogResult.Cancel);
-    this.btnClose.setLocation(new java.awt.Point(-32, -32));
-    this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new FormSize(32, 32));
-    this.btnClose.setTabIndex(32);
-    this.btnClose.setTabStop(false);
-    this.btnClose.setText("X");
-    //
+    btnClose.setDialogResult(DialogResult.Cancel);
+    btnClose.setLocation(new Point(-32, -32));
+    btnClose.setName("btnClose");
+    btnClose.setSize(new FormSize(32, 32));
+    btnClose.setTabIndex(32);
+    btnClose.setTabStop(false);
+    btnClose.setText("X");
     // lblRank0
-    //
-    this.lblRank0.setAutoSize(true);
-    this.lblRank0.setLocation(new java.awt.Point(8, 8));
-    this.lblRank0.setName("lblRank0");
-    this.lblRank0.setSize(new FormSize(14, 13));
-    this.lblRank0.setTabIndex(33);
-    this.lblRank0.setText("1.");
-    this.lblRank0.TextAlign = ContentAlignment.TopRight;
-    //
+    lblRank0.setAutoSize(true);
+    lblRank0.setLocation(new Point(8, 8));
+    lblRank0.setName("lblRank0");
+    lblRank0.setSize(new FormSize(14, 13));
+    lblRank0.setTabIndex(33);
+    lblRank0.setText("1.");
+    lblRank0.TextAlign = ContentAlignment.TopRight;
     // lblRank2
-    //
-    this.lblRank2.setAutoSize(true);
-    this.lblRank2.setLocation(new java.awt.Point(8, 136));
-    this.lblRank2.setName("lblRank2");
-    this.lblRank2.setSize(new FormSize(14, 13));
-    this.lblRank2.setTabIndex(34);
-    this.lblRank2.setText("3.");
-    this.lblRank2.TextAlign = ContentAlignment.TopRight;
-    //
+    lblRank2.setAutoSize(true);
+    lblRank2.setLocation(new Point(8, 136));
+    lblRank2.setName("lblRank2");
+    lblRank2.setSize(new FormSize(14, 13));
+    lblRank2.setTabIndex(34);
+    lblRank2.setText("3.");
+    lblRank2.TextAlign = ContentAlignment.TopRight;
     // lblRank1
-    //
-    this.lblRank1.setAutoSize(true);
-    this.lblRank1.setLocation(new java.awt.Point(8, 72));
-    this.lblRank1.setName("lblRank1");
-    this.lblRank1.setSize(new FormSize(14, 13));
-    this.lblRank1.setTabIndex(35);
-    this.lblRank1.setText("2.");
-    this.lblRank1.TextAlign = ContentAlignment.TopRight;
-    //
+    lblRank1.setAutoSize(true);
+    lblRank1.setLocation(new Point(8, 72));
+    lblRank1.setName("lblRank1");
+    lblRank1.setSize(new FormSize(14, 13));
+    lblRank1.setTabIndex(35);
+    lblRank1.setText("2.");
+    lblRank1.TextAlign = ContentAlignment.TopRight;
     // lblScore0
-    //
-    this.lblScore0.setLocation(new java.awt.Point(168, 8));
-    this.lblScore0.setName("lblScore0");
-    this.lblScore0.setSize(new FormSize(43, 13));
-    this.lblScore0.setTabIndex(36);
-    this.lblScore0.setText("888.8%");
-    this.lblScore0.TextAlign = ContentAlignment.TopRight;
-    this.lblScore0.setVisible(false);
-    //
+    lblScore0.setLocation(new Point(168, 8));
+    lblScore0.setName("lblScore0");
+    lblScore0.setSize(new FormSize(43, 13));
+    lblScore0.setTabIndex(36);
+    lblScore0.setText("888.8%");
+    lblScore0.TextAlign = ContentAlignment.TopRight;
+    lblScore0.setVisible(false);
     // lblScore1
-    //
-    this.lblScore1.setLocation(new java.awt.Point(168, 72));
-    this.lblScore1.setName("lblScore1");
-    this.lblScore1.setSize(new FormSize(43, 13));
-    this.lblScore1.setTabIndex(37);
-    this.lblScore1.setText("888.8%");
-    this.lblScore1.TextAlign = ContentAlignment.TopRight;
-    this.lblScore1.setVisible(false);
-    //
+    lblScore1.setLocation(new Point(168, 72));
+    lblScore1.setName("lblScore1");
+    lblScore1.setSize(new FormSize(43, 13));
+    lblScore1.setTabIndex(37);
+    lblScore1.setText("888.8%");
+    lblScore1.TextAlign = ContentAlignment.TopRight;
+    lblScore1.setVisible(false);
     // lblScore2
-    //
-    this.lblScore2.setLocation(new java.awt.Point(168, 136));
-    this.lblScore2.setName("lblScore2");
-    this.lblScore2.setSize(new FormSize(43, 13));
-    this.lblScore2.setTabIndex(38);
-    this.lblScore2.setText("888.8%");
-    this.lblScore2.TextAlign = ContentAlignment.TopRight;
-    this.lblScore2.setVisible(false);
-    //
+    lblScore2.setLocation(new Point(168, 136));
+    lblScore2.setName("lblScore2");
+    lblScore2.setSize(new FormSize(43, 13));
+    lblScore2.setTabIndex(38);
+    lblScore2.setText("888.8%");
+    lblScore2.TextAlign = ContentAlignment.TopRight;
+    lblScore2.setVisible(false);
     // lblName0
-    //
-    this.lblName0.setLocation(new java.awt.Point(24, 8));
-    this.lblName0.setName("lblName0");
-    this.lblName0.setSize(new FormSize(144, 13));
-    this.lblName0.setTabIndex(39);
-    this.lblName0.setText("Empty");
-    //
+    lblName0.setLocation(new Point(24, 8));
+    lblName0.setName("lblName0");
+    lblName0.setSize(new FormSize(144, 13));
+    lblName0.setTabIndex(39);
+    lblName0.setText("Empty");
     // lblName1
-    //
-    this.lblName1.setLocation(new java.awt.Point(24, 72));
-    this.lblName1.setName("lblName1");
-    this.lblName1.setSize(new FormSize(144, 13));
-    this.lblName1.setTabIndex(40);
-    this.lblName1.setText("Empty");
-    //
+    lblName1.setLocation(new Point(24, 72));
+    lblName1.setName("lblName1");
+    lblName1.setSize(new FormSize(144, 13));
+    lblName1.setTabIndex(40);
+    lblName1.setText("Empty");
     // lblName2
-    //
-    this.lblName2.setLocation(new java.awt.Point(24, 136));
-    this.lblName2.setName("lblName2");
-    this.lblName2.setSize(new FormSize(144, 13));
-    this.lblName2.setTabIndex(41);
-    this.lblName2.setText("Empty");
-    //
+    lblName2.setLocation(new Point(24, 136));
+    lblName2.setName("lblName2");
+    lblName2.setSize(new FormSize(144, 13));
+    lblName2.setTabIndex(41);
+    lblName2.setText("Empty");
     // lblStatus0
-    //
-    this.lblStatus0.setLocation(new java.awt.Point(24, 24));
-    this.lblStatus0.setName("lblStatus0");
-    this.lblStatus0.setSize(new FormSize(200, 26));
-    this.lblStatus0.setTabIndex(42);
-    this.lblStatus0.setText("Claimed moon in 888,888 days, worth 8,888,888 credits on impossible level.");
-    this.lblStatus0.setVisible(false);
-    //
+    lblStatus0.setLocation(new Point(24, 24));
+    lblStatus0.setName("lblStatus0");
+    lblStatus0.setSize(new FormSize(200, 26));
+    lblStatus0.setTabIndex(42);
+    lblStatus0.setText("Claimed moon in 888,888 days, worth 8,888,888 credits on impossible level.");
+    lblStatus0.setVisible(false);
     // lblStatus1
-    //
-    this.lblStatus1.setLocation(new java.awt.Point(24, 88));
-    this.lblStatus1.setName("lblStatus1");
-    this.lblStatus1.setSize(new FormSize(200, 26));
-    this.lblStatus1.setTabIndex(43);
-    this.lblStatus1.setText("Claimed moon in 888,888 days, worth 8,888,888 credits on impossible level.");
-    this.lblStatus1.setVisible(false);
-    //
+    lblStatus1.setLocation(new Point(24, 88));
+    lblStatus1.setName("lblStatus1");
+    lblStatus1.setSize(new FormSize(200, 26));
+    lblStatus1.setTabIndex(43);
+    lblStatus1.setText("Claimed moon in 888,888 days, worth 8,888,888 credits on impossible level.");
+    lblStatus1.setVisible(false);
     // lblStatus2
-    //
-    this.lblStatus2.setLocation(new java.awt.Point(24, 152));
-    this.lblStatus2.setName("lblStatus2");
-    this.lblStatus2.setSize(new FormSize(200, 26));
-    this.lblStatus2.setTabIndex(44);
-    this.lblStatus2.setText("Claimed moon in 888,888 days, worth 8,888,888 credits on impossible level.");
-    this.lblStatus2.setVisible(false);
-    //
+    lblStatus2.setLocation(new Point(24, 152));
+    lblStatus2.setName("lblStatus2");
+    lblStatus2.setSize(new FormSize(200, 26));
+    lblStatus2.setTabIndex(44);
+    lblStatus2.setText("Claimed moon in 888,888 days, worth 8,888,888 credits on impossible level.");
+    lblStatus2.setVisible(false);
     // FormViewHighScores
-    //
-    this.setAutoScaleBaseSize(new FormSize(5, 13));
-    this.setCancelButton(this.btnClose);
-    this.setClientSize(new FormSize(218, 191));
-    this.Controls.addAll(Arrays.asList(
-        this.lblStatus2,
-        this.lblStatus1,
-        this.lblStatus0,
-        this.lblName2,
-        this.lblName1,
-        this.lblName0,
-        this.lblScore2,
-        this.lblScore1,
-        this.lblScore0,
-        this.lblRank1,
-        this.lblRank2,
-        this.lblRank0,
-        this.btnClose));
-    this.setFormBorderStyle(FormBorderStyle.FixedDialog);
-    this.setMaximizeBox(false);
-    this.setMinimizeBox(false);
-    this.setName("FormViewHighScores");
-    this.setShowInTaskbar(false);
-    this.setStartPosition(FormStartPosition.CenterParent);
-    this.setText("High Scores");
-    this.ResumeLayout(false);
+    setAutoScaleBaseSize(new FormSize(5, 13));
+    setCancelButton(btnClose);
+    setClientSize(new FormSize(218, 191));
+    Controls.addAll(Arrays.asList(lblStatus2, lblStatus1, lblStatus0, lblName2, lblName1, lblName0, lblScore2, lblScore1, lblScore0, lblRank1, lblRank2, lblRank0, btnClose));
+    setFormBorderStyle(FormBorderStyle.FixedDialog);
+    setMaximizeBox(false);
+    setMinimizeBox(false);
+    setName("FormViewHighScores");
+    setShowInTaskbar(false);
+    setStartPosition(FormStartPosition.CenterParent);
+    setText("High Scores");
+    ResumeLayout(false);
   }
 }

@@ -1,7 +1,5 @@
 package org.gts.bst.ship.equip;
 import jwinforms.Image;
-import org.gts.bst.ship.equip.EquipmentSubType;
-import org.gts.bst.ship.equip.EquipmentType;
 import spacetrader.Commander;
 import spacetrader.Game;
 import spacetrader.STSerializableObject;

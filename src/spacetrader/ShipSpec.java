@@ -1,7 +1,7 @@
 package spacetrader;
 import jwinforms.Image;
-import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.ShipSize;
+import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.equip.EquipmentType;
 import spacetrader.enums.Activity;
 import spacetrader.enums.TechLevel;
@@ -9,8 +9,13 @@ import spacetrader.util.Hashtable;
 
 
 public class ShipSpec extends STSerializableObject {
-  private ShipType _type = ShipType.Custom;
+  private Activity _pirates = Activity.NA;
+  private Activity _police = Activity.NA;
+  private Activity _traders = Activity.NA;
   private ShipSize _size = ShipSize.Tiny;
+  private ShipType _type = ShipType.Custom;
+  private TechLevel _minTech = TechLevel.Unavailable;
+  private boolean _hullUpgraded = false;
   private int _cargoBays = 0;
   private int _weaponSlots = 0;
   private int _shieldSlots = 0;
@@ -22,19 +27,14 @@ public class ShipSpec extends STSerializableObject {
   private int _repairCost = 0;
   private int _price = 0;
   private int _occurrence = 0;
-  private Activity _police = Activity.NA;
-  private Activity _pirates = Activity.NA;
-  private Activity _traders = Activity.NA;
-  private TechLevel _minTech = TechLevel.Unavailable;
-  private boolean _hullUpgraded = false;
   private int _imageIndex = Consts.ShipImgUseDefault;
 
   public ShipSpec() {
   }
 
   public ShipSpec(ShipType type, ShipSize size, int cargoBays, int weaponSlots, int shieldSlots, int gadgetSlots,
-                  int crewQuarters, int fuelTanks, int fuelCost, int hullStrength, int repairCost, int price, int occurrence,
-                  Activity police, Activity pirates, Activity traders, TechLevel minTechLevel) {
+      int crewQuarters, int fuelTanks, int fuelCost, int hullStrength, int repairCost, int price, int occurrence,
+      Activity police, Activity pirates, Activity traders, TechLevel minTechLevel) {
     _type = type;
     _size = size;
     _cargoBays = cargoBays;
@@ -76,16 +76,15 @@ public class ShipSpec extends STSerializableObject {
     _hullUpgraded = GetValueFromHash(hash, "_hullUpgraded", _hullUpgraded);
     _imageIndex = GetValueFromHash(hash, "_imageIndex", Consts.ShipImgUseDefault);
     // Get the images if the ship uses the custom images.
-    if(ImageIndex() == ShipType.Custom.CastToInt()) {
-      Game.CurrentGame().getParentWindow().setCustomShipImages(GetValueFromHash(hash,
-                                                                                "_images", Game.CurrentGame().getParentWindow().CustomShipImages()));
+    if(_imageIndex == ShipType.Custom.CastToInt()) {
+      Game.CurrentGame().getParentWindow().setCustomShipImages(GetValueFromHash(hash, "_images", Game.CurrentGame().getParentWindow().CustomShipImages()));
     }
     // Get the name if the ship is a custom design.
-    if(Type() == ShipType.Custom) {
+    if(_type == ShipType.Custom) {
       Strings.ShipNames[ShipType.Custom.CastToInt()] = GetValueFromHash(hash, "_name", Strings.ShipNames[ShipType.Custom.CastToInt()]);
       Consts.ShipSpecs[ShipType.Custom.CastToInt()] = new ShipSpec(_type, _size, _cargoBays, _weaponSlots,
-                                                                   _shieldSlots, _gadgetSlots, _crewQuarters, _fuelTanks, _fuelCost, _hullStrength, _repairCost,
-                                                                   _price, _occurrence, _police, _pirates, _traders, _minTech);
+          _shieldSlots, _gadgetSlots, _crewQuarters, _fuelTanks, _fuelCost, _hullStrength, _repairCost,
+          _price, _occurrence, _police, _pirates, _traders, _minTech);
       UpdateCustomImageOffsetConstants();
     }
   }

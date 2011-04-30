@@ -1,5 +1,6 @@
 package spacetrader;
 import java.util.ArrayList;
+import org.gts.bst.cargo.TradeItemType;
 import org.gts.bst.events.SpecialEventType;
 import org.gts.bst.ship.ShipSize;
 import spacetrader.enums.PoliticalSystemType;
@@ -8,15 +9,14 @@ import spacetrader.enums.SpecialResource;
 import spacetrader.enums.StarSystemId;
 import spacetrader.enums.SystemPressure;
 import spacetrader.enums.TechLevel;
-import org.gts.bst.cargo.TradeItemType;
 import spacetrader.util.Hashtable;
 
 
 public class StarSystem extends STSerializableObject {
   private PoliticalSystemType _politicalSystemType;
-  private ShipyardId _shipyardId = spacetrader.enums.ShipyardId.NA;
+  private ShipyardId _shipyardId = ShipyardId.NA;
   private ShipSize _size;
-  private SpecialEventType _specialEventType = org.gts.bst.events.SpecialEventType.NA;
+  private SpecialEventType _specialEventType = SpecialEventType.NA;
   private SpecialResource _specialResource;
   private StarSystemId _id;
   private SystemPressure _systemPressure;
@@ -28,7 +28,7 @@ public class StarSystem extends STSerializableObject {
   private int[] _tradeItems = new int[10];
 
   public StarSystem(StarSystemId id, int x, int y, ShipSize size, TechLevel techLevel,
-                    PoliticalSystemType politicalSystemType, SystemPressure systemPressure, SpecialResource specialResource) {
+      PoliticalSystemType politicalSystemType, SystemPressure systemPressure, SpecialResource specialResource) {
     _id = id;
     _x = x;
     _y = y;
@@ -97,21 +97,21 @@ public class StarSystem extends STSerializableObject {
 
   @Override
   public Hashtable Serialize() {
-    Hashtable hash = super.Serialize();
-    hash.add("_id", _id.CastToInt());
-    hash.add("_x", _x);
-    hash.add("_y", _y);
-    hash.add("_size", _size.CastToInt());
-    hash.add("_techLevel", _techLevel.CastToInt());
-    hash.add("_politicalSystemType", _politicalSystemType.CastToInt());
-    hash.add("_systemPressure", _systemPressure.CastToInt());
-    hash.add("_specialResource", _specialResource.CastToInt());
-    hash.add("_specialEventType", _specialEventType.CastToInt());
-    hash.add("_tradeItems", _tradeItems);
-    hash.add("_countDown", _countDown);
-    hash.add("_visited", _visited);
-    hash.add("_shipyardId", _shipyardId.CastToInt());
-    return hash;
+    Hashtable ht = super.Serialize();
+    ht.add("_id", _id.CastToInt());
+    ht.add("_x", _x);
+    ht.add("_y", _y);
+    ht.add("_size", _size.CastToInt());
+    ht.add("_techLevel", _techLevel.CastToInt());
+    ht.add("_politicalSystemType", _politicalSystemType.CastToInt());
+    ht.add("_systemPressure", _systemPressure.CastToInt());
+    ht.add("_specialResource", _specialResource.CastToInt());
+    ht.add("_specialEventType", _specialEventType.CastToInt());
+    ht.add("_tradeItems", _tradeItems);
+    ht.add("_countDown", _countDown);
+    ht.add("_visited", _visited);
+    ht.add("_shipyardId", _shipyardId.CastToInt());
+    return ht;
   }
 
   public boolean ShowSpecialButton() {
@@ -250,8 +250,8 @@ public class StarSystem extends STSerializableObject {
     return _countDown;
   }
 
-  public void CountDown(int value) {
-    _countDown = value;
+  public void CountDown(int i) {
+    _countDown = i;
   }
 
   public boolean DestOk() {
@@ -291,21 +291,21 @@ public class StarSystem extends STSerializableObject {
     return _politicalSystemType;
   }
 
-  public void PoliticalSystemType(PoliticalSystemType value) {
-    _politicalSystemType = value;
+  public void PoliticalSystemType(PoliticalSystemType pst) {
+    _politicalSystemType = pst;
   }
 
   public Shipyard Shipyard() {
     ShipyardId();
-    return (_shipyardId == spacetrader.enums.ShipyardId.NA ? null : Consts.Shipyards[_shipyardId.CastToInt()]);
+    return (_shipyardId == ShipyardId.NA ? null : Consts.Shipyards[_shipyardId.CastToInt()]);
   }
 
   public ShipyardId ShipyardId() {
     return _shipyardId;
   }
 
-  public void ShipyardId(ShipyardId value) {
-    _shipyardId = value;
+  public void ShipyardId(ShipyardId si) {
+    _shipyardId = si;
   }
 
   public ShipSize Size() {
@@ -314,15 +314,15 @@ public class StarSystem extends STSerializableObject {
 
   public SpecialEvent SpecialEvent() {
     SpecialEventType();
-    return (_specialEventType == org.gts.bst.events.SpecialEventType.NA ? null : Consts.SpecialEvents[_specialEventType.CastToInt()]);
+    return (_specialEventType == SpecialEventType.NA ? null : Consts.SpecialEvents[_specialEventType.CastToInt()]);
   }
 
   public SpecialEventType SpecialEventType() {
     return _specialEventType;
   }
 
-  public void SpecialEventType(SpecialEventType value) {
-    _specialEventType = value;
+  public void SpecialEventType(SpecialEventType set) {
+    _specialEventType = set;
   }
 
   public SpecialResource SpecialResource() {
@@ -333,16 +333,16 @@ public class StarSystem extends STSerializableObject {
     return _systemPressure;
   }
 
-  public void SystemPressure(SystemPressure value) {
-    _systemPressure = value;
+  public void SystemPressure(SystemPressure sp) {
+    _systemPressure = sp;
   }
 
   public TechLevel TechLevel() {
     return _techLevel;
   }
 
-  public void TechLevel(TechLevel value) {
-    _techLevel = value;
+  public void TechLevel(TechLevel tl) {
+    _techLevel = tl;
   }
 
   public int[] TradeItems() {
@@ -353,23 +353,23 @@ public class StarSystem extends STSerializableObject {
     return _visited;
   }
 
-  public void Visited(boolean value) {
-    _visited = value;
+  public void Visited(boolean b) {
+    _visited = b;
   }
 
   public int X() {
     return _x;
   }
 
-  public void X(int value) {
-    _x = value;
+  public void X(int i) {
+    _x = i;
   }
 
   public int Y() {
     return _y;
   }
 
-  public void Y(int value) {
-    _y = value;
+  public void Y(int i) {
+    _y = i;
   }
 }

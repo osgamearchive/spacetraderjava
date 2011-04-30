@@ -219,6 +219,7 @@ public class Functions {
         try {
           outStream.close();
         } catch(IOException e) {
+          e.printStackTrace();
         }
       }
     }

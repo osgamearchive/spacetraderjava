@@ -1,13 +1,13 @@
 package spacetrader;
 import jwinforms.Image;
-import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.ShipSize;
+import org.gts.bst.ship.ShipType;
 import spacetrader.util.Hashtable;
 
 
 public class ShipTemplate extends STSerializableObject implements Comparable<ShipTemplate> {
   private Image[] _images = null;
-  private ShipSize _size = org.gts.bst.ship.ShipSize.Tiny;
+  private ShipSize _size = ShipSize.Tiny;
   private String _name = null;
   private int _imageIndex = ShipType.Custom.CastToInt();
   private int _cargoBays = 0;
@@ -18,160 +18,160 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
   private int _fuelTanks = 0;
   private int _hullStrength = 0;
 
-  public ShipTemplate(ShipSize size, String name) {
-    _name = name;
-    _size = size;
+  public ShipTemplate(Hashtable ht) {
+    _name = GetValueFromHash(ht, "_name", _name, String.class);
+    _size = (GetValueFromHash(ht, "_size", _size));
+    _imageIndex = GetValueFromHash(ht, "_imageIndex", _imageIndex);
+    _cargoBays = GetValueFromHash(ht, "_cargoBays", _cargoBays);
+    _weaponSlots = GetValueFromHash(ht, "_weaponSlots", _weaponSlots);
+    _shieldSlots = GetValueFromHash(ht, "_shieldSlots", _shieldSlots);
+    _gadgetSlots = GetValueFromHash(ht, "_gadgetSlots", _gadgetSlots);
+    _crewQuarters = GetValueFromHash(ht, "_crewQuarters", _crewQuarters);
+    _fuelTanks = GetValueFromHash(ht, "_fuelTanks", _fuelTanks);
+    _hullStrength = GetValueFromHash(ht, "_hullStrength", _hullStrength);
+    _images = GetValueFromHash(ht, "_images", _images);
+  }
+
+  public ShipTemplate(ShipSize s, String t) {
+    _size = s;
+    _name = t;
     _images = Game.CurrentGame().getParentWindow().CustomShipImages();
   }
 
-  public ShipTemplate(ShipSpec spec, String name) {
-    _name = name;
-    _size = spec.getSize();
-    _imageIndex = spec.ImageIndex();
-    _cargoBays = spec.CargoBays();
-    _weaponSlots = spec.getWeaponSlots();
-    _shieldSlots = spec.getShieldSlots();
-    _gadgetSlots = spec.getGadgetSlots();
-    _crewQuarters = spec.getCrewQuarters();
-    _fuelTanks = spec.FuelTanks();
-    _hullStrength = spec.HullStrength();
-    if(ImageIndex() == Consts.ShipImgUseDefault) {
+  public ShipTemplate(ShipSpec s, String t) {
+    _name = t;
+    _size = s.getSize();
+    _imageIndex = s.ImageIndex();
+    _cargoBays = s.CargoBays();
+    _weaponSlots = s.getWeaponSlots();
+    _shieldSlots = s.getShieldSlots();
+    _gadgetSlots = s.getGadgetSlots();
+    _crewQuarters = s.getCrewQuarters();
+    _fuelTanks = s.FuelTanks();
+    _hullStrength = s.HullStrength();
+    if(_imageIndex == Consts.ShipImgUseDefault) {
       _images = Game.CurrentGame().getParentWindow().CustomShipImages();
     }
   }
 
-  public ShipTemplate(Hashtable hash) {
-    _name = GetValueFromHash(hash, "_name", _name, String.class);
-    _size = (GetValueFromHash(hash, "_size", _size));
-    _imageIndex = GetValueFromHash(hash, "_imageIndex", _imageIndex);
-    _cargoBays = GetValueFromHash(hash, "_cargoBays", _cargoBays);
-    _weaponSlots = GetValueFromHash(hash, "_weaponSlots", _weaponSlots);
-    _shieldSlots = GetValueFromHash(hash, "_shieldSlots", _shieldSlots);
-    _gadgetSlots = GetValueFromHash(hash, "_gadgetSlots", _gadgetSlots);
-    _crewQuarters = GetValueFromHash(hash, "_crewQuarters", _crewQuarters);
-    _fuelTanks = GetValueFromHash(hash, "_fuelTanks", _fuelTanks);
-    _hullStrength = GetValueFromHash(hash, "_hullStrength", _hullStrength);
-    _images = GetValueFromHash(hash, "_images", _images);
-  }
-
   @Override
-  public int compareTo(ShipTemplate other) {
-    if(other == null) {
+  public int compareTo(ShipTemplate st) {
+    if(st == null) {
       return 1;
     } else {
-      return Name().compareTo((other).Name());
+      return _name.compareTo(st._name);
     }
   }
 
   @Override
   public Hashtable Serialize() {
-    Hashtable hash = super.Serialize();
-    hash.add("_name", _name);
-    hash.add("_size", _size.CastToInt());
-    hash.add("_imageIndex", _imageIndex);
-    hash.add("_cargoBays", _cargoBays);
-    hash.add("_weaponSlots", _weaponSlots);
-    hash.add("_shieldSlots", _shieldSlots);
-    hash.add("_gadgetSlots", _gadgetSlots);
-    hash.add("_crewQuarters", _crewQuarters);
-    hash.add("_fuelTanks", _fuelTanks);
-    hash.add("_hullStrength", _hullStrength);
+    Hashtable ht = super.Serialize();
+    ht.add("_name", _name);
+    ht.add("_size", _size.CastToInt());
+    ht.add("_imageIndex", _imageIndex);
+    ht.add("_cargoBays", _cargoBays);
+    ht.add("_weaponSlots", _weaponSlots);
+    ht.add("_shieldSlots", _shieldSlots);
+    ht.add("_gadgetSlots", _gadgetSlots);
+    ht.add("_crewQuarters", _crewQuarters);
+    ht.add("_fuelTanks", _fuelTanks);
+    ht.add("_hullStrength", _hullStrength);
     if(_images != null) {
-      hash.add("_images", _images);
+      ht.add("_images", _images);
     }
-    return hash;
+    return ht;
   }
 
   @Override
   public String toString() {
-    return Name();
+    return _name;
   }
 
   public int CargoBays() {
     return _cargoBays;
   }
 
-  public void CargoBays(int value) {
-    _cargoBays = value;
+  public void CargoBays(int i) {
+    _cargoBays = i;
   }
 
   public int CrewQuarters() {
     return _crewQuarters;
   }
 
-  public void CrewQuarters(int value) {
-    _crewQuarters = value;
+  public void CrewQuarters(int i) {
+    _crewQuarters = i;
   }
 
   public int FuelTanks() {
     return _fuelTanks;
   }
 
-  public void FuelTanks(int value) {
-    _fuelTanks = value;
+  public void FuelTanks(int i) {
+    _fuelTanks = i;
   }
 
   public int GadgetSlots() {
     return _gadgetSlots;
   }
 
-  public void GadgetSlots(int value) {
-    _gadgetSlots = value;
+  public void GadgetSlots(int i) {
+    _gadgetSlots = i;
   }
 
   public int HullStrength() {
     return _hullStrength;
   }
 
-  public void HullStrength(int value) {
-    _hullStrength = value;
+  public void HullStrength(int i) {
+    _hullStrength = i;
   }
 
   public int ImageIndex() {
     return _imageIndex;
   }
 
-  public void ImageIndex(int value) {
-    _imageIndex = value;
+  public void ImageIndex(int i) {
+    _imageIndex = i;
   }
 
   public Image[] Images() {
     return _images;
   }
 
-  public void Images(Image[] value) {
-    _images = value;
+  public void Images(Image[] is) {
+    _images = is;
   }
 
   public String Name() {
     return _name;
   }
 
-  public void Name(String value) {
-    _name = value;
+  public void Name(String s) {
+    _name = s;
   }
 
   public int ShieldSlots() {
     return _shieldSlots;
   }
 
-  public void ShieldSlots(int value) {
-    _shieldSlots = value;
+  public void ShieldSlots(int i) {
+    _shieldSlots = i;
   }
 
   public ShipSize Size() {
     return _size;
   }
 
-  public void Size(ShipSize value) {
-    _size = value;
+  public void Size(ShipSize ss) {
+    _size = ss;
   }
 
   public int WeaponSlots() {
     return _weaponSlots;
   }
 
-  public void WeaponSlots(int value) {
-    _weaponSlots = value;
+  public void WeaponSlots(int i) {
+    _weaponSlots = i;
   }
 }

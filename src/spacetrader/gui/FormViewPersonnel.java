@@ -1,4 +1,5 @@
 package spacetrader.gui;
+import java.awt.Point;
 import jwinforms.BorderStyle;
 import jwinforms.Button;
 import jwinforms.DialogResult;
@@ -8,12 +9,12 @@ import jwinforms.FlatStyle;
 import jwinforms.Font;
 import jwinforms.FontStyle;
 import jwinforms.FormBorderStyle;
+import jwinforms.FormSize;
 import jwinforms.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.Label;
 import jwinforms.ListBox;
-import jwinforms.FormSize;
 import jwinforms.WinformForm;
 import org.gts.bst.crew.CrewMemberId;
 import spacetrader.CrewMember;
@@ -54,225 +55,220 @@ public class FormViewPersonnel extends WinformForm {
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
-    this.btnClose = new Button();
-    this.boxCurrentCrew = new GroupBox();
-    this.lstCrew = new ListBox();
-    this.boxForHire = new GroupBox();
-    this.lstForHire = new ListBox();
-    this.boxInfo = new GroupBox();
-    this.btnHireFire = new Button();
-    this.lblRate = new Label();
-    this.lblName = new Label();
-    this.lblEngineer = new Label();
-    this.lblTrader = new Label();
-    this.lblFighter = new Label();
-    this.lblPilot = new Label();
-    this.lblEngineerLabel = new Label();
-    this.lblTraderLabel = new Label();
-    this.lblFighterLabel = new Label();
-    this.lblPilotLabel = new Label();
-    this.lblCrewNoQuarters = new Label();
-    this.lblForHireNone = new Label();
-    this.boxCurrentCrew.SuspendLayout();
-    this.boxForHire.SuspendLayout();
-    this.boxInfo.SuspendLayout();
-    this.SuspendLayout();
+    btnClose = new Button();
+    boxCurrentCrew = new GroupBox();
+    lstCrew = new ListBox();
+    boxForHire = new GroupBox();
+    lstForHire = new ListBox();
+    boxInfo = new GroupBox();
+    btnHireFire = new Button();
+    lblRate = new Label();
+    lblName = new Label();
+    lblEngineer = new Label();
+    lblTrader = new Label();
+    lblFighter = new Label();
+    lblPilot = new Label();
+    lblEngineerLabel = new Label();
+    lblTraderLabel = new Label();
+    lblFighterLabel = new Label();
+    lblPilotLabel = new Label();
+    lblCrewNoQuarters = new Label();
+    lblForHireNone = new Label();
+    boxCurrentCrew.SuspendLayout();
+    boxForHire.SuspendLayout();
+    boxInfo.SuspendLayout();
+    SuspendLayout();
     // btnClose
-    this.btnClose.setDialogResult(DialogResult.Cancel);
-    this.btnClose.setLocation(new java.awt.Point(-32, -32));
-    this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new FormSize(32, 32));
-    this.btnClose.setTabIndex(32);
-    this.btnClose.setTabStop(false);
-    this.btnClose.setText("X");
+    btnClose.setDialogResult(DialogResult.Cancel);
+    btnClose.setLocation(new Point(-32, -32));
+    btnClose.setName("btnClose");
+    btnClose.setSize(new FormSize(32, 32));
+    btnClose.setTabIndex(32);
+    btnClose.setTabStop(false);
+    btnClose.setText("X");
     // boxCurrentCrew
-    this.boxCurrentCrew.Controls.add(this.lblCrewNoQuarters);
-    this.boxCurrentCrew.Controls.add(this.lstCrew);
-    this.boxCurrentCrew.setLocation(new java.awt.Point(8, 8));
-    this.boxCurrentCrew.setName("boxCurrentCrew");
-    this.boxCurrentCrew.setSize(new FormSize(144, 114));
-    this.boxCurrentCrew.setTabIndex(33);
-    this.boxCurrentCrew.setTabStop(false);
-    this.boxCurrentCrew.setText("Current Crew");
+    boxCurrentCrew.Controls.add(lblCrewNoQuarters);
+    boxCurrentCrew.Controls.add(lstCrew);
+    boxCurrentCrew.setLocation(new Point(8, 8));
+    boxCurrentCrew.setName("boxCurrentCrew");
+    boxCurrentCrew.setSize(new FormSize(144, 114));
+    boxCurrentCrew.setTabIndex(33);
+    boxCurrentCrew.setTabStop(false);
+    boxCurrentCrew.setText("Current Crew");
     // lstCrew
-    this.lstCrew.setBorderStyle(BorderStyle.FixedSingle);
-    this.lstCrew.setLocation(new java.awt.Point(8, 24));
-    this.lstCrew.setName("lstCrew");
-    this.lstCrew.setSize(new FormSize(126, 80));
-    this.lstCrew.setTabIndex(6);
-    this.lstCrew.setDoubleClick(new EventHandler<Object, EventArgs>()
-		 {
+    lstCrew.setBorderStyle(BorderStyle.FixedSingle);
+    lstCrew.setLocation(new Point(8, 24));
+    lstCrew.setName("lstCrew");
+    lstCrew.setSize(new FormSize(126, 80));
+    lstCrew.setTabIndex(6);
+    lstCrew.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         HireFire(sender, e);
       }
     });
-    this.lstCrew.setSelectedIndexChanged(new EventHandler<Object, EventArgs>()
-		 {
+    lstCrew.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SelectedIndexChanged(sender, e);
       }
     });
     // boxForHire
-    this.boxForHire.Controls.add(this.lblForHireNone);
-    this.boxForHire.Controls.add(this.lstForHire);
-    this.boxForHire.setLocation(new java.awt.Point(160, 8));
-    this.boxForHire.setName("boxForHire");
-    this.boxForHire.setSize(new FormSize(144, 114));
-    this.boxForHire.setTabIndex(34);
-    this.boxForHire.setTabStop(false);
-    this.boxForHire.setText("Mercenaries For Hire");
+    boxForHire.Controls.add(lblForHireNone);
+    boxForHire.Controls.add(lstForHire);
+    boxForHire.setLocation(new Point(160, 8));
+    boxForHire.setName("boxForHire");
+    boxForHire.setSize(new FormSize(144, 114));
+    boxForHire.setTabIndex(34);
+    boxForHire.setTabStop(false);
+    boxForHire.setText("Mercenaries For Hire");
     // lstForHire
-    this.lstForHire.setBorderStyle(BorderStyle.FixedSingle);
-    this.lstForHire.setLocation(new java.awt.Point(8, 24));
-    this.lstForHire.setName("lstForHire");
-    this.lstForHire.setSize(new FormSize(126, 80));
-    this.lstForHire.setTabIndex(5);
-    this.lstForHire.setDoubleClick(new EventHandler<Object, EventArgs>()
-		 {
+    lstForHire.setBorderStyle(BorderStyle.FixedSingle);
+    lstForHire.setLocation(new Point(8, 24));
+    lstForHire.setName("lstForHire");
+    lstForHire.setSize(new FormSize(126, 80));
+    lstForHire.setTabIndex(5);
+    lstForHire.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         HireFire(sender, e);
       }
     });
-    this.lstForHire.setSelectedIndexChanged(new EventHandler<Object, EventArgs>()
-		 {
+    lstForHire.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         SelectedIndexChanged(sender, e);
       }
     });
     // boxInfo
-    this.boxInfo.Controls.add(this.btnHireFire);
-    this.boxInfo.Controls.add(this.lblRate);
-    this.boxInfo.Controls.add(this.lblName);
-    this.boxInfo.Controls.add(this.lblEngineer);
-    this.boxInfo.Controls.add(this.lblTrader);
-    this.boxInfo.Controls.add(this.lblFighter);
-    this.boxInfo.Controls.add(this.lblPilot);
-    this.boxInfo.Controls.add(this.lblEngineerLabel);
-    this.boxInfo.Controls.add(this.lblTraderLabel);
-    this.boxInfo.Controls.add(this.lblFighterLabel);
-    this.boxInfo.Controls.add(this.lblPilotLabel);
-    this.boxInfo.setLocation(new java.awt.Point(312, 8));
-    this.boxInfo.setName("boxInfo");
-    this.boxInfo.setSize(new FormSize(168, 114));
-    this.boxInfo.setTabIndex(35);
-    this.boxInfo.setTabStop(false);
-    this.boxInfo.setText("Mercenary Information");
+    boxInfo.Controls.add(btnHireFire);
+    boxInfo.Controls.add(lblRate);
+    boxInfo.Controls.add(lblName);
+    boxInfo.Controls.add(lblEngineer);
+    boxInfo.Controls.add(lblTrader);
+    boxInfo.Controls.add(lblFighter);
+    boxInfo.Controls.add(lblPilot);
+    boxInfo.Controls.add(lblEngineerLabel);
+    boxInfo.Controls.add(lblTraderLabel);
+    boxInfo.Controls.add(lblFighterLabel);
+    boxInfo.Controls.add(lblPilotLabel);
+    boxInfo.setLocation(new Point(312, 8));
+    boxInfo.setName("boxInfo");
+    boxInfo.setSize(new FormSize(168, 114));
+    boxInfo.setTabIndex(35);
+    boxInfo.setTabStop(false);
+    boxInfo.setText("Mercenary Information");
     // btnHireFire
-    this.btnHireFire.setFlatStyle(FlatStyle.Flat);
-    this.btnHireFire.setLocation(new java.awt.Point(120, 80));
-    this.btnHireFire.setName("btnHireFire");
-    this.btnHireFire.setSize(new FormSize(36, 22));
-    this.btnHireFire.setTabIndex(4);
-    this.btnHireFire.setText("Hire");
-    this.btnHireFire.setClick(new EventHandler<Object, EventArgs>()
-		 {
+    btnHireFire.setFlatStyle(FlatStyle.Flat);
+    btnHireFire.setLocation(new Point(120, 80));
+    btnHireFire.setName("btnHireFire");
+    btnHireFire.setSize(new FormSize(36, 22));
+    btnHireFire.setTabIndex(4);
+    btnHireFire.setText("Hire");
+    btnHireFire.setClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         HireFire(sender, e);
       }
     });
     // lblRate
-    this.lblRate.setLocation(new java.awt.Point(104, 40));
-    this.lblRate.setName("lblRate");
-    this.lblRate.setSize(new FormSize(59, 13));
-    this.lblRate.setTabIndex(97);
-    this.lblRate.setText("88 cr. daily");
+    lblRate.setLocation(new Point(104, 40));
+    lblRate.setName("lblRate");
+    lblRate.setSize(new FormSize(59, 13));
+    lblRate.setTabIndex(97);
+    lblRate.setText("88 cr. daily");
     // lblName
-    this.lblName.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
-    this.lblName.setLocation(new java.awt.Point(12, 18));
-    this.lblName.setName("lblName");
-    this.lblName.setSize(new FormSize(72, 13));
-    this.lblName.setTabIndex(96);
-    this.lblName.setText("Xxxxxxxxxxx");
+    lblName.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblName.setLocation(new Point(12, 18));
+    lblName.setName("lblName");
+    lblName.setSize(new FormSize(72, 13));
+    lblName.setTabIndex(96);
+    lblName.setText("Xxxxxxxxxxx");
     // lblEngineer
-    this.lblEngineer.setLocation(new java.awt.Point(64, 88));
-    this.lblEngineer.setName("lblEngineer");
-    this.lblEngineer.setSize(new FormSize(17, 13));
-    this.lblEngineer.setTabIndex(95);
-    this.lblEngineer.setText("88");
+    lblEngineer.setLocation(new Point(64, 88));
+    lblEngineer.setName("lblEngineer");
+    lblEngineer.setSize(new FormSize(17, 13));
+    lblEngineer.setTabIndex(95);
+    lblEngineer.setText("88");
     // lblTrader
-    this.lblTrader.setLocation(new java.awt.Point(64, 72));
-    this.lblTrader.setName("lblTrader");
-    this.lblTrader.setSize(new FormSize(17, 13));
-    this.lblTrader.setTabIndex(94);
-    this.lblTrader.setText("88");
+    lblTrader.setLocation(new Point(64, 72));
+    lblTrader.setName("lblTrader");
+    lblTrader.setSize(new FormSize(17, 13));
+    lblTrader.setTabIndex(94);
+    lblTrader.setText("88");
     // lblFighter
-    this.lblFighter.setLocation(new java.awt.Point(64, 56));
-    this.lblFighter.setName("lblFighter");
-    this.lblFighter.setSize(new FormSize(17, 13));
-    this.lblFighter.setTabIndex(93);
-    this.lblFighter.setText("88");
+    lblFighter.setLocation(new Point(64, 56));
+    lblFighter.setName("lblFighter");
+    lblFighter.setSize(new FormSize(17, 13));
+    lblFighter.setTabIndex(93);
+    lblFighter.setText("88");
     // lblPilot
-    this.lblPilot.setLocation(new java.awt.Point(64, 40));
-    this.lblPilot.setName("lblPilot");
-    this.lblPilot.setSize(new FormSize(17, 13));
-    this.lblPilot.setTabIndex(92);
-    this.lblPilot.setText("88");
+    lblPilot.setLocation(new Point(64, 40));
+    lblPilot.setName("lblPilot");
+    lblPilot.setSize(new FormSize(17, 13));
+    lblPilot.setTabIndex(92);
+    lblPilot.setText("88");
     // lblEngineerLabel
-    this.lblEngineerLabel.setAutoSize(true);
-    this.lblEngineerLabel.setLocation(new java.awt.Point(12, 88));
-    this.lblEngineerLabel.setName("lblEngineerLabel");
-    this.lblEngineerLabel.setSize(new FormSize(53, 16));
-    this.lblEngineerLabel.setTabIndex(91);
-    this.lblEngineerLabel.setText("Engineer:");
+    lblEngineerLabel.setAutoSize(true);
+    lblEngineerLabel.setLocation(new Point(12, 88));
+    lblEngineerLabel.setName("lblEngineerLabel");
+    lblEngineerLabel.setSize(new FormSize(53, 16));
+    lblEngineerLabel.setTabIndex(91);
+    lblEngineerLabel.setText("Engineer:");
     // lblTraderLabel
-    this.lblTraderLabel.setAutoSize(true);
-    this.lblTraderLabel.setLocation(new java.awt.Point(12, 72));
-    this.lblTraderLabel.setName("lblTraderLabel");
-    this.lblTraderLabel.setSize(new FormSize(41, 16));
-    this.lblTraderLabel.setTabIndex(90);
-    this.lblTraderLabel.setText("Trader:");
+    lblTraderLabel.setAutoSize(true);
+    lblTraderLabel.setLocation(new Point(12, 72));
+    lblTraderLabel.setName("lblTraderLabel");
+    lblTraderLabel.setSize(new FormSize(41, 16));
+    lblTraderLabel.setTabIndex(90);
+    lblTraderLabel.setText("Trader:");
     // lblFighterLabel
-    this.lblFighterLabel.setAutoSize(true);
-    this.lblFighterLabel.setLocation(new java.awt.Point(12, 56));
-    this.lblFighterLabel.setName("lblFighterLabel");
-    this.lblFighterLabel.setSize(new FormSize(43, 16));
-    this.lblFighterLabel.setTabIndex(89);
-    this.lblFighterLabel.setText("Fighter:");
+    lblFighterLabel.setAutoSize(true);
+    lblFighterLabel.setLocation(new Point(12, 56));
+    lblFighterLabel.setName("lblFighterLabel");
+    lblFighterLabel.setSize(new FormSize(43, 16));
+    lblFighterLabel.setTabIndex(89);
+    lblFighterLabel.setText("Fighter:");
     // lblPilotLabel
-    this.lblPilotLabel.setAutoSize(true);
-    this.lblPilotLabel.setLocation(new java.awt.Point(12, 40));
-    this.lblPilotLabel.setName("lblPilotLabel");
-    this.lblPilotLabel.setSize(new FormSize(29, 16));
-    this.lblPilotLabel.setTabIndex(88);
-    this.lblPilotLabel.setText("Pilot:");
+    lblPilotLabel.setAutoSize(true);
+    lblPilotLabel.setLocation(new Point(12, 40));
+    lblPilotLabel.setName("lblPilotLabel");
+    lblPilotLabel.setSize(new FormSize(29, 16));
+    lblPilotLabel.setTabIndex(88);
+    lblPilotLabel.setText("Pilot:");
     // lblCrewNoQuarters
-    this.lblCrewNoQuarters.setLocation(new java.awt.Point(16, 24));
-    this.lblCrewNoQuarters.setName("lblCrewNoQuarters");
-    this.lblCrewNoQuarters.setSize(new FormSize(120, 16));
-    this.lblCrewNoQuarters.setTabIndex(7);
-    this.lblCrewNoQuarters.setText("No quarters available");
-    this.lblCrewNoQuarters.setVisible(false);
+    lblCrewNoQuarters.setLocation(new Point(16, 24));
+    lblCrewNoQuarters.setName("lblCrewNoQuarters");
+    lblCrewNoQuarters.setSize(new FormSize(120, 16));
+    lblCrewNoQuarters.setTabIndex(7);
+    lblCrewNoQuarters.setText("No quarters available");
+    lblCrewNoQuarters.setVisible(false);
     // lblForHireNone
-    this.lblForHireNone.setLocation(new java.awt.Point(16, 24));
-    this.lblForHireNone.setName("lblForHireNone");
-    this.lblForHireNone.setSize(new FormSize(120, 16));
-    this.lblForHireNone.setTabIndex(8);
-    this.lblForHireNone.setText("No one for hire");
-    this.lblForHireNone.setVisible(false);
+    lblForHireNone.setLocation(new Point(16, 24));
+    lblForHireNone.setName("lblForHireNone");
+    lblForHireNone.setSize(new FormSize(120, 16));
+    lblForHireNone.setTabIndex(8);
+    lblForHireNone.setText("No one for hire");
+    lblForHireNone.setVisible(false);
     // FormViewPersonnel
-    this.setAutoScaleBaseSize(new FormSize(5, 13));
-    this.setCancelButton(this.btnClose);
-    this.setClientSize(new FormSize(488, 129));
-    this.Controls.add(this.boxInfo);
-    this.Controls.add(this.boxForHire);
-    this.Controls.add(this.boxCurrentCrew);
-    this.Controls.add(this.btnClose);
-    this.setFormBorderStyle(FormBorderStyle.FixedDialog);
-    this.setMaximizeBox(false);
-    this.setMinimizeBox(false);
-    this.setName("FormViewPersonnel");
-    this.setShowInTaskbar(false);
-    this.setStartPosition(FormStartPosition.CenterParent);
-    this.setText("Personnel");
-    this.boxCurrentCrew.ResumeLayout(false);
-    this.boxForHire.ResumeLayout(false);
-    this.boxInfo.ResumeLayout(false);
-    this.ResumeLayout(false);
+    setAutoScaleBaseSize(new FormSize(5, 13));
+    setCancelButton(btnClose);
+    setClientSize(new FormSize(488, 129));
+    Controls.add(boxInfo);
+    Controls.add(boxForHire);
+    Controls.add(boxCurrentCrew);
+    Controls.add(btnClose);
+    setFormBorderStyle(FormBorderStyle.FixedDialog);
+    setMaximizeBox(false);
+    setMinimizeBox(false);
+    setName("FormViewPersonnel");
+    setShowInTaskbar(false);
+    setStartPosition(FormStartPosition.CenterParent);
+    setText("Personnel");
+    boxCurrentCrew.ResumeLayout(false);
+    boxForHire.ResumeLayout(false);
+    boxInfo.ResumeLayout(false);
+    ResumeLayout(false);
   }
 
   private void DeselectAll() {

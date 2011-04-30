@@ -1,8 +1,8 @@
 package spacetrader;
+import org.gts.bst.cargo.TradeItemType;
 import spacetrader.enums.SpecialResource;
 import spacetrader.enums.SystemPressure;
 import spacetrader.enums.TechLevel;
-import org.gts.bst.cargo.TradeItemType;
 
 
 public class TradeItem implements Comparable<TradeItem> {
@@ -21,8 +21,8 @@ public class TradeItem implements Comparable<TradeItem> {
   private int _roundOff;      // Roundoff price for trade in orbit
 
   public TradeItem(TradeItemType type, TechLevel techProduction, TechLevel techUsage, TechLevel techTopProduction, int piceLowTech,
-                   int priceInc, int priceVariance, SystemPressure pressurePriceHike, SpecialResource resourceLowPrice,
-                   SpecialResource resourceHighPrice, int minTradePrice, int maxTradePrice, int roundOff) {
+      int priceInc, int priceVariance, SystemPressure pressurePriceHike, SpecialResource resourceLowPrice,
+      SpecialResource resourceHighPrice, int minTradePrice, int maxTradePrice, int roundOff) {
     _type = type;
     _techProduction = techProduction;
     _techUsage = techUsage;

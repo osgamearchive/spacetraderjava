@@ -1,4 +1,5 @@
 package spacetrader.gui;
+import java.awt.Point;
 import jwinforms.Button;
 import jwinforms.CheckBox;
 import jwinforms.DialogResult;
@@ -6,9 +7,9 @@ import jwinforms.EventArgs;
 import jwinforms.EventHandler;
 import jwinforms.FlatStyle;
 import jwinforms.FormBorderStyle;
+import jwinforms.FormSize;
 import jwinforms.FormStartPosition;
 import jwinforms.Label;
-import jwinforms.FormSize;
 import jwinforms.TextBox;
 import jwinforms.WinformForm;
 
@@ -30,66 +31,66 @@ public class FormFind extends WinformForm {
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
-    this.lblText = new Label();
-    this.btnOk = new Button();
-    this.btnCancel = new Button();
-    this.txtSystem = new TextBox();
-    this.chkTrack = new CheckBox();
-    this.SuspendLayout();
+    lblText = new Label();
+    btnOk = new Button();
+    btnCancel = new Button();
+    txtSystem = new TextBox();
+    chkTrack = new CheckBox();
+    SuspendLayout();
     // lblText
-    this.lblText.setAutoSize(true);
-    this.lblText.setLocation(new java.awt.Point(8, 8));
-    this.lblText.setName("lblText");
-    this.lblText.setSize(new FormSize(177, 13));
-    this.lblText.setTabIndex(3);
-    this.lblText.setText("Which system are you looking for?");
+    lblText.setAutoSize(true);
+    lblText.setLocation(new Point(8, 8));
+    lblText.setName("lblText");
+    lblText.setSize(new FormSize(177, 13));
+    lblText.setTabIndex(3);
+    lblText.setText("Which system are you looking for?");
     // btnOk
-    this.btnOk.setDialogResult(DialogResult.OK);
-    this.btnOk.setFlatStyle(FlatStyle.Flat);
-    this.btnOk.setLocation(new java.awt.Point(43, 68));
-    this.btnOk.setName("btnOk");
-    this.btnOk.setSize(new FormSize(40, 22));
-    this.btnOk.setTabIndex(3);
-    this.btnOk.setText("Ok");
+    btnOk.setDialogResult(DialogResult.OK);
+    btnOk.setFlatStyle(FlatStyle.Flat);
+    btnOk.setLocation(new Point(43, 68));
+    btnOk.setName("btnOk");
+    btnOk.setSize(new FormSize(40, 22));
+    btnOk.setTabIndex(3);
+    btnOk.setText("Ok");
     // btnCancel
-    this.btnCancel.setDialogResult(DialogResult.Cancel);
-    this.btnCancel.setFlatStyle(FlatStyle.Flat);
-    this.btnCancel.setLocation(new java.awt.Point(91, 68));
-    this.btnCancel.setName("btnCancel");
-    this.btnCancel.setSize(new FormSize(50, 22));
-    this.btnCancel.setTabIndex(4);
-    this.btnCancel.setText("Cancel");
+    btnCancel.setDialogResult(DialogResult.Cancel);
+    btnCancel.setFlatStyle(FlatStyle.Flat);
+    btnCancel.setLocation(new Point(91, 68));
+    btnCancel.setName("btnCancel");
+    btnCancel.setSize(new FormSize(50, 22));
+    btnCancel.setTabIndex(4);
+    btnCancel.setText("Cancel");
     // txtSystem
-    this.txtSystem.setLocation(new java.awt.Point(8, 24));
-    this.txtSystem.setName("txtSystem");
-    this.txtSystem.setSize(new FormSize(168, 20));
-    this.txtSystem.setTabIndex(1);
-    this.txtSystem.setText("");
+    txtSystem.setLocation(new Point(8, 24));
+    txtSystem.setName("txtSystem");
+    txtSystem.setSize(new FormSize(168, 20));
+    txtSystem.setTabIndex(1);
+    txtSystem.setText("");
     // chkTrack
-    this.chkTrack.setLocation(new java.awt.Point(8, 48));
-    this.chkTrack.setName("chkTrack");
-    this.chkTrack.setSize(new FormSize(112, 16));
-    this.chkTrack.setTabIndex(2);
-    this.chkTrack.setText("Track this system");
+    chkTrack.setLocation(new Point(8, 48));
+    chkTrack.setName("chkTrack");
+    chkTrack.setSize(new FormSize(112, 16));
+    chkTrack.setTabIndex(2);
+    chkTrack.setText("Track this system");
     // FormFind
-    this.setAcceptButton(this.btnOk);
-    this.setAutoScaleBaseSize(new FormSize(5, 13));
-    this.setCancelButton(this.btnCancel);
-    this.setClientSize(new FormSize(184, 97));
-    this.setControlBox(false);
-    this.Controls.addAll(this.chkTrack, this.txtSystem, this.btnCancel, this.btnOk, this.lblText);
-    this.setFormBorderStyle(FormBorderStyle.FixedDialog);
-    this.setName("FormFind");
-    this.setShowInTaskbar(false);
-    this.setStartPosition(FormStartPosition.CenterParent);
-    this.setText("Find System");
-    this.Closed = new EventHandler<Object, EventArgs>() {
+    setAcceptButton(btnOk);
+    setAutoScaleBaseSize(new FormSize(5, 13));
+    setCancelButton(btnCancel);
+    setClientSize(new FormSize(184, 97));
+    setControlBox(false);
+    Controls.addAll(chkTrack, txtSystem, btnCancel, btnOk, lblText);
+    setFormBorderStyle(FormBorderStyle.FixedDialog);
+    setName("FormFind");
+    setShowInTaskbar(false);
+    setStartPosition(FormStartPosition.CenterParent);
+    setText("Find System");
+    Closed = new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
         FormFind_Closed(sender, e);
       }
     };
-    this.ResumeLayout(false);
+    ResumeLayout(false);
   }
 
   private void FormFind_Closed(Object sender, EventArgs e) {

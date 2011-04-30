@@ -1,8 +1,8 @@
 package spacetrader;
 
 
-public class Strings {
-  public static final String newline = String.format("%n");
+public interface Strings {
+  public static final String newline = String.format("\n");
   public static final String BankInsuranceButtonText = "^1 Insurance";
   public static final String BankInsuranceButtonBuy = "Buy";
   public static final String BankInsuranceButtonStop = "Stop";

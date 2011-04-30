@@ -1,7 +1,7 @@
 package spacetrader;
 import java.util.ArrayList;
-import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.ShipSize;
+import org.gts.bst.ship.ShipType;
 import spacetrader.enums.ShipyardId;
 import spacetrader.enums.ShipyardSkill;
 
@@ -49,11 +49,11 @@ public class Shipyard {
   private int modShield = 0;
   private int modWeapon = 0;
 
-  public Shipyard(ShipyardId id, ShipSize specialtySize, ShipyardSkill skill) {
-    _id = id;
-    _specialtySize = specialtySize;
-    _skill = skill;
-    switch(Skill()) {
+  public Shipyard(ShipyardId si, ShipSize ss, ShipyardSkill ys) {
+    _id = si;
+    _specialtySize = ss;
+    _skill = ys;
+    switch(_skill) {
       case CrewQuarters:
         modCrew = ADJUST_SKILL_CREW;
         break;
@@ -93,8 +93,8 @@ public class Shipyard {
 
   public ArrayList<ShipSize> AvailableSizes() {
     ArrayList<ShipSize> list = new ArrayList<ShipSize>(6);
-    int begin = Math.max(ShipSize.Tiny.CastToInt(), SpecialtySize().CastToInt() - 2);
-    int end = Math.min(ShipSize.Gargantuan.CastToInt(), SpecialtySize().CastToInt() + 2);
+    int begin = Math.max(ShipSize.Tiny.CastToInt(), _specialtySize.CastToInt() - 2);
+    int end = Math.min(ShipSize.Gargantuan.CastToInt(), _specialtySize.CastToInt() + 2);
     for(int index = begin; index <= end; index++) {
       list.add(ShipSize.values()[index]);
     }
@@ -115,7 +115,7 @@ public class Shipyard {
 
   public int CostAdjustment() {
     int adjustment;
-    switch(Math.abs(SpecialtySize().CastToInt() - ShipSpec().getSize().CastToInt())) {
+    switch(Math.abs(_specialtySize.CastToInt() - ShipSpec().getSize().CastToInt())) {
       case 0:
         adjustment = ADJUST_SIZE_SPECIALTY;
         break;
@@ -138,7 +138,7 @@ public class Shipyard {
   }
 
   public String Engineer() {
-    return Strings.ShipyardEngineers[Id().CastToInt()];
+    return Strings.ShipyardEngineers[_id.CastToInt()];
   }
 
   public ShipyardId Id() {
@@ -150,7 +150,7 @@ public class Shipyard {
   }
 
   public String Name() {
-    return Strings.ShipyardNames[Id().CastToInt()];
+    return Strings.ShipyardNames[_id.CastToInt()];
   }
 
   public int PenaltyCost() {

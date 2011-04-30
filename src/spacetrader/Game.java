@@ -108,7 +108,7 @@ public class Game extends STSerializableObject {
   private boolean _encounterOppHit = false;
 
   public Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer, SpaceTrader parentWin) {
-    _game = this;
+    _game = Game.CurrentGame();
     _parentWin = parentWin;
     _difficulty = difficulty;
     // Keep Generating a new universe until PlaceSpecialEvents and PlaceShipyards return true, indicating all special events and shipyards were placed.

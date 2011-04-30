@@ -1,10 +1,15 @@
 package spacetrader.gui;
+import java.awt.Point;
 import java.util.Arrays;
+import jwinforms.Button;
 import jwinforms.Container;
 import jwinforms.DialogResult;
 import jwinforms.EventHandler;
 import jwinforms.FormBorderStyle;
+import jwinforms.FormSize;
 import jwinforms.FormStartPosition;
+import jwinforms.LinkArea;
+import jwinforms.LinkLabel;
 import jwinforms.LinkLabelLinkClickedEventArgs;
 import jwinforms.WinformForm;
 import org.gts.bst.crew.CrewMemberId;
@@ -19,83 +24,65 @@ import spacetrader.util.Util;
 
 
 public class FormViewQuests extends WinformForm {
-  private jwinforms.Button btnClose;
-  private jwinforms.LinkLabel lblQuests;
+  private Button btnClose;
   private Container components = null;
+  private LinkLabel lblQuests;
 
   public FormViewQuests() {
     InitializeComponent();
-
     UpdateAll();
   }
 
-  // / Required method for Designer support - do not modify
-  // / the contents of this method with the code editor.
+  // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
-    this.btnClose = new jwinforms.Button();
-    this.lblQuests = new jwinforms.LinkLabel();
-    this.SuspendLayout();
-    //
+    btnClose = new Button();
+    lblQuests = new LinkLabel();
+    SuspendLayout();
     // btnClose
-    //
-    this.btnClose.setDialogResult(DialogResult.Cancel);
-    this.btnClose.setLocation(new java.awt.Point(-32, -32));
-    this.btnClose.setName("btnClose");
-    this.btnClose.setSize(new jwinforms.FormSize(32, 32));
-    this.btnClose.setTabIndex(32);
-    this.btnClose.setTabStop(false);
-    this.btnClose.setText("X");
-    //
+    btnClose.setDialogResult(DialogResult.Cancel);
+    btnClose.setLocation(new Point(-32, -32));
+    btnClose.setName("btnClose");
+    btnClose.setSize(new FormSize(32, 32));
+    btnClose.setTabIndex(32);
+    btnClose.setTabStop(false);
+    btnClose.setText("X");
     // lblQuests
-    //
-    this.lblQuests.LinkArea = new jwinforms.LinkArea(0, 0);
-    this.lblQuests.setLocation(new java.awt.Point(8, 8));
-    this.lblQuests.setName("lblQuests");
-    this.lblQuests.setSize(new jwinforms.FormSize(368, 312));
-    this.lblQuests.setTabIndex(44);
-    this.lblQuests.setText("Kill the space monster at Acamar."
-        + "\n\n"
-        + "Get your lightning shield at Zalkon."
-        + "\n\n"
-        + "Deliver antidote to Japori."
-        + "\n\n"
-        + "Deliver the alien artifact to Professor Berger at some hi-tech system."
-        + "\n\n"
-        + "Bring ambassador Jarek to Devidia.  Jarek is wondering why the journey is taking so long, and is no longer of much help in negotiating trades."
-        + "\n\n"
-        + "Inform Gemulon about alien invasion within 8 days."
-        + "\n\n"
-        + "Stop Dr. Fehler's experiment at Daled within 8 days."
-        + "\n\n"
-        + "Deliver the unstable reactor to Nix before it consumes all its fuel."
-        + "\n\n"
-        + "Find and destroy the Scarab (which is hiding at the exit to a wormhole)."
-        + "\n\n"
-        + "Smuggle Jonathan Wild to Kravat.  Wild is getting impatient, and will no longer aid your crew along the way."
-        + "\n\n" + "Get rid of those pesky tribbles." + "\n\n"
+    lblQuests.LinkArea = new LinkArea(0, 0);
+    lblQuests.setLocation(new Point(8, 8));
+    lblQuests.setName("lblQuests");
+    lblQuests.setSize(new FormSize(368, 312));
+    lblQuests.setTabIndex(44);
+    lblQuests.setText("Kill the space monster at Acamar.\n\n"
+        + "Get your lightning shield at Zalkon.\n\n"
+        + "Deliver antidote to Japori.\n\n"
+        + "Deliver the alien artifact to Professor Berger at some hi-tech system.\n\n"
+        + "Bring ambassador Jarek to Devidia. Jarek is wondering why the journey is taking so long, and is no longer of much help in negotiating trades.\n\n"
+        + "Inform Gemulon about alien invasion within 8 days.\n\n"
+        + "Stop Dr. Fehler's experiment at Daled within 8 days.\n\n"
+        + "Deliver the unstable reactor to Nix before it consumes all its fuel.\n\n"
+        + "Find and destroy the Scarab (which is hiding at the exit to a wormhole).\n\n"
+        + "Smuggle Jonathan Wild to Kravat. Wild is getting impatient, and will no longer aid your crew along the way.\n\n"
+        + "Get rid of those pesky tribbles.\n\n"
         + "Claim your moon at Utopia.");
-    this.lblQuests.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>()
-		  {
+    lblQuests.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
       @Override
-      public void handle(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e) {
+      public void handle(Object sender, LinkLabelLinkClickedEventArgs e) {
         lblQuests_LinkClicked(sender, e);
       }
     };
-    //
     // FormViewQuests
-    //
-    this.setAutoScaleBaseSize(new jwinforms.FormSize(5, 13));
-    this.setCancelButton(this.btnClose);
-    this.setClientSize(new jwinforms.FormSize(378, 325));
-    this.Controls.addAll(Arrays.asList(this.btnClose, this.lblQuests));
-    this.setFormBorderStyle(FormBorderStyle.FixedDialog);
-    this.setMaximizeBox(false);
-    this.setMinimizeBox(false);
-    this.setName("FormViewQuests");
-    this.setShowInTaskbar(false);
-    this.setStartPosition(FormStartPosition.CenterParent);
-    this.setText("Quests");
-    this.ResumeLayout(false);
+    setAutoScaleBaseSize(new FormSize(5, 13));
+    setCancelButton(btnClose);
+    setClientSize(new FormSize(378, 325));
+    Controls.addAll(Arrays.asList(btnClose, lblQuests));
+    setFormBorderStyle(FormBorderStyle.FixedDialog);
+    setMaximizeBox(false);
+    setMinimizeBox(false);
+    setName("FormViewQuests");
+    setShowInTaskbar(false);
+    setStartPosition(FormStartPosition.CenterParent);
+    setText("Quests");
+    ResumeLayout(false);
   }
 
   private String[] GetQuestStrings() {
@@ -234,7 +221,7 @@ public class FormViewQuests extends WinformForm {
     }
   }
 
-  private void lblQuests_LinkClicked(Object sender, jwinforms.LinkLabelLinkClickedEventArgs e) {
+  private void lblQuests_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e) {
     Game.CurrentGame().setSelectedSystemByName(e.Link.LinkData.toString());
     Game.CurrentGame().getParentWindow().UpdateAll();
     Close();
