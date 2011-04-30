@@ -14,7 +14,7 @@ public class ShipSpec extends STSerializableObject {
   private Activity _traders = Activity.NA;
   private ShipSize _size = ShipSize.Tiny;
   private ShipType _type = ShipType.Custom;
-  private TechLevel _minTech = TechLevel.Unavailable;
+  private TechLevel _minTech = TechLevel.t8;
   private boolean _hullUpgraded = false;
   private int _cargoBays = 0;
   private int _weaponSlots = 0;
@@ -82,9 +82,9 @@ public class ShipSpec extends STSerializableObject {
     // Get the name if the ship is a custom design.
     if(_type == ShipType.Custom) {
       Strings.ShipNames[ShipType.Custom.CastToInt()] = GetValueFromHash(hash, "_name", Strings.ShipNames[ShipType.Custom.CastToInt()]);
-      Consts.ShipSpecs[ShipType.Custom.CastToInt()] = new ShipSpec(_type, _size, _cargoBays, _weaponSlots,
-          _shieldSlots, _gadgetSlots, _crewQuarters, _fuelTanks, _fuelCost, _hullStrength, _repairCost,
-          _price, _occurrence, _police, _pirates, _traders, _minTech);
+      Consts.ShipSpecs[ShipType.Custom.CastToInt()] = new ShipSpec(
+          _type, _size, _cargoBays, _weaponSlots, _shieldSlots, _gadgetSlots, _crewQuarters, _fuelTanks,
+          _fuelCost, _hullStrength, _repairCost, _price, _occurrence, _police, _pirates, _traders, _minTech);
       UpdateCustomImageOffsetConstants();
     }
   }

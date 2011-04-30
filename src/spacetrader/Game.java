@@ -602,7 +602,7 @@ public class Game extends STSerializableObject {
     boolean goodUniverse = true;
     ArrayList<Integer> systemIdList = new ArrayList<Integer>();
     for(int system = 0; system < _universe.length; system++) {
-      if(_universe[system].TechLevel() == TechLevel.HiTech) {
+      if(_universe[system].TechLevel() == TechLevel.t7) {
         systemIdList.add(system);
       }
     }
@@ -647,7 +647,7 @@ public class Game extends STSerializableObject {
     }
     // Find a Hi-Tech system without a special event.
     if(goodUniverse) {
-      for(system = 0; system < _universe.length && !(_universe[system].SpecialEventType() == SpecialEventType.NA && _universe[system].TechLevel() == TechLevel.HiTech); system++) {
+      for(system = 0; system < _universe.length && !(_universe[system].SpecialEventType() == SpecialEventType.NA && _universe[system].TechLevel() == TechLevel.t7); system++) {
       }
       if(system < _universe.length) {
         _universe[system].SpecialEventType(SpecialEventType.ArtifactDelivery);
@@ -1252,7 +1252,7 @@ public class Game extends STSerializableObject {
       if(id == StarSystemId.Galvon) {
         size = ShipSize.Large;
         polSys = Consts.PoliticalSystems[PoliticalSystemType.Monarchy.CastToInt()];
-        tech = TechLevel.HiTech;
+        tech = TechLevel.t7;
       }
       if(Functions.GetRandom(100) < 15) {
         pressure = SystemPressure.FromInt(Functions.GetRandom(SystemPressure.War.CastToInt(), SystemPressure.Employment.CastToInt() + 1));
@@ -1321,8 +1321,8 @@ public class Game extends STSerializableObject {
     while(_commander.CurrentSystem() == null) {
       StarSystem system = _universe[Functions.GetRandom(_universe.length)];
       if(system.SpecialEventType() == SpecialEventType.NA
-          && system.TechLevel().CastToInt() > TechLevel.PreAgricultural.CastToInt()
-          && system.TechLevel().CastToInt() < TechLevel.HiTech.CastToInt()) {
+          && system.TechLevel().CastToInt() > TechLevel.t0.CastToInt()
+          && system.TechLevel().CastToInt() < TechLevel.t7.CastToInt()) {
         // Make sure at least three other systems can be reached
         int close = 0;
         for(int i = 0; i < _universe.length && close < 3; i++) {
@@ -2983,7 +2983,7 @@ public class Game extends STSerializableObject {
       if(getQuestStatusGemulon() == SpecialEvent.StatusGemulonTooLate) {
         StarSystem gemulon = _universe[StarSystemId.Gemulon.CastToInt()];
         gemulon.SpecialEventType(SpecialEventType.GemulonInvaded);
-        gemulon.TechLevel(TechLevel.PreAgricultural);
+        gemulon.TechLevel(TechLevel.t0);
         gemulon.PoliticalSystemType(PoliticalSystemType.Anarchy);
       }
     }

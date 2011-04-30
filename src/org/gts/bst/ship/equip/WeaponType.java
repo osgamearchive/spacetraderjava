@@ -4,12 +4,12 @@ import spacetrader.enums.TechLevel;
 
 
 public enum WeaponType implements SpaceTraderEnum, EquipmentSubType {
-  PulseLaser(TechLevel.Industrial, false, 50, 15, 2000),
-  BeamLaser(TechLevel.PostIndustrial, false, 35, 25, 12500),
-  MilitaryLaser(TechLevel.HiTech, false, 15, 35, 35000),
-  MorgansLaser(TechLevel.Unavailable, false, 0, 85, 50000),
-  PhotonDisruptor(TechLevel.PostIndustrial, true, 0, 20, 15000),
-  QuantumDistruptor(TechLevel.Unavailable, true, 0, 60, 50000);
+  PulseLaser(TechLevel.t5, false, 50, 15, 2000),
+  BeamLaser(TechLevel.t6, false, 35, 25, 12500),
+  MilitaryLaser(TechLevel.t7, false, 15, 35, 35000),
+  MorgansLaser(TechLevel.t8, false, 0, 85, 50000),
+  PhotonDisruptor(TechLevel.t6, true, 0, 20, 15000),
+  QuantumDistruptor(TechLevel.t8, true, 0, 60, 50000);
   public final TechLevel tl;
   public final boolean disabler;
   public final int chance;
