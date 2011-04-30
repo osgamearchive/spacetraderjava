@@ -1,4 +1,5 @@
 package jwinforms;
+import jwinforms.enums.HorizontalAlignment;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JSpinner;

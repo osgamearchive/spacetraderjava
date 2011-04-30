@@ -1,4 +1,5 @@
 package jwinforms;
+import jwinforms.enums.BorderStyle;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JList;

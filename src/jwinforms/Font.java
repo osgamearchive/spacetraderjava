@@ -1,5 +1,5 @@
 package jwinforms;
-
+import jwinforms.enums.FontStyle;
 
 public class Font extends java.awt.Font {
   private static final long serialVersionUID = 1L;

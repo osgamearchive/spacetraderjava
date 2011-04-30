@@ -1,4 +1,4 @@
-package jwinforms;
+package jwinforms.enums;
 import java.awt.Font;
 
 
@@ -8,7 +8,7 @@ public enum FontStyle {
   Regular(Font.PLAIN);
   public final int awtFontstyle;
 
-  private FontStyle(int awtFontstyle) {
-    this.awtFontstyle = awtFontstyle;
+  private FontStyle(int i) {
+    awtFontstyle = i;
   }
 }

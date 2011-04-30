@@ -1,4 +1,7 @@
 package jwinforms;
+import jwinforms.enums.FormStartPosition;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.DialogResult;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 

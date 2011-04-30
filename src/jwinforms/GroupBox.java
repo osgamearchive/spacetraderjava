@@ -1,4 +1,5 @@
 package jwinforms;
+import jwinforms.enums.AnchorStyles;
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 

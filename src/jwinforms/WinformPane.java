@@ -1,4 +1,5 @@
 package jwinforms;
+import jwinforms.enums.DialogResult;
 import java.awt.Component;
 
 

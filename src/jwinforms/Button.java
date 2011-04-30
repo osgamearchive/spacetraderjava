@@ -1,4 +1,6 @@
 package jwinforms;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.DialogResult;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

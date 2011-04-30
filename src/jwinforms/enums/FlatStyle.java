@@ -1,4 +1,4 @@
-package jwinforms;
+package jwinforms.enums;
 
 
 public enum FlatStyle {

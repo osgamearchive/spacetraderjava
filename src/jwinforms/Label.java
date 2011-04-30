@@ -1,4 +1,5 @@
 package jwinforms;
+import jwinforms.enums.ContentAlignment;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
