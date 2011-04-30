@@ -41,8 +41,8 @@ import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
 
-public final class Game extends STSerializableObject {
-  public static Game game;
+public class Game extends STSerializableObject {
+  private static Game game;
   // Game Data
   private StarSystem[] _universe;
   private int[] _wormholes = new int[6];
@@ -214,7 +214,7 @@ public final class Game extends STSerializableObject {
     ht.add("_arrivedViaWormhole", _arrivedViaWormhole);
     ht.add("_paidForNewspaper", _paidForNewspaper);
     ht.add("_litterWarning", _litterWarning);
-    ht.add("_newsEvents", ArrayListToIntArray(_newsEvents));
+    ht.add("_newsEvents", _newsEvents);
     ht.add("_difficulty", _difficulty.CastToInt());
     ht.add("_cheatEnabled", _cheatEnabled);
     ht.add("_autoSave", _autoSave);

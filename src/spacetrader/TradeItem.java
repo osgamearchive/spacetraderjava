@@ -39,8 +39,8 @@ public class TradeItem implements Comparable<TradeItem> {
   }
 
   @Override
-  public int compareTo(TradeItem o) {
-    return CompareTo(o);
+  public int compareTo(TradeItem ti) {
+    return CompareTo(ti);
   }
 
   public int CompareTo(Object value) {
@@ -48,9 +48,9 @@ public class TradeItem implements Comparable<TradeItem> {
     if(value == null) {
       compared = 1;
     } else {
-      compared = ((Integer)PriceLowTech()).compareTo(((TradeItem)value).PriceLowTech());
+      compared = ((Integer)_piceLowTech).compareTo(((TradeItem)value)._piceLowTech);
       if(compared == 0) {
-        compared = -((Integer)PriceInc()).compareTo(((TradeItem)value).PriceInc());
+        compared = -((Integer)_priceInc).compareTo(((TradeItem)value)._priceInc);
       }
     }
     return compared;
@@ -60,9 +60,9 @@ public class TradeItem implements Comparable<TradeItem> {
     int price = 0;
     if(target.ItemUsed(this)) {
       // Determine base price on techlevel of system
-      price = PriceLowTech() + target.TechLevel().CastToInt() * PriceInc();
+      price = _piceLowTech + target.TechLevel().CastToInt() * _priceInc;
       // If a good is highly requested, increase the price
-      if(target.PoliticalSystem().Wanted() == Type()) {
+      if(target.PoliticalSystem().Wanted() == _type) {
         price = price * 4 / 3;
       }
       // High trader activity decreases prices
@@ -70,9 +70,9 @@ public class TradeItem implements Comparable<TradeItem> {
       // Large system = high production decreases prices
       price = price * (100 - target.Size().CastToInt()) / 100;
       // Special resources price adaptation
-      if(target.SpecialResource() == ResourceLowPrice()) {
+      if(target.SpecialResource() == _resourceLowPrice) {
         price = price * 3 / 4;
-      } else if(target.SpecialResource() == ResourceHighPrice()) {
+      } else if(target.SpecialResource() == _resourceHighPrice) {
         price = price * 4 / 3;
       }
     }
@@ -80,7 +80,7 @@ public class TradeItem implements Comparable<TradeItem> {
   }
 
   public boolean Illegal() {
-    return Type() == TradeItemType.Firearms || Type() == TradeItemType.Narcotics;
+    return _type == TradeItemType.Firearms || _type == TradeItemType.Narcotics;
   }
 
   public int MaxTradePrice() {

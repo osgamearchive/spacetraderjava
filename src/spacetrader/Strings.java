@@ -486,7 +486,8 @@ public interface Strings {
     "Just yesterday a ship was seen in docking bay 327. A trader sold goods to a member of the crew, who was a native of Qonos. It's possible that's where they were going next.",
     "The Galvonian Ambassador to Qonos approaches you. The Princess needs a ride home. Will you take her? I don't think she'll feel safe with anyone else.",
     "His Majesty's Shipyard: Do you want us to install a quantum disruptor on your current ship?",
-    "The King and Queen are extremely grateful to you for returning their daughter to them. The King says, \"Ziyal is priceless to us, but we feel we must offer you something as a reward. Visit my shipyard captain and he'll install one of our new Quantum Disruptors.\""};
+    "The King and Queen are extremely grateful to you for returning their daughter to them. The King says, \"Ziyal is priceless to us, but we feel we must offer you something as a reward. Visit my shipyard captain and he'll install one of our new Quantum Disruptors.\""
+  };
   public static final String[] SpecialEventTitles = new String[] {
     "Alien Artifact", "Artifact Delivery", "Cargo For Sale",
     "Dragonfly", "Dragonfly Destroyed", "Weird Ship", "Lightning Ship",
@@ -634,16 +635,16 @@ public interface Strings {
     "suffering from a crop failure", // Food in demand
     "lacking enough workers" // Machinery and Robots in demand
   };
-  public static final String[] TechLevelNames = new String[] {"Pre-Agricultural",
-    "Agricultural", "Medieval", "Renaissance", "Early Industrial",
-    "Industrial", "Post-Industrial", "Hi-Tech"};
-  public static final String[] TradeItemNames = new String[] {"Water", "Furs",
-    "Food", "Ore", "Games", "Firearms", "Medicine", "Machines",
-    "Narcotics", "Robots"};
-  public static final String[] VeryRareEncounters = new String[] {"Marie Celeste",
-    "Captain Ahab", "Captain Conrad", "Captain Huie", "Dated Tonic",
-    "Good Tonic"};
-  public static final String[] WeaponNames = new String[] {"Pulse Laser",
-    "Beam Laser", "Military Laser", "Morgan's Laser",
-    "Photon Disruptor", "Quantum Disruptor"};
+  public static final String[] TechLevelNames = new String[] {
+    "Pre-Agricultural", "Agricultural", "Medieval", "Renaissance", "Early Industrial", "Industrial", "Post-Industrial", "Hi-Tech"
+  };
+  public static final String[] TradeItemNames = new String[] {
+    "Water", "Furs", "Food", "Ore", "Games", "Firearms", "Medicine", "Machines", "Narcotics", "Robots"
+  };
+  public static final String[] VeryRareEncounters = new String[] {
+    "Marie Celeste", "Captain Ahab", "Captain Conrad", "Captain Huie", "Dated Tonic", "Good Tonic"
+  };
+  public static final String[] WeaponNames = new String[] {
+    "Pulse Laser", "Beam Laser", "Military Laser", "Morgan's Laser", "Photon Disruptor", "Quantum Disruptor"
+  };
 }
