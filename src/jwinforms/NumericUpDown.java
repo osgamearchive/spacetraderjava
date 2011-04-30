@@ -24,8 +24,7 @@ public class NumericUpDown extends WinformControl {
       public void focusGained(FocusEvent e) {
         if(e.getSource() instanceof JTextComponent) {
           final JTextComponent textComponent = ((JTextComponent)e.getSource());
-          SwingUtilities.invokeLater(new Runnable()
-					  {
+          SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
               textComponent.selectAll();
@@ -49,7 +48,7 @@ public class NumericUpDown extends WinformControl {
     });
   }
 
-  public JSpinner asJSpinner() {
+  private JSpinner asJSpinner() {
     return (JSpinner)swingVersion;
   }
 
@@ -76,12 +75,12 @@ public class NumericUpDown extends WinformControl {
   }
 
   /**
-   * In .NET, this means that the field can be manipulated by the buttons/arrows,
-   * just not by directly inputing text into it.
+   * In .NET, this means that the field can be manipulated by the buttons/arrows, just not by directly inputing text into it.
    * TODO: implement this. Possibly by installing filter on key-presses.
+   * @param b read only
    */
-  public void setReadOnly(boolean readOnly) {
-    //asJSpinner().setEnabled(!readOnly);
+  public void setReadOnly(boolean b) {
+    asJSpinner().setEnabled(!b);
   }
 
   public void setLeave(EventHandler<Object, EventArgs> leave) {
