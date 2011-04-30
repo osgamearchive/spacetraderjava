@@ -1,5 +1,6 @@
 package spacetrader;
 import java.util.ArrayList;
+import org.gts.bst.cargo.TradeItem;
 import org.gts.bst.cargo.TradeItemType;
 import org.gts.bst.events.SpecialEventType;
 import org.gts.bst.ship.ShipSize;

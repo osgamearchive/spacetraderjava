@@ -1,5 +1,6 @@
 package spacetrader;
 import jwinforms.Rectangle;
+import org.gts.bst.cargo.TradeItem;
 import org.gts.bst.cargo.TradeItemType;
 import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.events.SpecialEventType;

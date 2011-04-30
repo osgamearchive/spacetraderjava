@@ -1,5 +1,6 @@
-package spacetrader;
-import org.gts.bst.cargo.TradeItemType;
+package org.gts.bst.cargo;
+import spacetrader.StarSystem;
+import spacetrader.Strings;
 import spacetrader.enums.SpecialResource;
 import spacetrader.enums.SystemPressure;
 import spacetrader.enums.TechLevel;

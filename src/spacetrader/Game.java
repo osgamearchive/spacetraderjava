@@ -5,6 +5,7 @@ import jwinforms.WinformPane;
 import jwinforms.enums.DialogResult;
 import org.gts.bst.cargo.CargoBuyOp;
 import org.gts.bst.cargo.CargoSellOp;
+import org.gts.bst.cargo.TradeItem;
 import org.gts.bst.cargo.TradeItemType;
 import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.difficulty.Difficulty;
