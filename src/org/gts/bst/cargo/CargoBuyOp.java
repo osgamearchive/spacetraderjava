@@ -1,14 +1,19 @@
 package org.gts.bst.cargo;
-import spacetrader.enums.SpaceTraderEnum;
 
 
-public enum CargoBuyOp implements SpaceTraderEnum {
-  BuySystem,
-  BuyTrader,
-  Plunder;
+public enum CargoBuyOp {
+  BuySystem(0, "Buy from system"),
+  BuyTrader(1, "Buy from trader"),
+  InPlunder(2, "Get via plunder");
+  public final String name;
+  public final int id;
 
-  @Override
-  public int CastToInt() {
-    return ordinal();
+  private CargoBuyOp(int i, String s) {
+    name = s;
+    id = i;
+  }
+
+  public static CargoBuyOp fromId(int i) {
+    return values()[i];
   }
 }

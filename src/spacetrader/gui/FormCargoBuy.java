@@ -36,8 +36,8 @@ public class FormCargoBuy extends WinformForm {
     InitializeComponent();
     numAmount.setMaximum(maxAmount);
     numAmount.setValue(numAmount.getMinimum());
-    setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.CastToInt()], Consts.TradeItems[item].Name()));
-    lblQuestion.setText(Functions.StringVars(Strings.CargoBuyQuestion, Strings.CargoBuyOps[op.CastToInt()].toLowerCase()));
+    setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Consts.TradeItems[item].Name()));
+    lblQuestion.setText(Functions.StringVars(Strings.CargoBuyQuestion, Strings.CargoBuyOps[op.id].toLowerCase()));
     switch(op) {
       case BuySystem:
         lblStatement.setText(Functions.StringVars(Strings.CargoBuyStatement, Functions.FormatMoney(game.PriceCargoBuy()[item]), Functions.FormatNumber(maxAmount)));
@@ -59,7 +59,7 @@ public class FormCargoBuy extends WinformForm {
         lblQuestion.setTop(lblQuestion.getTop() + 26);
         numAmount.setTop(numAmount.getTop() + 26);
         break;
-      case Plunder:
+      case InPlunder:
         lblStatement.setText(Functions.StringVars(Strings.CargoBuyStatementSteal, Functions.FormatNumber(game.getOpponent().Cargo()[item])));
         setHeight(btnOk.getTop() + btnOk.getHeight() + 34);
         break;

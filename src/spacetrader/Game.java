@@ -1,8 +1,8 @@
 package spacetrader;
 import java.util.Arrays;
 import java.util.Iterator;
-import jwinforms.enums.DialogResult;
 import jwinforms.WinformPane;
+import jwinforms.enums.DialogResult;
 import org.gts.bst.cargo.CargoBuyOp;
 import org.gts.bst.cargo.CargoSellOp;
 import org.gts.bst.cargo.TradeItemType;
@@ -41,8 +41,8 @@ import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
 
-public class Game extends STSerializableObject {
-  private static Game _game;
+public final class Game extends STSerializableObject {
+  public static Game game;
   // Game Data
   private StarSystem[] _universe;
   private int[] _wormholes = new int[6];
@@ -108,7 +108,7 @@ public class Game extends STSerializableObject {
   private boolean _encounterOppHit = false;
 
   public Game(String name, Difficulty difficulty, int pilot, int fighter, int trader, int engineer, SpaceTrader parentWin) {
-    _game = Game.CurrentGame();
+    game = Game.CurrentGame();
     _parentWin = parentWin;
     _difficulty = difficulty;
     // Keep Generating a new universe until PlaceSpecialEvents and PlaceShipyards return true, indicating all special events and shipyards were placed.
@@ -135,7 +135,7 @@ public class Game extends STSerializableObject {
 
   public Game(Hashtable hash, SpaceTrader parentWin) {
     super(hash);
-    _game = this;
+    game = Game.CurrentGame();
     _parentWin = parentWin;
     String version = GetValueFromHash(hash, "_version", String.class);
     if(version.compareTo(Consts.CurrentVersion) > 0) {
@@ -188,64 +188,65 @@ public class Game extends STSerializableObject {
     _justLootedMarie = GetValueFromHash(hash, "_justLootedMarie", _justLootedMarie);
     _canSuperWarp = GetValueFromHash(hash, "_canSuperWarp", _canSuperWarp);
     _chanceOfVeryRareEncounter = GetValueFromHash(hash, "_chanceOfVeryRareEncounter", _chanceOfVeryRareEncounter);
-    _veryRareEncounters = new ArrayList(Arrays.asList(GetValueFromHash(hash, "_veryRareEncounters", _veryRareEncounters.ToArray(new Integer[0]))));
+    _veryRareEncounters = new ArrayList(
+        Arrays.asList(GetValueFromHash(hash, "_veryRareEncounters", _veryRareEncounters.ToArray(new Integer[0]))));
     _options = new GameOptions(GetValueFromHash(hash, "_options", _options.Serialize(), Hashtable.class));
   }
 
   @Override
   public Hashtable Serialize() {
-    Hashtable hash = super.Serialize();
-    hash.add("_version", "2.00");
-    hash.add("_universe", ArrayToArrayList(_universe));
-    hash.add("_commander", _commander.Serialize());
-    hash.add("_wormholes", _wormholes);
-    hash.add("_mercenaries", ArrayToArrayList(_mercenaries));
-    hash.add("_dragonfly", _dragonfly.Serialize());
-    hash.add("_scarab", _scarab.Serialize());
-    hash.add("_scorpion", _scorpion.Serialize());
-    hash.add("_spaceMonster", _spaceMonster.Serialize());
-    hash.add("_opponent", _opponent.Serialize());
-    hash.add("_chanceOfTradeInOrbit", _chanceOfTradeInOrbit);
-    hash.add("_clicks", _clicks);
-    hash.add("_raided", _raided);
-    hash.add("_inspected", _inspected);
-    hash.add("_tribbleMessage", _tribbleMessage);
-    hash.add("_arrivedViaWormhole", _arrivedViaWormhole);
-    hash.add("_paidForNewspaper", _paidForNewspaper);
-    hash.add("_litterWarning", _litterWarning);
-    hash.add("_newsEvents", ArrayListToIntArray(_newsEvents));
-    hash.add("_difficulty", _difficulty.CastToInt());
-    hash.add("_cheatEnabled", _cheatEnabled);
-    hash.add("_autoSave", _autoSave);
-    hash.add("_easyEncounters", _easyEncounters);
-    hash.add("_endStatus", _endStatus.CastToInt());
-    hash.add("_encounterType", _encounterType.CastToInt());
-    hash.add("_selectedSystemId", _selectedSystemId.CastToInt());
-    hash.add("_warpSystemId", _warpSystemId.CastToInt());
-    hash.add("_trackedSystemId", _trackedSystemId.CastToInt());
-    hash.add("_targetWormhole", _targetWormhole);
-    hash.add("_priceCargoBuy", _priceCargoBuy);
-    hash.add("_priceCargoSell", _priceCargoSell);
-    hash.add("_questStatusArtifact", _questStatusArtifact);
-    hash.add("_questStatusDragonfly", _questStatusDragonfly);
-    hash.add("_questStatusExperiment", _questStatusExperiment);
-    hash.add("_questStatusGemulon", _questStatusGemulon);
-    hash.add("_questStatusJapori", _questStatusJapori);
-    hash.add("_questStatusJarek", _questStatusJarek);
-    hash.add("_questStatusMoon", _questStatusMoon);
-    hash.add("_questStatusPrincess", _questStatusPrincess);
-    hash.add("_questStatusReactor", _questStatusReactor);
-    hash.add("_questStatusScarab", _questStatusScarab);
-    hash.add("_questStatusSculpture", _questStatusSculpture);
-    hash.add("_questStatusSpaceMonster", _questStatusSpaceMonster);
-    hash.add("_questStatusWild", _questStatusWild);
-    hash.add("_fabricRipProbability", _fabricRipProbability);
-    hash.add("_justLootedMarie", _justLootedMarie);
-    hash.add("_canSuperWarp", _canSuperWarp);
-    hash.add("_chanceOfVeryRareEncounter", _chanceOfVeryRareEncounter);
-    hash.add("_veryRareEncounters", ArrayListToIntArray(_veryRareEncounters));
-    hash.add("_options", _options.Serialize());
-    return hash;
+    Hashtable ht = super.Serialize();
+    ht.add("_version", "2.00");
+    ht.add("_universe", ArrayToArrayList(_universe));
+    ht.add("_commander", _commander.Serialize());
+    ht.add("_wormholes", _wormholes);
+    ht.add("_mercenaries", ArrayToArrayList(_mercenaries));
+    ht.add("_dragonfly", _dragonfly.Serialize());
+    ht.add("_scarab", _scarab.Serialize());
+    ht.add("_scorpion", _scorpion.Serialize());
+    ht.add("_spaceMonster", _spaceMonster.Serialize());
+    ht.add("_opponent", _opponent.Serialize());
+    ht.add("_chanceOfTradeInOrbit", _chanceOfTradeInOrbit);
+    ht.add("_clicks", _clicks);
+    ht.add("_raided", _raided);
+    ht.add("_inspected", _inspected);
+    ht.add("_tribbleMessage", _tribbleMessage);
+    ht.add("_arrivedViaWormhole", _arrivedViaWormhole);
+    ht.add("_paidForNewspaper", _paidForNewspaper);
+    ht.add("_litterWarning", _litterWarning);
+    ht.add("_newsEvents", ArrayListToIntArray(_newsEvents));
+    ht.add("_difficulty", _difficulty.CastToInt());
+    ht.add("_cheatEnabled", _cheatEnabled);
+    ht.add("_autoSave", _autoSave);
+    ht.add("_easyEncounters", _easyEncounters);
+    ht.add("_endStatus", _endStatus.CastToInt());
+    ht.add("_encounterType", _encounterType.CastToInt());
+    ht.add("_selectedSystemId", _selectedSystemId.CastToInt());
+    ht.add("_warpSystemId", _warpSystemId.CastToInt());
+    ht.add("_trackedSystemId", _trackedSystemId.CastToInt());
+    ht.add("_targetWormhole", _targetWormhole);
+    ht.add("_priceCargoBuy", _priceCargoBuy);
+    ht.add("_priceCargoSell", _priceCargoSell);
+    ht.add("_questStatusArtifact", _questStatusArtifact);
+    ht.add("_questStatusDragonfly", _questStatusDragonfly);
+    ht.add("_questStatusExperiment", _questStatusExperiment);
+    ht.add("_questStatusGemulon", _questStatusGemulon);
+    ht.add("_questStatusJapori", _questStatusJapori);
+    ht.add("_questStatusJarek", _questStatusJarek);
+    ht.add("_questStatusMoon", _questStatusMoon);
+    ht.add("_questStatusPrincess", _questStatusPrincess);
+    ht.add("_questStatusReactor", _questStatusReactor);
+    ht.add("_questStatusScarab", _questStatusScarab);
+    ht.add("_questStatusSculpture", _questStatusSculpture);
+    ht.add("_questStatusSpaceMonster", _questStatusSpaceMonster);
+    ht.add("_questStatusWild", _questStatusWild);
+    ht.add("_fabricRipProbability", _fabricRipProbability);
+    ht.add("_justLootedMarie", _justLootedMarie);
+    ht.add("_canSuperWarp", _canSuperWarp);
+    ht.add("_chanceOfVeryRareEncounter", _chanceOfVeryRareEncounter);
+    ht.add("_veryRareEncounters", ArrayListToIntArray(_veryRareEncounters));
+    ht.add("_options", _options.Serialize());
+    return ht;
   }
 
   private boolean DetermineEncounter() {
@@ -905,7 +906,7 @@ public class Game extends STSerializableObject {
         double adj = Functions.GetRandom(100) < chance ? 1.1 : (item.Illegal() ? 0.8 : 0.9);
         unitPrice = Math.min(item.MaxTradePrice(), Math.max(item.MinTradePrice(), (int)Math.round(_priceCargoBuy[tradeItem] * adj / item.RoundOff()) * item.RoundOff()));
         break;
-      case Plunder:
+      case InPlunder:
         items = getOpponent().Cargo();
         break;
     }
@@ -915,7 +916,7 @@ public class Game extends STSerializableObject {
       FormAlert.Alert(AlertType.CargoNoneAvailable, owner);
     } else if(freeBays == 0) {
       FormAlert.Alert(AlertType.CargoNoEmptyBays, owner);
-    } else if(op != CargoBuyOp.Plunder && cashToSpend < unitPrice) {
+    } else if(op != CargoBuyOp.InPlunder && cashToSpend < unitPrice) {
       FormAlert.Alert(AlertType.CargoIF, owner);
     } else {
       int qty = 0;
@@ -1152,7 +1153,7 @@ public class Game extends STSerializableObject {
           _commander.setReputationScore(_commander.getReputationScore() + Consts.ScoreKillCaptain);
         }
         // bump news flag from attacked to ship destroyed
-        NewsReplaceEvent(NewsLatestEvent().CastToInt(), NewsEvent.FromInt(NewsLatestEvent().CastToInt() + 1).CastToInt());
+        NewsReplaceEvent(NewsLatestEvent(), NewsEvent.FromInt(NewsLatestEvent() + 1).CastToInt());
         break;
       case DragonflyAttack:
         EncounterDefeatDragonfly();
@@ -1585,8 +1586,8 @@ public class Game extends STSerializableObject {
     return _options;
   }
 
-  public NewsEvent NewsLatestEvent() {
-    return (NewsEvent)_newsEvents.get(_newsEvents.size() - 1);
+  public int NewsLatestEvent() {
+    return _newsEvents.get(_newsEvents.size() - 1);
   }
 
   public Ship Dragonfly() {
@@ -1916,6 +1917,7 @@ public class Game extends STSerializableObject {
     return Util.StringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(items));
   }
 
+  @SuppressWarnings("fallthrough")
   public boolean EncounterVerifyAttack(WinformPane owner) {
     boolean attack = true;
     if(_commander.getShip().WeaponStrength() == 0) {
@@ -2523,7 +2525,7 @@ public class Game extends STSerializableObject {
   }
 
   public void CargoPlunder(int tradeItem, boolean max, WinformPane owner) {
-    CargoBuy(tradeItem, max, owner, CargoBuyOp.Plunder);
+    CargoBuy(tradeItem, max, owner, CargoBuyOp.InPlunder);
   }
 
   public void CargoSellSystem(int tradeItem, boolean all, WinformPane owner) {
@@ -3044,7 +3046,7 @@ public class Game extends STSerializableObject {
   }
 
   public void NewsAddEvent(NewsEvent ne) {
-    _newsEvents.add(ne);
+    _newsEvents.add(ne.CastToInt());
   }
 
   public void NewsAddEventsOnArrival() {
@@ -3487,10 +3489,10 @@ public class Game extends STSerializableObject {
   }
 
   public static Game CurrentGame() {
-    return _game;
+    return game;
   }
 
-  public static void CurrentGame(Game value) {
-    _game = value;
+  public static void CurrentGame(Game g) {
+    game = g;
   }
 }

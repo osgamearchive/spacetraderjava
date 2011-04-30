@@ -76,7 +76,7 @@ import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
 
-public class SpaceTrader extends WinformWindow {
+public final class SpaceTrader extends WinformWindow {
   private Button btnDesign;
   private Button btnNews;
   private Button btnSpecial;
@@ -3087,7 +3087,6 @@ public class SpaceTrader extends WinformWindow {
     } else {
       FormAlert.Alert(AlertType.GameEndHighScoreMissed, this);
     }
-
     Game.CurrentGame(null);
     game = null;
   }
