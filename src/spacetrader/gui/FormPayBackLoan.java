@@ -1,13 +1,13 @@
 package spacetrader.gui;
 import java.awt.Point;
 import jwinforms.Button;
-import jwinforms.DialogResult;
+import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.FlatStyle;
-import jwinforms.FormBorderStyle;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.FormStartPosition;
+import jwinforms.enums.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;

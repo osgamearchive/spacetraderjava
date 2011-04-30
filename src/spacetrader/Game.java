@@ -1,7 +1,7 @@
 package spacetrader;
 import java.util.Arrays;
 import java.util.Iterator;
-import jwinforms.DialogResult;
+import jwinforms.enums.DialogResult;
 import jwinforms.WinformPane;
 import org.gts.bst.cargo.CargoBuyOp;
 import org.gts.bst.cargo.CargoSellOp;
@@ -1941,11 +1941,9 @@ public class Game extends STSerializableObject {
             attack = false;
           }
           // Fall through...
-          if(attack) {
-          } else {
+          if(!attack) {
             break;
-          }
-        // goto case PoliceIgnore;
+          } // goto case PoliceIgnore;
         case MarieCelestePolice:
         case PoliceFlee:
         case PoliceIgnore:
@@ -1973,10 +1971,9 @@ public class Game extends STSerializableObject {
             attack = false;
           }
           // Fall through...
-          if(attack) {// goto case TraderAttack;
-          } else {
+          if(!attack) {
             break;
-          }
+          }// else goto case TraderAttack;
         case TraderAttack:
         case TraderSurrender:
           if(Functions.GetRandom(Consts.ReputationScoreElite) <= _commander.getReputationScore() * 10 / (getOpponent().Type().CastToInt() + 1)

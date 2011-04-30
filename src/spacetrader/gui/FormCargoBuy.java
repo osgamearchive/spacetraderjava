@@ -1,17 +1,18 @@
 package spacetrader.gui;
-import org.gts.bst.cargo.CargoBuyOp;
+import java.awt.Point;
 import jwinforms.Button;
-import jwinforms.DialogResult;
+import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.FlatStyle;
-import jwinforms.FormBorderStyle;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.FormStartPosition;
+import jwinforms.enums.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
 import jwinforms.WinformForm;
+import org.gts.bst.cargo.CargoBuyOp;
 import spacetrader.Commander;
 import spacetrader.Consts;
 import spacetrader.Functions;
@@ -29,10 +30,10 @@ public class FormCargoBuy extends WinformForm {
   private Label lblAfford;
   private NumericUpDown numAmount;
   private Game game = Game.CurrentGame();
+  private Commander cmdr = game.Commander();
 
   public FormCargoBuy(int item, int maxAmount, CargoBuyOp op) {
     InitializeComponent();
-    Commander cmdr = game.Commander();
     numAmount.setMaximum(maxAmount);
     numAmount.setValue(numAmount.getMinimum());
     setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.CastToInt()], Consts.TradeItems[item].Name()));
@@ -43,7 +44,7 @@ public class FormCargoBuy extends WinformForm {
         setHeight(btnOk.getTop() + btnOk.getHeight() + 34);
         break;
       case BuyTrader:
-        int afford = Math.min(game.Commander().getCash() / game.PriceCargoBuy()[item], game.Commander().getShip().FreeCargoBays());
+        int afford = Math.min(cmdr.getCash() / game.PriceCargoBuy()[item], cmdr.getShip().FreeCargoBays());
         if(afford < maxAmount) {
           numAmount.setMaximum(afford);
         }
@@ -79,19 +80,19 @@ public class FormCargoBuy extends WinformForm {
     SuspendLayout();
     // lblQuestion
     lblQuestion.setAutoSize(true);
-    lblQuestion.setLocation(new java.awt.Point(8, 24));
+    lblQuestion.setLocation(new Point(8, 24));
     lblQuestion.setName("lblQuestion");
     lblQuestion.setSize(new FormSize(161, 16));
     lblQuestion.setTabIndex(1);
     lblQuestion.setText("How many do you want to buy?");
     // lblStatement
-    lblStatement.setLocation(new java.awt.Point(8, 8));
+    lblStatement.setLocation(new Point(8, 8));
     lblStatement.setName("lblStatement");
     lblStatement.setSize(new FormSize(326, 13));
     lblStatement.setTabIndex(3);
     lblStatement.setText("The trader wants to sell Machines for the price of 8,888 cr. each.");
     // numAmount
-    numAmount.setLocation(new java.awt.Point(168, 22));
+    numAmount.setLocation(new Point(168, 22));
     numAmount.setMaximum(999);
     numAmount.setMinimum(1);
     numAmount.setName("numAmount");
@@ -101,7 +102,7 @@ public class FormCargoBuy extends WinformForm {
     // btnOk
     btnOk.setDialogResult(DialogResult.OK);
     btnOk.setFlatStyle(FlatStyle.Flat);
-    btnOk.setLocation(new java.awt.Point(95, 48));
+    btnOk.setLocation(new Point(95, 48));
     btnOk.setName("btnOk");
     btnOk.setSize(new FormSize(41, 22));
     btnOk.setTabIndex(2);
@@ -109,7 +110,7 @@ public class FormCargoBuy extends WinformForm {
     // btnAll
     btnAll.setDialogResult(DialogResult.OK);
     btnAll.setFlatStyle(FlatStyle.Flat);
-    btnAll.setLocation(new java.awt.Point(143, 48));
+    btnAll.setLocation(new Point(143, 48));
     btnAll.setName("btnAll");
     btnAll.setSize(new FormSize(41, 22));
     btnAll.setTabIndex(3);
@@ -123,20 +124,20 @@ public class FormCargoBuy extends WinformForm {
     // btnNone
     btnNone.setDialogResult(DialogResult.Cancel);
     btnNone.setFlatStyle(FlatStyle.Flat);
-    btnNone.setLocation(new java.awt.Point(191, 48));
+    btnNone.setLocation(new Point(191, 48));
     btnNone.setName("btnNone");
     btnNone.setSize(new FormSize(41, 22));
     btnNone.setTabIndex(4);
     btnNone.setText("None");
     // lblAvailable
-    lblAvailable.setLocation(new java.awt.Point(8, 21));
+    lblAvailable.setLocation(new Point(8, 21));
     lblAvailable.setName("lblAvailable");
     lblAvailable.setSize(new FormSize(163, 13));
     lblAvailable.setTabIndex(5);
     lblAvailable.setText("The trader has 88 units for sale.");
     lblAvailable.setVisible(false);
     // lblAfford
-    lblAfford.setLocation(new java.awt.Point(8, 34));
+    lblAfford.setLocation(new Point(8, 34));
     lblAfford.setName("lblAfford");
     lblAfford.setSize(new FormSize(157, 13));
     lblAfford.setTabIndex(6);

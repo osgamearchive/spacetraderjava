@@ -1,5 +1,5 @@
 package spacetrader;
-import jwinforms.DialogResult;
+import jwinforms.enums.DialogResult;
 import jwinforms.WinformPane;
 import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.ship.ShipType;
@@ -135,7 +135,7 @@ public class Commander extends CrewMember {
         if(add[i]) {
           if(netPrice + extraCost + special[i].TransferPrice() > CashToSpend()) {
             FormAlert.Alert(AlertType.ShipBuyNoTransfer, owner, special[i].Name());
-          } else if(FormAlert.Alert(AlertType.ShipBuyTransfer, owner, special[i].Name(), special[i].Name().toLowerCase(), Functions.FormatNumber(special[i].TransferPrice())) == jwinforms.DialogResult.Yes) {
+          } else if(FormAlert.Alert(AlertType.ShipBuyTransfer, owner, special[i].Name(), special[i].Name().toLowerCase(), Functions.FormatNumber(special[i].TransferPrice())) == jwinforms.enums.DialogResult.Yes) {
             extraCost += special[i].TransferPrice();
           } else {
             add[i] = false;

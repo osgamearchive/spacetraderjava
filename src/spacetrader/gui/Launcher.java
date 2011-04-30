@@ -2,7 +2,7 @@ package spacetrader.gui;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import jwinforms.DialogResult;
+import jwinforms.enums.DialogResult;
 import jwinforms.WinformForm;
 
 
