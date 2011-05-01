@@ -8,12 +8,12 @@ public class ResourceManager {
   private final String path;
   protected final Properties properties = new Properties();
 
-  protected ResourceManager(URL resource, String path) {
+  protected ResourceManager(URL url, String s) {
     try {
-      properties.load(resource.openStream());
-      this.path = path;
+      properties.load(url.openStream());
+      path = s;
     } catch(Exception e) {
-      throw new Error(e.getMessage() + ": trying to load url \"" + resource + "\"", e);
+      throw new Error(e.getMessage() + ": trying to load url \"" + url + "\"", e);
     }
   }
 
