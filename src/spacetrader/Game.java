@@ -36,7 +36,7 @@ import spacetrader.gui.FormCargoSell;
 import spacetrader.gui.FormEncounter;
 import spacetrader.gui.FormJettison;
 import spacetrader.gui.FormPlunder;
-import spacetrader.gui.SpaceTrader;
+import org.gts.bst.SpaceTrader;
 import spacetrader.stub.ArrayList;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
