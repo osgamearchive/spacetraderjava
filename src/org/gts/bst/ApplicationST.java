@@ -96,7 +96,7 @@ import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
 
-public class SpaceTrader extends WinformWindow {
+public class ApplicationST extends WinformWindow {
   private Button btnDesign;
   private Button btnNews;
   private Button btnSpecial;
@@ -338,7 +338,7 @@ public class SpaceTrader extends WinformWindow {
   private String SaveGameFile = null;
   private int SaveGameDays = -1;
 
-  public SpaceTrader(String s) {
+  public ApplicationST(String s) {
     InitializeComponent();
     InitFileStructure();
     lblSellPrice = new Label[]{
@@ -377,14 +377,14 @@ public class SpaceTrader extends WinformWindow {
   public static void main(String[] args) throws Exception {
     UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
     UIManager.put("swing.boldMetal", Boolean.FALSE);
-    SpaceTrader st = new SpaceTrader(args.length > 0 ? args[0] : null);
+    ApplicationST st = new ApplicationST(args.length > 0 ? args[0] : null);
     st.ShowWindow();
   }
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
     components = new Container();
-    ResourceManager resources = new ResourceManager(SpaceTrader.class);
+    ResourceManager resources = new ResourceManager(ApplicationST.class);
     mnuMain = new MainMenu();
     mnuGame = new SubMenu();
     mnuGameNew = new MenuItem();
@@ -2589,7 +2589,7 @@ public class SpaceTrader extends WinformWindow {
     ilEquipmentImages.setImageSize(new FormSize(64, 52));
     ilEquipmentImages.setImageStream(((ImageListStreamer)(resources.GetObject("ilEquipmentImages.ImageStream"))));
     ilEquipmentImages.setTransparentColor(Color.white);
-    // SpaceTrader
+    // ApplicationST
     setAutoScaleBaseSize(new FormSize(5, 13));
     setClientSize(new FormSize(768, 505));
     Controls.add(picLine);
