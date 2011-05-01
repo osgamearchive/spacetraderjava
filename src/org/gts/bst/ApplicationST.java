@@ -332,7 +332,7 @@ public class ApplicationST extends WinformWindow {
   private final int IMG_S_V = 5;
   private final int IMG_S_VS = 6;
   private final int IMG_S_W = 7;
-  private Game game;
+  private Game game = null;
   private final Pen DEFAULT_PEN = new Pen(Color.black);
   private final Brush DEFAULT_BRUSH = new SolidBrush(Color.white);
   private String SaveGameFile = null;
