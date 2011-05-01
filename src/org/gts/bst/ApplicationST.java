@@ -333,6 +333,7 @@ public class ApplicationST extends WinformWindow {
   private final int IMG_S_VS = 6;
   private final int IMG_S_W = 7;
   private Game game = null;
+  private Commander cmdr = null;
   private final Pen DEFAULT_PEN = new Pen(Color.black);
   private final Brush DEFAULT_BRUSH = new SolidBrush(Color.white);
   private String SaveGameFile = null;
@@ -342,31 +343,40 @@ public class ApplicationST extends WinformWindow {
     InitializeComponent();
     InitFileStructure();
     lblSellPrice = new Label[]{
-      lblSellPrice0, lblSellPrice1, lblSellPrice2, lblSellPrice3, lblSellPrice4, lblSellPrice5, lblSellPrice6, lblSellPrice7, lblSellPrice8, lblSellPrice9
+      lblSellPrice0, lblSellPrice1, lblSellPrice2, lblSellPrice3, lblSellPrice4,
+      lblSellPrice5, lblSellPrice6, lblSellPrice7, lblSellPrice8, lblSellPrice9
     };
     lblBuyPrice = new Label[]{
-      lblBuyPrice0, lblBuyPrice1, lblBuyPrice2, lblBuyPrice3, lblBuyPrice4, lblBuyPrice5, lblBuyPrice6, lblBuyPrice7, lblBuyPrice8, lblBuyPrice9
+      lblBuyPrice0, lblBuyPrice1, lblBuyPrice2, lblBuyPrice3, lblBuyPrice4,
+      lblBuyPrice5, lblBuyPrice6, lblBuyPrice7, lblBuyPrice8, lblBuyPrice9
     };
     lblTargetPrice = new Label[]{
-      lblTargetPrice0, lblTargetPrice1, lblTargetPrice2, lblTargetPrice3, lblTargetPrice4, lblTargetPrice5, lblTargetPrice6, lblTargetPrice7, lblTargetPrice8, lblTargetPrice9
+      lblTargetPrice0, lblTargetPrice1, lblTargetPrice2, lblTargetPrice3, lblTargetPrice4,
+      lblTargetPrice5, lblTargetPrice6, lblTargetPrice7, lblTargetPrice8, lblTargetPrice9
     };
     lblTargetDiff = new Label[]{
-      lblTargetDiff0, lblTargetDiff1, lblTargetDiff2, lblTargetDiff3, lblTargetDiff4, lblTargetDiff5, lblTargetDiff6, lblTargetDiff7, lblTargetDiff8, lblTargetDiff9
+      lblTargetDiff0, lblTargetDiff1, lblTargetDiff2, lblTargetDiff3, lblTargetDiff4,
+      lblTargetDiff5, lblTargetDiff6, lblTargetDiff7, lblTargetDiff8, lblTargetDiff9
     };
     lblTargetPct = new Label[]{
-      lblTargetPct0, lblTargetPct1, lblTargetPct2, lblTargetPct3, lblTargetPct4, lblTargetPct5, lblTargetPct6, lblTargetPct7, lblTargetPct8, lblTargetPct9
+      lblTargetPct0, lblTargetPct1, lblTargetPct2, lblTargetPct3, lblTargetPct4,
+      lblTargetPct5, lblTargetPct6, lblTargetPct7, lblTargetPct8, lblTargetPct9
     };
     btnSellQty = new Button[]{
-      btnSellQty0, btnSellQty1, btnSellQty2, btnSellQty3, btnSellQty4, btnSellQty5, btnSellQty6, btnSellQty7, btnSellQty8, btnSellQty9
+      btnSellQty0, btnSellQty1, btnSellQty2, btnSellQty3, btnSellQty4,
+      btnSellQty5, btnSellQty6, btnSellQty7, btnSellQty8, btnSellQty9
     };
     btnSellAll = new Button[]{
-      btnSellAll0, btnSellAll1, btnSellAll2, btnSellAll3, btnSellAll4, btnSellAll5, btnSellAll6, btnSellAll7, btnSellAll8, btnSellAll9
+      btnSellAll0, btnSellAll1, btnSellAll2, btnSellAll3, btnSellAll4,
+      btnSellAll5, btnSellAll6, btnSellAll7, btnSellAll8, btnSellAll9
     };
     btnBuyQty = new Button[]{
-      btnBuyQty0, btnBuyQty1, btnBuyQty2, btnBuyQty3, btnBuyQty4, btnBuyQty5, btnBuyQty6, btnBuyQty7, btnBuyQty8, btnBuyQty9
+      btnBuyQty0, btnBuyQty1, btnBuyQty2, btnBuyQty3, btnBuyQty4,
+      btnBuyQty5, btnBuyQty6, btnBuyQty7, btnBuyQty8, btnBuyQty9
     };
     btnBuyMax = new Button[]{
-      btnBuyMax0, btnBuyMax1, btnBuyMax2, btnBuyMax3, btnBuyMax4, btnBuyMax5, btnBuyMax6, btnBuyMax7, btnBuyMax8, btnBuyMax9
+      btnBuyMax0, btnBuyMax1, btnBuyMax2, btnBuyMax3, btnBuyMax4,
+      btnBuyMax5, btnBuyMax6, btnBuyMax7, btnBuyMax8, btnBuyMax9
     };
     if(s != null) {
       LoadGame(s);
@@ -381,7 +391,8 @@ public class ApplicationST extends WinformWindow {
     st.ShowWindow();
   }
 
-  // Required method for Designer support - do not modify the contents of this method with the code editor.
+  // Required method for Designer support -
+  // do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
     components = new Container();
     ResourceManager resources = new ResourceManager(ApplicationST.class);
@@ -613,7 +624,9 @@ public class ApplicationST extends WinformWindow {
     mnuMain.addAll(mnuGame, mnuView, mnuHelp);
     // mnuGame
     mnuGame.Index = 0;
-    mnuGame.addAll(mnuGameNew, mnuGameLoad, mnuGameSave, mnuGameSaveAs, mnuGameLine1, mnuRetire, mnuGameLine2, mnuGameExit);
+    mnuGame.addAll(
+        mnuGameNew, mnuGameLoad, mnuGameSave, mnuGameSaveAs,
+        mnuGameLine1, mnuRetire, mnuGameLine2, mnuGameExit);
     mnuGame.setText("&Game");
     // mnuGameNew
     mnuGameNew.Index = 0;
@@ -683,7 +696,9 @@ public class ApplicationST extends WinformWindow {
     });
     // mnuView
     mnuView.Index = 1;
-    mnuView.addAll(mnuViewCommander, mnuViewShip, mnuViewPersonnel, mnuViewQuests, mnuViewBank, mnuViewLine1, mnuHighScores, mnuViewLine2, mnuOptions);
+    mnuView.addAll(
+        mnuViewCommander, mnuViewShip, mnuViewPersonnel, mnuViewQuests,
+        mnuViewBank, mnuViewLine1, mnuHighScores, mnuViewLine2, mnuOptions);
     mnuView.setText("&View");
     // mnuViewCommander
     mnuViewCommander.setEnabled(false);
@@ -818,7 +833,9 @@ public class ApplicationST extends WinformWindow {
     // statusBar
     statusBar.setLocation(new Point(0, 481));
     statusBar.setName("statusBar");
-    statusBar.Panels.addAll(Arrays.asList(new StatusBarPanel[]{statusBarPanelCash, statusBarPanelBays, statusBarPanelCosts, statusBarPanelExtra}));
+    statusBar.Panels.addAll(Arrays.asList(new StatusBarPanel[]{
+          statusBarPanelCash, statusBarPanelBays, statusBarPanelCosts, statusBarPanelExtra
+        }));
     statusBar.ShowPanels = true;
     statusBar.setSize(new FormSize(768, 24));
     statusBar.SizingGrip = false;
@@ -1039,7 +1056,8 @@ public class ApplicationST extends WinformWindow {
     lblTargetResource.setText("Sweetwater Oceans");
     // lblTargetDistanceLabel
     lblTargetDistanceLabel.setAutoSize(true);
-    lblTargetDistanceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblTargetDistanceLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTargetDistanceLabel.setLocation(new Point(8, 128));
     lblTargetDistanceLabel.setName("lblTargetDistanceLabel");
     lblTargetDistanceLabel.setSize(new FormSize(53, 16));
@@ -1047,7 +1065,8 @@ public class ApplicationST extends WinformWindow {
     lblTargetDistanceLabel.setText("Distance:");
     // lblTargetPiratesLabel
     lblTargetPiratesLabel.setAutoSize(true);
-    lblTargetPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblTargetPiratesLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTargetPiratesLabel.setLocation(new Point(8, 112));
     lblTargetPiratesLabel.setName("lblTargetPiratesLabel");
     lblTargetPiratesLabel.setSize(new FormSize(44, 16));
@@ -1055,7 +1074,8 @@ public class ApplicationST extends WinformWindow {
     lblTargetPiratesLabel.setText("Pirates:");
     // lblTargetPoliceLabel
     lblTargetPoliceLabel.setAutoSize(true);
-    lblTargetPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblTargetPoliceLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTargetPoliceLabel.setLocation(new Point(8, 96));
     lblTargetPoliceLabel.setName("lblTargetPoliceLabel");
     lblTargetPoliceLabel.setSize(new FormSize(40, 16));
@@ -1063,7 +1083,8 @@ public class ApplicationST extends WinformWindow {
     lblTargetPoliceLabel.setText("Police:");
     // lblTargetResourceLabel
     lblTargetResourceLabel.setAutoSize(true);
-    lblTargetResourceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblTargetResourceLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTargetResourceLabel.setLocation(new Point(8, 80));
     lblTargetResourceLabel.setName("lblTargetResourceLabel");
     lblTargetResourceLabel.setSize(new FormSize(58, 16));
@@ -1071,7 +1092,8 @@ public class ApplicationST extends WinformWindow {
     lblTargetResourceLabel.setText("Resource:");
     // lblTargetGovtLabel
     lblTargetGovtLabel.setAutoSize(true);
-    lblTargetGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblTargetGovtLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTargetGovtLabel.setLocation(new Point(8, 64));
     lblTargetGovtLabel.setName("lblTargetGovtLabel");
     lblTargetGovtLabel.setSize(new FormSize(72, 16));
@@ -1079,7 +1101,8 @@ public class ApplicationST extends WinformWindow {
     lblTargetGovtLabel.setText("Government:");
     // lblTargetTechLabel
     lblTargetTechLabel.setAutoSize(true);
-    lblTargetTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblTargetTechLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTargetTechLabel.setLocation(new Point(8, 48));
     lblTargetTechLabel.setName("lblTargetTechLabel");
     lblTargetTechLabel.setSize(new FormSize(65, 16));
@@ -1087,7 +1110,8 @@ public class ApplicationST extends WinformWindow {
     lblTargetTechLabel.setText("Tech Level:");
     // lblTargetSizeLabel
     lblTargetSizeLabel.setAutoSize(true);
-    lblTargetSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblTargetSizeLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTargetSizeLabel.setLocation(new Point(8, 32));
     lblTargetSizeLabel.setName("lblTargetSizeLabel");
     lblTargetSizeLabel.setSize(new FormSize(31, 16));
@@ -1101,7 +1125,8 @@ public class ApplicationST extends WinformWindow {
     lblTargetName.setText("Tarchannen");
     // lblTargetNameLabel
     lblTargetNameLabel.setAutoSize(true);
-    lblTargetNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblTargetNameLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTargetNameLabel.setLocation(new Point(8, 16));
     lblTargetNameLabel.setName("lblTargetNameLabel");
     lblTargetNameLabel.setSize(new FormSize(39, 16));
@@ -1435,7 +1460,8 @@ public class ApplicationST extends WinformWindow {
     lblTargetPct7.setText("-888%");
     lblTargetPct7.TextAlign = ContentAlignment.TopRight;
     // lblTargetDiff7
-    lblTargetDiff7.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
+    lblTargetDiff7.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
     lblTargetDiff7.setLocation(new Point(410, 228));
     lblTargetDiff7.setName("lblTargetDiff7");
     lblTargetDiff7.setSize(new FormSize(52, 13));
@@ -2161,7 +2187,8 @@ public class ApplicationST extends WinformWindow {
     lblBuy.setText("Buy");
     // lblSell
     lblSell.setAutoSize(true);
-    lblSell.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
+    lblSell.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))));
     lblSell.setLocation(new Point(132, 34));
     lblSell.setName("lblSell");
     lblSell.setSize(new FormSize(23, 16));
@@ -2308,7 +2335,7 @@ public class ApplicationST extends WinformWindow {
     lblSystemPressure.setName("lblSystemPressure");
     lblSystemPressure.setSize(new FormSize(168, 16));
     lblSystemPressure.setTabIndex(18);
-    lblSystemPressure.setText("suffering from extreme bordom.");
+    lblSystemPressure.setText("suffering from extreme boredom.");
     // lblSystemPressurePre
     lblSystemPressurePre.setAutoSize(true);
     lblSystemPressurePre.setLocation(new Point(8, 134));
@@ -2354,7 +2381,8 @@ public class ApplicationST extends WinformWindow {
     lblSystemResource.setText("Sweetwater Oceans");
     // lblSystemPiratesLabel
     lblSystemPiratesLabel.setAutoSize(true);
-    lblSystemPiratesLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblSystemPiratesLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblSystemPiratesLabel.setLocation(new Point(8, 112));
     lblSystemPiratesLabel.setName("lblSystemPiratesLabel");
     lblSystemPiratesLabel.setSize(new FormSize(44, 16));
@@ -2362,7 +2390,8 @@ public class ApplicationST extends WinformWindow {
     lblSystemPiratesLabel.setText("Pirates:");
     // lblSystemPoliceLabel
     lblSystemPoliceLabel.setAutoSize(true);
-    lblSystemPoliceLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblSystemPoliceLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblSystemPoliceLabel.setLocation(new Point(8, 96));
     lblSystemPoliceLabel.setName("lblSystemPoliceLabel");
     lblSystemPoliceLabel.setSize(new FormSize(40, 16));
@@ -2370,7 +2399,8 @@ public class ApplicationST extends WinformWindow {
     lblSystemPoliceLabel.setText("Police:");
     // lblSystemResourseLabel
     lblSystemResourseLabel.setAutoSize(true);
-    lblSystemResourseLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblSystemResourseLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblSystemResourseLabel.setLocation(new Point(8, 80));
     lblSystemResourseLabel.setName("lblSystemResourseLabel");
     lblSystemResourseLabel.setSize(new FormSize(58, 16));
@@ -2378,7 +2408,8 @@ public class ApplicationST extends WinformWindow {
     lblSystemResourseLabel.setText("Resource:");
     // lblSystemGovtLabel
     lblSystemGovtLabel.setAutoSize(true);
-    lblSystemGovtLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblSystemGovtLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblSystemGovtLabel.setLocation(new Point(8, 64));
     lblSystemGovtLabel.setName("lblSystemGovtLabel");
     lblSystemGovtLabel.setSize(new FormSize(72, 16));
@@ -2386,7 +2417,8 @@ public class ApplicationST extends WinformWindow {
     lblSystemGovtLabel.setText("Government:");
     // lblSystemTechLabel
     lblSystemTechLabel.setAutoSize(true);
-    lblSystemTechLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblSystemTechLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblSystemTechLabel.setLocation(new Point(8, 48));
     lblSystemTechLabel.setName("lblSystemTechLabel");
     lblSystemTechLabel.setSize(new FormSize(65, 16));
@@ -2394,7 +2426,8 @@ public class ApplicationST extends WinformWindow {
     lblSystemTechLabel.setText("Tech Level:");
     // lblSystemSizeLabel
     lblSystemSizeLabel.setAutoSize(true);
-    lblSystemSizeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblSystemSizeLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblSystemSizeLabel.setLocation(new Point(8, 32));
     lblSystemSizeLabel.setName("lblSystemSizeLabel");
     lblSystemSizeLabel.setSize(new FormSize(31, 16));
@@ -2408,7 +2441,8 @@ public class ApplicationST extends WinformWindow {
     lblSystemName.setText("Tarchannen");
     // lblSystemNameLabel
     lblSystemNameLabel.setAutoSize(true);
-    lblSystemNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
+    lblSystemNameLabel.setFont(
+        new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblSystemNameLabel.setLocation(new Point(8, 16));
     lblSystemNameLabel.setName("lblSystemNameLabel");
     lblSystemNameLabel.setSize(new FormSize(39, 16));
@@ -2676,10 +2710,11 @@ public class ApplicationST extends WinformWindow {
         break;
     }
     FormAlert.Alert(alertType, this);
-    FormAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
+    FormAlert.Alert(AlertType.GameEndScore, this,
+        Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
     HighScoreRecord candidate = new HighScoreRecord(
-        game.Commander().Name(), game.Score(), game.getEndStatus(),
-        game.Commander().getDays(), game.Commander().Worth(), game.Difficulty());
+        cmdr.Name(), game.Score(), game.getEndStatus(),
+        cmdr.getDays(), cmdr.Worth(), game.Difficulty());
     if(candidate.CompareTo(Functions.GetHighScores(this)[0]) > 0) {
       if(game.getCheatEnabled()) {
         FormAlert.Alert(AlertType.GameEndHighScoreCheat, this);
@@ -2712,7 +2747,11 @@ public class ApplicationST extends WinformWindow {
   // Make sure all directories exists.
   private void InitFileStructure() {
     String[] paths = new String[]{
-      Consts.CustomDirectory, Consts.CustomImagesDirectory, Consts.CustomTemplatesDirectory, Consts.DataDirectory, Consts.SaveDirectory
+      Consts.CustomDirectory,
+      Consts.CustomImagesDirectory,
+      Consts.CustomTemplatesDirectory,
+      Consts.DataDirectory,
+      Consts.SaveDirectory
     };
     for(String path : paths) {
       if(!Directory.Exists(path)) {
@@ -2728,8 +2767,9 @@ public class ApplicationST extends WinformWindow {
       Object obj = Functions.LoadFile(fileName, false, this);
       if(obj != null) {
         game = new Game((Hashtable)obj, this);
+        cmdr = game.Commander();
         SaveGameFile = fileName;
-        SaveGameDays = game.Commander().getDays();
+        SaveGameDays = cmdr.getDays();
         SetInGameControlsEnabled(true);
         UpdateAll();
       }
@@ -2742,7 +2782,7 @@ public class ApplicationST extends WinformWindow {
     if(Functions.SaveFile(fileName, game.Serialize(), this) && saveFileName) {
       SaveGameFile = fileName;
     }
-    SaveGameDays = game.Commander().getDays();
+    SaveGameDays = cmdr.getDays();
   }
 
   private void SetInGameControlsEnabled(boolean enabled) {
@@ -2777,7 +2817,7 @@ public class ApplicationST extends WinformWindow {
   }
 
   private void UpdateCargo() {
-    if(game == null || game.Commander().CurrentSystem() == null) {
+    if(game == null || cmdr.CurrentSystem() == null) {
       for(int i = 0; i < lblSellPrice.length; i++) {
         lblSellPrice[i].setText("");
         lblBuyPrice[i].setText("");
@@ -2792,7 +2832,7 @@ public class ApplicationST extends WinformWindow {
     } else {
       int[] buy = game.PriceCargoBuy();
       int[] sell = game.PriceCargoSell();
-      Commander cmdr = game.Commander();
+      cmdr = game.Commander();//todo: is this unnecessary? GAC
       StarSystem warpSys = game.WarpSystem();
       for(int i = 0; i < lblSellPrice.length; i++) {
         int price = warpSys == null ? 0 : Consts.TradeItems[i].StandardPrice(warpSys);
@@ -2819,7 +2859,9 @@ public class ApplicationST extends WinformWindow {
           int diff = price - buy[i];
           lblTargetDiff[i].setText((diff > 0 ? "+" : "") + Functions.FormatMoney(diff));
           lblTargetPct[i].setText((diff > 0 ? "+" : "") + Functions.FormatNumber(100 * diff / buy[i]) + "%");
-          lblBuyPrice[i].setFont((diff > 0 && cmdr.CurrentSystem().TradeItems()[i] > 0) ? lblSystemNameLabel.getFont() : lblBuy.getFont());
+          lblBuyPrice[i].setFont(
+              (diff > 0 && cmdr.CurrentSystem().TradeItems()[i] > 0)
+              ? lblSystemNameLabel.getFont() : lblBuy.getFont());
         } else {
           lblTargetDiff[i].setText("------------");
           lblTargetPct[i].setText("--------");
@@ -2863,14 +2905,21 @@ public class ApplicationST extends WinformWindow {
       lblRepairCost.setText("");
       btnRepair.setVisible(false);
     } else {
-      Ship ship = game.Commander().getShip();
-      lblFuelStatus.setText(Functions.StringVars("You have fuel to fly ^1.", Functions.Multiples(ship.getFuel(), "parsec")));
+      Ship ship = cmdr.getShip();
+      lblFuelStatus.setText(
+          Functions.StringVars("You have fuel to fly ^1.", Functions.Multiples(ship.getFuel(), "parsec")));
       int tanksEmpty = ship.FuelTanks() - ship.getFuel();
-      lblFuelCost.setText(tanksEmpty > 0 ? Functions.StringVars("A full tank costs ^1", Functions.FormatMoney(tanksEmpty * ship.getFuelCost())) : "Your tank is full.");
+      lblFuelCost.setText(tanksEmpty > 0
+          ? Functions.StringVars("A full tank costs ^1", Functions.FormatMoney(tanksEmpty * ship.getFuelCost()))
+          : "Your tank is full.");
       btnFuel.setVisible(tanksEmpty > 0);
-      lblHullStatus.setText(Functions.StringVars("Your hull strength is at ^1%.", Functions.FormatNumber((int)Math.floor((double)100 * ship.getHull() / ship.HullStrength()))));
+      lblHullStatus.setText(
+          Functions.StringVars("Your hull strength is at ^1%.",
+          Functions.FormatNumber((int)Math.floor((double)100 * ship.getHull() / ship.HullStrength()))));
       int hullLoss = ship.HullStrength() - ship.getHull();
-      lblRepairCost.setText(hullLoss > 0 ? Functions.StringVars("Full repairs will cost ^1", Functions.FormatMoney(hullLoss * ship.getRepairCost())) : "No repairs are needed.");
+      lblRepairCost.setText(hullLoss > 0
+          ? Functions.StringVars("Full repairs will cost ^1", Functions.FormatMoney(hullLoss * ship.getRepairCost()))
+          : "No repairs are needed.");
       btnRepair.setVisible(hullLoss > 0);
     }
   }
@@ -2885,18 +2934,20 @@ public class ApplicationST extends WinformWindow {
       btnDesign.setVisible(false);
       btnEquip.setVisible(false);
     } else {
-      boolean noTech = (game.Commander().CurrentSystem().TechLevel().CastToInt() < Consts.ShipSpecs[ShipType.Flea.CastToInt()].MinimumTechLevel().CastToInt());
+      boolean noTech =
+          cmdr.CurrentSystem().TechLevel().CastToInt()
+          < Consts.ShipSpecs[ShipType.Flea.CastToInt()].MinimumTechLevel().CastToInt();
       lblShipsForSale.setText(noTech ? Strings.ShipyardShipNoSale : Strings.ShipyardShipForSale);
       btnBuyShip.setVisible(true);
-      btnDesign.setVisible((Game.CurrentGame().Commander().CurrentSystem().Shipyard() != null));
+      btnDesign.setVisible((cmdr.CurrentSystem().Shipyard() != null));
       lblEquipForSale.setText(noTech ? Strings.ShipyardEquipNoSale : Strings.ShipyardEquipForSale);
       btnEquip.setVisible(true);
       btnPod.setVisible(false);
-      if(game.Commander().getShip().getEscapePod()) {
+      if(cmdr.getShip().getEscapePod()) {
         lblEscapePod.setText(Strings.ShipyardPodInstalled);
       } else if(noTech) {
         lblEscapePod.setText(Strings.ShipyardPodNoSale);
-      } else if(game.Commander().getCash() < 2000) {
+      } else if(cmdr.getCash() < 2000) {
         lblEscapePod.setText(Strings.ShipyardPodIF);
       } else {
         lblEscapePod.setText(Strings.ShipyardPodCost);
@@ -2912,15 +2963,16 @@ public class ApplicationST extends WinformWindow {
       statusBarPanelCosts.setText("");
       statusBarPanelExtra.setText("No Game Loaded.");
     } else {
-      statusBarPanelCash.setText("Cash: " + Functions.FormatMoney(game.Commander().getCash()));
-      statusBarPanelBays.setText("Bays: " + game.Commander().getShip().FilledCargoBays() + "/" + game.Commander().getShip().CargoBays());
+      statusBarPanelCash.setText("Cash: " + Functions.FormatMoney(cmdr.getCash()));
+      statusBarPanelBays.setText(
+          "Bays: " + cmdr.getShip().FilledCargoBays() + "/" + cmdr.getShip().CargoBays());
       statusBarPanelCosts.setText("Current Costs: " + Functions.FormatMoney(game.CurrentCosts()));
       statusBarPanelExtra.setText("");
     }
   }
 
   private void UpdateSystemInfo() {
-    if(game == null || game.Commander().CurrentSystem() == null) {
+    if(game == null || cmdr.CurrentSystem() == null) {
       lblSystemName.setText("");
       lblSystemSize.setText("");
       lblSystemTech.setText("");
@@ -2934,7 +2986,7 @@ public class ApplicationST extends WinformWindow {
       btnMerc.setVisible(false);
       btnSpecial.setVisible(false);
     } else {
-      StarSystem system = game.Commander().CurrentSystem();
+      StarSystem system = cmdr.CurrentSystem();
       CrewMember[] mercs = system.MercenariesForHire();
       lblSystemName.setText(system.Name());
       lblSystemSize.setText(Strings.Sizes[system.Size().CastToInt()]);
@@ -2976,7 +3028,7 @@ public class ApplicationST extends WinformWindow {
       btnTrack.setVisible(false);
     } else {
       StarSystem system = game.WarpSystem();
-      int distance = Functions.Distance(game.Commander().CurrentSystem(), system);
+      int distance = Functions.Distance(cmdr.CurrentSystem(), system);
       lblTargetName.setText(system.Name());
       lblTargetSize.setText(Strings.Sizes[system.Size().CastToInt()]);
       lblTargetTech.setText(system.TechLevel().name);
@@ -2985,14 +3037,15 @@ public class ApplicationST extends WinformWindow {
       lblTargetPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
       lblTargetPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
       lblTargetDistance.setText("" + distance);
-      lblTargetOutOfRange.setVisible(!system.DestOk() && system != game.Commander().CurrentSystem());
+      lblTargetOutOfRange.setVisible(!system.DestOk() && system != cmdr.CurrentSystem());
       btnWarp.setVisible(system.DestOk());
       btnTrack.setVisible(lblTargetOutOfRange.getVisible() && system != game.TrackedSystem());
     }
   }
 
   private void SpaceTrader_Closing(Object sender, CancelEventArgs e) {
-    if(game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) {
+    if(game == null || cmdr.getDays() == SaveGameDays
+        || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) {
       if(WindowState == FormWindowState.Normal) {
         SetRegistrySetting("X", Left.toString());
         SetRegistrySetting("Y", Top.toString());
@@ -3037,7 +3090,7 @@ public class ApplicationST extends WinformWindow {
   private void btnFind_Click(Object sender, EventArgs e) {
     FormFind form = new FormFind();
     if(form.ShowDialog(this) == DialogResult.OK) {
-      Ship ship = game.Commander().getShip();
+      Ship ship = cmdr.getShip();
       String[] words = form.SystemName().split(" ");
       String first = words.length > 0 ? words[0] : "";
       String second = words.length > 1 ? words[1] : "";
@@ -3056,7 +3109,7 @@ public class ApplicationST extends WinformWindow {
             }
             break;
           case DeLorean:
-            game.Commander().setDays(Math.max(0, num1));
+            cmdr.setDays(Math.max(0, num1));
             break;
           case Diamond:
             ship.setHullUpgraded(!ship.getHullUpgraded());
@@ -3077,7 +3130,7 @@ public class ApplicationST extends WinformWindow {
             }
             break;
           case Fame:
-            game.Commander().setReputationScore(Math.max(0, num1));
+            cmdr.setReputationScore(Math.max(0, num1));
             break;
           case Go:
             game.setSelectedSystemByName(second);
@@ -3094,22 +3147,22 @@ public class ApplicationST extends WinformWindow {
           case Ice: {
             switch(SomeStringsForSwitch.find(second)) {
               case Pirate:
-                game.Commander().setKillsPirate(Math.max(0, num2));
+                cmdr.setKillsPirate(Math.max(0, num2));
                 break;
               case Police:
-                game.Commander().setKillsPolice(Math.max(0, num2));
+                cmdr.setKillsPolice(Math.max(0, num2));
                 break;
               case Trader:
-                game.Commander().setKillsTrader(Math.max(0, num2));
+                cmdr.setKillsTrader(Math.max(0, num2));
                 break;
             }
           }
           break;
           case Indemnity:
-            game.Commander().NoClaim(Math.max(0, num1));
+            cmdr.NoClaim(Math.max(0, num1));
             break;
           case IOU:
-            game.Commander().setDebt(Math.max(0, num1));
+            cmdr.setDebt(Math.max(0, num1));
             break;
           case Iron:
             if(num1 >= 0 && num1 < ship.Weapons().length && num2 >= 0 && num2 < Consts.Weapons.length) {
@@ -3124,7 +3177,8 @@ public class ApplicationST extends WinformWindow {
               String[] skills = third.split(",");
               for(int i = 0; i < game.Mercenaries()[num1].Skills().length && i < skills.length; i++) {
                 if(Functions.IsInt(skills[i])) {
-                  game.Mercenaries()[num1].Skills()[i] = Math.max(1, Math.min(Consts.MaxSkill, Integer.parseInt(skills[i])));
+                  game.Mercenaries()[num1].Skills()[i] =
+                      Math.max(1, Math.min(Consts.MaxSkill, Integer.parseInt(skills[i])));
                 }
               }
             }
@@ -3147,18 +3201,18 @@ public class ApplicationST extends WinformWindow {
               int skill = ship.Trader();
               ship.Crew()[num1] = game.Mercenaries()[num2];
               if(ship.Trader() != skill) {
-                game.RecalculateBuyPrices(game.Commander().CurrentSystem());
+                game.RecalculateBuyPrices(cmdr.CurrentSystem());
               }
             }
             break;
           case RapSheet:
-            game.Commander().setPoliceRecordScore(num1);
+            cmdr.setPoliceRecordScore(num1);
             break;
           case Rarity:
             game.setChanceOfVeryRareEncounter(Math.max(0, Math.min(1000, num1)));
             break;
           case Scratch:
-            game.Commander().setCash(Math.max(0, num1));
+            cmdr.setCash(Math.max(0, num1));
             break;
           case Skin:
             ship.setHull(Math.max(0, Math.min(ship.HullStrength(), num1)));
@@ -3270,9 +3324,9 @@ public class ApplicationST extends WinformWindow {
   private void btnFuel_Click(Object sender, EventArgs e) {
     FormBuyFuel form = new FormBuyFuel();
     if(form.ShowDialog(this) == DialogResult.OK) {
-      int toAdd = form.Amount() / game.Commander().getShip().getFuelCost();
-      game.Commander().getShip().setFuel(game.Commander().getShip().getFuel() + toAdd);
-      game.Commander().setCash(game.Commander().getCash() - (toAdd * game.Commander().getShip().getFuelCost()));
+      int toAdd = form.Amount() / cmdr.getShip().getFuelCost();
+      cmdr.getShip().setFuel(cmdr.getShip().getFuel() + toAdd);
+      cmdr.setCash(cmdr.getCash() - (toAdd * cmdr.getShip().getFuelCost()));
       UpdateAll();
     }
   }
@@ -3280,7 +3334,7 @@ public class ApplicationST extends WinformWindow {
   private void btnJump_Click(Object sender, EventArgs e) {
     if(game.WarpSystem() == null) {
       FormAlert.Alert(AlertType.ChartJumpNoSystemSelected, this);
-    } else if(game.WarpSystem() == game.Commander().CurrentSystem()) {
+    } else if(game.WarpSystem() == cmdr.CurrentSystem()) {
       FormAlert.Alert(AlertType.ChartJumpCurrent, this);
     } else if(FormAlert.Alert(AlertType.ChartJump, this, game.WarpSystem().Name()) == DialogResult.Yes) {
       game.setCanSuperWarp(false);
@@ -3315,8 +3369,8 @@ public class ApplicationST extends WinformWindow {
 
   private void btnPod_Click(Object sender, EventArgs e) {
     if(FormAlert.Alert(AlertType.EquipmentEscapePod, this) == DialogResult.Yes) {
-      game.Commander().setCash(game.Commander().getCash() - 2000);
-      game.Commander().getShip().setEscapePod(true);
+      cmdr.setCash(cmdr.getCash() - 2000);
+      cmdr.getShip().setEscapePod(true);
       UpdateAll();
     }
   }
@@ -3329,15 +3383,15 @@ public class ApplicationST extends WinformWindow {
   private void btnRepair_Click(Object sender, EventArgs e) {
     FormBuyRepairs form = new FormBuyRepairs();
     if(form.ShowDialog(this) == DialogResult.OK) {
-      int toAdd = form.Amount() / game.Commander().getShip().getRepairCost();
-      game.Commander().getShip().setHull(game.Commander().getShip().getHull() + toAdd);
-      game.Commander().setCash(game.Commander().getCash() - (toAdd * game.Commander().getShip().getRepairCost()));
+      int toAdd = form.Amount() / cmdr.getShip().getRepairCost();
+      cmdr.getShip().setHull(cmdr.getShip().getHull() + toAdd);
+      cmdr.setCash(cmdr.getCash() - (toAdd * cmdr.getShip().getRepairCost()));
       UpdateAll();
     }
   }
 
   private void btnSpecial_Click(Object sender, EventArgs e) {
-    SpecialEvent specEvent = game.Commander().CurrentSystem().SpecialEvent();
+    SpecialEvent specEvent = cmdr.CurrentSystem().SpecialEvent();
     String btn1, btn2;
     DialogResult res1, res2;
     if(specEvent.MessageOnly()) {
@@ -3353,7 +3407,7 @@ public class ApplicationST extends WinformWindow {
     }
     FormAlert alert = new FormAlert(specEvent.Title(), specEvent.String(), btn1, res1, btn2, res2, null);
     if(alert.ShowDialog() != DialogResult.No) {
-      if(game.Commander().CashToSpend() < specEvent.Price()) {
+      if(cmdr.CashToSpend() < specEvent.Price()) {
         FormAlert.Alert(AlertType.SpecialIF, this);
       } else {
         try {
@@ -3392,8 +3446,13 @@ public class ApplicationST extends WinformWindow {
 
   private void mnuGameNew_Click(Object sender, EventArgs e) {
     FormNewCommander form = new FormNewCommander();
-    if((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) && form.ShowDialog(this) == DialogResult.OK) {
-      game = new Game(form.CommanderName(), form.Difficulty(), form.Pilot(), form.Fighter(), form.Trader(), form.Engineer(), this);
+    if((game == null || cmdr.getDays() == SaveGameDays
+        || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
+        && form.ShowDialog(this) == DialogResult.OK) {
+      game = new Game(
+          form.CommanderName(), form.Difficulty(), form.Pilot(),
+          form.Fighter(), form.Trader(), form.Engineer(), this);
+      cmdr = game.Commander();
       SaveGameFile = null;
       SaveGameDays = 0;
       SetInGameControlsEnabled(true);
@@ -3405,13 +3464,15 @@ public class ApplicationST extends WinformWindow {
   }
 
   private void mnuGameLoad_Click(Object sender, EventArgs e) {
-    if((game == null || game.Commander().getDays() == SaveGameDays || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes) && dlgOpen.ShowDialog(this) == DialogResult.OK) {
+    if((game == null || cmdr.getDays() == SaveGameDays
+        || FormAlert.Alert(AlertType.GameAbandonConfirm, this) == DialogResult.Yes)
+        && dlgOpen.ShowDialog(this) == DialogResult.OK) {
       LoadGame(dlgOpen.getFileName());
     }
   }
 
   private void mnuGameSave_Click(Object sender, EventArgs e) {
-    if(Game.CurrentGame() != null) {
+    if(game != null) {
       if(SaveGameFile != null) {
         SaveGame(SaveGameFile, false);
       } else {
@@ -3421,7 +3482,7 @@ public class ApplicationST extends WinformWindow {
   }
 
   private void mnuGameSaveAs_Click(Object sender, EventArgs e) {
-    if(Game.CurrentGame() != null && dlgSave.ShowDialog(this) == DialogResult.OK) {
+    if(game != null && dlgSave.ShowDialog(this) == DialogResult.OK) {
       SaveGame(dlgSave.getFileName(), true);
     }
   }
@@ -3500,8 +3561,8 @@ public class ApplicationST extends WinformWindow {
       StarSystem[] universe = game.Universe();
       int[] wormholes = game.Wormholes();
       StarSystem targetSys = game.SelectedSystem();
-      StarSystem curSys = game.Commander().CurrentSystem();
-      int fuel = game.Commander().getShip().getFuel();
+      StarSystem curSys = cmdr.CurrentSystem();
+      int fuel = cmdr.getShip().getFuel();
       if(fuel > 0) {
         e.Graphics.DrawEllipse(DEFAULT_PEN, curSys.X() + OFF_X - fuel, curSys.Y() + OFF_Y - fuel, fuel * 2, fuel * 2);
       }
@@ -3509,7 +3570,9 @@ public class ApplicationST extends WinformWindow {
       if(game.TargetWormhole()) {
         int dest = wormholes[(Util.BruteSeek(wormholes, index) + 1) % wormholes.length];
         StarSystem destSys = universe[dest];
-        e.Graphics.DrawLine(DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X, targetSys.Y() + OFF_Y, destSys.X() + OFF_X, destSys.Y() + OFF_Y);
+        e.Graphics.DrawLine(
+            DEFAULT_PEN, targetSys.X() + OFF_X_WORM + OFF_X,
+            targetSys.Y() + OFF_Y, destSys.X() + OFF_X, destSys.Y() + OFF_Y);
       }
       for(int i = 0; i < universe.length; i++) {
         int imageIndex = universe[i].Visited() ? IMG_S_V : IMG_S_N;
@@ -3518,8 +3581,12 @@ public class ApplicationST extends WinformWindow {
         }
         Image image = ilChartImages.getImages()[imageIndex];
         if(universe[i] == game.TrackedSystem()) {
-          e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y(), universe[i].X() + image.getWidth() - 1, universe[i].Y() + image.getHeight() - 1);
-          e.Graphics.DrawLine(DEFAULT_PEN, universe[i].X(), universe[i].Y() + image.getHeight() - 1, universe[i].X() + image.getWidth() - 1, universe[i].Y());
+          e.Graphics.DrawLine(
+              DEFAULT_PEN, universe[i].X(), universe[i].Y(),
+              universe[i].X() + image.getWidth() - 1, universe[i].Y() + image.getHeight() - 1);
+          e.Graphics.DrawLine(
+              DEFAULT_PEN, universe[i].X(), universe[i].Y() + image.getHeight() - 1,
+              universe[i].X() + image.getWidth() - 1, universe[i].Y());
         }
         ilChartImages.Draw(e.Graphics, universe[i].X(), universe[i].Y(), imageIndex);
         if(Functions.WormholeExists(i, -1)) {
@@ -3534,7 +3601,7 @@ public class ApplicationST extends WinformWindow {
   private void picShortRangeChart_MouseDown(Object sender, MouseEventArgs e) {
     if(e.Button == MouseButtons.Left && game != null) {
       StarSystem[] universe = game.Universe();
-      StarSystem curSys = game.Commander().CurrentSystem();
+      StarSystem curSys = cmdr.CurrentSystem();
       boolean clickedSystem = false;
       int centerX = picShortRangeChart.getWidth() / 2;
       int centerY = picShortRangeChart.getHeight() / 2;
@@ -3568,15 +3635,16 @@ public class ApplicationST extends WinformWindow {
       StarSystem[] universe = game.Universe();
       int[] wormholes = game.Wormholes();
       StarSystem trackSys = game.TrackedSystem();
-      StarSystem curSys = game.Commander().CurrentSystem();
-      int fuel = game.Commander().getShip().getFuel();
+      StarSystem curSys = cmdr.CurrentSystem();
+      int fuel = cmdr.getShip().getFuel();
       int centerX = picShortRangeChart.getWidth() / 2;
       int centerY = picShortRangeChart.getHeight() / 2;
       int delta = picShortRangeChart.getHeight() / (Consts.MaxRange * 2);
       e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY - 1, centerX + 1, centerY + 1);
       e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY + 1, centerX + 1, centerY - 1);
       if(fuel > 0) {
-        e.Graphics.DrawEllipse(DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
+        e.Graphics.DrawEllipse(
+            DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
       }
       if(trackSys != null) {
         int dist = Functions.Distance(curSys, trackSys);
@@ -3592,11 +3660,13 @@ public class ApplicationST extends WinformWindow {
               });
         }
         if(game.Options().getShowTrackedRange()) {
-          e.Graphics.DrawString(Functions.StringVars("^1 to ^2.", Functions.Multiples(dist, Strings.DistanceUnit), trackSys.Name()),
+          e.Graphics.DrawString(
+              Functions.StringVars("^1 to ^2.", Functions.Multiples(dist, Strings.DistanceUnit), trackSys.Name()),
               getFont(), new SolidBrush(Color.black), 0, picShortRangeChart.getHeight() - 13);
         }
       }
-      // First, draw the names, then the systems. The names may overlap and the systems may be drawn on the names, but at least every system is visible.
+      // First, draw the names, then the systems.
+      // The names may overlap and the systems may be drawn on the names, but at least every system is visible.
       for(int j = 0; j < 2; j++) {
         for(int i = 0; i < universe.length; i++) {
           if((Math.abs(universe[i].X() - curSys.X()) * delta <= picShortRangeChart.getWidth() / 2 - 10)
@@ -3624,7 +3694,8 @@ public class ApplicationST extends WinformWindow {
             } else {
               Font font = new Font(getFont().FontFamily, 7);
               SizeF size = e.Graphics.MeasureString(universe[i].Name(), getFont());
-              e.Graphics.DrawString(universe[i].Name(), font, new SolidBrush(Color.black), x - size.width / 2 + OFF_X, y /*- size.Height*/ - 5);
+              e.Graphics.DrawString(universe[i].Name(), font, new SolidBrush(Color.black),
+                  x - size.width / 2 + OFF_X, y /*- size.Height*/ - 5);
               // implementations differ as to which point we start the string at. --aviv
             }
           }
