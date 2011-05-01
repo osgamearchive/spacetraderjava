@@ -1,17 +1,17 @@
 package spacetrader.gui;
 import java.awt.Point;
 import jwinforms.Button;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import spacetrader.Commander;
 import spacetrader.Functions;
 import spacetrader.Game;
@@ -25,11 +25,11 @@ public class FormPayBackLoan extends WinformForm {
   private Label lblQuestion;
   private Label lblStatement;
   private NumericUpDown numAmount;
-  private Game game = Game.CurrentGame();
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
 
   public FormPayBackLoan() {
     InitializeComponent();
-    Commander cmdr = game.Commander();
     int max = Math.min(cmdr.getDebt(), cmdr.getCash());
     numAmount.setMaximum(max);
     numAmount.setValue(numAmount.getMinimum());
@@ -81,7 +81,7 @@ public class FormPayBackLoan extends WinformForm {
     btnMax.setClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        btnMax_Click(sender, e);
+        btnMax_Click();
       }
     });
     // btnNothing
@@ -114,7 +114,7 @@ public class FormPayBackLoan extends WinformForm {
     ResumeLayout(false);
   }
 
-  private void btnMax_Click(Object sender, EventArgs e) {
+  private void btnMax_Click() {
     numAmount.setValue(numAmount.getMaximum());
   }
 

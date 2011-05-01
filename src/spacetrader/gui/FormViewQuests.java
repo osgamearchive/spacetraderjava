@@ -2,16 +2,15 @@ package spacetrader.gui;
 import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
-import jwinforms.Container;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventHandler;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.LinkArea;
 import jwinforms.LinkLabel;
 import jwinforms.LinkLabelLinkClickedEventArgs;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.events.SpecialEventType;
 import spacetrader.Consts;
@@ -24,8 +23,8 @@ import spacetrader.util.Util;
 
 
 public class FormViewQuests extends WinformForm {
+  private final Game game = Game.CurrentGame();
   private Button btnClose;
-  private Container components = null;
   private LinkLabel lblQuests;
 
   public FormViewQuests() {
@@ -86,7 +85,6 @@ public class FormViewQuests extends WinformForm {
   }
 
   private String[] GetQuestStrings() {
-    Game game = Game.CurrentGame();
     ArrayList<String> quests = new ArrayList<String>(12);
     if(game.getQuestStatusGemulon() > SpecialEvent.StatusGemulonNotStarted && game.getQuestStatusGemulon() < SpecialEvent.StatusGemulonDate) {
       if(game.getQuestStatusGemulon() == SpecialEvent.StatusGemulonDate - 1) {
@@ -101,9 +99,7 @@ public class FormViewQuests extends WinformForm {
       if(game.getQuestStatusExperiment() == SpecialEvent.StatusExperimentDate - 1) {
         quests.add(Strings.QuestExperimentInformTomorrow);
       } else {
-        quests.add(Functions.StringVars(
-            Strings.QuestExperimentInformDays, Functions.Multiples(
-            SpecialEvent.StatusExperimentDate - game.getQuestStatusExperiment(), "day")));
+        quests.add(Functions.StringVars(Strings.QuestExperimentInformDays, Functions.Multiples(SpecialEvent.StatusExperimentDate - game.getQuestStatusExperiment(), "day")));
       }
     }
     if(game.Commander().getShip().ReactorOnBoard()) {
@@ -222,8 +218,8 @@ public class FormViewQuests extends WinformForm {
   }
 
   private void lblQuests_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e) {
-    Game.CurrentGame().setSelectedSystemByName(e.Link.LinkData.toString());
-    Game.CurrentGame().getParentWindow().UpdateAll();
+    game.setSelectedSystemByName(e.Link.LinkData.toString());
+    game.getParentWindow().UpdateAll();
     Close();
   }
 }

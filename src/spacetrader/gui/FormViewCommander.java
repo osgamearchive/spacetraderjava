@@ -2,18 +2,18 @@ package spacetrader.gui;
 import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
-import jwinforms.enums.ContentAlignment;
-import jwinforms.enums.DialogResult;
 import jwinforms.Font;
-import jwinforms.enums.FontStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.Label;
 import jwinforms.WinformControl;
 import jwinforms.WinformForm;
+import jwinforms.enums.ContentAlignment;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FontStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import spacetrader.Commander;
 import spacetrader.Consts;
 import spacetrader.Functions;
@@ -24,7 +24,12 @@ import spacetrader.Strings;
 
 
 public class FormViewCommander extends WinformForm {
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
   private Button btnClose;
+  private GroupBox boxSkills;
+  private GroupBox boxFinances;
+  private GroupBox boxNotoriety;
   private Label lblNameLabel;
   private Label lblName;
   private Label lblDifficulty;
@@ -53,10 +58,6 @@ public class FormViewCommander extends WinformForm {
   private Label lblKillsLabel;
   private Label lblBountyLabel;
   private Label lblBounty;
-  private GroupBox boxSkills;
-  private GroupBox boxFinances;
-  private GroupBox boxNotoriety;
-  private Game game = Game.CurrentGame();
 
   public FormViewCommander() {
     InitializeComponent();
@@ -359,7 +360,6 @@ public class FormViewCommander extends WinformForm {
   }
 
   private void InitializeScreen() {
-    Commander cmdr = game.Commander();
     lblName.setText(cmdr.Name());
     lblDifficulty.setText(Strings.DifficultyLevels[game.Difficulty().CastToInt()]);
     lblTime.setText(Functions.Multiples(cmdr.getDays(), Strings.TimeUnit));

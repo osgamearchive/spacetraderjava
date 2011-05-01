@@ -3,32 +3,32 @@ import java.awt.Point;
 import java.util.Arrays;
 import javax.swing.UnsupportedLookAndFeelException;
 import jwinforms.Button;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
 import jwinforms.WinformControl;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import spacetrader.Commander;
 import spacetrader.Game;
 
 
 public class FormBuyRepairs extends WinformForm {
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
   private Button btnOk;
   private Button btnMax;
   private Button btnNothing;
   private Label lblQuestion;
   private NumericUpDown numAmount;
-  private Game game = Game.CurrentGame();
 
   public FormBuyRepairs() {
     InitializeComponent();
-    Commander cmdr = game.Commander();
     numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().HullStrength() - cmdr.getShip().getHull()) * cmdr.getShip().getRepairCost()));
     numAmount.setValue(numAmount.getMaximum());
   }

@@ -2,32 +2,32 @@ package spacetrader.gui;
 import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import spacetrader.Commander;
 import spacetrader.Game;
 
 
 public class FormBuyFuel extends WinformForm {
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
   private Button btnOk;
   private Button btnMax;
   private Button btnNothing;
   private Label lblQuestion;
   private NumericUpDown numAmount;
-  private Game game = Game.CurrentGame();
 
   public FormBuyFuel() {
     InitializeComponent();
-    Commander cmdr = game.Commander();
     numAmount.setMaximum(Math.min(cmdr.getCash(), (cmdr.getShip().FuelTanks() - cmdr.getShip().getFuel()) * cmdr.getShip().getFuelCost()));
     numAmount.setValue(numAmount.getMaximum());
   }

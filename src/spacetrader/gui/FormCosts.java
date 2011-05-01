@@ -3,22 +3,23 @@ import java.awt.Color;
 import java.awt.Point;
 import jwinforms.Button;
 import jwinforms.Container;
-import jwinforms.enums.ContentAlignment;
-import jwinforms.enums.DialogResult;
 import jwinforms.Font;
-import jwinforms.enums.FontStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.Label;
 import jwinforms.PictureBox;
 import jwinforms.WinformForm;
+import jwinforms.enums.ContentAlignment;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FontStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import spacetrader.Functions;
 import spacetrader.Game;
 
 
 public class FormCosts extends WinformForm {
+  private final Game game = Game.CurrentGame();
   private Button btnClose;
   private Label lblMerc;
   private Label lblIns;
@@ -31,8 +32,6 @@ public class FormCosts extends WinformForm {
   private Label lblMercLabel;
   private Label lblInsLabel;
   private PictureBox picLine;
-  private Container components = null;
-  private Game game = Game.CurrentGame();
 
   public FormCosts() {
     InitializeComponent();

@@ -2,28 +2,29 @@ package spacetrader.gui;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.Arrays;
-import jwinforms.enums.BorderStyle;
 import jwinforms.Button;
-import jwinforms.Container;
-import jwinforms.enums.ContentAlignment;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
 import jwinforms.Font;
-import jwinforms.enums.FontStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.Label;
 import jwinforms.PictureBox;
 import jwinforms.WinformControl;
 import jwinforms.WinformForm;
+import jwinforms.enums.BorderStyle;
+import jwinforms.enums.ContentAlignment;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FontStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
+import spacetrader.Commander;
 import spacetrader.Consts;
 import spacetrader.Functions;
 import spacetrader.Game;
+import spacetrader.Ship;
 import spacetrader.ShipSpec;
 import spacetrader.SpecialEvent;
 import spacetrader.Strings;
@@ -92,10 +93,11 @@ public class FormShipList extends WinformForm {
   private Label lblShield;
   private Label lblGadget;
   private Label lblCrew;
-  private Container components = null;
   private Label[] lblPrice;
   private Button[] btnBuy;
-  private Game game = Game.CurrentGame();
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
+  private final Ship ship = cmdr.getShip();
   private int[] prices = new int[Consts.ShipSpecs.length];
 
   public FormShipList() {
@@ -123,8 +125,8 @@ public class FormShipList extends WinformForm {
       btnBuy8,
       btnBuy9,};
     UpdateAll();
-    Info(game.Commander().getShip().Type().CastToInt());
-    if(game.Commander().getShip().getTribbles() > 0 && !game.getTribbleMessage()) {
+    Info(ship.Type().CastToInt());
+    if(ship.getTribbles() > 0 && !game.getTribbleMessage()) {
       FormAlert.Alert(AlertType.TribblesTradeIn, this);
       game.setTribbleMessage(true);
     }
@@ -824,7 +826,7 @@ public class FormShipList extends WinformForm {
 
   private void Buy(int id) {
     Info(id);
-    if(game.Commander().TradeShip(Consts.ShipSpecs[id], prices[id], this)) {
+    if(cmdr.TradeShip(Consts.ShipSpecs[id], prices[id], this)) {
       if(game.getQuestStatusScarab() == SpecialEvent.StatusScarabDone) {
         game.setQuestStatusScarab(SpecialEvent.StatusScarabNotStarted);
       }
@@ -850,13 +852,13 @@ public class FormShipList extends WinformForm {
   private void UpdateAll() {
     for(int i = 0; i < lblPrice.length; i++) {
       btnBuy[i].setVisible(false);
-      if(Consts.ShipSpecs[i].MinimumTechLevel().CastToInt() > game.Commander().CurrentSystem().TechLevel().CastToInt()) {
+      if(Consts.ShipSpecs[i].MinimumTechLevel().CastToInt() > cmdr.CurrentSystem().TechLevel().CastToInt()) {
         lblPrice[i].setText("not sold");
-      } else if(Consts.ShipSpecs[i].Type() == game.Commander().getShip().Type()) {
+      } else if(Consts.ShipSpecs[i].Type() == ship.Type()) {
         lblPrice[i].setText(Strings.ShipBuyGotOne);
       } else {
         btnBuy[i].setVisible(true);
-        prices[i] = Consts.ShipSpecs[i].getPrice() - game.Commander().getShip().Worth(false);
+        prices[i] = Consts.ShipSpecs[i].getPrice() - ship.Worth(false);
         lblPrice[i].setText(Functions.FormatMoney(prices[i]));
       }
     }

@@ -2,23 +2,24 @@ package spacetrader.gui;
 import java.awt.Point;
 import jwinforms.Button;
 import jwinforms.CheckBox;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import spacetrader.Game;
 import spacetrader.GameOptions;
 import spacetrader.enums.AlertType;
 
 
 public class FormOptions extends WinformForm {
+  private final Game game = Game.CurrentGame();
   private Button btnOk;
   private Button btnCancel;
   private Button btnSave;
@@ -41,16 +42,15 @@ public class FormOptions extends WinformForm {
   private Label lblEmpty;
   private Label lblIgnore;
   private NumericUpDown numEmpty;
-  private Game game = Game.CurrentGame();
   private boolean initializing = true;
-  private GameOptions _options = new GameOptions(false);
+  private GameOptions opts = new GameOptions(false);
 
   public FormOptions() {
     InitializeComponent();
     if(game != null) {
-      _options.CopyValues(game.Options());
+      opts.CopyValues(game.Options());
     } else {
-      _options.LoadFromDefaults(false, this);
+      opts.LoadFromDefaults(false, this);
       btnOk.setEnabled(false);
       FormAlert.Alert(AlertType.OptionsNoGame, this);
     }
@@ -115,7 +115,7 @@ public class FormOptions extends WinformForm {
     chkFuel.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkContinuousAttack
@@ -127,7 +127,7 @@ public class FormOptions extends WinformForm {
     chkContinuousAttack.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkAttackFleeing
@@ -139,7 +139,7 @@ public class FormOptions extends WinformForm {
     chkAttackFleeing.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkNewspaper
@@ -151,7 +151,7 @@ public class FormOptions extends WinformForm {
     chkNewspaper.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkRange
@@ -163,7 +163,7 @@ public class FormOptions extends WinformForm {
     chkRange.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkStopTracking
@@ -175,7 +175,7 @@ public class FormOptions extends WinformForm {
     chkStopTracking.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkLoan
@@ -187,7 +187,7 @@ public class FormOptions extends WinformForm {
     chkLoan.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkIgnoreTradersDealing
@@ -199,7 +199,7 @@ public class FormOptions extends WinformForm {
     chkIgnoreTradersDealing.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkReserveMoney
@@ -212,7 +212,7 @@ public class FormOptions extends WinformForm {
 		 {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkIgnoreTraders
@@ -224,7 +224,7 @@ public class FormOptions extends WinformForm {
     chkIgnoreTraders.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkIgnorePirates
@@ -236,7 +236,7 @@ public class FormOptions extends WinformForm {
     chkIgnorePirates.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkIgnorePolice
@@ -248,7 +248,7 @@ public class FormOptions extends WinformForm {
     chkIgnorePolice.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkRepair
@@ -260,7 +260,7 @@ public class FormOptions extends WinformForm {
     chkRepair.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // lblIgnore
@@ -280,7 +280,7 @@ public class FormOptions extends WinformForm {
     numEmpty.setValueChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // btnSave
@@ -293,7 +293,7 @@ public class FormOptions extends WinformForm {
     btnSave.setClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        btnSave_Click(sender, e);
+        btnSave_Click();
       }
     });
     // btnLoad
@@ -306,7 +306,7 @@ public class FormOptions extends WinformForm {
     btnLoad.setClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        btnLoad_Click(sender, e);
+        btnLoad_Click();
       }
     });
     // chkNewspaperShow
@@ -318,7 +318,7 @@ public class FormOptions extends WinformForm {
     chkNewspaperShow.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // chkDisable
@@ -330,7 +330,7 @@ public class FormOptions extends WinformForm {
     chkDisable.setCheckedChanged(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        controlChanged(sender, e);
+        controlChanged();
       }
     });
     // FormOptions
@@ -373,22 +373,22 @@ public class FormOptions extends WinformForm {
 
   private void UpdateAll() {
     initializing = true;
-    chkFuel.setChecked(_options.getAutoFuel());
-    chkRepair.setChecked(_options.getAutoRepair());
-    chkNewspaper.setChecked(_options.getNewsAutoPay());
-    chkNewspaperShow.setChecked(_options.getNewsAutoShow());
-    chkLoan.setChecked(_options.getRemindLoans());
-    chkRange.setChecked(_options.getShowTrackedRange());
-    chkStopTracking.setChecked(_options.getTrackAutoOff());
-    chkReserveMoney.setChecked(_options.getReserveMoney());
-    numEmpty.setValue(_options.getLeaveEmpty());
-    chkIgnorePirates.setChecked(_options.getAlwaysIgnorePirates());
-    chkIgnorePolice.setChecked(_options.getAlwaysIgnorePolice());
-    chkIgnoreTraders.setChecked(_options.getAlwaysIgnoreTraders());
-    chkIgnoreTradersDealing.setChecked(_options.getAlwaysIgnoreTradeInOrbit());
-    chkContinuousAttack.setChecked(_options.getContinuousAttack());
-    chkAttackFleeing.setChecked(_options.getContinuousAttackFleeing());
-    chkDisable.setChecked(_options.getDisableOpponents());
+    chkFuel.setChecked(opts.getAutoFuel());
+    chkRepair.setChecked(opts.getAutoRepair());
+    chkNewspaper.setChecked(opts.getNewsAutoPay());
+    chkNewspaperShow.setChecked(opts.getNewsAutoShow());
+    chkLoan.setChecked(opts.getRemindLoans());
+    chkRange.setChecked(opts.getShowTrackedRange());
+    chkStopTracking.setChecked(opts.getTrackAutoOff());
+    chkReserveMoney.setChecked(opts.getReserveMoney());
+    numEmpty.setValue(opts.getLeaveEmpty());
+    chkIgnorePirates.setChecked(opts.getAlwaysIgnorePirates());
+    chkIgnorePolice.setChecked(opts.getAlwaysIgnorePolice());
+    chkIgnoreTraders.setChecked(opts.getAlwaysIgnoreTraders());
+    chkIgnoreTradersDealing.setChecked(opts.getAlwaysIgnoreTradeInOrbit());
+    chkContinuousAttack.setChecked(opts.getContinuousAttack());
+    chkAttackFleeing.setChecked(opts.getContinuousAttackFleeing());
+    chkDisable.setChecked(opts.getDisableOpponents());
     UpdateContinueAttackFleeing();
     UpdateIgnoreTradersDealing();
     UpdateNewsAutoShow();
@@ -416,42 +416,42 @@ public class FormOptions extends WinformForm {
     chkNewspaperShow.setEnabled(chkNewspaper.isChecked());
   }
 
-  private void btnLoad_Click(Object sender, EventArgs e) {
-    _options.LoadFromDefaults(true, this);
+  private void btnLoad_Click() {
+    opts.LoadFromDefaults(true, this);
     UpdateAll();
   }
 
-  private void btnSave_Click(Object sender, EventArgs e) {
-    _options.SaveAsDefaults(this);
+  private void btnSave_Click() {
+    opts.SaveAsDefaults(this);
   }
 
-  private void controlChanged(Object sender, EventArgs e) {
+  private void controlChanged() {
     if(!initializing) {
       initializing = true;
       UpdateContinueAttackFleeing();
       UpdateIgnoreTradersDealing();
       UpdateNewsAutoShow();
       initializing = false;
-      _options.setAutoFuel(chkFuel.isChecked());
-      _options.setAutoRepair(chkRepair.isChecked());
-      _options.setNewsAutoPay(chkNewspaper.isChecked());
-      _options.setNewsAutoShow(chkNewspaperShow.isChecked());
-      _options.setRemindLoans(chkLoan.isChecked());
-      _options.setShowTrackedRange(chkRange.isChecked());
-      _options.setTrackAutoOff(chkStopTracking.isChecked());
-      _options.setReserveMoney(chkReserveMoney.isChecked());
-      _options.setLeaveEmpty(numEmpty.getValue());
-      _options.setAlwaysIgnorePirates(chkIgnorePirates.isChecked());
-      _options.setAlwaysIgnorePolice(chkIgnorePolice.isChecked());
-      _options.setAlwaysIgnoreTraders(chkIgnoreTraders.isChecked());
-      _options.setAlwaysIgnoreTradeInOrbit(chkIgnoreTradersDealing.isChecked());
-      _options.setContinuousAttack(chkContinuousAttack.isChecked());
-      _options.setContinuousAttackFleeing(chkAttackFleeing.isChecked());
-      _options.setDisableOpponents(chkDisable.isChecked());
+      opts.setAutoFuel(chkFuel.isChecked());
+      opts.setAutoRepair(chkRepair.isChecked());
+      opts.setNewsAutoPay(chkNewspaper.isChecked());
+      opts.setNewsAutoShow(chkNewspaperShow.isChecked());
+      opts.setRemindLoans(chkLoan.isChecked());
+      opts.setShowTrackedRange(chkRange.isChecked());
+      opts.setTrackAutoOff(chkStopTracking.isChecked());
+      opts.setReserveMoney(chkReserveMoney.isChecked());
+      opts.setLeaveEmpty(numEmpty.getValue());
+      opts.setAlwaysIgnorePirates(chkIgnorePirates.isChecked());
+      opts.setAlwaysIgnorePolice(chkIgnorePolice.isChecked());
+      opts.setAlwaysIgnoreTraders(chkIgnoreTraders.isChecked());
+      opts.setAlwaysIgnoreTradeInOrbit(chkIgnoreTradersDealing.isChecked());
+      opts.setContinuousAttack(chkContinuousAttack.isChecked());
+      opts.setContinuousAttackFleeing(chkAttackFleeing.isChecked());
+      opts.setDisableOpponents(chkDisable.isChecked());
     }
   }
 
   public GameOptions Options() {
-    return _options;
+    return opts;
   }
 }

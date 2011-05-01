@@ -2,14 +2,13 @@ package spacetrader.gui;
 import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
-import jwinforms.Container;
+import jwinforms.FormSize;
+import jwinforms.Label;
+import jwinforms.WinformForm;
 import jwinforms.enums.ContentAlignment;
 import jwinforms.enums.DialogResult;
 import jwinforms.enums.FormBorderStyle;
-import jwinforms.FormSize;
 import jwinforms.enums.FormStartPosition;
-import jwinforms.Label;
-import jwinforms.WinformForm;
 import spacetrader.Functions;
 import spacetrader.HighScoreRecord;
 import spacetrader.Strings;
@@ -29,18 +28,17 @@ public class FormViewHighScores extends WinformForm {
   private Label lblStatus0;
   private Label lblStatus1;
   private Label lblStatus2;
-  private Container components = null;
 
   public FormViewHighScores() {
     InitializeComponent();
-    Label[] lblName = new Label[] {lblName0, lblName1, lblName2};
-    Label[] lblScore = new Label[] {lblScore0, lblScore1, lblScore2};
-    Label[] lblStatus = new Label[] {lblStatus0, lblStatus1, lblStatus2};
+    Label[] lblName = new Label[]{lblName0, lblName1, lblName2};
+    Label[] lblScore = new Label[]{lblScore0, lblScore1, lblScore2};
+    Label[] lblStatus = new Label[]{lblStatus0, lblStatus1, lblStatus2};
     HighScoreRecord[] highScores = Functions.GetHighScores(this);
     for(int i = highScores.length - 1; i >= 0 && highScores[i] != null; i--) {
       lblName[2 - i].setText(highScores[i].Name());
       lblScore[2 - i].setText(Functions.FormatNumber(highScores[i].Score() / 10) + "." + highScores[i].Score() % 10);
-      lblStatus[2 - i].setText(Functions.StringVars(Strings.HighScoreStatus, new String[] {
+      lblStatus[2 - i].setText(Functions.StringVars(Strings.HighScoreStatus, new String[]{
             Strings.GameCompletionTypes[highScores[i].Type().CastToInt()],
             Functions.Multiples(highScores[i].Days(), Strings.TimeUnit),
             Functions.Multiples(highScores[i].Worth(), Strings.MoneyUnit),
@@ -166,7 +164,9 @@ public class FormViewHighScores extends WinformForm {
     setAutoScaleBaseSize(new FormSize(5, 13));
     setCancelButton(btnClose);
     setClientSize(new FormSize(218, 191));
-    Controls.addAll(Arrays.asList(lblStatus2, lblStatus1, lblStatus0, lblName2, lblName1, lblName0, lblScore2, lblScore1, lblScore0, lblRank1, lblRank2, lblRank0, btnClose));
+    Controls.addAll(Arrays.asList(
+        lblStatus2, lblStatus1, lblStatus0, lblName2, lblName1, lblName0,
+        lblScore2, lblScore1, lblScore0, lblRank1, lblRank2, lblRank0, btnClose));
     setFormBorderStyle(FormBorderStyle.FixedDialog);
     setMaximizeBox(false);
     setMinimizeBox(false);

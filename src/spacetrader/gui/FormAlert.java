@@ -1,14 +1,9 @@
 package spacetrader.gui;
 import jwinforms.Button;
-import jwinforms.enums.ColorDepth;
 import jwinforms.Container;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.Graphics;
 import jwinforms.IContainer;
 import jwinforms.ImageList;
@@ -19,6 +14,11 @@ import jwinforms.SizeF;
 import jwinforms.Timer;
 import jwinforms.WinformForm;
 import jwinforms.WinformPane;
+import jwinforms.enums.ColorDepth;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import spacetrader.Functions;
 import spacetrader.Game;
 import spacetrader.Strings;
@@ -141,7 +141,7 @@ public class FormAlert extends WinformForm {
     tmrTick.Tick = new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        tmrTick_Tick(sender, e);
+        tmrTick_Tick();
       }
     };
     // FormAlert
@@ -945,7 +945,7 @@ public class FormAlert extends WinformForm {
     }
   }
 
-  private void tmrTick_Tick(Object sender, EventArgs e) {
+  private void tmrTick_Tick() {
     Close();
   }
 }

@@ -2,20 +2,19 @@ package spacetrader.gui;
 import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
-import jwinforms.Container;
-import jwinforms.enums.ContentAlignment;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
 import jwinforms.Font;
+import jwinforms.FormSize;
+import jwinforms.GraphicsUnit;
+import jwinforms.Label;
+import jwinforms.WinformForm;
+import jwinforms.enums.ContentAlignment;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
 import jwinforms.enums.FontStyle;
 import jwinforms.enums.FormBorderStyle;
 import jwinforms.enums.FormStartPosition;
-import jwinforms.GraphicsUnit;
-import jwinforms.Label;
-import jwinforms.FormSize;
-import jwinforms.WinformForm;
 import spacetrader.Commander;
 import spacetrader.Consts;
 import spacetrader.Functions;
@@ -29,7 +28,6 @@ public class FormViewBank extends WinformForm {
   private Button btnBuyInsurance;
   private Button btnPayBack;
   private Button btnClose;
-  private Container components = null;
   private Label lblLoan;
   private Label lblCurrentDebtLabel;
   private Label lblMaxLoanLabel;
@@ -43,10 +41,10 @@ public class FormViewBank extends WinformForm {
   private Label lblInsAmt;
   private Label lblInsAmtLabel;
   private Label lblMaxNoClaim;
-  private Game game = Game.CurrentGame();
-  private Commander cmdr = Game.CurrentGame().Commander();
-  private int MaxLoan = Game.CurrentGame().Commander().getPoliceRecordScore() >= Consts.PoliceRecordScoreClean
-      ? Math.min(25000, Math.max(1000, Game.CurrentGame().Commander().Worth() / 5000 * 500)) : 500;
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
+  private final int MaxLoan = cmdr.getPoliceRecordScore() >= Consts.PoliceRecordScoreClean
+      ? Math.min(25000, Math.max(1000, cmdr.Worth() / 5000 * 500)) : 500;
 
   public FormViewBank() {
     InitializeComponent();

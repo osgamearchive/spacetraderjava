@@ -1,16 +1,10 @@
 package spacetrader.gui;
 import java.awt.Color;
 import java.awt.Point;
-import jwinforms.enums.BorderStyle;
 import jwinforms.Button;
-import jwinforms.enums.ContentAlignment;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventHandler;
 import jwinforms.Font;
-import jwinforms.enums.FontStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.Label;
 import jwinforms.LinkArea;
@@ -19,6 +13,13 @@ import jwinforms.LinkLabelLinkClickedEventArgs;
 import jwinforms.Panel;
 import jwinforms.PictureBox;
 import jwinforms.WinformForm;
+import jwinforms.enums.BorderStyle;
+import jwinforms.enums.ContentAlignment;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FontStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
+import spacetrader.Commander;
 import spacetrader.Consts;
 import spacetrader.CrewMember;
 import spacetrader.Functions;
@@ -31,6 +32,8 @@ import spacetrader.util.Util;
 
 
 public class FormMonster extends WinformForm {
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
   private final int SplitSystems = 31;
   private Button btnClose;
   private Label lblMercLabel;
@@ -65,7 +68,6 @@ public class FormMonster extends WinformForm {
   private PictureBox picLine1;
   private PictureBox picLine0;
   private PictureBox picLine2;
-  private Game game = Game.CurrentGame();
   private Integer[] mercIds;
   private Integer[] questSystemIds;
   private Integer[] shipyardSystemIds;
@@ -578,7 +580,7 @@ public class FormMonster extends WinformForm {
 
   private String CurrentSystemDisplay(CrewMember merc) {
     return (merc.CurrentSystem() == null
-        ? Strings.Unknown : (game.Commander().getShip().HasCrew(merc.Id())
+        ? Strings.Unknown : (cmdr.getShip().HasCrew(merc.Id())
         ? Functions.StringVars(Strings.MercOnBoard, merc.CurrentSystem().Name()) : merc.CurrentSystem().Name()));
   }
 
@@ -678,7 +680,7 @@ public class FormMonster extends WinformForm {
     lblMercSystems2.Links.clear();
     for(int i = 0; i < mercIds.length; i++) {
       CrewMember merc = game.Mercenaries()[mercIds[i]];
-      boolean link = merc.CurrentSystem() != null && !game.Commander().getShip().HasCrew(merc.Id());
+      boolean link = merc.CurrentSystem() != null && !cmdr.getShip().HasCrew(merc.Id());
       lblMercIds.setText(lblMercIds.getText() + ((merc.Id().CastToInt()) + Strings.newline));
       lblMercNames.setText(lblMercNames.getText() + (merc.Name() + Strings.newline));
       lblMercSkillsPilot.setText(lblMercSkillsPilot.getText() + (merc.Pilot() + Strings.newline));
@@ -740,8 +742,8 @@ public class FormMonster extends WinformForm {
   }
 
   private void SystemLinkClicked(Object sender, LinkLabelLinkClickedEventArgs e) {
-    Game.CurrentGame().setSelectedSystemByName(e.Link.LinkData.toString());
-    Game.CurrentGame().getParentWindow().UpdateAll();
+    game.setSelectedSystemByName(e.Link.LinkData.toString());
+    game.getParentWindow().UpdateAll();
     Close();
   }
 

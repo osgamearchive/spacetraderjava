@@ -1,19 +1,19 @@
 package spacetrader.gui;
 import java.awt.Point;
-import org.gts.bst.cargo.CargoSellOp;
 import jwinforms.Button;
 import jwinforms.Container;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
+import org.gts.bst.cargo.CargoSellOp;
 import spacetrader.Commander;
 import spacetrader.Consts;
 import spacetrader.Functions;
@@ -31,11 +31,11 @@ public class FormCargoSell extends WinformForm {
   private Label lblProfit;
   private NumericUpDown numAmount;
   private Container components = null;
-  private Game game = Game.CurrentGame();
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
 
   public FormCargoSell(int item, int maxAmount, CargoSellOp op, int price) {
     InitializeComponent();
-    Commander cmdr = game.Commander();
     int cost = cmdr.PriceCargo()[item] / cmdr.getShip().Cargo()[item];
     numAmount.setMaximum(maxAmount);
     numAmount.setValue(numAmount.getMinimum());

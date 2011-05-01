@@ -2,16 +2,16 @@ package spacetrader.gui;
 import java.awt.Point;
 import jwinforms.Button;
 import jwinforms.CheckBox;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.Label;
 import jwinforms.TextBox;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 
 
 public class FormFind extends WinformForm {

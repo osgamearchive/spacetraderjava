@@ -1,30 +1,35 @@
 package spacetrader.gui;
 import java.awt.Point;
-import jwinforms.enums.BorderStyle;
 import jwinforms.Button;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
 import jwinforms.Font;
-import jwinforms.enums.FontStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.Label;
 import jwinforms.ListBox;
 import jwinforms.WinformForm;
+import jwinforms.enums.BorderStyle;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FontStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import org.gts.bst.crew.CrewMemberId;
+import spacetrader.Commander;
 import spacetrader.CrewMember;
 import spacetrader.Functions;
 import spacetrader.Game;
+import spacetrader.Ship;
 import spacetrader.Strings;
 import spacetrader.enums.AlertType;
 
 
 public class FormViewPersonnel extends WinformForm {
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
+  private final Ship ship = cmdr.getShip();
   private Button btnClose;
   private Button btnHireFire;
   private GroupBox boxForHire;
@@ -44,7 +49,6 @@ public class FormViewPersonnel extends WinformForm {
   private Label lblForHireNone;
   private ListBox lstForHire;
   private ListBox lstCrew;
-  private Game game = Game.CurrentGame();
   private CrewMember selectedCrewMember = null;
   private boolean handlingSelect = false;
 
@@ -284,7 +288,7 @@ public class FormViewPersonnel extends WinformForm {
   }
 
   private void UpdateCurrentCrew() {
-    CrewMember[] crew = game.Commander().getShip().Crew();
+    CrewMember[] crew = ship.Crew();
     lstCrew.Items.clear();
     for(int i = 1; i < crew.length; i++) {
       if(crew[i] == null) {
@@ -298,13 +302,13 @@ public class FormViewPersonnel extends WinformForm {
     lblCrewNoQuarters.setVisible(!entries);
     if(entries) {
       lstCrew.setHeight(lstCrew.getItemHeight() * Math.min(lstCrew.Items.size(), 6) + 2);
-    } else { // TODO: remove this when Strings are moved to resource.
+    } else { //TODO: remove this when Strings are moved to resource.
       lblCrewNoQuarters.setText(Strings.PersonnelNoQuarters);
     }
   }
 
   private void UpdateForHire() {
-    CrewMember[] mercs = game.Commander().CurrentSystem().MercenariesForHire();
+    CrewMember[] mercs = cmdr.CurrentSystem().MercenariesForHire();
     lstForHire.Items.clear();
     for(int i = 0; i < mercs.length; i++) {
       lstForHire.Items.add(mercs[i]);
@@ -334,7 +338,7 @@ public class FormViewPersonnel extends WinformForm {
       lblFighter.setText(selectedCrewMember.Fighter() + "");
       lblTrader.setText(selectedCrewMember.Trader() + "");
       lblEngineer.setText(selectedCrewMember.Engineer() + "");
-      btnHireFire.setText(game.Commander().getShip().HasCrew(selectedCrewMember.Id()) ? Strings.MercenaryFire : Strings.MercenaryHire);
+      btnHireFire.setText(ship.HasCrew(selectedCrewMember.Id()) ? Strings.MercenaryFire : Strings.MercenaryHire);
       hireFireVisible = rateVisible || selectedCrewMember.Id() == CrewMemberId.Zeethibal;
     }
     lblName.setVisible(visible);
@@ -352,17 +356,17 @@ public class FormViewPersonnel extends WinformForm {
 
   private void HireFire(Object sender, EventArgs e) {
     if(selectedCrewMember != null && btnHireFire.getVisible()) {
-      if(game.Commander().getShip().HasCrew(selectedCrewMember.Id())) {
+      if(ship.HasCrew(selectedCrewMember.Id())) {
         if(FormAlert.Alert(AlertType.CrewFireMercenary, this, selectedCrewMember.Name()) == DialogResult.Yes) {
-          game.Commander().getShip().Fire(selectedCrewMember.Id());
+          ship.Fire(selectedCrewMember.Id());
           UpdateAll();
           game.getParentWindow().UpdateAll();
         }
       } else {
-        if(game.Commander().getShip().FreeCrewQuarters() == 0) {
+        if(ship.FreeCrewQuarters() == 0) {
           FormAlert.Alert(AlertType.CrewNoQuarters, this, selectedCrewMember.Name());
         } else {
-          game.Commander().getShip().Hire(selectedCrewMember);
+          ship.Hire(selectedCrewMember);
           UpdateAll();
           game.getParentWindow().UpdateAll();
         }

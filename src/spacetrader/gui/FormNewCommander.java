@@ -1,22 +1,23 @@
 package spacetrader.gui;
+import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
 import jwinforms.ComboBox;
-import jwinforms.enums.ComboBoxStyle;
-import jwinforms.enums.ContentAlignment;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
-import jwinforms.enums.HorizontalAlignment;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
 import jwinforms.TextBox;
 import jwinforms.WinformForm;
+import jwinforms.enums.ComboBoxStyle;
+import jwinforms.enums.ContentAlignment;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
+import jwinforms.enums.HorizontalAlignment;
 import org.gts.bst.difficulty.Difficulty;
 
 
@@ -70,13 +71,13 @@ public class FormNewCommander extends WinformForm {
     SuspendLayout();
     // lblName
     lblName.setAutoSize(true);
-    lblName.setLocation(new java.awt.Point(8, 8));
+    lblName.setLocation(new Point(8, 8));
     lblName.setName("lblName");
     lblName.setSize(new FormSize(38, 13));
     lblName.setTabIndex(0);
     lblName.setText("Name:");
     // txtName
-    txtName.setLocation(new java.awt.Point(72, 5));
+    txtName.setLocation(new Point(72, 5));
     txtName.setName("txtName");
     txtName.setSize(new FormSize(120, 20));
     txtName.setTabIndex(1);
@@ -89,7 +90,7 @@ public class FormNewCommander extends WinformForm {
     });
     // btnClose
     btnClose.setDialogResult(DialogResult.Cancel);
-    btnClose.setLocation(new java.awt.Point(-32, -32));
+    btnClose.setLocation(new Point(-32, -32));
     btnClose.setName("btnClose");
     btnClose.setSize(new FormSize(30, 31));
     btnClose.setTabIndex(33);
@@ -97,42 +98,42 @@ public class FormNewCommander extends WinformForm {
     btnClose.setText("X");
     // lblDifficulty
     lblDifficulty.setAutoSize(true);
-    lblDifficulty.setLocation(new java.awt.Point(8, 40));
+    lblDifficulty.setLocation(new Point(8, 40));
     lblDifficulty.setName("lblDifficulty");
     lblDifficulty.setSize(new FormSize(50, 13));
     lblDifficulty.setTabIndex(34);
     lblDifficulty.setText("Difficulty:");
     // lblSkillPoints
     lblSkillPoints.setAutoSize(true);
-    lblSkillPoints.setLocation(new java.awt.Point(8, 72));
+    lblSkillPoints.setLocation(new Point(8, 72));
     lblSkillPoints.setName("lblSkillPoints");
     lblSkillPoints.setSize(new FormSize(63, 13));
     lblSkillPoints.setTabIndex(35);
     lblSkillPoints.setText("Skill Points:");
     // lblPilot
     lblPilot.setAutoSize(true);
-    lblPilot.setLocation(new java.awt.Point(16, 96));
+    lblPilot.setLocation(new Point(16, 96));
     lblPilot.setName("lblPilot");
     lblPilot.setSize(new FormSize(29, 13));
     lblPilot.setTabIndex(36);
     lblPilot.setText("Pilot:");
     // lblFighter
     lblFighter.setAutoSize(true);
-    lblFighter.setLocation(new java.awt.Point(16, 120));
+    lblFighter.setLocation(new Point(16, 120));
     lblFighter.setName("lblFighter");
     lblFighter.setSize(new FormSize(43, 13));
     lblFighter.setTabIndex(37);
     lblFighter.setText("Fighter:");
     // lblTrader
     lblTrader.setAutoSize(true);
-    lblTrader.setLocation(new java.awt.Point(16, 144));
+    lblTrader.setLocation(new Point(16, 144));
     lblTrader.setName("lblTrader");
     lblTrader.setSize(new FormSize(41, 13));
     lblTrader.setTabIndex(38);
     lblTrader.setText("Trader:");
     // lblEngineer
     lblEngineer.setAutoSize(true);
-    lblEngineer.setLocation(new java.awt.Point(16, 168));
+    lblEngineer.setLocation(new Point(16, 168));
     lblEngineer.setName("lblEngineer");
     lblEngineer.setSize(new FormSize(53, 13));
     lblEngineer.setTabIndex(39);
@@ -140,12 +141,12 @@ public class FormNewCommander extends WinformForm {
     // selDifficulty
     selDifficulty.DropDownStyle = ComboBoxStyle.DropDownList;
     selDifficulty.Items.AddRange(new Object[]{"Beginner", "Easy", "Normal", "Hard", "Impossible"});
-    selDifficulty.setLocation(new java.awt.Point(72, 37));
+    selDifficulty.setLocation(new Point(72, 37));
     selDifficulty.setName("selDifficulty");
     selDifficulty.setSize(new FormSize(120, 21));
     selDifficulty.setTabIndex(2);
     // numPilot
-    numPilot.setLocation(new java.awt.Point(72, 94));
+    numPilot.setLocation(new Point(72, 94));
     numPilot.setMaximum(10);
     numPilot.setMinimum(1);
     numPilot.setName("numPilot");
@@ -172,7 +173,7 @@ public class FormNewCommander extends WinformForm {
       }
     });
     // numFighter
-    numFighter.setLocation(new java.awt.Point(72, 118));
+    numFighter.setLocation(new Point(72, 118));
     numFighter.setMaximum(10);
     numFighter.setMinimum(1);
     numFighter.setName("numFighter");
@@ -199,7 +200,7 @@ public class FormNewCommander extends WinformForm {
       }
     });
     // numTrader
-    numTrader.setLocation(new java.awt.Point(72, 142));
+    numTrader.setLocation(new Point(72, 142));
     numTrader.setMaximum(10);
     numTrader.setMinimum(1);
     numTrader.setName("numTrader");
@@ -226,7 +227,7 @@ public class FormNewCommander extends WinformForm {
       }
     });
     // numEngineer
-    numEngineer.setLocation(new java.awt.Point(72, 166));
+    numEngineer.setLocation(new Point(72, 166));
     numEngineer.setMaximum(10);
     numEngineer.setMinimum(1);
     numEngineer.setName("numEngineer");
@@ -256,7 +257,7 @@ public class FormNewCommander extends WinformForm {
     btnOk.setDialogResult(DialogResult.OK);
     btnOk.setEnabled(false);
     btnOk.setFlatStyle(FlatStyle.Flat);
-    btnOk.setLocation(new java.awt.Point(83, 200));
+    btnOk.setLocation(new Point(83, 200));
     btnOk.setName("btnOk");
     btnOk.setSize(new FormSize(36, 22));
     btnOk.setTabIndex(7);
@@ -264,13 +265,13 @@ public class FormNewCommander extends WinformForm {
     btnOk.setEnabled(false);
     // lblPointsRemaining
     lblPointsRemaining.setAutoSize(true);
-    lblPointsRemaining.setLocation(new java.awt.Point(91, 72));
+    lblPointsRemaining.setLocation(new Point(91, 72));
     lblPointsRemaining.setName("lblPointsRemaining");
     lblPointsRemaining.setSize(new FormSize(90, 13));
     lblPointsRemaining.setTabIndex(40);
     lblPointsRemaining.setText("points remaining.");
     // lblPoints
-    lblPoints.setLocation(new java.awt.Point(73, 72));
+    lblPoints.setLocation(new Point(73, 72));
     lblPoints.setName("lblPoints");
     lblPoints.setSize(new FormSize(17, 13));
     lblPoints.setTabIndex(41);

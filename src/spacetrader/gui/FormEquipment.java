@@ -1,23 +1,23 @@
 package spacetrader.gui;
 import java.awt.Color;
 import java.awt.Point;
-import jwinforms.enums.BorderStyle;
 import jwinforms.Button;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
 import jwinforms.Font;
-import jwinforms.enums.FontStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.Label;
 import jwinforms.ListBox;
 import jwinforms.PictureBox;
 import jwinforms.WinformForm;
+import jwinforms.enums.BorderStyle;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FontStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import org.gts.bst.ship.equip.Equipment;
 import org.gts.bst.ship.equip.EquipmentType;
 import org.gts.bst.ship.equip.Gadget;
@@ -34,6 +34,9 @@ import spacetrader.enums.AlertType;
 
 
 public class FormEquipment extends WinformForm {
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
+  private final Ship ship = cmdr.getShip();
   private Button btnClose;
   private Button btnBuy;
   private Button btnSell;
@@ -72,7 +75,6 @@ public class FormEquipment extends WinformForm {
   private ListBox lstBuyShield;
   private ListBox lstBuyWeapon;
   private PictureBox picEquipment;
-  private Game game = Game.CurrentGame();
   private Equipment selectedEquipment = null;
   private Equipment[] equipBuy = Consts.EquipmentForSale;
   private boolean sellSideSelected = false;
@@ -203,7 +205,7 @@ public class FormEquipment extends WinformForm {
     lstSellGadget.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        SellClick(sender, e);
+        SellClick();
       }
     });
     lstSellGadget.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
@@ -221,7 +223,7 @@ public class FormEquipment extends WinformForm {
     lstSellShield.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        SellClick(sender, e);
+        SellClick();
       }
     });
     lstSellShield.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
@@ -239,7 +241,7 @@ public class FormEquipment extends WinformForm {
     lstSellWeapon.setDoubleClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        SellClick(sender, e);
+        SellClick();
       }
     });
     lstSellWeapon.setSelectedIndexChanged(new EventHandler<Object, EventArgs>() {
@@ -443,7 +445,7 @@ public class FormEquipment extends WinformForm {
     btnSell.setClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        SellClick(sender, e);
+        SellClick();
       }
     });
     // btnBuy
@@ -530,21 +532,20 @@ public class FormEquipment extends WinformForm {
 
   private void Buy() {
     if(selectedEquipment != null && !sellSideSelected) {
-      Commander cmdr = game.Commander();
       EquipmentType baseType = selectedEquipment.EquipmentType();
-      if(baseType == EquipmentType.Gadget && cmdr.getShip().HasGadget(((Gadget)selectedEquipment).Type())
+      if(baseType == EquipmentType.Gadget && ship.HasGadget(((Gadget)selectedEquipment).Type())
           && ((Gadget)selectedEquipment).Type() != GadgetType.ExtraCargoBays) {
         FormAlert.Alert(AlertType.EquipmentAlreadyOwn, this);
       } else if(cmdr.getDebt() > 0) {
         FormAlert.Alert(AlertType.DebtNoBuy, this);
       } else if(selectedEquipment.Price() > cmdr.CashToSpend()) {
         FormAlert.Alert(AlertType.EquipmentIF, this);
-      } else if((baseType == EquipmentType.Weapon && cmdr.getShip().FreeSlotsWeapon() == 0)
-          || (baseType == EquipmentType.Shield && cmdr.getShip().FreeSlotsShield() == 0)
-          || (baseType == EquipmentType.Gadget && cmdr.getShip().FreeSlotsGadget() == 0)) {
+      } else if((baseType == EquipmentType.Weapon && ship.FreeSlotsWeapon() == 0)
+          || (baseType == EquipmentType.Shield && ship.FreeSlotsShield() == 0)
+          || (baseType == EquipmentType.Gadget && ship.FreeSlotsGadget() == 0)) {
         FormAlert.Alert(AlertType.EquipmentNotEnoughSlots, this);
       } else if(FormAlert.Alert(AlertType.EquipmentBuy, this, selectedEquipment.Name(), Functions.FormatNumber(selectedEquipment.Price())) == DialogResult.Yes) {
-        cmdr.getShip().AddEquipment(selectedEquipment);
+        ship.AddEquipment(selectedEquipment);
         cmdr.setCash(cmdr.getCash() - selectedEquipment.Price());
         DeselectAll();
         UpdateSell();
@@ -567,13 +568,13 @@ public class FormEquipment extends WinformForm {
       if(FormAlert.Alert(AlertType.EquipmentSell, this) == DialogResult.Yes) {
         // The slot is the selected index. Two of the three list boxes will have selected indices of -1, so adding 2 to the total cancels those out.
         int slot = lstSellWeapon.getSelectedIndex() + lstSellShield.getSelectedIndex() + lstSellGadget.getSelectedIndex() + 2;
-        Commander cmdr = game.Commander();
         if(selectedEquipment.EquipmentType() == EquipmentType.Gadget
-            && (((Gadget)selectedEquipment).Type() == GadgetType.ExtraCargoBays || ((Gadget)selectedEquipment).Type() == GadgetType.HiddenCargoBays) && cmdr.getShip().FreeCargoBays() < 5) {
+            && (((Gadget)selectedEquipment).Type() == GadgetType.ExtraCargoBays || ((Gadget)selectedEquipment).Type() == GadgetType.HiddenCargoBays)
+            && ship.FreeCargoBays() < 5) {
           FormAlert.Alert(AlertType.EquipmentExtraBaysInUse, this);
         } else {
           cmdr.setCash(cmdr.getCash() + selectedEquipment.SellPrice());
-          cmdr.getShip().RemoveEquipment(selectedEquipment.EquipmentType(), slot);
+          ship.RemoveEquipment(selectedEquipment.EquipmentType(), slot);
           UpdateSell();
           game.getParentWindow().UpdateAll();
         }
@@ -665,7 +666,6 @@ public class FormEquipment extends WinformForm {
     lstSellWeapon.Items.clear();
     lstSellShield.Items.clear();
     lstSellGadget.Items.clear();
-    Ship ship = Game.CurrentGame().Commander().getShip();
     Equipment[] equipSell;
     int index;
     equipSell = ship.EquipmentByType(EquipmentType.Weapon);
@@ -715,14 +715,14 @@ public class FormEquipment extends WinformForm {
     }
   }
 
-  private void SellClick(Object sender, EventArgs e) {
+  private void SellClick() {
     if(selectedEquipment != null) {
       Sell();
     }
   }
 
   public static void main(String[] args) throws Exception {
-    FormEquipment form = new FormEquipment();
-    Launcher.runForm(form);
+    FormEquipment fe = new FormEquipment();
+    Launcher.runForm(fe);
   }
 }

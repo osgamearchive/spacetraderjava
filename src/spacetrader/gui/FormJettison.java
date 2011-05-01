@@ -3,15 +3,16 @@ import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
 import jwinforms.Container;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.Label;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
+import spacetrader.Commander;
 import spacetrader.Game;
 import spacetrader.Ship;
 
@@ -53,7 +54,8 @@ public class FormJettison extends WinformForm {
   private Container components = null;
   private Button[] btnJettisonQty;
   private Button[] btnJettisonAll;
-  private Game game = Game.CurrentGame();
+  private final Game game = Game.CurrentGame();
+  private final Commander cmdr = game.Commander();
 
   public FormJettison() {
     InitializeComponent();
@@ -526,7 +528,7 @@ public class FormJettison extends WinformForm {
   }
 
   private void UpdateAll() {
-    Ship ship = game.Commander().getShip();
+    Ship ship = cmdr.getShip();
     for(int i = 0; i < btnJettisonQty.length; i++) {
       btnJettisonQty[i].setText("" + ship.Cargo()[i]);
     }

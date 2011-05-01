@@ -1,21 +1,21 @@
 package spacetrader.gui;
 import java.awt.Point;
 import jwinforms.Button;
-import jwinforms.Container;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.Label;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import spacetrader.Game;
 import spacetrader.Ship;
 
 
 public class FormPlunder extends WinformForm {
+  private final Game game = Game.CurrentGame();
   private Button btnPlunderAll9;
   private Button btnPlunderQty9;
   private Button btnPlunderAll8;
@@ -36,6 +36,10 @@ public class FormPlunder extends WinformForm {
   private Button btnPlunderQty1;
   private Button btnPlunderAll0;
   private Button btnPlunderQty0;
+  private Button btnDone;
+  private Button btnJettison;
+  private Button[] btnPlunderQty;
+  private Button[] btnPlunderAll;
   private Label lblTradeCmdty9;
   private Label lblTradeCmdty8;
   private Label lblTradeCmdty2;
@@ -48,12 +52,6 @@ public class FormPlunder extends WinformForm {
   private Label lblTradeCmdty7;
   private Label lblBaysLabel;
   private Label lblBays;
-  private Button btnDone;
-  private Button btnJettison;
-  private Container components = null;
-  private Button[] btnPlunderQty;
-  private Button[] btnPlunderAll;
-  private Game game = Game.CurrentGame();
 
   public FormPlunder() {
     InitializeComponent();
@@ -466,7 +464,7 @@ public class FormPlunder extends WinformForm {
     btnJettison.setClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        btnJettison_Click(sender, e);
+        btnJettison_Click();
       }
     });
     // FormPlunder
@@ -533,7 +531,7 @@ public class FormPlunder extends WinformForm {
     lblBays.setText(ship.FilledCargoBays() + "/" + ship.CargoBays());
   }
 
-  private void btnJettison_Click(Object sender, EventArgs e) {
+  private void btnJettison_Click() {
     (new FormJettison()).ShowDialog(this);
   }
 

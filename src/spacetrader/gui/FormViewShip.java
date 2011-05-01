@@ -2,18 +2,17 @@ package spacetrader.gui;
 import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
-import jwinforms.Container;
-import jwinforms.enums.DialogResult;
 import jwinforms.Font;
-import jwinforms.enums.FontStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.Label;
 import jwinforms.WinformControl;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FontStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import org.gts.bst.ship.equip.GadgetType;
 import spacetrader.Consts;
 import spacetrader.Functions;
@@ -33,7 +32,6 @@ public class FormViewShip extends WinformForm {
   private Label lblSpecialCargo;
   private Label lblEquipLabel;
   private Label lblEquip;
-  private Container components = null;
   private Game game = Game.CurrentGame();
   private Ship ship = game.Commander().getShip();
 
@@ -223,6 +221,7 @@ public class FormViewShip extends WinformForm {
       specialCargo.add(Strings.SpecialCargoExperiment);
     }
     lblSpecialCargo.setText(specialCargo.size() == 0
-        ? Strings.SpecialCargoNone : Util.StringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(specialCargo)));
+        ? Strings.SpecialCargoNone
+        : Util.StringsJoin(Strings.newline + Strings.newline, Functions.ArrayListtoStringArray(specialCargo)));
   }
 }

@@ -2,17 +2,17 @@ package spacetrader.gui;
 import java.awt.Point;
 import java.util.Arrays;
 import jwinforms.Button;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.ISupportInitialize;
 import jwinforms.Label;
 import jwinforms.NumericUpDown;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 import spacetrader.Functions;
 import spacetrader.Strings;
 
@@ -77,7 +77,7 @@ public class FormGetLoan extends WinformForm {
     btnMax.setClick(new EventHandler<Object, EventArgs>() {
       @Override
       public void handle(Object sender, EventArgs e) {
-        btnMax_Click(sender, e);
+        btnMax_Click();
       }
     });
     // btnNothing
@@ -110,7 +110,7 @@ public class FormGetLoan extends WinformForm {
     ResumeLayout(false);
   }
 
-  private void btnMax_Click(Object sender, EventArgs e) {
+  private void btnMax_Click() {
     numAmount.setValue(numAmount.getMaximum());
   }
 

@@ -328,9 +328,9 @@ public class ApplicationST extends WinformWindow {
   private final int IMG_G_V = 1;
   private final int IMG_G_W = 2;
   private final int IMG_S_N = 3;
-  private final int IMG_S_NS = 4;
+//  private final int IMG_S_NS = 4;
   private final int IMG_S_V = 5;
-  private final int IMG_S_VS = 6;
+//  private final int IMG_S_VS = 6;
   private final int IMG_S_W = 7;
   private Game game = null;
   private Commander cmdr = null;
@@ -384,10 +384,10 @@ public class ApplicationST extends WinformWindow {
     UpdateAll();
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] s) throws Exception {
     UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
     UIManager.put("swing.boldMetal", Boolean.FALSE);
-    ApplicationST st = new ApplicationST(args.length > 0 ? args[0] : null);
+    ApplicationST st = new ApplicationST(s.length > 0 ? s[0] : null);
     st.ShowWindow();
   }
 
