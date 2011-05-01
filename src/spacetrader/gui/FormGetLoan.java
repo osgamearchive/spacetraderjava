@@ -29,7 +29,7 @@ public class FormGetLoan extends WinformForm {
     InitializeComponent();
     numAmount.setMaximum(max);
     numAmount.setValue(numAmount.getMinimum());
-    lblStatement.setText(Functions.StringVars(Strings.BankLoanStatementBorrow, Functions.Multiples(max, Strings.MoneyUnit)));
+    lblStatement.setText(Functions.StringVars("You can borrow up to ^1.", Functions.Multiples(max, Strings.MoneyUnit)));
   }
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.

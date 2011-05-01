@@ -261,8 +261,7 @@ public class FormViewBank extends WinformForm {
     lblNoClaim.setText(Functions.FormatPercent(cmdr.NoClaim()));
     lblMaxNoClaim.setVisible((cmdr.NoClaim() == Consts.MaxNoClaim));
     lblInsAmt.setText(Functions.StringVars(Strings.MoneyRateSuffix, Functions.FormatMoney(game.InsuranceCosts())));
-    btnBuyInsurance.setText(Functions.StringVars(Strings.BankInsuranceButtonText, cmdr.getInsurance()
-        ? Strings.BankInsuranceButtonStop : Strings.BankInsuranceButtonBuy));
+    btnBuyInsurance.setText(Functions.StringVars("^1 Insurance", cmdr.getInsurance() ? "Stop" : "Buy"));
   }
 
   private void btnGetLoan_Click(Object sender, EventArgs e) {

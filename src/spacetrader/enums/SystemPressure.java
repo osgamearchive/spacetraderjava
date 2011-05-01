@@ -2,14 +2,19 @@ package spacetrader.enums;
 
 
 public enum SystemPressure implements SpaceTraderEnum {
-  None,//= 0,
-  War,//= 1,
-  Plague,//= 2,
-  Drought,//= 3,
-  Boredom,//= 4,
-  Cold,//= 5,
-  CropFailure,//= 6,
-  Employment;//= 7
+  None(       "under no particular pressure"),//= 0,
+  War(        "at war"),//= 1,
+  Plague(     "ravaged by plague"),//= 2,
+  Drought(    "suffering from a drought"),//= 3,
+  Boredom(    "suffering from extreme boredom"),//= 4,
+  Cold(       "suffering from a cold spell"),//= 5,
+  CropFailure("suffering from a crop failure"),//= 6,
+  Employment( "lacking enough workers");//= 7
+  public final String name;
+
+  private SystemPressure(String s) {
+    name = s;
+  }
 
   public static SystemPressure FromInt(int i) {
     return values()[i];

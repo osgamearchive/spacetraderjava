@@ -40,25 +40,25 @@ public class FormCargoSell extends WinformForm {
     numAmount.setMaximum(maxAmount);
     numAmount.setValue(numAmount.getMinimum());
     setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoSellOps[op.CastToInt()], Consts.TradeItems[item].Name()));
-    lblQuestion.setText(Functions.StringVars(Strings.CargoSellQuestion, Strings.CargoSellOps[op.CastToInt()].toLowerCase()));
+    lblQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoSellOps[op.CastToInt()].toLowerCase()));
     lblPaid.setText(Functions.StringVars(op == CargoSellOp.SellTrader
-        ? Strings.CargoSellPaidTrader : Strings.CargoSellPaid, Functions.FormatMoney(cost), Functions.Multiples(maxAmount, Strings.CargoUnit)));
-    lblProfit.setText(Functions.StringVars(Strings.CargoSellProfit, price >= cost
+        ? "You paid about ^1 per unit, and can sell ^2." : "You paid about ^1 per unit.", Functions.FormatMoney(cost), Functions.Multiples(maxAmount, Strings.CargoUnit)));
+    lblProfit.setText(Functions.StringVars("Your ^1 per unit is ^2", price >= cost
         ? "profit" : "loss", Functions.FormatMoney(price >= cost ? price - cost : cost - price)));
     // Override defaults for some ops.
     switch(op) {
       case Dump:
         lblStatement.setText(Functions.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.CastToInt()].toLowerCase(), Functions.FormatNumber(maxAmount)));
-        lblProfit.setText(Functions.StringVars(Strings.CargoSellDumpCost, Functions.FormatMoney(-price)));
+        lblProfit.setText(Functions.StringVars("It costs ^1 per unit for disposal.", Functions.FormatMoney(-price)));
         break;
       case Jettison:
         lblStatement.setText(Functions.StringVars(Strings.CargoSellStatementDump, Strings.CargoSellOps[op.CastToInt()].toLowerCase(), Functions.FormatNumber(maxAmount)));
         break;
       case SellSystem:
-        lblStatement.setText(Functions.StringVars(Strings.CargoSellStatement, Functions.FormatNumber(maxAmount), Functions.FormatMoney(price)));
+        lblStatement.setText(Functions.StringVars("You can sell up to ^1 at ^2 each.", Functions.FormatNumber(maxAmount), Functions.FormatMoney(price)));
         break;
       case SellTrader:
-        lblStatement.setText(Functions.StringVars(Strings.CargoSellStatementTrader, Consts.TradeItems[item].Name(), Functions.FormatMoney(price)));
+        lblStatement.setText(Functions.StringVars("The trader wants to buy ^1 and offers ^2 each.", Consts.TradeItems[item].Name(), Functions.FormatMoney(price)));
         break;
     }
   }

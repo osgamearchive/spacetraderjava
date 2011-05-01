@@ -33,7 +33,7 @@ public class FormPayBackLoan extends WinformForm {
     int max = Math.min(cmdr.getDebt(), cmdr.getCash());
     numAmount.setMaximum(max);
     numAmount.setValue(numAmount.getMinimum());
-    lblStatement.setText(Functions.StringVars(Strings.BankLoanStatementDebt, Functions.Multiples(cmdr.getDebt(), Strings.MoneyUnit)));
+    lblStatement.setText(Functions.StringVars("You have a debt of ^1.", Functions.Multiples(cmdr.getDebt(), Strings.MoneyUnit)));
   }
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.

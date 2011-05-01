@@ -1760,7 +1760,7 @@ public class Game extends STSerializableObject {
     String cmdrStatus = "";
     String oppStatus = "";
     if(getEncounterCmdrFleeing()) {
-      cmdrStatus = Functions.StringVars(Strings.EncounterActionCmdrChased, EncounterShipText());
+      cmdrStatus = Functions.StringVars("The ^1 is still following you.", EncounterShipText());
     } else if(getEncounterOppHit()) {
       cmdrStatus = Functions.StringVars(Strings.EncounterActionOppHit, EncounterShipText());
     } else {
@@ -1769,9 +1769,9 @@ public class Game extends STSerializableObject {
     if(getEncounterOppFleeingPrev()) {
       oppStatus = Functions.StringVars(Strings.EncounterActionOppChased, EncounterShipText());
     } else if(getEncounterCmdrHit()) {
-      oppStatus = Functions.StringVars(Strings.EncounterActionCmdrHit, EncounterShipText());
+      oppStatus = Functions.StringVars("The ^1 hits you.", EncounterShipText());
     } else {
-      oppStatus = Functions.StringVars(Strings.EncounterActionCmdrMissed, EncounterShipText());
+      oppStatus = Functions.StringVars("The ^1 missed you.", EncounterShipText());
     }
     return cmdrStatus + Strings.newline + oppStatus;
   }
@@ -1845,7 +1845,7 @@ public class Game extends STSerializableObject {
     }
     return Functions.StringVars(Strings.EncounterText,
         new String[]{
-          Functions.Multiples(getClicks(), Strings.DistanceSubunit), WarpSystem().Name(), encounterPretext, getOpponent().Name().toLowerCase()
+          Functions.Multiples(getClicks(), "click"), WarpSystem().Name(), encounterPretext, getOpponent().Name().toLowerCase()
         });
   }
 
@@ -2627,7 +2627,7 @@ public class Game extends STSerializableObject {
   public void EncounterTrade(WinformPane owner) {
     boolean buy = (getEncounterType() == EncounterType.TraderBuy);
     int item = (buy ? _commander.getShip() : getOpponent()).GetRandomTradeableItem();
-    String alertStr = (buy ? Strings.CargoSelling : Strings.CargoBuying);
+    String alertStr = buy ? "selling" : "buying";
     int cash = _commander.getCash();
     if(getEncounterType() == EncounterType.TraderBuy) {
       CargoSellTrader(item, owner);

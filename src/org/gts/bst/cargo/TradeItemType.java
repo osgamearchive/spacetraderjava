@@ -3,17 +3,22 @@ import spacetrader.enums.SpaceTraderEnum;
 
 
 public enum TradeItemType implements SpaceTraderEnum {
-  NA,//					= -1,
-  Water,//			= 0,
-  Furs,//				= 1,
-  Food,//				= 2,
-  Ore,//				= 3,
-  Games,//			= 4,
-  Firearms,//		= 5,
-  Medicine,//		= 6,
-  Machines,//		= 7,
-  Narcotics,//	= 8,
-  Robots;//			= 9
+  NA(""),//					= -1,
+  Water("Water"),//			= 0,
+  Furs("Furs"),//				= 1,
+  Food("Food"),//				= 2,
+  Ore("Ore"),//				= 3,
+  Games("Games"),//			= 4,
+  Firearms("Firearms"),//		= 5,
+  Medicine("Medicine"),//		= 6,
+  Machines("Machines"),//		= 7,
+  Narcotics("Narcotics"),//	= 8,
+  Robots("Robots");//			= 9
+  public final String name;
+
+  private TradeItemType(String s) {
+    name = s;
+  }
 
   @Override
   public int CastToInt() {

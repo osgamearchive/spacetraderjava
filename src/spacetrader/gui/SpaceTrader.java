@@ -4,20 +4,14 @@ import java.awt.Point;
 import java.util.Arrays;
 import java.util.Iterator;
 import javax.swing.UIManager;
-import jwinforms.enums.AnchorStyles;
 import jwinforms.Brush;
 import jwinforms.Button;
 import jwinforms.CancelEventArgs;
 import jwinforms.Container;
-import jwinforms.enums.ContentAlignment;
-import jwinforms.enums.DialogResult;
 import jwinforms.EventArgs;
 import jwinforms.EventHandler;
-import jwinforms.enums.FlatStyle;
 import jwinforms.Font;
-import jwinforms.enums.FontStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.IContainer;
@@ -42,12 +36,18 @@ import jwinforms.SizeF;
 import jwinforms.SolidBrush;
 import jwinforms.StatusBar;
 import jwinforms.StatusBarPanel;
-import jwinforms.enums.StatusBarPanelAutoSize;
 import jwinforms.StatusBarPanelClickEventArgs;
 import jwinforms.SubMenu;
 import jwinforms.SystemColors;
 import jwinforms.ToolTip;
 import jwinforms.WinformWindow;
+import jwinforms.enums.AnchorStyles;
+import jwinforms.enums.ContentAlignment;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
+import jwinforms.enums.FontStyle;
+import jwinforms.enums.FormStartPosition;
+import jwinforms.enums.StatusBarPanelAutoSize;
 import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.events.VeryRareEncounter;
 import org.gts.bst.ship.ShipType;
@@ -76,7 +76,7 @@ import spacetrader.util.Hashtable;
 import spacetrader.util.Util;
 
 
-public final class SpaceTrader extends WinformWindow {
+public class SpaceTrader extends WinformWindow {
   private Button btnDesign;
   private Button btnNews;
   private Button btnSpecial;
@@ -3194,12 +3194,12 @@ public final class SpaceTrader extends WinformWindow {
       StarSystem warpSys = game.WarpSystem();
       for(i = 0; i < lblSellPrice.length; i++) {
         int price = warpSys == null ? 0 : Consts.TradeItems[i].StandardPrice(warpSys);
-        lblSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : Strings.CargoSellNA);
+        lblSellPrice[i].setText(sell[i] > 0 ? Functions.FormatMoney(sell[i]) : "no trade");
         btnSellQty[i].setText("" + cmdr.getShip().Cargo()[i]);
         btnSellQty[i].setVisible(true);
         btnSellAll[i].setText(sell[i] > 0 ? "All" : "Dump");
         btnSellAll[i].setVisible(true);
-        lblBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : Strings.CargoBuyNA);
+        lblBuyPrice[i].setText(buy[i] > 0 ? Functions.FormatMoney(buy[i]) : "not sold");
         btnBuyQty[i].setText("" + cmdr.CurrentSystem().TradeItems()[i]);
         btnBuyQty[i].setVisible(buy[i] > 0);
         btnBuyMax[i].setVisible(buy[i] > 0);
@@ -3262,13 +3262,13 @@ public final class SpaceTrader extends WinformWindow {
       btnRepair.setVisible(false);
     } else {
       Ship ship = game.Commander().getShip();
-      lblFuelStatus.setText(Functions.StringVars(Strings.DockFuelStatus, Functions.Multiples(ship.getFuel(), "parsec")));
+      lblFuelStatus.setText(Functions.StringVars("You have fuel to fly ^1.", Functions.Multiples(ship.getFuel(), "parsec")));
       int tanksEmpty = ship.FuelTanks() - ship.getFuel();
-      lblFuelCost.setText(tanksEmpty > 0 ? Functions.StringVars(Strings.DockFuelCost, Functions.FormatMoney(tanksEmpty * ship.getFuelCost())) : Strings.DockFuelFull);
+      lblFuelCost.setText(tanksEmpty > 0 ? Functions.StringVars("A full tank costs ^1", Functions.FormatMoney(tanksEmpty * ship.getFuelCost())) : "Your tank is full.");
       btnFuel.setVisible(tanksEmpty > 0);
-      lblHullStatus.setText(Functions.StringVars(Strings.DockHullStatus, Functions.FormatNumber((int)Math.floor((double)100 * ship.getHull() / ship.HullStrength()))));
+      lblHullStatus.setText(Functions.StringVars("Your hull strength is at ^1%.", Functions.FormatNumber((int)Math.floor((double)100 * ship.getHull() / ship.HullStrength()))));
       int hullLoss = ship.HullStrength() - ship.getHull();
-      lblRepairCost.setText(hullLoss > 0 ? Functions.StringVars(Strings.DockHullCost, Functions.FormatMoney(hullLoss * ship.getRepairCost())) : Strings.DockHullFull);
+      lblRepairCost.setText(hullLoss > 0 ? Functions.StringVars("Full repairs will cost ^1", Functions.FormatMoney(hullLoss * ship.getRepairCost())) : "No repairs are needed.");
       btnRepair.setVisible(hullLoss > 0);
     }
   }
@@ -3339,17 +3339,19 @@ public final class SpaceTrader extends WinformWindow {
       CrewMember[] mercs = system.MercenariesForHire();
       lblSystemName.setText(system.Name());
       lblSystemSize.setText(Strings.Sizes[system.Size().CastToInt()]);
-      lblSystemTech.setText(Strings.TechLevelNames[system.TechLevel().CastToInt()]);
+      lblSystemTech.setText(system.TechLevel().name);
       lblSystemPolSys.setText(system.PoliticalSystem().Name());
-      lblSystemResource.setText(Strings.SpecialResources[system.SpecialResource().CastToInt()]);
+      lblSystemResource.setText(system.SpecialResource().name);
       lblSystemPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
       lblSystemPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
-      lblSystemPressure.setText(Strings.SystemPressures[system.SystemPressure().CastToInt()]);
+      lblSystemPressure.setText(system.SystemPressure().name);
       lblSystemPressurePre.setVisible(true);
       btnNews.setVisible(true);
       btnMerc.setVisible(mercs.length > 0);
       if(btnMerc.getVisible()) {
-        tipMerc.SetToolTip(btnMerc, Functions.StringVars(Strings.MercenariesForHire, mercs.length == 1 ? mercs[0].Name() : mercs.length + Strings.Mercenaries));
+        tipMerc.SetToolTip(btnMerc, Functions.StringVars(
+            Strings.MercenariesForHire,
+            mercs.length == 1 ? mercs[0].Name() : mercs.length + Strings.Mercenaries));
       }
       btnSpecial.setVisible(system.ShowSpecialButton());
       if(btnSpecial.getVisible()) {
@@ -3378,9 +3380,9 @@ public final class SpaceTrader extends WinformWindow {
       int distance = Functions.Distance(game.Commander().CurrentSystem(), system);
       lblTargetName.setText(system.Name());
       lblTargetSize.setText(Strings.Sizes[system.Size().CastToInt()]);
-      lblTargetTech.setText(Strings.TechLevelNames[system.TechLevel().CastToInt()]);
+      lblTargetTech.setText(system.TechLevel().name);
       lblTargetPolSys.setText(system.PoliticalSystem().Name());
-      lblTargetResource.setText(system.Visited() ? Strings.SpecialResources[system.SpecialResource().CastToInt()] : Strings.Unknown);
+      lblTargetResource.setText(system.Visited() ? system.SpecialResource().name : Strings.Unknown);
       lblTargetPolice.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPolice().CastToInt()]);
       lblTargetPirates.setText(Strings.ActivityLevels[system.PoliticalSystem().ActivityPirates().CastToInt()]);
       lblTargetDistance.setText("" + distance);
@@ -3988,12 +3990,11 @@ public final class SpaceTrader extends WinformWindow {
                 new Point(centerX + dX2, centerY + dY2)});
         }
         if(game.Options().getShowTrackedRange()) {
-          e.Graphics.DrawString(Functions.StringVars(Strings.ChartDistance, Functions.Multiples(dist,
-              Strings.DistanceUnit), trackSys.Name()), getFont(), new SolidBrush(Color.black), 0,
-              picShortRangeChart.getHeight() - 13);
+          e.Graphics.DrawString(Functions.StringVars("^1 to ^2.", Functions.Multiples(dist, Strings.DistanceUnit), trackSys.Name()),
+              getFont(), new SolidBrush(Color.black), 0, picShortRangeChart.getHeight() - 13);
         }
       }
-      // Two loops: first draw the names and then the systems. The names may overlap and the systems may be drawn on the names,
+      // First, draw the names, then the systems. The names may overlap and the systems may be drawn on the names,
       // but at least every system is visible.
       for(int j = 0; j < 2; j++) {
         for(int i = 0; i < universe.length; i++) {

@@ -1,5 +1,4 @@
 package org.gts.bst.ship.equip;
-import spacetrader.Strings;
 import spacetrader.enums.TechLevel;
 import spacetrader.util.Hashtable;
 import spacetrader.util.Log;
@@ -49,7 +48,7 @@ public class Weapon extends Equipment {
 
   @Override
   public String Name() {
-    return Strings.WeaponNames[_type.id];
+    return _type.name;
   }
 
   @Override

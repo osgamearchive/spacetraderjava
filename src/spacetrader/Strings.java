@@ -1,47 +1,15 @@
 package spacetrader;
+import org.gts.bst.events.VeryRareEncounter;
+import org.gts.bst.ship.equip.WeaponType;
 
 
 public interface Strings {
   public static final String newline = String.format("\n");
-  public static final String BankInsuranceButtonText = "^1 Insurance";
-  public static final String BankInsuranceButtonBuy = "Buy";
-  public static final String BankInsuranceButtonStop = "Stop";
-  public static final String BankLoanStatementBorrow = "You can borrow up to ^1.";
-  public static final String BankLoanStatementDebt = "You have a debt of ^1.";
-  public static final String ChartDistance = "^1 to ^2.";
-  public static final String CargoBuyAfford = "You can afford to buy ^1.";
-  public static final String CargoBuyAvailable = "The trader has ^1 for sale.";
-  public static final String CargoBuying = "buying";
-  public static final String CargoBuyNA = "not sold";
-  public static final String CargoBuyQuestion = "How many do you want to ^1?";
-  public static final String CargoBuyStatement = "At ^1 each, you can buy up to ^2.";
-  public static final String CargoBuyStatementSteal = "Your victim has ^1 of these goods.";
-  public static final String CargoBuyStatementTrader = "The trader wants to sell ^1 for the price of ^2 each.";
-  public static final String CargoSellDumpCost = "It costs ^1 per unit for disposal.";
-  public static final String CargoSelling = "selling";
-  public static final String CargoSellNA = "no trade";
-  public static final String CargoSellPaid = "You paid about ^1 per unit.";
-  public static final String CargoSellPaidTrader = "You paid about ^1 per unit, and can sell ^2.";
-  public static final String CargoSellProfit = "Your ^1 per unit is ^2";
-  public static final String CargoSellQuestion = "How many do you want to ^1?";
-  public static final String CargoSellStatement = "You can sell up to ^1 at ^2 each.";
   public static final String CargoSellStatementDump = "You can ^1 up to ^2.";
-  public static final String CargoSellStatementTrader = "The trader wants to buy ^1 and offers ^2 each.";
   public static final String CargoTitle = "^1 ^2";
   public static final String CargoUnit = "unit";
   // TODO fix this line.
-  public static final String CopyrightChar = "" + ((char)169);
   public static final String DistanceUnit = "parsec";
-  public static final String DistanceSubunit = "click";
-  public static final String DockFuelCost = "A full tank costs ^1";
-  public static final String DockFuelFull = "Your tank is full.";
-  public static final String DockFuelStatus = "You have fuel to fly ^1.";
-  public static final String DockHullCost = "Full repairs will cost ^1";
-  public static final String DockHullFull = "No repairs are needed.";
-  public static final String DockHullStatus = "Your hull strength is at ^1%.";
-  public static final String EncounterActionCmdrChased = "The ^1 is still following you.";
-  public static final String EncounterActionCmdrHit = "The ^1 hits you.";
-  public static final String EncounterActionCmdrMissed = "The ^1 missed you.";
   public static final String EncounterActionOppAttacks = "The ^1 attacks.";
   public static final String EncounterActionOppChased = "The ^1 didn't get away.";
   public static final String EncounterActionOppDisabled = "The ^1 has been disabled.";
@@ -187,10 +155,10 @@ public interface Strings {
   public static final String TimeUnit = "day";
   public static final String TribbleDangerousNumber = "a dangerous number of";
   public static final String Unknown = "Unknown";
-  public static final String[] ActivityLevels = new String[] {"Absent", "Minimal", "Few", "Some", "Moderate", "Many", "Abundant", "Swarms"};
-  public static final String[] CargoBuyOps = new String[] {"Buy", "Buy", "Steal"};
-  public static final String[] CargoSellOps = new String[] {"Sell", "Sell", "Dump", "Jettison"};
-  public static final String[] CrewMemberNames = new String[] {"Commander",
+  public static final String[] ActivityLevels = new String[]{"Absent", "Minimal", "Few", "Some", "Moderate", "Many", "Abundant", "Swarms"};
+  public static final String[] CargoBuyOps = new String[]{"Buy", "Buy", "Steal"};
+  public static final String[] CargoSellOps = new String[]{"Sell", "Sell", "Dump", "Jettison"};
+  public static final String[] CrewMemberNames = new String[]{"Commander",
     "Alyssa", "Armatur", "Bentos", "C2U2", "Chi'Ti", "Crystal", "Dane",
     "Deirdre", "Doc", "Draco", "Iranda", "Jeremiah", "Jujubal",
     "Krydon", "Luis", "Mercedez", "Milete", "Muri-L", "Mystyc",
@@ -222,21 +190,21 @@ public interface Strings {
     "Ziyal", // From ST: Deep Space 9
     "Scorpion" // dummy crew member used in opponent ship
   };
-  public static final String[] DifficultyLevels = new String[] {"Beginner",
+  public static final String[] DifficultyLevels = new String[]{"Beginner",
     "Easy", "Normal", "Hard", "Impossible"};
-  public static final String[][] EquipmentDescriptions = new String[][] {
-    new String[] {
+  public static final String[][] EquipmentDescriptions = new String[][]{
+    new String[]{
       "The Pulse Laser is the weakest weapon available. It's small size allows only enough energy to build up to emit pulses of light.",
       "The Beam Laser is larger than the Pulse Laser, so can build up enough charge to power what are essentially two Pulse Lasers. The resulting effect appears more like a constant beam.",
       "The Military Laser is the largest commecially available weapon. It can build up enough charge to power three Pulse Lasers in series, resulting in a more dense and concentrated beam.",
       "Morgan's Laser has been constructed from a Beam Laser, which has been attached to an Ion Reactor that builds up an immense charge, resulting in the strongest weapon known to exist.",
       "The Photon Disruptor is a relatively weak weapon, but has the ability to disable an opponent's electrical systems, rendering them helpless.",
       "The Quantum Disruptor is a very powerful disabling weapon. Once an opponent's sheilds are down it will usually require only a single shot with the Quantum Disruptor to disable them."},
-    new String[] {
+    new String[]{
       "The Energy Shield is a very basic deflector shield. Its operating principle is to absorb the energy directed at it.",
       "The Reflective Shield is twice as powerful as the Energy Shield. It works by reflecting the energy directed at it instead of absorbing that energy.",
       "The Lightning Shield is the most powerful shield known to exist. It features a Reflective Shield operating on a rotating frequency, which causes what looks like lightning to play across the shield barrier."},
-    new String[] {
+    new String[]{
       "Extra Cargo Bays to store anything your ship can take on as cargo.",
       "The Auto-Repair System works to reduce the damage your ship sustains in battle, and repairs some damage in between encounters. It also boosts all other engineering functions.",
       "The Navigating System increases the overall Pilot skill of the ship, making it harder to hit in battle, and making it easier to flee an encounter.",
@@ -244,19 +212,19 @@ public interface Strings {
       "The Cloaking Device can enable your ship to evade detection by an opponent, but only if the Engineer skill of your ship is greater than that of your opponent. It also makes your ship harder to hit in battle.",
       "The Fuel Compactor that you got as a reward for warning Gemulon of the invasion will increase the range of your ship by 3 parsecs.",
       "These extra bays will not be detected during routine police searches. They may be detected if you are arrested and the police perform a more thorough search."}};
-  public static final String[] EquipmentTypes = new String[] {"Weapon", "Shield", "Gadget"};
-  public static final String[] GadgetNames = new String[] {"5 Extra Cargo Bays",
+  public static final String[] EquipmentTypes = new String[]{"Weapon", "Shield", "Gadget"};
+  public static final String[] GadgetNames = new String[]{"5 Extra Cargo Bays",
     "Auto-Repair System", "Navigating System", "Targeting System",
     "Cloaking Device", "Fuel Compactor", "5 Hidden Cargo Bays"};
-  public static final String[] GameCompletionTypes = new String[] {"Was killed",
+  public static final String[] GameCompletionTypes = new String[]{"Was killed",
     "Retired", "Claimed moon"};
-  public static final String[] ListStrings = new String[] {"", "^1", "^1 and ^2",
+  public static final String[] ListStrings = new String[]{"", "^1", "^1 and ^2",
     "^1, ^2, and ^3", "^1, ^2, ^3, and ^4"};
-	/*
+  /*
    * In News Events, the following variables can be used: ^1 Commander Name ^2
    * Current System ^3 Commander's Ship Type
    */
-  public static final String[] NewsEvent = new String[] {
+  public static final String[] NewsEvent = new String[]{
     "Scientist Adds Alien Artifact to Museum Collection.",
     "Police Trace Orbiting Space Litter to ^1.",
     "Experimental Craft Stolen! Critics Demand Security Review.",
@@ -296,151 +264,149 @@ public interface Strings {
     "Kidnappers Holding Out at Qonos",
     "Scorpion Defeated! Kidnapped Member of Galvon Royal Family Freed!",
     "Beloved Royal Returns Home!"};
-  public static final String[][] NewsHeadlines = new String[][] {
-    new String[] {"Riots, Looting Mar Factional Negotiations.",
+  public static final String[][] NewsHeadlines = new String[][]{
+    new String[]{"Riots, Looting Mar Factional Negotiations.",
       "Communities Seek Consensus.",
       "Successful Bakunin Day Rally!",
       "Major Faction Conflict Expected for the Weekend!"},
-    new String[] {"Editorial: Taxes Too High!",
+    new String[]{"Editorial: Taxes Too High!",
       "Market Indices Read Record Levels!",
       "Corporate Profits Up!",
       "Restrictions on Corporate Freedom Abolished by Courts!"},
-    new String[] {"Party Reports Productivity Increase.",
+    new String[]{"Party Reports Productivity Increase.",
       "Counter-Revolutionary Bureaucrats Purged from Party!",
       "Party: Bold New Future Predicted!",
       "Politburo Approves New 5-Year Plan!"},
-    new String[] {
+    new String[]{
       "States Dispute Natural Resource Rights!",
       "States Denied Federal Funds over Local Laws!",
       "Southern States Resist Federal Taxation for Capital Projects!",
       "States Request Federal Intervention in Citrus Conflict!"},
-    new String[] {"Robot Shortages Predicted for Q4.",
+    new String[]{"Robot Shortages Predicted for Q4.",
       "Profitable Quarter Predicted.",
       "CEO: Corporate Rebranding Progressing.",
       "Advertising Budgets to Increase."},
-    new String[] {"Olympics: Software Beats Wetware in All Events!",
+    new String[]{"Olympics: Software Beats Wetware in All Events!",
       "New Network Protocols To Be Deployed.",
       "Storage Banks to be Upgraded!",
       "System Backup Rescheduled."},
-    new String[] {"Local Elections on Schedule!",
+    new String[]{"Local Elections on Schedule!",
       "Polls: Voter Satisfaction High!",
       "Campaign Spending Aids Economy!",
       "Police, Politicians Vow Improvements."},
-    new String[] {"New Palace Planned; Taxes Increase.",
+    new String[]{"New Palace Planned; Taxes Increase.",
       "Future Presents More Opportunities for Sacrifice!",
       "Insurrection Crushed: Rebels Executed!",
       "Police Powers to Increase!"},
-    new String[] {
+    new String[]{
       "Drug Smugglers Sentenced to Death!",
       "Aliens Required to Carry Visible Identification at All Times!",
       "Foreign Sabotage Suspected.",
       "Stricter Immigration Laws Installed."},
-    new String[] {"Farmers Drafted to Defend Lord's Castle!",
+    new String[]{"Farmers Drafted to Defend Lord's Castle!",
       "Report: Kingdoms Near Flashpoint!",
       "Baron Ignores Ultimatum!", "War of Succession Threatens!"},
-    new String[] {"Court-Martials Up 2% This Year.",
+    new String[]{"Court-Martials Up 2% This Year.",
       "Editorial: Why Wait to Invade?",
       "HQ: Invasion Plans Reviewed.",
       "Weapons Research Increases Kill-Ratio!"},
-    new String[] {"King to Attend Celebrations.",
+    new String[]{"King to Attend Celebrations.",
       "Queen's Birthday Celebration Ends in Riots!",
       "King Commissions New Artworks.",
       "Prince Exiled for Palace Plot!"},
-    new String[] {"Dialog Averts Eastern Conflict!",
+    new String[]{"Dialog Averts Eastern Conflict!",
       "Universal Peace: Is it Possible?",
       "Editorial: Life in Harmony.",
       "Polls: Happiness Quotient High!"},
-    new String[] {"Government Promises Increased Welfare Benefits!",
+    new String[]{"Government Promises Increased Welfare Benefits!",
       "State Denies Food Rationing Required to Prevent Famine.",
       "'Welfare Actually Boosts Economy,' Minister Says.",
       "Hoarder Lynched by Angry Mob!"},
-    new String[] {"Millions at Peace.", "Sun Rises.",
+    new String[]{"Millions at Peace.", "Sun Rises.",
       "Countless Hearts Awaken.", "Serenity Reigns."},
-    new String[] {"New Processor Hits 10 ZettaHerz!",
+    new String[]{"New Processor Hits 10 ZettaHerz!",
       "Nanobot Output Exceeds Expectation.",
       "Last Human Judge Retires.",
       "Software Bug Causes Mass Confusion."},
-    new String[] {"High Priest to Hold Special Services.",
+    new String[]{"High Priest to Hold Special Services.",
       "Temple Restoration Fund at 81%.",
       "Sacred Texts on Public Display.",
       "Dozen Blasphemers Excommunicated!"}};
-  public static final String[][] NewsMastheads = new String[][] {
-    new String[] {"The ^1 Arsenal", "The Grassroot", "Kick It!"},
-    new String[] {"The Objectivist", "The ^1 Market", "The Invisible Hand"},
-    new String[] {"The Daily Worker", "The People's Voice", "The ^1 Proletariat"},
-    new String[] {"Planet News", "The ^1 Times", "Interstate Update"},
-    new String[] {"^1 Memo", "News From The Board", "Status Report"},
-    new String[] {"Pulses", "Binary Stream", "The System Clock"},
-    new String[] {"The Daily Planet", "The ^1 Majority", "Unanimity"},
-    new String[] {"The Command", "Leader's Voice", "The ^1 Mandate"},
-    new String[] {"State Tribune", "Motherland News", "Homeland Report"},
-    new String[] {"News from the Keep", "The Town Crier", "The ^1 Herald"},
-    new String[] {"General Report", "^1 Dispatch", "The ^1 Sentry"},
-    new String[] {"Royal Times", "The Loyal Subject", "The Fanfare"},
-    new String[] {"Pax Humani", "Principle", "The ^1 Chorus"},
-    new String[] {"All for One", "Brotherhood", "The People's Syndicate"},
-    new String[] {"The Daily Koan", "Haiku", "One Hand Clapping"},
-    new String[] {"The Future", "Hardware Dispatch", "TechNews"},
-    new String[] {"The Spiritual Advisor", "Church Tidings", "The Temple Tribune"}
+  public static final String[][] NewsMastheads = new String[][]{
+    new String[]{"The ^1 Arsenal", "The Grassroot", "Kick It!"},
+    new String[]{"The Objectivist", "The ^1 Market", "The Invisible Hand"},
+    new String[]{"The Daily Worker", "The People's Voice", "The ^1 Proletariat"},
+    new String[]{"Planet News", "The ^1 Times", "Interstate Update"},
+    new String[]{"^1 Memo", "News From The Board", "Status Report"},
+    new String[]{"Pulses", "Binary Stream", "The System Clock"},
+    new String[]{"The Daily Planet", "The ^1 Majority", "Unanimity"},
+    new String[]{"The Command", "Leader's Voice", "The ^1 Mandate"},
+    new String[]{"State Tribune", "Motherland News", "Homeland Report"},
+    new String[]{"News from the Keep", "The Town Crier", "The ^1 Herald"},
+    new String[]{"General Report", "^1 Dispatch", "The ^1 Sentry"},
+    new String[]{"Royal Times", "The Loyal Subject", "The Fanfare"},
+    new String[]{"Pax Humani", "Principle", "The ^1 Chorus"},
+    new String[]{"All for One", "Brotherhood", "The People's Syndicate"},
+    new String[]{"The Daily Koan", "Haiku", "One Hand Clapping"},
+    new String[]{"The Future", "Hardware Dispatch", "TechNews"},
+    new String[]{"The Spiritual Advisor", "Church Tidings", "The Temple Tribune"}
   };
-  public static final String[] NewsPoliceRecordHero = new String[] {
+  public static final String[] NewsPoliceRecordHero = new String[]{
     "Locals Welcome Visiting Hero ^1!",
     "Famed Hero ^1 to Visit System!",
     "Large Turnout At Spaceport to Welcome ^1!"};
-  public static final String[] NewsPoliceRecordPsychopath = new String[] {
+  public static final String[] NewsPoliceRecordPsychopath = new String[]{
     "Police Warning: ^1 Will Dock At ^2!",
     "Notorious Criminal ^1 Sighted in ^2!",
     "Locals Rally to Deny Spaceport Access to ^1!",
     "Terror Strikes Locals on Arrival of ^1!"};
-  public static final String[] NewsPressureExternal = new String[] {
+  public static final String[] NewsPressureExternal = new String[]{
     "Reports of ^1 in the ^2 System.", "News of ^1 in the ^2 System.",
     "New Rumors of ^1 in the ^2 System.",
     "Sources report ^1 in the ^2 System.",
     "Notice: ^1 in the ^2 System.",
     "Evidence Suggests ^1 in the ^2 System."};
-  public static final String[] NewsPressureExternalPressures = new String[] {"",
+  public static final String[] NewsPressureExternalPressures = new String[]{"",
     "Strife and War", "Plague Outbreaks", "Severe Drought",
     "Terrible Boredom", "Cold Weather", "Crop Failures",
     "Labor Shortages"};
-  public static final String[] NewsPressureInternal = new String[] {"",
+  public static final String[] NewsPressureInternal = new String[]{"",
     "War News: Offensives Continue!", "Plague Spreads! Outlook Grim.",
     "No Rain in Sight!", "Editors: Won't Someone Entertain Us?",
     "Cold Snap Continues!", "Serious Crop Failure! Must We Ration?",
     "Jobless Rate at All-Time Low!"};
-  public static final String[] PoliceRecordNames = new String[] {"Psychopath",
+  public static final String[] PoliceRecordNames = new String[]{"Psychopath",
     "Villain", "Criminal", "Crook", "Dubious", "Clean", "Lawful",
     "Trusted", "Liked", "Hero"};
-  public static final String[] PoliticalSystemNames = new String[] {"Anarchy",
+  public static final String[] PoliticalSystemNames = new String[]{"Anarchy",
     "Capitalist State", "Communist State", "Confederacy",
     "Corporate State", "Cybernetic State", "Democracy", "Dictatorship",
     "Fascist State", "Feudal State", "Military State", "Monarchy",
     "Pacifist State", "Socialist State", "State of Satori",
     "Technocracy", "Theocracy"};
-  public static final String[] ReputationNames = new String[] {"Harmless",
+  public static final String[] ReputationNames = new String[]{"Harmless",
     "Mostly harmless", "Poor", "Average", "Above average", "Competent",
     "Dangerous", "Deadly", "Elite"};
-  public static final String[] ShieldNames = new String[] {"Energy Shield",
+  public static final String[] ShieldNames = new String[]{"Energy Shield",
     "Reflective Shield", "Lightning Shield"};
-  public static final String[] ShipNames = new String[] {"Flea", "Gnat",
+  public static final String[] ShipNames = new String[]{"Flea", "Gnat",
     "Firefly", "Mosquito", "Bumblebee", "Beetle", "Hornet",
     "Grasshopper", "Termite", "Wasp", "Space Monster", "Dragonfly",
     "Mantis", "Scarab", "Bottle", ShipNameCustomShip, "Scorpion"};
-  public static final String[] ShipyardEngineers = new String[] {"Wedge", "Luke",
+  public static final String[] ShipyardEngineers = new String[]{"Wedge", "Luke",
     "Lando", "Mara", "Obi-Wan"};
-  public static final String[] ShipyardNames = new String[] {
+  public static final String[] ShipyardNames = new String[]{
     "Corellian Engineering", "Incom Corporation", "Kuat Drive Yards",
     "Sienar Fleet Systems", "Sorosuub Engineering"};
-  public static final String[] ShipyardSkillDescriptions = new String[] {
+  public static final String[] ShipyardSkillDescriptions = new String[]{
     "All ships constructed at this shipyard use 2 fewer units per crew quarter.",
     "All ships constructed at this shipyard have 2 extra base fuel tanks.",
     "All ships constructed at this shipyard have the hull points increment by 5 more than usual.",
     "All ships constructed at this shipyard get shield slots for 2 fewer units.",
     "All ships constructed at this shipyard get weapon slots for 2 fewer units."};
-  public static final String[] ShipyardSkills = new String[] {"Crew Quartering",
-    "Fuel Efficienty", "Hull Strength", "Shielding", "Weaponry"};
-  public static final String[] Sizes = new String[] {"Tiny", "Small", "Medium",
-    "Large", "Huge", "Gargantuan"};
-  public static final String[] SpecialEventStrings = new String[] {
+  public static final String[] ShipyardSkills = new String[]{"Crew Quartering", "Fuel Efficienty", "Hull Strength", "Shielding", "Weaponry"};
+  public static final String[] Sizes = new String[]{"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
+  public static final String[] SpecialEventStrings = new String[]{
     "This alien artifact should be delivered to professor Berger, who is currently traveling. You can probably find him at a hi-tech solar system. The alien race which produced this artifact seems keen on getting it back, however, and may hinder the carrier. Are you, for a price, willing to deliver it?",
     "This is professor Berger. I thank you for delivering the alien artifact to me. I hope the aliens weren't too much of a nuisance. I have transferred 20000 credits to your account, which I assume compensates for your troubles.",
     "A trader in second-hand goods offers you 3 sealed cargo canisters for the sum of 1000 credits. It could be a good deal: they could contain robots. Then again, it might just be water. Do you want the canisters?",
@@ -488,31 +454,20 @@ public interface Strings {
     "His Majesty's Shipyard: Do you want us to install a quantum disruptor on your current ship?",
     "The King and Queen are extremely grateful to you for returning their daughter to them. The King says, \"Ziyal is priceless to us, but we feel we must offer you something as a reward. Visit my shipyard captain and he'll install one of our new Quantum Disruptors.\""
   };
-  public static final String[] SpecialEventTitles = new String[] {
-    "Alien Artifact", "Artifact Delivery", "Cargo For Sale",
-    "Dragonfly", "Dragonfly Destroyed", "Weird Ship", "Lightning Ship",
-    "Lightning Shield", "Strange Ship", "Erase Record",
-    "Dangerous Experiment", "Experiment Failed", "Disaster Averted",
-    "Alien Invasion", "Fuel Compactor", "Gemulon Invaded",
-    "Gemulon Rescued", "Japori Disease", "Medicine Delivery",
-    "Ambassador Jarek", "Jarek Gets Out", "Lottery Winner",
-    "Moon For Sale", "Retirement", "Morgan's Reactor",
-    "Reactor Delivered", "Install Morgan's Laser", "Scarab Stolen",
-    "Scarab Destroyed", "Upgrade Hull", "Skill Increase",
-    "Space Monster", "Monster Killed", "Merchant Prince",
-    "Tribble Buyer", "Jonathan Wild", "Wild Gets Out",
-    "Stolen Sculpture", "Sculpture Delivered",
-    "Install Hidden Compartments", "Kidnapped", "Aggressive Ship",
-    "Dangerous Scorpion", "Royal Rescue", "Quantum Disruptor",
-    "Royal Return"};
-  public static final String[] SpecialResources = new String[] {"Nothing Special",
-    "Mineral Rich", "Mineral Poor", "Desert", "Sweetwater Oceans",
-    "Rich Soil", "Poor Soil", "Rich Fauna", "Lifeless",
-    "Weird Mushrooms", "Special Herbs", "Artistic Populace",
-    "Warlike Populace"};
+  public static final String[] SpecialEventTitles = new String[]{
+    "Alien Artifact", "Artifact Delivery", "Cargo For Sale", "Dragonfly", "Dragonfly Destroyed", "Weird Ship", "Lightning Ship",
+    "Lightning Shield", "Strange Ship", "Erase Record", "Dangerous Experiment", "Experiment Failed", "Disaster Averted",
+    "Alien Invasion", "Fuel Compactor", "Gemulon Invaded", "Gemulon Rescued", "Japori Disease", "Medicine Delivery",
+    "Ambassador Jarek", "Jarek Gets Out", "Lottery Winner", "Moon For Sale", "Retirement", "Morgan's Reactor",
+    "Reactor Delivered", "Install Morgan's Laser", "Scarab Stolen", "Scarab Destroyed", "Upgrade Hull", "Skill Increase",
+    "Space Monster", "Monster Killed", "Merchant Prince", "Tribble Buyer", "Jonathan Wild", "Wild Gets Out",
+    "Stolen Sculpture", "Sculpture Delivered", "Install Hidden Compartments", "Kidnapped", "Aggressive Ship",
+    "Dangerous Scorpion", "Royal Rescue", "Quantum Disruptor", "Royal Return"
+  };
   // Many of these names are from Star Trek: The Next Generation, or are small changes to names of this series. A few have different origins.
   // JAF - Except where noted these comments are the previous author's.
-  public static final String[] SystemNames = new String[] {"Acamar", // JAF - TNG "The Vengeance Factor (Acamar III)"
+  public static final String[] SystemNames = new String[]{
+    "Acamar", // JAF - TNG "The Vengeance Factor (Acamar III)"
     "Adahn", // The alternate personality for The Nameless One in "Planescape: Torment"
     "Aldea", // JAF - TNG "When the Bough Breaks"
     "Andevian", // JAF - ST Andoria?
@@ -607,10 +562,12 @@ public interface Strings {
     "Turkana", // JAF - TNG "Legacy" (Turkana IV)
     "Tyrus", "Umberlee", // A god from AD&D, which has a prominent role in Baldur's Gate
     "Utopia", // The ultimate goal
-    "Vadera", "Vagra", // JAF - TNG "Skin of Evil" (Vagra II)
+    "Vadera",
+    "Vagra", // JAF - TNG "Skin of Evil" (Vagra II)
     "Vandor", // JAF - TNG "We'll Always Have Paris" (Vando VI)?
     "Ventax", // JAF - TNG "Devil's Due" (Ventax II)
-    "Xenon", "Xerxes", // A Greek hero
+    "Xenon",
+    "Xerxes", // A Greek hero
     "Yew", // A city which is in almost all of the Ultima games
     "Yojimbo", // A film by Akira Kurosawa
     "Zalkon", // TNG "Transfigurations" (Zalcon)
@@ -625,26 +582,14 @@ public interface Strings {
     "Weytahn", // Star Trek: Enterprise "Cease Fire"
     "Zonama" // From the Star Wars: New Jedi Order series (and Rogue Planet)
   };
-  public static final String[] SystemPressures = new String[] {
-    "under no particular pressure", // Uneventful
-    "at war", // Ore and Weapons in demand
-    "ravaged by a plague", // Medicine in demand
-    "suffering from a drought", // Water in demand
-    "suffering from extreme boredom", // Games and Narcotics in demand
-    "suffering from a cold spell", // Furs in demand
-    "suffering from a crop failure", // Food in demand
-    "lacking enough workers" // Machinery and Robots in demand
+  public static final String[] VeryRareEncounters = new String[]{
+    //TODO: Only used in SpaceTrader.btnFind_Click(Object,EventArgs)
+    VeryRareEncounter.MarieCeleste.name, VeryRareEncounter.CaptainAhab.name, VeryRareEncounter.CaptainConrad.name,
+    VeryRareEncounter.CaptainHuie.name, VeryRareEncounter.BottleOld.name, VeryRareEncounter.BottleGood.name
   };
-  public static final String[] TechLevelNames = new String[] {
-    "Pre-Agricultural", "Agricultural", "Medieval", "Renaissance", "Early Industrial", "Industrial", "Post-Industrial", "Hi-Tech"
-  };
-  public static final String[] TradeItemNames = new String[] {
-    "Water", "Furs", "Food", "Ore", "Games", "Firearms", "Medicine", "Machines", "Narcotics", "Robots"
-  };
-  public static final String[] VeryRareEncounters = new String[] {
-    "Marie Celeste", "Captain Ahab", "Captain Conrad", "Captain Huie", "Dated Tonic", "Good Tonic"
-  };
-  public static final String[] WeaponNames = new String[] {
-    "Pulse Laser", "Beam Laser", "Military Laser", "Morgan's Laser", "Photon Disruptor", "Quantum Disruptor"
+  public static final String[] WeaponNames = new String[]{
+    //TODO: Only used in Equipment.BaseImageIndex()
+    WeaponType.PulseLaser.name, WeaponType.BeamLaser.name, WeaponType.MilitaryLaser.name,
+    WeaponType.MorgansLaser.name, WeaponType.PhotonDisruptor.name, WeaponType.QuantumDistruptor.name
   };
 }

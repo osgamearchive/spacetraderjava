@@ -37,10 +37,10 @@ public class FormCargoBuy extends WinformForm {
     numAmount.setMaximum(maxAmount);
     numAmount.setValue(numAmount.getMinimum());
     setText(Functions.StringVars(Strings.CargoTitle, Strings.CargoBuyOps[op.id], Consts.TradeItems[item].Name()));
-    lblQuestion.setText(Functions.StringVars(Strings.CargoBuyQuestion, Strings.CargoBuyOps[op.id].toLowerCase()));
+    lblQuestion.setText(Functions.StringVars("How many do you want to ^1?", Strings.CargoBuyOps[op.id].toLowerCase()));
     switch(op) {
       case BuySystem:
-        lblStatement.setText(Functions.StringVars(Strings.CargoBuyStatement, Functions.FormatMoney(game.PriceCargoBuy()[item]), Functions.FormatNumber(maxAmount)));
+        lblStatement.setText(Functions.StringVars("At ^1 each, you can buy up to ^2.", Functions.FormatMoney(game.PriceCargoBuy()[item]), Functions.FormatNumber(maxAmount)));
         setHeight(btnOk.getTop() + btnOk.getHeight() + 34);
         break;
       case BuyTrader:
@@ -48,9 +48,9 @@ public class FormCargoBuy extends WinformForm {
         if(afford < maxAmount) {
           numAmount.setMaximum(afford);
         }
-        lblStatement.setText(Functions.StringVars(Strings.CargoBuyStatementTrader, Consts.TradeItems[item].Name(), Functions.FormatMoney(game.PriceCargoBuy()[item])));
-        lblAvailable.setText(Functions.StringVars(Strings.CargoBuyAvailable, Functions.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
-        lblAfford.setText(Functions.StringVars(Strings.CargoBuyAfford, Functions.Multiples(afford, Strings.CargoUnit)));
+        lblStatement.setText(Functions.StringVars("The trader wants to sell ^1 for the price of ^2 each.", Consts.TradeItems[item].Name(), Functions.FormatMoney(game.PriceCargoBuy()[item])));
+        lblAvailable.setText(Functions.StringVars("The trader has ^1 for sale.", Functions.Multiples(game.getOpponent().Cargo()[item], Strings.CargoUnit)));
+        lblAfford.setText(Functions.StringVars("You can afford to buy ^1.", Functions.Multiples(afford, Strings.CargoUnit)));
         lblAvailable.setVisible(true);
         lblAfford.setVisible(true);
         btnOk.setTop(btnOk.getTop() + 26);
@@ -60,7 +60,7 @@ public class FormCargoBuy extends WinformForm {
         numAmount.setTop(numAmount.getTop() + 26);
         break;
       case InPlunder:
-        lblStatement.setText(Functions.StringVars(Strings.CargoBuyStatementSteal, Functions.FormatNumber(game.getOpponent().Cargo()[item])));
+        lblStatement.setText(Functions.StringVars("Your victim has ^1 of these goods.", Functions.FormatNumber(game.getOpponent().Cargo()[item])));
         setHeight(btnOk.getTop() + btnOk.getHeight() + 34);
         break;
     }

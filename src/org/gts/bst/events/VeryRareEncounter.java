@@ -3,13 +3,19 @@ import spacetrader.enums.SpaceTraderEnum;
 
 
 public enum VeryRareEncounter implements SpaceTraderEnum {
-  MarieCeleste, // = 0,
-  CaptainAhab, // = 1,
-  CaptainConrad, // = 2,
-  CaptainHuie, // = 3,
-  BottleOld, // = 4,
-  BottleGood, // = 5
-  ;
+  MarieCeleste("Marie Celeste"), // = 0,
+  CaptainAhab("Captain Ahab"), // = 1,
+  CaptainConrad("Captain Conrad"), // = 2,
+  CaptainHuie("Captain Huie"), // = 3,
+  BottleOld("Dated Tonic"), // = 4,
+  BottleGood("Good Tonic"); // = 5
+  public final String name;
+  public final int id;
+
+  private VeryRareEncounter(String s) {
+    name = s;
+    id = ordinal();
+  }
 
   @Override
   public int CastToInt() {

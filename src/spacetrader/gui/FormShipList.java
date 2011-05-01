@@ -851,7 +851,7 @@ public class FormShipList extends WinformForm {
     for(int i = 0; i < lblPrice.length; i++) {
       btnBuy[i].setVisible(false);
       if(Consts.ShipSpecs[i].MinimumTechLevel().CastToInt() > game.Commander().CurrentSystem().TechLevel().CastToInt()) {
-        lblPrice[i].setText(Strings.CargoBuyNA);
+        lblPrice[i].setText("not sold");
       } else if(Consts.ShipSpecs[i].Type() == game.Commander().getShip().Type()) {
         lblPrice[i].setText(Strings.ShipBuyGotOne);
       } else {

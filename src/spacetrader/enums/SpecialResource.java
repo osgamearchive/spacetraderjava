@@ -2,21 +2,26 @@ package spacetrader.enums;
 
 
 public enum SpecialResource implements SpaceTraderEnum {
-  NA, // = -1,
-  Nothing, // = 0,
-  MineralRich, // = 1,
-  MineralPoor, // = 2,
-  Desert, // = 3,
-  SweetOceans, // = 4,
-  RichSoil, // = 5,
-  PoorSoil, // = 6,
-  RichFauna, // = 7,
-  Lifeless, // = 8,
-  WeirdMushrooms, // = 9,
-  SpecialHerbs, // = 10,
-  Artistic, // = 11,
-  Warlike, // = 12
+  NA(""), // = -1,
+  Nothing("Nothing Special"), // = 0,
+  MineralRich("Mineral Rich"), // = 1,
+  MineralPoor("Mineral Poor"), // = 2,
+  Desert("Desert"), // = 3,
+  SweetOceans("Sweetwater Oceans"), // = 4,
+  RichSoil("Rich Soil"), // = 5,
+  PoorSoil("Poor Soil"), // = 6,
+  RichFauna("Rich Fauna"), // = 7,
+  Lifeless("Lifeless"), // = 8,
+  WeirdMushrooms("Wierd Mushrooms"), // = 9,
+  SpecialHerbs("Special Herbs"), // = 10,
+  Artistic("Artistic Populace"), // = 11,
+  Warlike("Warlike Populace"), // = 12
   ;
+  public final String name;
+
+  private SpecialResource(String s) {
+    name = s;
+  }
 
   @Override
   public int CastToInt() {

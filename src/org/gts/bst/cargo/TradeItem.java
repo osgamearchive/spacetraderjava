@@ -1,6 +1,5 @@
 package org.gts.bst.cargo;
 import spacetrader.StarSystem;
-import spacetrader.Strings;
 import spacetrader.enums.SpecialResource;
 import spacetrader.enums.SystemPressure;
 import spacetrader.enums.TechLevel;
@@ -93,7 +92,7 @@ public class TradeItem implements Comparable<TradeItem> {
   }
 
   public String Name() {
-    return Strings.TradeItemNames[_type.CastToInt()];
+    return _type.name;
   }
 
   public SystemPressure PressurePriceHike() {
