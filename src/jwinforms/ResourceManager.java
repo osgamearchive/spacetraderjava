@@ -17,45 +17,41 @@ public class ResourceManager {
     }
   }
 
-  public ResourceManager(Class<?> className) {
-    this(classLoader.getResource(classToPath(className) + className.getSimpleName() + ".properties"), classToPath(className));
+  public ResourceManager(Class<?> c) {
+    this(classLoader.getResource(classToPath(c) + c.getSimpleName() + ".properties"), classToPath(c));
   }
 
-  private static String classToPath(Class<?> className) {
-    String path = className.getCanonicalName().replace('.', '/');
-    path = path.substring(0, path.lastIndexOf('/') + 1);
-    //System.out.println("classToPath " + path);
-    return path;
+  private static String classToPath(Class<?> c) {
+    String path = c.getCanonicalName().replace('.', '/');
+    return path.substring(0, path.lastIndexOf('/') + 1);
   }
 
-  public Object GetObject(String key) {
-    String objectType = properties.getProperty(key + ".type", null);
+  public Object GetObject(String s) {
+    String objectType = properties.getProperty(s + ".type", null);
     if(objectType == null) {
-      throw new Error("No object type for: " + key);
+      throw new Error("No object type for: " + s);
     }
     if(objectType.equals("ImageListStreamer")) {
       // value is name of properties file with image names in it
-      String streamFilename = properties.getProperty(key);
-      //System.out.println(path + streamFilename);
+      String streamFilename = properties.getProperty(s);
       try {
         return new ImageStreamResourceManager(classLoader.getResource(path + streamFilename), path).getStream();
-      //return new ImageStreamResourceManager(classLoader.getResource(streamFilename)).getStream();
       } catch(NullPointerException e) {
         throw new Error("NPE while seeking for " + streamFilename);
       }
     } else if(objectType.equals("Image")) {
-      String imageName = properties.getProperty(key);
+      String imageName = properties.getProperty(s);
       return getImage(imageName);
     } else {
       throw new Error("Uknown object type " + objectType);
     }
   }
 
-  public Object getImage(String imageName) {
-    return new Bitmap(classLoader.getResource(imageName.trim()));
+  public Object getImage(String s) {
+    return new Bitmap(classLoader.getResource(s.trim()));
   }
 
-  public String GetString(String key) {
-    return properties.getProperty(key);
+  public String GetString(String s) {
+    return properties.getProperty(s);
   }
 }
