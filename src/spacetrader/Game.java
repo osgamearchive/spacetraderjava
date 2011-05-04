@@ -1646,12 +1646,12 @@ public class Game extends STSerializableObject {
   public String EncounterAction() {
     String action = "";
     if(getOpponentDisabled()) {
-      action = Functions.StringVars(Strings.EncounterActionOppDisabled, EncounterShipText());
+      action = Functions.StringVars("The ^1 has been disabled.", EncounterShipText());
     } else if(getEncounterOppFleeing()) {
       if(getEncounterType() == EncounterType.PirateSurrender || getEncounterType() == EncounterType.TraderSurrender) {
-        action = Functions.StringVars(Strings.EncounterActionOppSurrender, EncounterShipText());
+        action = Functions.StringVars("The ^1 hails that they wish to surrender to you.", EncounterShipText());
       } else {
-        action = Functions.StringVars(Strings.EncounterActionOppFleeing, EncounterShipText());
+        action = Functions.StringVars("The ^1 is fleeing.", EncounterShipText());
       }
     } else {
       action = Functions.StringVars(Strings.EncounterActionOppAttacks, EncounterShipText());
@@ -1762,12 +1762,12 @@ public class Game extends STSerializableObject {
     if(getEncounterCmdrFleeing()) {
       cmdrStatus = Functions.StringVars("The ^1 is still following you.", EncounterShipText());
     } else if(getEncounterOppHit()) {
-      cmdrStatus = Functions.StringVars(Strings.EncounterActionOppHit, EncounterShipText());
+      cmdrStatus = Functions.StringVars("You hit the ^1.", EncounterShipText());
     } else {
-      cmdrStatus = Functions.StringVars(Strings.EncounterActionOppMissed, EncounterShipText());
+      cmdrStatus = Functions.StringVars("You missed the ^1.", EncounterShipText());
     }
     if(getEncounterOppFleeingPrev()) {
-      oppStatus = Functions.StringVars(Strings.EncounterActionOppChased, EncounterShipText());
+      oppStatus = Functions.StringVars("The ^1 didn't get away.", EncounterShipText());
     } else if(getEncounterCmdrHit()) {
       oppStatus = Functions.StringVars("The ^1 hits you.", EncounterShipText());
     } else {

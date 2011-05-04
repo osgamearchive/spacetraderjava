@@ -11,12 +11,6 @@ public interface Strings {
   // TODO fix this line.
   public static final String DistanceUnit = "parsec";
   public static final String EncounterActionOppAttacks = "The ^1 attacks.";
-  public static final String EncounterActionOppChased = "The ^1 didn't get away.";
-  public static final String EncounterActionOppDisabled = "The ^1 has been disabled.";
-  public static final String EncounterActionOppFleeing = "The ^1 is fleeing.";
-  public static final String EncounterActionOppHit = "You hit the ^1.";
-  public static final String EncounterActionOppMissed = "You missed the ^1.";
-  public static final String EncounterActionOppSurrender = "The ^1 hails that they wish to surrender to you.";
   public static final String EncounterHidePrincess = "the Princess";
   public static final String EncounterHideSculpture = "the stolen sculpture";
   public static final String EncounterHullStrength = "Hull at ^1%";
