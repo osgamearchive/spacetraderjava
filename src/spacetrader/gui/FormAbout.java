@@ -3,18 +3,18 @@ import java.awt.Point;
 import javax.swing.UnsupportedLookAndFeelException;
 import jwinforms.Button;
 import jwinforms.ComponentResourceManager;
-import jwinforms.enums.DialogResult;
 import jwinforms.Font;
-import jwinforms.enums.FontStyle;
-import jwinforms.enums.FormBorderStyle;
 import jwinforms.FormSize;
-import jwinforms.enums.FormStartPosition;
 import jwinforms.GraphicsUnit;
 import jwinforms.ISupportInitialize;
 import jwinforms.Image;
 import jwinforms.Label;
 import jwinforms.PictureBox;
 import jwinforms.WinformForm;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FontStyle;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 
 
 public class FormAbout extends WinformForm {
