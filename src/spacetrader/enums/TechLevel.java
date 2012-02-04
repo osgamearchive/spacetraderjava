@@ -1,7 +1,7 @@
 package spacetrader.enums;
 
 
-public enum TechLevel implements SpaceTraderEnum {
+public enum TechLevel {
   pt(-1, "PT", "Pre-Species/Non-Existence"),
   t0(0, "T0", "Pre-Agricultural"), // = 0, pre-agricultural
   t1(1, "T1", "Agricultural"), // = 1, agricultural
@@ -23,11 +23,6 @@ public enum TechLevel implements SpaceTraderEnum {
     abbr = s;
     name = t;
     id = ordinal();
-  }
-
-  @Override
-  public int CastToInt() {
-    return ordinal();
   }
 
   public static TechLevel FromInt(int i) {

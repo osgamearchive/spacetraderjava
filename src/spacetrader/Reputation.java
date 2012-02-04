@@ -23,7 +23,7 @@ public class Reputation {
   }
 
   public String Name() {
-    return Strings.PoliceRecordNames[_type.CastToInt()];
+    return Strings.ReputationNames[_type.CastToInt()];
   }
 
   public ReputationType Type() {

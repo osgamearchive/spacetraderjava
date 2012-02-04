@@ -877,7 +877,7 @@ public class Game extends STSerializableObject {
         }
         // Randomize price a bit
         int variance = Math.min(Consts.TradeItems[i].PriceVariance(), price - 1);
-        price = price + Functions.GetRandom(-variance, variance + 1);
+        price += Functions.GetRandom(-variance, variance + 1);
         // Criminals have to pay off an intermediary
         if(cmdr.getPoliceRecordScore() < Consts.PoliceRecordScoreDubious) {
           price = price * 90 / 100;
@@ -1248,7 +1248,7 @@ public class Game extends STSerializableObject {
       SpecialResource specRes = SpecialResource.Nothing;
       ShipSize size = ShipSize.FromInt(Functions.GetRandom(ShipSize.Huge.CastToInt() + 1));
       PoliticalSystem polSys = Consts.PoliticalSystems[Functions.GetRandom(Consts.PoliticalSystems.length)];
-      TechLevel tech = TechLevel.FromInt(Functions.GetRandom(polSys.MinimumTechLevel().CastToInt(), polSys.MaximumTechLevel().CastToInt() + 1));
+      TechLevel tech = TechLevel.FromInt(Functions.GetRandom(polSys.MinimumTechLevel().ordinal(), polSys.MaximumTechLevel().ordinal() + 1));
       // Galvon must be a Monarchy.
       if(id == StarSystemId.Galvon) {
         size = ShipSize.Large;
@@ -1322,8 +1322,8 @@ public class Game extends STSerializableObject {
     while(cmdr.CurrentSystem() == null) {
       StarSystem system = _universe[Functions.GetRandom(_universe.length)];
       if(system.SpecialEventType() == SpecialEventType.NA
-          && system.TechLevel().CastToInt() > TechLevel.t0.CastToInt()
-          && system.TechLevel().CastToInt() < TechLevel.t7.CastToInt()) {
+          && system.TechLevel().ordinal() > TechLevel.t0.ordinal()
+          && system.TechLevel().ordinal() < TechLevel.t7.ordinal()) {
         // Make sure at least three other systems can be reached
         int close = 0;
         for(int i = 0; i < _universe.length && close < 3; i++) {
@@ -1877,7 +1877,7 @@ public class Game extends STSerializableObject {
     // and now, finally, useful news (if any); base probability of a story showing up is (50 / MAXTECHLEVEL) * Current Tech Level
     // This is then modified by adding 10% for every level of play less than Impossible
     boolean realNews = false;
-    int minProbability = Consts.StoryProbability * curSys.TechLevel().CastToInt() + 10 * (5 - _difficulty.CastToInt());
+    int minProbability = Consts.StoryProbability * curSys.TechLevel().ordinal() + 10 * (5 - _difficulty.CastToInt());
     for(int i = 0; i < _universe.length; i++) {
       if(_universe[i].DestOk() && _universe[i] != curSys) {
         // Special stories that always get shown: moon, millionaire, shipyard
@@ -1893,7 +1893,7 @@ public class Game extends STSerializableObject {
         }
         // And not-always-shown stories
         if(_universe[i].SystemPressure() != SystemPressure.None
-            && Functions.GetRandom2(100) <= Consts.StoryProbability * curSys.TechLevel().CastToInt() + 10 * (5 - _difficulty.CastToInt())) {
+            && Functions.GetRandom2(100) <= Consts.StoryProbability * curSys.TechLevel().ordinal() + 10 * (5 - _difficulty.CastToInt())) {
           int index = Functions.GetRandom2(Strings.NewsPressureExternal.length);
           String baseStr = Strings.NewsPressureExternal[index];
           String pressure = Strings.NewsPressureExternalPressures[_universe[i].SystemPressure().CastToInt()];

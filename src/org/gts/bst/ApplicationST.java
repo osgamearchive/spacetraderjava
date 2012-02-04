@@ -2935,8 +2935,8 @@ public class ApplicationST extends WinformWindow {
       btnEquip.setVisible(false);
     } else {
       boolean noTech =
-          cmdr.CurrentSystem().TechLevel().CastToInt()
-          < Consts.ShipSpecs[ShipType.Flea.CastToInt()].MinimumTechLevel().CastToInt();
+          cmdr.CurrentSystem().TechLevel().ordinal()
+          < Consts.ShipSpecs[ShipType.Flea.CastToInt()].MinimumTechLevel().ordinal();
       lblShipsForSale.setText(noTech ? Strings.ShipyardShipNoSale : Strings.ShipyardShipForSale);
       btnBuyShip.setVisible(true);
       btnDesign.setVisible((cmdr.CurrentSystem().Shipyard() != null));

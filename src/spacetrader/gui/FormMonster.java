@@ -121,7 +121,6 @@ public class FormMonster extends WinformForm {
      // btnClose
     btnClose.setDialogResult(DialogResult.Cancel);
     btnClose.setLocation(new Point(-32, -32));
-    btnClose.setName("btnClose");
     btnClose.setSize(new FormSize(32, 32));
     btnClose.setTabIndex(32);
     btnClose.setTabStop(false);
@@ -129,14 +128,12 @@ public class FormMonster extends WinformForm {
     // picLine1
     picLine1.setBackColor(Color.darkGray);
     picLine1.setLocation(new Point(4, 40));
-    picLine1.setName("picLine1");
     picLine1.setSize(new FormSize(609, 1));
     picLine1.setTabIndex(133);
     picLine1.setTabStop(false);
     // picLine0
     picLine0.setBackColor(Color.darkGray);
     picLine0.setLocation(new Point(234, 8));
-    picLine0.setName("picLine0");
     picLine0.setSize(new FormSize(1, 347));
     picLine0.setTabIndex(132);
     picLine0.setTabStop(false);
@@ -144,7 +141,6 @@ public class FormMonster extends WinformForm {
     lblQuestsLabel.setAutoSize(true);
     lblQuestsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblQuestsLabel.setLocation(new Point(88, 4));
-    lblQuestsLabel.setName("lblQuestsLabel");
     lblQuestsLabel.setSize(new FormSize(50, 19));
     lblQuestsLabel.setTabIndex(134);
     lblQuestsLabel.setText("Quests");
@@ -152,7 +148,6 @@ public class FormMonster extends WinformForm {
     lblMercLabel.setAutoSize(true);
     lblMercLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblMercLabel.setLocation(new Point(348, 4));
-    lblMercLabel.setName("lblMercLabel");
     lblMercLabel.setSize(new FormSize(84, 19));
     lblMercLabel.setTabIndex(141);
     lblMercLabel.setText("Mercenaries");
@@ -160,7 +155,6 @@ public class FormMonster extends WinformForm {
     lblMercSkillLabelPilot.setAutoSize(true);
     lblMercSkillLabelPilot.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblMercSkillLabelPilot.setLocation(new Point(341, 24));
-    lblMercSkillLabelPilot.setName("lblMercSkillLabelPilot");
     lblMercSkillLabelPilot.setSize(new FormSize(12, 16));
     lblMercSkillLabelPilot.setTabIndex(7);
     lblMercSkillLabelPilot.setTabStop(true);
@@ -176,7 +170,6 @@ public class FormMonster extends WinformForm {
     lblMercSkillLabelFighter.setAutoSize(true);
     lblMercSkillLabelFighter.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblMercSkillLabelFighter.setLocation(new Point(362, 24));
-    lblMercSkillLabelFighter.setName("lblMercSkillLabelFighter");
     lblMercSkillLabelFighter.setSize(new FormSize(11, 16));
     lblMercSkillLabelFighter.setTabIndex(8);
     lblMercSkillLabelFighter.setTabStop(true);
@@ -192,7 +185,6 @@ public class FormMonster extends WinformForm {
     lblMercSkillLabelTrader.setAutoSize(true);
     lblMercSkillLabelTrader.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblMercSkillLabelTrader.setLocation(new Point(382, 24));
-    lblMercSkillLabelTrader.setName("lblMercSkillLabelTrader");
     lblMercSkillLabelTrader.setSize(new FormSize(11, 16));
     lblMercSkillLabelTrader.setTabIndex(9);
     lblMercSkillLabelTrader.setTabStop(true);
@@ -208,7 +200,6 @@ public class FormMonster extends WinformForm {
     lblMercSkillLabelEngineer.setAutoSize(true);
     lblMercSkillLabelEngineer.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblMercSkillLabelEngineer.setLocation(new Point(401, 24));
-    lblMercSkillLabelEngineer.setName("lblMercSkillLabelEngineer");
     lblMercSkillLabelEngineer.setSize(new FormSize(12, 16));
     lblMercSkillLabelEngineer.setTabIndex(10);
     lblMercSkillLabelEngineer.setTabStop(true);
@@ -224,7 +215,6 @@ public class FormMonster extends WinformForm {
     lblMercSystemLabel.setAutoSize(true);
     lblMercSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblMercSystemLabel.setLocation(new Point(425, 24));
-    lblMercSystemLabel.setName("lblMercSystemLabel");
     lblMercSystemLabel.setSize(new FormSize(43, 16));
     lblMercSystemLabel.setTabIndex(11);
     lblMercSystemLabel.setTabStop(true);
@@ -239,7 +229,6 @@ public class FormMonster extends WinformForm {
     lblQuestSystemLabel.setAutoSize(true);
     lblQuestSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblQuestSystemLabel.setLocation(new Point(13, 24));
-    lblQuestSystemLabel.setName("lblQuestSystemLabel");
     lblQuestSystemLabel.setSize(new FormSize(43, 16));
     lblQuestSystemLabel.setTabIndex(1);
     lblQuestSystemLabel.setTabStop(true);
@@ -254,7 +243,6 @@ public class FormMonster extends WinformForm {
     lblQuestDescLabel.setAutoSize(true);
     lblQuestDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblQuestDescLabel.setLocation(new Point(85, 24));
-    lblQuestDescLabel.setName("lblQuestDescLabel");
     lblQuestDescLabel.setSize(new FormSize(63, 16));
     lblQuestDescLabel.setTabIndex(2);
     lblQuestDescLabel.setTabStop(true);
@@ -269,7 +257,6 @@ public class FormMonster extends WinformForm {
     lblMercIDLabel.setAutoSize(true);
     lblMercIDLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblMercIDLabel.setLocation(new Point(247, 24));
-    lblMercIDLabel.setName("lblMercIDLabel");
     lblMercIDLabel.setSize(new FormSize(16, 16));
     lblMercIDLabel.setTabIndex(5);
     lblMercIDLabel.setTabStop(true);
@@ -285,7 +272,6 @@ public class FormMonster extends WinformForm {
     lblMercNameLabel.setAutoSize(true);
     lblMercNameLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblMercNameLabel.setLocation(new Point(268, 24));
-    lblMercNameLabel.setName("lblMercNameLabel");
     lblMercNameLabel.setSize(new FormSize(35, 16));
     lblMercNameLabel.setTabIndex(6);
     lblMercNameLabel.setTabStop(true);
@@ -300,7 +286,6 @@ public class FormMonster extends WinformForm {
     lblShipyardsDescLabel.setAutoSize(true);
     lblShipyardsDescLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblShipyardsDescLabel.setLocation(new Point(85, 258));
-    lblShipyardsDescLabel.setName("lblShipyardsDescLabel");
     lblShipyardsDescLabel.setSize(new FormSize(63, 16));
     lblShipyardsDescLabel.setTabIndex(4);
     lblShipyardsDescLabel.setTabStop(true);
@@ -315,7 +300,6 @@ public class FormMonster extends WinformForm {
     lblShipyardsSystemLabel.setAutoSize(true);
     lblShipyardsSystemLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblShipyardsSystemLabel.setLocation(new Point(13, 258));
-    lblShipyardsSystemLabel.setName("lblShipyardsSystemLabel");
     lblShipyardsSystemLabel.setSize(new FormSize(43, 16));
     lblShipyardsSystemLabel.setTabIndex(3);
     lblShipyardsSystemLabel.setTabStop(true);
@@ -330,7 +314,6 @@ public class FormMonster extends WinformForm {
     lblShipyardsLabel.setAutoSize(true);
     lblShipyardsLabel.setFont(new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblShipyardsLabel.setLocation(new Point(79, 238));
-    lblShipyardsLabel.setName("lblShipyardsLabel");
     lblShipyardsLabel.setSize(new FormSize(68, 19));
     lblShipyardsLabel.setTabIndex(155);
     lblShipyardsLabel.setText("Shipyards");
@@ -346,37 +329,31 @@ public class FormMonster extends WinformForm {
     pnlMercs.Controls.add(lblMercNames);
     pnlMercs.Controls.add(lblMercSystems2);
     pnlMercs.setLocation(new Point(239, 44));
-    pnlMercs.setName("pnlMercs");
     pnlMercs.setSize(new FormSize(371, 307));
     pnlMercs.setTabIndex(158);
     // lblMercSkillsPilot
     lblMercSkillsPilot.setLocation(new Point(93, 4));
-    lblMercSkillsPilot.setName("lblMercSkillsPilot");
     lblMercSkillsPilot.setSize(new FormSize(20, 563));
     lblMercSkillsPilot.setTabIndex(144);
     lblMercSkillsPilot.TextAlign = ContentAlignment.TopRight;
     // lblMercSkillsFighter
     lblMercSkillsFighter.setLocation(new Point(113, 4));
-    lblMercSkillsFighter.setName("lblMercSkillsFighter");
     lblMercSkillsFighter.setSize(new FormSize(20, 563));
     lblMercSkillsFighter.setTabIndex(145);
     lblMercSkillsFighter.TextAlign = ContentAlignment.TopRight;
     // lblMercSkillsTrader
     lblMercSkillsTrader.setLocation(new Point(133, 4));
-    lblMercSkillsTrader.setName("lblMercSkillsTrader");
     lblMercSkillsTrader.setSize(new FormSize(20, 563));
     lblMercSkillsTrader.setTabIndex(146);
     lblMercSkillsTrader.TextAlign = ContentAlignment.TopRight;
     // lblMercSkillsEngineer
     lblMercSkillsEngineer.setLocation(new Point(153, 4));
-    lblMercSkillsEngineer.setName("lblMercSkillsEngineer");
     lblMercSkillsEngineer.setSize(new FormSize(20, 563));
     lblMercSkillsEngineer.setTabIndex(147);
     lblMercSkillsEngineer.TextAlign = ContentAlignment.TopRight;
     // lblMercSystems
     lblMercSystems.LinkArea = new LinkArea(0, 0);
     lblMercSystems.setLocation(new Point(185, 4));
-    lblMercSystems.setName("lblMercSystems");
     lblMercSystems.setSize(new FormSize(160, 387));
     lblMercSystems.setTabIndex(14);
     lblMercSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
@@ -387,19 +364,16 @@ public class FormMonster extends WinformForm {
     };
     // lblMercIds
     lblMercIds.setLocation(new Point(0, 4));
-    lblMercIds.setName("lblMercIds");
     lblMercIds.setSize(new FormSize(23, 563));
     lblMercIds.setTabIndex(142);
     lblMercIds.TextAlign = ContentAlignment.TopRight;
     // lblMercNames
     lblMercNames.setLocation(new Point(28, 4));
-    lblMercNames.setName("lblMercNames");
     lblMercNames.setSize(new FormSize(69, 563));
     lblMercNames.setTabIndex(141);
     // lblMercSystems2
     lblMercSystems2.LinkArea = new LinkArea(0, 0);
     lblMercSystems2.setLocation(new Point(185, 391));
-    lblMercSystems2.setName("lblMercSystems2");
     lblMercSystems2.setSize(new FormSize(160, 175));
     lblMercSystems2.setTabIndex(148);
     lblMercSystems2.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
@@ -414,18 +388,15 @@ public class FormMonster extends WinformForm {
     pnlQuests.Controls.add(lblQuests);
     pnlQuests.Controls.add(lblQuestSystems);
     pnlQuests.setLocation(new Point(8, 44));
-    pnlQuests.setName("pnlQuests");
     pnlQuests.setSize(new FormSize(222, 182));
     pnlQuests.setTabIndex(159);
     // lblQuests
     lblQuests.setLocation(new Point(76, 4));
-    lblQuests.setName("lblQuests");
     lblQuests.setSize(new FormSize(120, 350));
     lblQuests.setTabIndex(48);
     // lblQuestSystems
     lblQuestSystems.LinkArea = new LinkArea(0, 0);
     lblQuestSystems.setLocation(new Point(4, 4));
-    lblQuestSystems.setName("lblQuestSystems");
     lblQuestSystems.setSize(new FormSize(68, 350));
     lblQuestSystems.setTabIndex(12);
     lblQuestSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
@@ -439,18 +410,15 @@ public class FormMonster extends WinformForm {
     pnlShipyards.Controls.add(lblShipyards);
     pnlShipyards.Controls.add(lblShipyardSystems);
     pnlShipyards.setLocation(new Point(8, 278));
-    pnlShipyards.setName("pnlShipyards");
     pnlShipyards.setSize(new FormSize(222, 73));
     pnlShipyards.setTabIndex(160);
     // lblShipyards
     lblShipyards.setLocation(new Point(76, 4));
-    lblShipyards.setName("lblShipyards");
     lblShipyards.setSize(new FormSize(120, 63));
     lblShipyards.setTabIndex(158);
     // lblShipyardSystems
     lblShipyardSystems.LinkArea = new LinkArea(0, 0);
     lblShipyardSystems.setLocation(new Point(4, 4));
-    lblShipyardSystems.setName("lblShipyardSystems");
     lblShipyardSystems.setSize(new FormSize(68, 63));
     lblShipyardSystems.setTabIndex(13);
     lblShipyardSystems.LinkClicked = new EventHandler<Object, LinkLabelLinkClickedEventArgs>() {
@@ -462,7 +430,6 @@ public class FormMonster extends WinformForm {
     // picLine2
     picLine2.setBackColor(Color.darkGray);
     picLine2.setLocation(new Point(4, 274));
-    picLine2.setName("picLine2");
     picLine2.setSize(new FormSize(222, 1));
     picLine2.setTabIndex(161);
     picLine2.setTabStop(false);
@@ -494,7 +461,6 @@ public class FormMonster extends WinformForm {
     setFormBorderStyle(FormBorderStyle.FixedDialog);
     setMaximizeBox(false);
     setMinimizeBox(false);
-    setName("FormMonster");
     setShowInTaskbar(false);
     setStartPosition(FormStartPosition.CenterParent);
     setText("Monster.com Job Listing");

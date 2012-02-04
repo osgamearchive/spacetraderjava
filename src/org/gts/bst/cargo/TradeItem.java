@@ -60,7 +60,7 @@ public class TradeItem implements Comparable<TradeItem> {
     int price = 0;
     if(target.ItemUsed(this)) {
       // Determine base price on techlevel of system
-      price = _piceLowTech + target.TechLevel().CastToInt() * _priceInc;
+      price = _piceLowTech + target.TechLevel().ordinal() * _priceInc;
       // If a good is highly requested, increase the price
       if(target.PoliticalSystem().Wanted() == _type) {
         price = price * 4 / 3;

@@ -852,7 +852,7 @@ public class FormShipList extends WinformForm {
   private void UpdateAll() {
     for(int i = 0; i < lblPrice.length; i++) {
       btnBuy[i].setVisible(false);
-      if(Consts.ShipSpecs[i].MinimumTechLevel().CastToInt() > cmdr.CurrentSystem().TechLevel().CastToInt()) {
+      if(Consts.ShipSpecs[i].MinimumTechLevel().ordinal() > cmdr.CurrentSystem().TechLevel().ordinal()) {
         lblPrice[i].setText("not sold");
       } else if(Consts.ShipSpecs[i].Type() == ship.Type()) {
         lblPrice[i].setText(Strings.ShipBuyGotOne);

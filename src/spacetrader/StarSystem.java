@@ -64,7 +64,7 @@ public class StarSystem extends STSerializableObject {
         _tradeItems[i] = 0;
       } else {
         _tradeItems[i] = (this.Size().CastToInt() + 1)
-            * (Functions.GetRandom(9, 14) - Math.abs(Consts.TradeItems[i].TechTopProduction().CastToInt() - this.TechLevel().CastToInt()));
+            * (Functions.GetRandom(9, 14) - Math.abs(Consts.TradeItems[i].TechTopProduction().ordinal() - this.TechLevel().ordinal()));
         // Because of the enormous profits possible, there shouldn't be too many robots or narcotics available.
         if(i >= TradeItemType.Narcotics.CastToInt()) {
           _tradeItems[i] = ((_tradeItems[i] * (5 - Game.CurrentGame().Difficulty().CastToInt())) / (6 - Game.CurrentGame().Difficulty().CastToInt())) + 1;
@@ -88,12 +88,12 @@ public class StarSystem extends STSerializableObject {
 
   public boolean ItemTraded(TradeItem item) {
     return ((item.Type() != TradeItemType.Narcotics || PoliticalSystem().DrugsOk())
-        && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().CastToInt() >= item.TechProduction().CastToInt());
+        && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechProduction().ordinal());
   }
 
   public boolean ItemUsed(TradeItem item) {
     return ((item.Type() != TradeItemType.Narcotics || PoliticalSystem().DrugsOk())
-        && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().CastToInt() >= item.TechUsage().CastToInt());
+        && (item.Type() != TradeItemType.Firearms || PoliticalSystem().FirearmsOk()) && TechLevel().ordinal() >= item.TechUsage().ordinal());
   }
 
   @Override
@@ -103,7 +103,7 @@ public class StarSystem extends STSerializableObject {
     ht.add("_x", _x);
     ht.add("_y", _y);
     ht.add("_size", _size.CastToInt());
-    ht.add("_techLevel", _techLevel.CastToInt());
+    ht.add("_techLevel", _techLevel.ordinal());
     ht.add("_politicalSystemType", _politicalSystemType.CastToInt());
     ht.add("_systemPressure", _systemPressure.CastToInt());
     ht.add("_specialResource", _specialResource.CastToInt());

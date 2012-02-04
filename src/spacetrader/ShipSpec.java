@@ -108,7 +108,7 @@ public class ShipSpec extends STSerializableObject {
     hash.add("_police", _police.CastToInt());
     hash.add("_pirates", _pirates.CastToInt());
     hash.add("_traders", _traders.CastToInt());
-    hash.add("_minTech", _minTech.CastToInt());
+    hash.add("_minTech", _minTech.ordinal());
     hash.add("_hullUpgraded", _hullUpgraded);
     // Only save image index if it's not the default.
     if(_imageIndex != Consts.ShipImgUseDefault) {

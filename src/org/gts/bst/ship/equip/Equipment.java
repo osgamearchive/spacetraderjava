@@ -34,7 +34,7 @@ abstract public class Equipment extends STSerializableObject implements Cloneabl
     Hashtable hash = super.Serialize();
     hash.put("_equipType", _equipType.CastToInt());
     hash.put("_price", _price);
-    hash.put("_minTech", _minTech.CastToInt());
+    hash.put("_minTech", _minTech.ordinal());
     hash.put("_chance", _chance);
     return hash;
   }
@@ -87,7 +87,7 @@ abstract public class Equipment extends STSerializableObject implements Cloneabl
   public int Price() {
     Commander cmdr = Game.CurrentGame().Commander();
     int price = 0;
-    if(cmdr != null && cmdr.CurrentSystem().TechLevel().CastToInt() >= MinimumTechLevel().CastToInt()) {
+    if(cmdr != null && cmdr.CurrentSystem().TechLevel().ordinal() >= MinimumTechLevel().ordinal()) {
       price = (_price * (100 - cmdr.getShip().Trader())) / 100;
     }
     return price;
