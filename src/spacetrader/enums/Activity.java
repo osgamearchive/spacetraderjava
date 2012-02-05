@@ -12,17 +12,14 @@ public enum Activity implements SpaceTraderEnum {
   Swarms, // = 7,
   NA;// = 100
 
-  //TODO go over all NAs, see if can use null, or atleast normalize.
-  //TODO go over all CastToInt, see if needed.
   @Override
   public int CastToInt() {
-    return this == NA ? 100 : ordinal();
+    return (this == NA) ? 100 : ordinal();
   }
 
   public static Activity FromInt(int i) {
-    if(i == 100) {
-      return NA;
-    }
-    return values()[i];
+    return (i == 100) ? NA : values()[i];
   }
 }
+//TODO go over all NAs, see if can use null, or atleast normalize.
+//TODO go over all CastToInt, see if needed.
