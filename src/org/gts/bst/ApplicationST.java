@@ -2710,8 +2710,7 @@ public class ApplicationST extends WinformWindow {
         break;
     }
     FormAlert.Alert(alertType, this);
-    FormAlert.Alert(AlertType.GameEndScore, this,
-        Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
+    FormAlert.Alert(AlertType.GameEndScore, this, Functions.FormatNumber(game.Score() / 10), Functions.FormatNumber(game.Score() % 10));
     HighScoreRecord candidate = new HighScoreRecord(
         cmdr.Name(), game.Score(), game.getEndStatus(),
         cmdr.getDays(), cmdr.Worth(), game.Difficulty());

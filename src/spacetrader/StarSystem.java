@@ -43,7 +43,7 @@ public class StarSystem extends STSerializableObject {
 
   public StarSystem(Hashtable hash) {
     super(hash);
-    _id = StarSystemId.FromInt(GetValueFromHash(hash, "_id", _id, Integer.class));
+    _id = StarSystemId.FromInt(GetValueFromHash(hash, "_id", Integer.class));
     _x = GetValueFromHash(hash, "_x", _x);
     _y = GetValueFromHash(hash, "_y", _y);
     _size = ShipSize.FromInt(GetValueFromHash(hash, "_size", _size, Integer.class));

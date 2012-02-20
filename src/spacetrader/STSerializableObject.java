@@ -128,7 +128,7 @@ abstract public class STSerializableObject {
   }
 
   @SuppressWarnings("unchecked")
-  public static <U> U GetValueFromHash(Hashtable hash, String key, Class<U> requstedType) {
+  public static <U> U              GetValueFromHash(Hashtable hash, String key, Class<U> requstedType) {
     if(!hash.containsKey(key)) {
       return null;
     }
@@ -138,6 +138,11 @@ abstract public class STSerializableObject {
     } else {
       return (U)object;
     }
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T> T              GetValueFromHash(Hashtable hash, String key, T defaultValue) {
+    return GetValueFromHash(hash, key, defaultValue, (Class<T>)defaultValue.getClass());
   }
 
   @SuppressWarnings("unchecked")
@@ -152,8 +157,8 @@ abstract public class STSerializableObject {
     }
   }
 
-  //TODO many of calls to this method then cast it back to the enum type; fix them to call generic form.
-  public static int GetValueFromHash(Hashtable hash, String key, SpaceTraderEnum defaultValue, Class<Integer> requstedType) {
+  public static int                GetValueFromHash(Hashtable hash, String key, SpaceTraderEnum defaultValue, Class<Integer> requstedType) {
+    //TODO many of calls to this method then cast it back to the enum type; fix them to call generic form.
     if(!hash.containsKey(key)) {
       return defaultValue.CastToInt();
     }
@@ -163,11 +168,6 @@ abstract public class STSerializableObject {
     } else { //Assume its the enum
       return ((SpaceTraderEnum)saved).CastToInt();
     }
-  }
-
-  @SuppressWarnings("unchecked")
-  public static <T> T GetValueFromHash(Hashtable hash, String key, T defaultValue) {
-    return GetValueFromHash(hash, key, defaultValue, (Class<T>)defaultValue.getClass());
   }
 
   public static int GetValueFromHash(Hashtable hash, String key, int defaultValue) {

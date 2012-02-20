@@ -29,15 +29,15 @@ import util.Path;
 
 public class Consts {
   // Directory structure and File Constsants.
-  public static String BaseDirectory = Environment.CurrentDirectory;
-  public static String CustomDirectory = Path.Combine(BaseDirectory, "custom");
-  public static String DataDirectory = Path.Combine(BaseDirectory, "data");
-  public static String SaveDirectory = Path.Combine(BaseDirectory, "save");
-  public static String CustomImagesDirectory = Path.Combine(CustomDirectory, "images");
-  public static String CustomTemplatesDirectory = Path.Combine(CustomDirectory, "templates");
-  public static String HighScoreFile = Path.Combine(DataDirectory, "HighScores.bin");
-  public static String DefaultSettingsFile = Path.Combine(DataDirectory, "DefaultSettings.bin");
-  public static final String CurrentVersion = "2.00";
+  public static final String BaseDirectory = Environment.CurrentDirectory;
+  public static final String CustomDirectory = Path.Combine(BaseDirectory, "custom");
+  public static final String DataDirectory = Path.Combine(BaseDirectory, "data");
+  public static final String SaveDirectory = Path.Combine(BaseDirectory, "save");
+  public static final String CustomImagesDirectory = Path.Combine(CustomDirectory, "images");
+  public static final String CustomTemplatesDirectory = Path.Combine(CustomDirectory, "templates");
+  public static final String HighScoreFile = Path.Combine(DataDirectory, "HighScores.bin");
+  public static final String DefaultSettingsFile = Path.Combine(DataDirectory, "DefaultSettings.bin");
+  public static String CurrentVersion = "2.00";
   // Price paid by government for each negative PoliceScore point
   public static final int BountyModifier = 1000;
   public static final int GalaxyWidth = 154;
@@ -210,25 +210,25 @@ public class Consts {
     new Rectangle(2, 0, 60, 0) // Scorpion
   };
   public static ShipSpec[] ShipSpecs = new ShipSpec[] {
-    // Type ShipSize Bays W S G Cr F FC Hull RC Price % Police Pirates Traders MinTechLevel
-    new ShipSpec(ShipType.Flea, ShipSize.Tiny, 10, 0, 0, 0, 1, 20, 1, 25, 1, 2000, 2, Activity.NA, Activity.NA, Activity.Absent, TechLevel.t4),
-    new ShipSpec(ShipType.Gnat, ShipSize.Small, 15, 1, 0, 1, 1, 14, 1, 100, 2, 10000, 28, Activity.Absent, Activity.Absent, Activity.Absent, TechLevel.t5),
-    new ShipSpec(ShipType.Firefly, ShipSize.Small, 20, 1, 1, 1, 1, 17, 1, 100, 3, 25000, 20, Activity.Absent, Activity.Absent, Activity.Absent, TechLevel.t5),
-    new ShipSpec(ShipType.Mosquito, ShipSize.Small, 15, 2, 1, 1, 1, 13, 1, 100, 5, 30000, 20, Activity.Absent, Activity.Minimal, Activity.Absent, TechLevel.t5),
-    new ShipSpec(ShipType.Bumblebee, ShipSize.Medium, 25, 1, 2, 2, 2, 15, 1, 100, 7, 60000, 15, Activity.Minimal, Activity.Minimal, Activity.Absent, TechLevel.t5),
-    new ShipSpec(ShipType.Beetle, ShipSize.Medium, 50, 0, 1, 1, 3, 14, 1, 50, 10, 80000, 3, Activity.NA, Activity.NA, Activity.Absent, TechLevel.t5),
-    new ShipSpec(ShipType.Hornet, ShipSize.Large, 20, 3, 2, 1, 2, 16, 2, 150, 15, 100000, 6, Activity.Few, Activity.Some, Activity.Minimal, TechLevel.t6),
-    new ShipSpec(ShipType.Grasshopper, ShipSize.Large, 30, 2, 2, 3, 3, 15, 3, 150, 15, 150000, 2, Activity.Some, Activity.Moderate, Activity.Few, TechLevel.t6),
-    new ShipSpec(ShipType.Termite, ShipSize.Huge, 60, 1, 3, 2, 3, 13, 4, 200, 20, 225000, 2, Activity.Moderate, Activity.Many, Activity.Some, TechLevel.t7),
-    new ShipSpec(ShipType.Wasp, ShipSize.Huge, 35, 3, 2, 2, 3, 14, 5, 200, 20, 300000, 2, Activity.Many, Activity.Abundant, Activity.Moderate, TechLevel.t7),
+    //           Type                  ShipSize        Bays W  S  G  Cr F   FC Hull RC  Price   %   Police             Pirates           Traders          MinTechLevel
+    new ShipSpec(ShipType.Flea,        ShipSize.Tiny,  10,  0, 0, 0, 1, 20, 1, 25,  1,  2000,   2,  Activity.NA,       Activity.NA,      Activity.Absent, TechLevel.t4),
+    new ShipSpec(ShipType.Gnat,        ShipSize.Small, 15,  1, 0, 1, 1, 14, 1, 100, 2,  10000,  28, Activity.Absent,   Activity.Absent,  Activity.Absent, TechLevel.t5),
+    new ShipSpec(ShipType.Firefly,     ShipSize.Small, 20,  1, 1, 1, 1, 17, 1, 100, 3,  25000,  20, Activity.Absent,   Activity.Absent,  Activity.Absent, TechLevel.t5),
+    new ShipSpec(ShipType.Mosquito,    ShipSize.Small, 15,  2, 1, 1, 1, 13, 1, 100, 5,  30000,  20, Activity.Absent,   Activity.Minimal, Activity.Absent, TechLevel.t5),
+    new ShipSpec(ShipType.Bumblebee,   ShipSize.Medium,25,  1, 2, 2, 2, 15, 1, 100, 7,  60000,  15, Activity.Minimal,  Activity.Minimal, Activity.Absent, TechLevel.t5),
+    new ShipSpec(ShipType.Beetle,      ShipSize.Medium,50,  0, 1, 1, 3, 14, 1, 50,  10, 80000,  3,  Activity.NA,       Activity.NA,      Activity.Absent, TechLevel.t5),
+    new ShipSpec(ShipType.Hornet,      ShipSize.Large, 20,  3, 2, 1, 2, 16, 2, 150, 15, 100000, 6,  Activity.Few,      Activity.Some,    Activity.Minimal,TechLevel.t6),
+    new ShipSpec(ShipType.Grasshopper, ShipSize.Large, 30,  2, 2, 3, 3, 15, 3, 150, 15, 150000, 2,  Activity.Some,     Activity.Moderate,Activity.Few,    TechLevel.t6),
+    new ShipSpec(ShipType.Termite,     ShipSize.Huge,  60,  1, 3, 2, 3, 13, 4, 200, 20, 225000, 2,  Activity.Moderate, Activity.Many,    Activity.Some,   TechLevel.t7),
+    new ShipSpec(ShipType.Wasp,        ShipSize.Huge,  35,  3, 2, 2, 3, 14, 5, 200, 20, 300000, 2,  Activity.Many,     Activity.Abundant,Activity.Moderate,TechLevel.t7),
     // The ships below can't be bought (mostly)
-    new ShipSpec(ShipType.SpaceMonster, ShipSize.Huge, 0, 3, 0, 0, 1, 1, 1, 500, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
-    new ShipSpec(ShipType.Dragonfly, ShipSize.Small, 0, 2, 3, 2, 1, 1, 1, 10, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
-    new ShipSpec(ShipType.Mantis, ShipSize.Medium, 0, 3, 1, 3, 3, 1, 1, 300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
-    new ShipSpec(ShipType.Scarab, ShipSize.Large, 20, 2, 0, 0, 2, 1, 1, 400, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
-    new ShipSpec(ShipType.Bottle, ShipSize.Small, 0, 0, 0, 0, 0, 1, 1, 10, 1, 100, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
-    new ShipSpec(ShipType.Custom, ShipSize.Huge, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
-    new ShipSpec(ShipType.Scorpion, ShipSize.Huge, 30, 2, 2, 2, 2, 1, 1, 300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8)};
+    new ShipSpec(ShipType.SpaceMonster,ShipSize.Huge, 0, 3, 0, 0, 1, 1, 1, 500, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
+    new ShipSpec(ShipType.Dragonfly,   ShipSize.Small, 0, 2, 3, 2, 1, 1, 1, 10, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
+    new ShipSpec(ShipType.Mantis,      ShipSize.Medium, 0, 3, 1, 3, 3, 1, 1, 300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
+    new ShipSpec(ShipType.Scarab,      ShipSize.Large, 20, 2, 0, 0, 2, 1, 1, 400, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
+    new ShipSpec(ShipType.Bottle,      ShipSize.Small, 0, 0, 0, 0, 0, 1, 1, 10, 1, 100, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
+    new ShipSpec(ShipType.Custom,      ShipSize.Huge, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8),
+    new ShipSpec(ShipType.Scorpion,    ShipSize.Huge, 30, 2, 2, 2, 2, 1, 1, 300, 1, 500000, 0, Activity.NA, Activity.NA, Activity.NA, TechLevel.t8)};
   public static Shipyard[] Shipyards = new Shipyard[] {
     new Shipyard(ShipyardId.Corellian, ShipSize.Large, ShipyardSkill.CrewQuarters),
     new Shipyard(ShipyardId.Incom, ShipSize.Medium, ShipyardSkill.ShieldSlotUnits),

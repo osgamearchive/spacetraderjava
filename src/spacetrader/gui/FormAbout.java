@@ -39,7 +39,6 @@ public class FormAbout extends WinformForm {
     // btnClose
     btnClose.setDialogResult(DialogResult.Cancel);
     btnClose.setLocation(new Point(-32, -32));
-    btnClose.setName("btnClose");
     btnClose.setSize(new FormSize(32, 32));
     btnClose.setTabIndex(32);
     btnClose.setTabStop(false);
@@ -48,20 +47,17 @@ public class FormAbout extends WinformForm {
     lblTitle.setAutoSize(true);
     lblTitle.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTitle.setLocation(new Point(172, 8));
-    lblTitle.setName("lblTitle");
     lblTitle.setSize(new FormSize(187, 13));
     lblTitle.setTabIndex(33);
     lblTitle.setText("Space Trader for Windows 2.01");
     // lblAbout
     lblAbout.setLocation(new Point(172, 32));
-    lblAbout.setName("lblAbout");
     lblAbout.setSize(new FormSize(272, 160));
     lblAbout.setTabIndex(34);
     lblAbout.setText(resources.GetString("lblAbout.Text"));
     // picLogo
     picLogo.setImage(((Image)(resources.GetObject("picLogo.Image"))));
     picLogo.setLocation(new Point(8, 8));
-    picLogo.setName("picLogo");
     picLogo.setSize(new FormSize(160, 160));
     picLogo.setTabIndex(35);
     picLogo.setTabStop(false);
@@ -76,7 +72,6 @@ public class FormAbout extends WinformForm {
     setFormBorderStyle(FormBorderStyle.FixedDialog);
     setMaximizeBox(false);
     setMinimizeBox(false);
-    setName("FormAbout");
     setShowInTaskbar(false);
     setStartPosition(FormStartPosition.CenterParent);
     setText("About Space Trader");

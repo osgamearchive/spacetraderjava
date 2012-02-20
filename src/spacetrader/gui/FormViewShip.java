@@ -59,20 +59,17 @@ public class FormViewShip extends WinformForm {
     lblTypeLabel.setAutoSize(true);
     lblTypeLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblTypeLabel.setLocation(new Point(8, 8));
-    lblTypeLabel.setName("lblTypeLabel");
     lblTypeLabel.setSize(new FormSize(34, 13));
     lblTypeLabel.setTabIndex(2);
     lblTypeLabel.setText("Type:");
     // lblType
     lblType.setLocation(new Point(80, 8));
-    lblType.setName("lblType");
     lblType.setSize(new FormSize(100, 13));
     lblType.setTabIndex(4);
     lblType.setText("Grasshopper");
     // btnClose
     btnClose.setDialogResult(DialogResult.Cancel);
     btnClose.setLocation(new Point(-32, -32));
-    btnClose.setName("btnClose");
     btnClose.setSize(new FormSize(32, 32));
     btnClose.setTabIndex(32);
     btnClose.setTabStop(false);
@@ -80,13 +77,11 @@ public class FormViewShip extends WinformForm {
     // lblEquipLabel
     lblEquipLabel.setFont(new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))));
     lblEquipLabel.setLocation(new Point(8, 34));
-    lblEquipLabel.setName("lblEquipLabel");
     lblEquipLabel.setSize(new FormSize(64, 176));
     lblEquipLabel.setTabIndex(43);
     lblEquipLabel.setText("Hull:\r\n\r\nEquipment:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnfilled:");
     // lblEquip
     lblEquip.setLocation(new Point(80, 34));
-    lblEquip.setName("lblEquip");
     lblEquip.setSize(new FormSize(120, 176));
     lblEquip.setTabIndex(44);
     lblEquip.setText("Hardened\r\n\r\n1 Military Laser\r\n1 Morgan\'s Laser\r\n1 Energy Shield\r\n1 Reflective Shi"
@@ -95,14 +90,12 @@ public class FormViewShip extends WinformForm {
     // boxSpecialCargo
     boxSpecialCargo.Controls.addAll((new WinformControl[] {lblSpecialCargo}));
     boxSpecialCargo.setLocation(new Point(192, 8));
-    boxSpecialCargo.setName("boxSpecialCargo");
     boxSpecialCargo.setSize(new FormSize(200, 204));
     boxSpecialCargo.setTabIndex(64);
     boxSpecialCargo.setTabStop(false);
     boxSpecialCargo.setText("Special Cargo");
     // lblSpecialCargo
     lblSpecialCargo.setLocation(new Point(8, 16));
-    lblSpecialCargo.setName("lblSpecialCargo");
     lblSpecialCargo.setSize(new FormSize(190, 176));
     lblSpecialCargo.setTabIndex(0);
     lblSpecialCargo.setText("No special items.");
@@ -114,7 +107,6 @@ public class FormViewShip extends WinformForm {
     setFormBorderStyle(FormBorderStyle.FixedDialog);
     setMaximizeBox(false);
     setMinimizeBox(false);
-    setName("FormViewShip");
     setShowInTaskbar(false);
     setStartPosition(FormStartPosition.CenterParent);
     setText("Current Ship");

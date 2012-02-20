@@ -36,7 +36,7 @@ public class CrewMember extends STSerializableObject {
     super(hash);
     _id = CrewMemberId.FromInt(GetValueFromHash(hash, "_id", Integer.class));
     _skills = GetValueFromHash(hash, "_skills", _skills, int[].class);
-    _curSystemId = StarSystemId.FromInt(GetValueFromHash(hash, "_curSystemId", _curSystemId, Integer.class));
+    _curSystemId = StarSystemId.FromInt(GetValueFromHash(hash, "_curSystemId", Integer.class));
   }
 
   private void ChangeRandomSkill(int amount) {
