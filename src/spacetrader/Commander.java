@@ -30,7 +30,7 @@ public class Commander extends CrewMember {
     super(cm);
     // Start off with a crew of only the commander and a Pulse Laser.
     _ship.Crew()[0] = this;
-    _ship.AddEquipment(Consts.Weapons[WeaponType.PulseLaser.id]);
+    _ship.AddEquipment(Consts.WeapObjs[WeaponType.PulseLaser.id]);
   }
 
   public Commander(Hashtable hash) {
@@ -104,8 +104,8 @@ public class Commander extends CrewMember {
       FormAlert.Alert(AlertType.ShipBuyReactor, owner);
     } else {
       Equipment[] special = new Equipment[] {
-        Consts.Weapons[WeaponType.MorgansLaser.id],
-        Consts.Weapons[WeaponType.QuantumDistruptor.id],
+        Consts.WeapObjs[WeaponType.MorgansLaser.id],
+        Consts.WeapObjs[WeaponType.QuantumDistruptor.id],
         Consts.Shields[ShieldType.Lightning.id],
         Consts.Gadgets[GadgetType.FuelCompactor.asInteger()],
         Consts.Gadgets[GadgetType.HiddenCargoBays.asInteger()]

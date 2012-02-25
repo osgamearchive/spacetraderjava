@@ -1006,8 +1006,8 @@ public class Game extends STSerializableObject {
   private void CreateShips() {
     // set the details of the Dragonfly...
     Dragonfly().Crew()[0] = Mercenaries()[CrewMemberId.Dragonfly.CastToInt()];
-    Dragonfly().AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
-    Dragonfly().AddEquipment(Consts.Weapons[WeaponType.PulseLaser.id]);
+    Dragonfly().AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
+    Dragonfly().AddEquipment(Consts.WeapObjs[WeaponType.PulseLaser.id]);
     Dragonfly().AddEquipment(Consts.Shields[ShieldType.Lightning.id]);
     Dragonfly().AddEquipment(Consts.Shields[ShieldType.Lightning.id]);
     Dragonfly().AddEquipment(Consts.Shields[ShieldType.Lightning.id]);
@@ -1015,21 +1015,21 @@ public class Game extends STSerializableObject {
     Dragonfly().AddEquipment(Consts.Gadgets[GadgetType.TargetingSystem.asInteger()]);
     // set the details of the Scarab...
     _scarab.Crew()[0] = Mercenaries()[CrewMemberId.Scarab.CastToInt()];
-    _scarab.AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
-    _scarab.AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
+    _scarab.AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
+    _scarab.AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
     // set the details of the Scorpion...
     _scorpion.Crew()[0] = Mercenaries()[CrewMemberId.Scorpion.CastToInt()];
-    _scorpion.AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
-    _scorpion.AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
+    _scorpion.AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
+    _scorpion.AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
     _scorpion.AddEquipment(Consts.Shields[ShieldType.Reflective.id]);
     _scorpion.AddEquipment(Consts.Shields[ShieldType.Reflective.id]);
     _scorpion.AddEquipment(Consts.Gadgets[GadgetType.AutoRepairSystem.asInteger()]);
     _scorpion.AddEquipment(Consts.Gadgets[GadgetType.TargetingSystem.asInteger()]);
     // set the details of the Space Monster...
     _spaceMonster.Crew()[0] = Mercenaries()[CrewMemberId.SpaceMonster.CastToInt()];
-    _spaceMonster.AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
-    _spaceMonster.AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
-    _spaceMonster.AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
+    _spaceMonster.AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
+    _spaceMonster.AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
+    _spaceMonster.AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
   }
 
   private void EncounterDefeatDragonfly() {
@@ -2824,7 +2824,7 @@ public class Game extends STSerializableObject {
           remove = false;
         } else {
           FormAlert.Alert(AlertType.EquipmentQuantumDisruptor, getParentWindow());
-          ship.AddEquipment(Consts.Weapons[WeaponType.QuantumDistruptor.id]);
+          ship.AddEquipment(Consts.WeapObjs[WeaponType.QuantumDistruptor.id]);
           setQuestStatusPrincess(SpecialEvent.StatusPrincessDone);
         }
         break;
@@ -2864,7 +2864,7 @@ public class Game extends STSerializableObject {
           remove = false;
         } else {
           FormAlert.Alert(AlertType.EquipmentMorgansLaser, getParentWindow());
-          ship.AddEquipment(Consts.Weapons[WeaponType.MorgansLaser.id]);
+          ship.AddEquipment(Consts.WeapObjs[WeaponType.MorgansLaser.id]);
           setQuestStatusReactor(SpecialEvent.StatusReactorDone);
         }
         break;

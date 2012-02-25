@@ -43,7 +43,7 @@ public class Ship extends ShipSpec {
         AddEquipment(Consts.Shields[ShieldType.Reflective.id]);
       }
       for(int i = 0; i < _weapons.length; i++) {
-        AddEquipment(Consts.Weapons[WeaponType.MilitaryLaser.id]);
+        AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
       }
       AddEquipment(Consts.Gadgets[GadgetType.NavigatingSystem.asInteger()]);
       AddEquipment(Consts.Gadgets[GadgetType.TargetingSystem.asInteger()]);
@@ -357,17 +357,17 @@ public class Ship extends ShipSpec {
         int bestWeaponType = 0;
         for(int j = 0; j < tries; j++) {
           int x = Functions.GetRandom(100);
-          int sum = Consts.Weapons[0].Chance();
+          int sum = Consts.WeapObjs[0].Chance();
           int weaponType = 0;
-          while(sum < x && weaponType <= Consts.Weapons.length - 1) {
+          while(sum < x && weaponType <= Consts.WeapObjs.length - 1) {
             weaponType++;
-            sum += Consts.Weapons[weaponType].Chance();
+            sum += Consts.WeapObjs[weaponType].Chance();
           }
           if(!HasWeapon(WeaponType.fromId(weaponType), true) && weaponType > bestWeaponType) {
             bestWeaponType = weaponType;
           }
         }
-        AddEquipment(Consts.Weapons[bestWeaponType]);
+        AddEquipment(Consts.WeapObjs[bestWeaponType]);
       }
     }
   }

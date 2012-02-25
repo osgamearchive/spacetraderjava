@@ -114,16 +114,6 @@ public class Consts {
   public static final int ScoreTrafficking = -1;
   public static final String ShipTemplateSeparator = "----------------------------";
   // TODO many of these can become enums.
-  public static Gadget[] Gadgets = new Gadget[] {
-    new Gadget(GadgetType.ExtraCargoBays, SkillType.NA, 2500, TechLevel.t4, 35), // 5 extra holds
-    new Gadget(GadgetType.AutoRepairSystem, SkillType.Engineer, 7500, TechLevel.t5, 20), // Increases engineer's effectivity
-    new Gadget(GadgetType.NavigatingSystem, SkillType.Pilot, 15000, TechLevel.t6, 20), // Increases pilot's effectivity
-    new Gadget(GadgetType.TargetingSystem, SkillType.Fighter, 25000, TechLevel.t6, 20), // Increases fighter's effectivity
-    new Gadget(GadgetType.CloakingDevice, SkillType.Pilot, 100000, TechLevel.t7, 5), // If you have a good engineer, neither pirates nor police will notice you
-    // The gadgets below can't be bought
-    new Gadget(GadgetType.FuelCompactor, SkillType.NA, 30000, TechLevel.t8, 0),
-    new Gadget(GadgetType.HiddenCargoBays, SkillType.NA, 60000, TechLevel.t8, 0)
-  };
   public static PoliceRecord[] PoliceRecords = new PoliceRecord[] {
     new PoliceRecord(PoliceRecordType.Psychopath, PoliceRecordScorePsychopath),
     new PoliceRecord(PoliceRecordType.Villain, PoliceRecordScoreVillain),
@@ -182,12 +172,6 @@ public class Consts {
     new Reputation(ReputationType.Dangerous, ReputationScoreDangerous),
     new Reputation(ReputationType.Deadly, ReputationScoreDeadly),
     new Reputation(ReputationType.Elite, ReputationScoreElite)
-  };
-  public static Shield[] Shields = new Shield[] {
-    new Shield(ShieldType.Energy, 100, 5000, TechLevel.t5, 70),
-    new Shield(ShieldType.Reflective, 200, 20000, TechLevel.t6, 30),
-    // The weapons below cannot be bought
-    new Shield(ShieldType.Lightning, 350, 45000, TechLevel.t8, 0)
   };
   public static Rectangle[] ShipImageOffsets = new Rectangle[] {
     // We only care about X and Width, so set Y and Height to 0.
@@ -300,7 +284,7 @@ public class Consts {
     new TradeItem(TradeItemType.Narcotics, TechLevel.t5, TechLevel.t0, TechLevel.t5, 3500, -125, 150, SystemPressure.Boredom, SpecialResource.WeirdMushrooms, SpecialResource.NA, 2000, 3000, 50),
     new TradeItem(TradeItemType.Robots, TechLevel.t6, TechLevel.t4, TechLevel.t7, 5000, -150, 100, SystemPressure.Employment, SpecialResource.NA, SpecialResource.NA, 3500, 5000, 100)
   };
-  public static Weapon[] Weapons = new Weapon[] {
+  public static final Weapon[] WeapObjs = new Weapon[] {
     new Weapon(WeaponType.PulseLaser, 15, false, 2000, TechLevel.t5, 50),
     new Weapon(WeaponType.BeamLaser, 25, false, 12500, TechLevel.t6, 35),
     new Weapon(WeaponType.MilitaryLaser, 35, false, 35000, TechLevel.t7, 15),
@@ -308,12 +292,28 @@ public class Consts {
     new Weapon(WeaponType.PhotonDisruptor, 20, true, 15000, TechLevel.t6, 0),
     new Weapon(WeaponType.QuantumDistruptor, 60, true, 50000, TechLevel.t8, 0)
   };
+  public static final Shield[] Shields = new Shield[] {
+    new Shield(ShieldType.Energy, 100, 5000, TechLevel.t5, 70),
+    new Shield(ShieldType.Reflective, 200, 20000, TechLevel.t6, 30),
+    // The weapons below cannot be bought
+    new Shield(ShieldType.Lightning, 350, 45000, TechLevel.t8, 0)
+  };
+  public static final Gadget[] Gadgets = new Gadget[] {
+    new Gadget(GadgetType.ExtraCargoBays, SkillType.NA, 2500, TechLevel.t4, 35), // 5 extra holds
+    new Gadget(GadgetType.AutoRepairSystem, SkillType.Engineer, 7500, TechLevel.t5, 20), // Increases engineer's effectivity
+    new Gadget(GadgetType.NavigatingSystem, SkillType.Pilot, 15000, TechLevel.t6, 20), // Increases pilot's effectivity
+    new Gadget(GadgetType.TargetingSystem, SkillType.Fighter, 25000, TechLevel.t6, 20), // Increases fighter's effectivity
+    new Gadget(GadgetType.CloakingDevice, SkillType.Pilot, 100000, TechLevel.t7, 5), // If you have a good engineer, neither pirates nor police will notice you
+    // The gadgets below can't be bought
+    new Gadget(GadgetType.FuelCompactor, SkillType.NA, 30000, TechLevel.t8, 0),
+    new Gadget(GadgetType.HiddenCargoBays, SkillType.NA, 60000, TechLevel.t8, 0)
+  };
   // This comes at the end because it depends on other Constant Arrays
   public static Equipment[] EquipmentForSale = new Equipment[] {
-    Weapons[WeaponType.PulseLaser.id],
-    Weapons[WeaponType.BeamLaser.id],
-    Weapons[WeaponType.MilitaryLaser.id],
-    Weapons[WeaponType.PhotonDisruptor.id],
+    WeapObjs[WeaponType.PulseLaser.id],
+    WeapObjs[WeaponType.BeamLaser.id],
+    WeapObjs[WeaponType.MilitaryLaser.id],
+    WeapObjs[WeaponType.PhotonDisruptor.id],
     Shields[ShieldType.Energy.id],
     Shields[ShieldType.Reflective.id],
     Gadgets[GadgetType.ExtraCargoBays.asInteger()],

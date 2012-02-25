@@ -120,16 +120,16 @@ public class FormViewShip extends WinformForm {
       lblEquip.setText(lblEquip.getText() + ("Hardened" + Strings.newline + Strings.newline));
     }
     boolean equipPrinted = false;
-    for(int i = 0; i < Consts.Weapons.length; i++) {
+    for(int i = 0; i < Consts.WeapObjs.length; i++) {
       int count = 0;
       for(int j = 0; j < ship.Weapons().length; j++) {
-        if(ship.Weapons()[j] != null && ship.Weapons()[j].Type() == Consts.Weapons[i].Type()) {
+        if(ship.Weapons()[j] != null && ship.Weapons()[j].Type() == Consts.WeapObjs[i].Type()) {
           count++;
         }
       }
       if(count > 0) {
         lblEquipLabel.setText(lblEquipLabel.getText() + (equipPrinted ? Strings.newline : "Equipment:" + Strings.newline));
-        lblEquip.setText(lblEquip.getText() + (Functions.Multiples(count, Consts.Weapons[i].Name()) + Strings.newline));
+        lblEquip.setText(lblEquip.getText() + (Functions.Multiples(count, Consts.WeapObjs[i].Name()) + Strings.newline));
         equipPrinted = true;
       }
     }

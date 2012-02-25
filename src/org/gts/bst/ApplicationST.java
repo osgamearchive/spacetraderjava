@@ -3164,8 +3164,8 @@ public class ApplicationST extends WinformWindow {
             cmdr.setDebt(Math.max(0, num1));
             break;
           case Iron:
-            if(num1 >= 0 && num1 < ship.Weapons().length && num2 >= 0 && num2 < Consts.Weapons.length) {
-              ship.Weapons()[num1] = (Weapon)Consts.Weapons[num2].Clone();
+            if(num1 >= 0 && num1 < ship.Weapons().length && num2 >= 0 && num2 < Consts.WeapObjs.length) {
+              ship.Weapons()[num1] = (Weapon)Consts.WeapObjs[num2].Clone();
             }
             break;
           case Juice:
