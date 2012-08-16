@@ -1,8 +1,8 @@
 package jwinforms;
-import jwinforms.enums.ComboBoxStyle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
+import jwinforms.enums.ComboBoxStyle;
 
 
 public class ComboBox extends WinformControl {
@@ -11,12 +11,12 @@ public class ComboBox extends WinformControl {
   public ComboBoxStyle DropDownStyle;
 
   public ComboBox() {
-    super(new JComboBox());
-    asJComboBox().setModel(Items);
+    super(new JComboBox<Object>());
+    ComboBox.this.asJComboBox().setModel(Items);
   }
 
-  public JComboBox asJComboBox() {
-    return (JComboBox)swingVersion;
+  public JComboBox<Object> asJComboBox() {
+    return (JComboBox<Object>)swingVersion;
   }
 
   public Object getSelectedItem() {

@@ -13,7 +13,7 @@ public class WinformJPanel extends JPanel {
   private static final long serialVersionUID = 1L;
   private final WinformPane form;
   Map<Component, Integer> tabOrderMap = new HashMap<Component, Integer>(0);
-  Image BackgroundImage = null;
+  WfImage BackgroundImage = null;
 
   public WinformJPanel(WinformPane wp) {
     super(null); // That's what winforms use.

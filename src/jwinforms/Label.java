@@ -1,7 +1,7 @@
 package jwinforms;
-import jwinforms.enums.ContentAlignment;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import jwinforms.enums.ContentAlignment;
 
 
 public class Label extends WinformControl {
@@ -26,7 +26,7 @@ public class Label extends WinformControl {
     return text;
   }
 
-  public void setImage(Image image) {
+  public void setImage(WfImage image) {
     ((JLabel)swingVersion).setIcon(new ImageIcon(image.asSwingImage()));
   }
 

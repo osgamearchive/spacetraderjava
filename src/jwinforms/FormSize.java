@@ -6,6 +6,5 @@ public class FormSize extends SizeF {
 
   public FormSize(int w, int h) {
     super(h, w);
-    // TODO Auto-generated constructor stub
   }
 }

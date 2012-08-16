@@ -2,7 +2,7 @@ package jwinforms;
 import javax.swing.DefaultComboBoxModel;
 
 
-public class MyComboBoxModel extends DefaultComboBoxModel {
+public class MyComboBoxModel extends DefaultComboBoxModel<Object> {
   private static final long serialVersionUID = 1L;
   // TODO inline methods, use super-class.
 

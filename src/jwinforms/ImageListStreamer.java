@@ -2,9 +2,9 @@ package jwinforms;
 
 
 public class ImageListStreamer {
-  final Iterable<Image> images;
+  final Iterable<WfImage> images;
 
-  public ImageListStreamer(Iterable<Image> images) {
+  public ImageListStreamer(Iterable<WfImage> images) {
     this.images = images;
   }
 }

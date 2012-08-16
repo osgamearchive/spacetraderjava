@@ -1,7 +1,7 @@
 package jwinforms;
-import jwinforms.enums.StatusBarPanelAutoSize;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import jwinforms.enums.StatusBarPanelAutoSize;
 import swingextra.JStatusBar;
 
 

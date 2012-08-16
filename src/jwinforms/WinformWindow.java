@@ -1,11 +1,10 @@
 package jwinforms;
-import jwinforms.enums.FormStartPosition;
-import jwinforms.enums.FormBorderStyle;
-import jwinforms.enums.DialogResult;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 
 
 public class WinformWindow extends WinformControl implements WinformPane {

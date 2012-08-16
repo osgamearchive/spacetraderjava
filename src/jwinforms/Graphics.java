@@ -51,7 +51,7 @@ public class Graphics {
     impl.setColor(bk);
   }
 
-  public void DrawImage(Image img, int x, int y, Rectangle rect, @Deprecated int pixel) {
+  public void DrawImage(WfImage img, int x, int y, Rectangle rect, @Deprecated int pixel) {
     impl.drawImage(img.asSwingImage(), x, y, x + rect.Width, y + rect.Hight, rect.X, rect.Y, rect.X + rect.Width, rect.Y + rect.Hight, null);
   }
 

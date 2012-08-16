@@ -1,12 +1,8 @@
 package jwinforms;
-import jwinforms.enums.BorderStyle;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import jwinforms.enums.BorderStyle;
 
 
 public class PictureBox extends WinformControl implements ISupportInitialize {
@@ -15,12 +11,9 @@ public class PictureBox extends WinformControl implements ISupportInitialize {
 
   public PictureBox() {
     super(new SpecialImageJLabel());
-    asJLabel().pictureBox = this;
-    asJLabel().addMouseListener(mouseListener = new ImageMouseListener(this));
-  }
-
-  public void setMouseDown(EventHandler<Object, MouseEventArgs> mouseDown) {
-    mouseListener.pressed = mouseDown;
+    asJLabel().pictureBox = PictureBox.this;
+    mouseListener = new ImageMouseListener(PictureBox.this);
+    asJLabel().addMouseListener(mouseListener);
   }
 
   @Override
@@ -28,24 +21,8 @@ public class PictureBox extends WinformControl implements ISupportInitialize {
     asJLabel().background = backColor;
   }
 
-  public void Refresh() {
-    asJLabel().repaint();
-  }
-
-  public void setImage(Image image) {
-    if(image != null) {
-      asJLabel().setIcon(new ImageIcon(image.asSwingImage()));
-    }
-  }
-
-  public void setPaint(EventHandler<Object, PaintEventArgs> paint) {
-    if(asJLabel().paintEventHandler != null) {
-      throw new Error("2 handlers same event");
-    }
-    asJLabel().paintEventHandler = paint;
-  }
-
   @Override
+  @SuppressWarnings("deprecation")
   public void setBorderStyle(BorderStyle borderStyle) {
     switch(borderStyle) {
       case FixedSingle:
@@ -59,55 +36,25 @@ public class PictureBox extends WinformControl implements ISupportInitialize {
   private SpecialImageJLabel asJLabel() {
     return ((SpecialImageJLabel)swingVersion);
   }
-}
 
-
-class SpecialImageJLabel extends JLabel {
-  private static final long serialVersionUID = 1L;
-  EventHandler<Object, PaintEventArgs> paintEventHandler;
-  PictureBox pictureBox;
-  Color background;
-
-  @Override
-  public void paintComponent(Graphics graphics) {
-    tryBackground(background, graphics);
-    tryEventHandler(paintEventHandler, graphics);
-    super.paintComponent(graphics);
+  public void Refresh() {
+    asJLabel().repaint();
   }
 
-  private void tryBackground(Color background, Graphics graphics) {
-    if(background == null) {
-      return;
-    }
-
-    graphics.setColor(background);
-    graphics.fillRect(0, 0, getWidth(), getHeight());
-  }
-
-  private void tryEventHandler(EventHandler<Object, PaintEventArgs> handler, Graphics graphics) {
-    if(handler != null) {
-      handler.handle(pictureBox, new PaintEventArgs(graphics));
+  public void setImage(WfImage image) {
+    if(image != null) {
+      asJLabel().setIcon(new ImageIcon(image.asSwingImage()));
     }
   }
-}
 
-
-class ImageMouseListener extends MouseAdapter {
-  public EventHandler<Object, MouseEventArgs> pressed;
-  private final PictureBox pictureBox;
-
-  public ImageMouseListener(PictureBox pictureBox) {
-    this.pictureBox = pictureBox;
+  public void setMouseDown(EventHandler<Object, MouseEventArgs> mouseDown) {
+    mouseListener.pressed = mouseDown;
   }
 
-  @Override
-  public void mousePressed(MouseEvent e) {
-    tryEvent(pressed, new MouseEventArgs(e));
-  }
-
-  private void tryEvent(EventHandler<Object, MouseEventArgs> handler, MouseEventArgs e) {
-    if(handler != null) {
-      handler.handle(pictureBox, e);
+  public void setPaint(EventHandler<Object, PaintEventArgs> paint) {
+    if(asJLabel().paintEventHandler != null) {
+      throw new Error("2 handlers same event");
     }
+    asJLabel().paintEventHandler = paint;
   }
 }

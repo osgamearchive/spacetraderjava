@@ -1,33 +1,29 @@
 package jwinforms;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.URL;
 import javax.imageio.ImageIO;
 
 
-public class Bitmap extends Image implements Icon, Serializable {
+public class WfBitmap extends WfImage implements Icon, Serializable {
   private static final long serialVersionUID = 2134761799614301086L;
-  private transient BufferedImage image;
-  private transient boolean transSet = false;
-  private final URL imageUrl;
-  private Color transparent = null;
+  transient BufferedImage image;
+  transient boolean transSet = false;
+  final URL imageUrl;
+  Color transparent = null;
 
-  private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-    in.defaultReadObject();
-    image = ImageIO.read(imageUrl);
-    setTransparentColor(transparent);
+  public WfBitmap(WfImage source) {
+    image = ((WfBitmap)source).image;
+    imageUrl = ((WfBitmap)source).imageUrl;
   }
 
-  public Bitmap(Image source) {
-    image = ((Bitmap)source).image;
-    imageUrl = ((Bitmap)source).imageUrl;
-  }
-
-  public Bitmap(String fileName) {
+  public WfBitmap(String fileName) {
     try {
       File input = new File(fileName);
       imageUrl = input.toURI().toURL();
@@ -37,13 +33,28 @@ public class Bitmap extends Image implements Icon, Serializable {
     }
   }
 
-  public Bitmap(URL imageUrl) {
+  public WfBitmap(URL imageUrl) {
     try {
       this.imageUrl = imageUrl;
       image = ImageIO.read(imageUrl);
     } catch(IOException e) {
       throw new Error(e);
     }
+  }
+
+  @Override
+  public Image asSwingImage() {
+    return image;
+  }
+
+  @Override
+  public int getHeight() {
+    return image.getHeight();
+  }
+
+  @Override
+  public int getWidth() {
+    return image.getWidth();
   }
 
   @Override
@@ -85,23 +96,14 @@ public class Bitmap extends Image implements Icon, Serializable {
     image = newImage;
   }
 
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    image = ImageIO.read(imageUrl);
+    setTransparentColor(transparent);
+  }
+
   public int ToArgb(int col, int row) {
     // note that alpha is ignored.
     return image.getRGB(col, row);
-  }
-
-  @Override
-  public int getHeight() {
-    return image.getHeight();
-  }
-
-  @Override
-  public int getWidth() {
-    return image.getWidth();
-  }
-
-  @Override
-  public java.awt.Image asSwingImage() {
-    return image;
   }
 }

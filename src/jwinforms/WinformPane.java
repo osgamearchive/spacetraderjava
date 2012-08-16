@@ -1,6 +1,6 @@
 package jwinforms;
-import jwinforms.enums.DialogResult;
 import java.awt.Component;
+import jwinforms.enums.DialogResult;
 
 
 public interface WinformPane {

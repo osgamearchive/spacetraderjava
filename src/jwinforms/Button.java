@@ -1,6 +1,4 @@
 package jwinforms;
-import jwinforms.enums.FlatStyle;
-import jwinforms.enums.DialogResult;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -8,6 +6,8 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FlatStyle;
 
 
 public class Button extends WinformControl {

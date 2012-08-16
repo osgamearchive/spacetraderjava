@@ -1,6 +1,6 @@
 package jwinforms;
-import jwinforms.enums.StatusBarPanelAutoSize;
 import java.awt.Dimension;
+import jwinforms.enums.StatusBarPanelAutoSize;
 import swingextra.JStatusBarSection;
 
 

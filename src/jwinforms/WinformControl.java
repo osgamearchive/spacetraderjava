@@ -1,11 +1,11 @@
 package jwinforms;
-import jwinforms.enums.BorderStyle;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseListener;
+import jwinforms.enums.BorderStyle;
 
 
 public class WinformControl implements ISupportInitialize {

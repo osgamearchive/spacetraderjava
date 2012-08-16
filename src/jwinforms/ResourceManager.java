@@ -48,7 +48,7 @@ public class ResourceManager {
   }
 
   public Object getImage(String s) {
-    return new Bitmap(classLoader.getResource(s.trim()));
+    return new WfBitmap(classLoader.getResource(s.trim()));
   }
 
   public String GetString(String s) {

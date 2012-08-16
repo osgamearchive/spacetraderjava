@@ -5,32 +5,31 @@ import java.util.ArrayList;
 
 
 public class ImageList {
-  private Image[] images;
+  private WfImage[] images;
   private FormSize size;
   public Object ColorDepth;
 
   public ImageList(IContainer components) {
-    // TODO Auto-generated constructor stub
   }
 
   public void Draw(jwinforms.Graphics graphics, int x, int y, int imageIndex) {
     graphics.DrawImage(images[imageIndex], x, y, new Rectangle(0, 0, size.width, size.height), 0);
   }
 
-  public Image[] getImages() {
+  public WfImage[] getImages() {
     return images;
   }
 
   public void setImageStream(ImageListStreamer imageStream) {
-    ArrayList<Image> al = new ArrayList<Image>();
-    for(Image image : imageStream.images) {
+    ArrayList<WfImage> al = new ArrayList<WfImage>();
+    for(WfImage image : imageStream.images) {
       al.add(image);
     }
-    images = al.toArray(new Image[0]);
+    images = al.toArray(new WfImage[0]);
   }
 
   public void setTransparentColor(Color transparentColor) {
-    for(Image image : images) {
+    for(WfImage image : images) {
       image.setTransparentColor(transparentColor);
     }
   }

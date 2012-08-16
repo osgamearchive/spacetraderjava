@@ -1,7 +1,7 @@
 package jwinforms;
-import jwinforms.enums.AnchorStyles;
 import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
+import jwinforms.enums.AnchorStyles;
 
 
 public class GroupBox extends WinformControl {
@@ -18,7 +18,6 @@ public class GroupBox extends WinformControl {
 
   @Override
   public void SuspendLayout() {
-    //TODO Auto-generated method stub
   }
 
   public void setText(String text) {

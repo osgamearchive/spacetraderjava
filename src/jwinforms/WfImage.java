@@ -1,9 +1,10 @@
 package jwinforms;
 import java.awt.Color;
+import java.awt.Image;
 
 
-public abstract class Image {
-  abstract public java.awt.Image asSwingImage();
+abstract public class WfImage {
+  abstract public Image asSwingImage();
 
   abstract public int getHeight();
 

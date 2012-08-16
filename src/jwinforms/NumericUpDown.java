@@ -1,5 +1,4 @@
 package jwinforms;
-import jwinforms.enums.HorizontalAlignment;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JSpinner;
@@ -8,6 +7,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.JTextComponent;
+import jwinforms.enums.HorizontalAlignment;
 
 
 public class NumericUpDown extends WinformControl {

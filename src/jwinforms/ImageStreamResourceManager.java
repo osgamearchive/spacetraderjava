@@ -24,10 +24,10 @@ public class ImageStreamResourceManager extends ResourceManager {
         return left.compareTo(right);
       }
     });
-    Iterable<Image> images = Lisp.map(ls, new Convertor<Image, Entry<Object, Object>>() {
+    Iterable<WfImage> images = Lisp.map(ls, new Convertor<WfImage, Entry<Object, Object>>() {
       @Override
-      public Image convert(Entry<Object, Object> entry) {
-        return (Image)getImage((String)entry.getValue());
+      public WfImage convert(Entry<Object, Object> entry) {
+        return (WfImage)getImage((String)entry.getValue());
       }
     });
     return new ImageListStreamer(images);

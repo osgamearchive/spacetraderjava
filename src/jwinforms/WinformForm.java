@@ -1,10 +1,10 @@
 package jwinforms;
-import jwinforms.enums.FormStartPosition;
-import jwinforms.enums.FormBorderStyle;
-import jwinforms.enums.DialogResult;
-import java.awt.Dimension;
 import java.awt.Dialog.ModalityType;
+import java.awt.Dimension;
 import javax.swing.JDialog;
+import jwinforms.enums.DialogResult;
+import jwinforms.enums.FormBorderStyle;
+import jwinforms.enums.FormStartPosition;
 
 
 public class WinformForm extends WinformControl implements WinformPane {
@@ -211,11 +211,11 @@ public class WinformForm extends WinformControl implements WinformPane {
     result = dialogResult;
   }
 
-  protected void setBackgroundImage(Image backgroundImage) {
+  protected void setBackgroundImage(WfImage backgroundImage) {
     panel.BackgroundImage = backgroundImage;
   }
 
-  protected Image getBackgroundImage() {
+  protected WfImage getBackgroundImage() {
     return panel.BackgroundImage;
   }
 }

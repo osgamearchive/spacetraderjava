@@ -1,9 +1,9 @@
 package jwinforms;
-import jwinforms.enums.DialogResult;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import jwinforms.enums.DialogResult;
 
 
 public class FileDialog {
