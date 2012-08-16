@@ -52,11 +52,10 @@ public class FormAlert extends WinformForm {
     lblText.setText(text);
     lblText.setHeight(30 + 30 * text.length() / 80);
     // Size the buttons.
-    int btnWidth = 0;
     btn1.setText(button1Text);
     btn1.setDialogResult(button1Result);
     btn1.setWidth(Math.max(40, g.MeasureString(btn1.getText(), getFont()).width + 35));
-    btnWidth = btn1.getWidth();
+    int btnWidth = btn1.getWidth();
     if(button2Text != null) {
       btn2.setText(button2Text);
       btn2.setWidth(Math.max((int)Math.ceil(g.MeasureString(btn2.getText(), getFont()).width) + 10, 40));

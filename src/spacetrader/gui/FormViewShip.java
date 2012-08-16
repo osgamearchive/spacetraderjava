@@ -185,7 +185,7 @@ public class FormViewShip extends WinformForm {
   }
 
   private void DisplaySpecialCargo() {
-    ArrayList<String> specialCargo = new ArrayList<String>(12);
+    ArrayList<String> specialCargo = new ArrayList<>(12);
     if(ship.getTribbles() > 0) {
       if(ship.getTribbles() == Consts.MaxTribbles) {
         specialCargo.add(Strings.SpecialCargoTribblesInfest);

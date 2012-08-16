@@ -80,6 +80,7 @@ public class FormMonster extends WinformForm {
   }
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.
+  @SuppressWarnings("deprecation")
   private void InitializeComponent() {
     btnClose = new Button();
     picLine1 = new PictureBox();
@@ -552,7 +553,7 @@ public class FormMonster extends WinformForm {
 
   private void PopulateIdArrays() {
     // Populate the mercenary ids array.
-    ArrayList<Integer> ids = new ArrayList<Integer>();
+    ArrayList<Integer> ids = new ArrayList<>();
     for(CrewMember merc : game.Mercenaries()) {
       if(!Util.ArrayContains(Consts.SpecialCrewMemberIds, merc.Id())) {
         ids.add(merc.Id().CastToInt());
@@ -560,8 +561,8 @@ public class FormMonster extends WinformForm {
     }
     mercIds = ids.toArray(new Integer[0]);
     // Populate the quest and shipyard system ids arrays.
-    ArrayList<Integer> quests = new ArrayList<Integer>();
-    ArrayList<Integer> shipyards = new ArrayList<Integer>();
+    ArrayList<Integer> quests = new ArrayList<>();
+    ArrayList<Integer> shipyards = new ArrayList<>();
     for(StarSystem system : game.Universe()) {
       if(system.ShowSpecialButton()) {
         quests.add(system.Id().CastToInt());

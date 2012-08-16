@@ -6,11 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
-import jwinforms.Bitmap;
 import jwinforms.Graphics;
 import jwinforms.GraphicsUnit;
-import jwinforms.Image;
 import jwinforms.Rectangle;
+import jwinforms.WfBitmap;
+import jwinforms.WfImage;
 import jwinforms.WinformPane;
 import org.gts.bst.difficulty.Difficulty;
 import spacetrader.enums.AlertType;
@@ -54,7 +54,7 @@ public class Functions {
     return (int)Math.floor(Math.sqrt(Math.pow(a.X() - x, 2) + Math.pow(a.Y() - y, 2)));
   }
 
-  private static void DrawPartialImage(Graphics g, Image img, int start, int stop) {
+  private static void DrawPartialImage(Graphics g, WfImage img, int start, int stop) {
     g.DrawImage(img, 2 + start, 2, new Rectangle(start, 0, stop - start, img.getHeight()), GraphicsUnit.Pixel);
   }
 
@@ -74,8 +74,8 @@ public class Functions {
     return String.format("%,d%%", num);
   }
 
-  public static int GetColumnOfFirstNonWhitePixel(Image image, int direction) {
-    Bitmap bitmap = new Bitmap(image);
+  public static int GetColumnOfFirstNonWhitePixel(WfImage image, int direction) {
+    WfBitmap bitmap = new WfBitmap(image);
     int step = direction < 0 ? -1 : 1;
     int col = step > 0 ? 0 : bitmap.getWidth() - 1;
     int stop = step > 0 ? bitmap.getWidth() : -1;

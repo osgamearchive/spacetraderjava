@@ -39,10 +39,7 @@ public class Consts {
   public static final String DefaultSettingsFile = Path.Combine(DataDirectory, "DefaultSettings.bin");
   public static String CurrentVersion = "2.00";
   // Price paid by government for each negative PoliceScore point
-  public static final int BountyModifier = 1000;
-  public static final int GalaxyWidth = 154;
-  public static final int GalaxyHeight = 110;
-  public static final int MinDistance = 7;
+  //public static final int BountyModifier = 1000;
   public static final int CloseDistance = 13;
   public static final int MaxRange = 20;
   public static final int WormDist = 25;

@@ -2,7 +2,6 @@ package spacetrader.gui;
 import java.awt.Color;
 import java.awt.Point;
 import jwinforms.Button;
-import jwinforms.Container;
 import jwinforms.Font;
 import jwinforms.FormSize;
 import jwinforms.GraphicsUnit;

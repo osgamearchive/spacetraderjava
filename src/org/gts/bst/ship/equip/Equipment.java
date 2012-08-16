@@ -1,5 +1,5 @@
 package org.gts.bst.ship.equip;
-import jwinforms.Image;
+import jwinforms.WfImage;
 import spacetrader.Commander;
 import spacetrader.Game;
 import spacetrader.STSerializableObject;
@@ -10,9 +10,9 @@ import spacetrader.util.Hashtable;
 
 abstract public class Equipment extends STSerializableObject implements Cloneable {
   protected EquipmentType _equipType;
-  protected int _price;
   protected TechLevel _minTech;
   protected int _chance;
+  protected int _price;
 
   public Equipment(EquipmentType type, int price, TechLevel minTechLevel, int chance) {
     _equipType = type;
@@ -68,7 +68,7 @@ abstract public class Equipment extends STSerializableObject implements Cloneabl
     return _equipType;
   }
 
-  public Image Image() {
+  public WfImage Image() {
     return Game.CurrentGame().getParentWindow().EquipmentImages().getImages()[BaseImageIndex() + SubType().asInteger()];
   }
 

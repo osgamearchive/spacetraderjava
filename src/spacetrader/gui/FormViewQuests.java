@@ -85,7 +85,7 @@ public class FormViewQuests extends WinformForm {
   }
 
   private String[] GetQuestStrings() {
-    ArrayList<String> quests = new ArrayList<String>(12);
+    ArrayList<String> quests = new ArrayList<>(12);
     if(game.getQuestStatusGemulon() > SpecialEvent.StatusGemulonNotStarted && game.getQuestStatusGemulon() < SpecialEvent.StatusGemulonDate) {
       if(game.getQuestStatusGemulon() == SpecialEvent.StatusGemulonDate - 1) {
         quests.add(Strings.QuestGemulonInformTomorrow);

@@ -1,6 +1,6 @@
 package spacetrader;
-import jwinforms.enums.DialogResult;
 import jwinforms.WinformPane;
+import jwinforms.enums.DialogResult;
 import org.gts.bst.crew.CrewMemberId;
 import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.equip.Equipment;

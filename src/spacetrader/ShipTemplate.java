@@ -1,12 +1,12 @@
 package spacetrader;
-import jwinforms.Image;
+import jwinforms.WfImage;
 import org.gts.bst.ship.ShipSize;
 import org.gts.bst.ship.ShipType;
 import spacetrader.util.Hashtable;
 
 
 public class ShipTemplate extends STSerializableObject implements Comparable<ShipTemplate> {
-  private Image[] _images = null;
+  private WfImage[] _images = null;
   private ShipSize _size = ShipSize.Tiny;
   private String _name = null;
   private int _imageIndex = ShipType.Custom.CastToInt();
@@ -135,11 +135,11 @@ public class ShipTemplate extends STSerializableObject implements Comparable<Shi
     _imageIndex = i;
   }
 
-  public Image[] Images() {
+  public WfImage[] Images() {
     return _images;
   }
 
-  public void Images(Image[] is) {
+  public void Images(WfImage[] is) {
     _images = is;
   }
 

@@ -1,11 +1,11 @@
 package spacetrader;
+import org.gts.bst.cargo.TradeItemType;
 import org.gts.bst.difficulty.Difficulty;
 import org.gts.bst.ship.ShipType;
 import spacetrader.enums.Activity;
 import spacetrader.enums.OpponentType;
 import spacetrader.enums.PoliticalSystemType;
 import spacetrader.enums.TechLevel;
-import org.gts.bst.cargo.TradeItemType;
 
 
 public class PoliticalSystem {

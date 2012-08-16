@@ -1,5 +1,5 @@
 package spacetrader;
-import jwinforms.Image;
+import jwinforms.WfImage;
 import org.gts.bst.ship.ShipSize;
 import org.gts.bst.ship.ShipType;
 import org.gts.bst.ship.equip.EquipmentType;
@@ -32,9 +32,8 @@ public class ShipSpec extends STSerializableObject {
   public ShipSpec() {
   }
 
-  public ShipSpec(ShipType type, ShipSize size, int cargoBays, int weaponSlots, int shieldSlots, int gadgetSlots,
-      int crewQuarters, int fuelTanks, int fuelCost, int hullStrength, int repairCost, int price, int occurrence,
-      Activity police, Activity pirates, Activity traders, TechLevel minTechLevel) {
+  public ShipSpec(ShipType type, ShipSize size, int cargoBays, int weaponSlots, int shieldSlots, int gadgetSlots, int crewQuarters, int fuelTanks,
+      int fuelCost, int hullStrength, int repairCost, int price, int occurrence, Activity police, Activity pirates, Activity traders, TechLevel minTechLevel) {
     _type = type;
     _size = size;
     _cargoBays = cargoBays;
@@ -72,7 +71,7 @@ public class ShipSpec extends STSerializableObject {
     _police = Activity.FromInt(GetValueFromHash(hash, "_police", _police, Integer.class));
     _pirates = Activity.FromInt(GetValueFromHash(hash, "_pirates", _pirates, Integer.class));
     _traders = Activity.FromInt(GetValueFromHash(hash, "_traders", _traders, Integer.class));
-    _minTech = TechLevel.FromInt(GetValueFromHash(hash, "_minTech", _minTech, Integer.class));
+    _minTech = TechLevel.FromInt(GetValueFromHash(hash, "_minTech", /*_minTech*/0, Integer.class));
     _hullUpgraded = GetValueFromHash(hash, "_hullUpgraded", _hullUpgraded);
     _imageIndex = GetValueFromHash(hash, "_imageIndex", Consts.ShipImgUseDefault);
     // Get the images if the ship uses the custom images.
@@ -165,7 +164,7 @@ public class ShipSpec extends STSerializableObject {
   }
 
   public void UpdateCustomImageOffsetConstants() {
-    Image image = Game.CurrentGame().getParentWindow().CustomShipImages()[0];
+    WfImage image = Game.CurrentGame().getParentWindow().CustomShipImages()[0];
     int custIndex = ShipType.Custom.CastToInt();
     // Find the first column of pixels that has a non-white pixel for the X value, and the last column for the width.
     int x = Functions.GetColumnOfFirstNonWhitePixel(image, 1);
@@ -270,15 +269,15 @@ public class ShipSpec extends STSerializableObject {
     _hullStrength = value;
   }
 
-  public Image Image() {
+  public WfImage Image() {
     return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip + Consts.ShipImgOffsetNormal];
   }
 
-  public Image ImageDamaged() {
+  public WfImage ImageDamaged() {
     return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip + Consts.ShipImgOffsetDamage];
   }
 
-  public Image ImageDamagedWithShields() {
+  public WfImage ImageDamagedWithShields() {
     return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip + Consts.ShipImgOffsetSheildDamage];
   }
 
@@ -290,7 +289,7 @@ public class ShipSpec extends STSerializableObject {
     _imageIndex = (value == Type().CastToInt() ? Consts.ShipImgUseDefault : value);
   }
 
-  public Image ImageWithShields() {
+  public WfImage ImageWithShields() {
     return Game.CurrentGame().getParentWindow().ShipImages().getImages()[ImageIndex() * Consts.ImagesPerShip + Consts.ShipImgOffsetShield];
   }
 

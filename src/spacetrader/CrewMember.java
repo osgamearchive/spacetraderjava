@@ -40,7 +40,7 @@ public class CrewMember extends STSerializableObject {
   }
 
   private void ChangeRandomSkill(int amount) {
-    ArrayList<Integer> skillIdList = new ArrayList<Integer>(4);
+    ArrayList<Integer> skillIdList = new ArrayList<>(4);
     for(int i = 0; i < Skills().length; i++) {
       if(Skills()[i] + amount > 0 && Skills()[i] + amount < Consts.MaxSkill) {
         skillIdList.add(i);

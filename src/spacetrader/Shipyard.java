@@ -92,7 +92,7 @@ public class Shipyard {
   }
 
   public ArrayList<ShipSize> AvailableSizes() {
-    ArrayList<ShipSize> list = new ArrayList<ShipSize>(6);
+    ArrayList<ShipSize> list = new ArrayList<>(6);
     int begin = Math.max(ShipSize.Tiny.CastToInt(), _specialtySize.CastToInt() - 2);
     int end = Math.min(ShipSize.Gargantuan.CastToInt(), _specialtySize.CastToInt() + 2);
     for(int index = begin; index <= end; index++) {

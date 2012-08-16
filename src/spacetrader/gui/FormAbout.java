@@ -7,9 +7,9 @@ import jwinforms.Font;
 import jwinforms.FormSize;
 import jwinforms.GraphicsUnit;
 import jwinforms.ISupportInitialize;
-import jwinforms.Image;
 import jwinforms.Label;
 import jwinforms.PictureBox;
+import jwinforms.WfImage;
 import jwinforms.WinformForm;
 import jwinforms.enums.DialogResult;
 import jwinforms.enums.FontStyle;
@@ -56,7 +56,7 @@ public class FormAbout extends WinformForm {
     lblAbout.setTabIndex(34);
     lblAbout.setText(resources.GetString("lblAbout.Text"));
     // picLogo
-    picLogo.setImage(((Image)(resources.GetObject("picLogo.Image"))));
+    picLogo.setImage(((WfImage)(resources.GetObject("picLogo.Image"))));
     picLogo.setLocation(new Point(8, 8));
     picLogo.setSize(new FormSize(160, 160));
     picLogo.setTabIndex(35);

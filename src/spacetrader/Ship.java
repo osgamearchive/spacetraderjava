@@ -33,23 +33,23 @@ public class Ship extends ShipSpec {
   private boolean[] _tradeableItems;
 
   public Ship(ShipType type) {
-    SetValues(type);
+    Ship.this.SetValues(type);
   }
 
   public Ship(OpponentType oppType) {
     if(oppType == OpponentType.FamousCaptain) {
-      SetValues(Consts.ShipSpecs[Consts.MaxShip].Type());
+      Ship.this.SetValues(Consts.ShipSpecs[Consts.MaxShip].Type());
       for(int i = 0; i < _shields.length; i++) {
-        AddEquipment(Consts.Shields[ShieldType.Reflective.id]);
+        Ship.this.AddEquipment(Consts.Shields[ShieldType.Reflective.id]);
       }
       for(int i = 0; i < _weapons.length; i++) {
-        AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
+        Ship.this.AddEquipment(Consts.WeapObjs[WeaponType.MilitaryLaser.id]);
       }
-      AddEquipment(Consts.Gadgets[GadgetType.NavigatingSystem.asInteger()]);
-      AddEquipment(Consts.Gadgets[GadgetType.TargetingSystem.asInteger()]);
-      Crew()[0] = Game.CurrentGame().Mercenaries()[CrewMemberId.FamousCaptain.CastToInt()];
+      Ship.this.AddEquipment(Consts.Gadgets[GadgetType.NavigatingSystem.asInteger()]);
+      Ship.this.AddEquipment(Consts.Gadgets[GadgetType.TargetingSystem.asInteger()]);
+      Ship.this.Crew()[0] = Game.CurrentGame().Mercenaries()[CrewMemberId.FamousCaptain.CastToInt()];
     } else if(oppType == OpponentType.Bottle) {
-      SetValues(ShipType.Bottle);
+      Ship.this.SetValues(ShipType.Bottle);
     } else {
       int tries = oppType == OpponentType.Mantis
           ? Game.CurrentGame().Difficulty().CastToInt() + 1
@@ -68,6 +68,7 @@ public class Ship extends ShipSpec {
     }
   }
 
+  @SuppressWarnings("unchecked")
   public Ship(Hashtable hash) {
     super(hash);
     _fuel = GetValueFromHash(hash, "_fuel", Integer.class);
@@ -224,7 +225,7 @@ public class Ship extends ShipSpec {
     } else {
       Crew()[0].Engineer(1 + Functions.GetRandom(Consts.MaxSkill));
     }
-    int numCrew = 0;
+    int numCrew;
     if(diff == Difficulty.Impossible) {
       numCrew = getCrewQuarters();
     } else {
@@ -243,7 +244,7 @@ public class Ship extends ShipSpec {
 
   private void GenerateOpponentAddGadgets(int tries) {
     if(getGadgetSlots() > 0) {
-      int numGadgets = 0;
+      int numGadgets;
       if(Game.CurrentGame().Difficulty() == Difficulty.Impossible) {
         numGadgets = getGadgetSlots();
       } else {
@@ -305,7 +306,7 @@ public class Ship extends ShipSpec {
 
   private void GenerateOpponentAddShields(int tries) {
     if(getShieldSlots() > 0) {
-      int numShields = 0;
+      int numShields;
       if(Game.CurrentGame().Difficulty() == Difficulty.Impossible) {
         numShields = getShieldSlots();
       } else {
@@ -342,7 +343,7 @@ public class Ship extends ShipSpec {
 
   private void GenerateOpponentAddWeapons(int tries) {
     if(getWeaponSlots() > 0) {
-      int numWeapons = 0;
+      int numWeapons;
       if(Game.CurrentGame().Difficulty() == Difficulty.Impossible) {
         numWeapons = getWeaponSlots();
       } else if(getWeaponSlots() == 1) {
@@ -549,7 +550,7 @@ public class Ship extends ShipSpec {
   }
 
   public String IllegalSpecialCargoActions() {
-    ArrayList<String> actions = new ArrayList<String>();
+    ArrayList<String> actions = new ArrayList<>();
     if(ReactorOnBoard()) {
       actions.add(Strings.EncounterPoliceSurrenderReactor);
     } else if(WildOnBoard()) {
@@ -563,7 +564,7 @@ public class Ship extends ShipSpec {
   }
 
   public String IllegalSpecialCargoDescription(String wrapper, boolean includePassengers, boolean includeTradeItems) {
-    ArrayList<String> items = new ArrayList<String>();
+    ArrayList<String> items = new ArrayList<>();
     if(includePassengers && WildOnBoard()) {
       items.add(Strings.EncounterPoliceSubmitWild);
     }
@@ -954,7 +955,7 @@ public class Ship extends ShipSpec {
 
   // Crew members that are not hired/fired - Commander, Jarek, Princess, and Wild - JAF
   public CrewMember[] SpecialCrew() {
-    ArrayList<CrewMember> list = new ArrayList<CrewMember>();
+    ArrayList<CrewMember> list = new ArrayList<>();
     for(int i = 0; i < Crew().length; i++) {
       if(Crew()[i] != null && Util.ArrayContains(Consts.SpecialCrewMemberIds, Crew()[i].Id())) {
         list.add(Crew()[i]);
@@ -970,7 +971,7 @@ public class Ship extends ShipSpec {
   // Sort all cargo based on value and put some of it in hidden bays, if they are present.
   public ArrayList<Integer> StealableCargo() {
     // Put all of the cargo items in a list and sort it. Reverse it so the most expensive items are first.
-    ArrayList<Integer> tradeItems = new ArrayList<Integer>();
+    ArrayList<Integer> tradeItems = new ArrayList<>();
     for(int tradeItem = 0; tradeItem < Cargo().length; tradeItem++) {
       for(int count = 0; count < Cargo()[tradeItem]; count++) {
         tradeItems.add(tradeItem);

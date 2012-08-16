@@ -17,7 +17,6 @@ import jwinforms.GroupBox;
 import jwinforms.IContainer;
 import jwinforms.ISupportInitialize;
 import jwinforms.Icon;
-import jwinforms.Image;
 import jwinforms.ImageList;
 import jwinforms.ImageListStreamer;
 import jwinforms.Label;
@@ -40,6 +39,7 @@ import jwinforms.StatusBarPanelClickEventArgs;
 import jwinforms.SubMenu;
 import jwinforms.SystemColors;
 import jwinforms.ToolTip;
+import jwinforms.WfImage;
 import jwinforms.WinformWindow;
 import jwinforms.enums.AnchorStyles;
 import jwinforms.enums.ContentAlignment;
@@ -381,7 +381,7 @@ public class ApplicationST extends WinformWindow {
     if(s != null) {
       LoadGame(s);
     }
-    UpdateAll();
+    ApplicationST.this.UpdateAll();
   }
 
   public static void main(String[] s) throws Exception {
@@ -391,8 +391,7 @@ public class ApplicationST extends WinformWindow {
     st.ShowWindow();
   }
 
-  // Required method for Designer support -
-  // do not modify the contents of this method with the code editor.
+  // Required method for Designer support - do not modify the contents of this method with the code editor.
   private void InitializeComponent() {
     components = new Container();
     ResourceManager resources = new ResourceManager(ApplicationST.class);
@@ -3578,7 +3577,7 @@ public class ApplicationST extends WinformWindow {
         if(universe[i] == game.WarpSystem()) {
           imageIndex++;
         }
-        Image image = ilChartImages.getImages()[imageIndex];
+        WfImage image = ilChartImages.getImages()[imageIndex];
         if(universe[i] == game.TrackedSystem()) {
           e.Graphics.DrawLine(
               DEFAULT_PEN, universe[i].X(), universe[i].Y(),
@@ -3715,8 +3714,8 @@ public class ApplicationST extends WinformWindow {
     }
   }
 
-  public Image[] CustomShipImages() {
-    Image[] images = new Image[Consts.ImagesPerShip];
+  public WfImage[] CustomShipImages() {
+    WfImage[] images = new WfImage[Consts.ImagesPerShip];
     int baseIndex = ShipType.Custom.CastToInt() * Consts.ImagesPerShip;
     for(int index = 0; index < Consts.ImagesPerShip; index++) {
       images[index] = ilShipImages.getImages()[baseIndex + index];
@@ -3724,8 +3723,8 @@ public class ApplicationST extends WinformWindow {
     return images;
   }
 
-  public void CustomShipImages(Image[] value) {
-    Image[] images = value;
+  public void CustomShipImages(WfImage[] value) {
+    WfImage[] images = value;
     int baseIndex = ShipType.Custom.CastToInt() * Consts.ImagesPerShip;
     System.arraycopy(images, 0, ilShipImages.getImages(), baseIndex, Consts.ImagesPerShip);
   }
@@ -3742,8 +3741,8 @@ public class ApplicationST extends WinformWindow {
     return ilShipImages;
   }
 
-  public Image[] getCustomShipImages() {
-    Image[] images = new Image[Consts.ImagesPerShip];
+  public WfImage[] getCustomShipImages() {
+    WfImage[] images = new WfImage[Consts.ImagesPerShip];
     int baseIndex = ShipType.Custom.CastToInt() * Consts.ImagesPerShip;
     for(int index = 0; index < Consts.ImagesPerShip; index++) {
       images[index] = ilShipImages.getImages()[baseIndex + index];
@@ -3751,8 +3750,8 @@ public class ApplicationST extends WinformWindow {
     return images;
   }
 
-  public void setCustomShipImages(Image[] value) {
-    Image[] images = value;
+  public void setCustomShipImages(WfImage[] value) {
+    WfImage[] images = value;
     int baseIndex = ShipType.Custom.CastToInt() * Consts.ImagesPerShip;
     System.arraycopy(images, 0, ilShipImages.getImages(), baseIndex, Consts.ImagesPerShip);
   }

@@ -21,7 +21,7 @@ public class ArrayList<T> extends java.util.ArrayList<T> {
   @SuppressWarnings("unchecked")
   public void Sort() {
     Object ob = this;
-    Collections.sort((java.util.List<Comparable>)ob);
+    Collections.sort((java.util.List<Comparable<Object>>)ob);
   }
 
   public <U> U[] ToArray(U[] a) {

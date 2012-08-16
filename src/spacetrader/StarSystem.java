@@ -47,7 +47,7 @@ public class StarSystem extends STSerializableObject {
     _x = GetValueFromHash(hash, "_x", _x);
     _y = GetValueFromHash(hash, "_y", _y);
     _size = ShipSize.FromInt(GetValueFromHash(hash, "_size", _size, Integer.class));
-    _techLevel = TechLevel.FromInt(GetValueFromHash(hash, "_techLevel", _techLevel, Integer.class));
+    _techLevel = TechLevel.FromInt(GetValueFromHash(hash, "_techLevel", /*_techLevel*/0, Integer.class));
     _politicalSystemType = PoliticalSystemType.FromInt(GetValueFromHash(hash, "_politicalSystemType", _politicalSystemType, Integer.class));
     _systemPressure = SystemPressure.FromInt(GetValueFromHash(hash, "_systemPressure", _systemPressure, Integer.class));
     _specialResource = SpecialResource.FromInt(GetValueFromHash(hash, "_specialResource", _specialResource, Integer.class));
@@ -271,7 +271,7 @@ public class StarSystem extends STSerializableObject {
   public CrewMember[] MercenariesForHire() {
     Commander cmdr = Game.CurrentGame().Commander();
     CrewMember[] mercs = Game.CurrentGame().Mercenaries();
-    ArrayList<CrewMember> forHire = new ArrayList<CrewMember>(3);
+    ArrayList<CrewMember> forHire = new ArrayList<>(3);
     for(int i = 1; i < mercs.length; i++) {
       if(mercs[i].CurrentSystem() == cmdr.CurrentSystem() && !cmdr.getShip().HasCrew(mercs[i].Id())) {
         forHire.add(mercs[i]);

@@ -2,7 +2,6 @@ package spacetrader.gui;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.Arrays;
-import jwinforms.Bitmap;
 import jwinforms.Button;
 import jwinforms.ComboBox;
 import jwinforms.Container;
@@ -14,7 +13,6 @@ import jwinforms.GraphicsUnit;
 import jwinforms.GroupBox;
 import jwinforms.IContainer;
 import jwinforms.ISupportInitialize;
-import jwinforms.Image;
 import jwinforms.ImageList;
 import jwinforms.ImageListStreamer;
 import jwinforms.Label;
@@ -26,6 +24,8 @@ import jwinforms.ResourceManager;
 import jwinforms.SaveFileDialog;
 import jwinforms.SystemColors;
 import jwinforms.TextBox;
+import jwinforms.WfBitmap;
+import jwinforms.WfImage;
 import jwinforms.WinformControl;
 import jwinforms.WinformForm;
 import jwinforms.enums.BorderStyle;
@@ -79,7 +79,7 @@ public class FormShipyard extends WinformForm {
   private GroupBox boxWelcome;
   private GroupBox boxInfo;
   private IContainer components;
-  private Image[] customImages = new Image[Consts.ImagesPerShip];
+  private WfImage[] customImages = new WfImage[Consts.ImagesPerShip];
   private ImageList ilShipyardLogos;
   private Label lblWelcome;
   private Label lblName;
@@ -152,6 +152,7 @@ public class FormShipyard extends WinformForm {
   }
 
   // Required method for Designer support - do not modify the contents of this method with the code editor.
+  @SuppressWarnings("deprecation")
   private void InitializeComponent() {
     components = new Container();
     ResourceManager resources = new ResourceManager(FormShipyard.class);
@@ -886,10 +887,10 @@ public class FormShipyard extends WinformForm {
     return yard.PercentOfMaxUnits() <= 100 && txtName.getText().length() > 0;
   }
 
-  private Bitmap GetImageFile(String fileName) {
-    Bitmap image = null;
+  private WfBitmap GetImageFile(String fileName) {
+    WfBitmap image = null;
     try {
-      image = new Bitmap(fileName);
+      image = new WfBitmap(fileName);
     } catch(Exception ex) {
       FormAlert.Alert(AlertType.FileErrorOpen, this, fileName, ex.getMessage());
     }
@@ -931,7 +932,7 @@ public class FormShipyard extends WinformForm {
   }
 
   private void LoadSizes() {
-    sizes = new ArrayList<ShipSize>(6);
+    sizes = new ArrayList<>(6);
     for(ShipSize size : yard.AvailableSizes()) {
       sizes.add(size);
       selSize.Items.add(Functions.StringVars(
@@ -957,7 +958,7 @@ public class FormShipyard extends WinformForm {
     }
     selTemplate.Items.add(Consts.ShipTemplateSeparator);
     // Add the user-created templates.
-    ArrayList<ShipTemplate> userTemplates = new ArrayList<ShipTemplate>();
+    ArrayList<ShipTemplate> userTemplates = new ArrayList<>();
     for(String fileName : Directory.GetFiles(Consts.CustomTemplatesDirectory, "*.sst")) {
       ShipTemplate template = new ShipTemplate((Hashtable)Functions.LoadFile(fileName, true, this));
       if(sizes.contains(template.Size())) {
@@ -1129,10 +1130,10 @@ public class FormShipyard extends WinformForm {
     if(dlgOpen.ShowDialog(this) == DialogResult.OK) {
       String baseFileName = Path.RemoveExtension(dlgOpen.getFileName());
       String ext = Path.GetExtension(dlgOpen.getFileName());
-      Bitmap image = GetImageFile(baseFileName + ext);
-      Bitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
-      Bitmap imageShields = GetImageFile(baseFileName + "s" + ext);
-      Bitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
+      WfBitmap image = GetImageFile(baseFileName + ext);
+      WfBitmap imageDamaged = GetImageFile(baseFileName + "d" + ext);
+      WfBitmap imageShields = GetImageFile(baseFileName + "s" + ext);
+      WfBitmap imageShieldsDamaged = GetImageFile(baseFileName + "sd" + ext);
       if(image != null && imageDamaged != null && imageShields != null && imageShieldsDamaged != null) {
         customImages[Consts.ShipImgOffsetNormal] = image;
         customImages[Consts.ShipImgOffsetDamage] = imageDamaged;

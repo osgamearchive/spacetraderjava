@@ -119,7 +119,7 @@ abstract public class STSerializableObject {
   public static ArrayList<Hashtable> ArrayToArrayList(STSerializableObject[] array) {
     ArrayList<Hashtable> list = null;
     if(array != null) {
-      list = new ArrayList<Hashtable>();
+      list = new ArrayList<>();
       for(STSerializableObject obj : array) {
         list.add(obj == null ? null : obj.Serialize());
       }

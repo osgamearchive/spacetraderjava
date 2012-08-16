@@ -43,6 +43,9 @@ import spacetrader.util.Util;
 
 
 public class Game extends STSerializableObject {
+  public static final int GalaxyHeight = 110;
+  public static final int GalaxyWidth = 154;
+  public static final int MinDistance = 7;
   private static Game game;
   private Commander cmdr;
   // Game Data
@@ -63,7 +66,7 @@ public class Game extends STSerializableObject {
   private boolean _arrivedViaWormhole = false; // flag to indicate whether player arrived on current planet via wormhole
   private boolean _paidForNewspaper = false; // once you buy a paper on a system, you don't have to pay again.
   private boolean _litterWarning = false; // Warning against littering has been issued.
-  private ArrayList<Integer> _newsEvents = new ArrayList<Integer>(30);
+  private ArrayList<Integer> _newsEvents = new ArrayList<>(30);
   // Current Selections
   private Difficulty _difficulty = Difficulty.Normal; // Difficulty level
   private boolean _cheatEnabled = false;
@@ -95,7 +98,7 @@ public class Game extends STSerializableObject {
   private boolean _justLootedMarie = false; // flag to indicate whether player looted Marie Celeste
   private boolean _canSuperWarp = false; // Do you have the Portable Singularity on board?
   private int _chanceOfVeryRareEncounter = 5;
-  private ArrayList<VeryRareEncounter> _veryRareEncounters = new ArrayList<VeryRareEncounter>(6); // Array of Very Rare encounters not done yet.
+  private ArrayList<VeryRareEncounter> _veryRareEncounters = new ArrayList<>(6); // Array of Very Rare encounters not done yet.
   // Options
   private GameOptions _options = new GameOptions(true);
   // The rest of the member variables are not saved between games.
@@ -120,11 +123,12 @@ public class Game extends STSerializableObject {
     GenerateCrewMemberList();
     CreateShips();
     CalculatePrices(cmdr.CurrentSystem());
-    ResetVeryRareEncounters();
+    Game.this.ResetVeryRareEncounters();
     if(_difficulty.CastToInt() < Difficulty.Normal.CastToInt()) {
       cmdr.CurrentSystem().SpecialEventType(SpecialEventType.Lottery);
     }
-    //TODO: The following code block is run if the commander name is left blank - you get $1M, cheat mode on, easy encounters, can super-warp...
+    //TODO: The following code block is run if the commander name is left blank
+    // You get $1M, cheat mode on, easy encounters, can super-warp...
     {
       // TODO: JAF - DEBUG
       cmdr.setCash(1000000);
@@ -134,6 +138,7 @@ public class Game extends STSerializableObject {
     }
   }
 
+  @SuppressWarnings("unchecked")
   public Game(Hashtable hash, ApplicationST parentWin) {
     super(hash);
     game = Game.CurrentGame();
@@ -159,7 +164,7 @@ public class Game extends STSerializableObject {
     _arrivedViaWormhole = GetValueFromHash(hash, "_arrivedViaWormhole", _arrivedViaWormhole);
     _paidForNewspaper = GetValueFromHash(hash, "_paidForNewspaper", _paidForNewspaper);
     _litterWarning = GetValueFromHash(hash, "_litterWarning", _litterWarning);
-    _newsEvents = new ArrayList<Integer>(Arrays.asList(GetValueFromHash(hash, "_newsEvents", _newsEvents.ToArray(new Integer[0]))));
+    _newsEvents = new ArrayList<>(Arrays.asList(GetValueFromHash(hash, "_newsEvents", _newsEvents.ToArray(new Integer[0]))));
     _difficulty = Difficulty.FromInt(GetValueFromHash(hash, "_difficulty", _difficulty, Integer.class));
     _cheatEnabled = GetValueFromHash(hash, "_cheatEnabled", _cheatEnabled);
     _autoSave = GetValueFromHash(hash, "_autoSave", _autoSave);
@@ -601,7 +606,7 @@ public class Game extends STSerializableObject {
 
   private boolean PlaceShipyards() {
     boolean goodUniverse = true;
-    ArrayList<Integer> systemIdList = new ArrayList<Integer>();
+    ArrayList<Integer> systemIdList = new ArrayList<>();
     for(int system = 0; system < _universe.length; system++) {
       if(_universe[system].TechLevel() == TechLevel.t7) {
         systemIdList.add(system);
@@ -1265,19 +1270,19 @@ public class Game extends STSerializableObject {
       int y = 0;
       if(i < _wormholes.length) {
         // Place the first systems somewhere in the center.
-        x = ((Consts.GalaxyWidth * (1 + 2 * (i % 3))) / 6) - Functions.GetRandom(-Consts.CloseDistance + 1, Consts.CloseDistance);
-        y = ((Consts.GalaxyHeight * (i < 3 ? 1 : 3)) / 4) - Functions.GetRandom(-Consts.CloseDistance + 1, Consts.CloseDistance);
+        x = ((GalaxyWidth * (1 + 2 * (i % 3))) / 6) - Functions.GetRandom(-Consts.CloseDistance + 1, Consts.CloseDistance);
+        y = ((GalaxyHeight * (i < 3 ? 1 : 3)) / 4) - Functions.GetRandom(-Consts.CloseDistance + 1, Consts.CloseDistance);
         _wormholes[i] = i;
       } else {
         boolean ok = false;
         while(!ok) {
-          x = Functions.GetRandom(1, Consts.GalaxyWidth);
-          y = Functions.GetRandom(1, Consts.GalaxyHeight);
+          x = Functions.GetRandom(1, GalaxyWidth);
+          y = Functions.GetRandom(1, GalaxyHeight);
           boolean closeFound = false;
           boolean tooClose = false;
           for(j = 0; j < i && !tooClose; j++) {
             // Minimum distance between any two systems not to be accepted.
-            if(Functions.Distance(_universe[j], x, y) < Consts.MinDistance) {
+            if(Functions.Distance(_universe[j], x, y) < MinDistance) {
               tooClose = true;
             }
             // There should be at least one system which is close enough.
@@ -1505,7 +1510,7 @@ public class Game extends STSerializableObject {
     } else {
       setRaided(true);
       if(cmdr.getShip().HasGadget(GadgetType.HiddenCargoBays)) {
-        ArrayList<String> precious = new ArrayList<String>();
+        ArrayList<String> precious = new ArrayList<>();
         if(cmdr.getShip().PrincessOnBoard()) {
           precious.add(Strings.EncounterHidePrincess);
         }
@@ -1644,7 +1649,7 @@ public class Game extends STSerializableObject {
   }
 
   public String EncounterAction() {
-    String action = "";
+    String action;
     if(getOpponentDisabled()) {
       action = Functions.StringVars("The ^1 has been disabled.", EncounterShipText());
     } else if(getEncounterOppFleeing()) {
@@ -1757,8 +1762,7 @@ public class Game extends STSerializableObject {
   }
 
   public String EncounterText() {
-    String cmdrStatus = "";
-    String oppStatus = "";
+    String cmdrStatus;
     if(getEncounterCmdrFleeing()) {
       cmdrStatus = Functions.StringVars("The ^1 is still following you.", EncounterShipText());
     } else if(getEncounterOppHit()) {
@@ -1766,6 +1770,7 @@ public class Game extends STSerializableObject {
     } else {
       cmdrStatus = Functions.StringVars("You missed the ^1.", EncounterShipText());
     }
+    String oppStatus;
     if(getEncounterOppFleeingPrev()) {
       oppStatus = Functions.StringVars("The ^1 didn't get away.", EncounterShipText());
     } else if(getEncounterCmdrHit()) {
@@ -1857,7 +1862,7 @@ public class Game extends STSerializableObject {
 
   public String NewspaperText() {
     StarSystem curSys = cmdr.CurrentSystem();
-    ArrayList<String> items = new ArrayList<String>();
+    ArrayList<String> items = new ArrayList<>();
     // We're using the GetRandom2 function so that the same number is generated each time for the same "version" of the newspaper. -JAF
     Functions.RandSeed(curSys.Id().CastToInt(), cmdr.getDays());
     for(Iterator<?> en = _newsEvents.iterator(); en.hasNext();) {
@@ -2405,7 +2410,7 @@ public class Game extends STSerializableObject {
   }
 
   public int[] Destinations() {
-    ArrayList<Integer> list = new ArrayList<Integer>();
+    ArrayList<Integer> list = new ArrayList<>();
     for(int i = 0; i < _universe.length; i++) {
       if(_universe[i].DestOk()) {
         list.add(i);
