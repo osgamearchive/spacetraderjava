@@ -863,7 +863,7 @@ public class ApplicationST extends WinformWindow {
     //statusBarPanelExtra.setWidth();
 
     // boxShortRangeChart
-    boxShortRangeChart.Anchor = (((AnchorStyles.Top_Right)));
+    boxShortRangeChart.Anchor = AnchorStyles.Top_Right;
     boxShortRangeChart.Controls.add(picShortRangeChart);
     boxShortRangeChart.setLocation(new Point(364, 306));
     boxShortRangeChart.setName("boxShortRangeChart");
@@ -872,7 +872,7 @@ public class ApplicationST extends WinformWindow {
     boxShortRangeChart.setTabStop(false);
     boxShortRangeChart.setText("Short-Range Chart");
     // boxGalacticChart
-    boxGalacticChart.Anchor = (((AnchorStyles.Top_Right)));
+    boxGalacticChart.Anchor = AnchorStyles.Top_Right;
     boxGalacticChart.setBackColor(SystemColors.Control);
     boxGalacticChart.Controls.add(lblWormhole);
     boxGalacticChart.Controls.add(lblWormholeLabel);
@@ -924,7 +924,7 @@ public class ApplicationST extends WinformWindow {
       }
     });
     // boxTargetSystem
-    boxTargetSystem.Anchor = (((AnchorStyles.Top_Right)));
+    boxTargetSystem.Anchor = AnchorStyles.Top_Right;
     boxTargetSystem.Controls.add(btnTrack);
     boxTargetSystem.Controls.add(btnNextSystem);
     boxTargetSystem.Controls.add(btnPrevSystem);
@@ -1132,7 +1132,7 @@ public class ApplicationST extends WinformWindow {
     lblTargetNameLabel.setTabIndex(0);
     lblTargetNameLabel.setText("Name:");
     // boxCargo
-    boxCargo.Anchor = (((AnchorStyles.Top_Right)));
+    boxCargo.Anchor = AnchorStyles.Top_Right;
     boxCargo.Controls.add(picCargoLine3);
     boxCargo.Controls.add(picCargoLine2);
     boxCargo.Controls.add(picCargoLine0);
