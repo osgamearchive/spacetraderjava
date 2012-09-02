@@ -1,7 +1,6 @@
 package jwinforms;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
