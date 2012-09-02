@@ -31,19 +31,20 @@ public class ResourceManager {
     if(objectType == null) {
       throw new Error("No object type for: " + s);
     }
-    if(objectType.equals("ImageListStreamer")) {
-      // value is name of properties file with image names in it
-      String streamFilename = properties.getProperty(s);
-      try {
-        return new ImageStreamResourceManager(classLoader.getResource(path + streamFilename), path).getStream();
-      } catch(NullPointerException e) {
-        throw new Error("NPE while seeking for " + streamFilename);
-      }
-    } else if(objectType.equals("Image")) {
-      String imageName = properties.getProperty(s);
-      return getImage(imageName);
-    } else {
-      throw new Error("Uknown object type " + objectType);
+    switch(objectType) {
+      case "ImageListStreamer":
+        // value is name of properties file with image names in it
+        String streamFilename = properties.getProperty(s);
+        try {
+          return new ImageStreamResourceManager(classLoader.getResource(path + streamFilename), path).getStream();
+        } catch(NullPointerException e) {
+          throw new Error("NPE while seeking for " + streamFilename);
+        }
+      case "Image":
+        String imageName = properties.getProperty(s);
+        return getImage(imageName);
+      default:
+        throw new Error("Uknown object type " + objectType);
     }
   }
 
