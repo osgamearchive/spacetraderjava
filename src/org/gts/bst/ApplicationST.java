@@ -3629,7 +3629,9 @@ public class ApplicationST extends WinformWindow {
   }
 
   private void picShortRangeChart_Paint(Object sender, PaintEventArgs e) {
-    if(game != null) {
+    if(game == null) {
+      e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, picShortRangeChart.getWidth(), picShortRangeChart.getHeight());
+    } else {
       StarSystem[] universe = game.Universe();
       int[] wormholes = game.Wormholes();
       StarSystem trackSys = game.TrackedSystem();
@@ -3641,8 +3643,7 @@ public class ApplicationST extends WinformWindow {
       e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY - 1, centerX + 1, centerY + 1);
       e.Graphics.DrawLine(DEFAULT_PEN, centerX - 1, centerY + 1, centerX + 1, centerY - 1);
       if(fuel > 0) {
-        e.Graphics.DrawEllipse(
-            DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
+        e.Graphics.DrawEllipse(DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
       }
       if(trackSys != null) {
         int dist = Functions.Distance(curSys, trackSys);
@@ -3699,8 +3700,6 @@ public class ApplicationST extends WinformWindow {
           }
         }
       }
-    } else {
-      e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, picShortRangeChart.getWidth(), picShortRangeChart.getHeight());
     }
   }
 
