@@ -3632,10 +3632,7 @@ public class ApplicationST extends WinformWindow {
     if(game == null) {
       e.Graphics.FillRectangle(DEFAULT_BRUSH, 0, 0, picShortRangeChart.getWidth(), picShortRangeChart.getHeight());
     } else {
-      StarSystem[] universe = game.Universe();
       int[] wormholes = game.Wormholes();
-      StarSystem trackSys = game.TrackedSystem();
-      StarSystem curSys = cmdr.CurrentSystem();
       int fuel = cmdr.getShip().getFuel();
       int centerX = picShortRangeChart.getWidth() / 2;
       int centerY = picShortRangeChart.getHeight() / 2;
@@ -3645,6 +3642,8 @@ public class ApplicationST extends WinformWindow {
       if(fuel > 0) {
         e.Graphics.DrawEllipse(DEFAULT_PEN, centerX - fuel * delta, centerY - fuel * delta, fuel * delta * 2, fuel * delta * 2);
       }
+      StarSystem curSys = cmdr.CurrentSystem();
+      StarSystem trackSys = game.TrackedSystem();
       if(trackSys != null) {
         int dist = Functions.Distance(curSys, trackSys);
         if(dist > 0) {
@@ -3653,9 +3652,7 @@ public class ApplicationST extends WinformWindow {
           int dX2 = (int)Math.round(4 * (trackSys.Y() - curSys.Y()) / (double)dist);
           int dY2 = (int)Math.round(4 * (curSys.X() - trackSys.X()) / (double)dist);
           e.Graphics.FillPolygon(new SolidBrush(new Color(220, 20, 60)), new Point[]{
-                new Point(centerX + dX, centerY + dY),
-                new Point(centerX - dX2, centerY - dY2),
-                new Point(centerX + dX2, centerY + dY2)
+                new Point(centerX + dX, centerY + dY), new Point(centerX - dX2, centerY - dY2), new Point(centerX + dX2, centerY + dY2)
               });
         }
         if(game.Options().getShowTrackedRange()) {
@@ -3666,6 +3663,7 @@ public class ApplicationST extends WinformWindow {
       }
       // First, draw the names, then the systems.
       // The names may overlap and the systems may be drawn on the names, but at least every system is visible.
+      StarSystem[] universe = game.Universe();
       for(int j = 0; j < 2; j++) {
         for(int i = 0; i < universe.length; i++) {
           if((Math.abs(universe[i].X() - curSys.X()) * delta <= picShortRangeChart.getWidth() / 2 - 10)
