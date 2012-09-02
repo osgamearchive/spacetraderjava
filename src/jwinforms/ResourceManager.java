@@ -1,6 +1,10 @@
 package jwinforms;
+import java.io.IOException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ResourceManager {
@@ -9,11 +13,11 @@ public class ResourceManager {
   protected final Properties properties = new Properties();
 
   protected ResourceManager(URL url, String s) {
+    path = s;
     try {
       properties.load(url.openStream());
-      path = s;
-    } catch(Exception e) {
-      throw new Error(e.getMessage() + ": trying to load url \"" + url + "\"", e);
+    } catch(IOException ex) {
+      Logger.getLogger(ResourceManager.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
