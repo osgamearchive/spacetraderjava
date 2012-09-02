@@ -15,7 +15,7 @@ public class ImageStreamResourceManager extends ResourceManager {
   }
 
   public ImageListStreamer getStream() {
-    List<Entry<Object, Object>> ls = new ArrayList<Entry<Object, Object>>(properties.entrySet());
+    List<Entry<Object, Object>> ls = new ArrayList<>(properties.entrySet());
     Collections.sort(ls, new Comparator<Entry<Object, Object>>() {
       @Override
       public int compare(Entry<Object, Object> arg0, Entry<Object, Object> arg1) {
